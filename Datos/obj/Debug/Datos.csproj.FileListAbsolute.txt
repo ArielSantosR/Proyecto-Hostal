@@ -1,0 +1,144 @@
+E:\Users\Suzu\Desktop\Nueva carpeta (6)\Hostal\Datos\bin\Debug\Datos.dll.config
+E:\Users\Suzu\Desktop\Nueva carpeta (6)\Hostal\Datos\bin\Debug\Datos.dll
+E:\Users\Suzu\Desktop\Nueva carpeta (6)\Hostal\Datos\bin\Debug\Datos.pdb
+E:\Users\Suzu\Desktop\Nueva carpeta (6)\Hostal\Datos\bin\Debug\EntityFramework.dll
+E:\Users\Suzu\Desktop\Nueva carpeta (6)\Hostal\Datos\bin\Debug\Oracle.ManagedDataAccess.dll
+E:\Users\Suzu\Desktop\Nueva carpeta (6)\Hostal\Datos\bin\Debug\EntityFramework.xml
+E:\Users\Suzu\Desktop\Nueva carpeta (6)\Hostal\Datos\obj\Debug\Datos.csprojResolveAssemblyReference.cache
+E:\Users\Suzu\Desktop\Nueva carpeta (6)\Hostal\Datos\obj\Debug\Datos.dll
+E:\Users\Suzu\Desktop\Nueva carpeta (6)\Hostal\Datos\obj\Debug\Datos.pdb
+E:\Users\Suzu\Desktop\Hostal\Datos\bin\Debug\Datos.dll.config
+E:\Users\Suzu\Desktop\Hostal\Datos\bin\Debug\Datos.dll
+E:\Users\Suzu\Desktop\Hostal\Datos\bin\Debug\Datos.pdb
+E:\Users\Suzu\Desktop\Hostal\Datos\bin\Debug\EntityFramework.dll
+E:\Users\Suzu\Desktop\Hostal\Datos\bin\Debug\Oracle.ManagedDataAccess.dll
+E:\Users\Suzu\Desktop\Hostal\Datos\bin\Debug\EntityFramework.xml
+E:\Users\Suzu\Desktop\Hostal\Datos\obj\Debug\Datos.csprojResolveAssemblyReference.cache
+E:\Users\Suzu\Desktop\Hostal\Datos\obj\Debug\Datos.dll
+E:\Users\Suzu\Desktop\Hostal\Datos\obj\Debug\Datos.pdb
+C:\Users\Cliente\Desktop\Hostalv0.2.2\Hostal\Datos\bin\Debug\Datos.dll.config
+C:\Users\Cliente\Desktop\Hostalv0.2.2\Hostal\Datos\bin\Debug\Datos.dll
+C:\Users\Cliente\Desktop\Hostalv0.2.2\Hostal\Datos\bin\Debug\Datos.pdb
+C:\Users\Cliente\Desktop\Hostalv0.2.2\Hostal\Datos\bin\Debug\EntityFramework.dll
+C:\Users\Cliente\Desktop\Hostalv0.2.2\Hostal\Datos\bin\Debug\Oracle.ManagedDataAccess.dll
+C:\Users\Cliente\Desktop\Hostalv0.2.2\Hostal\Datos\bin\Debug\EntityFramework.xml
+C:\Users\Cliente\Desktop\Hostalv0.2.2\Hostal\Datos\obj\Debug\Datos.csprojResolveAssemblyReference.cache
+C:\Users\Cliente\Desktop\Hostalv0.2.2\Hostal\Datos\obj\Debug\Datos.dll
+C:\Users\Cliente\Desktop\Hostalv0.2.2\Hostal\Datos\obj\Debug\Datos.pdb
+E:\Users\Suzu\Desktop\Hostalv0.2.3\Hostal\Datos\bin\Debug\Datos.dll.config
+E:\Users\Suzu\Desktop\Hostalv0.2.3\Hostal\Datos\bin\Debug\Datos.dll
+E:\Users\Suzu\Desktop\Hostalv0.2.3\Hostal\Datos\bin\Debug\Datos.pdb
+E:\Users\Suzu\Desktop\Hostalv0.2.3\Hostal\Datos\bin\Debug\EntityFramework.dll
+E:\Users\Suzu\Desktop\Hostalv0.2.3\Hostal\Datos\bin\Debug\Oracle.ManagedDataAccess.dll
+E:\Users\Suzu\Desktop\Hostalv0.2.3\Hostal\Datos\bin\Debug\EntityFramework.xml
+E:\Users\Suzu\Desktop\Hostalv0.2.3\Hostal\Datos\obj\Debug\Datos.csprojResolveAssemblyReference.cache
+E:\Users\Suzu\Desktop\Hostalv0.2.3\Hostal\Datos\obj\Debug\Datos.dll
+E:\Users\Suzu\Desktop\Hostalv0.2.3\Hostal\Datos\obj\Debug\Datos.pdb
+E:\Users\Suzu\Desktop\Hostal\Hostal\Datos\bin\Debug\Datos.dll.config
+E:\Users\Suzu\Desktop\Hostal\Hostal\Datos\bin\Debug\Datos.dll
+E:\Users\Suzu\Desktop\Hostal\Hostal\Datos\bin\Debug\Datos.pdb
+E:\Users\Suzu\Desktop\Hostal\Hostal\Datos\bin\Debug\EntityFramework.dll
+E:\Users\Suzu\Desktop\Hostal\Hostal\Datos\bin\Debug\Oracle.ManagedDataAccess.dll
+E:\Users\Suzu\Desktop\Hostal\Hostal\Datos\bin\Debug\EntityFramework.xml
+E:\Users\Suzu\Desktop\Hostal\Hostal\Datos\obj\Debug\Datos.csprojResolveAssemblyReference.cache
+E:\Users\Suzu\Desktop\Hostal\Hostal\Datos\obj\Debug\Datos.dll
+E:\Users\Suzu\Desktop\Hostal\Hostal\Datos\obj\Debug\Datos.pdb
+C:\Users\Cliente\Desktop\0.2.8\Nueva carpeta\Hostalv0.2.8\Hostal\Hostal\Datos\bin\Debug\Datos.dll.config
+C:\Users\Cliente\Desktop\0.2.8\Nueva carpeta\Hostalv0.2.8\Hostal\Hostal\Datos\bin\Debug\Datos.dll
+C:\Users\Cliente\Desktop\0.2.8\Nueva carpeta\Hostalv0.2.8\Hostal\Hostal\Datos\bin\Debug\Datos.pdb
+C:\Users\Cliente\Desktop\0.2.8\Nueva carpeta\Hostalv0.2.8\Hostal\Hostal\Datos\bin\Debug\EntityFramework.dll
+C:\Users\Cliente\Desktop\0.2.8\Nueva carpeta\Hostalv0.2.8\Hostal\Hostal\Datos\bin\Debug\Oracle.ManagedDataAccess.dll
+C:\Users\Cliente\Desktop\0.2.8\Nueva carpeta\Hostalv0.2.8\Hostal\Hostal\Datos\bin\Debug\EntityFramework.xml
+C:\Users\Cliente\Desktop\0.2.8\Nueva carpeta\Hostalv0.2.8\Hostal\Hostal\Datos\obj\Debug\Datos.csprojResolveAssemblyReference.cache
+C:\Users\Cliente\Desktop\0.2.8\Nueva carpeta\Hostalv0.2.8\Hostal\Hostal\Datos\obj\Debug\Datos.dll
+C:\Users\Cliente\Desktop\0.2.8\Nueva carpeta\Hostalv0.2.8\Hostal\Hostal\Datos\obj\Debug\Datos.pdb
+E:\Users\Suzu\Desktop\Hostalv0.2.8E\Datos\bin\Debug\Datos.dll.config
+E:\Users\Suzu\Desktop\Hostalv0.2.8E\Datos\bin\Debug\Datos.dll
+E:\Users\Suzu\Desktop\Hostalv0.2.8E\Datos\bin\Debug\Datos.pdb
+E:\Users\Suzu\Desktop\Hostalv0.2.8E\Datos\bin\Debug\EntityFramework.dll
+E:\Users\Suzu\Desktop\Hostalv0.2.8E\Datos\bin\Debug\Oracle.ManagedDataAccess.dll
+E:\Users\Suzu\Desktop\Hostalv0.2.8E\Datos\bin\Debug\EntityFramework.xml
+E:\Users\Suzu\Desktop\Hostalv0.2.8E\Datos\obj\Debug\Datos.csprojResolveAssemblyReference.cache
+E:\Users\Suzu\Desktop\Hostalv0.2.8E\Datos\obj\Debug\Datos.dll
+E:\Users\Suzu\Desktop\Hostalv0.2.8E\Datos\obj\Debug\Datos.pdb
+E:\Users\Suzu\Desktop\Hostalv0.2.9\Datos\bin\Debug\Datos.dll.config
+E:\Users\Suzu\Desktop\Hostalv0.2.9\Datos\bin\Debug\Datos.dll
+E:\Users\Suzu\Desktop\Hostalv0.2.9\Datos\bin\Debug\Datos.pdb
+E:\Users\Suzu\Desktop\Hostalv0.2.9\Datos\bin\Debug\EntityFramework.dll
+E:\Users\Suzu\Desktop\Hostalv0.2.9\Datos\bin\Debug\Oracle.ManagedDataAccess.dll
+E:\Users\Suzu\Desktop\Hostalv0.2.9\Datos\bin\Debug\EntityFramework.xml
+E:\Users\Suzu\Desktop\Hostalv0.2.9\Datos\obj\Debug\Datos.csprojResolveAssemblyReference.cache
+E:\Users\Suzu\Desktop\Hostalv0.2.9\Datos\obj\Debug\Datos.dll
+E:\Users\Suzu\Desktop\Hostalv0.2.9\Datos\obj\Debug\Datos.pdb
+E:\Users\Suzu\Desktop\Nueva carpeta (3)\Hostalv0.3.0\Datos\bin\Debug\Datos.dll.config
+E:\Users\Suzu\Desktop\Nueva carpeta (3)\Hostalv0.3.0\Datos\bin\Debug\Datos.dll
+E:\Users\Suzu\Desktop\Nueva carpeta (3)\Hostalv0.3.0\Datos\bin\Debug\Datos.pdb
+E:\Users\Suzu\Desktop\Nueva carpeta (3)\Hostalv0.3.0\Datos\bin\Debug\EntityFramework.dll
+E:\Users\Suzu\Desktop\Nueva carpeta (3)\Hostalv0.3.0\Datos\bin\Debug\Oracle.ManagedDataAccess.dll
+E:\Users\Suzu\Desktop\Nueva carpeta (3)\Hostalv0.3.0\Datos\bin\Debug\EntityFramework.xml
+E:\Users\Suzu\Desktop\Nueva carpeta (3)\Hostalv0.3.0\Datos\obj\Debug\Datos.dll
+E:\Users\Suzu\Desktop\Nueva carpeta (3)\Hostalv0.3.0\Datos\obj\Debug\Datos.pdb
+E:\Users\Suzu\Desktop\Nueva carpeta (3)\Hostalv0.3.0\Datos\obj\Debug\Datos.csprojResolveAssemblyReference.cache
+E:\Users\Suzu\Desktop\Hostalv0.3.0.6.2\Datos\bin\Debug\Datos.dll.config
+E:\Users\Suzu\Desktop\Hostalv0.3.0.6.2\Datos\bin\Debug\Datos.dll
+E:\Users\Suzu\Desktop\Hostalv0.3.0.6.2\Datos\bin\Debug\Datos.pdb
+E:\Users\Suzu\Desktop\Hostalv0.3.0.6.2\Datos\bin\Debug\EntityFramework.dll
+E:\Users\Suzu\Desktop\Hostalv0.3.0.6.2\Datos\bin\Debug\Oracle.ManagedDataAccess.dll
+E:\Users\Suzu\Desktop\Hostalv0.3.0.6.2\Datos\bin\Debug\EntityFramework.xml
+E:\Users\Suzu\Desktop\Hostalv0.3.0.6.2\Datos\obj\Debug\Datos.csprojResolveAssemblyReference.cache
+E:\Users\Suzu\Desktop\Hostalv0.3.0.6.2\Datos\obj\Debug\Datos.dll
+E:\Users\Suzu\Desktop\Hostalv0.3.0.6.2\Datos\obj\Debug\Datos.pdb
+E:\Users\Suzu\Desktop\Hostalv0.3.0.7\Datos\bin\Debug\Datos.dll.config
+E:\Users\Suzu\Desktop\Hostalv0.3.0.7\Datos\bin\Debug\Datos.dll
+E:\Users\Suzu\Desktop\Hostalv0.3.0.7\Datos\bin\Debug\Datos.pdb
+E:\Users\Suzu\Desktop\Hostalv0.3.0.7\Datos\bin\Debug\EntityFramework.dll
+E:\Users\Suzu\Desktop\Hostalv0.3.0.7\Datos\bin\Debug\Oracle.ManagedDataAccess.dll
+E:\Users\Suzu\Desktop\Hostalv0.3.0.7\Datos\bin\Debug\EntityFramework.xml
+E:\Users\Suzu\Desktop\Hostalv0.3.0.7\Datos\obj\Debug\Datos.csprojResolveAssemblyReference.cache
+E:\Users\Suzu\Desktop\Hostalv0.3.0.7\Datos\obj\Debug\Datos.dll
+E:\Users\Suzu\Desktop\Hostalv0.3.0.7\Datos\obj\Debug\Datos.pdb
+E:\Users\Suzu\Desktop\Hostalv0.3.0.7E\Datos\bin\Debug\Datos.dll.config
+E:\Users\Suzu\Desktop\Hostalv0.3.0.7E\Datos\bin\Debug\Datos.dll
+E:\Users\Suzu\Desktop\Hostalv0.3.0.7E\Datos\bin\Debug\Datos.pdb
+E:\Users\Suzu\Desktop\Hostalv0.3.0.7E\Datos\bin\Debug\EntityFramework.dll
+E:\Users\Suzu\Desktop\Hostalv0.3.0.7E\Datos\bin\Debug\Oracle.ManagedDataAccess.dll
+E:\Users\Suzu\Desktop\Hostalv0.3.0.7E\Datos\bin\Debug\EntityFramework.xml
+E:\Users\Suzu\Desktop\Hostalv0.3.0.7E\Datos\obj\Debug\Datos.csprojResolveAssemblyReference.cache
+E:\Users\Suzu\Desktop\Hostalv0.3.0.7E\Datos\obj\Debug\Datos.dll
+E:\Users\Suzu\Desktop\Hostalv0.3.0.7E\Datos\obj\Debug\Datos.pdb
+E:\Users\Suzu\Desktop\Hostalv0.3.0.7.1\Datos\bin\Debug\Datos.dll.config
+E:\Users\Suzu\Desktop\Hostalv0.3.0.7.1\Datos\bin\Debug\Datos.dll
+E:\Users\Suzu\Desktop\Hostalv0.3.0.7.1\Datos\bin\Debug\Datos.pdb
+E:\Users\Suzu\Desktop\Hostalv0.3.0.7.1\Datos\bin\Debug\EntityFramework.dll
+E:\Users\Suzu\Desktop\Hostalv0.3.0.7.1\Datos\bin\Debug\Oracle.ManagedDataAccess.dll
+E:\Users\Suzu\Desktop\Hostalv0.3.0.7.1\Datos\bin\Debug\EntityFramework.xml
+E:\Users\Suzu\Desktop\Hostalv0.3.0.7.1\Datos\obj\Debug\Datos.csprojResolveAssemblyReference.cache
+E:\Users\Suzu\Desktop\Hostalv0.3.0.7.1\Datos\obj\Debug\Datos.dll
+E:\Users\Suzu\Desktop\Hostalv0.3.0.7.1\Datos\obj\Debug\Datos.pdb
+C:\Users\Cliente\Desktop\asdasdas\Hostalv0.3.0.8\Hostalv0.3.0.8\Datos\bin\Debug\Datos.dll.config
+C:\Users\Cliente\Desktop\asdasdas\Hostalv0.3.0.8\Hostalv0.3.0.8\Datos\bin\Debug\Datos.dll
+C:\Users\Cliente\Desktop\asdasdas\Hostalv0.3.0.8\Hostalv0.3.0.8\Datos\bin\Debug\Datos.pdb
+C:\Users\Cliente\Desktop\asdasdas\Hostalv0.3.0.8\Hostalv0.3.0.8\Datos\bin\Debug\EntityFramework.dll
+C:\Users\Cliente\Desktop\asdasdas\Hostalv0.3.0.8\Hostalv0.3.0.8\Datos\bin\Debug\Oracle.ManagedDataAccess.dll
+C:\Users\Cliente\Desktop\asdasdas\Hostalv0.3.0.8\Hostalv0.3.0.8\Datos\bin\Debug\EntityFramework.xml
+C:\Users\Cliente\Desktop\asdasdas\Hostalv0.3.0.8\Hostalv0.3.0.8\Datos\obj\Debug\Datos.csprojResolveAssemblyReference.cache
+C:\Users\Cliente\Desktop\asdasdas\Hostalv0.3.0.8\Hostalv0.3.0.8\Datos\obj\Debug\Datos.dll
+C:\Users\Cliente\Desktop\asdasdas\Hostalv0.3.0.8\Hostalv0.3.0.8\Datos\obj\Debug\Datos.pdb
+C:\Users\shogu\Documents\GitHub\ProyectoPortafolio\Datos\bin\Debug\Datos.dll.config
+C:\Users\shogu\Documents\GitHub\ProyectoPortafolio\Datos\bin\Debug\Datos.dll
+C:\Users\shogu\Documents\GitHub\ProyectoPortafolio\Datos\bin\Debug\Datos.pdb
+C:\Users\shogu\Documents\GitHub\ProyectoPortafolio\Datos\bin\Debug\EntityFramework.dll
+C:\Users\shogu\Documents\GitHub\ProyectoPortafolio\Datos\bin\Debug\Oracle.ManagedDataAccess.dll
+C:\Users\shogu\Documents\GitHub\ProyectoPortafolio\Datos\bin\Debug\EntityFramework.xml
+C:\Users\shogu\Documents\GitHub\ProyectoPortafolio\Datos\obj\Debug\Datos.csprojResolveAssemblyReference.cache
+C:\Users\shogu\Documents\GitHub\ProyectoPortafolio\Datos\obj\Debug\Datos.dll
+C:\Users\shogu\Documents\GitHub\ProyectoPortafolio\Datos\obj\Debug\Datos.pdb
+C:\Users\Suzu\Documents\GitHub\ProyectoPortafolio\Datos\bin\Debug\Datos.dll.config
+C:\Users\Suzu\Documents\GitHub\ProyectoPortafolio\Datos\bin\Debug\Datos.dll
+C:\Users\Suzu\Documents\GitHub\ProyectoPortafolio\Datos\bin\Debug\Datos.pdb
+C:\Users\Suzu\Documents\GitHub\ProyectoPortafolio\Datos\bin\Debug\EntityFramework.dll
+C:\Users\Suzu\Documents\GitHub\ProyectoPortafolio\Datos\bin\Debug\Oracle.ManagedDataAccess.dll
+C:\Users\Suzu\Documents\GitHub\ProyectoPortafolio\Datos\bin\Debug\EntityFramework.xml
+C:\Users\Suzu\Documents\GitHub\ProyectoPortafolio\Datos\obj\Debug\Datos.csprojResolveAssemblyReference.cache
+C:\Users\Suzu\Documents\GitHub\ProyectoPortafolio\Datos\obj\Debug\Datos.dll
+C:\Users\Suzu\Documents\GitHub\ProyectoPortafolio\Datos\obj\Debug\Datos.pdb

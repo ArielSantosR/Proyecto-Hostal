@@ -1,0 +1,136 @@
+E:\Users\Suzu\Desktop\Nueva carpeta (6)\Hostal\Modelo\bin\Debug\Modelo.dll
+E:\Users\Suzu\Desktop\Nueva carpeta (6)\Hostal\Modelo\bin\Debug\Modelo.pdb
+E:\Users\Suzu\Desktop\Nueva carpeta (6)\Hostal\Modelo\obj\Debug\Modelo.csprojResolveAssemblyReference.cache
+E:\Users\Suzu\Desktop\Nueva carpeta (6)\Hostal\Modelo\obj\Debug\Modelo.dll
+E:\Users\Suzu\Desktop\Nueva carpeta (6)\Hostal\Modelo\obj\Debug\Modelo.pdb
+E:\Users\Suzu\Desktop\Hostal\Modelo\bin\Debug\Modelo.dll
+E:\Users\Suzu\Desktop\Hostal\Modelo\bin\Debug\Modelo.pdb
+E:\Users\Suzu\Desktop\Hostal\Modelo\obj\Debug\Modelo.csprojResolveAssemblyReference.cache
+E:\Users\Suzu\Desktop\Hostal\Modelo\obj\Debug\Modelo.dll
+E:\Users\Suzu\Desktop\Hostal\Modelo\obj\Debug\Modelo.pdb
+C:\Users\Cliente\Desktop\Hostalv0.2.2\Hostal\Modelo\bin\Debug\Modelo.dll
+C:\Users\Cliente\Desktop\Hostalv0.2.2\Hostal\Modelo\bin\Debug\Modelo.pdb
+C:\Users\Cliente\Desktop\Hostalv0.2.2\Hostal\Modelo\obj\Debug\Modelo.csprojResolveAssemblyReference.cache
+C:\Users\Cliente\Desktop\Hostalv0.2.2\Hostal\Modelo\obj\Debug\Modelo.dll
+C:\Users\Cliente\Desktop\Hostalv0.2.2\Hostal\Modelo\obj\Debug\Modelo.pdb
+C:\Users\Cliente\Desktop\Hostalv0.2.2\Hostal\Modelo\bin\Debug\Datos.dll
+C:\Users\Cliente\Desktop\Hostalv0.2.2\Hostal\Modelo\bin\Debug\EntityFramework.dll
+C:\Users\Cliente\Desktop\Hostalv0.2.2\Hostal\Modelo\bin\Debug\Datos.pdb
+C:\Users\Cliente\Desktop\Hostalv0.2.2\Hostal\Modelo\bin\Debug\EntityFramework.xml
+E:\Users\Suzu\Desktop\Hostalv0.2.3\Hostal\Modelo\bin\Debug\Modelo.dll
+E:\Users\Suzu\Desktop\Hostalv0.2.3\Hostal\Modelo\bin\Debug\Modelo.pdb
+E:\Users\Suzu\Desktop\Hostalv0.2.3\Hostal\Modelo\bin\Debug\Datos.dll
+E:\Users\Suzu\Desktop\Hostalv0.2.3\Hostal\Modelo\bin\Debug\EntityFramework.dll
+E:\Users\Suzu\Desktop\Hostalv0.2.3\Hostal\Modelo\bin\Debug\Datos.pdb
+E:\Users\Suzu\Desktop\Hostalv0.2.3\Hostal\Modelo\bin\Debug\EntityFramework.xml
+E:\Users\Suzu\Desktop\Hostalv0.2.3\Hostal\Modelo\obj\Debug\Modelo.csprojResolveAssemblyReference.cache
+E:\Users\Suzu\Desktop\Hostalv0.2.3\Hostal\Modelo\obj\Debug\Modelo.dll
+E:\Users\Suzu\Desktop\Hostalv0.2.3\Hostal\Modelo\obj\Debug\Modelo.pdb
+E:\Users\Suzu\Desktop\Hostal\Hostal\Modelo\bin\Debug\Modelo.dll
+E:\Users\Suzu\Desktop\Hostal\Hostal\Modelo\bin\Debug\Modelo.pdb
+E:\Users\Suzu\Desktop\Hostal\Hostal\Modelo\bin\Debug\Datos.dll
+E:\Users\Suzu\Desktop\Hostal\Hostal\Modelo\bin\Debug\EntityFramework.dll
+E:\Users\Suzu\Desktop\Hostal\Hostal\Modelo\bin\Debug\Datos.pdb
+E:\Users\Suzu\Desktop\Hostal\Hostal\Modelo\bin\Debug\EntityFramework.xml
+E:\Users\Suzu\Desktop\Hostal\Hostal\Modelo\obj\Debug\Modelo.csprojResolveAssemblyReference.cache
+E:\Users\Suzu\Desktop\Hostal\Hostal\Modelo\obj\Debug\Modelo.dll
+E:\Users\Suzu\Desktop\Hostal\Hostal\Modelo\obj\Debug\Modelo.pdb
+C:\Users\Cliente\Desktop\0.2.8\Nueva carpeta\Hostalv0.2.8\Hostal\Hostal\Modelo\bin\Debug\Modelo.dll
+C:\Users\Cliente\Desktop\0.2.8\Nueva carpeta\Hostalv0.2.8\Hostal\Hostal\Modelo\bin\Debug\Modelo.pdb
+C:\Users\Cliente\Desktop\0.2.8\Nueva carpeta\Hostalv0.2.8\Hostal\Hostal\Modelo\bin\Debug\Datos.dll
+C:\Users\Cliente\Desktop\0.2.8\Nueva carpeta\Hostalv0.2.8\Hostal\Hostal\Modelo\bin\Debug\EntityFramework.dll
+C:\Users\Cliente\Desktop\0.2.8\Nueva carpeta\Hostalv0.2.8\Hostal\Hostal\Modelo\bin\Debug\Datos.pdb
+C:\Users\Cliente\Desktop\0.2.8\Nueva carpeta\Hostalv0.2.8\Hostal\Hostal\Modelo\bin\Debug\EntityFramework.xml
+C:\Users\Cliente\Desktop\0.2.8\Nueva carpeta\Hostalv0.2.8\Hostal\Hostal\Modelo\obj\Debug\Modelo.csprojResolveAssemblyReference.cache
+C:\Users\Cliente\Desktop\0.2.8\Nueva carpeta\Hostalv0.2.8\Hostal\Hostal\Modelo\obj\Debug\Modelo.dll
+C:\Users\Cliente\Desktop\0.2.8\Nueva carpeta\Hostalv0.2.8\Hostal\Hostal\Modelo\obj\Debug\Modelo.pdb
+E:\Users\Suzu\Desktop\Hostalv0.2.8E\Modelo\bin\Debug\Modelo.dll
+E:\Users\Suzu\Desktop\Hostalv0.2.8E\Modelo\bin\Debug\Modelo.pdb
+E:\Users\Suzu\Desktop\Hostalv0.2.8E\Modelo\bin\Debug\Datos.dll
+E:\Users\Suzu\Desktop\Hostalv0.2.8E\Modelo\bin\Debug\EntityFramework.dll
+E:\Users\Suzu\Desktop\Hostalv0.2.8E\Modelo\bin\Debug\Datos.pdb
+E:\Users\Suzu\Desktop\Hostalv0.2.8E\Modelo\bin\Debug\EntityFramework.xml
+E:\Users\Suzu\Desktop\Hostalv0.2.8E\Modelo\obj\Debug\Modelo.csprojResolveAssemblyReference.cache
+E:\Users\Suzu\Desktop\Hostalv0.2.8E\Modelo\obj\Debug\Modelo.dll
+E:\Users\Suzu\Desktop\Hostalv0.2.8E\Modelo\obj\Debug\Modelo.pdb
+E:\Users\Suzu\Desktop\Hostalv0.2.9\Modelo\bin\Debug\Modelo.dll
+E:\Users\Suzu\Desktop\Hostalv0.2.9\Modelo\bin\Debug\Modelo.pdb
+E:\Users\Suzu\Desktop\Hostalv0.2.9\Modelo\bin\Debug\Datos.dll
+E:\Users\Suzu\Desktop\Hostalv0.2.9\Modelo\bin\Debug\EntityFramework.dll
+E:\Users\Suzu\Desktop\Hostalv0.2.9\Modelo\bin\Debug\Datos.pdb
+E:\Users\Suzu\Desktop\Hostalv0.2.9\Modelo\bin\Debug\EntityFramework.xml
+E:\Users\Suzu\Desktop\Hostalv0.2.9\Modelo\obj\Debug\Modelo.csprojResolveAssemblyReference.cache
+E:\Users\Suzu\Desktop\Hostalv0.2.9\Modelo\obj\Debug\Modelo.dll
+E:\Users\Suzu\Desktop\Hostalv0.2.9\Modelo\obj\Debug\Modelo.pdb
+E:\Users\Suzu\Desktop\Nueva carpeta (3)\Hostalv0.3.0\Modelo\bin\Debug\Modelo.dll
+E:\Users\Suzu\Desktop\Nueva carpeta (3)\Hostalv0.3.0\Modelo\bin\Debug\Modelo.pdb
+E:\Users\Suzu\Desktop\Nueva carpeta (3)\Hostalv0.3.0\Modelo\bin\Debug\Datos.dll
+E:\Users\Suzu\Desktop\Nueva carpeta (3)\Hostalv0.3.0\Modelo\bin\Debug\EntityFramework.dll
+E:\Users\Suzu\Desktop\Nueva carpeta (3)\Hostalv0.3.0\Modelo\bin\Debug\Datos.pdb
+E:\Users\Suzu\Desktop\Nueva carpeta (3)\Hostalv0.3.0\Modelo\bin\Debug\EntityFramework.xml
+E:\Users\Suzu\Desktop\Nueva carpeta (3)\Hostalv0.3.0\Modelo\obj\Debug\Modelo.csprojResolveAssemblyReference.cache
+E:\Users\Suzu\Desktop\Nueva carpeta (3)\Hostalv0.3.0\Modelo\obj\Debug\Modelo.dll
+E:\Users\Suzu\Desktop\Nueva carpeta (3)\Hostalv0.3.0\Modelo\obj\Debug\Modelo.pdb
+E:\Users\Suzu\Desktop\Hostalv0.3.0.6.2\Modelo\bin\Debug\Modelo.dll
+E:\Users\Suzu\Desktop\Hostalv0.3.0.6.2\Modelo\bin\Debug\Modelo.pdb
+E:\Users\Suzu\Desktop\Hostalv0.3.0.6.2\Modelo\bin\Debug\Datos.dll
+E:\Users\Suzu\Desktop\Hostalv0.3.0.6.2\Modelo\bin\Debug\EntityFramework.dll
+E:\Users\Suzu\Desktop\Hostalv0.3.0.6.2\Modelo\bin\Debug\Datos.pdb
+E:\Users\Suzu\Desktop\Hostalv0.3.0.6.2\Modelo\bin\Debug\EntityFramework.xml
+E:\Users\Suzu\Desktop\Hostalv0.3.0.6.2\Modelo\obj\Debug\Modelo.csprojResolveAssemblyReference.cache
+E:\Users\Suzu\Desktop\Hostalv0.3.0.6.2\Modelo\obj\Debug\Modelo.dll
+E:\Users\Suzu\Desktop\Hostalv0.3.0.6.2\Modelo\obj\Debug\Modelo.pdb
+E:\Users\Suzu\Desktop\Hostalv0.3.0.7\Modelo\bin\Debug\Modelo.dll
+E:\Users\Suzu\Desktop\Hostalv0.3.0.7\Modelo\bin\Debug\Modelo.pdb
+E:\Users\Suzu\Desktop\Hostalv0.3.0.7\Modelo\bin\Debug\Datos.dll
+E:\Users\Suzu\Desktop\Hostalv0.3.0.7\Modelo\bin\Debug\EntityFramework.dll
+E:\Users\Suzu\Desktop\Hostalv0.3.0.7\Modelo\bin\Debug\Datos.pdb
+E:\Users\Suzu\Desktop\Hostalv0.3.0.7\Modelo\bin\Debug\EntityFramework.xml
+E:\Users\Suzu\Desktop\Hostalv0.3.0.7\Modelo\obj\Debug\Modelo.csprojResolveAssemblyReference.cache
+E:\Users\Suzu\Desktop\Hostalv0.3.0.7\Modelo\obj\Debug\Modelo.dll
+E:\Users\Suzu\Desktop\Hostalv0.3.0.7\Modelo\obj\Debug\Modelo.pdb
+E:\Users\Suzu\Desktop\Hostalv0.3.0.7E\Modelo\bin\Debug\Modelo.dll
+E:\Users\Suzu\Desktop\Hostalv0.3.0.7E\Modelo\bin\Debug\Modelo.pdb
+E:\Users\Suzu\Desktop\Hostalv0.3.0.7E\Modelo\bin\Debug\Datos.dll
+E:\Users\Suzu\Desktop\Hostalv0.3.0.7E\Modelo\bin\Debug\EntityFramework.dll
+E:\Users\Suzu\Desktop\Hostalv0.3.0.7E\Modelo\bin\Debug\Datos.pdb
+E:\Users\Suzu\Desktop\Hostalv0.3.0.7E\Modelo\bin\Debug\EntityFramework.xml
+E:\Users\Suzu\Desktop\Hostalv0.3.0.7E\Modelo\obj\Debug\Modelo.csprojResolveAssemblyReference.cache
+E:\Users\Suzu\Desktop\Hostalv0.3.0.7E\Modelo\obj\Debug\Modelo.dll
+E:\Users\Suzu\Desktop\Hostalv0.3.0.7E\Modelo\obj\Debug\Modelo.pdb
+E:\Users\Suzu\Desktop\Hostalv0.3.0.7.1\Modelo\bin\Debug\Modelo.dll
+E:\Users\Suzu\Desktop\Hostalv0.3.0.7.1\Modelo\bin\Debug\Modelo.pdb
+E:\Users\Suzu\Desktop\Hostalv0.3.0.7.1\Modelo\bin\Debug\Datos.dll
+E:\Users\Suzu\Desktop\Hostalv0.3.0.7.1\Modelo\bin\Debug\EntityFramework.dll
+E:\Users\Suzu\Desktop\Hostalv0.3.0.7.1\Modelo\bin\Debug\Datos.pdb
+E:\Users\Suzu\Desktop\Hostalv0.3.0.7.1\Modelo\bin\Debug\EntityFramework.xml
+E:\Users\Suzu\Desktop\Hostalv0.3.0.7.1\Modelo\obj\Debug\Modelo.csprojResolveAssemblyReference.cache
+E:\Users\Suzu\Desktop\Hostalv0.3.0.7.1\Modelo\obj\Debug\Modelo.dll
+E:\Users\Suzu\Desktop\Hostalv0.3.0.7.1\Modelo\obj\Debug\Modelo.pdb
+C:\Users\Cliente\Desktop\asdasdas\Hostalv0.3.0.8\Hostalv0.3.0.8\Modelo\bin\Debug\Modelo.dll
+C:\Users\Cliente\Desktop\asdasdas\Hostalv0.3.0.8\Hostalv0.3.0.8\Modelo\bin\Debug\Modelo.pdb
+C:\Users\Cliente\Desktop\asdasdas\Hostalv0.3.0.8\Hostalv0.3.0.8\Modelo\bin\Debug\Datos.dll
+C:\Users\Cliente\Desktop\asdasdas\Hostalv0.3.0.8\Hostalv0.3.0.8\Modelo\bin\Debug\EntityFramework.dll
+C:\Users\Cliente\Desktop\asdasdas\Hostalv0.3.0.8\Hostalv0.3.0.8\Modelo\bin\Debug\Datos.pdb
+C:\Users\Cliente\Desktop\asdasdas\Hostalv0.3.0.8\Hostalv0.3.0.8\Modelo\bin\Debug\EntityFramework.xml
+C:\Users\Cliente\Desktop\asdasdas\Hostalv0.3.0.8\Hostalv0.3.0.8\Modelo\obj\Debug\Modelo.csprojResolveAssemblyReference.cache
+C:\Users\Cliente\Desktop\asdasdas\Hostalv0.3.0.8\Hostalv0.3.0.8\Modelo\obj\Debug\Modelo.dll
+C:\Users\Cliente\Desktop\asdasdas\Hostalv0.3.0.8\Hostalv0.3.0.8\Modelo\obj\Debug\Modelo.pdb
+C:\Users\shogu\Documents\GitHub\ProyectoPortafolio\Modelo\bin\Debug\Modelo.dll
+C:\Users\shogu\Documents\GitHub\ProyectoPortafolio\Modelo\bin\Debug\Modelo.pdb
+C:\Users\shogu\Documents\GitHub\ProyectoPortafolio\Modelo\bin\Debug\Datos.dll
+C:\Users\shogu\Documents\GitHub\ProyectoPortafolio\Modelo\bin\Debug\EntityFramework.dll
+C:\Users\shogu\Documents\GitHub\ProyectoPortafolio\Modelo\bin\Debug\Datos.pdb
+C:\Users\shogu\Documents\GitHub\ProyectoPortafolio\Modelo\bin\Debug\EntityFramework.xml
+C:\Users\shogu\Documents\GitHub\ProyectoPortafolio\Modelo\obj\Debug\Modelo.csprojResolveAssemblyReference.cache
+C:\Users\shogu\Documents\GitHub\ProyectoPortafolio\Modelo\obj\Debug\Modelo.dll
+C:\Users\shogu\Documents\GitHub\ProyectoPortafolio\Modelo\obj\Debug\Modelo.pdb
+C:\Users\Suzu\Documents\GitHub\ProyectoPortafolio\Modelo\bin\Debug\Modelo.dll
+C:\Users\Suzu\Documents\GitHub\ProyectoPortafolio\Modelo\bin\Debug\Modelo.pdb
+C:\Users\Suzu\Documents\GitHub\ProyectoPortafolio\Modelo\bin\Debug\Datos.dll
+C:\Users\Suzu\Documents\GitHub\ProyectoPortafolio\Modelo\bin\Debug\EntityFramework.dll
+C:\Users\Suzu\Documents\GitHub\ProyectoPortafolio\Modelo\bin\Debug\Datos.pdb
+C:\Users\Suzu\Documents\GitHub\ProyectoPortafolio\Modelo\bin\Debug\EntityFramework.xml
+C:\Users\Suzu\Documents\GitHub\ProyectoPortafolio\Modelo\obj\Debug\Modelo.csprojResolveAssemblyReference.cache
+C:\Users\Suzu\Documents\GitHub\ProyectoPortafolio\Modelo\obj\Debug\Modelo.dll
+C:\Users\Suzu\Documents\GitHub\ProyectoPortafolio\Modelo\obj\Debug\Modelo.pdb
