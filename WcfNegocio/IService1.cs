@@ -62,6 +62,14 @@ namespace WcfNegocio
         [OperationContract]
         string ListarHabitacion();
 
+        //CRUD Producto
+        [OperationContract]
+        bool AgregarProducto(string producto);
+
+        //CRUD Plato
+        [OperationContract]
+        bool AgregarPlato(string plato);
+
         //DDL
         [OperationContract]
         string ListarTipoProveedor();
@@ -87,8 +95,7 @@ namespace WcfNegocio
         [OperationContract]
         string ListarFamilia();
 
-        [OperationContract]
-        bool AgregarProducto(string producto);
+        
 
     }
 }
