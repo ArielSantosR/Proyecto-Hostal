@@ -14,5 +14,17 @@ namespace Datos
         {
             return ent.TIPO_PLATO.ToList<TIPO_PLATO>();
         }
+
+        public List<CATEGORIA> ListarCategoria()
+        {
+            return ent.CATEGORIA.ToList();
+        }
+
+        public bool AgregarPlato(PLATO p)
+        {
+            ent.PLATO.Add(p);
+            ent.SaveChanges();
+            return true;
+        }
     }
 }

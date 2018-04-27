@@ -359,6 +359,47 @@ namespace WcfNegocio
             }
         }
 
+        //CRUD Producto
+        public bool AgregarProducto(string producto)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.Producto));
+            StringReader reader = new StringReader(producto);
+            Modelo.Producto p = (Modelo.Producto)ser.Deserialize(reader);
+            ServicioProducto servicio = new ServicioProducto();
+
+            Datos.PRODUCTO pDatos = new Datos.PRODUCTO();
+            //Datos Producto
+            pDatos.DESCRIPCION_PRODUCTO = p.DESCRIPCION_PRODUCTO;
+            pDatos.ID_PRODUCTO = p.ID_PRODUCTO;
+            pDatos.NOMBRE_PRODUCTO = p.NOMBRE_PRODUCTO;
+            pDatos.FECHA_VENCIMIENTO_PRODUCTO = p.FECHA_VENCIMIENTO_PRODUCTO;
+            pDatos.STOCK_PRODUCTO = p.STOCK_PRODUCTO;
+            pDatos.STOCK_CRITICO_PRODUCTO = p.STOCK_CRITICO_PRODUCTO;
+            pDatos.PRECIO_PRODUCTO = p.PRECIO_PRODUCTO;
+            pDatos.ID_FAMILIA = p.ID_FAMILIA;
+
+
+            return servicio.AgregarProducto(pDatos);
+        }
+
+        //CRUD Plato
+        public bool AgregarPlato(string plato)
+        {
+            //Datos Usuario
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.Plato));
+            StringReader reader = new StringReader(plato);
+            Modelo.Plato p = (Modelo.Plato)ser.Deserialize(reader);
+            ServicioMinuta serv = new ServicioMinuta();
+            Datos.PLATO pDatos = new Datos.PLATO();
+            pDatos.ID_PLATO = p.ID_PLATO;
+            pDatos.NOMBRE_PLATO = p.NOMBRE_PLATO;
+            pDatos.PRECIO_PLATO = p.PRECIO_PLATO;
+            pDatos.ID_CATEGORIA = p.ID_CATEGORIA;
+            pDatos.ID_TIPO_PLATO = p.ID_TIPO_PLATO;
+
+            return serv.AgregarPlato(pDatos);
+        }
+
         //DDL
         public string ListarPais()
         {
@@ -435,6 +476,24 @@ namespace WcfNegocio
             return writer.ToString();
         }
 
+        public string ListarCategoria()
+        {
+            ServicioMinuta servicio = new ServicioMinuta();
+            List<Datos.CATEGORIA> categoria = servicio.ListarCategoria();
+            Modelo.CategoriaCollection listaCategoria = new Modelo.CategoriaCollection();
+            foreach (Datos.CATEGORIA c in categoria)
+            {
+                Modelo.Categoria cModelo = new Modelo.Categoria();
+                cModelo.ID_CATEGORIA = c.ID_CATEGORIA;
+                cModelo.NOMBRE_CATEGORIA = c.NOMBRE_CATEGORIA;
+                listaCategoria.Add(cModelo);
+            }
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.TipoPlatoCollection));
+            StringWriter writer = new StringWriter();
+            ser.Serialize(writer, listaCategoria);
+            return writer.ToString();
+        }
+
         public string ListarTipoPlato()
         {
             ServicioMinuta servicio = new ServicioMinuta();
@@ -451,29 +510,6 @@ namespace WcfNegocio
             StringWriter writer = new StringWriter();
             ser.Serialize(writer, listaPlatos);
             return writer.ToString();
-        }
-
-        //CRUD Producto
-        public bool AgregarProducto(string producto)
-        {
-            XmlSerializer ser = new XmlSerializer(typeof(Modelo.Producto));
-            StringReader reader = new StringReader(producto);
-            Modelo.Producto p = (Modelo.Producto)ser.Deserialize(reader);
-            ServicioProducto servicio = new ServicioProducto();
-
-            Datos.PRODUCTO pDatos = new Datos.PRODUCTO();
-            //Datos Producto
-            pDatos.DESCRIPCION_PRODUCTO = p.DESCRIPCION_PRODUCTO;
-            pDatos.ID_PRODUCTO = p.ID_PRODUCTO;
-            pDatos.NOMBRE_PRODUCTO = p.NOMBRE_PRODUCTO;
-            pDatos.FECHA_VENCIMIENTO_PRODUCTO = p.FECHA_VENCIMIENTO_PRODUCTO;
-            pDatos.STOCK_PRODUCTO = p.STOCK_PRODUCTO;
-            pDatos.STOCK_CRITICO_PRODUCTO = p.STOCK_CRITICO_PRODUCTO;
-            pDatos.PRECIO_PRODUCTO = p.PRECIO_PRODUCTO;
-            pDatos.ID_FAMILIA = p.ID_FAMILIA;
-            
-
-            return servicio.AgregarProducto(pDatos);
         }
 
         public string ListarProducto()
@@ -493,8 +529,6 @@ namespace WcfNegocio
                 pModelo.ID_FAMILIA = p.ID_FAMILIA;
                 pModelo.FECHA_VENCIMIENTO_PRODUCTO = p.FECHA_VENCIMIENTO_PRODUCTO;
                 pModelo.DESCRIPCION_PRODUCTO = p.DESCRIPCION_PRODUCTO;
-
-                
 
                 listaProducto.Add(pModelo);
             }
@@ -518,9 +552,6 @@ namespace WcfNegocio
                 fModelo.ID_FAMILIA = f.ID_FAMILIA;
                 fModelo.NOMBRE_FAMILIA = f.NOMBRE_FAMILIA;
                 
-
-
-
                 listaFamilia.Add(fModelo);
             }
 
@@ -530,6 +561,5 @@ namespace WcfNegocio
             writer.Close();
             return writer.ToString();
         }
-
     }
 }

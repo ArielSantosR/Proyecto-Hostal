@@ -40,6 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Categoria.cs" />
+    <Compile Include="CategoriaCollection.cs" />
     <Compile Include="Cliente.cs" />
     <Compile Include="ClienteCollection.cs" />
     <Compile Include="Comuna.cs" />
@@ -53,6 +55,8 @@
     <Compile Include="HabitacionCollection.cs" />
     <Compile Include="Pais.cs" />
     <Compile Include="PaisCollection.cs" />
+    <Compile Include="Plato.cs" />
+    <Compile Include="PlatoCollection.cs" />
     <Compile Include="Producto.cs" />
     <Compile Include="ProductoCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
