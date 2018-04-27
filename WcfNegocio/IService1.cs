@@ -80,5 +80,15 @@ namespace WcfNegocio
 
         [OperationContract]
         string ListarTipoPlato();
+
+        [OperationContract]
+        string ListarProducto();
+
+        [OperationContract]
+        string ListarFamilia();
+
+        [OperationContract]
+        bool AgregarProducto(string producto);
+
     }
 }

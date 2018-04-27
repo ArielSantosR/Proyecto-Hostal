@@ -453,5 +453,83 @@ namespace WcfNegocio
             return writer.ToString();
         }
 
+        //CRUD Producto
+        public bool AgregarProducto(string producto)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.Producto));
+            StringReader reader = new StringReader(producto);
+            Modelo.Producto p = (Modelo.Producto)ser.Deserialize(reader);
+            ServicioProducto servicio = new ServicioProducto();
+
+            Datos.PRODUCTO pDatos = new Datos.PRODUCTO();
+            //Datos Producto
+            pDatos.DESCRIPCION_PRODUCTO = p.DESCRIPCION_PRODUCTO;
+            pDatos.ID_PRODUCTO = p.ID_PRODUCTO;
+            pDatos.NOMBRE_PRODUCTO = p.NOMBRE_PRODUCTO;
+            pDatos.FECHA_VENCIMIENTO_PRODUCTO = p.FECHA_VENCIMIENTO_PRODUCTO;
+            pDatos.STOCK_PRODUCTO = p.STOCK_PRODUCTO;
+            pDatos.STOCK_CRITICO_PRODUCTO = p.STOCK_CRITICO_PRODUCTO;
+            pDatos.PRECIO_PRODUCTO = p.PRECIO_PRODUCTO;
+            pDatos.ID_FAMILIA = p.ID_FAMILIA;
+            
+
+            return servicio.AgregarProducto(pDatos);
+        }
+
+        public string ListarProducto()
+        {
+            ServicioProducto servicio = new ServicioProducto();
+            List<Datos.PRODUCTO> producto = servicio.ListarProducto();
+            Modelo.ProductoCollection listaProducto = new Modelo.ProductoCollection();
+
+            foreach (Datos.PRODUCTO p in producto)
+            {
+                Modelo.Producto pModelo = new Modelo.Producto();
+                pModelo.ID_PRODUCTO = p.ID_PRODUCTO;
+                pModelo.NOMBRE_PRODUCTO = p.NOMBRE_PRODUCTO;
+                pModelo.PRECIO_PRODUCTO = p.PRECIO_PRODUCTO;
+                pModelo.STOCK_CRITICO_PRODUCTO = p.STOCK_CRITICO_PRODUCTO;
+                pModelo.STOCK_PRODUCTO = p.STOCK_PRODUCTO;
+                pModelo.ID_FAMILIA = p.ID_FAMILIA;
+                pModelo.FECHA_VENCIMIENTO_PRODUCTO = p.FECHA_VENCIMIENTO_PRODUCTO;
+                pModelo.DESCRIPCION_PRODUCTO = p.DESCRIPCION_PRODUCTO;
+
+                
+
+                listaProducto.Add(pModelo);
+            }
+
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.ProductoCollection));
+            StringWriter writer = new StringWriter();
+            ser.Serialize(writer, listaProducto);
+            writer.Close();
+            return writer.ToString();
+        }
+
+        public string ListarFamilia()
+        {
+            ServicioProducto servicio = new ServicioProducto();
+            List<Datos.FAMILIA> familia = servicio.ListarFamilia();
+            Modelo.FamiliaCollection listaFamilia = new Modelo.FamiliaCollection();
+
+            foreach (Datos.FAMILIA f in familia)
+            {
+                Modelo.Familia fModelo = new Modelo.Familia();
+                fModelo.ID_FAMILIA = f.ID_FAMILIA;
+                fModelo.NOMBRE_FAMILIA = f.NOMBRE_FAMILIA;
+                
+
+
+
+                listaFamilia.Add(fModelo);
+            }
+
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.FamiliaCollection));
+            StringWriter writer = new StringWriter();
+            ser.Serialize(writer, listaFamilia);
+            writer.Close();
+            return writer.ToString();
+        }
+
     }
 }

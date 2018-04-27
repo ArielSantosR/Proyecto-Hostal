@@ -150,6 +150,7 @@
     <Compile Include="ServicioHabitacion.cs" />
     <Compile Include="ServicioLogin.cs" />
     <Compile Include="ServicioMinuta.cs" />
+    <Compile Include="ServicioProducto.cs" />
     <Compile Include="ServicioProveedor.cs" />
     <Compile Include="ServicioUsuario.cs" />
     <Compile Include="TIPO_HABITACION.cs">
