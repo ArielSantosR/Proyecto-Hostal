@@ -2,7 +2,7 @@
 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
-<!doctype html>
+<head runat="server">
     <title>Hostal Doña Clarita</title>
     <meta name="description" content="Hostal Doña Clarita"/>
     <meta name="author" content="SitePoint"/>

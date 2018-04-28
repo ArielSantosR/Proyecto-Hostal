@@ -104,7 +104,6 @@ namespace Web.Administrador
             producto.STOCK_CRITICO_PRODUCTO = short.Parse(txtStockCritico.Text);
             producto.DESCRIPCION_PRODUCTO = txtDescripcion.Text;
             producto.FECHA_VENCIMIENTO_PRODUCTO = DateTime.Parse(txtFechaVencimiento.Text);
-
             
         }
     }

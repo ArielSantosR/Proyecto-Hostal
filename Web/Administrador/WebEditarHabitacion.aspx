@@ -2,7 +2,6 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
      <div class="alert alert-danger alert-dismissible" id="alerta" runat="server">
   <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
   <strong>Error!</strong> <asp:Literal ID="error" runat="server"></asp:Literal>

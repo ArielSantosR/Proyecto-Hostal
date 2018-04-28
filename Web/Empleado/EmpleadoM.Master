@@ -2,7 +2,7 @@
 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
-<!doctype html>
+<head runat="server">
     <title>Hostal Doña Clarita</title>
     <meta name="description" content="Hostal Doña Clarita"/>
     <meta name="author" content="SitePoint"/>
@@ -16,6 +16,8 @@
     </asp:ContentPlaceHolder>
 </head>
 <body>
+
+    <form id="form1" runat="server">
 
     <!--        COMIENZO NAVBAR EMPLEADO        -->
 <nav class="navbar navbar-inverse">
@@ -56,11 +58,12 @@
 
 <!--        COMIENZO DE CONTENIDO        -->
 
-    <form id="form1" runat="server">
+    
+        <div class="content">
         <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-        
         </asp:ContentPlaceHolder>
-        </form>
+         </div>
+        
 <!--        FIN DE CONTENIDO		-->
 
 <!--        INICIO FOOTER        -->
@@ -86,6 +89,6 @@
 </footer>
 <!--        FIN FOOTER        -->
 
-    
+    </form>
 </body>
 </html>

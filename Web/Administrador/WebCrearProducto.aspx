@@ -42,7 +42,7 @@
                 <div class="col-sm-12">
                   <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                  <asp:TextBox ID="txtFechaVencimiento" placeholder="Ingrese Fecha de Vencimiento"  runat="server" CssClass="form-control" required="required"></asp:TextBox>
+                  <asp:TextBox ID="txtFechaVencimiento" TextMode="Date" placeholder="Ingrese Fecha de Vencimiento"  runat="server" CssClass="form-control" required="required"></asp:TextBox>
                 </div>
               </div>
             </div>

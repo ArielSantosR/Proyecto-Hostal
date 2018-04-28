@@ -108,7 +108,12 @@ namespace Web.Administrador
                         habitacion.PRECIO_HABITACION = precio;
                         habitacion.ESTADO_HABITACION = ddlEstado.SelectedValue;
                         habitacion.ID_TIPO_HABITACION = short.Parse(ddlTipo.SelectedValue);
-                        habitacion.RUT_CLIENTE = int.Parse(txtRut.Text);
+
+                        if (txtRut.Text != string.Empty)
+                        {
+                            habitacion.RUT_CLIENTE = int.Parse(txtRut.Text);
+                        }
+                        
 
                         Service1 s = new Service1();
                         XmlSerializer sr = new XmlSerializer(typeof(Modelo.Habitacion));
