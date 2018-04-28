@@ -105,5 +105,30 @@ namespace Web
         {
             Response.Redirect("WebEliminarHabitacion.aspx");
         }
+
+        protected void btnVerInforme_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("WebInformes.aspx");
+        }
+
+        protected void btnAgregarPlato_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("WebAgregarPlato.aspx");
+        }
+
+        protected void btnVerPlato_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("WebVerPlatos.aspx");
+        }
+
+        protected void btnAgregarProducto_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("WebAgregarProducto.aspx");
+        }
+
+        protected void btnVerProducto_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("WebVerProductos.aspx");
+        }
     }
 }

@@ -134,3 +134,12 @@ C:\Users\Suzu\Documents\GitHub\ProyectoPortafolio\Modelo\bin\Debug\EntityFramewo
 C:\Users\Suzu\Documents\GitHub\ProyectoPortafolio\Modelo\obj\Debug\Modelo.csprojResolveAssemblyReference.cache
 C:\Users\Suzu\Documents\GitHub\ProyectoPortafolio\Modelo\obj\Debug\Modelo.dll
 C:\Users\Suzu\Documents\GitHub\ProyectoPortafolio\Modelo\obj\Debug\Modelo.pdb
+C:\Users\Suzu\Documents\Proyecto-Hostal\.git\Modelo\bin\Debug\Modelo.dll
+C:\Users\Suzu\Documents\Proyecto-Hostal\.git\Modelo\bin\Debug\Modelo.pdb
+C:\Users\Suzu\Documents\Proyecto-Hostal\.git\Modelo\bin\Debug\Datos.dll
+C:\Users\Suzu\Documents\Proyecto-Hostal\.git\Modelo\bin\Debug\EntityFramework.dll
+C:\Users\Suzu\Documents\Proyecto-Hostal\.git\Modelo\bin\Debug\Datos.pdb
+C:\Users\Suzu\Documents\Proyecto-Hostal\.git\Modelo\bin\Debug\EntityFramework.xml
+C:\Users\Suzu\Documents\Proyecto-Hostal\.git\Modelo\obj\Debug\Modelo.csprojResolveAssemblyReference.cache
+C:\Users\Suzu\Documents\Proyecto-Hostal\.git\Modelo\obj\Debug\Modelo.dll
+C:\Users\Suzu\Documents\Proyecto-Hostal\.git\Modelo\obj\Debug\Modelo.pdb

@@ -26,5 +26,19 @@ namespace Datos
             ent.SaveChanges();
             return true;
         }
+
+        public bool existePlato(PLATO plato)
+        {
+            PLATO p = ent.PLATO.FirstOrDefault(objeto =>
+            objeto.NOMBRE_PLATO.Equals(plato.NOMBRE_PLATO));
+            if (p != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

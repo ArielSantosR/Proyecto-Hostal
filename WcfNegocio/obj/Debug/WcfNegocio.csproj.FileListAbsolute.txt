@@ -190,3 +190,15 @@ C:\Users\Suzu\Documents\GitHub\ProyectoPortafolio\WcfNegocio\bin\Debug\EntityFra
 C:\Users\Suzu\Documents\GitHub\ProyectoPortafolio\WcfNegocio\obj\Debug\WcfNegocio.csprojResolveAssemblyReference.cache
 C:\Users\Suzu\Documents\GitHub\ProyectoPortafolio\WcfNegocio\obj\Debug\WcfNegocio.dll
 C:\Users\Suzu\Documents\GitHub\ProyectoPortafolio\WcfNegocio\obj\Debug\WcfNegocio.pdb
+C:\Users\Suzu\Documents\Proyecto-Hostal\.git\WcfNegocio\bin\Debug\WcfNegocio.dll.config
+C:\Users\Suzu\Documents\Proyecto-Hostal\.git\WcfNegocio\bin\Debug\WcfNegocio.dll
+C:\Users\Suzu\Documents\Proyecto-Hostal\.git\WcfNegocio\bin\Debug\WcfNegocio.pdb
+C:\Users\Suzu\Documents\Proyecto-Hostal\.git\WcfNegocio\bin\Debug\Datos.dll
+C:\Users\Suzu\Documents\Proyecto-Hostal\.git\WcfNegocio\bin\Debug\Modelo.dll
+C:\Users\Suzu\Documents\Proyecto-Hostal\.git\WcfNegocio\bin\Debug\EntityFramework.dll
+C:\Users\Suzu\Documents\Proyecto-Hostal\.git\WcfNegocio\bin\Debug\Datos.pdb
+C:\Users\Suzu\Documents\Proyecto-Hostal\.git\WcfNegocio\bin\Debug\Modelo.pdb
+C:\Users\Suzu\Documents\Proyecto-Hostal\.git\WcfNegocio\bin\Debug\EntityFramework.xml
+C:\Users\Suzu\Documents\Proyecto-Hostal\.git\WcfNegocio\obj\Debug\WcfNegocio.csprojResolveAssemblyReference.cache
+C:\Users\Suzu\Documents\Proyecto-Hostal\.git\WcfNegocio\obj\Debug\WcfNegocio.dll
+C:\Users\Suzu\Documents\Proyecto-Hostal\.git\WcfNegocio\obj\Debug\WcfNegocio.pdb

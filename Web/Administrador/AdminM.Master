@@ -7,7 +7,7 @@
     <meta name="description" content="Hostal Doña Clarita"/>
     <meta name="author" content="SitePoint"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous"> 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -66,13 +66,15 @@
         </ul>
       </li>
 	  <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown">Habitación
+        <a class="dropdown-toggle" data-toggle="dropdown">Gestión
         <span class="caret"></span></a>
         <ul class="dropdown-menu">
+          <li><a href="../Administrador/WebCrearHabitacion.aspx">Crear Habitación</a></li>  
           <li><a href="../Administrador/WebVerHabitacion.aspx">Ver Habitaciones</a></li>
-          <li><a href="../Administrador/WebCrearHabitacion.aspx">Crear Habitación</a></li>
-		  <li><a href="../Administrador/WebEditarHabitacion.aspx">Modificar Habitación</a></li>
-		  <li><a href="../Administrador/WebEliminarHabitacion.aspx">Eliminar Habitación</a></li>
+          <li><a href="../Administrador/WebAgregarPlato.aspx">Agregar Plato</a></li>
+          <li><a href="../Administrador/WebVerPlato.aspx">Ver Platos</a></li>
+          <li><a href="../Administrador/WebCrearProducto.aspx">AgregarProducto</a></li>
+          <li><a href="../Administrador/WebVerProducto.aspx.aspx">Ver Producto</a></li>
         </ul>
       </li>
         <li><a href="WebInformes.aspx">Informes</a></li>

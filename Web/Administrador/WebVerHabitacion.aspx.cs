@@ -49,6 +49,20 @@ namespace Web.Administrador
             gvHabitacion.DataBind();
         }
 
+        protected void btnEditar_Click(object sender, EventArgs e)
+        {
+            //Lee los valores del LinkButton, primero usa la clase LinkButton para 
+            //Transformar los datos de Sender, luego los lee y los asigna a una variable
+            LinkButton btn = (LinkButton)(sender);
+            short NUMERO_HABITACION = short.Parse(btn.CommandArgument);
+
+            Habitacion habitacion = new Habitacion();
+            habitacion.NUMERO_HABITACION = NUMERO_HABITACION;
+            MiSesionH = habitacion;
+
+            Response.Redirect("../Administrador/WebEditarHabitacion.aspx");
+        }
+
         //Creación de Sesión
         public Usuario MiSesion
         {
@@ -63,6 +77,22 @@ namespace Web.Administrador
             set
             {
                 Session["Usuario"] = value;
+            }
+        }
+
+        public Habitacion MiSesionH
+        {
+            get
+            {
+                if (Session["Habitacion"] == null)
+                {
+                    Session["Habitacion"] = new Habitacion();
+                }
+                return (Habitacion)Session["Habitacion"];
+            }
+            set
+            {
+                Session["Habitacion"] = value;
             }
         }
     }

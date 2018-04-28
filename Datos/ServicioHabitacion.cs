@@ -40,5 +40,42 @@ namespace Datos
                 return false;
             }
         }
+
+        public HABITACION obtenerHabitacion(HABITACION habitacion)
+        {
+
+            HABITACION h = ent.HABITACION.FirstOrDefault(objeto =>
+            objeto.NUMERO_HABITACION.Equals(habitacion.NUMERO_HABITACION));
+
+            if (h != null)
+            {
+                return h;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public bool EditarHabitacion(HABITACION habitacion)
+        {
+            HABITACION h = ent.HABITACION.FirstOrDefault(objeto =>
+            objeto.NUMERO_HABITACION.Equals(habitacion.NUMERO_HABITACION));
+
+            if (h != null)
+            {
+                h.PRECIO_HABITACION = habitacion.PRECIO_HABITACION;
+                h.ID_TIPO_HABITACION = habitacion.ID_TIPO_HABITACION;
+                h.RUT_CLIENTE = habitacion.RUT_CLIENTE;
+                h.ESTADO_HABITACION = habitacion.ESTADO_HABITACION;
+
+                ent.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

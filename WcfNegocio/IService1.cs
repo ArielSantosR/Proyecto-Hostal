@@ -62,6 +62,12 @@ namespace WcfNegocio
         [OperationContract]
         string ListarHabitacion();
 
+        [OperationContract]
+        Habitacion ObtenerHabitacion(string habitacion);
+
+        [OperationContract]
+        bool ModificarHabitacion(string habitacion);
+
         //CRUD Producto
         [OperationContract]
         bool AgregarProducto(string producto);
@@ -69,6 +75,9 @@ namespace WcfNegocio
         //CRUD Plato
         [OperationContract]
         bool AgregarPlato(string plato);
+
+        [OperationContract]
+        bool ExistePlato(string plato);
 
         //DDL
         [OperationContract]

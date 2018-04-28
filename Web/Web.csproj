@@ -94,6 +94,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Administrador\WebAgregarPlato.aspx" />
     <Content Include="Administrador\WebCrearHabitacion.aspx" />
     <Content Include="Administrador\WebCrearProducto.aspx" />
     <Content Include="Administrador\WebEditarHabitacion.aspx" />
@@ -158,6 +159,13 @@
     </Compile>
     <Compile Include="Administrador\AdminM.Master.designer.cs">
       <DependentUpon>AdminM.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Administrador\WebAgregarPlato.aspx.cs">
+      <DependentUpon>WebAgregarPlato.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\WebAgregarPlato.aspx.designer.cs">
+      <DependentUpon>WebAgregarPlato.aspx</DependentUpon>
     </Compile>
     <Compile Include="Administrador\WebCrearHabitacion.aspx.cs">
       <DependentUpon>WebCrearHabitacion.aspx</DependentUpon>

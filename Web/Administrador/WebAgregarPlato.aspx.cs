@@ -11,7 +11,7 @@ using WcfNegocio;
 
 namespace Web.Administrador
 {
-    public partial class WebCrearHabitacion : System.Web.UI.Page
+    public partial class WebAgregarPlato : System.Web.UI.Page
     {
         void Page_PreInit(object sender, EventArgs e)
         {
@@ -43,25 +43,32 @@ namespace Web.Administrador
             alerta_exito.Visible = false;
             alerta.Visible = false;
 
-            //Cargando DDL Tipo Plato
+            //Cargando DDL Categoria
             Service1 service = new Service1();
-            string tipo_habitacion = service.ListarTipoHabitacion();
-            XmlSerializer ser = new XmlSerializer(typeof(Modelo.TipoHabitacionCollection));
-            StringReader reader = new StringReader(tipo_habitacion);
-            Modelo.TipoHabitacionCollection coleccionTipoHabitacion = (Modelo.TipoHabitacionCollection)ser.Deserialize(reader);
+            string categoria = service.ListarCategoria();
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.CategoriaCollection));
+            StringReader reader = new StringReader(categoria);
+            Modelo.CategoriaCollection coleccionCategoria = (Modelo.CategoriaCollection)ser.Deserialize(reader);
             reader.Close();
 
+            //Cargando DDL Tipo Plato
+            string tipo_plato = service.ListarTipoPlato();
+            XmlSerializer ser2 = new XmlSerializer(typeof(Modelo.TipoPlatoCollection));
+            StringReader reader2 = new StringReader(tipo_plato);
+            Modelo.TipoPlatoCollection coleccionTipoPlato = (Modelo.TipoPlatoCollection)ser2.Deserialize(reader2);
+            reader.Close();
 
             if (!IsPostBack)
             {
-                ddlTipo.DataSource = coleccionTipoHabitacion;
-                ddlTipo.DataTextField = "NOMBRE_TIPO_HABITACION";
-                ddlTipo.DataValueField = "ID_TIPO_HABITACION";
-                ddlTipo.DataBind();
+                ddlCategoria.DataSource = coleccionCategoria;
+                ddlCategoria.DataTextField = "NOMBRE_CATEGORIA";
+                ddlCategoria.DataValueField = "ID_CATEGORIA";
+                ddlCategoria.DataBind();
 
-                ddlEstado.Items.Add("Disponible");
-                ddlEstado.Items.Add("Ocupada");
-                ddlEstado.Items.Add("Mantenimiento");
+                ddlTipo.DataSource = coleccionTipoPlato;
+                ddlTipo.DataTextField = "NOMBRE_TIPO_PLATO";
+                ddlTipo.DataValueField = "ID_TIPO_PLATO";
+                ddlTipo.DataBind();
             }
 
         }
@@ -87,29 +94,28 @@ namespace Web.Administrador
         {
             try
             {
-                short numero = 0;
                 int precio = 0;
 
-                if (txtNumero.Text != string.Empty && txtPrecio.Text != string.Empty)
+                if (txtNombre.Text != string.Empty && txtPrecio.Text != string.Empty)
                 {
-                    if (short.TryParse(txtNumero.Text, out numero) && int.TryParse(txtPrecio.Text, out precio))
+                    if (int.TryParse(txtPrecio.Text, out precio))
                     {
-                        Modelo.Habitacion habitacion = new Modelo.Habitacion();
-                        habitacion.NUMERO_HABITACION = numero;
-                        habitacion.PRECIO_HABITACION = precio;
-                        habitacion.ESTADO_HABITACION = ddlEstado.SelectedValue;
-                        habitacion.ID_TIPO_HABITACION = short.Parse(ddlTipo.SelectedValue);
+                        Modelo.Plato plato = new Modelo.Plato();
+                        plato.NOMBRE_PLATO = txtNombre.Text;
+                        plato.PRECIO_PLATO = precio;
+                        plato.ID_CATEGORIA = short.Parse(ddlCategoria.SelectedValue);
+                        plato.ID_TIPO_PLATO = short.Parse(ddlTipo.SelectedValue);
 
                         Service1 s = new Service1();
-                        XmlSerializer sr = new XmlSerializer(typeof(Modelo.Habitacion));
+                        XmlSerializer sr = new XmlSerializer(typeof(Modelo.Plato));
                         StringWriter writer = new StringWriter();
-                        sr.Serialize(writer, habitacion);
+                        sr.Serialize(writer, plato);
 
-                        if (!s.ExisteHabitacion(writer.ToString()))
+                        if (!s.ExistePlato(writer.ToString()))
                         {
-                            if (s.AgregarHabitacion(writer.ToString()))
+                            if (s.AgregarPlato(writer.ToString()))
                             {
-                                exito.Text = "La habitación ha sido creada con éxito";
+                                exito.Text = "El plato ha sido agregado con éxito";
                                 alerta_exito.Visible = true;
                                 alerta.Visible = false;
                             }
@@ -126,7 +132,7 @@ namespace Web.Administrador
                             error.Text = "Datos Ingresados incorrectamente, verifique que ha ingresado numeros correctamente";
                             alerta.Visible = true;
                         }
-                        
+
                     }
                     else
                     {
@@ -142,7 +148,7 @@ namespace Web.Administrador
                     alerta.Visible = true;
                 }
 
-            } 
+            }
             catch (Exception)
             {
                 alerta_exito.Visible = false;
@@ -153,9 +159,9 @@ namespace Web.Administrador
 
         protected void btnLimpiar_Click(object sender, EventArgs e)
         {
-            txtNumero.Text = string.Empty;
+            txtNombre.Text = string.Empty;
             txtPrecio.Text = string.Empty;
-            ddlEstado.SelectedIndex = 0;
+            ddlCategoria.SelectedIndex = 0;
             ddlTipo.SelectedIndex = 0;
         }
     }
