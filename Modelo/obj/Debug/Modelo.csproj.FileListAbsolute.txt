@@ -134,6 +134,7 @@ C:\Users\Suzu\Documents\GitHub\ProyectoPortafolio\Modelo\bin\Debug\EntityFramewo
 C:\Users\Suzu\Documents\GitHub\ProyectoPortafolio\Modelo\obj\Debug\Modelo.csprojResolveAssemblyReference.cache
 C:\Users\Suzu\Documents\GitHub\ProyectoPortafolio\Modelo\obj\Debug\Modelo.dll
 C:\Users\Suzu\Documents\GitHub\ProyectoPortafolio\Modelo\obj\Debug\Modelo.pdb
+<<<<<<< HEAD
 C:\Users\Suzu\Documents\Proyecto-Hostal\.git\Modelo\bin\Debug\Modelo.dll
 C:\Users\Suzu\Documents\Proyecto-Hostal\.git\Modelo\bin\Debug\Modelo.pdb
 C:\Users\Suzu\Documents\Proyecto-Hostal\.git\Modelo\bin\Debug\Datos.dll
@@ -143,3 +144,14 @@ C:\Users\Suzu\Documents\Proyecto-Hostal\.git\Modelo\bin\Debug\EntityFramework.xm
 C:\Users\Suzu\Documents\Proyecto-Hostal\.git\Modelo\obj\Debug\Modelo.csprojResolveAssemblyReference.cache
 C:\Users\Suzu\Documents\Proyecto-Hostal\.git\Modelo\obj\Debug\Modelo.dll
 C:\Users\Suzu\Documents\Proyecto-Hostal\.git\Modelo\obj\Debug\Modelo.pdb
+=======
+C:\Users\Cliente\Documents\GitHub\Proyecto-Hostal\Modelo\bin\Debug\Modelo.dll
+C:\Users\Cliente\Documents\GitHub\Proyecto-Hostal\Modelo\bin\Debug\Modelo.pdb
+C:\Users\Cliente\Documents\GitHub\Proyecto-Hostal\Modelo\bin\Debug\Datos.dll
+C:\Users\Cliente\Documents\GitHub\Proyecto-Hostal\Modelo\bin\Debug\EntityFramework.dll
+C:\Users\Cliente\Documents\GitHub\Proyecto-Hostal\Modelo\bin\Debug\Datos.pdb
+C:\Users\Cliente\Documents\GitHub\Proyecto-Hostal\Modelo\bin\Debug\EntityFramework.xml
+C:\Users\Cliente\Documents\GitHub\Proyecto-Hostal\Modelo\obj\Debug\Modelo.csprojResolveAssemblyReference.cache
+C:\Users\Cliente\Documents\GitHub\Proyecto-Hostal\Modelo\obj\Debug\Modelo.dll
+C:\Users\Cliente\Documents\GitHub\Proyecto-Hostal\Modelo\obj\Debug\Modelo.pdb
+>>>>>>> d9493fc16315746c815091b5be9eaba34ca93f46
