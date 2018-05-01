@@ -123,7 +123,7 @@ namespace Web
 
         protected void btnAgregarProducto_Click(object sender, EventArgs e)
         {
-            Response.Redirect("WebAgregarProducto.aspx");
+            Response.Redirect("WebCrearProducto.aspx");
         }
 
         protected void btnVerProducto_Click(object sender, EventArgs e)

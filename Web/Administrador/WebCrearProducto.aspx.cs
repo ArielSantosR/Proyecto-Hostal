@@ -104,7 +104,14 @@ namespace Web.Administrador
             producto.STOCK_CRITICO_PRODUCTO = short.Parse(txtStockCritico.Text);
             producto.DESCRIPCION_PRODUCTO = txtDescripcion.Text;
             producto.FECHA_VENCIMIENTO_PRODUCTO = DateTime.Parse(txtFechaVencimiento.Text);
-            
+
+            Service1 s = new Service1();
+            XmlSerializer sr = new XmlSerializer(typeof(Modelo.Producto));
+            StringWriter writer = new StringWriter();
+            sr.Serialize(writer, producto);
+
+            s.AgregarProducto(writer.ToString());
+
         }
     }
 }
