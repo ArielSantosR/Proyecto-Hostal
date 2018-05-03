@@ -95,23 +95,77 @@ namespace Web.Administrador
 
         protected void btnRegistrar_Click(object sender, EventArgs e)
         {
+            short stock = 0;
+            short stockCritico = 0;
+            int precio = 0;
+            DateTime fecha;
 
-            Modelo.Producto producto = new Modelo.Producto();
-            producto.NOMBRE_PRODUCTO = txtNombre.Text;
-            producto.PRECIO_PRODUCTO = int.Parse(txtPrecio.Text);
-            producto.ID_FAMILIA = short.Parse(ddlFamilia.SelectedValue);
-            producto.STOCK_PRODUCTO = short.Parse(txtStock.Text);
-            producto.STOCK_CRITICO_PRODUCTO = short.Parse(txtStockCritico.Text);
-            producto.DESCRIPCION_PRODUCTO = txtDescripcion.Text;
-            producto.FECHA_VENCIMIENTO_PRODUCTO = DateTime.Parse(txtFechaVencimiento.Text);
+            try
+            {
+                if (txtNombre.Text != string.Empty && txtPrecio.Text != string.Empty &&
+                txtStock.Text != string.Empty && txtStockCritico.Text != string.Empty &&
+                txtDescripcion.Text != string.Empty)
+                {
+                    Modelo.Producto producto = new Modelo.Producto();
+                    producto.NOMBRE_PRODUCTO = txtNombre.Text;
+                    producto.ID_FAMILIA = short.Parse(ddlFamilia.SelectedValue);
+                    producto.DESCRIPCION_PRODUCTO = txtDescripcion.Text;
 
-            Service1 s = new Service1();
-            XmlSerializer sr = new XmlSerializer(typeof(Modelo.Producto));
-            StringWriter writer = new StringWriter();
-            sr.Serialize(writer, producto);
+                    if (DateTime.TryParse(txtFechaVencimiento.Text, out fecha))
+                    {
+                        producto.FECHA_VENCIMIENTO_PRODUCTO = fecha;
+                    }
+                    else
+                    {
+                        producto.FECHA_VENCIMIENTO_PRODUCTO = DateTime.Parse("01-01-1900");
+                    }
 
-            s.AgregarProducto(writer.ToString());
+                    if (short.TryParse(txtStock.Text, out stock) && 
+                        short.TryParse(txtStockCritico.Text, out stockCritico)  && 
+                        int.TryParse(txtPrecio.Text, out precio))
+                    {
+                        producto.STOCK_PRODUCTO = stock;
+                        producto.STOCK_CRITICO_PRODUCTO = stockCritico;
+                        producto.PRECIO_PRODUCTO = precio;
 
+                        Service1 s = new Service1();
+                        XmlSerializer sr = new XmlSerializer(typeof(Modelo.Producto));
+                        StringWriter writer = new StringWriter();
+                        sr.Serialize(writer, producto);
+
+                        if (s.AgregarProducto(writer.ToString()))
+                        {
+                            exito.Text = "El producto ha sido agregado con éxito con éxito";
+                            alerta_exito.Visible = true;
+                            alerta.Visible = false;
+                        }
+                        else
+                        {
+                            alerta_exito.Visible = false;
+                            error.Text = "El ingreso de Producto ha fallado";
+                            alerta.Visible = true;
+                        }
+                    }
+                    else
+                    {
+                        alerta_exito.Visible = false;
+                        error.Text = "Verifique el Ingreso numérico";
+                        alerta.Visible = true;
+                    }
+                }
+                else
+                {
+                    alerta_exito.Visible = false;
+                    error.Text = "Debe rellenar todos los campos requeridos";
+                    alerta.Visible = true;
+                }
+            }
+            catch (Exception)
+            {
+                alerta_exito.Visible = false;
+                error.Text = "Excepcion";
+                alerta.Visible = true;
+            }
         }
     }
 }

@@ -16,10 +16,10 @@
                             <SortedDescendingCellStyle BackColor="#E9EBEF" />
                             <SortedDescendingHeaderStyle BackColor="#4870BE" />
                             <Columns>
-                                 <asp:BoundField DataField="ID_PRODUCTO" HeaderText="ID_PRODUCTO" />
-                                <asp:BoundField DataField="NOMBRE_PRODUCTO" HeaderText="NOMBRE_PRODUCTO" />
-                                <asp:BoundField DataField="STOCK_PRODUCTO" HeaderText="STOCK_PRODUCTO" />
-                                <asp:BoundField DataField="PRECIO_PRODUCTO" HeaderText="PRECIO_PRODUCTO" />
+                                 <asp:BoundField DataField="ID_PRODUCTO" HeaderText="Código Producto" />
+                                <asp:BoundField DataField="NOMBRE_PRODUCTO" HeaderText="Nombre" />
+                                <asp:BoundField DataField="STOCK_PRODUCTO" HeaderText="Stock" />
+                                <asp:BoundField DataField="PRECIO_PRODUCTO" HeaderText="Precio" />
                                 <asp:TemplateField>
                                     <ItemTemplate>
                                         <asp:LinkButton ID="btnEditar"  CssClass="btn btn-success" text="Editar" runat="server"/>

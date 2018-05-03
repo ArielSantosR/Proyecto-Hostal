@@ -228,7 +228,7 @@
     </Key>
     <Property Name="ID_PRODUCTO" Type="number" Precision="5" Scale="0" Nullable="false" />
     <Property Name="NOMBRE_PRODUCTO" Type="varchar2" MaxLength="50" Nullable="false" />
-    <Property Name="FECHA_VENCIMIENTO_PRODUCTO" Type="date" Nullable="false" />
+    <Property Name="FECHA_VENCIMIENTO_PRODUCTO" Type="date" />
     <Property Name="STOCK_PRODUCTO" Type="number" Precision="5" Scale="0" Nullable="false" />
     <Property Name="STOCK_CRITICO_PRODUCTO" Type="number" Precision="5" Scale="0" Nullable="false" />
     <Property Name="DESCRIPCION_PRODUCTO" Type="varchar2" MaxLength="250" Nullable="false" />
