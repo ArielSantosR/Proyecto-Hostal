@@ -98,6 +98,7 @@
     <Content Include="Administrador\WebCrearHabitacion.aspx" />
     <Content Include="Administrador\WebCrearProducto.aspx" />
     <Content Include="Administrador\WebEditarHabitacion.aspx" />
+    <Content Include="Administrador\WebEditarPlato.aspx" />
     <Content Include="Administrador\WebEditarProducto.aspx" />
     <Content Include="Administrador\WebEditarUsuario.aspx" />
     <Content Include="Administrador\WebEliminarHabitacion.aspx" />
@@ -142,6 +143,7 @@
     <Content Include="Empleado\EmpleadoM.Master" />
     <Content Include="Hostal\HostalM.Master" />
     <Content Include="Hostal\WebRegistro.aspx" />
+    <Content Include="Administrador\WebVerPlatos.aspx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -189,6 +191,13 @@
     </Compile>
     <Compile Include="Administrador\WebEditarHabitacion.aspx.designer.cs">
       <DependentUpon>WebEditarHabitacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrador\WebEditarPlato.aspx.cs">
+      <DependentUpon>WebEditarPlato.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\WebEditarPlato.aspx.designer.cs">
+      <DependentUpon>WebEditarPlato.aspx</DependentUpon>
     </Compile>
     <Compile Include="Administrador\WebEditarProducto.aspx.cs">
       <DependentUpon>WebEditarProducto.aspx</DependentUpon>
@@ -463,6 +472,13 @@
     </Compile>
     <Compile Include="Hostal\WebRegistro.aspx.designer.cs">
       <DependentUpon>WebRegistro.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrador\WebVerPlatos.aspx.cs">
+      <DependentUpon>WebVerPlatos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\WebVerPlatos.aspx.designer.cs">
+      <DependentUpon>WebVerPlatos.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

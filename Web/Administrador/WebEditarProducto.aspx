@@ -100,7 +100,7 @@
             </asp:UpdatePanel>
           <div class="row"> 
                   <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                      <br/> <asp:Button ID="btnRegistrar" runat="server" Text="Agregar"  CssClass="btn btn-primary btn-lg btn-block login-button" OnClick="btnRegistrar_Click" />
+                      <br/> <asp:Button ID="btnRegistrar" runat="server" Text="Editar"  CssClass="btn btn-primary btn-lg btn-block login-button" OnClick="btnRegistrar_Click" />
                   </div>
                   <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                       <br/> <asp:Button ID="btnLimpiar" runat="server" Text="Limpiar"  CssClass="btn btn-warning btn-lg btn-block login-button" OnClick="btnLimpiar_Click"/>
