@@ -497,11 +497,11 @@ namespace WcfNegocio
         //CRUD Plato
         public bool AgregarPlato(string plato)
         {
-            //Datos Usuario
+            //Datos Plato
             XmlSerializer ser = new XmlSerializer(typeof(Modelo.Plato));
             StringReader reader = new StringReader(plato);
             Modelo.Plato p = (Modelo.Plato)ser.Deserialize(reader);
-            ServicioMinuta serv = new ServicioMinuta();
+            ServicioPlato serv = new ServicioPlato();
             Datos.PLATO pDatos = new Datos.PLATO();
             pDatos.ID_PLATO = p.ID_PLATO;
             pDatos.NOMBRE_PLATO = p.NOMBRE_PLATO;
@@ -517,11 +517,11 @@ namespace WcfNegocio
             XmlSerializer ser = new XmlSerializer(typeof(Modelo.Plato));
             StringReader reader = new StringReader(plato);
             Modelo.Plato p = (Modelo.Plato)ser.Deserialize(reader);
-            ServicioMinuta serv = new ServicioMinuta();
+            ServicioPlato serv = new ServicioPlato();
             Datos.PLATO pDatos = new Datos.PLATO();
             pDatos.NOMBRE_PLATO = p.NOMBRE_PLATO;
 
-            if (!serv.existePlato(pDatos))
+            if (!serv.ExistePlato(pDatos))
             {
                 return false;
             }
@@ -530,6 +530,52 @@ namespace WcfNegocio
                 return true;
             }
         }
+       
+
+        public Plato ObtenerPlato(string plato)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.Plato));
+            StringReader reader = new StringReader(plato);
+            Modelo.Plato p = (Modelo.Plato)ser.Deserialize(reader);
+            ServicioPlato serv = new ServicioPlato();
+            Datos.PLATO pDatos = new Datos.PLATO();
+            pDatos.ID_PLATO = p.ID_PLATO;
+
+            if (!serv.ExistePlato(pDatos))
+            {
+                return null;
+            }
+            else
+            {
+                Datos.PLATO pDatos2 = serv.obtenerPlato(pDatos);
+
+                p.ID_PLATO = pDatos2.ID_PLATO;
+                p.NOMBRE_PLATO = pDatos2.NOMBRE_PLATO;
+                p.PRECIO_PLATO = pDatos2.PRECIO_PLATO;
+                p.ID_CATEGORIA = pDatos2.ID_CATEGORIA;
+                p.ID_TIPO_PLATO = pDatos2.ID_TIPO_PLATO;
+
+                return p;
+            }
+        }
+
+        public bool ModificarPlato(string plato)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.Plato));
+            StringReader reader = new StringReader(plato);
+            Modelo.Plato p = (Modelo.Plato)ser.Deserialize(reader);
+            ServicioPlato serv = new ServicioPlato();
+            Datos.PLATO pDatos = new Datos.PLATO();
+
+            pDatos.ID_TIPO_PLATO = p.ID_TIPO_PLATO;
+            pDatos.ID_PLATO = p.ID_PLATO;
+            pDatos.NOMBRE_PLATO = p.NOMBRE_PLATO;
+            pDatos.PRECIO_PLATO = p.PRECIO_PLATO;
+            pDatos.ID_CATEGORIA = p.ID_CATEGORIA;
+
+            return serv.EditarPlato(pDatos);
+        }
+
 
         //DDL
         public string ListarPais()
@@ -609,7 +655,7 @@ namespace WcfNegocio
 
         public string ListarCategoria()
         {
-            ServicioMinuta servicio = new ServicioMinuta();
+            ServicioPlato servicio = new ServicioPlato();
             List<Datos.CATEGORIA> categoria = servicio.ListarCategoria();
             Modelo.CategoriaCollection listaCategoria = new Modelo.CategoriaCollection();
             foreach (Datos.CATEGORIA c in categoria)
@@ -627,7 +673,7 @@ namespace WcfNegocio
 
         public string ListarTipoPlato()
         {
-            ServicioMinuta servicio = new ServicioMinuta();
+            ServicioPlato servicio = new ServicioPlato();
             List<Datos.TIPO_PLATO> TipoPlato = servicio.ListarTipoPlato();
             Modelo.TipoPlatoCollection listaPlatos = new Modelo.TipoPlatoCollection();
             foreach (Datos.TIPO_PLATO c in TipoPlato)

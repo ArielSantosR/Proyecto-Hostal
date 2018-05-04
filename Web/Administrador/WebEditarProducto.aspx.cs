@@ -8,7 +8,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Xml.Serialization;
 using WcfNegocio;
-
+//aaa
 namespace Web.Administrador
 {
     public partial class WebEditarProducto : System.Web.UI.Page

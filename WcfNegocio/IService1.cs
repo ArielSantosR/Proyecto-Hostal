@@ -88,6 +88,12 @@ namespace WcfNegocio
         [OperationContract]
         bool ExistePlato(string plato);
 
+        [OperationContract]
+        Plato ObtenerPlato(string plato);
+
+        [OperationContract]
+        bool ModificarPlato(string plato);
+
         //DDL
         [OperationContract]
         string ListarTipoProveedor();
