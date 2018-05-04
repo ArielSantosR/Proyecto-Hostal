@@ -98,6 +98,7 @@
     <Content Include="Administrador\WebCrearHabitacion.aspx" />
     <Content Include="Administrador\WebCrearProducto.aspx" />
     <Content Include="Administrador\WebEditarHabitacion.aspx" />
+    <Content Include="Administrador\WebEditarProducto.aspx" />
     <Content Include="Administrador\WebEditarUsuario.aspx" />
     <Content Include="Administrador\WebEliminarHabitacion.aspx" />
     <Content Include="Administrador\WebInformes.aspx" />
@@ -188,6 +189,13 @@
     </Compile>
     <Compile Include="Administrador\WebEditarHabitacion.aspx.designer.cs">
       <DependentUpon>WebEditarHabitacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrador\WebEditarProducto.aspx.cs">
+      <DependentUpon>WebEditarProducto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\WebEditarProducto.aspx.designer.cs">
+      <DependentUpon>WebEditarProducto.aspx</DependentUpon>
     </Compile>
     <Compile Include="Administrador\WebEditarUsuario.aspx.cs">
       <DependentUpon>WebEditarUsuario.aspx</DependentUpon>

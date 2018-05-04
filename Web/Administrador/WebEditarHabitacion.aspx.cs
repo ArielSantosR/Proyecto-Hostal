@@ -43,7 +43,7 @@ namespace Web.Administrador
             alerta_exito.Visible = false;
             alerta.Visible = false;
 
-            //Cargando DDL Tipo Plato
+            //Cargando DDL Tipo habitacion
             Service1 service = new Service1();
             string tipo_habitacion = service.ListarTipoHabitacion();
             XmlSerializer ser = new XmlSerializer(typeof(Modelo.TipoHabitacionCollection));

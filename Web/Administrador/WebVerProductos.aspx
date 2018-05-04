@@ -22,7 +22,7 @@
                                 <asp:BoundField DataField="PRECIO_PRODUCTO" HeaderText="Precio" />
                                 <asp:TemplateField>
                                     <ItemTemplate>
-                                        <asp:LinkButton ID="btnEditar"  CssClass="btn btn-success" text="Editar" runat="server"/>
+                                        <asp:LinkButton ID="btnEditar"  onclick="btnEditar_Click" CssClass="btn btn-success" text="Editar" CommandArgument='<%#Eval("ID_PRODUCTO")%>' runat="server"/>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                             </Columns>

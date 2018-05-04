@@ -48,6 +48,38 @@ namespace Web.Administrador
             gvProducto.DataSource = listaProducto;
             gvProducto.DataBind();
         }
+        protected void btnEditar_Click(object sender, EventArgs e)
+        {
+            //Lee los valores del LinkButton, primero usa la clase LinkButton para 
+            //Transformar los datos de Sender, luego los lee y los asigna a una variable
+            LinkButton btn = (LinkButton)(sender);
+            short ID_PRODUCTO = short.Parse(btn.CommandArgument);
+
+            Producto producto = new Producto();
+            producto.ID_PRODUCTO = ID_PRODUCTO;
+            MiSesionp = producto;
+            
+
+            Response.Redirect("../Administrador/WebEditarProducto.aspx");
+        }
+
+
+        public Producto MiSesionp
+        {
+            get
+            {
+                if (Session["Producto"] == null)
+                {
+                    Session["Producto"] = new Producto();
+                }
+                return (Producto)Session["Producto"];
+            }
+            set
+            {
+                Session["Producto"] = value;
+            }
+        }
+
 
         public Usuario MiSesion
         {
@@ -64,5 +96,7 @@ namespace Web.Administrador
                 Session["Usuario"] = value;
             }
         }
+
+        
     }
 }

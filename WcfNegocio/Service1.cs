@@ -424,6 +424,75 @@ namespace WcfNegocio
 
             return servicio.AgregarProducto(pDatos);
         }
+        public bool ModificarProducto(string producto)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.Producto));
+            StringReader reader = new StringReader(producto);
+            Modelo.Producto p = (Modelo.Producto)ser.Deserialize(reader);
+            ServicioProducto serv = new ServicioProducto();
+            Datos.PRODUCTO pDatos = new Datos.PRODUCTO();
+
+            pDatos.DESCRIPCION_PRODUCTO = p.DESCRIPCION_PRODUCTO;
+            pDatos.FECHA_VENCIMIENTO_PRODUCTO = p.FECHA_VENCIMIENTO_PRODUCTO;
+            pDatos.ID_FAMILIA = p.ID_FAMILIA;
+            pDatos.ID_PRODUCTO = p.ID_PRODUCTO;
+            pDatos.NOMBRE_PRODUCTO = p.NOMBRE_PRODUCTO;
+            pDatos.PRECIO_PRODUCTO = p.PRECIO_PRODUCTO;
+            pDatos.STOCK_CRITICO_PRODUCTO = p.STOCK_CRITICO_PRODUCTO;
+            pDatos.STOCK_PRODUCTO = p.STOCK_PRODUCTO;
+
+            return serv.EditarProducto(pDatos);
+               
+        }
+
+        public bool ExisteProducto(string producto)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.Producto));
+            StringReader reader = new StringReader(producto);
+            Modelo.Producto p = (Modelo.Producto)ser.Deserialize(reader);
+            ServicioProducto serv = new ServicioProducto();
+            Datos.PRODUCTO pDatos = new Datos.PRODUCTO();
+            pDatos.ID_PRODUCTO = p.ID_PRODUCTO;
+
+            if (!serv.ExisteProducto(pDatos))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        public Producto ObtenerProducto(string producto)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.Producto));
+            StringReader reader = new StringReader(producto);
+            Modelo.Producto p = (Modelo.Producto)ser.Deserialize(reader);
+            ServicioProducto serv = new ServicioProducto();
+            Datos.PRODUCTO pDatos = new Datos.PRODUCTO();
+            pDatos.ID_PRODUCTO = p.ID_PRODUCTO;
+
+            if (!serv.ExisteProducto(pDatos))
+            {
+                return null;
+            }
+            else
+            {
+                Datos.PRODUCTO pDatos2 = serv.obtenerProducto(pDatos);
+                p.FECHA_VENCIMIENTO_PRODUCTO = pDatos2.FECHA_VENCIMIENTO_PRODUCTO;
+                p.DESCRIPCION_PRODUCTO = pDatos2.DESCRIPCION_PRODUCTO;
+                p.ID_FAMILIA = pDatos2.ID_FAMILIA;
+                p.ID_PRODUCTO = pDatos2.ID_PRODUCTO;
+                p.NOMBRE_PRODUCTO = pDatos2.NOMBRE_PRODUCTO;
+                p.PRECIO_PRODUCTO = pDatos2.PRECIO_PRODUCTO;
+                p.STOCK_CRITICO_PRODUCTO = pDatos2.STOCK_CRITICO_PRODUCTO;
+                p.STOCK_PRODUCTO = pDatos2.STOCK_PRODUCTO;
+
+                return p;
+            }
+        }
+
 
         //CRUD Plato
         public bool AgregarPlato(string plato)
