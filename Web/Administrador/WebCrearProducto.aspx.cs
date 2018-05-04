@@ -50,6 +50,7 @@ namespace Web.Administrador
             Modelo.FamiliaCollection coleccionFamilia = (Modelo.FamiliaCollection)ser.Deserialize(reader);
             reader.Close();
 
+            calendarFecha.SelectedDate = Convert.ToDateTime("01/01/2000");
 
             if (!IsPostBack)
             {
@@ -82,7 +83,7 @@ namespace Web.Administrador
         {
             txtNombre.Text = string.Empty;
             txtDescripcion.Text = string.Empty;
-            txtFechaVencimiento.Text = string.Empty;
+            calendarFecha.SelectedDate = Convert.ToDateTime("01/01/2000"); 
             txtNombre.Text = string.Empty;
             txtPrecio.Text = string.Empty;
             txtStock.Text = string.Empty;
@@ -97,7 +98,6 @@ namespace Web.Administrador
             short stock = 0;
             short stockCritico = 0;
             int precio = 0;
-            DateTime fecha;
 
             try
             {
@@ -109,15 +109,7 @@ namespace Web.Administrador
                     producto.NOMBRE_PRODUCTO = txtNombre.Text;
                     producto.ID_FAMILIA = short.Parse(ddlFamilia.SelectedValue);
                     producto.DESCRIPCION_PRODUCTO = txtDescripcion.Text;
-
-                    if (DateTime.TryParse(txtFechaVencimiento.Text, out fecha))
-                    {
-                        producto.FECHA_VENCIMIENTO_PRODUCTO = fecha;
-                    }
-                    else
-                    {
-                        producto.FECHA_VENCIMIENTO_PRODUCTO = DateTime.Parse("01-01-1900");
-                    }
+                    producto.FECHA_VENCIMIENTO_PRODUCTO = calendarFecha.SelectedDate;
 
                     if (short.TryParse(txtStock.Text, out stock) && 
                         short.TryParse(txtStockCritico.Text, out stockCritico)  && 
@@ -134,7 +126,7 @@ namespace Web.Administrador
 
                         if (s.AgregarProducto(writer.ToString()))
                         {
-                            exito.Text = "El producto ha sido agregado con éxito con éxito";
+                            exito.Text = "El producto ha sido agregado con éxito";
                             alerta_exito.Visible = true;
                             alerta.Visible = false;
                         }

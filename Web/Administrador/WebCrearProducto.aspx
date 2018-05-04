@@ -38,15 +38,6 @@
               </div>
             </div>
           <div class="form-group">
-              <label for="name" class="col-sm-12 control-label">Fecha de Vencimiento</label>
-                <div class="col-sm-12">
-                  <div class="input-group">
-                  <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                  <asp:TextBox ID="txtFechaVencimiento" TextMode="Date" placeholder="Ingrese Fecha de Vencimiento"  runat="server" CssClass="form-control"></asp:TextBox>
-                </div>
-              </div>
-            </div>
-          <div class="form-group">
               <label for="name" class="col-sm-12 control-label">Stock</label>
                 <div class="col-sm-12">
                   <div class="input-group">
@@ -83,11 +74,27 @@
                   <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
                       <asp:DropDownList ID="ddlFamilia" CssClass="form-control" runat="server">
-                      </asp:DropDownList>
-                      
+                      </asp:DropDownList>    
                 </div>
               </div>
             </div> 
+                <div class="form-group">
+              <label for="name" class="col-sm-12 control-label">Fecha de Vencimiento</label>
+&nbsp;<div class="col-sm-12">
+                  <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                  <asp:Calendar ID="calendarFecha" runat="server" BackColor="White" BorderColor="Black" BorderStyle="Solid" CellSpacing="1" Font-Names="Verdana" Font-Size="9pt" ForeColor="Black" Height="250px" NextPrevFormat="ShortMonth" Width="330px">
+                  <DayHeaderStyle Font-Bold="True" Font-Size="8pt" ForeColor="#333333" Height="8pt" />
+                  <DayStyle BackColor="#CCCCCC" />
+                  <NextPrevStyle Font-Bold="True" Font-Size="8pt" ForeColor="White" />
+                  <OtherMonthDayStyle ForeColor="#999999" />
+                  <SelectedDayStyle BackColor="#333399" ForeColor="White" />
+                  <TitleStyle BackColor="#333399" BorderStyle="Solid" Font-Bold="True" Font-Size="12pt" ForeColor="White" Height="12pt" />
+                  <TodayDayStyle BackColor="#CCCCCC"/>
+              </asp:Calendar>
+                </div>
+              </div>
+            </div>
             
                 </ContentTemplate>
             </asp:UpdatePanel>

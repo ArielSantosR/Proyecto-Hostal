@@ -95,6 +95,7 @@ namespace Web.Administrador
                 {
                     Modelo.Producto producto = new Modelo.Producto();
                     producto.ID_PRODUCTO = MiSesionP.ID_PRODUCTO;
+                    DateTime fecha = Convert.ToDateTime("01/01/2000");
 
                     Service1 s = new Service1();
                     XmlSerializer sr = new XmlSerializer(typeof(Modelo.Producto));
@@ -107,15 +108,17 @@ namespace Web.Administrador
 
                         txtNombre.Text = producto.NOMBRE_PRODUCTO + "";
                         txtDescripcion.Text = producto.DESCRIPCION_PRODUCTO + "";
-                        
-                        txtFechaVencimiento.Text = producto.FECHA_VENCIMIENTO_PRODUCTO + "";
+                        if (producto.FECHA_VENCIMIENTO_PRODUCTO != null)
+                        {
+                            fecha = (DateTime) producto.FECHA_VENCIMIENTO_PRODUCTO;
+                        }
+
+                        calendarFecha.SelectedDate = fecha;
                         txtPrecio.Text = producto.PRECIO_PRODUCTO + "";
                         txtStock.Text = producto.STOCK_PRODUCTO + "";
                         txtStockCritico.Text = producto.STOCK_CRITICO_PRODUCTO + "";
                         
-                        ddlFamilia.SelectedIndex = producto.ID_FAMILIA;
-
-                       
+                        ddlFamilia.SelectedIndex = producto.ID_FAMILIA - 1;
                     }
                 }
                 else
@@ -124,27 +127,32 @@ namespace Web.Administrador
                 }
             }
         }
-
-        //falta terminar
         protected void btnRegistrar_Click(object sender, EventArgs e)
         {
+            short stock = 0;
+            short stockCritico = 0;
+            int precio = 0;
+
             try
             {
-                int precio = 0;
-
-                if (txtNombre.Text != string.Empty && txtPrecio.Text != string.Empty)
+                if (txtNombre.Text != string.Empty && txtPrecio.Text != string.Empty &&
+                txtStock.Text != string.Empty && txtStockCritico.Text != string.Empty &&
+                txtDescripcion.Text != string.Empty)
                 {
-                    if (int.TryParse(txtPrecio.Text, out precio))
-                    {
-                        Modelo.Producto producto = new Modelo.Producto();
-                        producto.NOMBRE_PRODUCTO = txtNombre.Text;
-                        producto.PRECIO_PRODUCTO = precio;
-                        producto.ID_FAMILIA = short.Parse(ddlFamilia.SelectedValue);
-                        producto.FECHA_VENCIMIENTO_PRODUCTO = DateTime.Parse(txtFechaVencimiento.Text);
-                        producto.STOCK_CRITICO_PRODUCTO = short.Parse(txtStockCritico.Text);
-                        producto.STOCK_PRODUCTO = short.Parse(txtStock.Text);
-                        producto.DESCRIPCION_PRODUCTO = txtDescripcion.Text;
+                    Modelo.Producto producto = new Modelo.Producto();
+                    producto.ID_PRODUCTO = MiSesionP.ID_PRODUCTO;
+                    producto.NOMBRE_PRODUCTO = txtNombre.Text;
+                    producto.ID_FAMILIA = short.Parse(ddlFamilia.SelectedValue);
+                    producto.DESCRIPCION_PRODUCTO = txtDescripcion.Text;
+                    producto.FECHA_VENCIMIENTO_PRODUCTO = calendarFecha.SelectedDate;
 
+                    if (short.TryParse(txtStock.Text, out stock) &&
+                        short.TryParse(txtStockCritico.Text, out stockCritico) &&
+                        int.TryParse(txtPrecio.Text, out precio))
+                    {
+                        producto.STOCK_PRODUCTO = stock;
+                        producto.STOCK_CRITICO_PRODUCTO = stockCritico;
+                        producto.PRECIO_PRODUCTO = precio;
 
                         Service1 s = new Service1();
                         XmlSerializer sr = new XmlSerializer(typeof(Modelo.Producto));
@@ -153,32 +161,30 @@ namespace Web.Administrador
 
                         if (s.ModificarProducto(writer.ToString()))
                         {
-                            exito.Text = "El Producto ha sido modificado con éxito";
+                            exito.Text = "El producto ha sido modificado con éxito";
                             alerta_exito.Visible = true;
                             alerta.Visible = false;
                         }
                         else
                         {
                             alerta_exito.Visible = false;
-                            error.Text = "No se ha podido modificar";
+                            error.Text = "La modificación de Producto ha fallado";
                             alerta.Visible = true;
                         }
-
                     }
                     else
                     {
                         alerta_exito.Visible = false;
-                        error.Text = "Datos Ingresados incorrectamente, verifique que ha ingresado datos correctamente";
+                        error.Text = "Verifique el Ingreso numérico";
                         alerta.Visible = true;
                     }
                 }
                 else
                 {
                     alerta_exito.Visible = false;
-                    error.Text = "Debe llenar todos los datos";
+                    error.Text = "Debe rellenar todos los campos requeridos";
                     alerta.Visible = true;
                 }
-
             }
             catch (Exception)
             {
@@ -191,7 +197,7 @@ namespace Web.Administrador
         protected void btnLimpiar_Click(object sender, EventArgs e)
         {
             txtDescripcion.Text = string.Empty;
-            txtFechaVencimiento.Text = string.Empty;
+            calendarFecha.SelectedDate = Convert.ToDateTime("01/01/2000");
             txtNombre.Text = string.Empty;
             txtPrecio.Text = string.Empty;
             txtStock.Text = string.Empty;

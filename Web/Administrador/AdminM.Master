@@ -74,7 +74,7 @@
           <li><a href="../Administrador/WebAgregarPlato.aspx">Agregar Plato</a></li>
           <li><a href="../Administrador/WebVerPlato.aspx">Ver Platos</a></li>
           <li><a href="../Administrador/WebCrearProducto.aspx">AgregarProducto</a></li>
-          <li><a href="../Administrador/WebVerProducto.aspx.aspx">Ver Producto</a></li>
+          <li><a href="../Administrador/WebVerProductos.aspx">Ver Producto</a></li>
         </ul>
       </li>
         <li><a href="WebInformes.aspx">Informes</a></li>

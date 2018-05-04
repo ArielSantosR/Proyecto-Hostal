@@ -18,8 +18,12 @@
                             <Columns>
                                  <asp:BoundField DataField="ID_PRODUCTO" HeaderText="Código Producto" />
                                 <asp:BoundField DataField="NOMBRE_PRODUCTO" HeaderText="Nombre" />
-                                <asp:BoundField DataField="STOCK_PRODUCTO" HeaderText="Stock" />
                                 <asp:BoundField DataField="PRECIO_PRODUCTO" HeaderText="Precio" />
+                                <asp:BoundField DataField="DESCRIPCION_PRODUCTO" HeaderText="Descripción" />
+                                <asp:BoundField DataField="STOCK_PRODUCTO" HeaderText="Stock" />
+                                <asp:BoundField DataField="STOCK_CRITICO_PRODUCTO" HeaderText="Stock Crítico" />
+                                <asp:BoundField DataField="ID_FAMILIA" HeaderText="ID Familia" />
+                                <asp:BoundField DataField="FECHA_VENCIMIENTO_PRODUCTO" HeaderText="Fecha de Vencimiento" />
                                 <asp:TemplateField>
                                     <ItemTemplate>
                                         <asp:LinkButton ID="btnEditar"  onclick="btnEditar_Click" CssClass="btn btn-success" text="Editar" CommandArgument='<%#Eval("ID_PRODUCTO")%>' runat="server"/>
