@@ -63,6 +63,20 @@ namespace Web.Administrador
             Response.Redirect("../Administrador/WebEditarHabitacion.aspx");
         }
 
+        protected void btnEliminar_Click(object sender, EventArgs e)
+        {
+            //Lee los valores del LinkButton, primero usa la clase LinkButton para 
+            //Transformar los datos de Sender, luego los lee y los asigna a una variable
+            LinkButton btn = (LinkButton)(sender);
+            short NUMERO_HABITACION = short.Parse(btn.CommandArgument);
+
+            Habitacion habitacion = new Habitacion();
+            habitacion.NUMERO_HABITACION = NUMERO_HABITACION;
+            MiSesionH = habitacion;
+
+            Response.Redirect("../Administrador/WebEliminarHabitacion.aspx");
+        }
+
         //Creación de Sesión
         public Usuario MiSesion
         {

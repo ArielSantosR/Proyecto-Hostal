@@ -77,5 +77,22 @@ namespace Datos
                 return false;
             }
         }
+
+        public bool EliminarHabitacion(HABITACION habitacion)
+        {
+            HABITACION h = ent.HABITACION.FirstOrDefault(objeto =>
+            objeto.NUMERO_HABITACION.Equals(habitacion.NUMERO_HABITACION));
+
+            if (h != null)
+            {
+                ent.HABITACION.Remove(h);
+                ent.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

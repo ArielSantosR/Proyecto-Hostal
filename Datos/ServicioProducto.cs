@@ -51,6 +51,23 @@ namespace Datos
             }
         }
 
+        public bool EliminarProducto(PRODUCTO producto)
+        {
+            PRODUCTO P = ent.PRODUCTO.FirstOrDefault(objeto =>
+            objeto.ID_PRODUCTO.Equals(producto.ID_PRODUCTO));
+
+            if (P != null)
+            {
+                ent.PRODUCTO.Remove(P);
+                ent.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public bool ExisteProducto(PRODUCTO producto)
         {
             PRODUCTO p = ent.PRODUCTO.FirstOrDefault(objeto =>
