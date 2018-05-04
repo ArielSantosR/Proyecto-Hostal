@@ -72,6 +72,15 @@ namespace WcfNegocio
         [OperationContract]
         bool AgregarProducto(string producto);
 
+        [OperationContract]
+        bool ModificarProducto(string producto);
+
+        [OperationContract]
+        Producto ObtenerProducto(string producto);
+
+        [OperationContract]
+        bool ExisteProducto(string producto);
+
         //CRUD Plato
         [OperationContract]
         bool AgregarPlato(string plato);
@@ -105,6 +114,8 @@ namespace WcfNegocio
         string ListarFamilia();
 
         
+
+
 
     }
 }
