@@ -58,7 +58,6 @@ namespace Web.Administrador
                 ddlFamilia.DataValueField = "ID_FAMILIA";
                 ddlFamilia.DataTextField = "NOMBRE_FAMILIA";
                 ddlFamilia.DataBind();
-
             }
 
         }
