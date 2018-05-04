@@ -88,7 +88,7 @@ namespace WcfNegocio
         string ListarProducto();
 
         [OperationContract]
-        string EliminarProducto();
+        bool EliminarProducto(string producto);
 
         //CRUD Plato
         [OperationContract]
@@ -102,6 +102,12 @@ namespace WcfNegocio
 
         [OperationContract]
         bool ModificarPlato(string plato);
+
+        [OperationContract]
+        string ListarPlato();
+
+        [OperationContract]
+        bool EliminarPlato(string plato);
 
         //DDL
         [OperationContract]

@@ -63,6 +63,20 @@ namespace Web.Administrador
             Response.Redirect("../Administrador/WebEditarProducto.aspx");
         }
 
+        protected void btnEliminar_Click(object sender, EventArgs e)
+        {
+            //Lee los valores del LinkButton, primero usa la clase LinkButton para 
+            //Transformar los datos de Sender, luego los lee y los asigna a una variable
+            LinkButton btn = (LinkButton)(sender);
+            short ID_PRODUCTO = short.Parse(btn.CommandArgument);
+
+            Producto producto = new Producto();
+            producto.ID_PRODUCTO = ID_PRODUCTO;
+            MiSesionp = producto;
+
+            Response.Redirect("../Administrador/WebEliminarProducto.aspx");
+        }
+
 
         public Producto MiSesionp
         {

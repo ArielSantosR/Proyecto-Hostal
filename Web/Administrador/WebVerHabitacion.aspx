@@ -16,15 +16,15 @@
                             <SortedDescendingCellStyle BackColor="#E9EBEF" />
                             <SortedDescendingHeaderStyle BackColor="#4870BE" />
                             <Columns>
-                                 <asp:BoundField DataField="NUMERO_HABITACION" HeaderText="ID_USUARIO" />
-                                <asp:BoundField DataField="PRECIO_HABITACION" HeaderText="PRECIO_HABITACION" />
-                                <asp:BoundField DataField="ESTADO_HABITACION" HeaderText="ESTADO_HABITACION" />
-                                <asp:BoundField DataField="ID_TIPO_HABITACION" HeaderText="ID_TIPO_HABITACION" />
-                                <asp:BoundField DataField="RUT_CLIENTE" HeaderText="RUT_CLIENTE" />
+                                 <asp:BoundField DataField="NUMERO_HABITACION" HeaderText="Número de Habitación" />
+                                <asp:BoundField DataField="PRECIO_HABITACION" HeaderText="Precio" />
+                                <asp:BoundField DataField="ESTADO_HABITACION" HeaderText="Estado" />
+                                <asp:BoundField DataField="ID_TIPO_HABITACION" HeaderText="ID Tipo Habitación" />
+                                <asp:BoundField DataField="RUT_CLIENTE" HeaderText="RUT Cliente" />
                                 <asp:TemplateField>
                                     <ItemTemplate>
                                         <asp:LinkButton ID="btnEditar" onclick="btnEditar_Click" CssClass="btn btn-success" CommandArgument='<%#Eval("NUMERO_HABITACION")%>'  text="Editar" runat="server"/>
-                                        <asp:LinkButton ID="LinkButton1" onclick="btnEliminar_Click" CssClass="btn btn-danger" CommandArgument='<%#Eval("NUMERO_HABITACION")%>'  text="Eliminar" runat="server"/>
+                                        <asp:LinkButton ID="btnEliminar" onclick="btnEliminar_Click" CssClass="btn btn-danger" CommandArgument='<%#Eval("NUMERO_HABITACION")%>'  text="Eliminar" runat="server"/>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                             </Columns>

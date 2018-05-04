@@ -20,6 +20,11 @@ namespace Datos
             return ent.CATEGORIA.ToList();
         }
 
+        public List<PLATO> ListarPlato()
+        {
+            return ent.PLATO.ToList();
+        }
+
         public bool AgregarPlato(PLATO p)
         {
             ent.PLATO.Add(p);
@@ -31,6 +36,20 @@ namespace Datos
         {
             PLATO p = ent.PLATO.FirstOrDefault(objeto =>
             objeto.NOMBRE_PLATO.Equals(plato.NOMBRE_PLATO));
+            if (p != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public bool ExistePlatoID(PLATO plato)
+        {
+            PLATO p = ent.PLATO.FirstOrDefault(objeto =>
+            objeto.ID_PLATO.Equals(plato.ID_PLATO));
             if (p != null)
             {
                 return true;
@@ -78,5 +97,24 @@ namespace Datos
                 return false;
             }
         }
+
+        public bool EliminarPlato(PLATO plato)
+        {
+            PLATO p = ent.PLATO.FirstOrDefault(objeto =>
+            objeto.ID_PLATO.Equals(plato.ID_PLATO));
+
+            if (p != null)
+            {
+                ent.PLATO.Remove(p);
+                ent.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+
     }
 }

@@ -454,8 +454,7 @@ namespace WcfNegocio
             pDatos.STOCK_CRITICO_PRODUCTO = p.STOCK_CRITICO_PRODUCTO;
             pDatos.STOCK_PRODUCTO = p.STOCK_PRODUCTO;
 
-            return serv.EditarProducto(pDatos);
-               
+            return serv.EditarProducto(pDatos); 
         }
 
         public bool ExisteProducto(string producto)
@@ -506,6 +505,47 @@ namespace WcfNegocio
             }
         }
 
+        public string ListarProducto()
+        {
+            ServicioProducto servicio = new ServicioProducto();
+            List<Datos.PRODUCTO> producto = servicio.ListarProducto();
+            Modelo.ProductoCollection listaProducto = new Modelo.ProductoCollection();
+
+            foreach (Datos.PRODUCTO p in producto)
+            {
+                Modelo.Producto pModelo = new Modelo.Producto();
+                pModelo.ID_PRODUCTO = p.ID_PRODUCTO;
+                pModelo.NOMBRE_PRODUCTO = p.NOMBRE_PRODUCTO;
+                pModelo.PRECIO_PRODUCTO = p.PRECIO_PRODUCTO;
+                pModelo.STOCK_CRITICO_PRODUCTO = p.STOCK_CRITICO_PRODUCTO;
+                pModelo.STOCK_PRODUCTO = p.STOCK_PRODUCTO;
+                pModelo.ID_FAMILIA = p.ID_FAMILIA;
+                pModelo.FECHA_VENCIMIENTO_PRODUCTO = p.FECHA_VENCIMIENTO_PRODUCTO;
+                pModelo.DESCRIPCION_PRODUCTO = p.DESCRIPCION_PRODUCTO;
+
+                listaProducto.Add(pModelo);
+            }
+
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.ProductoCollection));
+            StringWriter writer = new StringWriter();
+            ser.Serialize(writer, listaProducto);
+            writer.Close();
+            return writer.ToString();
+        }
+
+        public bool EliminarProducto(string producto)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.Producto));
+            StringReader reader = new StringReader(producto);
+            Modelo.Producto p = (Modelo.Producto)ser.Deserialize(reader);
+            ServicioProducto serv = new ServicioProducto();
+            Datos.PRODUCTO pDatos = new Datos.PRODUCTO();
+
+            pDatos.ID_PRODUCTO = p.ID_PRODUCTO;
+
+            return serv.EliminarProducto(pDatos);
+        }
+
 
         //CRUD Plato
         public bool AgregarPlato(string plato)
@@ -554,7 +594,7 @@ namespace WcfNegocio
             Datos.PLATO pDatos = new Datos.PLATO();
             pDatos.ID_PLATO = p.ID_PLATO;
 
-            if (!serv.ExistePlato(pDatos))
+            if (!serv.ExistePlatoID(pDatos))
             {
                 return null;
             }
@@ -589,6 +629,43 @@ namespace WcfNegocio
             return serv.EditarPlato(pDatos);
         }
 
+        public string ListarPlato()
+        {
+            ServicioPlato servicio = new ServicioPlato();
+            List<Datos.PLATO> plato = servicio.ListarPlato();
+            Modelo.PlatoCollection listaPlato = new Modelo.PlatoCollection();
+
+            foreach (Datos.PLATO p in plato)
+            {
+                Modelo.Plato pModelo = new Modelo.Plato();
+                pModelo.ID_PLATO = p.ID_PLATO;
+                pModelo.NOMBRE_PLATO = p.NOMBRE_PLATO;
+                pModelo.PRECIO_PLATO = p.PRECIO_PLATO;
+                pModelo.ID_CATEGORIA = p.ID_CATEGORIA;
+                pModelo.ID_TIPO_PLATO = p.ID_TIPO_PLATO;
+
+                listaPlato.Add(pModelo);
+            }
+
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.PlatoCollection));
+            StringWriter writer = new StringWriter();
+            ser.Serialize(writer, listaPlato);
+            writer.Close();
+            return writer.ToString();
+        }
+
+        public bool EliminarPlato(string plato)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.Plato));
+            StringReader reader = new StringReader(plato);
+            Modelo.Plato p = (Modelo.Plato)ser.Deserialize(reader);
+            ServicioPlato serv = new ServicioPlato();
+            Datos.PLATO pDatos = new Datos.PLATO();
+
+            pDatos.ID_PLATO = p.ID_PLATO;
+     
+            return serv.EliminarPlato(pDatos);
+        }
 
         //DDL
         public string ListarPais()
@@ -699,34 +776,6 @@ namespace WcfNegocio
             XmlSerializer ser = new XmlSerializer(typeof(Modelo.TipoPlatoCollection));
             StringWriter writer = new StringWriter();
             ser.Serialize(writer, listaPlatos);
-            return writer.ToString();
-        }
-
-        public string ListarProducto()
-        {
-            ServicioProducto servicio = new ServicioProducto();
-            List<Datos.PRODUCTO> producto = servicio.ListarProducto();
-            Modelo.ProductoCollection listaProducto = new Modelo.ProductoCollection();
-
-            foreach (Datos.PRODUCTO p in producto)
-            {
-                Modelo.Producto pModelo = new Modelo.Producto();
-                pModelo.ID_PRODUCTO = p.ID_PRODUCTO;
-                pModelo.NOMBRE_PRODUCTO = p.NOMBRE_PRODUCTO;
-                pModelo.PRECIO_PRODUCTO = p.PRECIO_PRODUCTO;
-                pModelo.STOCK_CRITICO_PRODUCTO = p.STOCK_CRITICO_PRODUCTO;
-                pModelo.STOCK_PRODUCTO = p.STOCK_PRODUCTO;
-                pModelo.ID_FAMILIA = p.ID_FAMILIA;
-                pModelo.FECHA_VENCIMIENTO_PRODUCTO = p.FECHA_VENCIMIENTO_PRODUCTO;
-                pModelo.DESCRIPCION_PRODUCTO = p.DESCRIPCION_PRODUCTO;
-
-                listaProducto.Add(pModelo);
-            }
-
-            XmlSerializer ser = new XmlSerializer(typeof(Modelo.ProductoCollection));
-            StringWriter writer = new StringWriter();
-            ser.Serialize(writer, listaProducto);
-            writer.Close();
             return writer.ToString();
         }
 

@@ -11,7 +11,7 @@ using WcfNegocio;
 
 namespace Web.Administrador
 {
-    public partial class WebEliminarHabitacion : System.Web.UI.Page
+    public partial class WebEliminarProducto : System.Web.UI.Page
     {
         void Page_PreInit(object sender, EventArgs e)
         {
@@ -43,21 +43,21 @@ namespace Web.Administrador
 
             if (!IsPostBack)
             {
-                if (MiSesionH.NUMERO_HABITACION != 0)
+                if (MiSesionP.ID_PRODUCTO != 0)
                 {
-                    Modelo.Habitacion habitacion = new Modelo.Habitacion();
-                    habitacion.NUMERO_HABITACION = MiSesionH.NUMERO_HABITACION;
+                    Modelo.Producto producto = new Modelo.Producto();
+                    producto.ID_PRODUCTO = MiSesionP.ID_PRODUCTO;
 
                     Service1 s = new Service1();
-                    XmlSerializer sr = new XmlSerializer(typeof(Modelo.Habitacion));
+                    XmlSerializer sr = new XmlSerializer(typeof(Modelo.Producto));
                     StringWriter writer = new StringWriter();
-                    sr.Serialize(writer, habitacion);
+                    sr.Serialize(writer, producto);
 
-                    if (s.ObtenerHabitacion(writer.ToString()) != null)
+                    if (s.ObtenerProducto(writer.ToString()) != null)
                     {
-                        habitacion = s.ObtenerHabitacion(writer.ToString());
+                        producto = s.ObtenerProducto(writer.ToString());
 
-                        txtNumero.Text = habitacion.NUMERO_HABITACION + "";
+                        txtNumero.Text = producto.ID_PRODUCTO + "";
 
                         txtNumero.ReadOnly = true;
                     }
@@ -71,18 +71,18 @@ namespace Web.Administrador
 
         protected void btnEliminar_Click(object sender, EventArgs e)
         {
-            Modelo.Habitacion habitacion = new Modelo.Habitacion();
-            habitacion.NUMERO_HABITACION = short.Parse(txtNumero.Text);
+            Modelo.Producto producto = new Modelo.Producto();
+            producto.ID_PRODUCTO = MiSesionP.ID_PRODUCTO;
 
             Service1 s = new Service1();
-            XmlSerializer sr = new XmlSerializer(typeof(Modelo.Habitacion));
+            XmlSerializer sr = new XmlSerializer(typeof(Modelo.Producto));
             StringWriter writer = new StringWriter();
-            sr.Serialize(writer, habitacion);
+            sr.Serialize(writer, producto);
 
-            if (s.EliminarHabitacion(writer.ToString()))
+            if (s.EliminarProducto(writer.ToString()))
             {
-                MiSesionH = null;
-                Response.Write("<script language='javascript'>window.alert('La habitación ha sido Eliminada con éxito');window.location='../Administrador/WebVerHabitacion.aspx';</script>");
+                MiSesionP = null;
+                Response.Write("<script language='javascript'>window.alert('El Producto ha sido Eliminado con éxito');window.location='../Administrador/WebVerProductos.aspx';</script>");
                 alerta.Visible = false;
             }
             else
@@ -94,11 +94,11 @@ namespace Web.Administrador
 
         protected void btnCancelar_Click(object sender, EventArgs e)
         {
-            MiSesionH = null;
-            Response.Write("<script language='javascript'>window.alert('Ha decidido no eliminar la habitación');window.location='../Administrador/WebVerHabitacion.aspx'';</script>");
+            MiSesionP = null;
+            Response.Write("<script language='javascript'>window.alert('Ha decidido no eliminar el Producto');window.location='../Administrador/WebVerProductos.aspx';</script>");
         }
 
-        //Creación de Sesión
+
         public Usuario MiSesion
         {
             get
@@ -115,19 +115,19 @@ namespace Web.Administrador
             }
         }
 
-        public Habitacion MiSesionH
+        public Producto MiSesionP
         {
             get
             {
-                if (Session["Habitacion"] == null)
+                if (Session["Producto"] == null)
                 {
-                    Session["Habitacion"] = new Habitacion();
+                    Session["Producto"] = new Producto();
                 }
-                return (Habitacion)Session["Habitacion"];
+                return (Producto)Session["Producto"];
             }
             set
             {
-                Session["Habitacion"] = value;
+                Session["Producto"] = value;
             }
         }
     }

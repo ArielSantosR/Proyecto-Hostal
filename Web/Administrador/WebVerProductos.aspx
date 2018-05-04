@@ -27,6 +27,7 @@
                                 <asp:TemplateField>
                                     <ItemTemplate>
                                         <asp:LinkButton ID="btnEditar"  onclick="btnEditar_Click" CssClass="btn btn-success" text="Editar" CommandArgument='<%#Eval("ID_PRODUCTO")%>' runat="server"/>
+                                        <asp:LinkButton ID="btnEliminar"  onclick="btnEliminar_Click" CssClass="btn btn-danger" text="Eliminar" CommandArgument='<%#Eval("ID_PRODUCTO")%>' runat="server"/>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                             </Columns>

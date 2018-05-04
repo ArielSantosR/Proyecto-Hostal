@@ -11,7 +11,7 @@ using WcfNegocio;
 
 namespace Web.Administrador
 {
-    public partial class WebEliminarHabitacion : System.Web.UI.Page
+    public partial class WebEliminarPlato : System.Web.UI.Page
     {
         void Page_PreInit(object sender, EventArgs e)
         {
@@ -43,21 +43,21 @@ namespace Web.Administrador
 
             if (!IsPostBack)
             {
-                if (MiSesionH.NUMERO_HABITACION != 0)
+                if (MiSesionPlato.ID_PLATO != 0)
                 {
-                    Modelo.Habitacion habitacion = new Modelo.Habitacion();
-                    habitacion.NUMERO_HABITACION = MiSesionH.NUMERO_HABITACION;
+                    Modelo.Plato plato = new Modelo.Plato();
+                    plato.ID_PLATO = MiSesionPlato.ID_PLATO;
 
                     Service1 s = new Service1();
-                    XmlSerializer sr = new XmlSerializer(typeof(Modelo.Habitacion));
+                    XmlSerializer sr = new XmlSerializer(typeof(Modelo.Plato));
                     StringWriter writer = new StringWriter();
-                    sr.Serialize(writer, habitacion);
+                    sr.Serialize(writer, plato);
 
-                    if (s.ObtenerHabitacion(writer.ToString()) != null)
+                    if (s.ObtenerPlato(writer.ToString()) != null)
                     {
-                        habitacion = s.ObtenerHabitacion(writer.ToString());
+                        plato = s.ObtenerPlato(writer.ToString());
 
-                        txtNumero.Text = habitacion.NUMERO_HABITACION + "";
+                        txtNumero.Text = plato.ID_PLATO + "";
 
                         txtNumero.ReadOnly = true;
                     }
@@ -71,18 +71,18 @@ namespace Web.Administrador
 
         protected void btnEliminar_Click(object sender, EventArgs e)
         {
-            Modelo.Habitacion habitacion = new Modelo.Habitacion();
-            habitacion.NUMERO_HABITACION = short.Parse(txtNumero.Text);
+            Modelo.Plato plato = new Modelo.Plato();
+            plato.ID_PLATO = MiSesionPlato.ID_PLATO;
 
             Service1 s = new Service1();
-            XmlSerializer sr = new XmlSerializer(typeof(Modelo.Habitacion));
+            XmlSerializer sr = new XmlSerializer(typeof(Modelo.Plato));
             StringWriter writer = new StringWriter();
-            sr.Serialize(writer, habitacion);
+            sr.Serialize(writer, plato);
 
-            if (s.EliminarHabitacion(writer.ToString()))
+            if (s.EliminarPlato(writer.ToString()))
             {
-                MiSesionH = null;
-                Response.Write("<script language='javascript'>window.alert('La habitación ha sido Eliminada con éxito');window.location='../Administrador/WebVerHabitacion.aspx';</script>");
+                MiSesionPlato = null;
+                Response.Write("<script language='javascript'>window.alert('El Plato ha sido Eliminado con éxito');window.location='../Administrador/WebVerPlatos.aspx';</script>");
                 alerta.Visible = false;
             }
             else
@@ -94,8 +94,8 @@ namespace Web.Administrador
 
         protected void btnCancelar_Click(object sender, EventArgs e)
         {
-            MiSesionH = null;
-            Response.Write("<script language='javascript'>window.alert('Ha decidido no eliminar la habitación');window.location='../Administrador/WebVerHabitacion.aspx'';</script>");
+            MiSesionPlato = null;
+            Response.Write("<script language='javascript'>window.alert('Ha decidido no eliminar el Plato');window.location='../Administrador/WebVerPlatos.aspx';</script>");
         }
 
         //Creación de Sesión
@@ -115,20 +115,20 @@ namespace Web.Administrador
             }
         }
 
-        public Habitacion MiSesionH
+        public Plato MiSesionPlato
         {
             get
             {
-                if (Session["Habitacion"] == null)
+                if (Session["Plato"] == null)
                 {
-                    Session["Habitacion"] = new Habitacion();
+                    Session["Plato"] = new Plato();
                 }
-                return (Habitacion)Session["Habitacion"];
+                return (Plato)Session["Plato"];
             }
             set
             {
-                Session["Habitacion"] = value;
+                Session["Plato"] = value;
             }
-        }
+        }   
     }
 }

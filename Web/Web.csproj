@@ -102,6 +102,8 @@
     <Content Include="Administrador\WebEditarProducto.aspx" />
     <Content Include="Administrador\WebEditarUsuario.aspx" />
     <Content Include="Administrador\WebEliminarHabitacion.aspx" />
+    <Content Include="Administrador\WebEliminarPlato.aspx" />
+    <Content Include="Administrador\WebEliminarProducto.aspx" />
     <Content Include="Administrador\WebInformes.aspx" />
     <Content Include="Administrador\WebVerHabitacion.aspx" />
     <Content Include="Administrador\WebRegistroAdmin.aspx" />
@@ -219,6 +221,20 @@
     </Compile>
     <Compile Include="Administrador\WebEliminarHabitacion.aspx.designer.cs">
       <DependentUpon>WebEliminarHabitacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrador\WebEliminarPlato.aspx.cs">
+      <DependentUpon>WebEliminarPlato.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\WebEliminarPlato.aspx.designer.cs">
+      <DependentUpon>WebEliminarPlato.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrador\WebEliminarProducto.aspx.cs">
+      <DependentUpon>WebEliminarProducto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\WebEliminarProducto.aspx.designer.cs">
+      <DependentUpon>WebEliminarProducto.aspx</DependentUpon>
     </Compile>
     <Compile Include="Administrador\WebInformes.aspx.cs">
       <DependentUpon>WebInformes.aspx</DependentUpon>
