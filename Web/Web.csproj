@@ -97,6 +97,7 @@
     <Content Include="Administrador\WebAgregarPlato.aspx" />
     <Content Include="Administrador\WebCrearHabitacion.aspx" />
     <Content Include="Administrador\WebCrearProducto.aspx" />
+    <Content Include="Administrador\WebCrearTipoPlato.aspx" />
     <Content Include="Administrador\WebEditarHabitacion.aspx" />
     <Content Include="Administrador\WebEditarPlato.aspx" />
     <Content Include="Administrador\WebEditarProducto.aspx" />
@@ -186,6 +187,13 @@
     </Compile>
     <Compile Include="Administrador\WebCrearProducto.aspx.designer.cs">
       <DependentUpon>WebCrearProducto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrador\WebCrearTipoPlato.aspx.cs">
+      <DependentUpon>WebCrearTipoPlato.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\WebCrearTipoPlato.aspx.designer.cs">
+      <DependentUpon>WebCrearTipoPlato.aspx</DependentUpon>
     </Compile>
     <Compile Include="Administrador\WebEditarHabitacion.aspx.cs">
       <DependentUpon>WebEditarHabitacion.aspx</DependentUpon>

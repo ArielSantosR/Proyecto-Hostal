@@ -109,6 +109,26 @@ namespace WcfNegocio
         [OperationContract]
         bool EliminarPlato(string plato);
 
+        //CRUD tipo plato
+        [OperationContract]
+        bool AgregarTipoPlato(string tipoPlato);
+
+        [OperationContract]
+        bool EliminarTipoPlato(string tipoPlato);
+
+        [OperationContract]
+        bool ModificarTipoPlato(string tipoPlato);
+
+        [OperationContract]
+        bool ExisteTipoPlato(string tipoPlato);
+
+        [OperationContract]
+        TipoPlato ObtenerTipoPlato(string tipoPlato);
+
+
+
+
+
         //DDL
         [OperationContract]
         string ListarTipoProveedor();

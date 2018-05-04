@@ -10,7 +10,7 @@
 namespace Web.Administrador {
     
     
-    public partial class WebEliminarPlato {
+    public partial class WebCrearTipoPlato {
         
         /// <summary>
         /// Control alerta.
@@ -31,6 +31,24 @@ namespace Web.Administrador {
         protected global::System.Web.UI.WebControls.Literal error;
         
         /// <summary>
+        /// Control alerta_exito.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl alerta_exito;
+        
+        /// <summary>
+        /// Control exito.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal exito;
+        
+        /// <summary>
         /// Control txtNombre.
         /// </summary>
         /// <remarks>
@@ -40,21 +58,21 @@ namespace Web.Administrador {
         protected global::System.Web.UI.WebControls.TextBox txtNombre;
         
         /// <summary>
-        /// Control btnEliminar.
+        /// Control btnRegistrar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnEliminar;
+        protected global::System.Web.UI.WebControls.Button btnRegistrar;
         
         /// <summary>
-        /// Control btnCancelar.
+        /// Control btnLimpiar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCancelar;
+        protected global::System.Web.UI.WebControls.Button btnLimpiar;
     }
 }

@@ -25,6 +25,13 @@ namespace Datos
             return ent.PLATO.ToList();
         }
 
+        public bool AgregarTipoPlato(TIPO_PLATO p)
+        {
+            ent.TIPO_PLATO.Add(p);
+            ent.SaveChanges();
+            return true;
+        }
+
         public bool AgregarPlato(PLATO p)
         {
             ent.PLATO.Add(p);
@@ -37,6 +44,34 @@ namespace Datos
             PLATO p = ent.PLATO.FirstOrDefault(objeto =>
             objeto.NOMBRE_PLATO.Equals(plato.NOMBRE_PLATO));
             if (p != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public bool ExisteTipoPlato(TIPO_PLATO tipoPlato)
+        {
+            TIPO_PLATO tp = ent.TIPO_PLATO.FirstOrDefault(objeto =>
+            objeto.NOMBRE_TIPO_PLATO.Equals(tipoPlato.NOMBRE_TIPO_PLATO));
+            if (tp != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public bool ExisteTipoPlatoID(TIPO_PLATO tipoPlato)
+        {
+            TIPO_PLATO tp = ent.TIPO_PLATO.FirstOrDefault(objeto =>
+            objeto.ID_TIPO_PLATO.Equals(tipoPlato.ID_TIPO_PLATO));
+            if (tp != null)
             {
                 return true;
             }
@@ -76,6 +111,22 @@ namespace Datos
             }
         }
 
+        public TIPO_PLATO obtenerTipoPlato(TIPO_PLATO tipoPlato)
+        {
+
+            TIPO_PLATO tp = ent.TIPO_PLATO.FirstOrDefault(objeto =>
+            objeto.ID_TIPO_PLATO.Equals(tipoPlato.ID_TIPO_PLATO));
+
+            if (tp != null)
+            {
+                return tp;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
         public bool EditarPlato(PLATO plato)
         {
             PLATO p = ent.PLATO.FirstOrDefault(objeto =>
@@ -98,6 +149,25 @@ namespace Datos
             }
         }
 
+        public bool EditarTipoPlato(TIPO_PLATO tipoPlato)
+        {
+            TIPO_PLATO tp = ent.TIPO_PLATO.FirstOrDefault(objeto =>
+            objeto.ID_TIPO_PLATO.Equals(tipoPlato.ID_TIPO_PLATO));
+
+            if (tp != null)
+            {
+                tp.ID_TIPO_PLATO = tipoPlato.ID_TIPO_PLATO;
+                tp.NOMBRE_TIPO_PLATO = tipoPlato.NOMBRE_TIPO_PLATO;
+
+                ent.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public bool EliminarPlato(PLATO plato)
         {
             PLATO p = ent.PLATO.FirstOrDefault(objeto =>
@@ -106,6 +176,23 @@ namespace Datos
             if (p != null)
             {
                 ent.PLATO.Remove(p);
+                ent.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public bool EliminarTipoPlato(TIPO_PLATO tipoPlato)
+        {
+            TIPO_PLATO tp = ent.TIPO_PLATO.FirstOrDefault(objeto =>
+            objeto.ID_TIPO_PLATO.Equals(tipoPlato.ID_TIPO_PLATO));
+
+            if (tp != null)
+            {
+                ent.TIPO_PLATO.Remove(tp);
                 ent.SaveChanges();
                 return true;
             }

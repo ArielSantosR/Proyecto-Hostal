@@ -667,6 +667,92 @@ namespace WcfNegocio
             return serv.EliminarPlato(pDatos);
         }
 
+        //TIPO PLATO
+        public bool AgregarTipoPlato(string tipoPlato)
+        {
+            //Datos tipo Plato
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.TipoPlato));
+            StringReader reader = new StringReader(tipoPlato);
+            Modelo.TipoPlato p = (Modelo.TipoPlato)ser.Deserialize(reader);
+            ServicioPlato serv = new ServicioPlato();
+            Datos.TIPO_PLATO tpDatos = new Datos.TIPO_PLATO();
+            tpDatos.ID_TIPO_PLATO = p.ID_TIPO_PLATO;
+            tpDatos.NOMBRE_TIPO_PLATO = p.NOMBRE_TIPO_PLATO;
+
+            return serv.AgregarTipoPlato(tpDatos);
+        }
+
+        public bool ExisteTipoPlato(string tipoPlato)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.TipoPlato));
+            StringReader reader = new StringReader(tipoPlato);
+            Modelo.TipoPlato tp = (Modelo.TipoPlato)ser.Deserialize(reader);
+            ServicioPlato serv = new ServicioPlato();
+            Datos.TIPO_PLATO tpDatos = new Datos.TIPO_PLATO();
+            tpDatos.NOMBRE_TIPO_PLATO = tp.NOMBRE_TIPO_PLATO;
+
+            if (!serv.ExisteTipoPlato(tpDatos))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+
+        public TipoPlato ObtenerTipoPlato(string tipoPlato)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.TipoPlato));
+            StringReader reader = new StringReader(tipoPlato);
+            Modelo.TipoPlato p = (Modelo.TipoPlato)ser.Deserialize(reader);
+            ServicioPlato serv = new ServicioPlato();
+            Datos.TIPO_PLATO tpDatos = new Datos.TIPO_PLATO();
+            tpDatos.ID_TIPO_PLATO = p.ID_TIPO_PLATO;
+
+            if (!serv.ExisteTipoPlatoID(tpDatos))
+            {
+                return null;
+            }
+            else
+            {
+                Datos.TIPO_PLATO pDatos2 = serv.obtenerTipoPlato(tpDatos);
+
+                p.ID_TIPO_PLATO = pDatos2.ID_TIPO_PLATO;
+                p.NOMBRE_TIPO_PLATO = pDatos2.NOMBRE_TIPO_PLATO;
+
+                return p;
+            }
+        }
+
+        public bool ModificarTipoPlato(string tipoPlato)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.Plato));
+            StringReader reader = new StringReader(tipoPlato);
+            Modelo.TipoPlato p = (Modelo.TipoPlato)ser.Deserialize(reader);
+            ServicioPlato serv = new ServicioPlato();
+            Datos.TIPO_PLATO tpDatos = new Datos.TIPO_PLATO();
+
+            tpDatos.ID_TIPO_PLATO = p.ID_TIPO_PLATO;
+            tpDatos.NOMBRE_TIPO_PLATO = p.NOMBRE_TIPO_PLATO;
+
+            return serv.EditarTipoPlato(tpDatos);
+        }
+
+        public bool EliminarTipoPlato(string tipoPlato)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.TipoPlato));
+            StringReader reader = new StringReader(tipoPlato);
+            Modelo.TipoPlato tp = (Modelo.TipoPlato)ser.Deserialize(reader);
+            ServicioPlato serv = new ServicioPlato();
+            Datos.TIPO_PLATO tpDatos = new Datos.TIPO_PLATO();
+
+            tpDatos.ID_TIPO_PLATO = tp.ID_TIPO_PLATO;
+
+            return serv.EliminarTipoPlato(tpDatos);
+        }
+
         //DDL
         public string ListarPais()
         {

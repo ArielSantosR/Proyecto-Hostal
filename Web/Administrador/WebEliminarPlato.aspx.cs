@@ -57,9 +57,11 @@ namespace Web.Administrador
                     {
                         plato = s.ObtenerPlato(writer.ToString());
 
-                        txtNumero.Text = plato.ID_PLATO + "";
+                        txtNombre.Text = plato.NOMBRE_PLATO + "";
 
-                        txtNumero.ReadOnly = true;
+                        txtNombre.ReadOnly = true;
+
+                        
                     }
                 }
                 else
