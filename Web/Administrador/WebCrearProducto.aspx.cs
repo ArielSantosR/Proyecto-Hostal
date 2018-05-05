@@ -50,6 +50,12 @@ namespace Web.Administrador
             Modelo.FamiliaCollection coleccionFamilia = (Modelo.FamiliaCollection)ser.Deserialize(reader);
             reader.Close();
 
+            string proveedor = service.ListarProveedor();
+            XmlSerializer ser2 = new XmlSerializer(typeof(Modelo.ProveedorCollection2));
+            StringReader reader2 = new StringReader(proveedor);
+            Modelo.ProveedorCollection2 coleccionProveedor = (Modelo.ProveedorCollection2)ser2.Deserialize(reader2);
+            reader.Close();
+
             calendarFecha.SelectedDate = Convert.ToDateTime("01/01/2000");
 
             if (!IsPostBack)
@@ -59,6 +65,11 @@ namespace Web.Administrador
                 ddlFamilia.DataValueField = "ID_FAMILIA";
                 ddlFamilia.DataTextField = "NOMBRE_FAMILIA";
                 ddlFamilia.DataBind();
+
+                ddlRut.DataSource = coleccionProveedor;
+                ddlRut.DataValueField = "RUT_PROVEEDOR";
+                ddlRut.DataTextField = "RUT_PROVEEDOR";
+                ddlRut.DataBind();
             }
 
         }
@@ -108,6 +119,7 @@ namespace Web.Administrador
                     Modelo.Producto producto = new Modelo.Producto();
                     producto.NOMBRE_PRODUCTO = txtNombre.Text;
                     producto.ID_FAMILIA = short.Parse(ddlFamilia.SelectedValue);
+                    producto.RUT_PROVEEDOR = int.Parse(ddlRut.SelectedValue);
                     producto.DESCRIPCION_PRODUCTO = txtDescripcion.Text;
                     producto.FECHA_VENCIMIENTO_PRODUCTO = calendarFecha.SelectedDate;
 

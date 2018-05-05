@@ -74,6 +74,7 @@
         <EntityTypeShape EntityType="Hostal.DETALLE_ORDEN" Width="1.5" PointX="12.75" PointY="19.875" />
         <AssociationConnector Association="Hostal.FK_HUESPED_DETALLE_ORDEN" />
         <AssociationConnector Association="Hostal.FK_ORDEN_DETALLE_ORDEN" />
+        <AssociationConnector Association="Hostal.FK_PRODUCTO_PROVEEDOR" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -101,7 +101,7 @@
           <Property Name="ID_DETALLE_PEDIDO" Type="number" Precision="5" Scale="0" Nullable="false" />
           <Property Name="CANTIDAD" Type="number" Precision="10" Scale="0" Nullable="false" />
           <Property Name="NUMERO_PEDIDO" Type="number" Precision="5" Scale="0" />
-          <Property Name="ID_PRODUCTO" Type="number" Precision="5" Scale="0" Nullable="false" />
+          <Property Name="ID_PRODUCTO" Type="number" Precision="19" Scale="0" Nullable="false" />
         </EntityType>
         <EntityType Name="DETALLE_PLATOS">
           <Key>
@@ -119,7 +119,7 @@
           </Key>
           <Property Name="ID_DETALLE_RECEPCION" Type="number" Precision="5" Scale="0" Nullable="false" />
           <Property Name="CANTIDAD" Type="number" Precision="10" Scale="0" Nullable="false" />
-          <Property Name="ID_PRODUCTO" Type="number" Precision="5" Scale="0" Nullable="false" />
+          <Property Name="ID_PRODUCTO" Type="number" Precision="19" Scale="0" Nullable="false" />
           <Property Name="NUMERO_RECEPCION" Type="number" Precision="5" Scale="0" Nullable="false" />
         </EntityType>
         <EntityType Name="EMPLEADO">
@@ -231,7 +231,7 @@
           <Key>
             <PropertyRef Name="ID_PRODUCTO" />
           </Key>
-          <Property Name="ID_PRODUCTO" Type="number" Precision="5" Scale="0" Nullable="false" />
+          <Property Name="ID_PRODUCTO" Type="number" Precision="19" Scale="0" Nullable="false" />
           <Property Name="NOMBRE_PRODUCTO" Type="varchar2" MaxLength="50" Nullable="false" />
           <Property Name="FECHA_VENCIMIENTO_PRODUCTO" Type="date" />
           <Property Name="STOCK_PRODUCTO" Type="number" Precision="5" Scale="0" Nullable="false" />
@@ -239,6 +239,8 @@
           <Property Name="DESCRIPCION_PRODUCTO" Type="varchar2" MaxLength="250" Nullable="false" />
           <Property Name="PRECIO_PRODUCTO" Type="number" Precision="10" Scale="0" Nullable="false" />
           <Property Name="ID_FAMILIA" Type="number" Precision="5" Scale="0" Nullable="false" />
+          <Property Name="RUT_PROVEEDOR" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="ID_PRODUCTO_SEQ" Type="number" Precision="5" Scale="0" Nullable="false" />
         </EntityType>
         <EntityType Name="PROVEEDOR">
           <Key>
@@ -710,6 +712,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_PRODUCTO_PROVEEDOR">
+          <End Role="PROVEEDOR" Type="Self.PROVEEDOR" Multiplicity="1" />
+          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROVEEDOR">
+              <PropertyRef Name="RUT_PROVEEDOR" />
+            </Principal>
+            <Dependent Role="PRODUCTO">
+              <PropertyRef Name="RUT_PROVEEDOR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_PROVEEDOR_TIPO_PROVEEDOR">
           <End Role="TIPO_PROVEEDOR" Type="Self.TIPO_PROVEEDOR" Multiplicity="1" />
           <End Role="PROVEEDOR" Type="Self.PROVEEDOR" Multiplicity="*" />
@@ -935,6 +949,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_PRODUCTO_FAMILIA" Association="Self.FK_PRODUCTO_FAMILIA">
             <End Role="FAMILIA" EntitySet="FAMILIA" />
+            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRODUCTO_PROVEEDOR" Association="Self.FK_PRODUCTO_PROVEEDOR">
+            <End Role="PROVEEDOR" EntitySet="PROVEEDOR" />
             <End Role="PRODUCTO" EntitySet="PRODUCTO" />
           </AssociationSet>
           <AssociationSet Name="FK_PROVEEDOR_TIPO_PROVEEDOR" Association="Self.FK_PROVEEDOR_TIPO_PROVEEDOR">
@@ -1248,6 +1266,9 @@
           <NavigationProperty Name="DETALLE_PEDIDO" Relationship="Self.FK_DETALLE_PEDIDO_PRODUCTO" FromRole="PRODUCTO" ToRole="DETALLE_PEDIDO" />
           <NavigationProperty Name="DETALLE_RECEPCION" Relationship="Self.FK_DETALLE_RECEPCION_PRODUCTO" FromRole="PRODUCTO" ToRole="DETALLE_RECEPCION" />
           <NavigationProperty Name="FAMILIA" Relationship="Self.FK_PRODUCTO_FAMILIA" FromRole="PRODUCTO" ToRole="FAMILIA" />
+          <Property Name="RUT_PROVEEDOR" Type="Int32" Nullable="false" />
+          <Property Name="ID_PRODUCTO_SEQ" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="PROVEEDOR" Relationship="Hostal.FK_PRODUCTO_PROVEEDOR" FromRole="PRODUCTO" ToRole="PROVEEDOR" />
         </EntityType>
         <EntityType Name="PROVEEDOR">
           <Key>
@@ -1265,6 +1286,7 @@
           <NavigationProperty Name="TIPO_PROVEEDOR" Relationship="Self.FK_PROVEEDOR_TIPO_PROVEEDOR" FromRole="PROVEEDOR" ToRole="TIPO_PROVEEDOR" />
           <NavigationProperty Name="USUARIO" Relationship="Self.FK_PROVEEDOR_USUARIO" FromRole="PROVEEDOR" ToRole="USUARIO" />
           <NavigationProperty Name="RECEPCION" Relationship="Self.FK_RECEPCION_PROVEEDOR" FromRole="PROVEEDOR" ToRole="RECEPCION" />
+          <NavigationProperty Name="PRODUCTO" Relationship="Hostal.FK_PRODUCTO_PROVEEDOR" FromRole="PROVEEDOR" ToRole="PRODUCTO" />
         </EntityType>
         <EntityType Name="RECEPCION">
           <Key>
@@ -1958,6 +1980,10 @@
             <End Role="ORDEN_COMPRA" EntitySet="ORDEN_COMPRA" />
             <End Role="DETALLE_ORDEN" EntitySet="DETALLE_ORDEN" />
           </AssociationSet>
+          <AssociationSet Name="FK_PRODUCTO_PROVEEDOR" Association="Hostal.FK_PRODUCTO_PROVEEDOR">
+            <End Role="PROVEEDOR" EntitySet="PROVEEDOR" />
+            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="DETALLE_ORDEN">
           <Key>
@@ -1990,6 +2016,18 @@
             </Principal>
             <Dependent Role="DETALLE_ORDEN">
               <PropertyRef Name="NUMERO_ORDEN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRODUCTO_PROVEEDOR">
+          <End Type="Hostal.PROVEEDOR" Role="PROVEEDOR" Multiplicity="1" />
+          <End Type="Hostal.PRODUCTO" Role="PRODUCTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROVEEDOR">
+              <PropertyRef Name="RUT_PROVEEDOR" />
+            </Principal>
+            <Dependent Role="PRODUCTO">
+              <PropertyRef Name="RUT_PROVEEDOR" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2233,6 +2271,8 @@
           <EntitySetMapping Name="PRODUCTO">
             <EntityTypeMapping TypeName="Hostal.PRODUCTO">
               <MappingFragment StoreEntitySet="PRODUCTO">
+                <ScalarProperty Name="ID_PRODUCTO_SEQ" ColumnName="ID_PRODUCTO_SEQ" />
+                <ScalarProperty Name="RUT_PROVEEDOR" ColumnName="RUT_PROVEEDOR" />
                 <ScalarProperty Name="ID_PRODUCTO" ColumnName="ID_PRODUCTO" />
                 <ScalarProperty Name="NOMBRE_PRODUCTO" ColumnName="NOMBRE_PRODUCTO" />
                 <ScalarProperty Name="FECHA_VENCIMIENTO_PRODUCTO" ColumnName="FECHA_VENCIMIENTO_PRODUCTO" />

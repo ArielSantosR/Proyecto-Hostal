@@ -19,5 +19,7 @@ namespace Modelo
         public string DESCRIPCION_PRODUCTO { get; set; }
         public int PRECIO_PRODUCTO { get; set; }
         public short ID_FAMILIA { get; set; }
+        public int RUT_PROVEEDOR { get; set; }
+        public short ID_PRODUCTO_SEQ { get; set; }
     }
 }

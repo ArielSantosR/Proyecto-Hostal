@@ -79,6 +79,16 @@
               </div>
             </div> 
                 <div class="form-group">
+              <label for="name" class="col-sm-12 control-label">RUT Proveedor </label>
+                <div class="col-sm-12">
+                  <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                      <asp:DropDownList ID="ddlRut" CssClass="form-control" runat="server">
+                      </asp:DropDownList>    
+                </div>
+              </div>
+            </div> 
+                <div class="form-group">
               <label for="name" class="col-sm-12 control-label">Fecha de Vencimiento</label>
 &nbsp;<div class="col-sm-12">
                   <div class="input-group">

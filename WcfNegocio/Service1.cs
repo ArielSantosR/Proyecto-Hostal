@@ -279,6 +279,27 @@ namespace WcfNegocio
             return servicio.AgregarProveedor(pDatos);
         }
 
+        public string ListarProveedor()
+        {
+            ServicioProveedor servicio = new ServicioProveedor();
+            List<Datos.PROVEEDOR> proveedor = servicio.ListarProveedor();
+            Modelo.ProveedorCollection2 listaProveedor = new Modelo.ProveedorCollection2();
+
+            foreach (Datos.PROVEEDOR p in proveedor)
+            {
+                Modelo.Proveedor pModelo = new Modelo.Proveedor();
+                pModelo.RUT_PROVEEDOR = p.RUT_PROVEEDOR;
+
+                listaProveedor.Add(pModelo);
+            }
+
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.ProveedorCollection2));
+            StringWriter writer = new StringWriter();
+            ser.Serialize(writer, listaProveedor);
+            writer.Close();
+            return writer.ToString();
+        }
+
         //Listar Datos
         public string ListarTipoProveedor()
         {
@@ -433,7 +454,8 @@ namespace WcfNegocio
             pDatos.STOCK_CRITICO_PRODUCTO = p.STOCK_CRITICO_PRODUCTO;
             pDatos.PRECIO_PRODUCTO = p.PRECIO_PRODUCTO;
             pDatos.ID_FAMILIA = p.ID_FAMILIA;
-
+            pDatos.RUT_PROVEEDOR = p.RUT_PROVEEDOR;
+            pDatos.ID_PRODUCTO_SEQ = p.ID_PRODUCTO_SEQ;
 
             return servicio.AgregarProducto(pDatos);
         }

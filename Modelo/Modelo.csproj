@@ -64,6 +64,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Proveedor.cs" />
     <Compile Include="ProveedorCollection.cs" />
+    <Compile Include="ProveedorCollection2.cs" />
     <Compile Include="Region.cs" />
     <Compile Include="RegionCollection.cs" />
     <Compile Include="TipoHabitacion.cs" />

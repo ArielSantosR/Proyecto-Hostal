@@ -286,6 +286,9 @@
     <NavigationProperty Name="DETALLE_PEDIDO" Relationship="Self.FK_DETALLE_PEDIDO_PRODUCTO" FromRole="PRODUCTO" ToRole="DETALLE_PEDIDO" />
     <NavigationProperty Name="DETALLE_RECEPCION" Relationship="Self.FK_DETALLE_RECEPCION_PRODUCTO" FromRole="PRODUCTO" ToRole="DETALLE_RECEPCION" />
     <NavigationProperty Name="FAMILIA" Relationship="Self.FK_PRODUCTO_FAMILIA" FromRole="PRODUCTO" ToRole="FAMILIA" />
+    <Property Name="RUT_PROVEEDOR" Type="Int32" Nullable="false" />
+    <Property Name="ID_PRODUCTO_SEQ" Type="Int16" Nullable="false" />
+    <NavigationProperty Name="PROVEEDOR" Relationship="Hostal.FK_PRODUCTO_PROVEEDOR" FromRole="PRODUCTO" ToRole="PROVEEDOR" />
   </EntityType>
   <EntityType Name="PROVEEDOR">
     <Key>
@@ -303,6 +306,7 @@
     <NavigationProperty Name="TIPO_PROVEEDOR" Relationship="Self.FK_PROVEEDOR_TIPO_PROVEEDOR" FromRole="PROVEEDOR" ToRole="TIPO_PROVEEDOR" />
     <NavigationProperty Name="USUARIO" Relationship="Self.FK_PROVEEDOR_USUARIO" FromRole="PROVEEDOR" ToRole="USUARIO" />
     <NavigationProperty Name="RECEPCION" Relationship="Self.FK_RECEPCION_PROVEEDOR" FromRole="PROVEEDOR" ToRole="RECEPCION" />
+    <NavigationProperty Name="PRODUCTO" Relationship="Hostal.FK_PRODUCTO_PROVEEDOR" FromRole="PROVEEDOR" ToRole="PRODUCTO" />
   </EntityType>
   <EntityType Name="RECEPCION">
     <Key>
@@ -996,6 +1000,10 @@
       <End Role="ORDEN_COMPRA" EntitySet="ORDEN_COMPRA" />
       <End Role="DETALLE_ORDEN" EntitySet="DETALLE_ORDEN" />
     </AssociationSet>
+    <AssociationSet Name="FK_PRODUCTO_PROVEEDOR" Association="Hostal.FK_PRODUCTO_PROVEEDOR">
+      <End Role="PROVEEDOR" EntitySet="PROVEEDOR" />
+      <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="DETALLE_ORDEN">
     <Key>
@@ -1028,6 +1036,18 @@
       </Principal>
       <Dependent Role="DETALLE_ORDEN">
         <PropertyRef Name="NUMERO_ORDEN" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PRODUCTO_PROVEEDOR">
+    <End Type="Hostal.PROVEEDOR" Role="PROVEEDOR" Multiplicity="1" />
+    <End Type="Hostal.PRODUCTO" Role="PRODUCTO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PROVEEDOR">
+        <PropertyRef Name="RUT_PROVEEDOR" />
+      </Principal>
+      <Dependent Role="PRODUCTO">
+        <PropertyRef Name="RUT_PROVEEDOR" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
