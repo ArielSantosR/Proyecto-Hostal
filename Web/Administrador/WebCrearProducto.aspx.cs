@@ -56,8 +56,6 @@ namespace Web.Administrador
             Modelo.ProveedorCollection2 coleccionProveedor = (Modelo.ProveedorCollection2)ser2.Deserialize(reader2);
             reader.Close();
 
-            calendarFecha.SelectedDate = Convert.ToDateTime("01/01/2000");
-
             if (!IsPostBack)
             {
 
@@ -70,6 +68,8 @@ namespace Web.Administrador
                 ddlRut.DataValueField = "RUT_PROVEEDOR";
                 ddlRut.DataTextField = "RUT_PROVEEDOR";
                 ddlRut.DataBind();
+
+                calendarFecha.SelectedDate = Convert.ToDateTime("01/01/2000");
             }
 
         }
