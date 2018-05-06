@@ -53,6 +53,8 @@
     <Compile Include="FamiliaCollection.cs" />
     <Compile Include="Habitacion.cs" />
     <Compile Include="HabitacionCollection.cs" />
+    <Compile Include="Huesped.cs" />
+    <Compile Include="HuespedCollection.cs" />
     <Compile Include="Minuta.cs" />
     <Compile Include="MinutaCollection.cs" />
     <Compile Include="Pais.cs" />

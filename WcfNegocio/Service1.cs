@@ -155,6 +155,119 @@ namespace WcfNegocio
             }
         }
 
+        //  CRUD HUESPED
+        public bool ExisteHuesped(string user)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.Huesped));
+            StringReader reader = new StringReader(user);
+            Modelo.Huesped huesped = (Modelo.Huesped)ser.Deserialize(reader);
+            ServicioHuesped serv = new ServicioHuesped();
+            Datos.HUESPED uDatos = new Datos.HUESPED();
+            uDatos.RUT_HUESPED = huesped.RUT_HUESPED;
+            if (!serv.ExisteHuesped(uDatos))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        public bool RegistroHuesped(string huesped)
+        {
+            //Datos huesped
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.Huesped));
+            StringReader reader = new StringReader(huesped);
+            Modelo.Huesped hp = (Modelo.Huesped)ser.Deserialize(reader);
+            ServicioHuesped serv = new ServicioHuesped();
+            Datos.HUESPED uDatos = new Datos.HUESPED();
+            uDatos.APP_MATERNO_HUESPED = hp.APP_MATERNO_HUESPED;
+            uDatos.APP_PATERNO_HUESPED = hp.APP_PATERNO_HUESPED;
+            uDatos.DV_HUESPED = hp.DV_HUESPED;
+            uDatos.NUMERO_HABITACION = hp.NUMERO_HABITACION;
+            uDatos.PNOMBRE_HUESPED = hp.PNOMBRE_HUESPED;
+            uDatos.REGISTRADO = hp.REGISTRADO;
+            uDatos.RUT_CLIENTE = hp.RUT_CLIENTE;
+            uDatos.RUT_HUESPED = hp.RUT_HUESPED;
+            uDatos.SNOMBRE_HUESPED = hp.SNOMBRE_HUESPED;
+            uDatos.TELEFONO_HUESPED = hp.TELEFONO_HUESPED;
+
+            return serv.RegistrarHuesped(uDatos);
+        }
+
+        public bool EliminarHuesped(string huesped)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.Huesped));
+            StringReader reader = new StringReader(huesped);
+            Modelo.Huesped hp = (Modelo.Huesped)ser.Deserialize(reader);
+            ServicioHuesped serv = new ServicioHuesped();
+            Datos.HUESPED uDatos = new Datos.HUESPED();
+            uDatos.RUT_HUESPED = hp.RUT_HUESPED;
+
+            return serv.EliminarHuesped(uDatos);
+        }
+
+        public string ListarHuesped()
+        {
+            ServicioHuesped servicio = new ServicioHuesped();
+            List<Datos.HUESPED> huesped = servicio.ListarHuesped();
+            Modelo.HuespedCollection listaHuesped = new Modelo.HuespedCollection();
+
+            foreach (Datos.HUESPED hp in huesped)
+            {
+                Modelo.Huesped h = new Modelo.Huesped();
+                h.RUT_HUESPED = hp.RUT_HUESPED;
+                h.DV_HUESPED = hp.DV_HUESPED;
+                h.PNOMBRE_HUESPED = hp.PNOMBRE_HUESPED;
+                h.SNOMBRE_HUESPED = hp.SNOMBRE_HUESPED;
+                h.TELEFONO_HUESPED = hp.TELEFONO_HUESPED;
+                h.NUMERO_HABITACION = hp.NUMERO_HABITACION;
+                h.APP_MATERNO_HUESPED = hp.APP_MATERNO_HUESPED;
+                h.APP_PATERNO_HUESPED = hp.APP_PATERNO_HUESPED;
+                h.REGISTRADO = hp.REGISTRADO;
+                h.RUT_CLIENTE = hp.RUT_CLIENTE;
+
+                listaHuesped.Add(h);
+            }
+
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.HuespedCollection));
+            StringWriter writer = new StringWriter();
+            ser.Serialize(writer, listaHuesped);
+            writer.Close();
+            return writer.ToString();
+        }
+
+        public bool ModificarHuesped(string huesped)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.Huesped));
+            StringReader reader = new StringReader(huesped);
+            Modelo.Huesped hp = (Modelo.Huesped)ser.Deserialize(reader);
+            Datos.ServicioHuesped servicio = new Datos.ServicioHuesped();
+            Datos.HUESPED hues = new Datos.HUESPED();
+            //Datos de Huesped
+            hues.RUT_HUESPED = hp.RUT_HUESPED;
+            hues.NUMERO_HABITACION = hp.NUMERO_HABITACION;
+            hues.DV_HUESPED = hp.DV_HUESPED;
+            hues.APP_PATERNO_HUESPED = hp.APP_PATERNO_HUESPED;
+            hues.APP_MATERNO_HUESPED = hp.APP_MATERNO_HUESPED;
+            hues.PNOMBRE_HUESPED = hp.PNOMBRE_HUESPED;
+            hues.SNOMBRE_HUESPED = hp.SNOMBRE_HUESPED;
+            hues.TELEFONO_HUESPED = hp.TELEFONO_HUESPED;
+            hues.REGISTRADO = hp.REGISTRADO;
+            hues.RUT_CLIENTE = hp.RUT_CLIENTE;
+            
+
+            if (servicio.ModificarHuesped(hues))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         //CRUD Cliente
         public bool ExisteRutC(string cliente)
         {

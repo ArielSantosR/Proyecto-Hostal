@@ -33,6 +33,22 @@ namespace WcfNegocio
 
         [OperationContract]
         string ListarUsuarios();
+        //Huesped
+        [OperationContract]
+        bool ExisteHuesped(string huesped);
+
+        [OperationContract]
+        bool RegistroHuesped(string huesped);
+
+        [OperationContract]
+        bool EliminarHuesped(string huesped);
+
+        [OperationContract]
+        bool ModificarHuesped(string huesped);
+
+        [OperationContract]
+        string ListarHuesped();
+
         //CRUD Cliente
         [OperationContract]
         bool ExisteRutC(string cliente);
