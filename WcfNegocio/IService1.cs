@@ -128,6 +128,21 @@ namespace WcfNegocio
         [OperationContract]
         TipoPlato ObtenerTipoPlato(string tipoPlato);
 
+        //CRUD TIPO PROVEEDOR
+        [OperationContract]
+        bool AgregarTipoProveedor(string tipoProveedor);
+
+        [OperationContract]
+        bool EliminarTipoProveedor(string tipoProveedor);
+
+        [OperationContract]
+        bool ModificarTipoProveedor(string tipoProveedor);
+
+        [OperationContract]
+        bool ExisteTipoProveedor(string tipoProveedor);
+
+        [OperationContract]
+        TipoProveedor ObtenerTipoProveedor(string tipoProveedor);
 
 
 

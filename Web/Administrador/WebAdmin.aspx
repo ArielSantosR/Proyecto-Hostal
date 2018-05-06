@@ -47,6 +47,8 @@
                         <asp:button runat="server" text="Ver Platos" ID="btnVerPlato" CssClass="btn btn-primary btn-lg btn-block login-button" style="font-size: 15px" OnClick="btnVerPlato_Click"  />
                         <asp:button runat="server" text="Agregar Producto" ID="btnAgregarProducto" cssClass="btn btn-primary btn-lg btn-block login-button" style="font-size: 15px" OnClick="btnAgregarProducto_Click" />
                         <asp:button runat="server" text="Ver Producto" ID="btnVerProducto" CssClass="btn btn-primary btn-lg btn-block login-button" style="font-size: 15px" OnClick="btnVerProducto_Click"  />
+                        <asp:button runat="server" text="Crear Tipo Plato" ID="btnCrearTipoPlato" CssClass="btn btn-primary btn-lg btn-block login-button" style="font-size: 15px" OnClick="btnCrearTipoPlato_Click"  />
+                        <asp:button runat="server" text="Crear Tipo Proveedor" ID="btnCrearTipoProveedor" CssClass="btn btn-primary btn-lg btn-block login-button" style="font-size: 15px" OnClick="btnCrearTipoProveedor_Click"  />
                     </div>
                 </div>
 

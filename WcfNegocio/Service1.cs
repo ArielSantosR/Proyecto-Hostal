@@ -750,7 +750,7 @@ namespace WcfNegocio
 
         public bool ModificarTipoPlato(string tipoPlato)
         {
-            XmlSerializer ser = new XmlSerializer(typeof(Modelo.Plato));
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.TipoPlato));
             StringReader reader = new StringReader(tipoPlato);
             Modelo.TipoPlato p = (Modelo.TipoPlato)ser.Deserialize(reader);
             ServicioPlato serv = new ServicioPlato();
@@ -774,6 +774,93 @@ namespace WcfNegocio
 
             return serv.EliminarTipoPlato(tpDatos);
         }
+
+        // tipo proveedor
+        public bool AgregarTipoProveedor(string tipoProveedor)
+        {
+            //Datos tipo PROVEEDOR
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.TipoProveedor));
+            StringReader reader = new StringReader(tipoProveedor);
+            Modelo.TipoProveedor p = (Modelo.TipoProveedor)ser.Deserialize(reader);
+            ServicioProveedor serv = new ServicioProveedor();
+            Datos.TIPO_PROVEEDOR tpDatos = new Datos.TIPO_PROVEEDOR();
+            tpDatos.ID_TIPO_PROVEEDOR = p.ID_TIPO_PROVEEDOR;
+            tpDatos.NOMBRE_TIPO = p.NOMBRE_TIPO;
+
+            return serv.AgregarTipoProveedor(tpDatos);
+        }
+
+        public bool ExisteTipoProveedor(string tipoProveedor)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.TipoProveedor));
+            StringReader reader = new StringReader(tipoProveedor);
+            Modelo.TipoProveedor tp = (Modelo.TipoProveedor)ser.Deserialize(reader);
+            ServicioProveedor serv = new ServicioProveedor();
+            Datos.TIPO_PROVEEDOR tpDatos = new Datos.TIPO_PROVEEDOR();
+            tpDatos.NOMBRE_TIPO = tp.NOMBRE_TIPO;
+
+            if (!serv.ExisteTipoProveedor(tpDatos))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+
+        public TipoProveedor ObtenerTipoProveedor(string tipoProveedor)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.TipoProveedor));
+            StringReader reader = new StringReader(tipoProveedor);
+            Modelo.TipoProveedor p = (Modelo.TipoProveedor)ser.Deserialize(reader);
+            ServicioProveedor serv = new ServicioProveedor();
+            Datos.TIPO_PROVEEDOR tpDatos = new Datos.TIPO_PROVEEDOR();
+            tpDatos.ID_TIPO_PROVEEDOR = p.ID_TIPO_PROVEEDOR;
+
+            if (!serv.ExisteTipoProveedorID(tpDatos))
+            {
+                return null;
+            }
+            else
+            {
+                Datos.TIPO_PROVEEDOR pDatos2 = serv.obtenerTipoProveedor(tpDatos);
+
+                p.ID_TIPO_PROVEEDOR = pDatos2.ID_TIPO_PROVEEDOR;
+                p.NOMBRE_TIPO = pDatos2.NOMBRE_TIPO;
+
+                return p;
+            }
+        }
+
+        public bool ModificarTipoProveedor(string tipoProveedor)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.TipoProveedor));
+            StringReader reader = new StringReader(tipoProveedor);
+            Modelo.TipoProveedor p = (Modelo.TipoProveedor)ser.Deserialize(reader);
+            ServicioProveedor serv = new ServicioProveedor();
+            Datos.TIPO_PROVEEDOR tpDatos = new Datos.TIPO_PROVEEDOR();
+
+            tpDatos.ID_TIPO_PROVEEDOR = p.ID_TIPO_PROVEEDOR;
+            tpDatos.NOMBRE_TIPO = p.NOMBRE_TIPO;
+
+            return serv.EditarTipoProveedor(tpDatos);
+        }
+
+        public bool EliminarTipoProveedor(string tipoProveedor)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.TipoProveedor));
+            StringReader reader = new StringReader(tipoProveedor);
+            Modelo.TipoProveedor tp = (Modelo.TipoProveedor)ser.Deserialize(reader);
+            ServicioProveedor serv = new ServicioProveedor();
+            Datos.TIPO_PROVEEDOR tpDatos = new Datos.TIPO_PROVEEDOR();
+
+            tpDatos.ID_TIPO_PROVEEDOR = tp.ID_TIPO_PROVEEDOR;
+
+            return serv.EliminarTipoProveedor(tpDatos);
+        }
+
 
         //DDL
         public string ListarPais()

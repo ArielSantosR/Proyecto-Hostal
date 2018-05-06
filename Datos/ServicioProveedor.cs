@@ -43,5 +43,93 @@ namespace Datos
                          select consulta).ToList();
             return lista;
         }
+
+        //TIPO PROVEEDOR
+
+
+        public bool AgregarTipoProveedor(TIPO_PROVEEDOR p)
+        {
+            ent.TIPO_PROVEEDOR.Add(p);
+            ent.SaveChanges();
+            return true;
+        }
+        public bool ExisteTipoProveedor(TIPO_PROVEEDOR tipoProveedor)
+        {
+            TIPO_PROVEEDOR tp = ent.TIPO_PROVEEDOR.FirstOrDefault(objeto =>
+            objeto.NOMBRE_TIPO.Equals(tipoProveedor.NOMBRE_TIPO));
+            if (tp != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public bool ExisteTipoProveedorID(TIPO_PROVEEDOR tipoProveedor)
+        {
+            TIPO_PROVEEDOR tp = ent.TIPO_PROVEEDOR.FirstOrDefault(objeto =>
+            objeto.ID_TIPO_PROVEEDOR.Equals(tipoProveedor.ID_TIPO_PROVEEDOR));
+            if (tp != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public TIPO_PROVEEDOR obtenerTipoProveedor(TIPO_PROVEEDOR tipoProveedor)
+        {
+
+            TIPO_PROVEEDOR tp = ent.TIPO_PROVEEDOR.FirstOrDefault(objeto =>
+            objeto.ID_TIPO_PROVEEDOR.Equals(tipoProveedor.ID_TIPO_PROVEEDOR));
+
+            if (tp != null)
+            {
+                return tp;
+            }
+            else
+            {
+                return null;
+            }
+        }
+        public bool EditarTipoProveedor(TIPO_PROVEEDOR tipoProveedor)
+        {
+            TIPO_PROVEEDOR tp = ent.TIPO_PROVEEDOR.FirstOrDefault(objeto =>
+            objeto.ID_TIPO_PROVEEDOR.Equals(tipoProveedor.ID_TIPO_PROVEEDOR));
+
+            if (tp != null)
+            {
+                tp.ID_TIPO_PROVEEDOR = tipoProveedor.ID_TIPO_PROVEEDOR;
+                tp.NOMBRE_TIPO = tipoProveedor.NOMBRE_TIPO;
+
+                ent.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public bool EliminarTipoProveedor(TIPO_PROVEEDOR tipoProveedor)
+        {
+            TIPO_PROVEEDOR tp = ent.TIPO_PROVEEDOR.FirstOrDefault(objeto =>
+            objeto.ID_TIPO_PROVEEDOR.Equals(tipoProveedor.ID_TIPO_PROVEEDOR));
+
+            if (tp != null)
+            {
+                ent.TIPO_PROVEEDOR.Remove(tp);
+                ent.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+
     }
 }

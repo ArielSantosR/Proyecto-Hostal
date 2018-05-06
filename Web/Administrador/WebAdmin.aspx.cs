@@ -130,5 +130,13 @@ namespace Web
         {
             Response.Redirect("WebVerProductos.aspx");
         }
+        protected void btnCrearTipoPlato_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("WebCrearTipoPlato.aspx");
+        }
+        protected void btnCrearTipoProveedor_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("WebCrearTipoProveedor.aspx");
+        }
     }
 }
