@@ -35,10 +35,7 @@ namespace Datos
 
         public List<PEDIDO> ListarPedidoAdmin()
         {
-            var lista = (from consulta in ent.PEDIDO
-                         orderby consulta.NUMERO_PEDIDO
-                         select consulta).ToList();
-            return lista;
+            return (from a in ent.PEDIDO where a.ESTADO_PEDIDO.Equals("Pendiente") select a).ToList();
         }
     }
 }

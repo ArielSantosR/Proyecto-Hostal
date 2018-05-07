@@ -109,6 +109,7 @@
     <Content Include="Administrador\WebInformes.aspx" />
     <Content Include="Administrador\WebVerHabitacion.aspx" />
     <Content Include="Administrador\WebRegistroAdmin.aspx" />
+    <Content Include="Administrador\WebVerPedido.aspx" />
     <Content Include="Administrador\WebVerProductos.aspx" />
     <Content Include="Administrador\WebVerUsuarios.aspx" />
     <Content Include="Cliente\WebCrearOrden.aspx" />
@@ -272,6 +273,13 @@
     </Compile>
     <Compile Include="Administrador\WebRegistroAdmin.aspx.designer.cs">
       <DependentUpon>WebRegistroAdmin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrador\WebVerPedido.aspx.cs">
+      <DependentUpon>WebVerPedido.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\WebVerPedido.aspx.designer.cs">
+      <DependentUpon>WebVerPedido.aspx</DependentUpon>
     </Compile>
     <Compile Include="Administrador\WebVerProductos.aspx.cs">
       <DependentUpon>WebVerProductos.aspx</DependentUpon>

@@ -171,7 +171,8 @@ namespace WcfNegocio
         bool AgregarPedido(string pedido);
 
         [OperationContract]
-        bool AgregarDetallePedido(string detalle);
+        string ListarPedidoAdmin();
+
 
         //DDL
         [OperationContract]

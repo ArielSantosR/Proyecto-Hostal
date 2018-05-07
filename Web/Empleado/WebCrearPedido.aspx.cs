@@ -76,7 +76,7 @@ namespace Web.Empleado
             try
             {
                 int cantidad = 0;
-
+                //lalala
                 if (txtCantidad.Text != string.Empty)
                 {
                     if (int.TryParse(txtCantidad.Text, out cantidad))

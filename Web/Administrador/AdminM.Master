@@ -75,6 +75,7 @@
           <li><a href="../Administrador/WebVerPlatos.aspx">Ver Platos</a></li>
           <li><a href="../Administrador/WebCrearProducto.aspx">AgregarProducto</a></li>
           <li><a href="../Administrador/WebVerProductos.aspx">Ver Producto</a></li>
+            <li><a href="../Administrador/WebVerPedido.aspx">Ver Pedidos Pendientes</a></li>
         </ul>
       </li>
         <li><a href="WebInformes.aspx">Informes</a></li>

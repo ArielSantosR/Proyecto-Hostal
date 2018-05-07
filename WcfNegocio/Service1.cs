@@ -56,6 +56,7 @@ namespace WcfNegocio
             usuario.PASSWORD = uDatos2.PASSWORD;
             usuario.TIPO_USUARIO = uDatos2.TIPO_USUARIO;
             usuario.ESTADO = uDatos2.ESTADO;
+            usuario.ID_USUARIO = uDatos2.ID_USUARIO;
 
             return usuario;
         }
@@ -1066,6 +1067,32 @@ namespace WcfNegocio
             return servicio.AgregarDetallePedido(dDatos);
         }
 
+        public string ListarPedidoAdmin()
+        {
+
+            ServicioPedido servicio = new ServicioPedido();
+            List<Datos.PEDIDO> pedido = servicio.ListarPedidoAdmin();
+            Modelo.PedidoCollection listaPedido = new Modelo.PedidoCollection();
+
+            foreach (Datos.PEDIDO p in pedido)
+            {
+                Modelo.Pedido pModelo = new Modelo.Pedido();
+                pModelo.NUMERO_PEDIDO = p.NUMERO_PEDIDO;
+                pModelo.ESTADO_PEDIDO = p.ESTADO_PEDIDO;
+                pModelo.FECHA_PEDIDO = p.FECHA_PEDIDO;
+                pModelo.RUT_EMPLEADO = p.RUT_EMPLEADO;
+                pModelo.NUMERO_RECEPCION = p.NUMERO_RECEPCION;
+                pModelo.RUT_PROVEEDOR = p.RUT_PROVEEDOR;
+
+                listaPedido.Add(pModelo);
+            }
+
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.PedidoCollection));
+            StringWriter writer = new StringWriter();
+            ser.Serialize(writer, listaPedido);
+            writer.Close();
+            return writer.ToString();
+        }
 
         //DDL
         public string ListarPais()
