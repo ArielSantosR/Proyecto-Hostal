@@ -151,6 +151,7 @@
     <Compile Include="ServicioLogin.cs" />
     <Compile Include="ServicioMinuta.cs" />
     <Compile Include="ServicioHuesped.cs" />
+    <Compile Include="ServicioPedido.cs" />
     <Compile Include="ServicioPlato.cs" />
     <Compile Include="ServicioProducto.cs" />
     <Compile Include="ServicioProveedor.cs" />
@@ -169,17 +170,18 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.Config" />
     <EntityDeploy Include="Hostal.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Hostal.Designer.cs</LastGenOutput>
     </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.Config" />
     <None Include="Hostal.edmx.diagram">
       <DependentUpon>Hostal.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Hostal.Context.tt">
@@ -192,9 +194,6 @@
       <DependentUpon>Hostal.edmx</DependentUpon>
       <LastGenOutput>Hostal.cs</LastGenOutput>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

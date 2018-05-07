@@ -46,6 +46,7 @@
     <Compile Include="ClienteCollection.cs" />
     <Compile Include="Comuna.cs" />
     <Compile Include="ComunaCollection.cs" />
+    <Compile Include="DetallePedido.cs" />
     <Compile Include="Empleado.cs" />
     <Compile Include="EmpleadoCollection.cs" />
     <Compile Include="Enumerable.cs" />
@@ -59,6 +60,8 @@
     <Compile Include="MinutaCollection.cs" />
     <Compile Include="Pais.cs" />
     <Compile Include="PaisCollection.cs" />
+    <Compile Include="Pedido.cs" />
+    <Compile Include="PedidoCollection.cs" />
     <Compile Include="Plato.cs" />
     <Compile Include="PlatoCollection.cs" />
     <Compile Include="Producto.cs" />

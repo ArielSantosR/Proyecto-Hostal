@@ -34,7 +34,6 @@
     <EntitySetMapping Name="CLIENTE">
       <EntityTypeMapping TypeName="Hostal.CLIENTE">
         <MappingFragment StoreEntitySet="CLIENTE">
-          <ScalarProperty Name="NOMBRE_CLIENTE" ColumnName="NOMBRE_CLIENTE" />
           <ScalarProperty Name="RUT_CLIENTE" ColumnName="RUT_CLIENTE" />
           <ScalarProperty Name="DV_CLIENTE" ColumnName="DV_CLIENTE" />
           <ScalarProperty Name="DIRECCION_CLIENTE" ColumnName="DIRECCION_CLIENTE" />
@@ -42,6 +41,7 @@
           <ScalarProperty Name="TELEFONO_CLIENTE" ColumnName="TELEFONO_CLIENTE" />
           <ScalarProperty Name="ID_COMUNA" ColumnName="ID_COMUNA" />
           <ScalarProperty Name="ID_USUARIO" ColumnName="ID_USUARIO" />
+          <ScalarProperty Name="NOMBRE_CLIENTE" ColumnName="NOMBRE_CLIENTE" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -84,6 +84,15 @@
           <ScalarProperty Name="VALOR_TOTAL" ColumnName="VALOR_TOTAL" />
           <ScalarProperty Name="ID_FACTURA" ColumnName="ID_FACTURA" />
           <ScalarProperty Name="RUT_CLIENTE" ColumnName="RUT_CLIENTE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DETALLE_ORDEN">
+      <EntityTypeMapping TypeName="Hostal.DETALLE_ORDEN">
+        <MappingFragment StoreEntitySet="DETALLE_ORDEN">
+          <ScalarProperty Name="ID_DETALLE" ColumnName="ID_DETALLE" />
+          <ScalarProperty Name="NUMERO_ORDEN" ColumnName="NUMERO_ORDEN" />
+          <ScalarProperty Name="RUT_HUESPED" ColumnName="RUT_HUESPED" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -235,8 +244,6 @@
     <EntitySetMapping Name="PRODUCTO">
       <EntityTypeMapping TypeName="Hostal.PRODUCTO">
         <MappingFragment StoreEntitySet="PRODUCTO">
-          <ScalarProperty Name="ID_PRODUCTO_SEQ" ColumnName="ID_PRODUCTO_SEQ" />
-          <ScalarProperty Name="RUT_PROVEEDOR" ColumnName="RUT_PROVEEDOR" />
           <ScalarProperty Name="ID_PRODUCTO" ColumnName="ID_PRODUCTO" />
           <ScalarProperty Name="NOMBRE_PRODUCTO" ColumnName="NOMBRE_PRODUCTO" />
           <ScalarProperty Name="FECHA_VENCIMIENTO_PRODUCTO" ColumnName="FECHA_VENCIMIENTO_PRODUCTO" />
@@ -245,6 +252,8 @@
           <ScalarProperty Name="DESCRIPCION_PRODUCTO" ColumnName="DESCRIPCION_PRODUCTO" />
           <ScalarProperty Name="PRECIO_PRODUCTO" ColumnName="PRECIO_PRODUCTO" />
           <ScalarProperty Name="ID_FAMILIA" ColumnName="ID_FAMILIA" />
+          <ScalarProperty Name="RUT_PROVEEDOR" ColumnName="RUT_PROVEEDOR" />
+          <ScalarProperty Name="ID_PRODUCTO_SEQ" ColumnName="ID_PRODUCTO_SEQ" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -314,15 +323,6 @@
           <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
           <ScalarProperty Name="TIPO_USUARIO" ColumnName="TIPO_USUARIO" />
           <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="DETALLE_ORDEN">
-      <EntityTypeMapping TypeName="Hostal.DETALLE_ORDEN">
-        <MappingFragment StoreEntitySet="DETALLE_ORDEN">
-          <ScalarProperty Name="RUT_HUESPED" ColumnName="RUT_HUESPED" />
-          <ScalarProperty Name="NUMERO_ORDEN" ColumnName="NUMERO_ORDEN" />
-          <ScalarProperty Name="ID_DETALLE" ColumnName="ID_DETALLE" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

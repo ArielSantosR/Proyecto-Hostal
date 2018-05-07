@@ -27,7 +27,7 @@ namespace Datos
         public Nullable<int> RUT_CLIENTE { get; set; }
     
         public virtual CLIENTE CLIENTE { get; set; }
-        public virtual EMPLEADO EMPLEADO { get; set; }
         public virtual ICollection<DETALLE_ORDEN> DETALLE_ORDEN { get; set; }
+        public virtual EMPLEADO EMPLEADO { get; set; }
     }
 }

@@ -42,6 +42,8 @@ namespace Web.Administrador
             exito.Text = "";
             alerta_exito.Visible = false;
             alerta.Visible = false;
+            btnLimpiar.CausesValidation = false;
+            btnLimpiar.UseSubmitBehavior = false;
 
             //Cargando DDL Categoria
             Service1 service = new Service1();
@@ -129,7 +131,7 @@ namespace Web.Administrador
                         else
                         {
                             alerta_exito.Visible = false;
-                            error.Text = "Datos Ingresados incorrectamente, verifique que ha ingresado números correctamente";
+                            error.Text = "El Plato ya existe";
                             alerta.Visible = true;
                         }
 

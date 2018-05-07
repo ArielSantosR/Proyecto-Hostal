@@ -592,3 +592,72 @@ COMPOUND TRIGGER
      END AFTER STATEMENT;
 
 END TGR_PRODUCTO;
+
+--Cambios 06/05
+
+--Inserción a Familia
+
+insert into familia values (6, 'Pan');
+
+--Creación Secuencia Tipo Proveedor
+
+CREATE SEQUENCE seq_tipo_proveedor
+MINVALUE 1
+START WITH 1
+INCREMENT BY 1;
+
+--Creación Trigger Tipo Proveedor
+
+create or replace TRIGGER TGR_TIPO_PROVEEDOR
+BEFORE INSERT ON TIPO_PROVEEDOR
+FOR EACH ROW
+ WHEN (new.ID_TIPO_PROVEEDOR IS NULL or new.ID_TIPO_PROVEEDOR = 0) 
+BEGIN
+  SELECT seq_tipo_proveedor.NEXTVAL
+  INTO :new.ID_TIPO_PROVEEDOR
+  FROM dual;
+END;
+
+--Creación Secuencia Pedido
+
+CREATE SEQUENCE seq_pedido
+MINVALUE 1
+START WITH 1
+INCREMENT BY 1;
+
+--Creación Trigger Pedido
+
+create or replace TRIGGER TGR_PEDIDO
+BEFORE INSERT ON PEDIDO
+FOR EACH ROW
+ WHEN (new.NUMERO_PEDIDO IS NULL or new.NUMERO_PEDIDO = 0) 
+BEGIN
+  SELECT seq_pedido.NEXTVAL
+  INTO :new.NUMERO_PEDIDO
+  FROM dual;
+END;
+
+--Creación Secuencia Detalle Pedido
+
+CREATE SEQUENCE seq_detalle_pedido
+MINVALUE 1
+START WITH 1
+INCREMENT BY 1;
+
+--Creación Trigger Detalle Pedido
+
+create or replace TRIGGER TGR_DETALLE_PEDIDO
+BEFORE INSERT ON DETALLE_PEDIDO
+FOR EACH ROW
+ WHEN (new.NUMERO_PEDIDO IS NULL or new.NUMERO_PEDIDO = 0) 
+BEGIN
+  SELECT seq_pedido.CURRVAL
+  INTO :new.NUMERO_PEDIDO
+  FROM dual;
+
+  SELECT seq_detalle_pedido.NEXTVAL
+  INTO :new.ID_DETALLE_PEDIDO
+  FROM dual;
+END;
+
+

@@ -31,6 +31,20 @@ namespace Datos
             }
         }
 
+        public EMPLEADO BuscarIDE(EMPLEADO empleado)
+        {
+            EMPLEADO e = ent.EMPLEADO.FirstOrDefault(objeto =>
+            objeto.ID_USUARIO.Equals(empleado.ID_USUARIO));
+            if (e != null)
+            {
+                return e;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
         public List<EMPLEADO> ListarEmpleado()
         {
             var lista = (from consulta in ent.EMPLEADO

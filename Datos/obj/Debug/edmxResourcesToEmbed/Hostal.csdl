@@ -43,6 +43,7 @@
     <Property Name="TELEFONO_CLIENTE" Type="Int64" />
     <Property Name="ID_COMUNA" Type="Int16" Nullable="false" />
     <Property Name="ID_USUARIO" Type="Int16" Nullable="false" />
+    <Property Name="NOMBRE_CLIENTE" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
     <NavigationProperty Name="BOLETA" Relationship="Self.FK_BOLETA_CLIENTE" FromRole="CLIENTE" ToRole="BOLETA" />
     <NavigationProperty Name="COMUNA" Relationship="Self.FK_CLIENTE_COMUNA" FromRole="CLIENTE" ToRole="COMUNA" />
     <NavigationProperty Name="USUARIO" Relationship="Self.FK_CLIENTE_USUARIO" FromRole="CLIENTE" ToRole="USUARIO" />
@@ -51,7 +52,6 @@
     <NavigationProperty Name="HABITACION" Relationship="Self.FK_HABITACION_CLIENTE" FromRole="CLIENTE" ToRole="HABITACION" />
     <NavigationProperty Name="HUESPED" Relationship="Self.FK_HUESPED_CLIENTE" FromRole="CLIENTE" ToRole="HUESPED" />
     <NavigationProperty Name="ORDEN_COMPRA" Relationship="Self.FK_ORDEN_COMPRA_CLIENTE" FromRole="CLIENTE" ToRole="ORDEN_COMPRA" />
-    <Property Name="NOMBRE_CLIENTE" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="COMUNA">
     <Key>
@@ -100,6 +100,16 @@
     <NavigationProperty Name="CLIENTE" Relationship="Self.FK_DETALLE_FACTURA_CLIENTE" FromRole="DETALLE_FACTURA" ToRole="CLIENTE" />
     <NavigationProperty Name="FACTURA" Relationship="Self.FK_DETALLE_FACTURA_FACTURA" FromRole="DETALLE_FACTURA" ToRole="FACTURA" />
   </EntityType>
+  <EntityType Name="DETALLE_ORDEN">
+    <Key>
+      <PropertyRef Name="ID_DETALLE" />
+    </Key>
+    <Property Name="ID_DETALLE" Type="Int32" Nullable="false" />
+    <Property Name="NUMERO_ORDEN" Type="Int16" Nullable="false" />
+    <Property Name="RUT_HUESPED" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="HUESPED" Relationship="Self.FK_HUESPED_DETALLE_ORDEN" FromRole="DETALLE_ORDEN" ToRole="HUESPED" />
+    <NavigationProperty Name="ORDEN_COMPRA" Relationship="Self.FK_ORDEN_DETALLE_ORDEN" FromRole="DETALLE_ORDEN" ToRole="ORDEN_COMPRA" />
+  </EntityType>
   <EntityType Name="DETALLE_PEDIDO">
     <Key>
       <PropertyRef Name="ID_DETALLE_PEDIDO" />
@@ -108,7 +118,7 @@
     <Property Name="ID_DETALLE_PEDIDO" Type="Int16" Nullable="false" />
     <Property Name="CANTIDAD" Type="Int32" Nullable="false" />
     <Property Name="NUMERO_PEDIDO" Type="Int16" />
-    <Property Name="ID_PRODUCTO" Type="Int16" Nullable="false" />
+    <Property Name="ID_PRODUCTO" Type="Int64" Nullable="false" />
     <NavigationProperty Name="PEDIDO" Relationship="Self.FK_DETALLE_PEDIDO_PEDIDO" FromRole="DETALLE_PEDIDO" ToRole="PEDIDO" />
     <NavigationProperty Name="PRODUCTO" Relationship="Self.FK_DETALLE_PEDIDO_PRODUCTO" FromRole="DETALLE_PEDIDO" ToRole="PRODUCTO" />
   </EntityType>
@@ -130,7 +140,7 @@
     </Key>
     <Property Name="ID_DETALLE_RECEPCION" Type="Int16" Nullable="false" />
     <Property Name="CANTIDAD" Type="Int32" Nullable="false" />
-    <Property Name="ID_PRODUCTO" Type="Int16" Nullable="false" />
+    <Property Name="ID_PRODUCTO" Type="Int64" Nullable="false" />
     <Property Name="NUMERO_RECEPCION" Type="Int16" Nullable="false" />
     <NavigationProperty Name="PRODUCTO" Relationship="Self.FK_DETALLE_RECEPCION_PRODUCTO" FromRole="DETALLE_RECEPCION" ToRole="PRODUCTO" />
     <NavigationProperty Name="RECEPCION" Relationship="Self.FK_DETALLE_RECEPCION_RECEPCION" FromRole="DETALLE_RECEPCION" ToRole="RECEPCION" />
@@ -207,8 +217,8 @@
     <Property Name="NUMERO_HABITACION" Type="Int16" />
     <Property Name="RUT_CLIENTE" Type="Int32" Nullable="false" />
     <NavigationProperty Name="CLIENTE" Relationship="Self.FK_HUESPED_CLIENTE" FromRole="HUESPED" ToRole="CLIENTE" />
+    <NavigationProperty Name="DETALLE_ORDEN" Relationship="Self.FK_HUESPED_DETALLE_ORDEN" FromRole="HUESPED" ToRole="DETALLE_ORDEN" />
     <NavigationProperty Name="HABITACION" Relationship="Self.FK_HUESPED_HABITACION" FromRole="HUESPED" ToRole="HABITACION" />
-    <NavigationProperty Name="DETALLE_ORDEN" Relationship="Hostal.FK_HUESPED_DETALLE_ORDEN" FromRole="HUESPED" ToRole="DETALLE_ORDEN" />
   </EntityType>
   <EntityType Name="ORDEN_COMPRA">
     <Key>
@@ -221,8 +231,8 @@
     <Property Name="RUT_EMPLEADO" Type="Int32" />
     <Property Name="RUT_CLIENTE" Type="Int32" />
     <NavigationProperty Name="CLIENTE" Relationship="Self.FK_ORDEN_COMPRA_CLIENTE" FromRole="ORDEN_COMPRA" ToRole="CLIENTE" />
+    <NavigationProperty Name="DETALLE_ORDEN" Relationship="Self.FK_ORDEN_DETALLE_ORDEN" FromRole="ORDEN_COMPRA" ToRole="DETALLE_ORDEN" />
     <NavigationProperty Name="EMPLEADO" Relationship="Self.FK_ORDEN_COMPRA_EMPLEADO" FromRole="ORDEN_COMPRA" ToRole="EMPLEADO" />
-    <NavigationProperty Name="DETALLE_ORDEN" Relationship="Hostal.FK_ORDEN_DETALLE_ORDEN" FromRole="ORDEN_COMPRA" ToRole="DETALLE_ORDEN" />
   </EntityType>
   <EntityType Name="PAIS">
     <Key>
@@ -275,20 +285,20 @@
     <Key>
       <PropertyRef Name="ID_PRODUCTO" />
     </Key>
-    <Property Name="ID_PRODUCTO" Type="Int16" Nullable="false" />
+    <Property Name="ID_PRODUCTO" Type="Int64" Nullable="false" />
     <Property Name="NOMBRE_PRODUCTO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="FECHA_VENCIMIENTO_PRODUCTO" Type="DateTime" Nullable="false" />
+    <Property Name="FECHA_VENCIMIENTO_PRODUCTO" Type="DateTime" />
     <Property Name="STOCK_PRODUCTO" Type="Int16" Nullable="false" />
     <Property Name="STOCK_CRITICO_PRODUCTO" Type="Int16" Nullable="false" />
     <Property Name="DESCRIPCION_PRODUCTO" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="PRECIO_PRODUCTO" Type="Int32" Nullable="false" />
     <Property Name="ID_FAMILIA" Type="Int16" Nullable="false" />
+    <Property Name="RUT_PROVEEDOR" Type="Int32" Nullable="false" />
+    <Property Name="ID_PRODUCTO_SEQ" Type="Int16" Nullable="false" />
     <NavigationProperty Name="DETALLE_PEDIDO" Relationship="Self.FK_DETALLE_PEDIDO_PRODUCTO" FromRole="PRODUCTO" ToRole="DETALLE_PEDIDO" />
     <NavigationProperty Name="DETALLE_RECEPCION" Relationship="Self.FK_DETALLE_RECEPCION_PRODUCTO" FromRole="PRODUCTO" ToRole="DETALLE_RECEPCION" />
     <NavigationProperty Name="FAMILIA" Relationship="Self.FK_PRODUCTO_FAMILIA" FromRole="PRODUCTO" ToRole="FAMILIA" />
-    <Property Name="RUT_PROVEEDOR" Type="Int32" Nullable="false" />
-    <Property Name="ID_PRODUCTO_SEQ" Type="Int16" Nullable="false" />
-    <NavigationProperty Name="PROVEEDOR" Relationship="Hostal.FK_PRODUCTO_PROVEEDOR" FromRole="PRODUCTO" ToRole="PROVEEDOR" />
+    <NavigationProperty Name="PROVEEDOR" Relationship="Self.FK_PRODUCTO_PROVEEDOR" FromRole="PRODUCTO" ToRole="PROVEEDOR" />
   </EntityType>
   <EntityType Name="PROVEEDOR">
     <Key>
@@ -303,10 +313,10 @@
     <Property Name="ID_TIPO_PROVEEDOR" Type="Int16" Nullable="false" />
     <Property Name="ID_USUARIO" Type="Int16" Nullable="false" />
     <NavigationProperty Name="PEDIDO" Relationship="Self.FK_PEDIDO_PROVEEDOR" FromRole="PROVEEDOR" ToRole="PEDIDO" />
+    <NavigationProperty Name="PRODUCTO" Relationship="Self.FK_PRODUCTO_PROVEEDOR" FromRole="PROVEEDOR" ToRole="PRODUCTO" />
     <NavigationProperty Name="TIPO_PROVEEDOR" Relationship="Self.FK_PROVEEDOR_TIPO_PROVEEDOR" FromRole="PROVEEDOR" ToRole="TIPO_PROVEEDOR" />
     <NavigationProperty Name="USUARIO" Relationship="Self.FK_PROVEEDOR_USUARIO" FromRole="PROVEEDOR" ToRole="USUARIO" />
     <NavigationProperty Name="RECEPCION" Relationship="Self.FK_RECEPCION_PROVEEDOR" FromRole="PROVEEDOR" ToRole="RECEPCION" />
-    <NavigationProperty Name="PRODUCTO" Relationship="Hostal.FK_PRODUCTO_PROVEEDOR" FromRole="PROVEEDOR" ToRole="PRODUCTO" />
   </EntityType>
   <EntityType Name="RECEPCION">
     <Key>
@@ -549,6 +559,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_HUESPED_DETALLE_ORDEN">
+    <End Role="HUESPED" Type="Self.HUESPED" Multiplicity="1" />
+    <End Role="DETALLE_ORDEN" Type="Self.DETALLE_ORDEN" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HUESPED">
+        <PropertyRef Name="RUT_HUESPED" />
+      </Principal>
+      <Dependent Role="DETALLE_ORDEN">
+        <PropertyRef Name="RUT_HUESPED" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ORDEN_DETALLE_ORDEN">
+    <End Role="ORDEN_COMPRA" Type="Self.ORDEN_COMPRA" Multiplicity="1" />
+    <End Role="DETALLE_ORDEN" Type="Self.DETALLE_ORDEN" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ORDEN_COMPRA">
+        <PropertyRef Name="NUMERO_ORDEN" />
+      </Principal>
+      <Dependent Role="DETALLE_ORDEN">
+        <PropertyRef Name="NUMERO_ORDEN" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_DETALLE_PEDIDO_PEDIDO">
     <End Role="PEDIDO" Type="Self.PEDIDO" Multiplicity="0..1" />
     <End Role="DETALLE_PEDIDO" Type="Self.DETALLE_PEDIDO" Multiplicity="*" />
@@ -777,6 +811,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_PRODUCTO_PROVEEDOR">
+    <End Role="PROVEEDOR" Type="Self.PROVEEDOR" Multiplicity="1" />
+    <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PROVEEDOR">
+        <PropertyRef Name="RUT_PROVEEDOR" />
+      </Principal>
+      <Dependent Role="PRODUCTO">
+        <PropertyRef Name="RUT_PROVEEDOR" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_PROVEEDOR_TIPO_PROVEEDOR">
     <End Role="TIPO_PROVEEDOR" Type="Self.TIPO_PROVEEDOR" Multiplicity="1" />
     <End Role="PROVEEDOR" Type="Self.PROVEEDOR" Multiplicity="*" />
@@ -822,6 +868,7 @@
     <EntitySet Name="DETALLE_ACCESORIOS" EntityType="Self.DETALLE_ACCESORIOS" />
     <EntitySet Name="DETALLE_BOLETA" EntityType="Self.DETALLE_BOLETA" />
     <EntitySet Name="DETALLE_FACTURA" EntityType="Self.DETALLE_FACTURA" />
+    <EntitySet Name="DETALLE_ORDEN" EntityType="Self.DETALLE_ORDEN" />
     <EntitySet Name="DETALLE_PEDIDO" EntityType="Self.DETALLE_PEDIDO" />
     <EntitySet Name="DETALLE_PLATOS" EntityType="Self.DETALLE_PLATOS" />
     <EntitySet Name="DETALLE_RECEPCION" EntityType="Self.DETALLE_RECEPCION" />
@@ -903,6 +950,14 @@
       <End Role="FACTURA" EntitySet="FACTURA" />
       <End Role="DETALLE_FACTURA" EntitySet="DETALLE_FACTURA" />
     </AssociationSet>
+    <AssociationSet Name="FK_HUESPED_DETALLE_ORDEN" Association="Self.FK_HUESPED_DETALLE_ORDEN">
+      <End Role="HUESPED" EntitySet="HUESPED" />
+      <End Role="DETALLE_ORDEN" EntitySet="DETALLE_ORDEN" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ORDEN_DETALLE_ORDEN" Association="Self.FK_ORDEN_DETALLE_ORDEN">
+      <End Role="ORDEN_COMPRA" EntitySet="ORDEN_COMPRA" />
+      <End Role="DETALLE_ORDEN" EntitySet="DETALLE_ORDEN" />
+    </AssociationSet>
     <AssociationSet Name="FK_DETALLE_PEDIDO_PEDIDO" Association="Self.FK_DETALLE_PEDIDO_PEDIDO">
       <End Role="PEDIDO" EntitySet="PEDIDO" />
       <End Role="DETALLE_PEDIDO" EntitySet="DETALLE_PEDIDO" />
@@ -979,6 +1034,10 @@
       <End Role="TIPO_PLATO" EntitySet="TIPO_PLATO" />
       <End Role="PLATO" EntitySet="PLATO" />
     </AssociationSet>
+    <AssociationSet Name="FK_PRODUCTO_PROVEEDOR" Association="Self.FK_PRODUCTO_PROVEEDOR">
+      <End Role="PROVEEDOR" EntitySet="PROVEEDOR" />
+      <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+    </AssociationSet>
     <AssociationSet Name="FK_PROVEEDOR_TIPO_PROVEEDOR" Association="Self.FK_PROVEEDOR_TIPO_PROVEEDOR">
       <End Role="TIPO_PROVEEDOR" EntitySet="TIPO_PROVEEDOR" />
       <End Role="PROVEEDOR" EntitySet="PROVEEDOR" />
@@ -991,64 +1050,5 @@
       <End Role="PROVEEDOR" EntitySet="PROVEEDOR" />
       <End Role="RECEPCION" EntitySet="RECEPCION" />
     </AssociationSet>
-    <EntitySet Name="DETALLE_ORDEN" EntityType="Hostal.DETALLE_ORDEN" />
-    <AssociationSet Name="FK_HUESPED_DETALLE_ORDEN" Association="Hostal.FK_HUESPED_DETALLE_ORDEN">
-      <End Role="HUESPED" EntitySet="HUESPED" />
-      <End Role="DETALLE_ORDEN" EntitySet="DETALLE_ORDEN" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ORDEN_DETALLE_ORDEN" Association="Hostal.FK_ORDEN_DETALLE_ORDEN">
-      <End Role="ORDEN_COMPRA" EntitySet="ORDEN_COMPRA" />
-      <End Role="DETALLE_ORDEN" EntitySet="DETALLE_ORDEN" />
-    </AssociationSet>
-    <AssociationSet Name="FK_PRODUCTO_PROVEEDOR" Association="Hostal.FK_PRODUCTO_PROVEEDOR">
-      <End Role="PROVEEDOR" EntitySet="PROVEEDOR" />
-      <End Role="PRODUCTO" EntitySet="PRODUCTO" />
-    </AssociationSet>
   </EntityContainer>
-  <EntityType Name="DETALLE_ORDEN">
-    <Key>
-      <PropertyRef Name="ID_DETALLE" />
-    </Key>
-    <Property Name="ID_DETALLE" Type="Int32" Nullable="false" />
-    <Property Name="NUMERO_ORDEN" Type="Int16" Nullable="false" />
-    <Property Name="RUT_HUESPED" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="HUESPED" Relationship="Hostal.FK_HUESPED_DETALLE_ORDEN" FromRole="DETALLE_ORDEN" ToRole="HUESPED" />
-    <NavigationProperty Name="ORDEN_COMPRA" Relationship="Hostal.FK_ORDEN_DETALLE_ORDEN" FromRole="DETALLE_ORDEN" ToRole="ORDEN_COMPRA" />
-  </EntityType>
-  <Association Name="FK_HUESPED_DETALLE_ORDEN">
-    <End Type="Hostal.HUESPED" Role="HUESPED" Multiplicity="1" />
-    <End Type="Hostal.DETALLE_ORDEN" Role="DETALLE_ORDEN" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="HUESPED">
-        <PropertyRef Name="RUT_HUESPED" />
-      </Principal>
-      <Dependent Role="DETALLE_ORDEN">
-        <PropertyRef Name="RUT_HUESPED" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_ORDEN_DETALLE_ORDEN">
-    <End Type="Hostal.ORDEN_COMPRA" Role="ORDEN_COMPRA" Multiplicity="1" />
-    <End Type="Hostal.DETALLE_ORDEN" Role="DETALLE_ORDEN" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ORDEN_COMPRA">
-        <PropertyRef Name="NUMERO_ORDEN" />
-      </Principal>
-      <Dependent Role="DETALLE_ORDEN">
-        <PropertyRef Name="NUMERO_ORDEN" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_PRODUCTO_PROVEEDOR">
-    <End Type="Hostal.PROVEEDOR" Role="PROVEEDOR" Multiplicity="1" />
-    <End Type="Hostal.PRODUCTO" Role="PRODUCTO" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="PROVEEDOR">
-        <PropertyRef Name="RUT_PROVEEDOR" />
-      </Principal>
-      <Dependent Role="PRODUCTO">
-        <PropertyRef Name="RUT_PROVEEDOR" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
 </Schema>

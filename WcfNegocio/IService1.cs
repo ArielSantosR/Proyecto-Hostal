@@ -60,6 +60,9 @@ namespace WcfNegocio
         bool ExisteRutE(string empleado);
 
         [OperationContract]
+        Empleado buscarIDE (string empleado);
+
+        [OperationContract]
         bool RegistroEmpleado(string empleado);
         //CRUD Proveedor
         [OperationContract]
@@ -108,6 +111,9 @@ namespace WcfNegocio
 
         [OperationContract]
         bool EliminarProducto(string producto);
+
+        [OperationContract]
+        string ListarProveedorProducto(string producto);
 
         //CRUD Plato
         [OperationContract]
@@ -160,8 +166,12 @@ namespace WcfNegocio
         [OperationContract]
         TipoProveedor ObtenerTipoProveedor(string tipoProveedor);
 
+        //CRUD Pedido
+        [OperationContract]
+        bool AgregarPedido(string pedido);
 
-
+        [OperationContract]
+        bool AgregarDetallePedido(string detalle);
 
         //DDL
         [OperationContract]

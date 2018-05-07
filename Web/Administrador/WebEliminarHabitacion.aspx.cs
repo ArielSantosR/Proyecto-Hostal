@@ -41,6 +41,7 @@ namespace Web.Administrador
             error.Text = "";
             alerta.Visible = false;
 
+
             if (!IsPostBack)
             {
                 if (MiSesionH.NUMERO_HABITACION != 0)

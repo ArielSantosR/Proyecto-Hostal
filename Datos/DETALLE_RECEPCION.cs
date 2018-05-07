@@ -16,7 +16,7 @@ namespace Datos
     {
         public short ID_DETALLE_RECEPCION { get; set; }
         public int CANTIDAD { get; set; }
-        public short ID_PRODUCTO { get; set; }
+        public long ID_PRODUCTO { get; set; }
         public short NUMERO_RECEPCION { get; set; }
     
         public virtual PRODUCTO PRODUCTO { get; set; }

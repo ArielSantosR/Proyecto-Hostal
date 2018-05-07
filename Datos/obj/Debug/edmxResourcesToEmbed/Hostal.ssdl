@@ -779,6 +779,12 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="FN_PRODUCTO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="HOSTAL" ReturnType="number">
+    <Parameter Name="P_ID_PROVEEDOR" Type="number" Mode="In" />
+    <Parameter Name="P_ID_FAMILIA" Type="number" Mode="In" />
+    <Parameter Name="P_FECHA_VENCIMIENTO" Type="date" Mode="In" />
+    <Parameter Name="P_ID_PRODUCTO_S" Type="number" Mode="In" />
+  </Function>
   <EntityContainer Name="HostalStoreContainer">
     <EntitySet Name="ACCESORIO" EntityType="Self.ACCESORIO" Schema="HOSTAL" store:Type="Tables" />
     <EntitySet Name="BOLETA" EntityType="Self.BOLETA" Schema="HOSTAL" store:Type="Tables" />

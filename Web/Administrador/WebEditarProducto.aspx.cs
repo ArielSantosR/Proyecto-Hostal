@@ -74,6 +74,8 @@ namespace Web.Administrador
             exito.Text = "";
             alerta_exito.Visible = false;
             alerta.Visible = false;
+            btnLimpiar.CausesValidation = false;
+            btnLimpiar.UseSubmitBehavior = false;
 
             //Cargando DDL Familia
             Service1 service = new Service1();

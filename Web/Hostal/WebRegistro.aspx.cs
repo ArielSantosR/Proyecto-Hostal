@@ -17,6 +17,9 @@ namespace Web
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            btnLimpiar.CausesValidation = false;
+            btnLimpiar.UseSubmitBehavior = false;
+
             error.Text = "";
             //ddlComuna.Enabled = false;
             //ddlRegion.Enabled = false;

@@ -44,6 +44,11 @@ namespace Datos
             return lista;
         }
 
+        public List<PROVEEDOR> ListarProveedorProducto(PRODUCTO p)
+        {
+            return (from a in ent.PROVEEDOR where a.RUT_PROVEEDOR.Equals(p.RUT_PROVEEDOR) select a).ToList();
+        }
+
         //TIPO PROVEEDOR
 
 
