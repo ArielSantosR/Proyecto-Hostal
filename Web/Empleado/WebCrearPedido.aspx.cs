@@ -103,6 +103,7 @@ namespace Web.Empleado
                                 pedido.ESTADO_PEDIDO = "Pendiente";
                                 pedido.RUT_EMPLEADO = empleado2.RUT_EMPLEADO;
                                 pedido.RUT_PROVEEDOR = int.Parse(ddlRut.SelectedValue);
+                                pedido.ESTADO_DESPACHO = "Pendiente";
 
                                 Modelo.DetallePedido detalle = new Modelo.DetallePedido();
                                 detalle.CANTIDAD = cantidad;

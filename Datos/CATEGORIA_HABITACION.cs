@@ -12,18 +12,17 @@ namespace Datos
     using System;
     using System.Collections.Generic;
     
-    public partial class ACCESORIO
+    public partial class CATEGORIA_HABITACION
     {
-        public ACCESORIO()
+        public CATEGORIA_HABITACION()
         {
-            this.DETALLE_ACCESORIOS = new HashSet<DETALLE_ACCESORIOS>();
+            this.HABITACION = new HashSet<HABITACION>();
         }
     
-        public short ID_ACCESORIO { get; set; }
-        public string NOMBRE_ACCESORIO { get; set; }
-        public Nullable<int> PRECIO { get; set; }
-        public Nullable<short> CANTIDAD { get; set; }
+        public short ID_CATEGORIA_HABITACION { get; set; }
+        public string NOMBRE_CATEGORIA { get; set; }
+        public int PRECIO_CATEGORIA { get; set; }
     
-        public virtual ICollection<DETALLE_ACCESORIOS> DETALLE_ACCESORIOS { get; set; }
+        public virtual ICollection<HABITACION> HABITACION { get; set; }
     }
 }

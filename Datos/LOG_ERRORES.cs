@@ -12,14 +12,10 @@ namespace Datos
     using System;
     using System.Collections.Generic;
     
-    public partial class DETALLE_ACCESORIOS
+    public partial class LOG_ERRORES
     {
-        public short ID_DETALLE_ACCESORIO { get; set; }
-        public short ID_ACCESORIO { get; set; }
-        public short NUMERO_HABITACION { get; set; }
-        public short CANTIDAD { get; set; }
-    
-        public virtual ACCESORIO ACCESORIO { get; set; }
-        public virtual HABITACION HABITACION { get; set; }
+        public int ID_ERROR { get; set; }
+        public string NUMERO_ERROR { get; set; }
+        public string MENSAJE { get; set; }
     }
 }

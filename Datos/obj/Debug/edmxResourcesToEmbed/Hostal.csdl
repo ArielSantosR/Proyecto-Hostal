@@ -1,15 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="Hostal" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-  <EntityType Name="ACCESORIO">
-    <Key>
-      <PropertyRef Name="ID_ACCESORIO" />
-    </Key>
-    <Property Name="ID_ACCESORIO" Type="Int16" Nullable="false" />
-    <Property Name="NOMBRE_ACCESORIO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="PRECIO" Type="Int32" />
-    <Property Name="CANTIDAD" Type="Int16" />
-    <NavigationProperty Name="DETALLE_ACCESORIOS" Relationship="Self.FK_DETALLE_ACCESORIOS_ACC" FromRole="ACCESORIO" ToRole="DETALLE_ACCESORIOS" />
-  </EntityType>
   <EntityType Name="BOLETA">
     <Key>
       <PropertyRef Name="ID_BOLETA" />
@@ -62,18 +52,6 @@
     <Property Name="ID_REGION" Type="Int16" Nullable="false" />
     <NavigationProperty Name="CLIENTE" Relationship="Self.FK_CLIENTE_COMUNA" FromRole="COMUNA" ToRole="CLIENTE" />
     <NavigationProperty Name="REGION" Relationship="Self.FK_COMUNA_REGION" FromRole="COMUNA" ToRole="REGION" />
-  </EntityType>
-  <EntityType Name="DETALLE_ACCESORIOS">
-    <Key>
-      <PropertyRef Name="ID_DETALLE_ACCESORIO" />
-      <PropertyRef Name="NUMERO_HABITACION" />
-    </Key>
-    <Property Name="ID_DETALLE_ACCESORIO" Type="Int16" Nullable="false" />
-    <Property Name="ID_ACCESORIO" Type="Int16" Nullable="false" />
-    <Property Name="NUMERO_HABITACION" Type="Int16" Nullable="false" />
-    <Property Name="CANTIDAD" Type="Int16" Nullable="false" />
-    <NavigationProperty Name="ACCESORIO" Relationship="Self.FK_DETALLE_ACCESORIOS_ACC" FromRole="DETALLE_ACCESORIOS" ToRole="ACCESORIO" />
-    <NavigationProperty Name="HABITACION" Relationship="Self.FK_DETALLE_ACCESORIOS_HAB" FromRole="DETALLE_ACCESORIOS" ToRole="HABITACION" />
   </EntityType>
   <EntityType Name="DETALLE_BOLETA">
     <Key>
@@ -197,10 +175,11 @@
     <Property Name="ID_TIPO_HABITACION" Type="Int16" Nullable="false" />
     <Property Name="RUT_CLIENTE" Type="Int32" />
     <NavigationProperty Name="CLIENTE" Relationship="Self.FK_HABITACION_CLIENTE" FromRole="HABITACION" ToRole="CLIENTE" />
-    <NavigationProperty Name="DETALLE_ACCESORIOS" Relationship="Self.FK_DETALLE_ACCESORIOS_HAB" FromRole="HABITACION" ToRole="DETALLE_ACCESORIOS" />
     <NavigationProperty Name="TIPO_HABITACION" Relationship="Self.FK_HABITACION_TIPO_HABITACION" FromRole="HABITACION" ToRole="TIPO_HABITACION" />
     <NavigationProperty Name="HUESPED" Relationship="Self.FK_HUESPED_HABITACION" FromRole="HABITACION" ToRole="HUESPED" />
     <NavigationProperty Name="PENSION" Relationship="Self.FK_PENSION_HABITACION" FromRole="HABITACION" ToRole="PENSION" />
+    <Property Name="ID_CATEGORIA_HABITACION" Type="Int16" Nullable="false" />
+    <NavigationProperty Name="CATEGORIA_HABITACION" Relationship="Hostal.FK_HABITACION_CATEGORIA_HAB" FromRole="HABITACION" ToRole="CATEGORIA_HABITACION" />
   </EntityType>
   <EntityType Name="HUESPED">
     <Key>
@@ -256,6 +235,8 @@
     <NavigationProperty Name="EMPLEADO" Relationship="Self.FK_PEDIDO_EMPLEADO" FromRole="PEDIDO" ToRole="EMPLEADO" />
     <NavigationProperty Name="PROVEEDOR" Relationship="Self.FK_PEDIDO_PROVEEDOR" FromRole="PEDIDO" ToRole="PROVEEDOR" />
     <NavigationProperty Name="RECEPCION" Relationship="Self.FK_PEDIDO_RECEPCION" FromRole="PEDIDO" ToRole="RECEPCION" />
+    <Property Name="ESTADO_DESPACHO" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="COMENTARIO" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="PENSION">
     <Key>
@@ -349,6 +330,7 @@
     <Property Name="NOMBRE_TIPO_HABITACION" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="CANTIDAD_PASAJERO" Type="Int16" Nullable="false" />
     <NavigationProperty Name="HABITACION" Relationship="Self.FK_HABITACION_TIPO_HABITACION" FromRole="TIPO_HABITACION" ToRole="HABITACION" />
+    <Property Name="PRECIO_TIPO" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="TIPO_PLATO">
     <Key>
@@ -378,19 +360,8 @@
     <NavigationProperty Name="CLIENTE" Relationship="Self.FK_CLIENTE_USUARIO" FromRole="USUARIO" ToRole="CLIENTE" />
     <NavigationProperty Name="EMPLEADO" Relationship="Self.FK_EMPLEADO_USUARIO" FromRole="USUARIO" ToRole="EMPLEADO" />
     <NavigationProperty Name="PROVEEDOR" Relationship="Self.FK_PROVEEDOR_USUARIO" FromRole="USUARIO" ToRole="PROVEEDOR" />
+    <NavigationProperty Name="NOTIFICACION" Relationship="Hostal.FK_NOTIFICACION_USUARIO" FromRole="USUARIO" ToRole="NOTIFICACION" />
   </EntityType>
-  <Association Name="FK_DETALLE_ACCESORIOS_ACC">
-    <End Role="ACCESORIO" Type="Self.ACCESORIO" Multiplicity="1" />
-    <End Role="DETALLE_ACCESORIOS" Type="Self.DETALLE_ACCESORIOS" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ACCESORIO">
-        <PropertyRef Name="ID_ACCESORIO" />
-      </Principal>
-      <Dependent Role="DETALLE_ACCESORIOS">
-        <PropertyRef Name="ID_ACCESORIO" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_BOLETA_CLIENTE">
     <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="0..1" />
     <End Role="BOLETA" Type="Self.BOLETA" Multiplicity="*" />
@@ -532,18 +503,6 @@
       </Principal>
       <Dependent Role="COMUNA">
         <PropertyRef Name="ID_REGION" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_DETALLE_ACCESORIOS_HAB">
-    <End Role="HABITACION" Type="Self.HABITACION" Multiplicity="1" />
-    <End Role="DETALLE_ACCESORIOS" Type="Self.DETALLE_ACCESORIOS" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="HABITACION">
-        <PropertyRef Name="NUMERO_HABITACION" />
-      </Principal>
-      <Dependent Role="DETALLE_ACCESORIOS">
-        <PropertyRef Name="NUMERO_HABITACION" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -860,12 +819,10 @@
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="HostalEntities" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="ACCESORIO" EntityType="Self.ACCESORIO" />
     <EntitySet Name="BOLETA" EntityType="Self.BOLETA" />
     <EntitySet Name="CATEGORIA" EntityType="Self.CATEGORIA" />
     <EntitySet Name="CLIENTE" EntityType="Self.CLIENTE" />
     <EntitySet Name="COMUNA" EntityType="Self.COMUNA" />
-    <EntitySet Name="DETALLE_ACCESORIOS" EntityType="Self.DETALLE_ACCESORIOS" />
     <EntitySet Name="DETALLE_BOLETA" EntityType="Self.DETALLE_BOLETA" />
     <EntitySet Name="DETALLE_FACTURA" EntityType="Self.DETALLE_FACTURA" />
     <EntitySet Name="DETALLE_ORDEN" EntityType="Self.DETALLE_ORDEN" />
@@ -890,10 +847,6 @@
     <EntitySet Name="TIPO_PLATO" EntityType="Self.TIPO_PLATO" />
     <EntitySet Name="TIPO_PROVEEDOR" EntityType="Self.TIPO_PROVEEDOR" />
     <EntitySet Name="USUARIO" EntityType="Self.USUARIO" />
-    <AssociationSet Name="FK_DETALLE_ACCESORIOS_ACC" Association="Self.FK_DETALLE_ACCESORIOS_ACC">
-      <End Role="ACCESORIO" EntitySet="ACCESORIO" />
-      <End Role="DETALLE_ACCESORIOS" EntitySet="DETALLE_ACCESORIOS" />
-    </AssociationSet>
     <AssociationSet Name="FK_BOLETA_CLIENTE" Association="Self.FK_BOLETA_CLIENTE">
       <End Role="CLIENTE" EntitySet="CLIENTE" />
       <End Role="BOLETA" EntitySet="BOLETA" />
@@ -941,10 +894,6 @@
     <AssociationSet Name="FK_COMUNA_REGION" Association="Self.FK_COMUNA_REGION">
       <End Role="REGION" EntitySet="REGION" />
       <End Role="COMUNA" EntitySet="COMUNA" />
-    </AssociationSet>
-    <AssociationSet Name="FK_DETALLE_ACCESORIOS_HAB" Association="Self.FK_DETALLE_ACCESORIOS_HAB">
-      <End Role="HABITACION" EntitySet="HABITACION" />
-      <End Role="DETALLE_ACCESORIOS" EntitySet="DETALLE_ACCESORIOS" />
     </AssociationSet>
     <AssociationSet Name="FK_DETALLE_FACTURA_FACTURA" Association="Self.FK_DETALLE_FACTURA_FACTURA">
       <End Role="FACTURA" EntitySet="FACTURA" />
@@ -1050,5 +999,66 @@
       <End Role="PROVEEDOR" EntitySet="PROVEEDOR" />
       <End Role="RECEPCION" EntitySet="RECEPCION" />
     </AssociationSet>
+    <EntitySet Name="CATEGORIA_HABITACION" EntityType="Hostal.CATEGORIA_HABITACION" />
+    <EntitySet Name="LOG_ERRORES" EntityType="Hostal.LOG_ERRORES" />
+    <EntitySet Name="NOTIFICACION" EntityType="Hostal.NOTIFICACION" />
+    <AssociationSet Name="FK_HABITACION_CATEGORIA_HAB" Association="Hostal.FK_HABITACION_CATEGORIA_HAB">
+      <End Role="CATEGORIA_HABITACION" EntitySet="CATEGORIA_HABITACION" />
+      <End Role="HABITACION" EntitySet="HABITACION" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NOTIFICACION_USUARIO" Association="Hostal.FK_NOTIFICACION_USUARIO">
+      <End Role="USUARIO" EntitySet="USUARIO" />
+      <End Role="NOTIFICACION" EntitySet="NOTIFICACION" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="CATEGORIA_HABITACION">
+    <Key>
+      <PropertyRef Name="ID_CATEGORIA_HABITACION" />
+    </Key>
+    <Property Name="ID_CATEGORIA_HABITACION" Type="Int16" Nullable="false" />
+    <Property Name="NOMBRE_CATEGORIA" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="PRECIO_CATEGORIA" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="HABITACION" Relationship="Hostal.FK_HABITACION_CATEGORIA_HAB" FromRole="CATEGORIA_HABITACION" ToRole="HABITACION" />
+  </EntityType>
+  <EntityType Name="LOG_ERRORES">
+    <Key>
+      <PropertyRef Name="ID_ERROR" />
+    </Key>
+    <Property Name="ID_ERROR" Type="Int32" Nullable="false" />
+    <Property Name="NUMERO_ERROR" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="MENSAJE" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="NOTIFICACION">
+    <Key>
+      <PropertyRef Name="ID_NOTIFICACION" />
+    </Key>
+    <Property Name="ID_NOTIFICACION" Type="Int32" Nullable="false" />
+    <Property Name="MENSAJE" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="ID_USUARIO" Type="Int16" Nullable="false" />
+    <NavigationProperty Name="USUARIO" Relationship="Hostal.FK_NOTIFICACION_USUARIO" FromRole="NOTIFICACION" ToRole="USUARIO" />
+  </EntityType>
+  <Association Name="FK_HABITACION_CATEGORIA_HAB">
+    <End Type="Hostal.CATEGORIA_HABITACION" Role="CATEGORIA_HABITACION" Multiplicity="1" />
+    <End Type="Hostal.HABITACION" Role="HABITACION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CATEGORIA_HABITACION">
+        <PropertyRef Name="ID_CATEGORIA_HABITACION" />
+      </Principal>
+      <Dependent Role="HABITACION">
+        <PropertyRef Name="ID_CATEGORIA_HABITACION" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NOTIFICACION_USUARIO">
+    <End Type="Hostal.USUARIO" Role="USUARIO" Multiplicity="1" />
+    <End Type="Hostal.NOTIFICACION" Role="NOTIFICACION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USUARIO">
+        <PropertyRef Name="ID_USUARIO" />
+      </Principal>
+      <Dependent Role="NOTIFICACION">
+        <PropertyRef Name="ID_USUARIO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

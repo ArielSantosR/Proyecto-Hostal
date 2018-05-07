@@ -15,5 +15,7 @@ namespace Modelo
         public int RUT_EMPLEADO { get; set; }
         public Nullable<short> NUMERO_RECEPCION { get; set; }
         public int RUT_PROVEEDOR { get; set; }
+        public string ESTADO_DESPACHO { get; set; }
+        public string COMENTARIO { get; set; }
     }
 }

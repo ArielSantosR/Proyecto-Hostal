@@ -1049,6 +1049,7 @@ namespace WcfNegocio
             pDatos.ESTADO_PEDIDO = p.ESTADO_PEDIDO;
             pDatos.RUT_EMPLEADO = p.RUT_EMPLEADO;
             pDatos.RUT_PROVEEDOR = p.RUT_PROVEEDOR;
+            pDatos.ESTADO_DESPACHO = p.ESTADO_DESPACHO;
 
             return servicio.AgregarPedido(pDatos);
         }

@@ -12,18 +12,12 @@ namespace Datos
     using System;
     using System.Collections.Generic;
     
-    public partial class TIPO_HABITACION
+    public partial class NOTIFICACION
     {
-        public TIPO_HABITACION()
-        {
-            this.HABITACION = new HashSet<HABITACION>();
-        }
+        public int ID_NOTIFICACION { get; set; }
+        public string MENSAJE { get; set; }
+        public short ID_USUARIO { get; set; }
     
-        public short ID_TIPO_HABITACION { get; set; }
-        public string NOMBRE_TIPO_HABITACION { get; set; }
-        public short CANTIDAD_PASAJERO { get; set; }
-        public int PRECIO_TIPO { get; set; }
-    
-        public virtual ICollection<HABITACION> HABITACION { get; set; }
+        public virtual USUARIO USUARIO { get; set; }
     }
 }

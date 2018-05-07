@@ -49,22 +49,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ACCESORIO.cs">
-      <DependentUpon>Hostal.tt</DependentUpon>
-    </Compile>
     <Compile Include="BOLETA.cs">
       <DependentUpon>Hostal.tt</DependentUpon>
     </Compile>
     <Compile Include="CATEGORIA.cs">
       <DependentUpon>Hostal.tt</DependentUpon>
     </Compile>
+    <Compile Include="CATEGORIA_HABITACION.cs">
+      <DependentUpon>Hostal.tt</DependentUpon>
+    </Compile>
     <Compile Include="CLIENTE.cs">
       <DependentUpon>Hostal.tt</DependentUpon>
     </Compile>
     <Compile Include="COMUNA.cs">
-      <DependentUpon>Hostal.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DETALLE_ACCESORIOS.cs">
       <DependentUpon>Hostal.tt</DependentUpon>
     </Compile>
     <Compile Include="DETALLE_BOLETA.cs">
@@ -113,6 +110,12 @@
       <DependentUpon>Hostal.edmx</DependentUpon>
     </Compile>
     <Compile Include="HUESPED.cs">
+      <DependentUpon>Hostal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LOG_ERRORES.cs">
+      <DependentUpon>Hostal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NOTIFICACION.cs">
       <DependentUpon>Hostal.tt</DependentUpon>
     </Compile>
     <Compile Include="ORDEN_COMPRA.cs">

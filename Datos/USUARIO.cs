@@ -19,6 +19,7 @@ namespace Datos
             this.CLIENTE = new HashSet<CLIENTE>();
             this.EMPLEADO = new HashSet<EMPLEADO>();
             this.PROVEEDOR = new HashSet<PROVEEDOR>();
+            this.NOTIFICACION = new HashSet<NOTIFICACION>();
         }
     
         public short ID_USUARIO { get; set; }
@@ -30,5 +31,6 @@ namespace Datos
         public virtual ICollection<CLIENTE> CLIENTE { get; set; }
         public virtual ICollection<EMPLEADO> EMPLEADO { get; set; }
         public virtual ICollection<PROVEEDOR> PROVEEDOR { get; set; }
+        public virtual ICollection<NOTIFICACION> NOTIFICACION { get; set; }
     }
 }
