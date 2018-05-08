@@ -17,6 +17,11 @@ namespace Datos
             return true;
         }
 
+        public List<PRODUCTO> ListarProveedorProducto(PROVEEDOR p)
+        {
+            return (from a in ent.PRODUCTO where a.RUT_PROVEEDOR.Equals(p.RUT_PROVEEDOR) select a).ToList();
+        }
+
         public List<PRODUCTO> ListarProducto()
         {
             return ent.PRODUCTO.ToList<PRODUCTO>();

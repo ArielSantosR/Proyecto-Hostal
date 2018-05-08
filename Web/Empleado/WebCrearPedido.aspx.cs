@@ -50,24 +50,50 @@ namespace Web.Empleado
             btnLimpiar.CausesValidation = false;
             btnLimpiar.UseSubmitBehavior = false;
 
-            //Cargando DDL Producto
+            //Cargando DDL Rut
             Service1 service = new Service1();
-            string producto = service.ListarProducto();
-            XmlSerializer ser = new XmlSerializer(typeof(Modelo.ProductoCollection));
-            StringReader reader = new StringReader(producto);
-            Modelo.ProductoCollection coleccionProducto = (Modelo.ProductoCollection)ser.Deserialize(reader);
-            reader.Close();
+
+            string proveedor = service.ListarProveedor();
+            XmlSerializer ser2 = new XmlSerializer(typeof(Modelo.ProveedorCollection2));
+            StringReader reader2 = new StringReader(proveedor);
+            Modelo.ProveedorCollection2 coleccionProveedor = (Modelo.ProveedorCollection2)ser2.Deserialize(reader2);
+            reader2.Close();
 
             txtPrecio.ReadOnly = true;
 
             if (!IsPostBack)
             {
+                ddlRut.DataSource = coleccionProveedor;
+                ddlRut.DataTextField = "RUT_PROVEEDOR";
+                ddlRut.DataValueField = "RUT_PROVEEDOR";
+                ddlRut.DataBind();
+
+                ddlRut.SelectedIndex = 0;
+
+                //segun el valor seleccionado en el anterior DDL, hara una busqueda para cargar
+                //todos los datos
+                Modelo.Proveedor proveedor2 = new Modelo.Proveedor();
+                proveedor2.RUT_PROVEEDOR = int.Parse(ddlRut.SelectedValue);
+
+                XmlSerializer sr = new XmlSerializer(typeof(Modelo.Proveedor));
+                StringWriter writer = new StringWriter();
+                sr.Serialize(writer, proveedor2);
+
+                //Ya con los datos, al fin puede hacer una busqueda en Cascada en el DDL
+
+                string productos = service.ListarProductosProveedor(writer.ToString());
+                XmlSerializer ser = new XmlSerializer(typeof(Modelo.ProductoCollection));
+                StringReader reader = new StringReader(productos);
+                Modelo.ProductoCollection coleccionProducto = (Modelo.ProductoCollection)ser.Deserialize(reader);
+                reader.Close();
+
                 ddlProducto.DataSource = coleccionProducto;
                 ddlProducto.DataTextField = "NombreYPrecio";
                 ddlProducto.DataValueField = "ID_PRODUCTO";
                 ddlProducto.DataBind();
 
-                ddlRut.Enabled = false;
+                //Para funcionar requiere que el update panel tenga el Modo Condicional
+                UpdatePanel2.Update();
             }
         }
 
@@ -195,41 +221,32 @@ namespace Web.Empleado
 
         protected void ddlProducto_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //Primero activa el DDL desactivado
-            ddlRut.Enabled = true;
-
             Service1 service = new Service1();
             //segun el valor seleccionado en el anterior DDL, hara una busqueda para cargar
             //todos los datos
-            Modelo.Producto producto = new Modelo.Producto();
-            producto.ID_PRODUCTO = long.Parse(ddlProducto.SelectedValue);
+            Modelo.Proveedor proveedor2 = new Modelo.Proveedor();
+            proveedor2.RUT_PROVEEDOR = int.Parse(ddlRut.SelectedValue);
 
-            XmlSerializer sr = new XmlSerializer(typeof(Modelo.Producto));
+            XmlSerializer sr = new XmlSerializer(typeof(Modelo.Proveedor));
             StringWriter writer = new StringWriter();
-            sr.Serialize(writer, producto);
-
-            //Una vez encuentra sus datos los carga en una segunda variable
-            Producto producto2 = service.ObtenerProducto(writer.ToString());
-
-            XmlSerializer sr2 = new XmlSerializer(typeof(Modelo.Producto));
-            StringWriter writer2 = new StringWriter();
-            sr.Serialize(writer2, producto2);
+            sr.Serialize(writer, proveedor2);
 
             //Ya con los datos, al fin puede hacer una busqueda en Cascada en el DDL
 
-            string proveedor = service.ListarProveedorProducto(writer2.ToString());
-            XmlSerializer ser2 = new XmlSerializer(typeof(Modelo.ProveedorCollection2));
-            StringReader reader2 = new StringReader(proveedor);
-            Modelo.ProveedorCollection2 coleccionProveedor = (Modelo.ProveedorCollection2)ser2.Deserialize(reader2);
-            reader2.Close();
+            string productos = service.ListarProductosProveedor(writer.ToString());
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.ProductoCollection));
+            StringReader reader = new StringReader(productos);
+            Modelo.ProductoCollection coleccionProducto = (Modelo.ProductoCollection)ser.Deserialize(reader);
+            reader.Close();
 
-            Modelo.ProveedorCollection2 coleccionProveedor2 = coleccionProveedor;
-            ddlRut.DataSource = coleccionProveedor;
-            ddlRut.DataTextField = "RUT_PROVEEDOR";
-            ddlRut.DataValueField = "RUT_PROVEEDOR";
-            ddlRut.DataBind();
+            ddlProducto.DataSource = coleccionProducto;
+            ddlProducto.DataTextField = "NombreYPrecio";
+            ddlProducto.DataValueField = "ID_PRODUCTO";
+            ddlProducto.DataBind();
 
             //Para funcionar requiere que el update panel tenga el Modo Condicional
+            txtCantidad.Text = "";
+            txtPrecio.Text = "";
             UpdatePanel2.Update();
         }
 

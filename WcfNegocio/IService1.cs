@@ -74,6 +74,9 @@ namespace WcfNegocio
         [OperationContract]
         string ListarProveedor();
 
+        [OperationContract]
+        string ListarProductosProveedor(string proveedor);
+
         //CRUD Habitacion
         [OperationContract]
         bool AgregarHabitacion(string habitacion);

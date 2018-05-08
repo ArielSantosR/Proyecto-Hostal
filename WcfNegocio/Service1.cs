@@ -454,6 +454,48 @@ namespace WcfNegocio
             return writer.ToString();
         }
 
+        public string ListarProductosProveedor(string proveedor)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.Proveedor));
+            StringReader reader = new StringReader(proveedor);
+            Modelo.Proveedor p = (Modelo.Proveedor)ser.Deserialize(reader);
+            ServicioProducto serv = new ServicioProducto();
+
+            Datos.PROVEEDOR pDatos = new Datos.PROVEEDOR();
+            pDatos.RUT_PROVEEDOR = p.RUT_PROVEEDOR;
+
+            List<Datos.PRODUCTO> listaProducto = serv.ListarProveedorProducto(pDatos);
+
+            if (listaProducto == null)
+            {
+                return null;
+            }
+            else
+            {
+                XmlSerializer servicio = new XmlSerializer(typeof(Modelo.Producto));
+                Modelo.ProductoCollection listaProducto2 = new Modelo.ProductoCollection();
+
+                foreach (Datos.PRODUCTO pr in listaProducto)
+                {
+                    Modelo.Producto pModelo = new Modelo.Producto();
+                    pModelo.ID_PRODUCTO = pr.ID_PRODUCTO;
+                    pModelo.NOMBRE_PRODUCTO = pr.NOMBRE_PRODUCTO;
+                    pModelo.PRECIO_PRODUCTO = pr.PRECIO_PRODUCTO;
+                    pModelo.STOCK_PRODUCTO = pr.STOCK_PRODUCTO;
+                    pModelo.STOCK_CRITICO_PRODUCTO = pr.STOCK_CRITICO_PRODUCTO;
+                    pModelo.RUT_PROVEEDOR = p.RUT_PROVEEDOR;
+
+                    listaProducto2.Add(pModelo);
+                }
+
+                XmlSerializer ser2 = new XmlSerializer(typeof(Modelo.ProductoCollection));
+                StringWriter writer = new StringWriter();
+                ser2.Serialize(writer, listaProducto2);
+                writer.Close();
+                return writer.ToString();
+            }
+        }
+
         //CRUD Habitacion
         public bool AgregarHabitacion(string habitacion)
         {

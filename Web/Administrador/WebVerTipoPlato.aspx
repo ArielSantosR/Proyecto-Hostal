@@ -3,7 +3,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div style="display: flex; justify-content: center; margin-bottom: 20px">
-        <asp:GridView ID="gvTipoPlato" AutoGenerateColumns="false" runat="server" ForeColor="#333333" GridLines="None">      
+        <asp:GridView ID="gvTipoPlato" AutoGenerateColumns="false" runat="server" ForeColor="#333333" GridLines="Vertical">      
                             <AlternatingRowStyle BackColor="White" />
                             <EditRowStyle BackColor="#2461BF" />
                             <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
