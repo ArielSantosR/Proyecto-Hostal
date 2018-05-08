@@ -187,6 +187,7 @@ namespace WcfNegocio
         Pais ObtenerPais(string pais);
 
         //REGION
+        /*
         [OperationContract]
         bool AgregarRegion(string region);
 
@@ -217,7 +218,7 @@ namespace WcfNegocio
 
         [OperationContract]
         Comuna ObtenerComuna(string comuna);
-
+        */
 
         //CRUD TIPO PROVEEDOR
         [OperationContract]
