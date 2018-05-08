@@ -23,7 +23,7 @@ namespace Modelo
                 user.ESTADO = dato.ESTADO;
                 user.ID_USUARIO = dato.ID_USUARIO;
                 user.NOMBRE_USUARIO = dato.NOMBRE_USUARIO;
-                user.PASSWORD = string.Empty;
+                user.PASSWORD = dato.PASSWORD;
                 user.TIPO_USUARIO = dato.TIPO_USUARIO;
 
                 list.Add(user);

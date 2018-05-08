@@ -56,6 +56,7 @@ namespace WcfNegocio
             usuario.PASSWORD = uDatos2.PASSWORD;
             usuario.TIPO_USUARIO = uDatos2.TIPO_USUARIO;
             usuario.ESTADO = uDatos2.ESTADO;
+            usuario.ID_USUARIO = uDatos2.ID_USUARIO;
 
             return usuario;
         }
@@ -155,6 +156,119 @@ namespace WcfNegocio
             }
         }
 
+        //  CRUD HUESPED
+        public bool ExisteHuesped(string user)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.Huesped));
+            StringReader reader = new StringReader(user);
+            Modelo.Huesped huesped = (Modelo.Huesped)ser.Deserialize(reader);
+            ServicioHuesped serv = new ServicioHuesped();
+            Datos.HUESPED uDatos = new Datos.HUESPED();
+            uDatos.RUT_HUESPED = huesped.RUT_HUESPED;
+            if (!serv.ExisteHuesped(uDatos))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        public bool RegistroHuesped(string huesped)
+        {
+            //Datos huesped
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.Huesped));
+            StringReader reader = new StringReader(huesped);
+            Modelo.Huesped hp = (Modelo.Huesped)ser.Deserialize(reader);
+            ServicioHuesped serv = new ServicioHuesped();
+            Datos.HUESPED uDatos = new Datos.HUESPED();
+            uDatos.APP_MATERNO_HUESPED = hp.APP_MATERNO_HUESPED;
+            uDatos.APP_PATERNO_HUESPED = hp.APP_PATERNO_HUESPED;
+            uDatos.DV_HUESPED = hp.DV_HUESPED;
+            uDatos.NUMERO_HABITACION = hp.NUMERO_HABITACION;
+            uDatos.PNOMBRE_HUESPED = hp.PNOMBRE_HUESPED;
+            uDatos.REGISTRADO = hp.REGISTRADO;
+            uDatos.RUT_CLIENTE = hp.RUT_CLIENTE;
+            uDatos.RUT_HUESPED = hp.RUT_HUESPED;
+            uDatos.SNOMBRE_HUESPED = hp.SNOMBRE_HUESPED;
+            uDatos.TELEFONO_HUESPED = hp.TELEFONO_HUESPED;
+
+            return serv.RegistrarHuesped(uDatos);
+        }
+
+        public bool EliminarHuesped(string huesped)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.Huesped));
+            StringReader reader = new StringReader(huesped);
+            Modelo.Huesped hp = (Modelo.Huesped)ser.Deserialize(reader);
+            ServicioHuesped serv = new ServicioHuesped();
+            Datos.HUESPED uDatos = new Datos.HUESPED();
+            uDatos.RUT_HUESPED = hp.RUT_HUESPED;
+
+            return serv.EliminarHuesped(uDatos);
+        }
+
+        public string ListarHuesped()
+        {
+            ServicioHuesped servicio = new ServicioHuesped();
+            List<Datos.HUESPED> huesped = servicio.ListarHuesped();
+            Modelo.HuespedCollection listaHuesped = new Modelo.HuespedCollection();
+
+            foreach (Datos.HUESPED hp in huesped)
+            {
+                Modelo.Huesped h = new Modelo.Huesped();
+                h.RUT_HUESPED = hp.RUT_HUESPED;
+                h.DV_HUESPED = hp.DV_HUESPED;
+                h.PNOMBRE_HUESPED = hp.PNOMBRE_HUESPED;
+                h.SNOMBRE_HUESPED = hp.SNOMBRE_HUESPED;
+                h.TELEFONO_HUESPED = hp.TELEFONO_HUESPED;
+                h.NUMERO_HABITACION = hp.NUMERO_HABITACION;
+                h.APP_MATERNO_HUESPED = hp.APP_MATERNO_HUESPED;
+                h.APP_PATERNO_HUESPED = hp.APP_PATERNO_HUESPED;
+                h.REGISTRADO = hp.REGISTRADO;
+                h.RUT_CLIENTE = hp.RUT_CLIENTE;
+
+                listaHuesped.Add(h);
+            }
+
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.HuespedCollection));
+            StringWriter writer = new StringWriter();
+            ser.Serialize(writer, listaHuesped);
+            writer.Close();
+            return writer.ToString();
+        }
+
+        public bool ModificarHuesped(string huesped)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.Huesped));
+            StringReader reader = new StringReader(huesped);
+            Modelo.Huesped hp = (Modelo.Huesped)ser.Deserialize(reader);
+            Datos.ServicioHuesped servicio = new Datos.ServicioHuesped();
+            Datos.HUESPED hues = new Datos.HUESPED();
+            //Datos de Huesped
+            hues.RUT_HUESPED = hp.RUT_HUESPED;
+            hues.NUMERO_HABITACION = hp.NUMERO_HABITACION;
+            hues.DV_HUESPED = hp.DV_HUESPED;
+            hues.APP_PATERNO_HUESPED = hp.APP_PATERNO_HUESPED;
+            hues.APP_MATERNO_HUESPED = hp.APP_MATERNO_HUESPED;
+            hues.PNOMBRE_HUESPED = hp.PNOMBRE_HUESPED;
+            hues.SNOMBRE_HUESPED = hp.SNOMBRE_HUESPED;
+            hues.TELEFONO_HUESPED = hp.TELEFONO_HUESPED;
+            hues.REGISTRADO = hp.REGISTRADO;
+            hues.RUT_CLIENTE = hp.RUT_CLIENTE;
+            
+
+            if (servicio.ModificarHuesped(hues))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         //CRUD Cliente
         public bool ExisteRutC(string cliente)
         {
@@ -236,6 +350,27 @@ namespace WcfNegocio
             eDatos.ID_USUARIO = 0;
 
             return servicio.AgregarEmpleado(eDatos);
+        }
+
+        public Empleado buscarIDE(string empleado)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.Empleado));
+            StringReader reader = new StringReader(empleado);
+            Modelo.Empleado e = (Modelo.Empleado)ser.Deserialize(reader);
+            ServicioEmpleado serv = new ServicioEmpleado();
+            Datos.EMPLEADO eDatos = new Datos.EMPLEADO();
+            eDatos.ID_USUARIO = e.ID_USUARIO;
+
+            if (serv.BuscarIDE(eDatos) == null)
+            {
+                return null;
+            }
+            else
+            {
+                Datos.EMPLEADO eDatos2 = serv.BuscarIDE(eDatos);
+                e.RUT_EMPLEADO = eDatos2.RUT_EMPLEADO;
+                return e;
+            }
         }
 
         //CRUD Proveedor
@@ -522,6 +657,7 @@ namespace WcfNegocio
                 p.PRECIO_PRODUCTO = pDatos2.PRECIO_PRODUCTO;
                 p.STOCK_CRITICO_PRODUCTO = pDatos2.STOCK_CRITICO_PRODUCTO;
                 p.STOCK_PRODUCTO = pDatos2.STOCK_PRODUCTO;
+                p.RUT_PROVEEDOR = pDatos2.RUT_PROVEEDOR;
 
                 return p;
             }
@@ -566,6 +702,44 @@ namespace WcfNegocio
             pDatos.ID_PRODUCTO = p.ID_PRODUCTO;
 
             return serv.EliminarProducto(pDatos);
+        }
+
+        public string ListarProveedorProducto(string producto)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.Producto));
+            StringReader reader = new StringReader(producto);
+            Modelo.Producto p = (Modelo.Producto)ser.Deserialize(reader);
+            ServicioProveedor serv = new ServicioProveedor();
+
+            Datos.PRODUCTO pDatos = new Datos.PRODUCTO();
+            pDatos.ID_PRODUCTO = p.ID_PRODUCTO;
+            pDatos.RUT_PROVEEDOR = p.RUT_PROVEEDOR;
+
+            List<Datos.PROVEEDOR> listaProveedor = serv.ListarProveedorProducto(pDatos);
+
+            if (listaProveedor == null)
+            {
+                return null;
+            }
+            else
+            {
+                XmlSerializer servicio = new XmlSerializer(typeof(Modelo.Proveedor));
+                Modelo.ProveedorCollection2 listaProveedor2 = new Modelo.ProveedorCollection2();
+
+                foreach (Datos.PROVEEDOR pr in listaProveedor)
+                {
+                    Modelo.Proveedor pModelo = new Modelo.Proveedor();
+                    pModelo.RUT_PROVEEDOR = p.RUT_PROVEEDOR;
+
+                    listaProveedor2.Add(pModelo);
+                }
+
+                XmlSerializer ser2 = new XmlSerializer(typeof(Modelo.ProveedorCollection2));
+                StringWriter writer = new StringWriter();
+                ser2.Serialize(writer, listaProveedor2);
+                writer.Close();
+                return writer.ToString();
+            }
         }
 
 
@@ -861,6 +1035,65 @@ namespace WcfNegocio
             return serv.EliminarTipoProveedor(tpDatos);
         }
 
+        //CRUD Pedido
+        public bool AgregarPedido(string pedido)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.Pedido));
+            StringReader reader = new StringReader(pedido);
+            Modelo.Pedido p = (Modelo.Pedido)ser.Deserialize(reader);
+            ServicioPedido servicio = new ServicioPedido();
+
+            Datos.PEDIDO pDatos = new Datos.PEDIDO();
+            //Datos Pedido
+            pDatos.FECHA_PEDIDO = p.FECHA_PEDIDO;
+            pDatos.ESTADO_PEDIDO = p.ESTADO_PEDIDO;
+            pDatos.RUT_EMPLEADO = p.RUT_EMPLEADO;
+            pDatos.RUT_PROVEEDOR = p.RUT_PROVEEDOR;
+            pDatos.ESTADO_DESPACHO = p.ESTADO_DESPACHO;
+
+            return servicio.AgregarPedido(pDatos);
+        }
+
+        public bool AgregarDetallePedido(string detalle)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.DetallePedido));
+            StringReader reader = new StringReader(detalle);
+            Modelo.DetallePedido d = (Modelo.DetallePedido)ser.Deserialize(reader);
+            ServicioPedido servicio = new ServicioPedido();
+
+            Datos.DETALLE_PEDIDO dDatos = new Datos.DETALLE_PEDIDO();
+            //Datos Pedido
+            dDatos.CANTIDAD = d.CANTIDAD;
+            dDatos.ID_PRODUCTO = d.ID_PRODUCTO;
+            return servicio.AgregarDetallePedido(dDatos);
+        }
+
+        public string ListarPedidoAdmin()
+        {
+
+            ServicioPedido servicio = new ServicioPedido();
+            List<Datos.PEDIDO> pedido = servicio.ListarPedidoAdmin();
+            Modelo.PedidoCollection listaPedido = new Modelo.PedidoCollection();
+
+            foreach (Datos.PEDIDO p in pedido)
+            {
+                Modelo.Pedido pModelo = new Modelo.Pedido();
+                pModelo.NUMERO_PEDIDO = p.NUMERO_PEDIDO;
+                pModelo.ESTADO_PEDIDO = p.ESTADO_PEDIDO;
+                pModelo.FECHA_PEDIDO = p.FECHA_PEDIDO;
+                pModelo.RUT_EMPLEADO = p.RUT_EMPLEADO;
+                pModelo.NUMERO_RECEPCION = p.NUMERO_RECEPCION;
+                pModelo.RUT_PROVEEDOR = p.RUT_PROVEEDOR;
+
+                listaPedido.Add(pModelo);
+            }
+
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.PedidoCollection));
+            StringWriter writer = new StringWriter();
+            ser.Serialize(writer, listaPedido);
+            writer.Close();
+            return writer.ToString();
+        }
 
         //DDL
         public string ListarPais()

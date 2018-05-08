@@ -40,5 +40,27 @@ namespace Datos
             return lista;
         }
 
+        public bool UpdateCliente(CLIENTE cliente) {
+            CLIENTE c = ent.CLIENTE.FirstOrDefault(x => x.RUT_CLIENTE == cliente.RUT_CLIENTE);
+            if (c != null) {
+                c.NOMBRE_CLIENTE = cliente.NOMBRE_CLIENTE;
+                c.CORREO_CLIENTE = cliente.CORREO_CLIENTE;
+                c.DIRECCION_CLIENTE = cliente.DIRECCION_CLIENTE;
+                c.ID_COMUNA = cliente.ID_COMUNA;
+                c.TELEFONO_CLIENTE = cliente.TELEFONO_CLIENTE;
+
+                ent.SaveChanges();
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+
+        public CLIENTE BuscarCliente(short ID_USUARIO) {
+            CLIENTE c = ent.CLIENTE.FirstOrDefault(x => x.ID_USUARIO == ID_USUARIO);
+            return c;
+        }
+
     }
 }

@@ -138,5 +138,10 @@ namespace Web
         {
             Response.Redirect("WebCrearTipoProveedor.aspx");
         }
+        protected void btnVerPedido_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("WebVerPedido.aspx");
+        }
+
     }
 }

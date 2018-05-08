@@ -25,14 +25,13 @@ namespace Datos
             throw new UnintentionalCodeFirstException();
         }
     
-        public DbSet<ACCESORIO> ACCESORIO { get; set; }
         public DbSet<BOLETA> BOLETA { get; set; }
         public DbSet<CATEGORIA> CATEGORIA { get; set; }
         public DbSet<CLIENTE> CLIENTE { get; set; }
         public DbSet<COMUNA> COMUNA { get; set; }
-        public DbSet<DETALLE_ACCESORIOS> DETALLE_ACCESORIOS { get; set; }
         public DbSet<DETALLE_BOLETA> DETALLE_BOLETA { get; set; }
         public DbSet<DETALLE_FACTURA> DETALLE_FACTURA { get; set; }
+        public DbSet<DETALLE_ORDEN> DETALLE_ORDEN { get; set; }
         public DbSet<DETALLE_PEDIDO> DETALLE_PEDIDO { get; set; }
         public DbSet<DETALLE_PLATOS> DETALLE_PLATOS { get; set; }
         public DbSet<DETALLE_RECEPCION> DETALLE_RECEPCION { get; set; }
@@ -54,6 +53,8 @@ namespace Datos
         public DbSet<TIPO_PLATO> TIPO_PLATO { get; set; }
         public DbSet<TIPO_PROVEEDOR> TIPO_PROVEEDOR { get; set; }
         public DbSet<USUARIO> USUARIO { get; set; }
-        public DbSet<DETALLE_ORDEN> DETALLE_ORDEN { get; set; }
+        public DbSet<CATEGORIA_HABITACION> CATEGORIA_HABITACION { get; set; }
+        public DbSet<LOG_ERRORES> LOG_ERRORES { get; set; }
+        public DbSet<NOTIFICACION> NOTIFICACION { get; set; }
     }
 }

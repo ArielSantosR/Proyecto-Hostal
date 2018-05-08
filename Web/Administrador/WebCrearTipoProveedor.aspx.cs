@@ -58,6 +58,8 @@ namespace Web.Administrador
             exito.Text = "";
             alerta_exito.Visible = false;
             alerta.Visible = false;
+            btnLimpiar.CausesValidation = false;
+            btnLimpiar.UseSubmitBehavior = false;
 
         }
 

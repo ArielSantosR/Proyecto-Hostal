@@ -11,7 +11,7 @@ namespace Modelo
 
         
     {
-        public short ID_PRODUCTO { get; set; }
+        public long ID_PRODUCTO { get; set; }
         public string NOMBRE_PRODUCTO { get; set; }
         public DateTime? FECHA_VENCIMIENTO_PRODUCTO { get; set; }
         public short STOCK_PRODUCTO { get; set; }
@@ -21,5 +21,10 @@ namespace Modelo
         public short ID_FAMILIA { get; set; }
         public int RUT_PROVEEDOR { get; set; }
         public short ID_PRODUCTO_SEQ { get; set; }
+
+        public string NombreYPrecio
+        {
+            get { return this.NOMBRE_PRODUCTO + " $" + this.PRECIO_PRODUCTO; }
+        }
     }
 }

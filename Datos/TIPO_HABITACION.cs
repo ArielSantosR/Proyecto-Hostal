@@ -22,6 +22,7 @@ namespace Datos
         public short ID_TIPO_HABITACION { get; set; }
         public string NOMBRE_TIPO_HABITACION { get; set; }
         public short CANTIDAD_PASAJERO { get; set; }
+        public int PRECIO_TIPO { get; set; }
     
         public virtual ICollection<HABITACION> HABITACION { get; set; }
     }

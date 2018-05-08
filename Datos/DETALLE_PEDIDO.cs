@@ -17,7 +17,7 @@ namespace Datos
         public short ID_DETALLE_PEDIDO { get; set; }
         public int CANTIDAD { get; set; }
         public Nullable<short> NUMERO_PEDIDO { get; set; }
-        public short ID_PRODUCTO { get; set; }
+        public long ID_PRODUCTO { get; set; }
     
         public virtual PEDIDO PEDIDO { get; set; }
         public virtual PRODUCTO PRODUCTO { get; set; }

@@ -33,6 +33,22 @@ namespace WcfNegocio
 
         [OperationContract]
         string ListarUsuarios();
+        //Huesped
+        [OperationContract]
+        bool ExisteHuesped(string huesped);
+
+        [OperationContract]
+        bool RegistroHuesped(string huesped);
+
+        [OperationContract]
+        bool EliminarHuesped(string huesped);
+
+        [OperationContract]
+        bool ModificarHuesped(string huesped);
+
+        [OperationContract]
+        string ListarHuesped();
+
         //CRUD Cliente
         [OperationContract]
         bool ExisteRutC(string cliente);
@@ -42,6 +58,9 @@ namespace WcfNegocio
         //CRUD Empleado
         [OperationContract]
         bool ExisteRutE(string empleado);
+
+        [OperationContract]
+        Empleado buscarIDE (string empleado);
 
         [OperationContract]
         bool RegistroEmpleado(string empleado);
@@ -92,6 +111,9 @@ namespace WcfNegocio
 
         [OperationContract]
         bool EliminarProducto(string producto);
+
+        [OperationContract]
+        string ListarProveedorProducto(string producto);
 
         //CRUD Plato
         [OperationContract]
@@ -144,7 +166,12 @@ namespace WcfNegocio
         [OperationContract]
         TipoProveedor ObtenerTipoProveedor(string tipoProveedor);
 
+        //CRUD Pedido
+        [OperationContract]
+        bool AgregarPedido(string pedido);
 
+        [OperationContract]
+        string ListarPedidoAdmin();
 
 
         //DDL

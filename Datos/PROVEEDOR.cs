@@ -17,8 +17,8 @@ namespace Datos
         public PROVEEDOR()
         {
             this.PEDIDO = new HashSet<PEDIDO>();
-            this.RECEPCION = new HashSet<RECEPCION>();
             this.PRODUCTO = new HashSet<PRODUCTO>();
+            this.RECEPCION = new HashSet<RECEPCION>();
         }
     
         public int RUT_PROVEEDOR { get; set; }
@@ -31,9 +31,9 @@ namespace Datos
         public short ID_USUARIO { get; set; }
     
         public virtual ICollection<PEDIDO> PEDIDO { get; set; }
+        public virtual ICollection<PRODUCTO> PRODUCTO { get; set; }
         public virtual TIPO_PROVEEDOR TIPO_PROVEEDOR { get; set; }
         public virtual USUARIO USUARIO { get; set; }
         public virtual ICollection<RECEPCION> RECEPCION { get; set; }
-        public virtual ICollection<PRODUCTO> PRODUCTO { get; set; }
     }
 }
