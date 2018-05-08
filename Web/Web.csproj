@@ -102,15 +102,21 @@
     <Content Include="Administrador\WebEditarHabitacion.aspx" />
     <Content Include="Administrador\WebEditarPlato.aspx" />
     <Content Include="Administrador\WebEditarProducto.aspx" />
+    <Content Include="Administrador\WebEditarTipoPlato.aspx" />
+    <Content Include="Administrador\WebEditarTipoProveedor.aspx" />
     <Content Include="Administrador\WebEditarUsuario.aspx" />
     <Content Include="Administrador\WebEliminarHabitacion.aspx" />
     <Content Include="Administrador\WebEliminarPlato.aspx" />
     <Content Include="Administrador\WebEliminarProducto.aspx" />
+    <Content Include="Administrador\WebEliminarTipoPlato.aspx" />
+    <Content Include="Administrador\WebEliminarTipoProveedor.aspx" />
     <Content Include="Administrador\WebInformes.aspx" />
     <Content Include="Administrador\WebVerHabitacion.aspx" />
     <Content Include="Administrador\WebRegistroAdmin.aspx" />
     <Content Include="Administrador\WebVerPedido.aspx" />
     <Content Include="Administrador\WebVerProductos.aspx" />
+    <Content Include="Administrador\WebVerTipoPlato.aspx" />
+    <Content Include="Administrador\WebVerTipoProveedor.aspx" />
     <Content Include="Administrador\WebVerUsuarios.aspx" />
     <Content Include="Cliente\WebCrearOrden.aspx" />
     <Content Include="Cliente\WebEditarCliente.aspx" />
@@ -225,6 +231,20 @@
     <Compile Include="Administrador\WebEditarProducto.aspx.designer.cs">
       <DependentUpon>WebEditarProducto.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Administrador\WebEditarTipoPlato.aspx.cs">
+      <DependentUpon>WebEditarTipoPlato.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\WebEditarTipoPlato.aspx.designer.cs">
+      <DependentUpon>WebEditarTipoPlato.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrador\WebEditarTipoProveedor.aspx.cs">
+      <DependentUpon>WebEditarTipoProveedor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\WebEditarTipoProveedor.aspx.designer.cs">
+      <DependentUpon>WebEditarTipoProveedor.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Administrador\WebEditarUsuario.aspx.cs">
       <DependentUpon>WebEditarUsuario.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -252,6 +272,20 @@
     </Compile>
     <Compile Include="Administrador\WebEliminarProducto.aspx.designer.cs">
       <DependentUpon>WebEliminarProducto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrador\WebEliminarTipoPlato.aspx.cs">
+      <DependentUpon>WebEliminarTipoPlato.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\WebEliminarTipoPlato.aspx.designer.cs">
+      <DependentUpon>WebEliminarTipoPlato.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrador\WebEliminarTipoProveedor.aspx.cs">
+      <DependentUpon>WebEliminarTipoProveedor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\WebEliminarTipoProveedor.aspx.designer.cs">
+      <DependentUpon>WebEliminarTipoProveedor.aspx</DependentUpon>
     </Compile>
     <Compile Include="Administrador\WebInformes.aspx.cs">
       <DependentUpon>WebInformes.aspx</DependentUpon>
@@ -287,6 +321,20 @@
     </Compile>
     <Compile Include="Administrador\WebVerProductos.aspx.designer.cs">
       <DependentUpon>WebVerProductos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrador\WebVerTipoPlato.aspx.cs">
+      <DependentUpon>WebVerTipoPlato.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\WebVerTipoPlato.aspx.designer.cs">
+      <DependentUpon>WebVerTipoPlato.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrador\WebVerTipoProveedor.aspx.cs">
+      <DependentUpon>WebVerTipoProveedor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\WebVerTipoProveedor.aspx.designer.cs">
+      <DependentUpon>WebVerTipoProveedor.aspx</DependentUpon>
     </Compile>
     <Compile Include="Administrador\WebVerUsuarios.aspx.cs">
       <DependentUpon>WebVerUsuarios.aspx</DependentUpon>

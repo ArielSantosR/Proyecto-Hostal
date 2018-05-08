@@ -31,6 +31,12 @@ namespace Datos
             ent.SaveChanges();
             return true;
         }
+        public bool AgregarCategoria(CATEGORIA c)
+        {
+            ent.CATEGORIA.Add(c);
+            ent.SaveChanges();
+            return true;
+        }
 
         public bool AgregarPlato(PLATO p)
         {
@@ -66,12 +72,38 @@ namespace Datos
                 return false;
             }
         }
+        public bool ExisteCategoria(CATEGORIA categoria)
+        {
+            CATEGORIA c = ent.CATEGORIA.FirstOrDefault(objeto =>
+            objeto.NOMBRE_CATEGORIA.Equals(categoria.NOMBRE_CATEGORIA));
+            if (c != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
 
         public bool ExisteTipoPlatoID(TIPO_PLATO tipoPlato)
         {
             TIPO_PLATO tp = ent.TIPO_PLATO.FirstOrDefault(objeto =>
             objeto.ID_TIPO_PLATO.Equals(tipoPlato.ID_TIPO_PLATO));
             if (tp != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public bool ExisteCategoriaID(CATEGORIA categoria)
+        {
+            CATEGORIA c = ent.CATEGORIA.FirstOrDefault(objeto =>
+            objeto.ID_CATEGORIA.Equals(categoria.ID_CATEGORIA));
+            if (c != null)
             {
                 return true;
             }
@@ -126,6 +158,21 @@ namespace Datos
                 return null;
             }
         }
+        public CATEGORIA obtenerCategoria(CATEGORIA categoria)
+        {
+
+            CATEGORIA c = ent.CATEGORIA.FirstOrDefault(objeto =>
+            objeto.ID_CATEGORIA.Equals(categoria.ID_CATEGORIA));
+
+            if (c != null)
+            {
+                return c;
+            }
+            else
+            {
+                return null;
+            }
+        }
 
         public bool EditarPlato(PLATO plato)
         {
@@ -168,6 +215,25 @@ namespace Datos
             }
         }
 
+        public bool EditarCategoria(CATEGORIA categoria)
+        {
+            CATEGORIA c = ent.CATEGORIA.FirstOrDefault(objeto =>
+            objeto.ID_CATEGORIA.Equals(categoria.ID_CATEGORIA));
+
+            if (c != null)
+            {
+                c.ID_CATEGORIA = categoria.ID_CATEGORIA;
+                c.NOMBRE_CATEGORIA = categoria.NOMBRE_CATEGORIA;
+
+                ent.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public bool EliminarPlato(PLATO plato)
         {
             PLATO p = ent.PLATO.FirstOrDefault(objeto =>
@@ -193,6 +259,22 @@ namespace Datos
             if (tp != null)
             {
                 ent.TIPO_PLATO.Remove(tp);
+                ent.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public bool EliminarCategoria(CATEGORIA categoria)
+        {
+            CATEGORIA c = ent.CATEGORIA.FirstOrDefault(objeto =>
+            objeto.ID_CATEGORIA.Equals(categoria.ID_CATEGORIA));
+
+            if (c != null)
+            {
+                ent.CATEGORIA.Remove(c);
                 ent.SaveChanges();
                 return true;
             }
