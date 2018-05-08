@@ -121,6 +121,15 @@ namespace Web {
         protected global::System.Web.UI.WebControls.Button btnCrearTipoPlato;
         
         /// <summary>
+        /// Control btnVerTipoPlato.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnVerTipoPlato;
+        
+        /// <summary>
         /// Control btnCrearTipoProveedor.
         /// </summary>
         /// <remarks>
@@ -128,6 +137,15 @@ namespace Web {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnCrearTipoProveedor;
+        
+        /// <summary>
+        /// Control btnVerTipoProveedor.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnVerTipoProveedor;
         
         /// <summary>
         /// Control btnVerPedido.
