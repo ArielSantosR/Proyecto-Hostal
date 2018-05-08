@@ -31,7 +31,7 @@ using System.Text;
 /// <para>To hash a password for the first time, call the
 /// <c>HashPassword</c> method with a random salt, like this:</para>
 /// <code>
-/// string hashed = BCrypt.HashPassword(plainPassword, BCrypt.GenerateSalt());
+/// string hashed = BCrypt.HashPassword(plainPassword, BCrypt.GenerateSalt(12));
 /// </code>
 /// <para>To check whether a plaintext password matches one that has
 /// been hashed previously, use the <c>CheckPassword</c> method:</para>

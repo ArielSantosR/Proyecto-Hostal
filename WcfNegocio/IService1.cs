@@ -194,9 +194,14 @@ namespace WcfNegocio
         string ListarTipoHabitacion();
 
         [OperationContract]
+        string ListarCategoriaHabitacion();
+
+        [OperationContract]
         string ListarTipoPlato();
 
         [OperationContract]
         string ListarFamilia();
+
+        
     }
 }

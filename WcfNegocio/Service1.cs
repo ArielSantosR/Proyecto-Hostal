@@ -510,6 +510,7 @@ namespace WcfNegocio
             hDatos.PRECIO_HABITACION = h.PRECIO_HABITACION;
             hDatos.ESTADO_HABITACION = h.ESTADO_HABITACION;
             hDatos.ID_TIPO_HABITACION = h.ID_TIPO_HABITACION;
+            hDatos.ID_CATEGORIA_HABITACION = h.ID_CATEGORIA_HABITACION;
 
             return servicio.AgregarHabitacion(hDatos);
         }
@@ -527,6 +528,7 @@ namespace WcfNegocio
                 hModelo.ESTADO_HABITACION = h.ESTADO_HABITACION;
                 hModelo.ID_TIPO_HABITACION = h.ID_TIPO_HABITACION;
                 hModelo.RUT_CLIENTE = h.RUT_CLIENTE;
+                hModelo.ID_CATEGORIA_HABITACION = h.ID_CATEGORIA_HABITACION;
 
                 listaHabitacion.Add(hModelo);
             }
@@ -578,6 +580,7 @@ namespace WcfNegocio
                 h.ESTADO_HABITACION = hDatos2.ESTADO_HABITACION;
                 h.RUT_CLIENTE = hDatos2.RUT_CLIENTE;
                 h.ID_TIPO_HABITACION = hDatos2.ID_TIPO_HABITACION;
+                h.ID_CATEGORIA_HABITACION = hDatos2.ID_CATEGORIA_HABITACION;
 
                 return h;
             }
@@ -596,6 +599,7 @@ namespace WcfNegocio
             hDatos.ID_TIPO_HABITACION = h.ID_TIPO_HABITACION;
             hDatos.ESTADO_HABITACION = h.ESTADO_HABITACION;
             hDatos.RUT_CLIENTE = h.RUT_CLIENTE;
+            hDatos.ID_CATEGORIA_HABITACION = h.ID_CATEGORIA_HABITACION;
 
             return serv.EditarHabitacion(hDatos);
         }
@@ -1210,6 +1214,25 @@ namespace WcfNegocio
             XmlSerializer ser = new XmlSerializer(typeof(Modelo.TipoHabitacionCollection));
             StringWriter writer = new StringWriter();
             ser.Serialize(writer, listaTipoHabitacion);
+            return writer.ToString();
+        }
+
+        public string ListarCategoriaHabitacion()
+        {
+            ServicioCategoria servicio = new ServicioCategoria();
+            List<Datos.CATEGORIA_HABITACION> categoria = servicio.ListarCategoriaHabitacion();
+            Modelo.CategoriaHabitacionCollection listaCateegoriaHabitacion = new Modelo.CategoriaHabitacionCollection();
+            foreach (Datos.CATEGORIA_HABITACION c in categoria)
+            {
+                Modelo.CategoriaHabitacion cModelo = new Modelo.CategoriaHabitacion();
+                cModelo.ID_CATEGORIA_HABITACION = c.ID_CATEGORIA_HABITACION;
+                cModelo.NOMBRE_CATEGORIA = c.NOMBRE_CATEGORIA;
+                cModelo.PRECIO_CATEGORIA = c.PRECIO_CATEGORIA;
+                listaCateegoriaHabitacion.Add(cModelo);
+            }
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.CategoriaHabitacionCollection));
+            StringWriter writer = new StringWriter();
+            ser.Serialize(writer, listaCateegoriaHabitacion);
             return writer.ToString();
         }
 

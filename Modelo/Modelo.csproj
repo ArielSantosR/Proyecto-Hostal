@@ -42,6 +42,8 @@
   <ItemGroup>
     <Compile Include="Categoria.cs" />
     <Compile Include="CategoriaCollection.cs" />
+    <Compile Include="CategoriaHabitacion.cs" />
+    <Compile Include="CategoriaHabitacionCollection.cs" />
     <Compile Include="Cliente.cs" />
     <Compile Include="ClienteCollection.cs" />
     <Compile Include="Comuna.cs" />

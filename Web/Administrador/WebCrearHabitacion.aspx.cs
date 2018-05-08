@@ -53,6 +53,13 @@ namespace Web.Administrador
             Modelo.TipoHabitacionCollection coleccionTipoHabitacion = (Modelo.TipoHabitacionCollection)ser.Deserialize(reader);
             reader.Close();
 
+            //Cargando DDL Categoria
+            string categoria_habitacion = service.ListarCategoriaHabitacion();
+            XmlSerializer ser1 = new XmlSerializer(typeof(Modelo.CategoriaHabitacionCollection));
+            StringReader reader1 = new StringReader(categoria_habitacion);
+            Modelo.CategoriaHabitacionCollection coleccionCategoria = (Modelo.CategoriaHabitacionCollection)ser1.Deserialize(reader1);
+            reader.Close();
+
 
             if (!IsPostBack)
             {
@@ -64,6 +71,11 @@ namespace Web.Administrador
                 ddlEstado.Items.Add("Disponible");
                 ddlEstado.Items.Add("Ocupada");
                 ddlEstado.Items.Add("Mantenimiento");
+
+                ddlCategoria.DataSource = coleccionCategoria;
+                ddlCategoria.DataTextField = "NOMBRE_CATEGORIA";
+                ddlCategoria.DataValueField = "ID_CATEGORIA_HABITACION";
+                ddlCategoria.DataBind();
             }
 
         }
@@ -101,6 +113,7 @@ namespace Web.Administrador
                         habitacion.PRECIO_HABITACION = precio;
                         habitacion.ESTADO_HABITACION = ddlEstado.SelectedValue;
                         habitacion.ID_TIPO_HABITACION = short.Parse(ddlTipo.SelectedValue);
+                        habitacion.ID_CATEGORIA_HABITACION = short.Parse(ddlCategoria.SelectedValue);
 
                         Service1 s = new Service1();
                         XmlSerializer sr = new XmlSerializer(typeof(Modelo.Habitacion));

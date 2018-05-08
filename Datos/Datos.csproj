@@ -147,6 +147,7 @@
       <DependentUpon>Hostal.tt</DependentUpon>
     </Compile>
     <Compile Include="ServicioBCrypt.cs" />
+    <Compile Include="ServicioCategoria.cs" />
     <Compile Include="ServicioCliente.cs" />
     <Compile Include="ServicioDireccion.cs" />
     <Compile Include="ServicioEmpleado.cs" />

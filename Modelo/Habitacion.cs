@@ -14,5 +14,6 @@ namespace Modelo
         public string ESTADO_HABITACION { get; set; }
         public short ID_TIPO_HABITACION { get; set; }
         public Nullable<int> RUT_CLIENTE { get; set; }
+        public short ID_CATEGORIA_HABITACION { get; set; }
     }
 }
