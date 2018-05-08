@@ -20,3 +20,5 @@ bld\
 \.vs\
 *.config
 *.cache
+*.dll
+*.force
