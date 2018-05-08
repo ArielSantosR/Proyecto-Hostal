@@ -52,7 +52,9 @@
                          <asp:button runat="server" text="Crear Tipo Proveedor" ID="btnCrearTipoProveedor" CssClass="btn btn-primary btn-lg btn-block login-button" style="font-size: 15px" OnClick="btnCrearTipoProveedor_Click"  />
                          <asp:button runat="server" text="Ver Tipo Proveedor" ID="btnVerTipoProveedor" CssClass="btn btn-primary btn-lg btn-block login-button" style="font-size: 15px" OnClick="btnVerTipoProveedor_Click"  />
                         <asp:button runat="server" text="Ver Pedidos Pendientes" ID="btnVerPedido" CssClass="btn btn-primary btn-lg btn-block login-button" style="font-size: 15px" OnClick="btnVerPedido_Click"  />
-                    </div>
+                         <asp:button runat="server" text="Crear Categoría Plato" ID="btnCrearCategoriaPlato" CssClass="btn btn-primary btn-lg btn-block login-button" style="font-size: 15px" OnClick="btnCrearCategoriaPlato_Click"  />
+                         <asp:button runat="server" text="Ver Categoría Plato" ID="btnVerCategoriaPlato" CssClass="btn btn-primary btn-lg btn-block login-button" style="font-size: 15px" OnClick="btnVerCategoriaPlato_Click"  />
+                         </div>
                 </div>
 
                 <div class="col-md-4">

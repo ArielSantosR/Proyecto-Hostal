@@ -95,21 +95,25 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Administrador\WebAgregarPlato.aspx" />
+    <Content Include="Administrador\WebCrearCategoriaPlato.aspx" />
     <Content Include="Administrador\WebCrearHabitacion.aspx" />
     <Content Include="Administrador\WebCrearProducto.aspx" />
     <Content Include="Administrador\WebCrearTipoPlato.aspx" />
     <Content Include="Administrador\WebCrearTipoProveedor.aspx" />
+    <Content Include="Administrador\WebEditarCategoriaPlato.aspx" />
     <Content Include="Administrador\WebEditarHabitacion.aspx" />
     <Content Include="Administrador\WebEditarPlato.aspx" />
     <Content Include="Administrador\WebEditarProducto.aspx" />
     <Content Include="Administrador\WebEditarTipoPlato.aspx" />
     <Content Include="Administrador\WebEditarTipoProveedor.aspx" />
+    <Content Include="Administrador\WebEliminarCategoriaPlato.aspx" />
     <Content Include="Administrador\WebEliminarHabitacion.aspx" />
     <Content Include="Administrador\WebEliminarPlato.aspx" />
     <Content Include="Administrador\WebEliminarProducto.aspx" />
     <Content Include="Administrador\WebEliminarTipoPlato.aspx" />
     <Content Include="Administrador\WebEliminarTipoProveedor.aspx" />
     <Content Include="Administrador\WebInformes.aspx" />
+    <Content Include="Administrador\WebVerCategoriaPlato.aspx" />
     <Content Include="Administrador\WebVerHabitacion.aspx" />
     <Content Include="Administrador\WebRegistroAdmin.aspx" />
     <Content Include="Administrador\WebVerPedido.aspx" />
@@ -181,6 +185,13 @@
     <Compile Include="Administrador\WebAgregarPlato.aspx.designer.cs">
       <DependentUpon>WebAgregarPlato.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Administrador\WebCrearCategoriaPlato.aspx.cs">
+      <DependentUpon>WebCrearCategoriaPlato.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\WebCrearCategoriaPlato.aspx.designer.cs">
+      <DependentUpon>WebCrearCategoriaPlato.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Administrador\WebCrearHabitacion.aspx.cs">
       <DependentUpon>WebCrearHabitacion.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -208,6 +219,13 @@
     </Compile>
     <Compile Include="Administrador\WebCrearTipoProveedor.aspx.designer.cs">
       <DependentUpon>WebCrearTipoProveedor.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrador\WebEditarCategoriaPlato.aspx.cs">
+      <DependentUpon>WebEditarCategoriaPlato.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\WebEditarCategoriaPlato.aspx.designer.cs">
+      <DependentUpon>WebEditarCategoriaPlato.aspx</DependentUpon>
     </Compile>
     <Compile Include="Administrador\WebEditarHabitacion.aspx.cs">
       <DependentUpon>WebEditarHabitacion.aspx</DependentUpon>
@@ -243,6 +261,13 @@
     </Compile>
     <Compile Include="Administrador\WebEditarTipoProveedor.aspx.designer.cs">
       <DependentUpon>WebEditarTipoProveedor.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrador\WebEliminarCategoriaPlato.aspx.cs">
+      <DependentUpon>WebEliminarCategoriaPlato.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\WebEliminarCategoriaPlato.aspx.designer.cs">
+      <DependentUpon>WebEliminarCategoriaPlato.aspx</DependentUpon>
     </Compile>
     <Compile Include="Administrador\WebEliminarHabitacion.aspx.cs">
       <DependentUpon>WebEliminarHabitacion.aspx</DependentUpon>
@@ -285,6 +310,13 @@
     </Compile>
     <Compile Include="Administrador\WebInformes.aspx.designer.cs">
       <DependentUpon>WebInformes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrador\WebVerCategoriaPlato.aspx.cs">
+      <DependentUpon>WebVerCategoriaPlato.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\WebVerCategoriaPlato.aspx.designer.cs">
+      <DependentUpon>WebVerCategoriaPlato.aspx</DependentUpon>
     </Compile>
     <Compile Include="Administrador\WebVerHabitacion.aspx.cs">
       <DependentUpon>WebVerHabitacion.aspx</DependentUpon>

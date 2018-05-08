@@ -89,5 +89,9 @@ namespace Datos
                 return true;
             }
         }
+
+        //TIPO USUARIOS
+
+        
     }
 }

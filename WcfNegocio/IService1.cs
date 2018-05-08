@@ -153,6 +153,72 @@ namespace WcfNegocio
         [OperationContract]
         TipoPlato ObtenerTipoPlato(string tipoPlato);
 
+        //categoria_plato
+
+        [OperationContract]
+        bool AgregarCategoria(string categoria);
+
+        [OperationContract]
+        bool EliminarCategoria(string categoria);
+
+        [OperationContract]
+        bool ModificarCategoria(string categoria);
+
+        [OperationContract]
+        bool ExisteCategoria(string categoria);
+
+        [OperationContract]
+        Categoria ObtenerCategoria(string categoria);
+
+        //PAIS
+        [OperationContract]
+        bool AgregarPais(string pais);
+
+        [OperationContract]
+        bool EliminarPais(string pais);
+
+        [OperationContract]
+        bool ModificarPais(string pais);
+
+        [OperationContract]
+        bool ExistePais(string pais);
+
+        [OperationContract]
+        Pais ObtenerPais(string pais);
+
+        //REGION
+        [OperationContract]
+        bool AgregarRegion(string region);
+
+        [OperationContract]
+        bool EliminarRegion(string region);
+
+        [OperationContract]
+        bool ModificarRegion(string region);
+
+        [OperationContract]
+        bool ExisteRegion(string region);
+
+        [OperationContract]
+        Region ObtenerRegion(string region);
+
+        //COMUNA
+        [OperationContract]
+        bool AgregarComuna(string comuna);
+
+        [OperationContract]
+        bool EliminarComuna(string comuna);
+
+        [OperationContract]
+        bool ModificarComuna(string comuna);
+
+        [OperationContract]
+        bool ExisteComuna(string comuna);
+
+        [OperationContract]
+        Comuna ObtenerComuna(string comuna);
+
+
         //CRUD TIPO PROVEEDOR
         [OperationContract]
         bool AgregarTipoProveedor(string tipoProveedor);
@@ -168,6 +234,8 @@ namespace WcfNegocio
 
         [OperationContract]
         TipoProveedor ObtenerTipoProveedor(string tipoProveedor);
+
+        
 
         //CRUD Pedido
         [OperationContract]
