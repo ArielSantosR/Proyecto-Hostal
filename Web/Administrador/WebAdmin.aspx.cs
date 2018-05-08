@@ -142,6 +142,14 @@ namespace Web
         {
             Response.Redirect("WebVerPedido.aspx");
         }
+        protected void btnVerTipoPlato_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("WebVerTipoPlato.aspx");
+        }
+        protected void btnVerTipoProveedor_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("WebVerTipoProveedor.aspx");
+        }
 
     }
 }
