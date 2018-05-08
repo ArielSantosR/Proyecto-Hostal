@@ -104,7 +104,6 @@
     <Content Include="Administrador\WebEditarProducto.aspx" />
     <Content Include="Administrador\WebEditarTipoPlato.aspx" />
     <Content Include="Administrador\WebEditarTipoProveedor.aspx" />
-    <Content Include="Administrador\WebEditarUsuario.aspx" />
     <Content Include="Administrador\WebEliminarHabitacion.aspx" />
     <Content Include="Administrador\WebEliminarPlato.aspx" />
     <Content Include="Administrador\WebEliminarProducto.aspx" />
@@ -244,13 +243,6 @@
     </Compile>
     <Compile Include="Administrador\WebEditarTipoProveedor.aspx.designer.cs">
       <DependentUpon>WebEditarTipoProveedor.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Administrador\WebEditarUsuario.aspx.cs">
-      <DependentUpon>WebEditarUsuario.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Administrador\WebEditarUsuario.aspx.designer.cs">
-      <DependentUpon>WebEditarUsuario.aspx</DependentUpon>
     </Compile>
     <Compile Include="Administrador\WebEliminarHabitacion.aspx.cs">
       <DependentUpon>WebEliminarHabitacion.aspx</DependentUpon>
