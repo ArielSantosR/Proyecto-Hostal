@@ -1080,6 +1080,178 @@ namespace WcfNegocio
 
             return serv.EliminarTipoProveedor(tpDatos);
         }
+        //Categoria plato
+
+        public bool AgregarCategoria(string categoria)
+        {
+            //Datos tipo PROVEEDOR
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.Categoria));
+            StringReader reader = new StringReader(categoria);
+            Modelo.Categoria c = (Modelo.Categoria)ser.Deserialize(reader);
+            ServicioPlato serv = new ServicioPlato();
+            Datos.CATEGORIA Datos = new Datos.CATEGORIA();
+            Datos.ID_CATEGORIA = c.ID_CATEGORIA;
+            Datos.NOMBRE_CATEGORIA = c.NOMBRE_CATEGORIA;
+
+            return serv.AgregarCategoria(Datos);
+        }
+
+        public bool ExisteCategoria(string categoria)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.Categoria));
+            StringReader reader = new StringReader(categoria);
+            Modelo.Categoria c = (Modelo.Categoria)ser.Deserialize(reader);
+            ServicioPlato serv = new ServicioPlato();
+            Datos.CATEGORIA Datos = new Datos.CATEGORIA();
+            Datos.NOMBRE_CATEGORIA = c.NOMBRE_CATEGORIA;
+
+            if (!serv.ExisteCategoria(Datos))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+
+        public Categoria ObtenerCategoria(string categoria)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.Categoria));
+            StringReader reader = new StringReader(categoria);
+            Modelo.Categoria c = (Modelo.Categoria)ser.Deserialize(reader);
+            ServicioPlato serv = new ServicioPlato();
+            Datos.CATEGORIA Datos = new Datos.CATEGORIA();
+            Datos.ID_CATEGORIA = c.ID_CATEGORIA;
+
+            if (!serv.ExisteCategoriaID(Datos))
+            {
+                return null;
+            }
+            else
+            {
+                Datos.CATEGORIA Datos2 = serv.obtenerCategoria(Datos);
+
+                c.ID_CATEGORIA = Datos2.ID_CATEGORIA;
+                c.NOMBRE_CATEGORIA = Datos2.NOMBRE_CATEGORIA;
+
+                return c;
+            }
+        }
+
+        public bool ModificarCategoria(string categoria)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.Categoria));
+            StringReader reader = new StringReader(categoria);
+            Modelo.Categoria c = (Modelo.Categoria)ser.Deserialize(reader);
+            ServicioPlato serv = new ServicioPlato();
+            Datos.CATEGORIA Datos = new Datos.CATEGORIA();
+
+            Datos.ID_CATEGORIA = c.ID_CATEGORIA;
+            Datos.NOMBRE_CATEGORIA = c.NOMBRE_CATEGORIA;
+
+            return serv.EditarCategoria(Datos);
+        }
+
+        public bool EliminarCategoria(string categoria)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.Categoria));
+            StringReader reader = new StringReader(categoria);
+            Modelo.Categoria c = (Modelo.Categoria)ser.Deserialize(reader);
+            ServicioPlato serv = new ServicioPlato();
+            Datos.CATEGORIA Datos = new Datos.CATEGORIA();
+
+            Datos.ID_CATEGORIA = c.ID_CATEGORIA;
+
+            return serv.EliminarCategoria(Datos);
+        }
+        //PAIS
+        public bool AgregarPais(string pais)
+        {
+            //Datos tipo pais
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.Pais));
+            StringReader reader = new StringReader(pais);
+            Modelo.Pais p = (Modelo.Pais)ser.Deserialize(reader);
+            ServicioDireccion serv = new ServicioDireccion();
+            Datos.PAIS Datos = new Datos.PAIS();
+            
+            Datos.ID_PAIS = p.ID_PAIS;
+            Datos.NOMBRE_PAIS = p.NOMBRE_PAIS;
+
+            return serv.AgregarPais(Datos);
+        }
+
+        public bool ExistePais(string pais)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.Pais));
+            StringReader reader = new StringReader(pais);
+            Modelo.Pais p = (Modelo.Pais)ser.Deserialize(reader);
+            ServicioDireccion serv = new ServicioDireccion();
+            Datos.PAIS Datos = new Datos.PAIS();
+            Datos.NOMBRE_PAIS = p.NOMBRE_PAIS;
+
+            if (!serv.ExistePais(Datos))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+
+        public Pais ObtenerPais(string pais)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.Pais));
+            StringReader reader = new StringReader(pais);
+            Modelo.Pais p = (Modelo.Pais)ser.Deserialize(reader);
+            ServicioDireccion serv = new ServicioDireccion();
+            Datos.PAIS Datos = new Datos.PAIS();
+            Datos.ID_PAIS = p.ID_PAIS;
+
+            if (!serv.ExistePaisID(Datos))
+            {
+                return null;
+            }
+            else
+            {
+                Datos.PAIS Datos2 = serv.obtenerPais(Datos);
+
+                p.ID_PAIS = Datos2.ID_PAIS;
+                p.NOMBRE_PAIS = Datos2.NOMBRE_PAIS;
+
+                return p;
+            }
+        }
+
+        public bool ModificarPais(string pais)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.Pais));
+            StringReader reader = new StringReader(pais);
+            Modelo.Pais p = (Modelo.Pais)ser.Deserialize(reader);
+            ServicioDireccion serv = new ServicioDireccion();
+            Datos.PAIS Datos = new Datos.PAIS();
+
+            Datos.ID_PAIS = p.ID_PAIS;
+            Datos.NOMBRE_PAIS = p.NOMBRE_PAIS;
+
+            return serv.EditarPais(Datos);
+        }
+
+        public bool EliminarPais(string pais)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.Pais));
+            StringReader reader = new StringReader(pais);
+            Modelo.Pais p = (Modelo.Pais)ser.Deserialize(reader);
+            ServicioDireccion serv = new ServicioDireccion();
+            Datos.PAIS Datos = new Datos.PAIS();
+
+            Datos.ID_PAIS = p.ID_PAIS;
+
+            return serv.EliminarPais(Datos);
+        }
 
         //CRUD Pedido
         public bool AgregarPedido(string pedido)

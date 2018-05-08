@@ -150,6 +150,14 @@ namespace Web
         {
             Response.Redirect("WebVerTipoProveedor.aspx");
         }
+        protected void btnCrearCategoriaPlato_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("WebCrearCategoriaPlato.aspx");
+        }
+        protected void btnVerCategoriaPlato_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("WebVerCategoriaPlato.aspx");
+        }
 
     }
 }
