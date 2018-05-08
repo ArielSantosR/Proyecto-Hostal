@@ -135,6 +135,26 @@ namespace Datos
             }
         }
 
+        public bool UpdateProveedor(PROVEEDOR proveedor) {
+            PROVEEDOR p = ent.PROVEEDOR.FirstOrDefault(x => x.RUT_PROVEEDOR == proveedor.RUT_PROVEEDOR);
+            if (p != null) {
+                p.APP_MATERNO_PROVEEDOR = proveedor.APP_MATERNO_PROVEEDOR;
+                p.APP_PATERNO_PROVEEDOR = proveedor.APP_PATERNO_PROVEEDOR;
+                p.ID_TIPO_PROVEEDOR = proveedor.ID_TIPO_PROVEEDOR;
+                p.PNOMBRE_PROVEEDOR = proveedor.PNOMBRE_PROVEEDOR;
+                p.SNOMBRE_PROVEEDOR = proveedor.SNOMBRE_PROVEEDOR;
 
+                ent.SaveChanges();
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+
+        public PROVEEDOR BuscarProveedor(short ID_USUARIO) {
+            PROVEEDOR p = ent.PROVEEDOR.FirstOrDefault(x => x.ID_USUARIO == ID_USUARIO);
+            return p;
+        }
     }
 }

@@ -53,5 +53,26 @@ namespace Datos
             return lista;
         }
 
+        public bool UpdateEmpleado(EMPLEADO empleado) {
+            EMPLEADO e = ent.EMPLEADO.FirstOrDefault(x => x.RUT_EMPLEADO == empleado.RUT_EMPLEADO);
+            if (e != null) {
+                e.APP_MATERNO_EMPLEADO = empleado.APP_MATERNO_EMPLEADO;
+                e.APP_PATERNO_EMPLEADO = empleado.APP_PATERNO_EMPLEADO;
+                e.PNOMBRE_EMPLEADO = empleado.PNOMBRE_EMPLEADO;
+                e.SNOMBRE_EMPLEADO = empleado.SNOMBRE_EMPLEADO;
+
+                ent.SaveChanges();
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+
+        public EMPLEADO BuscarEmpleado(short ID_USUARIO) {
+            EMPLEADO e = ent.EMPLEADO.FirstOrDefault(x => x.ID_USUARIO == ID_USUARIO);
+            return e;
+        }
+
     }
 }

@@ -87,15 +87,10 @@ namespace Web.Administrador
                 ddlPais.DataValueField = "ID_PAIS";
                 ddlPais.DataBind();
 
-                ddlRegion.DataSource = coleccionRegion;
+                ddlRegion.DataSource = coleccionRegion.Where(x => x.Id_Pais == int.Parse(ddlPais.SelectedValue));
                 ddlRegion.DataTextField = "Nombre";
                 ddlRegion.DataValueField = "Id_Region";
                 ddlRegion.DataBind();
-
-                ddlComuna.DataSource = coleccionComuna;
-                ddlComuna.DataTextField = "Nombre";
-                ddlComuna.DataValueField = "Id_Comuna";
-                ddlComuna.DataBind();
 
                 ddlTipoProveedor.DataSource = coleccionTipo;
                 ddlTipoProveedor.DataTextField = "NOMBRE_TIPO";
@@ -598,25 +593,17 @@ namespace Web.Administrador
 
         protected void ddlPais_SelectedIndexChanged(object sender, EventArgs e)
         {
-            /*if (ddlPais.SelectedValue.Equals("Chile"))
-            {
-                ddlRegion.DataSource = coleccionRegion.Where(x => x.Id_Pais == 1);
-                ddlRegion.DataBind();
-                ddlRegion.Enabled = true;
-                
-            }
-            else
-            {
-                ddlComuna.Enabled = false;
-                ddlRegion.Enabled = false;
-            }*/
-            ddlComuna.Enabled = false;
-            ddlRegion.Enabled = false;
+            ddlRegion.DataSource = coleccionRegion.Where(x => x.Id_Pais == int.Parse(ddlPais.SelectedValue));
+            ddlRegion.DataTextField = "Nombre";
+            ddlRegion.DataValueField = "Id_Region";
+            ddlRegion.DataBind();
         }
 
         protected void ddlRegion_SelectedIndexChanged(object sender, EventArgs e)
         {
             ddlComuna.DataSource = coleccionComuna.Where(x => x.Id_Region == int.Parse(ddlRegion.SelectedValue));
+            ddlComuna.DataTextField = "Nombre";
+            ddlComuna.DataValueField = "Id_Comuna";
             ddlComuna.DataBind();
             ddlComuna.Enabled = true;
         }

@@ -14,14 +14,20 @@ namespace Web.Administrador
 {
     public partial class WebUsuarios : System.Web.UI.Page
     {
+
+        private List<Usuario> users;
+        private List<Modelo.Empleado> empleados;
+        private List<Modelo.Cliente> clientes;
+        private List<Modelo.Proveedor> proveedores;
+
         void Page_PreInit(object sender, EventArgs e)
         {
             if (MiSesion != null)
             {
                 if (MiSesion.TIPO_USUARIO != null && MiSesion.ESTADO != null)
                 {
-                    if (MiSesion.TIPO_USUARIO.Equals("Administrador") &&
-                    MiSesion.ESTADO.Equals("Habilitado"))
+                    if (MiSesion.TIPO_USUARIO.Equals(Tipo_Usuario.Administrador.ToString()) &&
+                    MiSesion.ESTADO.Equals(Estado_Usuario.Habilitado.ToString()))
                     {
                         MasterPageFile = "~/Administrador/AdminM.Master";
                     }
@@ -63,10 +69,10 @@ namespace Web.Administrador
         
         private void CargarGriedView() {
             //Carga listas con datos
-            List<Usuario> users = UsuarioCollection.ListaUsuarios();
-            List<Modelo.Empleado> empleados = EmpleadoCollection.ListaEmpleados();
-            List<Modelo.Cliente> clientes = ClienteCollection.ListaClientes();
-            List<Modelo.Proveedor> proveedores = ProveedorCollection.ListaProveedores();
+            users = UsuarioCollection.ListaUsuarios();
+            empleados = EmpleadoCollection.ListaEmpleados();
+            clientes = ClienteCollection.ListaClientes();
+            proveedores = ProveedorCollection.ListaProveedores();
 
             Usuario user;
             
@@ -87,6 +93,7 @@ namespace Web.Administrador
                 foreach (var item in list) {
                     user.NOMBRE_USUARIO = item.NOMBRE_USUARIO;
                     user.TIPO_USUARIO = item.TIPO_USUARIO;
+                    user.PASSWORD = item.PASSWORD;
                     user.ESTADO = item.ESTADO;
                 }
                 dt.Rows.Add(c.ID_USUARIO,c.NOMBRE_CLIENTE,user.NOMBRE_USUARIO,user.TIPO_USUARIO,user.ESTADO);
@@ -98,6 +105,7 @@ namespace Web.Administrador
                 foreach (var item in list) {
                     user.NOMBRE_USUARIO = item.NOMBRE_USUARIO;
                     user.TIPO_USUARIO = item.TIPO_USUARIO;
+                    user.PASSWORD = item.PASSWORD;
                     user.ESTADO = item.ESTADO;
                 }
                 dt.Rows.Add(e.ID_USUARIO,e.PNOMBRE_EMPLEADO+ " " + e.APP_PATERNO_EMPLEADO + " " + e.APP_MATERNO_EMPLEADO,user.NOMBRE_USUARIO,user.TIPO_USUARIO,user.ESTADO);
@@ -109,6 +117,7 @@ namespace Web.Administrador
                 foreach (var item in list) {
                     user.NOMBRE_USUARIO = item.NOMBRE_USUARIO;
                     user.TIPO_USUARIO = item.TIPO_USUARIO;
+                    user.PASSWORD = item.PASSWORD;
                     user.ESTADO = item.ESTADO;
                 }
                 dt.Rows.Add(p.ID_USUARIO,p.PNOMBRE_PROVEEDOR + " " + p.APP_PATERNO_PROVEEDOR + " " + p.APP_MATERNO_PROVEEDOR,user.NOMBRE_USUARIO,user.TIPO_USUARIO,user.ESTADO);
@@ -120,15 +129,133 @@ namespace Web.Administrador
         }
 
         protected void gvUsuario_RowEditing(object sender,GridViewEditEventArgs e) {
-            string tipo = gvUsuario.DataKeys[e.NewEditIndex].Value.ToString();
+            string tipo = gvUsuario.DataKeys[e.NewEditIndex].Values["Tipo"].ToString();
+            int id = int.Parse(gvUsuario.DataKeys[e.NewEditIndex].Values["ID"].ToString());
             if (tipo.Equals(Tipo_Usuario.Administrador.ToString()) || tipo.Equals(Tipo_Usuario.Empleado.ToString())) {
+                Usuario user = new Usuario();
+                var list = users.Where(x => x.ID_USUARIO == id).ToList();
+                foreach (Usuario item in list) {
+                    user.NOMBRE_USUARIO = item.NOMBRE_USUARIO;
+                    user.TIPO_USUARIO = item.TIPO_USUARIO;
+                    user.PASSWORD = item.PASSWORD;
+                    user.ESTADO = item.ESTADO;
+                    user.ID_USUARIO = item.ID_USUARIO;
+                }
+                SesionEdit = user;
+                Modelo.Empleado emp = new Modelo.Empleado();
+                var empl = empleados.Where(x => x.ID_USUARIO == id).ToList();
+                foreach (Modelo.Empleado item in empl) {
+                    emp.APP_MATERNO_EMPLEADO = item.APP_MATERNO_EMPLEADO;
+                    emp.APP_PATERNO_EMPLEADO = item.APP_PATERNO_EMPLEADO;
+                    emp.DV_EMPLEADO = item.DV_EMPLEADO;
+                    emp.ID_USUARIO = item.ID_USUARIO;
+                    emp.PNOMBRE_EMPLEADO = item.PNOMBRE_EMPLEADO;
+                    emp.RUT_EMPLEADO = item.RUT_EMPLEADO;
+                    emp.SNOMBRE_EMPLEADO = item.SNOMBRE_EMPLEADO;
+                }
+                SesionEmp = emp;
                 Response.Redirect("../Empleado/WebEditarEmpleado.aspx");
             }
-            if (tipo.Equals(Tipo_Usuario.Administrador.ToString()) || tipo.Equals(Tipo_Usuario.Empleado.ToString())) {
+            if (tipo.Equals(Tipo_Usuario.Cliente.ToString())) {
+                Usuario user = new Usuario();
+                var list = users.Where(x => x.ID_USUARIO == id).ToList();
+                foreach (Usuario item in list) {
+                    user.NOMBRE_USUARIO = item.NOMBRE_USUARIO;
+                    user.TIPO_USUARIO = item.TIPO_USUARIO;
+                    user.ESTADO = item.ESTADO;
+                    user.PASSWORD = item.PASSWORD;
+                    user.ID_USUARIO = item.ID_USUARIO;
+                }
+                SesionEdit = user;
+                Modelo.Cliente cli = new Modelo.Cliente();
+                var clil = clientes.Where(x => x.ID_USUARIO == id).ToList();
+                foreach (Modelo.Cliente item in clil) {
+                    cli.CORREO_CLIENTE = item.CORREO_CLIENTE;
+                    cli.DIRECCION_CLIENTE = item.DIRECCION_CLIENTE;
+                    cli.DV_CLIENTE = item.DV_CLIENTE;
+                    cli.ID_USUARIO = item.ID_USUARIO;
+                    cli.ID_COMUNA = item.ID_COMUNA;
+                    cli.NOMBRE_CLIENTE = item.NOMBRE_CLIENTE;
+                    cli.RUT_CLIENTE = item.RUT_CLIENTE;
+                    cli.TELEFONO_CLIENTE = item.TELEFONO_CLIENTE;
+                }
+                SesionCl = cli;
                 Response.Redirect("../Cliente/WebEditarCliente.aspx");
             }
-            if (tipo.Equals(Tipo_Usuario.Administrador.ToString()) || tipo.Equals(Tipo_Usuario.Empleado.ToString())) {
+            if (tipo.Equals(Tipo_Usuario.Proveedor.ToString())) {
+                Usuario user = new Usuario();
+                var list = users.Where(x => x.ID_USUARIO == id).ToList();
+                foreach (Usuario item in list) {
+                    user.NOMBRE_USUARIO = item.NOMBRE_USUARIO;
+                    user.TIPO_USUARIO = item.TIPO_USUARIO;
+                    user.ESTADO = item.ESTADO;
+                    user.PASSWORD = item.PASSWORD;
+                    user.ID_USUARIO = item.ID_USUARIO;
+                }
+                SesionEdit = user;
+                Modelo.Proveedor prov = new Modelo.Proveedor();
+                var provl = proveedores.Where(x => x.ID_USUARIO == id).ToList();
+                foreach (Modelo.Proveedor item in provl) {
+                    prov.APP_MATERNO_PROVEEDOR = item.APP_MATERNO_PROVEEDOR;
+                    prov.APP_PATERNO_PROVEEDOR = item.APP_PATERNO_PROVEEDOR;
+                    prov.DV_PROVEEDOR = item.DV_PROVEEDOR;
+                    prov.ID_USUARIO = item.ID_USUARIO;
+                    prov.ID_TIPO_PROVEEDOR = item.ID_TIPO_PROVEEDOR;
+                    prov.PNOMBRE_PROVEEDOR = item.PNOMBRE_PROVEEDOR;
+                    prov.RUT_PROVEEDOR = item.RUT_PROVEEDOR;
+                    prov.SNOMBRE_PROVEEDOR = item.SNOMBRE_PROVEEDOR;
+                }
+                SesionPro = prov;
                 Response.Redirect("../Proveedor/WebEditarProveedor.aspx");
+            }
+        }
+
+        //Sesione para editar datos
+        public Modelo.Cliente SesionCl {
+            get {
+                if (Session["Cliente"] == null) {
+                    Session["Cliente"] = new Modelo.Cliente();
+                }
+                return (Modelo.Cliente)Session["Cliente"];
+            }
+            set {
+                Session["Cliente"] = value;
+            }
+        }
+
+        public Modelo.Proveedor SesionPro {
+            get {
+                if (Session["Proveedor"] == null) {
+                    Session["Proveedor"] = new Modelo.Proveedor();
+                }
+                return (Modelo.Proveedor)Session["Proveedor"];
+            }
+            set {
+                Session["Proveedor"] = value;
+            }
+        }
+
+        public Modelo.Empleado SesionEmp {
+            get {
+                if (Session["Empleado"] == null) {
+                    Session["Empleado"] = new Modelo.Empleado();
+                }
+                return (Modelo.Empleado)Session["Empleado"];
+            }
+            set {
+                Session["Empleado"] = value;
+            }
+        }
+
+        public Usuario SesionEdit {
+            get {
+                if (Session["UsuarioEdit"] == null) {
+                    Session["UsuarioEdit"] = new Usuario();
+                }
+                return (Usuario)Session["UsuarioEdit"];
+            }
+            set {
+                Session["UsuarioEdit"] = value;
             }
         }
     }
