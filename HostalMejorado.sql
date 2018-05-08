@@ -1,9 +1,9 @@
---Creaci贸n de Usuario
+--Creaci髇 de Usuario
 
 CREATE USER HOSTAL IDENTIFIED BY 123;
 GRANT DBA TO HOSTAL;
 
---Creaci贸n de Tablas
+--Creaci髇 de Tablas
 
 CREATE TABLE USUARIO(
 ID_USUARIO NUMBER(5),
@@ -269,7 +269,7 @@ RUT_EMPLEADO NUMBER(8) NOT NULL,
 NUMERO_RECEPCION NUMBER(5),
 RUT_PROVEEDOR NUMBER(8) NOT NULL,
 ESTADO_DESPACHO VARCHAR2(25) NOT NULL,
-ADD COMENTARIO VARCHAR2(256),
+COMENTARIO VARCHAR2(256),
 CONSTRAINT PK_PEDIDO PRIMARY KEY(NUMERO_PEDIDO),
 CONSTRAINT FK_PEDIDO_EMPLEADO FOREIGN KEY(RUT_EMPLEADO) REFERENCES EMPLEADO(RUT_EMPLEADO),
 CONSTRAINT FK_PEDIDO_PROVEEDOR FOREIGN KEY(RUT_PROVEEDOR) REFERENCES PROVEEDOR(RUT_PROVEEDOR),
@@ -313,7 +313,7 @@ CONSTRAINT FK_DETALLE_FACTURA_FACTURA FOREIGN KEY(ID_FACTURA) REFERENCES FACTURA
 CONSTRAINT FK_DETALLE_FACTURA_CLIENTE FOREIGN KEY(RUT_CLIENTE) REFERENCES CLIENTE(RUT_CLIENTE)
 );
 
---Creaci贸n de Secuencias
+--Creaci髇 de Secuencias
 
 CREATE SEQUENCE seq_usuario
 MINVALUE 1
@@ -340,7 +340,12 @@ MINVALUE 1
 START WITH 1
 INCREMENT BY 1;
 
---Creaci贸n Funci贸n C贸digo Producto
+CREATE SEQUENCE SEQ_DETALLE_PEDIDO
+MINVALUE 1
+START WITH 1
+INCREMENT BY 1;
+
+--Creaci髇 Funci髇 C骴igo Producto
 
 CREATE OR REPLACE FUNCTION FN_PRODUCTO (P_ID_PROVEEDOR IN PRODUCTO.RUT_PROVEEDOR%TYPE,
 										P_ID_FAMILIA IN PRODUCTO.ID_FAMILIA%TYPE,
@@ -369,7 +374,7 @@ RETURN V_ID_PRODUCTO;
 
 END FN_PRODUCTO;
 
---Creaci贸n de TRIGGER
+--Creaci髇 de TRIGGER
 
 create or replace TRIGGER TGR_USUARIO
 BEFORE INSERT ON USUARIO
@@ -473,7 +478,7 @@ COMPOUND TRIGGER
 
 END TGR_PRODUCTO;
 
---Creaci贸n Trigger Pedido
+--Creaci髇 Trigger Pedido
 
 create or replace TRIGGER TGR_PEDIDO
 BEFORE INSERT ON PEDIDO
@@ -485,7 +490,7 @@ BEGIN
   FROM dual;
 END;
 
---Creaci贸n Trigger Detalle Pedido
+--Creaci髇 Trigger Detalle Pedido
 
 create or replace TRIGGER TGR_DETALLE_PEDIDO
 BEFORE INSERT ON DETALLE_PEDIDO
@@ -501,26 +506,26 @@ BEGIN
   FROM dual;
 END;
 
---Inserci贸n de Usuarios
---Contrase帽a: admin
+--Inserci髇 de Usuarios
+--Contrase馻: admin
 INSERT INTO USUARIO values (null, 'Admin', '$2a$12$i4fY7wI7DtcJRVeHOitdn.0nuEebwCfoqNtx49sBIxuzXNYQUujIS', 'Administrador', 'Habilitado');
---Contrase帽a: cliente
+--Contrase馻: cliente
 INSERT INTO USUARIO values (null, 'Cliente', '$2a$12$iJ28fJuzmeSvTcLG2sJ1WOrSYogWPQF1yw5x6xgJnnJ.DukHZUhpi', 'Cliente', 'Habilitado');
---Contrase帽a: proveedor
+--Contrase馻: proveedor
 INSERT INTO USUARIO values (null, 'Proveedor', '$2a$12$gwfSuMQjh6onOVXyH7qjsuDAjpCXt527EI.EwbetNnSt4.Ey6safu', 'Proveedor', 'Habilitado');
---Contrase帽a: Empleado
+--Contrase馻: Empleado
 INSERT INTO USUARIO values (null, 'Empleado', '$2a$12$7RNSh5xuIFf6z1ansi6aTeoYQQJXuO.2mg7zQrzWDYvdu.OH2lyd2', 'Empleado', 'Habilitado');
 
---Inserci贸n de datos direcci贸n
+--Inserci髇 de datos direcci髇
 
 INSERT INTO PAIS VALUES (1, 'Chile');
 
-INSERT INTO REGION VALUES(1, 'Regi贸n Metropolitana', 1);
+INSERT INTO REGION VALUES(1, 'Regi髇 Metropolitana', 1);
 
 INSERT INTO COMUNA VALUES(1, 'San Miguel',1);
-INSERT INTO COMUNA VALUES(2, 'San Joaqu铆n',1);
+INSERT INTO COMUNA VALUES(2, 'San Joaqu韓',1);
 INSERT INTO COMUNA VALUES(3, 'Macul',1);
-INSERT INTO COMUNA VALUES(4, 'Pe帽alol茅n',1);
+INSERT INTO COMUNA VALUES(4, 'Pe馻lol閚',1);
 
 --Inserci贸n de datos Tipo PROVEEDOR
 
