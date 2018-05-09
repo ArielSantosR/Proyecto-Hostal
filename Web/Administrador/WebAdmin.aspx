@@ -54,6 +54,9 @@
                         <asp:button runat="server" text="Ver Pedidos Pendientes" ID="btnVerPedido" CssClass="btn btn-primary btn-lg btn-block login-button" style="font-size: 15px" OnClick="btnVerPedido_Click"  />
                          <asp:button runat="server" text="Crear Categoría Plato" ID="btnCrearCategoriaPlato" CssClass="btn btn-primary btn-lg btn-block login-button" style="font-size: 15px" OnClick="btnCrearCategoriaPlato_Click"  />
                          <asp:button runat="server" text="Ver Categoría Plato" ID="btnVerCategoriaPlato" CssClass="btn btn-primary btn-lg btn-block login-button" style="font-size: 15px" OnClick="btnVerCategoriaPlato_Click"  />
+                         <asp:button runat="server" text="Crear País" ID="btnCrearPais" CssClass="btn btn-primary btn-lg btn-block login-button" style="font-size: 15px" OnClick="btnCrearPais_Click"  />
+                         <asp:button runat="server" text="Ver Países" ID="btnVerPaises" CssClass="btn btn-primary btn-lg btn-block login-button" style="font-size: 15px" OnClick="btnVerPaises_Click"  />
+ 
                          </div>
                 </div>
 

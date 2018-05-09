@@ -158,6 +158,13 @@ namespace Web
         {
             Response.Redirect("WebVerCategoriaPlato.aspx");
         }
-
+        protected void btnCrearPais_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("WebCrearPais.aspx");
+        }
+        protected void btnVerPaises_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("WebVerPais.aspx");
+        }
     }
 }
