@@ -38,7 +38,6 @@ namespace Datos
         public DbSet<EMPLEADO> EMPLEADO { get; set; }
         public DbSet<FACTURA> FACTURA { get; set; }
         public DbSet<FAMILIA> FAMILIA { get; set; }
-        public DbSet<HABITACION> HABITACION { get; set; }
         public DbSet<HUESPED> HUESPED { get; set; }
         public DbSet<ORDEN_COMPRA> ORDEN_COMPRA { get; set; }
         public DbSet<PAIS> PAIS { get; set; }
@@ -54,7 +53,8 @@ namespace Datos
         public DbSet<TIPO_PROVEEDOR> TIPO_PROVEEDOR { get; set; }
         public DbSet<USUARIO> USUARIO { get; set; }
         public DbSet<CATEGORIA_HABITACION> CATEGORIA_HABITACION { get; set; }
-        public DbSet<LOG_ERRORES> LOG_ERRORES { get; set; }
         public DbSet<NOTIFICACION> NOTIFICACION { get; set; }
+        public DbSet<HABITACION> HABITACION { get; set; }
+        public DbSet<LOG_ERRORES> LOG_ERRORESSet { get; set; }
     }
 }

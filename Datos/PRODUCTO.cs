@@ -30,14 +30,14 @@ namespace Datos
         public short ID_FAMILIA { get; set; }
         public int RUT_PROVEEDOR { get; set; }
         public short ID_PRODUCTO_SEQ { get; set; }
+        public string UNIDAD_MEDIDA { get; set; }
     
         public virtual ICollection<DETALLE_PEDIDO> DETALLE_PEDIDO { get; set; }
         public virtual ICollection<DETALLE_RECEPCION> DETALLE_RECEPCION { get; set; }
         public virtual FAMILIA FAMILIA { get; set; }
         public virtual PROVEEDOR PROVEEDOR { get; set; }
 
-        public string NombreYPrecio
-        {
+        public string NombreYPrecio {
             get { return this.NOMBRE_PRODUCTO + " $" + this.PRECIO_PRODUCTO; }
         }
     }

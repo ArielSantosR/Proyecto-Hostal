@@ -64,7 +64,6 @@ namespace Datos
 
             if (h != null)
             {
-                h.PRECIO_HABITACION = habitacion.PRECIO_HABITACION;
                 h.ID_TIPO_HABITACION = habitacion.ID_TIPO_HABITACION;
                 h.RUT_CLIENTE = habitacion.RUT_CLIENTE;
                 h.ESTADO_HABITACION = habitacion.ESTADO_HABITACION;

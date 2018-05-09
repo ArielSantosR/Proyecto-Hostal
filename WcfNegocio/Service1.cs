@@ -507,7 +507,6 @@ namespace WcfNegocio
             Datos.HABITACION hDatos = new Datos.HABITACION();
             //Datos Proveedor
             hDatos.NUMERO_HABITACION = h.NUMERO_HABITACION;
-            hDatos.PRECIO_HABITACION = h.PRECIO_HABITACION;
             hDatos.ESTADO_HABITACION = h.ESTADO_HABITACION;
             hDatos.ID_TIPO_HABITACION = h.ID_TIPO_HABITACION;
             hDatos.ID_CATEGORIA_HABITACION = h.ID_CATEGORIA_HABITACION;
@@ -524,7 +523,6 @@ namespace WcfNegocio
             foreach (Datos.HABITACION h in habitacion) {
                 Modelo.Habitacion hModelo = new Modelo.Habitacion();
                 hModelo.NUMERO_HABITACION = h.NUMERO_HABITACION;
-                hModelo.PRECIO_HABITACION = h.PRECIO_HABITACION;
                 hModelo.ESTADO_HABITACION = h.ESTADO_HABITACION;
                 hModelo.ID_TIPO_HABITACION = h.ID_TIPO_HABITACION;
                 hModelo.RUT_CLIENTE = h.RUT_CLIENTE;
@@ -576,7 +574,6 @@ namespace WcfNegocio
             {
                 Datos.HABITACION hDatos2 = serv.obtenerHabitacion(hDatos);
                 h.NUMERO_HABITACION = hDatos2.NUMERO_HABITACION;
-                h.PRECIO_HABITACION = hDatos2.PRECIO_HABITACION;
                 h.ESTADO_HABITACION = hDatos2.ESTADO_HABITACION;
                 h.RUT_CLIENTE = hDatos2.RUT_CLIENTE;
                 h.ID_TIPO_HABITACION = hDatos2.ID_TIPO_HABITACION;
@@ -595,7 +592,6 @@ namespace WcfNegocio
             Datos.HABITACION hDatos = new Datos.HABITACION();
 
             hDatos.NUMERO_HABITACION = h.NUMERO_HABITACION;
-            hDatos.PRECIO_HABITACION = h.PRECIO_HABITACION;
             hDatos.ID_TIPO_HABITACION = h.ID_TIPO_HABITACION;
             hDatos.ESTADO_HABITACION = h.ESTADO_HABITACION;
             hDatos.RUT_CLIENTE = h.RUT_CLIENTE;

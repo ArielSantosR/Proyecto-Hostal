@@ -21,16 +21,15 @@ namespace Datos
         }
     
         public short NUMERO_HABITACION { get; set; }
-        public int PRECIO_HABITACION { get; set; }
         public string ESTADO_HABITACION { get; set; }
         public short ID_TIPO_HABITACION { get; set; }
         public Nullable<int> RUT_CLIENTE { get; set; }
         public short ID_CATEGORIA_HABITACION { get; set; }
     
+        public virtual CATEGORIA_HABITACION CATEGORIA_HABITACION { get; set; }
         public virtual CLIENTE CLIENTE { get; set; }
         public virtual TIPO_HABITACION TIPO_HABITACION { get; set; }
         public virtual ICollection<HUESPED> HUESPED { get; set; }
         public virtual ICollection<PENSION> PENSION { get; set; }
-        public virtual CATEGORIA_HABITACION CATEGORIA_HABITACION { get; set; }
     }
 }

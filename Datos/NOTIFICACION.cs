@@ -17,6 +17,7 @@ namespace Datos
         public int ID_NOTIFICACION { get; set; }
         public string MENSAJE { get; set; }
         public short ID_USUARIO { get; set; }
+        public string ESTADO_NOTIFICACION { get; set; }
     
         public virtual USUARIO USUARIO { get; set; }
     }

@@ -20,11 +20,10 @@
 
         function PermisosDeUsuario() {
 
-         var control = <%= S%>;
-         var tipo = control.options[control.selectedIndex].value;
+         var tipo = <%= this.MiSesion.TIPO_USUARIO%>;
 
-         if (tipo == "Cliente") {
-             $(".cliente").delay(200).show(1500);
+         if (tipo == "Administrador") {
+             $(".admin").delay(200).show(1500);
              $('.cliente').find(':input').prop('disabled', false);
              $(".proveedor").hide(1000);
              $('.proveedor').find(':input').prop('disabled', true);

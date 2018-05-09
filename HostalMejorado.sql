@@ -1,9 +1,9 @@
-﻿--Creaci�n de Usuario
+﻿--Creación de Usuario
 
 CREATE USER HOSTAL IDENTIFIED BY 123;
 GRANT DBA TO HOSTAL;
 
---Creaci�n de Tablas
+--Creación de Tablas
 
 CREATE TABLE USUARIO(
 ID_USUARIO NUMBER(5),
@@ -18,6 +18,7 @@ CREATE TABLE NOTIFICACION (
 ID_NOTIFICACION NUMBER(10),
 MENSAJE VARCHAR2(250) NOT NULL,
 ID_USUARIO NUMBER(5) NOT NULL,
+ESTADO_NOTIFICACION VARCHAR2(25) NOT NULL,
 CONSTRAINT PK_NOTIFICACION PRIMARY KEY(ID_NOTIFICACION),
 CONSTRAINT FK_NOTIFICACION_USUARIO FOREIGN KEY(ID_USUARIO) REFERENCES USUARIO(ID_USUARIO)
 );
@@ -78,7 +79,7 @@ PRECIO_HABITACION NUMBER(10) NOT NULL,
 ESTADO_HABITACION VARCHAR2(50) NOT NULL,
 ID_TIPO_HABITACION NUMBER(5) NOT NULL,
 RUT_CLIENTE NUMBER(8),
-ID_CATEGORIA_HABITACION NUMBER(3),
+ID_CATEGORIA_HABITACION NUMBER(3) NOT NULL,
 CONSTRAINT PK_HABITACION PRIMARY KEY(NUMERO_HABITACION),
 CONSTRAINT FK_HABITACION_TIPO_HABITACION FOREIGN KEY(ID_TIPO_HABITACION) REFERENCES TIPO_HABITACION(ID_TIPO_HABITACION),
 CONSTRAINT FK_HABITACION_CLIENTE FOREIGN KEY(RUT_CLIENTE) REFERENCES CLIENTE(RUT_CLIENTE),
@@ -231,7 +232,7 @@ FECHA_VENCIMIENTO_PRODUCTO DATE,
 STOCK_PRODUCTO NUMBER(5) NOT NULL,
 STOCK_CRITICO_PRODUCTO NUMBER(5) NOT NULL,
 DESCRIPCION_PRODUCTO VARCHAR2(250) NOT NULL,
-PRECIO_PRODUCTO NUMBER(10) NOT NULL,
+UNIDAD_MEDIDA VARCHAR2(25) NOT NULL,
 ID_FAMILIA NUMBER(5) NOT NULL,
 RUT_PROVEEDOR NUMBER(8) NOT NULL,
 ID_PRODUCTO_SEQ NUMBER(5) NOT NULL,
@@ -313,7 +314,13 @@ CONSTRAINT FK_DETALLE_FACTURA_FACTURA FOREIGN KEY(ID_FACTURA) REFERENCES FACTURA
 CONSTRAINT FK_DETALLE_FACTURA_CLIENTE FOREIGN KEY(RUT_CLIENTE) REFERENCES CLIENTE(RUT_CLIENTE)
 );
 
---Creaci�n de Secuencias
+CREATE TABLE LOG_ERRORES(
+ID_ERROR NUMBER(10) CONSTRAINT PK_LOG_ERRORES PRIMARY KEY,
+NUMERO_ERROR VARCHAR2(250) NOT NULL,
+MENSAJE VARCHAR(250) NOT NULL
+);
+
+--Creación de Secuencias
 
 CREATE SEQUENCE seq_usuario
 MINVALUE 1
@@ -365,7 +372,7 @@ MINVALUE 1
 START WITH 1
 INCREMENT BY 1;
 
---Creaci�n Funci�n C�digo Producto
+--Creación Función Código Producto
 
 CREATE OR REPLACE FUNCTION FN_PRODUCTO (P_ID_PROVEEDOR IN PRODUCTO.RUT_PROVEEDOR%TYPE,
 										P_ID_FAMILIA IN PRODUCTO.ID_FAMILIA%TYPE,
@@ -394,7 +401,7 @@ RETURN V_ID_PRODUCTO;
 
 END FN_PRODUCTO;
 
---Creaci�n de TRIGGER
+--Creación de TRIGGER
 
 create or replace TRIGGER TGR_USUARIO
 BEFORE INSERT ON USUARIO
@@ -497,7 +504,7 @@ COMPOUND TRIGGER
 
 END TGR_PRODUCTO;
 
---Creaci�n Trigger Pedido
+--Creación Trigger Pedido
 
 create or replace TRIGGER TGR_PEDIDO
 BEFORE INSERT ON PEDIDO
@@ -509,7 +516,7 @@ BEGIN
   FROM dual;
 END;
 
---Creaci�n Trigger Detalle Pedido
+--Creación Trigger Detalle Pedido
 
 create or replace TRIGGER TGR_DETALLE_PEDIDO
 BEFORE INSERT ON DETALLE_PEDIDO
@@ -545,26 +552,330 @@ BEGIN
   FROM dual;
 END;
 
---Inserci�n de Usuarios
---Contrase�a: admin
+--Inserción de Usuarios
+--Contraseña: admin
 INSERT INTO USUARIO values (null, 'Admin', '$2a$12$i4fY7wI7DtcJRVeHOitdn.0nuEebwCfoqNtx49sBIxuzXNYQUujIS', 'Administrador', 'Habilitado');
---Contrase�a: cliente
+--Contraseña: cliente
 INSERT INTO USUARIO values (null, 'Cliente', '$2a$12$iJ28fJuzmeSvTcLG2sJ1WOrSYogWPQF1yw5x6xgJnnJ.DukHZUhpi', 'Cliente', 'Habilitado');
---Contrase�a: proveedor
+--Contraseña: proveedor
 INSERT INTO USUARIO values (null, 'Proveedor', '$2a$12$gwfSuMQjh6onOVXyH7qjsuDAjpCXt527EI.EwbetNnSt4.Ey6safu', 'Proveedor', 'Habilitado');
---Contrase�a: Empleado
+--Contraseña: Empleado
 INSERT INTO USUARIO values (null, 'Empleado', '$2a$12$7RNSh5xuIFf6z1ansi6aTeoYQQJXuO.2mg7zQrzWDYvdu.OH2lyd2', 'Empleado', 'Habilitado');
 
---Inserci�n de datos direcci�n
+--Inserción de datos dirección
 
-INSERT INTO PAIS VALUES (1, 'Chile');
 
-INSERT INTO REGION VALUES(1, 'Regi�n Metropolitana', 1);
+--REGIONES
+INSERT INTO REGION VALUES(1,'REGIÓN DE ARICA Y PARINACOTA', 1);
+INSERT INTO REGION VALUES(2,'REGIÓN DE TARAPACÁ', 1);
+INSERT INTO REGION VALUES(3,'REGIÓN DE ANTOFAGASTA', 1);
+INSERT INTO REGION VALUES(4,'REGIÓN DE ATACAMA', 1);
+INSERT INTO REGION VALUES(5,'REGIÓN DE COQUIMBO', 1);
+INSERT INTO REGION VALUES(6,'REGIÓN DE VALPARAÍSO', 1);
+INSERT INTO REGION VALUES(7,'REGIÓN DEL LIBERTADOR GRAL. BERNARDO O´HIGGINS', 1);
+INSERT INTO REGION VALUES(8,'REGIÓN DEL MAULE', 1);
+INSERT INTO REGION VALUES(9,'REGIÓN DEL BIOBÍO', 1);
+INSERT INTO REGION VALUES(10,'REGIÓN DE LA ARAUCANÍA', 1);
+INSERT INTO REGION VALUES(11,'REGIÓN DE LOS RÍOS', 1);
+INSERT INTO REGION VALUES(12,'REGIÓN DE LOS LAGOS', 1);
+INSERT INTO REGION VALUES(13,'REGIÓN DE AISÉN', 1);
+INSERT INTO REGION VALUES(14,'REGIÓN DE MAGALLANES Y DE LA ANTÁRTICA CHILENA', 1);
+INSERT INTO REGION VALUES(15,'REGIÓN METROPOLITANA DE SANTIAGO', 1);
 
-INSERT INTO COMUNA VALUES(1, 'San Miguel',1);
-INSERT INTO COMUNA VALUES(2, 'San Joaqu�n',1);
-INSERT INTO COMUNA VALUES(3, 'Macul',1);
-INSERT INTO COMUNA VALUES(4, 'Pe�alol�n',1);
+
+--COMUNAS
+
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Arica',1);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Camarones',1);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Putre',1);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'General Lagos',1);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Iquique',2);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Alto Hospicio',2);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Pozo Almonte',2);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Camiña',2);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Colchane',2);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Huara',2);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Pica',2);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Antofagasta',3);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Mejillones',3);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Sierra Gorda',3);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Taltal',3);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Calama',3);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Ollagüe',3);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'San Pedro de Atacama',3);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Tocopilla',3);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'María Elena',3);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Copiapó',4);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Caldera',4);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Tierra Amarilla',4);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Chañaral',4);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Diego de Almagro',4);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Vallenar',4);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Alto del Carmen',4);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Freirina',4);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Huasco',4);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'La Serena',5);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Coquimbo',5);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Andacollo',5);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'La Higuera',5);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Paiguano',5);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Vicuña',5);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Illapel',5);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Canela',5);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Los Vilos',5);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Salamanca',5);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Ovalle',5);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Combarbalá',5);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Monte Patria',5);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Punitaqui',5);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Río Hurtado',5);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Valparaíso',6);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Casablanca',6);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Concón',6);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Juan Fernández',6);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Puchuncaví',6);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Quintero',6);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Viña del Mar',6);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Isla de Pascua',6);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Los Andes',6);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Calle Larga',6);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Rinconada',6);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'San Esteban',6);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'La Ligua',6);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Cabildo',6);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Papudo',6);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Petorca',6);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Zapallar',6);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Quillota',6);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Calera',6);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Hijuelas',6);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'La Cruz',6);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Nogales',6);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'San Antonio',6);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Algarrobo',6);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Cartagena',6);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'El Quisco',6);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'El Tabo',6);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Santo Domingo',6);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'San Felipe',6);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Catemu',6);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Llaillay',6);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Panquehue',6);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Putaendo',6);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Santa María',6);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Limache',6);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Quilpué',6);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Villa Alemana',6);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Olmué',6);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Rancagua',7);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Codegua',7);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Coinco',7);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Coltauco',7);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Doñihue',7);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Graneros',7);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Las Cabras',7);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Machalí',7);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Malloa',7);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Mostazal',7);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Olivar',7);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Peumo',7);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Pichidegua',7);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Quinta de Tilcoco',7);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Rengo',7);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Requínoa',7);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'San Vicente',7);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Pichilemu',7);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'La Estrella',7);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Litueche',7);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Marchihue',7);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Navidad',7);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Paredones',7);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'San Fernando',7);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Chépica',7);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Chimbarongo',7);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Lolol',7);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Nancagua',7);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Palmilla',7);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Peralillo',7);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Placilla',7);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Pumanque',7);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Santa Cruz',7);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Talca',8);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Constitución',8);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Curepto',8);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Empedrado',8);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Maule',8);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Pelarco',8);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Pencahue',8);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Río Claro',8);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'San Clemente',8);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'San Rafael',8);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Cauquenes',8);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Chanco',8);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Pelluhue',8);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Curicó',8);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Hualañé',8);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Licantén',8);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Molina',8);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Rauco',8);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Romeral',8);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Sagrada Familia',8);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Teno',8);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Vichuquén',8);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Linares',8);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Colbún',8);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Longaví',8);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Parral',8);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Retiro',8);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'San Javier',8);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Villa Alegre',8);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Yerbas Buenas',8);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Concepción',9);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Coronel',9);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Chiguayante',9);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Florida',9);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Hualqui',9);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Lota',9);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Penco',9);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'San Pedro de la Paz',9);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Santa Juana',9);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Talcahuano',9);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Tomé',9);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Hualpén',9);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Lebu',9);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Arauco',9);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Cañete',9);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Contulmo',9);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Curanilahue',9);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Los Alamos',9);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Tirúa',9);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Los Angeles',9);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Antuco',9);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Cabrero',9);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Laja',9);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Mulchén',9);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Nacimiento',9);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Negrete',9);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Quilaco',9);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Quilleco',9);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'San Rosendo',9);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Santa Bárbara',9);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Tucapel',9);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Yumbel',9);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Alto Biobío',9);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Chillán',9);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Bulnes',9);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Cobquecura',9);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Coelemu',9);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Coihueco',9);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Chillán Viejo',9);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'El Carmen',9);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Ninhue',9);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Ñiquén',9);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Pemuco',9);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Pinto',9);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Portezuelo',9);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Quillón',9);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Quirihue',9);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Ránquil',9);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'San Carlos',9);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'San Fabián',9);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'San Ignacio',9);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'San Nicolás',9);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Treguaco',9);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Yungay',9);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Temuco',10);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Carahue',10);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Cunco',10);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Curarrehue',10);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Freire',10);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Galvarino',10);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Gorbea',10);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Lautaro',10);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Loncoche',10);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Melipeuco',10);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Nueva Imperial',10);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Padre Las Casas',10);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Perquenco',10);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Pitrufquén',10);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Pucón',10);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Saavedra',10);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Teodoro Schmidt',10);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Toltén',10);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Vilcún',10);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Villarrica',10);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Cholchol',10);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Angol',10);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Collipulli',10);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Curacautín',10);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Ercilla',10);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Lonquimay',10);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Los Sauces',10);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Lumaco',10);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Purén',10);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Renaico',10);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Traiguén',10);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Victoria',10);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Valdivia',11);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Corral',11);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Lanco',11);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Los Lagos',11);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Máfil',11);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Mariquina',11);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Paillaco',11);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Panguipulli',11);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'La Unión',11);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Futrono',11);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Lago Ranco',11);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Río Bueno',11);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Puerto Montt',12);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Calbuco',12);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Cochamó',12);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Fresia',12);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Frutillar',12);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Los Muermos',12);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Llanquihue',12);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Maullín',12);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Puerto Varas',12);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Castro',12);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Ancud',12);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Chonchi',12);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Curaco de Vélez',12);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Dalcahue',12);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Puqueldón',12);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Queilén',12);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Quellón',12);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Quemchi',12);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Quinchao',12);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Osorno',12);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Puerto Octay',12);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Purranque',12);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Puyehue',12);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Río Negro',12);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'San Juan de la Costa',12);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'San Pablo',12);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Chaitén',12);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Futaleufú',12);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Hualaihué',12);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Palena',12);
+
+--FALTA REGION ID 13
+
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Punta Arenas',14);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Laguna Blanca',14);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Río Verde',14);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'San Gregorio',14);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Cabo de Hornos (Ex-Navarino)',14);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Antártica',14);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Porvenir',14);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Primavera',14);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Timaukel',14);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Natales',14);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Torres del Paine',14);
+
+--FALTA REGION ID 15
+
+
 
 --Inserción de datos Tipo PROVEEDOR
 
@@ -593,4 +904,11 @@ INSERT INTO FAMILIA VALUES (4, 'Aceite');
 INSERT INTO FAMILIA VALUES (5, 'Arroz');
 INSERT INTO FAMILIA VALUES (6, 'Pan');
 
+--Inserción de datos Empleado
+INSERT INTO EMPLEADO VALUES ('17925714', '9', 'Camilo', 'Alejandro', 'Muñoz', 'Guevara', '1'); 
+
+--Alteraciones de tablas
+ALTER TABLE HABITACION DROP COLUMN PRECIO_HABITACION;
+ALTER TABLE NOTIFICACION ADD ESTADO_NOTIFICACION VARCHAR2(25) NOT NULL;
+ALTER TABLE PRODUCTO ADD UNIDAD_MEDIDA VARCHAR2(25) NOT NULL;
 
