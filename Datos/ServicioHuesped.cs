@@ -65,6 +65,12 @@ namespace Datos
                          select consulta).ToList();
             return lista;
         }
+
+        public HUESPED BuscarHuesped(int RUT_HUESPED) {
+            HUESPED huesped = ent.HUESPED.FirstOrDefault(x => x.RUT_HUESPED == RUT_HUESPED);
+            return huesped;
+        }
+
         public bool ModificarHuesped(HUESPED h)
         {
             HUESPED huesped = ent.HUESPED.FirstOrDefault(objeto => objeto.RUT_HUESPED == h.RUT_HUESPED);

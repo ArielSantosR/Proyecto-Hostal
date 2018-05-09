@@ -123,6 +123,7 @@
     <Content Include="Administrador\WebVerTipoPlato.aspx" />
     <Content Include="Administrador\WebVerTipoProveedor.aspx" />
     <Content Include="Administrador\WebVerUsuarios.aspx" />
+    <Content Include="Cliente\WebAgregarPasajeros.aspx" />
     <Content Include="Cliente\WebCrearOrden.aspx" />
     <Content Include="Cliente\WebEditarCliente.aspx" />
     <Content Include="Cliente\WebVerHistorial.aspx" />
@@ -389,6 +390,13 @@
     </Compile>
     <Compile Include="Cliente\ClienteM.Master.designer.cs">
       <DependentUpon>ClienteM.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Cliente\WebAgregarPasajeros.aspx.cs">
+      <DependentUpon>WebAgregarPasajeros.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Cliente\WebAgregarPasajeros.aspx.designer.cs">
+      <DependentUpon>WebAgregarPasajeros.aspx</DependentUpon>
     </Compile>
     <Compile Include="Cliente\WebCrearOrden.aspx.cs">
       <DependentUpon>WebCrearOrden.aspx</DependentUpon>
