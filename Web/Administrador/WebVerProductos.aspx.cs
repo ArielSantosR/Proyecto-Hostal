@@ -53,7 +53,7 @@ namespace Web.Administrador
             //Lee los valores del LinkButton, primero usa la clase LinkButton para 
             //Transformar los datos de Sender, luego los lee y los asigna a una variable
             LinkButton btn = (LinkButton)(sender);
-            short ID_PRODUCTO = short.Parse(btn.CommandArgument);
+            long ID_PRODUCTO = long.Parse(btn.CommandArgument);
 
             Producto producto = new Producto();
             producto.ID_PRODUCTO = ID_PRODUCTO;
@@ -68,7 +68,7 @@ namespace Web.Administrador
             //Lee los valores del LinkButton, primero usa la clase LinkButton para 
             //Transformar los datos de Sender, luego los lee y los asigna a una variable
             LinkButton btn = (LinkButton)(sender);
-            short ID_PRODUCTO = short.Parse(btn.CommandArgument);
+            long ID_PRODUCTO = long.Parse(btn.CommandArgument);
 
             Producto producto = new Producto();
             producto.ID_PRODUCTO = ID_PRODUCTO;

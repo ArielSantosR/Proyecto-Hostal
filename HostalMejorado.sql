@@ -1,9 +1,9 @@
---Creación de Usuario
+--Creaciï¿½n de Usuario
 
 CREATE USER HOSTAL IDENTIFIED BY 123;
 GRANT DBA TO HOSTAL;
 
---Creación de Tablas
+--Creaciï¿½n de Tablas
 
 CREATE TABLE USUARIO(
 ID_USUARIO NUMBER(5),
@@ -313,7 +313,7 @@ CONSTRAINT FK_DETALLE_FACTURA_FACTURA FOREIGN KEY(ID_FACTURA) REFERENCES FACTURA
 CONSTRAINT FK_DETALLE_FACTURA_CLIENTE FOREIGN KEY(RUT_CLIENTE) REFERENCES CLIENTE(RUT_CLIENTE)
 );
 
---Creación de Secuencias
+--Creaciï¿½n de Secuencias
 
 CREATE SEQUENCE seq_usuario
 MINVALUE 1
@@ -345,7 +345,17 @@ MINVALUE 1
 START WITH 1
 INCREMENT BY 1;
 
---Creación Función Código Producto
+CREATE SEQUENCE seq_categoria
+MINVALUE 1
+START WITH 4
+INCREMENT BY 1;
+
+CREATE SEQUENCE seq_pais
+MINVALUE 1
+START WITH 2
+INCREMENT BY 1;
+
+--Creaciï¿½n Funciï¿½n Cï¿½digo Producto
 
 CREATE OR REPLACE FUNCTION FN_PRODUCTO (P_ID_PROVEEDOR IN PRODUCTO.RUT_PROVEEDOR%TYPE,
 										P_ID_FAMILIA IN PRODUCTO.ID_FAMILIA%TYPE,
@@ -374,7 +384,7 @@ RETURN V_ID_PRODUCTO;
 
 END FN_PRODUCTO;
 
---Creación de TRIGGER
+--Creaciï¿½n de TRIGGER
 
 create or replace TRIGGER TGR_USUARIO
 BEFORE INSERT ON USUARIO
@@ -389,8 +399,7 @@ END;
 CREATE OR REPLACE TRIGGER TGR_CLIENTE
 BEFORE INSERT ON CLIENTE
 FOR EACH ROW
- WHEN (new.ID_USUARIO IS NULL or new.ID_USUARIO = 0) 
-BEGIN
+ WHEN (new.ID_USUARIO IS NULL or new.ID_USUARIO = 0) BEGIN
   SELECT SEQ_USUARIO.CURRVAL 
   INTO :new.ID_USUARIO
   FROM dual;
@@ -478,7 +487,7 @@ COMPOUND TRIGGER
 
 END TGR_PRODUCTO;
 
---Creación Trigger Pedido
+--Creaciï¿½n Trigger Pedido
 
 create or replace TRIGGER TGR_PEDIDO
 BEFORE INSERT ON PEDIDO
@@ -490,7 +499,7 @@ BEGIN
   FROM dual;
 END;
 
---Creación Trigger Detalle Pedido
+--Creaciï¿½n Trigger Detalle Pedido
 
 create or replace TRIGGER TGR_DETALLE_PEDIDO
 BEFORE INSERT ON DETALLE_PEDIDO
@@ -506,26 +515,46 @@ BEGIN
   FROM dual;
 END;
 
---Inserción de Usuarios
---Contraseña: admin
+create or replace TRIGGER TGR_CATEGORIA
+BEFORE INSERT ON CATEGORIA
+FOR EACH ROW
+ WHEN (new.ID_CATEGORIA IS NULL or new.ID_CATEGORIA = 0) 
+BEGIN
+  SELECT seq_categoria.NEXTVAL
+  INTO :new.ID_CATEGORIA
+  FROM dual;
+END;
+
+create or replace TRIGGER TGR_PAIS
+BEFORE INSERT ON PAIS
+FOR EACH ROW
+ WHEN (new.ID_PAIS IS NULL or new.ID_PAIS = 0) 
+BEGIN
+  SELECT seq_pais.NEXTVAL
+  INTO :new.ID_PAIS
+  FROM dual;
+END;
+
+--Inserciï¿½n de Usuarios
+--Contraseï¿½a: admin
 INSERT INTO USUARIO values (null, 'Admin', '$2a$12$i4fY7wI7DtcJRVeHOitdn.0nuEebwCfoqNtx49sBIxuzXNYQUujIS', 'Administrador', 'Habilitado');
---Contraseña: cliente
+--Contraseï¿½a: cliente
 INSERT INTO USUARIO values (null, 'Cliente', '$2a$12$iJ28fJuzmeSvTcLG2sJ1WOrSYogWPQF1yw5x6xgJnnJ.DukHZUhpi', 'Cliente', 'Habilitado');
---Contraseña: proveedor
+--Contraseï¿½a: proveedor
 INSERT INTO USUARIO values (null, 'Proveedor', '$2a$12$gwfSuMQjh6onOVXyH7qjsuDAjpCXt527EI.EwbetNnSt4.Ey6safu', 'Proveedor', 'Habilitado');
---Contraseña: Empleado
+--Contraseï¿½a: Empleado
 INSERT INTO USUARIO values (null, 'Empleado', '$2a$12$7RNSh5xuIFf6z1ansi6aTeoYQQJXuO.2mg7zQrzWDYvdu.OH2lyd2', 'Empleado', 'Habilitado');
 
---Inserción de datos dirección
+--Inserciï¿½n de datos direcciï¿½n
 
 INSERT INTO PAIS VALUES (1, 'Chile');
 
-INSERT INTO REGION VALUES(1, 'Región Metropolitana', 1);
+INSERT INTO REGION VALUES(1, 'Regiï¿½n Metropolitana', 1);
 
 INSERT INTO COMUNA VALUES(1, 'San Miguel',1);
-INSERT INTO COMUNA VALUES(2, 'San Joaquín',1);
+INSERT INTO COMUNA VALUES(2, 'San Joaquï¿½n',1);
 INSERT INTO COMUNA VALUES(3, 'Macul',1);
-INSERT INTO COMUNA VALUES(4, 'Peñalolén',1);
+INSERT INTO COMUNA VALUES(4, 'Peï¿½alolï¿½n',1);
 
 --InserciÃ³n de datos Tipo PROVEEDOR
 

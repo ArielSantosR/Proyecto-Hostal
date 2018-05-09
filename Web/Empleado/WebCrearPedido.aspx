@@ -84,14 +84,16 @@
                       <br/> <asp:Button ID="btnRegistrar" runat="server" Text="Agregar a la Lista"  CssClass="btn btn-primary btn-lg btn-block login-button" OnClick="btnRegistrar_Click" />
                   </div>
                   <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                      <br/> <asp:Button ID="btnLimpiar" runat="server" Text="Limpiar"  CssClass="btn btn-warning btn-lg btn-block login-button" OnClick="btnLimpiar_Click"/>
+                      <br/> <asp:Button ID="btnLimpiar" runat="server" Text="Pedir Productos"  CssClass="btn btn-warning btn-lg btn-block login-button" OnClick="btnLimpiar_Click"/>
                   </div>
                 </div>   
           </div>
-        </div>
-      </div>
-
-        <asp:GridView ID="gvTipoPlato" AutoGenerateColumns="false" runat="server" ForeColor="#333333" GridLines="Vertical">      
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"> 
+                <div style="display: flex; justify-content: center; margin-top: 35px;">
+        <asp:UpdatePanel ID="UpdatePanel3" UpdateMode="Conditional" runat="server">
+              <ContentTemplate>
+            <asp:GridView ID="gvDetalle" AutoGenerateColumns="false" runat="server" ForeColor="#333333" GridLines="Vertical">      
                             <AlternatingRowStyle BackColor="White" />
                             <EditRowStyle BackColor="#2461BF" />
                             <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
@@ -104,15 +106,23 @@
                             <SortedDescendingCellStyle BackColor="#E9EBEF" />
                             <SortedDescendingHeaderStyle BackColor="#4870BE" />
                             <Columns>
-                                 <asp:BoundField DataField="ID_TIPO_PLATO" HeaderText="ID Tipo Plato" />
-                                <asp:BoundField DataField="NOMBRE_TIPO_PLATO" HeaderText="Nombre" />
-                                
+                                    <asp:BoundField DataField="ID_PRODUCTO" HeaderText="ID Producto" />
+                                    <asp:BoundField DataField="CANTIDAD" HeaderText="Cantidad" />                    
                                 <asp:TemplateField>
                                     <ItemTemplate>
-                                        <asp:LinkButton ID="btnEditar" CssClass="btn btn-success" CommandArgument='<%#Eval("ID_TIPO_PLATO")%>'  text="Editar" runat="server"/>
-                                        <asp:LinkButton ID="btnEliminar" CssClass="btn btn-danger" CommandArgument='<%#Eval("ID_TIPO_PLATO")%>'  text="Eliminar" runat="server"/>
+                                        <asp:LinkButton ID="btnEliminar" OnClick="btnEliminar_Click" CssClass="btn btn-danger" CommandArgument='<%#Eval("ID_PRODUCTO")%>'  text="Eliminar" runat="server"/>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                             </Columns>
                         </asp:GridView>
+                  </ContentTemplate>
+              </asp:UpdatePanel>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+      </div>
+    
+          
 </asp:Content>

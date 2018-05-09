@@ -97,6 +97,8 @@ namespace Web.Administrador
             }
         }
 
+        
+
         protected void btnRegistrar_Click(object sender, EventArgs e)
         {
             try

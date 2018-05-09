@@ -95,6 +95,10 @@ namespace Web.Empleado
                 //Para funcionar requiere que el update panel tenga el Modo Condicional
                 UpdatePanel2.Update();
             }
+            gvDetalle.DataSource = MiSesionD;
+            gvDetalle.DataBind();
+
+            UpdatePanel3.Update();
         }
 
         protected void btnRegistrar_Click(object sender, EventArgs e)
@@ -102,73 +106,62 @@ namespace Web.Empleado
             try
             {
                 int cantidad = 0;
-                //lalala
+                
                 if (txtCantidad.Text != string.Empty)
                 {
                     if (int.TryParse(txtCantidad.Text, out cantidad))
                     {
-                        if (ddlRut.SelectedValue != string.Empty)
+                        if (cantidad > 0)
                         {
-                            Modelo.Empleado empleado = new Modelo.Empleado();
-                            empleado.ID_USUARIO = MiSesion.ID_USUARIO;
-
-                            //Si el ID de empleado es encontrado, pasar al siguiente paso
-                            Service1 s = new Service1();
-                            XmlSerializer sr = new XmlSerializer(typeof(Modelo.Empleado));
-                            StringWriter writer = new StringWriter();
-                            sr.Serialize(writer, empleado);
-                            writer.Close();
-
-                            Modelo.Empleado empleado2 = s.buscarIDE(writer.ToString());
-
-                            if (empleado2 != null)
+                            if (ddlProducto.SelectedValue != string.Empty)
                             {
-
-                                Modelo.Pedido pedido = new Modelo.Pedido();
-                                pedido.FECHA_PEDIDO = DateTime.Now;
-                                pedido.ESTADO_PEDIDO = "Pendiente";
-                                pedido.RUT_EMPLEADO = empleado2.RUT_EMPLEADO;
-                                pedido.RUT_PROVEEDOR = int.Parse(ddlRut.SelectedValue);
-                                pedido.ESTADO_DESPACHO = "Pendiente";
-
                                 Modelo.DetallePedido detalle = new Modelo.DetallePedido();
                                 detalle.CANTIDAD = cantidad;
                                 detalle.ID_PRODUCTO = long.Parse(ddlProducto.SelectedValue);
 
-                                XmlSerializer sr2 = new XmlSerializer(typeof(Modelo.Pedido));
-                                StringWriter writer2 = new StringWriter();
-                                sr2.Serialize(writer2, pedido);
+                                bool existe = false;
 
-                                XmlSerializer sr3 = new XmlSerializer(typeof(Modelo.DetallePedido));
-                                StringWriter writer3 = new StringWriter();
-                                sr3.Serialize(writer3, detalle);
-
-                                if (s.AgregarPedido(writer2.ToString()) && s.AgregarDetallePedido(writer3.ToString()))
+                                foreach (DetallePedido d in MiSesionD)
                                 {
-                                    exito.Text = "El Pedido ha sido completado con éxito";
-                                    alerta_exito.Visible = true;
-                                    alerta.Visible = false;
+                                    if (detalle.ID_PRODUCTO == d.ID_PRODUCTO)
+                                    {
+                                        existe = true;
+
+                                    }
+                                }
+                                if (existe)
+                                {
+                                    alerta_exito.Visible = false;
+                                    error.Text = "Este Producto ya ha sido agregado";
+                                    alerta.Visible = true;
                                 }
                                 else
                                 {
-                                    alerta_exito.Visible = false;
-                                    error.Text = "No se ha podido hacer el Pedido";
-                                    alerta.Visible = true;
+                                    exito.Text = "Pedido Agregado a la Lista.";
+                                    alerta_exito.Visible = true;
+                                    alerta.Visible = false;
+                                    MiSesionD.Add(detalle);
                                 }
+
+                                gvDetalle.DataSource = MiSesionD;
+                                gvDetalle.DataBind();
+
+                                UpdatePanel3.Update();
                             }
                             else
                             {
                                 alerta_exito.Visible = false;
-                                error.Text = "Error, no se pudo encontrar al Empleado";
+                                error.Text = "Error, debe seleccionar un producto ";
                                 alerta.Visible = true;
                             }
                         }
                         else
                         {
                             alerta_exito.Visible = false;
-                            error.Text = "Error, debe seleccionar un proveedor ";
+                            error.Text = "Debe Ingresar una cantidad superior a 0";
                             alerta.Visible = true;
                         }
+                        
                     }
                     else
                     {
@@ -183,7 +176,6 @@ namespace Web.Empleado
                     error.Text = "Debe llenar todos los datos";
                     alerta.Visible = true;
                 }
-
             }
             catch (Exception)
             {
@@ -195,12 +187,93 @@ namespace Web.Empleado
 
         protected void btnLimpiar_Click(object sender, EventArgs e)
         {
-            txtCantidad.Text = string.Empty;
-            ddlProducto.SelectedIndex = 0;
-            ddlRut.Items.Clear();
-            ddlRut.Enabled = false;
-            txtPrecio.Text = "";
+            if (MiSesionD.Count > 0)
+            {
+                Modelo.Empleado empleado = new Modelo.Empleado();
+                empleado.ID_USUARIO = MiSesion.ID_USUARIO;
+
+                //Si el ID de empleado es encontrado, pasar al siguiente paso
+                Service1 s = new Service1();
+                XmlSerializer sr = new XmlSerializer(typeof(Modelo.Empleado));
+                StringWriter writer = new StringWriter();
+                sr.Serialize(writer, empleado);
+                writer.Close();
+
+                Modelo.Empleado empleado2 = s.buscarIDE(writer.ToString());
+
+                if (empleado2 != null)
+                {
+
+                    Modelo.Pedido pedido = new Modelo.Pedido();
+                    pedido.FECHA_PEDIDO = DateTime.Now;
+                    pedido.ESTADO_PEDIDO = "Pendiente";
+                    pedido.RUT_EMPLEADO = empleado2.RUT_EMPLEADO;
+                    pedido.RUT_PROVEEDOR = int.Parse(ddlRut.SelectedValue);
+                    pedido.ESTADO_DESPACHO = "Pendiente";
+
+                    XmlSerializer sr2 = new XmlSerializer(typeof(Modelo.Pedido));
+                    StringWriter writer2 = new StringWriter();
+                    sr2.Serialize(writer2, pedido);
+
+                    if (s.AgregarPedido(writer2.ToString()))
+                    {
+                        bool v_exito = true;
+
+                        foreach (DetallePedido d in MiSesionD)
+                        {
+                            Modelo.DetallePedido detalle = new Modelo.DetallePedido();
+                            detalle.CANTIDAD = d.CANTIDAD;
+                            detalle.ID_PRODUCTO = d.ID_PRODUCTO;
+
+                            XmlSerializer sr3 = new XmlSerializer(typeof(Modelo.DetallePedido));
+                            StringWriter writer3 = new StringWriter();
+                            sr3.Serialize(writer3, detalle);
+
+                            if (!s.AgregarDetallePedido(writer3.ToString()))
+                            {
+                                v_exito = false;
+                            }
+                        }
+
+                        if (v_exito)
+                        {
+                            exito.Text = "Pedido Realizado con éxito, el administrador debe confirmar su envío";
+                            alerta_exito.Visible = true;
+                            alerta.Visible = false;
+                            MiSesionD.Clear();
+                            gvDetalle.DataSource = MiSesionD;
+                            gvDetalle.DataBind();
+                            UpdatePanel3.Update();
+                        }
+                        else
+                        {
+                            alerta_exito.Visible = false;
+                            error.Text = "No se ha podido hacer el Pedido";
+                            alerta.Visible = true;
+                        }
+                    }
+                    else
+                    {
+                        alerta_exito.Visible = false;
+                        error.Text = "No se ha podido hacer el Pedido";
+                        alerta.Visible = true;
+                    }
+                }
+                else
+                {
+                    alerta_exito.Visible = false;
+                    error.Text = "Error, no se pudo encontrar al Empleado";
+                    alerta.Visible = true;
+                }
+            }
+            else
+            {
+                alerta_exito.Visible = false;
+                error.Text = "Error, debe ingresar objetos a la lista para Registrar una Orden";
+                alerta.Visible = true;
+            }
         }
+
 
         //Creación de Sesión
         public Usuario MiSesion
@@ -216,6 +289,22 @@ namespace Web.Empleado
             set
             {
                 Session["Usuario"] = value;
+            }
+        }
+
+        public List<DetallePedido> MiSesionD
+        {
+            get
+            {
+                if (Session["ListaDetalle"] == null)
+                {
+                    Session["ListaDetalle"] = new List<DetallePedido>();
+                }
+                return (List<DetallePedido>)Session["ListaDetalle"];
+            }
+            set
+            {
+                Session["ListaDetalle"] = value;
             }
         }
 
@@ -247,7 +336,16 @@ namespace Web.Empleado
             //Para funcionar requiere que el update panel tenga el Modo Condicional
             txtCantidad.Text = "";
             txtPrecio.Text = "";
+            UpdatePanel1.Update();
             UpdatePanel2.Update();
+
+            MiSesionD.Clear();
+
+            gvDetalle.DataSource = MiSesionD;
+            gvDetalle.DataBind();
+
+            UpdatePanel3.Update();
+
         }
 
         protected void txtCantidad_TextChanged(object sender, EventArgs e)
@@ -278,6 +376,28 @@ namespace Web.Empleado
             }
 
             UpdatePanel1.Update();
+        }
+
+        protected void btnEliminar_Click(object sender, EventArgs e)
+        {
+            //Lee los valores del LinkButton, primero usa la clase LinkButton para 
+            //Transformar los datos de Sender, luego los lee y los asigna a una variable
+            LinkButton btn = (LinkButton)(sender);
+            long ID_PRODUCTO = long.Parse(btn.CommandArgument);
+
+            foreach (DetallePedido d in MiSesionD.ToList())
+            {
+                if (d.ID_PRODUCTO == ID_PRODUCTO)
+                {
+                    MiSesionD.Remove(d);
+                }
+            }
+
+            gvDetalle.DataSource = MiSesionD;
+            gvDetalle.DataBind();
+
+            UpdatePanel3.Update();
+
         }
     }
 }
