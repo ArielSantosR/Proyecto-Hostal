@@ -175,6 +175,24 @@ namespace Web {
         protected global::System.Web.UI.WebControls.Button btnVerCategoriaPlato;
         
         /// <summary>
+        /// Control btnCrearPais.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCrearPais;
+        
+        /// <summary>
+        /// Control btnVerPaises.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnVerPaises;
+        
+        /// <summary>
         /// Control btnVerInforme.
         /// </summary>
         /// <remarks>

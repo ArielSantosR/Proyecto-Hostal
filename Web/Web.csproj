@@ -97,6 +97,7 @@
     <Content Include="Administrador\WebAgregarPlato.aspx" />
     <Content Include="Administrador\WebCrearCategoriaPlato.aspx" />
     <Content Include="Administrador\WebCrearHabitacion.aspx" />
+    <Content Include="Administrador\WebCrearPais.aspx" />
     <Content Include="Administrador\WebCrearProducto.aspx" />
     <Content Include="Administrador\WebCrearTipoPlato.aspx" />
     <Content Include="Administrador\WebCrearTipoProveedor.aspx" />
@@ -116,6 +117,7 @@
     <Content Include="Administrador\WebVerCategoriaPlato.aspx" />
     <Content Include="Administrador\WebVerHabitacion.aspx" />
     <Content Include="Administrador\WebRegistroAdmin.aspx" />
+    <Content Include="Administrador\WebVerPais.aspx" />
     <Content Include="Administrador\WebVerPedido.aspx" />
     <Content Include="Administrador\WebVerProductos.aspx" />
     <Content Include="Administrador\WebVerTipoPlato.aspx" />
@@ -198,6 +200,13 @@
     </Compile>
     <Compile Include="Administrador\WebCrearHabitacion.aspx.designer.cs">
       <DependentUpon>WebCrearHabitacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrador\WebCrearPais.aspx.cs">
+      <DependentUpon>WebCrearPais.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\WebCrearPais.aspx.designer.cs">
+      <DependentUpon>WebCrearPais.aspx</DependentUpon>
     </Compile>
     <Compile Include="Administrador\WebCrearProducto.aspx.cs">
       <DependentUpon>WebCrearProducto.aspx</DependentUpon>
@@ -331,6 +340,13 @@
     </Compile>
     <Compile Include="Administrador\WebRegistroAdmin.aspx.designer.cs">
       <DependentUpon>WebRegistroAdmin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrador\WebVerPais.aspx.cs">
+      <DependentUpon>WebVerPais.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\WebVerPais.aspx.designer.cs">
+      <DependentUpon>WebVerPais.aspx</DependentUpon>
     </Compile>
     <Compile Include="Administrador\WebVerPedido.aspx.cs">
       <DependentUpon>WebVerPedido.aspx</DependentUpon>
