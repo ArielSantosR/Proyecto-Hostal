@@ -77,6 +77,9 @@ namespace WcfNegocio
         [OperationContract]
         string ListarProductosProveedor(string proveedor);
 
+        [OperationContract]
+        Proveedor buscarIDP(string proveedor);
+
         //CRUD Habitacion
         [OperationContract]
         bool AgregarHabitacion(string habitacion);
@@ -248,6 +251,9 @@ namespace WcfNegocio
 
         [OperationContract]
         string ListarPedidoAdmin();
+
+        [OperationContract]
+        string ListarPedidoProveedor(string proveedor);
 
         [OperationContract]
         Pedido ObtenerPedido(string pedido);

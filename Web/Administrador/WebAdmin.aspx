@@ -34,7 +34,7 @@
             
             <div class="row" style="margin-top: 20px;">
                 <div class="col-md-4">
-                    <asp:button runat="server" Text="Usuarios" CssClass="btn btn-warning  btn-lg btn-block login-button" data-toggle="collapse" data-target="#usuario" OnClientClick="return false" />
+                    <asp:button runat="server" Text="Usuarios" CssClass="btn btn-primary active  btn-lg btn-block login-button" data-toggle="collapse" data-target="#usuario" OnClientClick="return false" />
                     <div id="usuario" class="collapse" style="margin-top: 10px;">
                         <asp:button runat="server" text="Registro Usuario" ID="btnCrearUsuario" CssClass="btn btn-primary btn-lg btn-block login-button" style="font-size: 15px; " OnClick="btnCrearUsuario_Click" />
                         <asp:button runat="server" text="Ver Usuarios" ID="btnVerUsuarios" CssClass="btn btn-primary btn-lg btn-block login-button" style="font-size: 15px;" OnClick="btnVerUsuarios_Click" />
@@ -45,7 +45,7 @@
                 </div>
                     
                 <div class="col-md-4">
-                    <asp:button runat="server" Text="Gestión" CssClass="btn btn-warning  btn-lg btn-block login-button" data-toggle="collapse" data-target="#gestion" OnClientClick="return false" />
+                    <asp:button runat="server" Text="Gestión" CssClass="btn btn-primary active btn-lg btn-block login-button" data-toggle="collapse" data-target="#gestion" OnClientClick="return false" />
                     <div id="gestion" class="collapse" style="margin-top: 10px;">
                         <asp:button runat="server" text="Crear Habitación" ID="btnCrearHabitacion" cssClass="btn btn-primary btn-lg btn-block login-button" style="font-size: 15px" OnClick="btnCrearHabitacion_Click" />
                         <asp:button runat="server" text="Ver Habitaciones" ID="btnVerHabitaciones" CssClass="btn btn-primary btn-lg btn-block login-button" style="font-size: 15px" OnClick="btnVerHabitaciones_Click" />
@@ -65,7 +65,7 @@
                 </div>
 
                 <div class="col-md-4">
-                        <asp:button runat="server" Text="Informe" CssClass="btn btn-warning btn-lg btn-block" data-toggle="collapse" data-target="#informe" OnClientClick="return false" />
+                        <asp:button runat="server" Text="Informe" CssClass="btn btn-primary btn-lg btn-block active" data-toggle="collapse" data-target="#informe" OnClientClick="return false" />
                         <div id="informe" class="collapse" style="margin-top: 10px;">
                             <asp:button runat="server" text="Ver Informes" ID="btnVerInforme" CssClass="btn btn-primary btn-lg btn-block login-button" style="font-size: 15px" OnClick="btnVerInforme_Click" />
                         </div>

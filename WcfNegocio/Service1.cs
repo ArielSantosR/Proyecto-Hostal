@@ -441,6 +441,27 @@ namespace WcfNegocio
             return writer.ToString();
         }
 
+        public Proveedor buscarIDP(string proveedor)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.Proveedor));
+            StringReader reader = new StringReader(proveedor);
+            Modelo.Proveedor p = (Modelo.Proveedor)ser.Deserialize(reader);
+            ServicioProveedor serv = new ServicioProveedor();
+            Datos.PROVEEDOR pDatos = new Datos.PROVEEDOR();
+            pDatos.ID_USUARIO = p.ID_USUARIO;
+
+            if (serv.BuscarIDP(pDatos) == null)
+            {
+                return null;
+            }
+            else
+            {
+                Datos.PROVEEDOR pDatos2 = serv.BuscarIDP(pDatos);
+                p.RUT_PROVEEDOR = pDatos2.RUT_PROVEEDOR;
+                return p;
+            }
+        }
+
         //Listar Datos
         public string ListarTipoProveedor()
         {
@@ -1322,6 +1343,49 @@ namespace WcfNegocio
             return writer.ToString();
         }
 
+        public string ListarPedidoProveedor(string proveedor)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.Proveedor));
+            StringReader reader = new StringReader(proveedor);
+            Modelo.Proveedor pr = (Modelo.Proveedor)ser.Deserialize(reader);
+            ServicioPedido serv = new ServicioPedido();
+
+            Datos.PROVEEDOR pDatos = new Datos.PROVEEDOR();
+            pDatos.RUT_PROVEEDOR = pr.RUT_PROVEEDOR;
+
+            List<Datos.PEDIDO> listaPedido = serv.ListarPedido(pDatos);
+
+            if (listaPedido == null)
+            {
+                return null;
+            }
+            else
+            {
+                Modelo.PedidoCollection listaPedido2 = new PedidoCollection();
+
+                foreach (Datos.PEDIDO p in listaPedido)
+                {
+                    Modelo.Pedido pModelo = new Modelo.Pedido();
+                    pModelo.NUMERO_PEDIDO = p.NUMERO_PEDIDO;
+                    pModelo.ESTADO_PEDIDO = p.ESTADO_PEDIDO;
+                    pModelo.FECHA_PEDIDO = p.FECHA_PEDIDO;
+                    pModelo.RUT_EMPLEADO = p.RUT_EMPLEADO;
+                    pModelo.NUMERO_RECEPCION = p.NUMERO_RECEPCION;
+                    pModelo.RUT_PROVEEDOR = p.RUT_PROVEEDOR;
+                    pModelo.ESTADO_DESPACHO = p.ESTADO_DESPACHO;
+                    pModelo.COMENTARIO = p.COMENTARIO;
+
+                    listaPedido2.Add(pModelo);
+                }
+
+                XmlSerializer ser2 = new XmlSerializer(typeof(Modelo.PedidoCollection));
+                StringWriter writer2 = new StringWriter();
+                ser2.Serialize(writer2, listaPedido2);
+                writer2.Close();
+                return writer2.ToString();
+            }
+        }
+
         public bool EditarEstadoPedido(string pedido)
         {
             XmlSerializer ser = new XmlSerializer(typeof(Modelo.Pedido));
@@ -1371,6 +1435,7 @@ namespace WcfNegocio
             }
         }
 
+        //CRUD Notificacion
         public string listaNotificacion(string usuario)
         {
             XmlSerializer ser = new XmlSerializer(typeof(Modelo.Usuario));
