@@ -29,7 +29,12 @@ namespace Datos
         public string APP_MATERNO_PROVEEDOR { get; set; }
         public short ID_TIPO_PROVEEDOR { get; set; }
         public short ID_USUARIO { get; set; }
-    
+
+        public string RutYNombre
+        {
+            get { return this.RUT_PROVEEDOR + "-" + this.DV_PROVEEDOR + " " + this.PNOMBRE_PROVEEDOR + " " + this.APP_PATERNO_PROVEEDOR; }
+        }
+
         public virtual ICollection<PEDIDO> PEDIDO { get; set; }
         public virtual ICollection<PRODUCTO> PRODUCTO { get; set; }
         public virtual TIPO_PROVEEDOR TIPO_PROVEEDOR { get; set; }

@@ -19,6 +19,11 @@ namespace Modelo
         public short ID_TIPO_PROVEEDOR { get; set; }
         public short ID_USUARIO { get; set; }
 
+        public string RutYNombre
+        {
+            get { return this.RUT_PROVEEDOR + "-" + this.DV_PROVEEDOR + " " + this.PNOMBRE_PROVEEDOR + " " + this.APP_PATERNO_PROVEEDOR; }
+        }
+
         public bool Update() {
             ServicioProveedor serv = new ServicioProveedor();
             PROVEEDOR datos = new PROVEEDOR();

@@ -46,6 +46,7 @@ namespace Datos
                 P.STOCK_PRODUCTO = producto.STOCK_PRODUCTO;
                 P.FECHA_VENCIMIENTO_PRODUCTO = producto.FECHA_VENCIMIENTO_PRODUCTO;
                 P.DESCRIPCION_PRODUCTO = producto.DESCRIPCION_PRODUCTO;
+                P.UNIDAD_MEDIDA = producto.UNIDAD_MEDIDA;
 
                 ent.SaveChanges();
                 return true;

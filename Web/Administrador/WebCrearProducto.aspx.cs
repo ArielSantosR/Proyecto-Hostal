@@ -71,6 +71,22 @@ namespace Web.Administrador
                 ddlRut.DataTextField = "RUT_PROVEEDOR";
                 ddlRut.DataBind();
 
+                ddlUnidad.Items.Add("Unidad");
+                ddlUnidad.Items.Add("100 Gramos");
+                ddlUnidad.Items.Add("200 Gramos");
+                ddlUnidad.Items.Add("500 Gramos");
+                ddlUnidad.Items.Add("1 Kilogramo");
+                ddlUnidad.Items.Add("2 Kilogramos");
+                ddlUnidad.Items.Add("5 Kilogramos");
+                ddlUnidad.Items.Add("350 Milílitros");
+                ddlUnidad.Items.Add("500 Milílitros");
+                ddlUnidad.Items.Add("750 Milílitros");
+                ddlUnidad.Items.Add("1 Litro");
+                ddlUnidad.Items.Add("1.5 Litros");
+                ddlUnidad.Items.Add("2 Litros");
+                ddlUnidad.Items.Add("2.5 Litros");
+                ddlUnidad.Items.Add("3 Litros");
+
                 calendarFecha.SelectedDate = Convert.ToDateTime("01/01/2000");
             }
 
@@ -101,6 +117,8 @@ namespace Web.Administrador
             txtPrecio.Text = string.Empty;
             txtStock.Text = string.Empty;
             txtStockCritico.Text = string.Empty;
+            ddlUnidad.SelectedIndex = 0;
+            ddlRut.SelectedIndex = 0;
 
             ddlFamilia.SelectedIndex = 0;
 
@@ -118,43 +136,53 @@ namespace Web.Administrador
                 txtStock.Text != string.Empty && txtStockCritico.Text != string.Empty &&
                 txtDescripcion.Text != string.Empty)
                 {
-                    Modelo.Producto producto = new Modelo.Producto();
-                    producto.NOMBRE_PRODUCTO = txtNombre.Text;
-                    producto.ID_FAMILIA = short.Parse(ddlFamilia.SelectedValue);
-                    producto.RUT_PROVEEDOR = int.Parse(ddlRut.SelectedValue);
-                    producto.DESCRIPCION_PRODUCTO = txtDescripcion.Text;
-                    producto.FECHA_VENCIMIENTO_PRODUCTO = calendarFecha.SelectedDate;
-
-                    if (short.TryParse(txtStock.Text, out stock) && 
-                        short.TryParse(txtStockCritico.Text, out stockCritico)  && 
-                        int.TryParse(txtPrecio.Text, out precio))
+                    if (calendarFecha.SelectedDate == Convert.ToDateTime("01/01/2000") || calendarFecha.SelectedDate > DateTime.Now)
                     {
-                        producto.STOCK_PRODUCTO = stock;
-                        producto.STOCK_CRITICO_PRODUCTO = stockCritico;
-                        producto.PRECIO_PRODUCTO = precio;
+                        Modelo.Producto producto = new Modelo.Producto();
+                        producto.NOMBRE_PRODUCTO = txtNombre.Text;
+                        producto.ID_FAMILIA = short.Parse(ddlFamilia.SelectedValue);
+                        producto.RUT_PROVEEDOR = int.Parse(ddlRut.SelectedValue);
+                        producto.DESCRIPCION_PRODUCTO = txtDescripcion.Text;
+                        producto.FECHA_VENCIMIENTO_PRODUCTO = calendarFecha.SelectedDate;
+                        producto.UNIDAD_MEDIDA = ddlUnidad.SelectedValue;
 
-                        Service1 s = new Service1();
-                        XmlSerializer sr = new XmlSerializer(typeof(Modelo.Producto));
-                        StringWriter writer = new StringWriter();
-                        sr.Serialize(writer, producto);
-
-                        if (s.AgregarProducto(writer.ToString()))
+                        if (short.TryParse(txtStock.Text, out stock) &&
+                            short.TryParse(txtStockCritico.Text, out stockCritico) &&
+                            int.TryParse(txtPrecio.Text, out precio))
                         {
-                            exito.Text = "El producto ha sido agregado con éxito";
-                            alerta_exito.Visible = true;
-                            alerta.Visible = false;
+                            producto.STOCK_PRODUCTO = stock;
+                            producto.STOCK_CRITICO_PRODUCTO = stockCritico;
+                            producto.PRECIO_PRODUCTO = precio;
+
+                            Service1 s = new Service1();
+                            XmlSerializer sr = new XmlSerializer(typeof(Modelo.Producto));
+                            StringWriter writer = new StringWriter();
+                            sr.Serialize(writer, producto);
+
+                            if (s.AgregarProducto(writer.ToString()))
+                            {
+                                exito.Text = "El producto ha sido agregado con éxito";
+                                alerta_exito.Visible = true;
+                                alerta.Visible = false;
+                            }
+                            else
+                            {
+                                alerta_exito.Visible = false;
+                                error.Text = "El ingreso de Producto ha fallado";
+                                alerta.Visible = true;
+                            }
                         }
                         else
                         {
                             alerta_exito.Visible = false;
-                            error.Text = "El ingreso de Producto ha fallado";
+                            error.Text = "Verifique el Ingreso numérico";
                             alerta.Visible = true;
                         }
                     }
                     else
                     {
                         alerta_exito.Visible = false;
-                        error.Text = "Verifique el Ingreso numérico";
+                        error.Text = "La fecha de Vencimiento no puede ser menor al día actual";
                         alerta.Visible = true;
                     }
                 }

@@ -8,6 +8,9 @@
  <script type="text/javascript">
 
      $(function () {
+         document.getElementById('<%=ddlPais.ClientID %>').selectedIndex = 0;
+         document.getElementById('<%=ddlRegion.ClientID %>').selectedIndex = 0;
+
          $(".cliente").hide();
          $('.cliente').find(':input').prop('disabled', true);
          $(".proveedor").hide();
@@ -16,7 +19,6 @@
          $('.empleado').find(':input').prop('disabled', true);
 
          PermisosDeUsuario();
-         
      });
 
      function PermisosDeUsuario() {

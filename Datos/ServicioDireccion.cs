@@ -22,7 +22,10 @@ namespace Datos
 
         public List<COMUNA> ListarComuna()
         {
-            return ent.COMUNA.ToList<COMUNA>();
+            var lista = (from consulta in ent.COMUNA
+                         orderby consulta.NOMBRE_COMUNA
+                         select consulta).ToList();
+            return lista;
         }
 
         //PAIS

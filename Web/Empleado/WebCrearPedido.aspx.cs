@@ -64,7 +64,7 @@ namespace Web.Empleado
             if (!IsPostBack)
             {
                 ddlRut.DataSource = coleccionProveedor;
-                ddlRut.DataTextField = "RUT_PROVEEDOR";
+                ddlRut.DataTextField = "RutYNombre";
                 ddlRut.DataValueField = "RUT_PROVEEDOR";
                 ddlRut.DataBind();
 
@@ -237,13 +237,26 @@ namespace Web.Empleado
 
                         if (v_exito)
                         {
-                            exito.Text = "Pedido Realizado con éxito, el administrador debe confirmar su envío";
-                            alerta_exito.Visible = true;
-                            alerta.Visible = false;
-                            MiSesionD.Clear();
-                            gvDetalle.DataSource = MiSesionD;
-                            gvDetalle.DataBind();
-                            UpdatePanel3.Update();
+                            if (MiSesion.TIPO_USUARIO.Equals("Empleado"))
+                            {
+                                exito.Text = "Pedido Realizado con éxito, el administrador debe confirmar su envío";
+                                alerta_exito.Visible = true;
+                                alerta.Visible = false;
+                                MiSesionD.Clear();
+                                gvDetalle.DataSource = MiSesionD;
+                                gvDetalle.DataBind();
+                                UpdatePanel3.Update();
+                            }
+                            else
+                            {
+                                exito.Text = "Pedido Realizado con éxito, antes de que su pedido sea enviado debe confirmar el envío";
+                                alerta_exito.Visible = true;
+                                alerta.Visible = false;
+                                MiSesionD.Clear();
+                                gvDetalle.DataSource = MiSesionD;
+                                gvDetalle.DataBind();
+                                UpdatePanel3.Update();
+                            }
                         }
                         else
                         {

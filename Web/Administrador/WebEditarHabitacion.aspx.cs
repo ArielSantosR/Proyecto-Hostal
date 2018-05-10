@@ -79,7 +79,6 @@ namespace Web.Administrador
                         habitacion = s.ObtenerHabitacion(writer.ToString());
 
                         txtNumero.Text = habitacion.NUMERO_HABITACION + "";
-                        txtPrecio.Text = habitacion.PRECIO_HABITACION + "";
                         ddlEstado.SelectedValue = habitacion.ESTADO_HABITACION;
                         ddlTipo.SelectedIndex = habitacion.ID_TIPO_HABITACION - 1;
 
@@ -107,7 +106,6 @@ namespace Web.Administrador
                     {
                         Modelo.Habitacion habitacion = new Modelo.Habitacion();
                         habitacion.NUMERO_HABITACION = numero;
-                        habitacion.PRECIO_HABITACION = precio;
                         habitacion.ESTADO_HABITACION = ddlEstado.SelectedValue;
                         habitacion.ID_TIPO_HABITACION = short.Parse(ddlTipo.SelectedValue);
 

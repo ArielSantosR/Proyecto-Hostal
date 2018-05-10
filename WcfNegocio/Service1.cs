@@ -424,6 +424,12 @@ namespace WcfNegocio
             {
                 Modelo.Proveedor pModelo = new Modelo.Proveedor();
                 pModelo.RUT_PROVEEDOR = p.RUT_PROVEEDOR;
+                pModelo.DV_PROVEEDOR = p.DV_PROVEEDOR;
+                pModelo.PNOMBRE_PROVEEDOR = p.PNOMBRE_PROVEEDOR;
+                pModelo.SNOMBRE_PROVEEDOR = p.SNOMBRE_PROVEEDOR;
+                pModelo.APP_MATERNO_PROVEEDOR = p.APP_MATERNO_PROVEEDOR;
+                pModelo.APP_PATERNO_PROVEEDOR = p.APP_PATERNO_PROVEEDOR;
+                pModelo.ID_TIPO_PROVEEDOR = p.ID_TIPO_PROVEEDOR;
 
                 listaProveedor.Add(pModelo);
             }
@@ -483,7 +489,8 @@ namespace WcfNegocio
                     pModelo.PRECIO_PRODUCTO = pr.PRECIO_PRODUCTO;
                     pModelo.STOCK_PRODUCTO = pr.STOCK_PRODUCTO;
                     pModelo.STOCK_CRITICO_PRODUCTO = pr.STOCK_CRITICO_PRODUCTO;
-                    pModelo.RUT_PROVEEDOR = p.RUT_PROVEEDOR;
+                    pModelo.RUT_PROVEEDOR = pr.RUT_PROVEEDOR;
+                    pModelo.UNIDAD_MEDIDA = pr.UNIDAD_MEDIDA;
 
                     listaProducto2.Add(pModelo);
                 }
@@ -633,6 +640,7 @@ namespace WcfNegocio
             pDatos.ID_FAMILIA = p.ID_FAMILIA;
             pDatos.RUT_PROVEEDOR = p.RUT_PROVEEDOR;
             pDatos.ID_PRODUCTO_SEQ = p.ID_PRODUCTO_SEQ;
+            pDatos.UNIDAD_MEDIDA = p.UNIDAD_MEDIDA;
 
             return servicio.AgregarProducto(pDatos);
         }
@@ -652,6 +660,7 @@ namespace WcfNegocio
             pDatos.PRECIO_PRODUCTO = p.PRECIO_PRODUCTO;
             pDatos.STOCK_CRITICO_PRODUCTO = p.STOCK_CRITICO_PRODUCTO;
             pDatos.STOCK_PRODUCTO = p.STOCK_PRODUCTO;
+            pDatos.UNIDAD_MEDIDA = p.UNIDAD_MEDIDA;
 
             return serv.EditarProducto(pDatos); 
         }
@@ -700,6 +709,7 @@ namespace WcfNegocio
                 p.STOCK_CRITICO_PRODUCTO = pDatos2.STOCK_CRITICO_PRODUCTO;
                 p.STOCK_PRODUCTO = pDatos2.STOCK_PRODUCTO;
                 p.RUT_PROVEEDOR = pDatos2.RUT_PROVEEDOR;
+                p.UNIDAD_MEDIDA = pDatos2.UNIDAD_MEDIDA;
 
                 return p;
             }
@@ -722,6 +732,7 @@ namespace WcfNegocio
                 pModelo.ID_FAMILIA = p.ID_FAMILIA;
                 pModelo.FECHA_VENCIMIENTO_PRODUCTO = p.FECHA_VENCIMIENTO_PRODUCTO;
                 pModelo.DESCRIPCION_PRODUCTO = p.DESCRIPCION_PRODUCTO;
+                pModelo.UNIDAD_MEDIDA = p.UNIDAD_MEDIDA;
 
                 listaProducto.Add(pModelo);
             }
@@ -1298,6 +1309,8 @@ namespace WcfNegocio
                 pModelo.RUT_EMPLEADO = p.RUT_EMPLEADO;
                 pModelo.NUMERO_RECEPCION = p.NUMERO_RECEPCION;
                 pModelo.RUT_PROVEEDOR = p.RUT_PROVEEDOR;
+                pModelo.ESTADO_DESPACHO = p.ESTADO_DESPACHO;
+                pModelo.COMENTARIO = p.COMENTARIO;
 
                 listaPedido.Add(pModelo);
             }
@@ -1307,6 +1320,55 @@ namespace WcfNegocio
             ser.Serialize(writer, listaPedido);
             writer.Close();
             return writer.ToString();
+        }
+
+        public bool EditarEstadoPedido(string pedido)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.Pedido));
+            StringReader reader = new StringReader(pedido);
+            Modelo.Pedido p = (Modelo.Pedido)ser.Deserialize(reader);
+            ServicioPedido servicio = new ServicioPedido();
+
+            Datos.PEDIDO pDatos = new Datos.PEDIDO();
+
+            pDatos.NUMERO_PEDIDO = p.NUMERO_PEDIDO;
+            pDatos.COMENTARIO = p.COMENTARIO;
+            pDatos.ESTADO_DESPACHO = p.ESTADO_DESPACHO;
+            pDatos.ESTADO_PEDIDO = p.ESTADO_PEDIDO;
+            pDatos.FECHA_PEDIDO = p.FECHA_PEDIDO;
+            pDatos.RUT_EMPLEADO = p.RUT_EMPLEADO;
+            pDatos.RUT_PROVEEDOR = p.RUT_PROVEEDOR;
+
+            return servicio.EditarEstadoPedido(pDatos);
+        }
+
+        public Pedido ObtenerPedido(string pedido)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.Pedido));
+            StringReader reader = new StringReader(pedido);
+            Modelo.Pedido p = (Modelo.Pedido)ser.Deserialize(reader);
+            ServicioPedido serv = new ServicioPedido();
+            Datos.PEDIDO Datos = new Datos.PEDIDO();
+            Datos.NUMERO_PEDIDO = p.NUMERO_PEDIDO;
+
+            if (serv.ObtenerPedido(Datos) == null)
+            {
+                return null;
+            }
+            else
+            {
+                Datos.PEDIDO Datos2 = serv.ObtenerPedido(Datos);
+
+                p.NUMERO_PEDIDO = Datos2.NUMERO_PEDIDO;
+                p.COMENTARIO = Datos2.COMENTARIO;
+                p.ESTADO_DESPACHO = Datos2.ESTADO_DESPACHO;
+                p.ESTADO_PEDIDO = Datos2.ESTADO_PEDIDO;
+                p.FECHA_PEDIDO = Datos2.FECHA_PEDIDO;
+                p.RUT_EMPLEADO = Datos2.RUT_EMPLEADO;
+                p.RUT_PROVEEDOR = Datos2.RUT_PROVEEDOR;
+
+                return p;
+            }
         }
 
         //DDL

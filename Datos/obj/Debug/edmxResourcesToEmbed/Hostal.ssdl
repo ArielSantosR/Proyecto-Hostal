@@ -143,7 +143,6 @@
       <PropertyRef Name="NUMERO_HABITACION" />
     </Key>
     <Property Name="NUMERO_HABITACION" Type="number" Precision="5" Scale="0" Nullable="false" />
-    <Property Name="PRECIO_HABITACION" Type="number" Precision="10" Scale="0" Nullable="false" />
     <Property Name="ESTADO_HABITACION" Type="varchar2" MaxLength="50" Nullable="false" />
     <Property Name="ID_TIPO_HABITACION" Type="number" Precision="5" Scale="0" Nullable="false" />
     <Property Name="RUT_CLIENTE" Type="number" Precision="8" Scale="0" />
@@ -179,6 +178,7 @@
     <Property Name="ID_NOTIFICACION" Type="number" Precision="10" Scale="0" Nullable="false" />
     <Property Name="MENSAJE" Type="varchar2" MaxLength="250" Nullable="false" />
     <Property Name="ID_USUARIO" Type="number" Precision="5" Scale="0" Nullable="false" />
+    <Property Name="ESTADO_NOTIFICACION" Type="varchar2" MaxLength="25" Nullable="false" />
   </EntityType>
   <EntityType Name="ORDEN_COMPRA">
     <Key>
@@ -244,6 +244,7 @@
     <Property Name="ID_FAMILIA" Type="number" Precision="5" Scale="0" Nullable="false" />
     <Property Name="RUT_PROVEEDOR" Type="number" Precision="8" Scale="0" Nullable="false" />
     <Property Name="ID_PRODUCTO_SEQ" Type="number" Precision="5" Scale="0" Nullable="false" />
+    <Property Name="UNIDAD_MEDIDA" Type="varchar2" MaxLength="25" Nullable="false" />
   </EntityType>
   <EntityType Name="PROVEEDOR">
     <Key>

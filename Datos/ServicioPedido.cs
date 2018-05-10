@@ -10,11 +10,35 @@ namespace Datos
     {
         HostalEntities ent = new HostalEntities();
 
-        public bool AgregarPedido(PEDIDO p)
+        public bool AgregarPedido(PEDIDO pedido)
         {
-            ent.PEDIDO.Add(p);
+            ent.PEDIDO.Add(pedido);
             ent.SaveChanges();
             return true;
+        }
+
+        public bool EditarEstadoPedido(PEDIDO pedido)
+        {
+            PEDIDO p = ent.PEDIDO.FirstOrDefault(objeto =>
+            objeto.NUMERO_PEDIDO.Equals(pedido.NUMERO_PEDIDO));
+
+            if (p != null)
+            {
+                p.NUMERO_PEDIDO = pedido.NUMERO_PEDIDO;
+                p.ESTADO_DESPACHO = pedido.ESTADO_DESPACHO;
+                p.ESTADO_PEDIDO = pedido.ESTADO_PEDIDO;
+                p.COMENTARIO = pedido.COMENTARIO;
+                p.RUT_EMPLEADO = pedido.RUT_EMPLEADO;
+                p.RUT_PROVEEDOR = pedido.RUT_PROVEEDOR;
+                p.FECHA_PEDIDO = pedido.FECHA_PEDIDO;
+
+                ent.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public bool AgregarDetallePedido(DETALLE_PEDIDO d)
@@ -36,6 +60,21 @@ namespace Datos
         public List<PEDIDO> ListarPedidoAdmin()
         {
             return (from a in ent.PEDIDO where a.ESTADO_PEDIDO.Equals("Pendiente") select a).ToList();
+        }
+
+        public PEDIDO ObtenerPedido(PEDIDO pedido)
+        {
+            PEDIDO p = ent.PEDIDO.FirstOrDefault(objeto =>
+            objeto.NUMERO_PEDIDO.Equals(pedido.NUMERO_PEDIDO));
+
+            if (p != null)
+            {
+                return p;
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

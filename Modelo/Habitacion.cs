@@ -10,7 +10,6 @@ namespace Modelo
     public class Habitacion
     {
         public short NUMERO_HABITACION { get; set; }
-        public int PRECIO_HABITACION { get; set; }
         public string ESTADO_HABITACION { get; set; }
         public short ID_TIPO_HABITACION { get; set; }
         public Nullable<int> RUT_CLIENTE { get; set; }

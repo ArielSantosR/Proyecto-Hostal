@@ -104,15 +104,13 @@ namespace Web.Administrador
             try
             {
                 short numero = 0;
-                int precio = 0;
 
-                if (txtNumero.Text != string.Empty && txtPrecio.Text != string.Empty)
+                if (txtNumero.Text != string.Empty)
                 {
-                    if (short.TryParse(txtNumero.Text, out numero) && int.TryParse(txtPrecio.Text, out precio))
+                    if (short.TryParse(txtNumero.Text, out numero))
                     {
                         Modelo.Habitacion habitacion = new Modelo.Habitacion();
                         habitacion.NUMERO_HABITACION = numero;
-                        habitacion.PRECIO_HABITACION = precio;
                         habitacion.ESTADO_HABITACION = ddlEstado.SelectedValue;
                         habitacion.ID_TIPO_HABITACION = short.Parse(ddlTipo.SelectedValue);
                         habitacion.ID_CATEGORIA_HABITACION = short.Parse(ddlCategoria.SelectedValue);
@@ -171,7 +169,6 @@ namespace Web.Administrador
         protected void btnLimpiar_Click(object sender, EventArgs e)
         {
             txtNumero.Text = string.Empty;
-            txtPrecio.Text = string.Empty;
             ddlEstado.SelectedIndex = 0;
             ddlTipo.SelectedIndex = 0;
         }

@@ -29,15 +29,7 @@
                 </div>
               </div>
             </div>
-          <div class="form-group">
-              <label for="name" class="col-sm-12 control-label">Precio</label>
-                <div class="col-sm-12">
-                  <div class="input-group">
-                  <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                  <asp:TextBox ID="txtPrecio" placeholder="Ingrese Precio de Habitación" TextMode="Number" runat="server" CssClass="form-control" required="required"></asp:TextBox>
-                </div>
-              </div>
-            </div>
+
 
               <asp:ScriptManager ID="ScriptManager2" runat="server"></asp:ScriptManager>
           <asp:UpdatePanel ID="UpdatePanel2" runat="server">

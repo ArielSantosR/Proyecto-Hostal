@@ -97,6 +97,12 @@ namespace Web.Administrador
                 ddlTipoProveedor.DataValueField = "ID_TIPO_PROVEEDOR";
                 ddlTipoProveedor.DataBind();
 
+                ddlComuna.DataSource = coleccionComuna.Where(x => x.Id_Region == int.Parse(ddlRegion.SelectedValue));
+                ddlComuna.DataTextField = "Nombre";
+                ddlComuna.DataValueField = "Id_Comuna";
+                ddlComuna.DataBind();
+                ddlComuna.Enabled = true;
+
                 ddlTipo.Items.Add("Cliente");
                 ddlTipo.Items.Add("Proveedor");
                 ddlTipo.Items.Add("Empleado");

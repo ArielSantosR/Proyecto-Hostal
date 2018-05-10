@@ -359,15 +359,20 @@ INCREMENT BY 1;
 
 CREATE SEQUENCE seq_pais
 MINVALUE 1
-START WITH 2
+START WITH 1
 INCREMENT BY 1;
 
 CREATE SEQUENCE seq_region
 MINVALUE 1
-START WITH 2
+START WITH 1
 INCREMENT BY 1;
 
 CREATE SEQUENCE seq_comuna
+MINVALUE 1
+START WITH 1
+INCREMENT BY 1;
+
+CREATE SEQUENCE seq_notificacion
 MINVALUE 1
 START WITH 1
 INCREMENT BY 1;
@@ -552,15 +557,44 @@ BEGIN
   FROM dual;
 END;
 
+--Este Trigger envía una notificación al proveedor si ha recibido un nuevo pedido.
+CREATE OR REPLACE TRIGGER TGR_NOTIFICACION_PROVEEDOR
+AFTER UPDATE ON PEDIDO
+FOR EACH ROW
+DECLARE
+CURSOR CUR_PROVEEDOR IS SELECT RUT_PROVEEDOR, ID_USUARIO FROM PROVEEDOR;
+
+BEGIN
+  IF UPDATING('ESTADO_PEDIDO') THEN
+    IF :NEW.ESTADO_PEDIDO = 'Aceptado' THEN
+        FOR I IN CUR_PROVEEDOR LOOP
+            IF I.RUT_PROVEEDOR = :NEW.RUT_PROVEEDOR THEN
+                INSERT INTO NOTIFICACION VALUES(SEQ_NOTIFICACION.NEXTVAL, 'Ha Recibido un nuevo Pedido', I.ID_USUARIO, 'Habilitado');
+            END IF;
+        END LOOP;
+    END IF;
+  END IF;
+END;
+
+--Este Trigger envía una notificación a cada uno de los administrador si hay nuevos pedidos pendientes.
+CREATE OR REPLACE TRIGGER TGR_NOTIFICACION_ADMIN
+AFTER INSERT ON PEDIDO
+FOR EACH ROW
+DECLARE
+CURSOR CUR_USUARIO IS SELECT ID_USUARIO, TIPO_USUARIO FROM USUARIO;
+
+BEGIN
+	FOR I IN CUR_USUARIO LOOP
+		IF I.TIPO_USUARIO = 'Administrador' THEN
+			INSERT INTO NOTIFICACION VALUES(SEQ_NOTIFICACION.NEXTVAL, 'Hay nuevos pedidos pendientes', I.ID_USUARIO, 'Habilitado');
+		END IF;
+	END LOOP;
+END;
+
 --Inserción de Usuarios
 --Contraseña: admin
 INSERT INTO USUARIO values (null, 'Admin', '$2a$12$i4fY7wI7DtcJRVeHOitdn.0nuEebwCfoqNtx49sBIxuzXNYQUujIS', 'Administrador', 'Habilitado');
---Contraseña: cliente
-INSERT INTO USUARIO values (null, 'Cliente', '$2a$12$iJ28fJuzmeSvTcLG2sJ1WOrSYogWPQF1yw5x6xgJnnJ.DukHZUhpi', 'Cliente', 'Habilitado');
---Contraseña: proveedor
-INSERT INTO USUARIO values (null, 'Proveedor', '$2a$12$gwfSuMQjh6onOVXyH7qjsuDAjpCXt527EI.EwbetNnSt4.Ey6safu', 'Proveedor', 'Habilitado');
---Contraseña: Empleado
-INSERT INTO USUARIO values (null, 'Empleado', '$2a$12$7RNSh5xuIFf6z1ansi6aTeoYQQJXuO.2mg7zQrzWDYvdu.OH2lyd2', 'Empleado', 'Habilitado');
+INSERT INTO EMPLEADO VALUES (18882607, '5', 'Juan', 'Patricio', 'Travol', 'Caceres', 1);
 
 --Inserción de datos dirección
 
@@ -858,9 +892,16 @@ INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Chaitén',12);
 INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Futaleufú',12);
 INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Hualaihué',12);
 INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Palena',12);
-
---FALTA REGION ID 13
-
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Coyhaique',13);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Lago Verde',13);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Aisén',13);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Cisnes',13);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Guaitecas',13);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Cochrane',13);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'O´Higgins',13);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Tortel',13);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Chile Chico',13);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Río Ibáñez',13);
 INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Punta Arenas',14);
 INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Laguna Blanca',14);
 INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Río Verde',14);
@@ -872,8 +913,58 @@ INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Primavera',14);
 INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Timaukel',14);
 INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Natales',14);
 INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Torres del Paine',14);
-
---FALTA REGION ID 15
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Santiago',15);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Cerrillos',15);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Cerro Navia',15);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Conchalí',15);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'El Bosque',15);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Estación Central',15);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Huechuraba',15);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Independencia',15);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'La Cisterna',15);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'La Florida',15);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'La Granja',15);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'La Pintana',15);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'La Reina',15);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Las Condes',15);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Lo Barnechea',15);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Lo Espejo',15);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Lo Prado',15);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Macul',15);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Maipú',15);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Ñuñoa',15);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Pedro Aguirre Cerda',15);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Peñalolén',15);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Providencia',15);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Pudahuel',15);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Quilicura',15);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Quinta Normal',15);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Recoleta',15);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Renca',15);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'San Joaquín',15);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'San Miguel',15);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'San Ramón',15);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Vitacura',15);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Puente Alto',15);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Pirque',15);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'San José de Maipo',15);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Colina',15);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Lampa',15);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Tiltil',15);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'San Bernardo',15);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Buin',15);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Calera de Tango',15);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Paine',15);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Melipilla',15);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Alhué',15);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Curacaví',15);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'María Pinto',15);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'San Pedro',15);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Talagante',15);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'El Monte',15);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Isla de Maipo',15);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Padre Hurtado',15);
+INSERT INTO COMUNA VALUES(seq_comuna.nextval,'Peñaflor',15);
 
 
 
@@ -911,4 +1002,5 @@ INSERT INTO EMPLEADO VALUES ('17925714', '9', 'Camilo', 'Alejandro', 'Muñoz', '
 ALTER TABLE HABITACION DROP COLUMN PRECIO_HABITACION;
 ALTER TABLE NOTIFICACION ADD ESTADO_NOTIFICACION VARCHAR2(25) NOT NULL;
 ALTER TABLE PRODUCTO ADD UNIDAD_MEDIDA VARCHAR2(25) NOT NULL;
+
 

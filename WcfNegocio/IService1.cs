@@ -236,15 +236,21 @@ namespace WcfNegocio
         [OperationContract]
         TipoProveedor ObtenerTipoProveedor(string tipoProveedor);
 
-        
-
         //CRUD Pedido
         [OperationContract]
         bool AgregarPedido(string pedido);
 
         [OperationContract]
+        bool EditarEstadoPedido(string pedido);
+
+        [OperationContract]
+        bool AgregarDetallePedido(string detalle);
+
+        [OperationContract]
         string ListarPedidoAdmin();
 
+        [OperationContract]
+        Pedido ObtenerPedido(string pedido);
 
         //DDL
         [OperationContract]
