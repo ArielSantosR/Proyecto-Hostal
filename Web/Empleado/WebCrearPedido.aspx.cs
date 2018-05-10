@@ -239,7 +239,7 @@ namespace Web.Empleado
                         {
                             if (MiSesion.TIPO_USUARIO.Equals("Empleado"))
                             {
-                                exito.Text = "Pedido Realizado con éxito, el administrador debe confirmar su envío";
+                                exito.Text = "Pedido Realizado, el administrador debe confirmar su envío";
                                 alerta_exito.Visible = true;
                                 alerta.Visible = false;
                                 MiSesionD.Clear();
@@ -249,7 +249,7 @@ namespace Web.Empleado
                             }
                             else
                             {
-                                exito.Text = "Pedido Realizado con éxito, antes de que su pedido sea enviado debe confirmar el envío";
+                                exito.Text = "Pedido Realizado, para que el proveedor lo reciba debe confirmar el Pedido";
                                 alerta_exito.Visible = true;
                                 alerta.Visible = false;
                                 MiSesionD.Clear();

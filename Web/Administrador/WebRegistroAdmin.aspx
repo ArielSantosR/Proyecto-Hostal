@@ -73,17 +73,16 @@
               <label for="name" class="col-sm-12 control-label">Nombre de Usuario</label>
                 <div class="col-sm-12">
                   <div class="input-group">
-                  <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                  <span class="input-group-text"><i class="fa fa-user" aria-hidden="true"></i></span>
                   <asp:TextBox ID="txtNombre" placeholder="Ingrese su Nombre de Usuario" runat="server" CssClass="form-control" required="required"></asp:TextBox>
                 </div>
               </div>
             </div>
-
               <div class="form-group">
               <label for="password" class="col-sm-12 control-label">Contraseña</label>
                 <div class="col-sm-12">
                   <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                    <span class="input-group-text"><i class="fas fa-lock fa-lg" aria-hidden="true"></i></span>
                     <asp:TextBox ID="txtPassword" placeholder="Ingrese su Contraseña" runat="server" CssClass="form-control" TextMode="Password"  required="required"></asp:TextBox>
                   </div>
                 </div>
@@ -92,7 +91,7 @@
               <label for="password" class="col-sm-12 control-label">Confirme su Contraseña</label>
                 <div class="col-sm-12">
                   <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                    <span class="input-group-text"><i class="fas fa-lock fa-lg" aria-hidden="true"></i></span>
                     <asp:TextBox ID="txtConfirmar" placeholder="Confirme su Contraseña" runat="server" CssClass="form-control" TextMode="Password" required="required"></asp:TextBox>
                   </div>
                 </div>
@@ -105,7 +104,7 @@
               <label for="name" class="col-sm-12 control-label">Tipo de Usuario </label>
                 <div class="col-sm-12">
                   <div class="input-group">
-                  <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                  <span class="input-group-text"><i class="fa fa-user fa" aria-hidden="true"></i></span>
                   <asp:DropDownList ID="ddlTipo" CssClass="form-control" runat="server" AutoPostBack="True" onChange="javascript: PermisosDeUsuario()" required="required">
                  </asp:DropDownList>
                 </div>
@@ -121,7 +120,7 @@
               <label for="name" class="col-sm-12 control-label">Estado</label>
                 <div class="col-sm-12">
                   <div class="input-group">
-                  <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                  <span class="input-group-text"><i class="fa fa-user fa" aria-hidden="true"></i></span>
                     <asp:DropDownList ID="ddlEstado" CssClass="form-control" runat="server" AutoPostBack="True"> 
                         <asp:ListItem>Habilitado</asp:ListItem>
                         <asp:ListItem>Deshabilitado</asp:ListItem>
@@ -139,7 +138,7 @@
               <label for="rut" class="col-sm-12 control-label">Rut Cliente</label>
                 <div class="col-sm-12">
                   <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-user-secret" aria-hidden="true"></i></span>
+                    <span class="input-group-text"><i class="fa fa-user-secret" aria-hidden="true"></i></span>
                     <asp:TextBox ID="txtRut" placeholder="Ingrese su Rut sin puntos ni guión" runat="server" oninput="checkRut(this)" CssClass="form-control" required="required"></asp:TextBox>
                 </div>
               </div>
@@ -148,7 +147,7 @@
               <label for="nombre" class="col-sm-12 control-label">Nombre</label>
               <div class="col-sm-12">
                 <div class="input-group">
-                  <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                  <span class="input-group-text"><i class="fa fa-user fa" aria-hidden="true"></i></span>
                   <asp:TextBox ID="txtNombreC" placeholder="Ingrese el nombre de su Empresa" runat="server" CssClass="form-control" required="required"></asp:TextBox>
                 </div>
               </div>
@@ -158,7 +157,7 @@
               <label for="email" class="col-sm-12 control-label">Correo Electrónico</label>
               <div class="col-sm-12">
                 <div class="input-group">
-                  <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+                  <span class="input-group-text"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
                   <asp:TextBox ID="txtEmail" placeholder="Ingrese su Correo Electrónico" TextMode="Email" runat="server" CssClass="form-control"></asp:TextBox>
                 </div>
               </div>
@@ -167,7 +166,7 @@
                 <label for="phone" class="col-sm-12 control-label">Teléfono</label>
                   <div class="col-sm-12">
                     <div class="input-group">
-                      <span class="input-group-addon"><i class="fa fa-phone fa-lg" aria-hidden="true"></i></span>
+                      <span class="input-group-text"><i class="fa fa-phone fa-lg" aria-hidden="true"></i></span>
                       <asp:TextBox ID="txtTelefono" placeholder="Ingrese su Teléfono" runat="server" TextMode="Number" CssClass="form-control"></asp:TextBox>
                     </div>
                   </div>
@@ -178,7 +177,7 @@
                   <label for="country" class="col-sm-12 control-label">País</label>
                     <div class="col-sm-12">
                       <div class="input-group">
-                        <span class="input-group-addon"><i class="fa fa-globe fa-lg" aria-hidden="true"></i></span>
+                        <span class="input-group-text"><i class="fa fa-globe fa-lg" aria-hidden="true"></i></span>
                           <asp:DropDownList ID="ddlPais" CssClass="form-control" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlPais_SelectedIndexChanged"> </asp:DropDownList>
                       </div>
                     </div>
@@ -187,7 +186,7 @@
                   <label for="region" class="col-sm-12 control-label">Región</label>
                     <div class="col-sm-12">
                       <div class="input-group">
-                        <span class="input-group-addon"><i class="fa fa-globe fa-lg" aria-hidden="true"></i></span>
+                        <span class="input-group-text"><i class="fa fa-globe fa-lg" aria-hidden="true"></i></span>
                           <asp:DropDownList ID="ddlRegion" CssClass="form-control" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlRegion_SelectedIndexChanged"> </asp:DropDownList>
                       </div>
                     </div>
@@ -196,7 +195,7 @@
                   <label for="confirm" class="col-sm-12 control-label">Comuna</label>
                     <div class="col-sm-12">
                       <div class="input-group">
-                        <span class="input-group-addon"><i class="fa fa-globe fa-lg" aria-hidden="true"></i></span>
+                        <span class="input-group-text"><i class="fa fa-globe fa-lg" aria-hidden="true"></i></span>
                           <asp:DropDownList ID="ddlComuna" CssClass="form-control" runat="server" AutoPostBack="True"> </asp:DropDownList>
                       </div>
                     </div>
@@ -207,7 +206,7 @@
                   <label for="direction" class="col-sm-12 control-label">Dirección</label>
                     <div class="col-sm-12">
                       <div class="input-group">
-                        <span class="input-group-addon"><i class="fa fa-home fa-lg" aria-hidden="true"></i></span>
+                        <span class="input-group-text"><i class="fa fa-home fa-lg" aria-hidden="true"></i></span>
                         <asp:TextBox ID="txtDireccion" placeholder="Ingrese su dirección" runat="server" CssClass="form-control" required="required"></asp:TextBox>
                       </div>
                     </div>
@@ -220,7 +219,7 @@
               <label for="rut" class="col-sm-12 control-label">Rut Empleado</label>
                 <div class="col-sm-12">
                   <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-user-secret" aria-hidden="true"></i></span>
+                    <span class="input-group-text"><i class="fa fa-user-secret" aria-hidden="true"></i></span>
                     <asp:TextBox ID="txtRut2" placeholder="Ingrese su Rut sin puntos ni guión" runat="server" oninput="checkRut(this)" CssClass="form-control" required="required"></asp:TextBox>
                 </div>
               </div>
@@ -229,7 +228,7 @@
               <label for="nombre" class="col-sm-12 control-label">Primer Nombre</label>
               <div class="col-sm-12">
                 <div class="input-group">
-                  <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                  <span class="input-group-text"><i class="fa fa-user fa" aria-hidden="true"></i></span>
                   <asp:TextBox ID="txtNombreE" placeholder="Ingrese su Primer Nombre" runat="server" CssClass="form-control" required="required"></asp:TextBox>
                 </div>
               </div>
@@ -238,7 +237,7 @@
               <label for="nombre" class="col-sm-12 control-label">Segundo Nombre</label>
               <div class="col-sm-12">
                 <div class="input-group">
-                  <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                  <span class="input-group-text"><i class="fa fa-user fa" aria-hidden="true"></i></span>
                   <asp:TextBox ID="txtNombre2E" placeholder="Ingrese su Segundo Nombre" runat="server" CssClass="form-control"></asp:TextBox>
                 </div>
               </div>
@@ -247,7 +246,7 @@
               <label for="apellido" class="col-sm-12 control-label">Apellido Paterno</label>
               <div class="col-sm-12">
                 <div class="input-group">
-                  <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                  <span class="input-group-text"><i class="fa fa-user fa" aria-hidden="true"></i></span>
                   <asp:TextBox ID="txtApellidoP" placeholder="Ingrese su Apellido Paterno" runat="server" CssClass="form-control" required="required"></asp:TextBox>
                 </div>
               </div>
@@ -256,7 +255,7 @@
               <label for="apellido" class="col-sm-12 control-label">Apellido Materno</label>
               <div class="col-sm-12">
                 <div class="input-group">
-                  <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                  <span class="input-group-text"><i class="fa fa-user fa" aria-hidden="true"></i></span>
                   <asp:TextBox ID="txtApellidoM" placeholder="Ingrese su Apellido Materno" runat="server" CssClass="form-control" required="required"></asp:TextBox>
                 </div>
               </div>
@@ -269,7 +268,7 @@
               <label for="rut" class="col-sm-12 control-label">Rut Proveedor</label>
                 <div class="col-sm-12">
                   <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-user-secret" aria-hidden="true"></i></span>
+                    <span class="input-group-text"><i class="fa fa-user-secret" aria-hidden="true"></i></span>
                     <asp:TextBox ID="txtRut3" placeholder="Ingrese su Rut sin puntos ni guión" runat="server" oninput="checkRut(this)" CssClass="form-control" required="required"></asp:TextBox>
                 </div>
               </div>
@@ -278,7 +277,7 @@
               <label for="nombre" class="col-sm-12 control-label">Primer Nombre</label>
               <div class="col-sm-12">
                 <div class="input-group">
-                  <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                  <span class="input-group-text"><i class="fa fa-user fa" aria-hidden="true"></i></span>
                   <asp:TextBox ID="txtNombreP" placeholder="Ingrese su Primer Nombre" runat="server" CssClass="form-control" required="required"></asp:TextBox>
                 </div>
               </div>
@@ -287,7 +286,7 @@
               <label for="nombre" class="col-sm-12 control-label">Segundo Nombre</label>
               <div class="col-sm-12">
                 <div class="input-group">
-                  <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                  <span class="input-group-text"><i class="fa fa-user fa" aria-hidden="true"></i></span>
                   <asp:TextBox ID="txtNombre2P" placeholder="Ingrese su Segundo Nombre" runat="server" CssClass="form-control"></asp:TextBox>
                 </div>
               </div>
@@ -296,7 +295,7 @@
               <label for="apellido" class="col-sm-12 control-label">Apellido Paterno</label>
               <div class="col-sm-12">
                 <div class="input-group">
-                  <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                  <span class="input-group-text"><i class="fa fa-user fa" aria-hidden="true"></i></span>
                   <asp:TextBox ID="txtApellidoP2" placeholder="Ingrese su Apellido Paterno" runat="server" CssClass="form-control" required="required"></asp:TextBox>
                 </div>
               </div>
@@ -305,7 +304,7 @@
               <label for="apellido" class="col-sm-12 control-label">Apellido Materno</label>
               <div class="col-sm-12">
                 <div class="input-group">
-                  <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                  <span class="input-group-text"><i class="fa fa-user fa" aria-hidden="true"></i></span>
                   <asp:TextBox ID="txtApellidoM2" placeholder="Ingrese su Apellido Materno" runat="server" CssClass="form-control" required="required"></asp:TextBox>
                 </div>
               </div>
@@ -316,7 +315,7 @@
               <label for="name" class="col-sm-12 control-label">Tipo de Proveedor</label>
                 <div class="col-sm-12">
                   <div class="input-group">
-                  <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                  <span class="input-group-text"><i class="fa fa-user fa" aria-hidden="true"></i></span>
                     <asp:DropDownList ID="ddlTipoProveedor" CssClass="form-control" runat="server" AutoPostBack="True"> 
                       </asp:DropDownList>                
                   </div>

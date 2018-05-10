@@ -36,7 +36,7 @@
               <label for="name" class="col-sm-12 control-label">RUT Proveedor </label>
                 <div class="col-sm-12">
                   <div class="input-group">
-                  <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                  <span class="input-group-text"><i class="fa fa-user fa" aria-hidden="true"></i></span>
                       <asp:DropDownList ID="ddlRut" CssClass="form-control" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlProducto_SelectedIndexChanged">
                       </asp:DropDownList>
                 </div>
@@ -46,7 +46,7 @@
               <label for="name" class="col-sm-12 control-label">Producto </label>
                 <div class="col-sm-12">
                   <div class="input-group">
-                  <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                  <span class="input-group-text"><i class="fa fa-user fa" aria-hidden="true"></i></span>
                       <asp:DropDownList ID="ddlProducto" CssClass="form-control" runat="server">
                       </asp:DropDownList>
                 </div>
@@ -61,7 +61,7 @@
               <label for="name" class="col-sm-12 control-label">Cantidad</label>
                 <div class="col-sm-12">
                   <div class="input-group">
-                  <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                  <span class="input-group-text"><i class="fa fa-user fa" aria-hidden="true"></i></span>
                   <asp:TextBox ID="txtCantidad" placeholder="Ingrese cantidad de Productos" TextMode="Number" runat="server" CssClass="form-control" required="required" min="1" AutoPostBack="true"  OnTextChanged="txtCantidad_TextChanged"></asp:TextBox>
                 </div>
               </div>
@@ -71,7 +71,7 @@
               <label for="name" class="col-sm-12 control-label">Precio Total</label>
                 <div class="col-sm-12">
                   <div class="input-group">
-                  <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                  <span class="input-group-text"><i class="fas fa-money-bill-alt" aria-hidden="true"></i></span>
                   <asp:TextBox ID="txtPrecio" placeholder="Ingrese cantidad de Productos para ver Total" runat="server" CssClass="form-control" required="required"></asp:TextBox>
                 </div>
               </div>
@@ -120,9 +120,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
       </div>
-    
-          
 </asp:Content>

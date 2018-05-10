@@ -23,7 +23,7 @@
               <label for="name" class="col-sm-12 control-label">Nombre Tipo Proveedor</label>
                 <div class="col-sm-12">
                   <div class="input-group">
-                  <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                  <span class="input-group-text"><i class="fa fa-user fa" aria-hidden="true"></i></span>
                   <asp:TextBox ID="txtNombre" placeholder="Ingrese nombre" runat="server" CssClass="form-control" required="required"></asp:TextBox>
                 </div>
               </div>

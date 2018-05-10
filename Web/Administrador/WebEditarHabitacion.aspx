@@ -24,7 +24,7 @@
               <label for="name" class="col-sm-12 control-label">Número de Habitación</label>
                 <div class="col-sm-12">
                   <div class="input-group">
-                  <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                  <span class="input-group-text"><i class="fa fa-user fa" aria-hidden="true"></i></span>
                   <asp:TextBox ID="txtNumero" placeholder="Ingrese número de habitación" TextMode="Number" runat="server" CssClass="form-control" required="required"></asp:TextBox>
                 </div>
               </div>
@@ -33,7 +33,7 @@
               <label for="name" class="col-sm-12 control-label">Precio</label>
                 <div class="col-sm-12">
                   <div class="input-group">
-                  <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                  <span class="input-group-text"><i class="fas fa-money-bill-alt" aria-hidden="true"></i></span>
                   <asp:TextBox ID="txtPrecio" placeholder="Ingrese Precio de Habitación" TextMode="Number" runat="server" CssClass="form-control" required="required"></asp:TextBox>
                 </div>
               </div>
@@ -46,7 +46,7 @@
               <label for="name" class="col-sm-12 control-label">Estado </label>
                 <div class="col-sm-12">
                   <div class="input-group">
-                  <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                  <span class="input-group-text"><i class="fa fa-user fa" aria-hidden="true"></i></span>
                       <asp:DropDownList ID="ddlEstado" CssClass="form-control" runat="server">
                       </asp:DropDownList>
                       
@@ -57,7 +57,7 @@
               <label for="name" class="col-sm-12 control-label">RUT Cliente</label>
                 <div class="col-sm-12">
                   <div class="input-group">
-                  <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                  <span class="input-group-text"><i class="fa fa-user fa" aria-hidden="true"></i></span>
                   <asp:TextBox ID="txtRut" placeholder="RUT Cliente" runat="server" CssClass="form-control" required="required"></asp:TextBox>
                 </div>
               </div>
@@ -68,7 +68,7 @@
               <label for="name" class="col-sm-12 control-label">Tipo de Habitación </label>
                 <div class="col-sm-12">
                   <div class="input-group">
-                  <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"> </i></span>
+                  <span class="input-group-text"><i class="fa fa-user fa" aria-hidden="true"> </i></span>
                       <asp:DropDownList ID="ddlTipo" CssClass="form-control" runat="server">
                       </asp:DropDownList>
                 </div>

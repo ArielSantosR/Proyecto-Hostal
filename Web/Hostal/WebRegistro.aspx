@@ -33,12 +33,11 @@
               <label for="name" class="col-sm-12 control-label">Nombre de Usuario</label>
                 <div class="col-sm-12">
                   <div class="input-group">
-                  <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                  <span class="input-group-addon"><i class="fas fa-user"></i></span>
                   <asp:TextBox ID="txtNombre" placeholder="Ingrese su Nombre de Usuario" runat="server" CssClass="form-control" required="required"></asp:TextBox>
                 </div>
               </div>
             </div>
-
               <div class="form-group">
               <label for="password" class="col-sm-12 control-label">Contraseña</label>
                 <div class="col-sm-12">

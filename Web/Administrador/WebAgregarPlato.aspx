@@ -24,7 +24,7 @@
               <label for="name" class="col-sm-12 control-label">Nombre Plato</label>
                 <div class="col-sm-12">
                   <div class="input-group">
-                  <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                  <span class="input-group-text"><i class="fa fa-user fa" aria-hidden="true"></i></span>
                   <asp:TextBox ID="txtNombre" placeholder="Ingrese nombre de Plato" runat="server" CssClass="form-control" required="required"></asp:TextBox>
                 </div>
               </div>
@@ -33,7 +33,7 @@
               <label for="name" class="col-sm-12 control-label">Precio</label>
                 <div class="col-sm-12">
                   <div class="input-group">
-                  <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                  <span class="input-group-text"><i class="fas fa-money-bill-alt" aria-hidden="true"></i></span>
                   <asp:TextBox ID="txtPrecio" placeholder="Ingrese Precio de Plato" TextMode="Number" runat="server" CssClass="form-control" required="required"></asp:TextBox>
                 </div>
               </div>
@@ -46,7 +46,7 @@
               <label for="name" class="col-sm-12 control-label">Categoría </label>
                 <div class="col-sm-12">
                   <div class="input-group">
-                  <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                  <span class="input-group-text"><i class="fa fa-user fa" aria-hidden="true"></i></span>
                       <asp:DropDownList ID="ddlCategoria" CssClass="form-control" runat="server">
                       </asp:DropDownList>
                       
@@ -59,7 +59,7 @@
               <label for="name" class="col-sm-12 control-label">Tipo de Plato </label>
                 <div class="col-sm-12">
                   <div class="input-group">
-                  <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"> </i></span>
+                  <span class="input-group-text"><i class="fa fa-user fa" aria-hidden="true"> </i></span>
                       <asp:DropDownList ID="ddlTipo" CssClass="form-control" runat="server">
                       </asp:DropDownList>
                 </div>

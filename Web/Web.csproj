@@ -143,9 +143,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Administrador\WebAdmin.aspx" />
-    <Content Include="Proveedor\WebDespachados.aspx" />
+    <Content Include="Proveedor\WebHistorialPedidos.aspx" />
     <Content Include="Proveedor\WebEditarProveedor.aspx" />
-    <Content Include="Proveedor\WebRecibidos.aspx" />
+    <Content Include="Proveedor\WebPedidosPendientes.aspx" />
     <Content Include="WebCerrarSesion.aspx" />
     <Content Include="Cliente\WebCliente.aspx" />
     <Content Include="Empleado\WebEmpleado.aspx" />
@@ -525,12 +525,12 @@
     <Compile Include="Administrador\WebAdmin.aspx.designer.cs">
       <DependentUpon>WebAdmin.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Proveedor\WebDespachados.aspx.cs">
-      <DependentUpon>WebDespachados.aspx</DependentUpon>
+    <Compile Include="Proveedor\WebHistorialPedidos.aspx.cs">
+      <DependentUpon>WebHistorialPedidos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Proveedor\WebDespachados.aspx.designer.cs">
-      <DependentUpon>WebDespachados.aspx</DependentUpon>
+    <Compile Include="Proveedor\WebHistorialPedidos.aspx.designer.cs">
+      <DependentUpon>WebHistorialPedidos.aspx</DependentUpon>
     </Compile>
     <Compile Include="Proveedor\WebEditarProveedor.aspx.cs">
       <DependentUpon>WebEditarProveedor.aspx</DependentUpon>
@@ -539,12 +539,12 @@
     <Compile Include="Proveedor\WebEditarProveedor.aspx.designer.cs">
       <DependentUpon>WebEditarProveedor.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Proveedor\WebRecibidos.aspx.cs">
-      <DependentUpon>WebRecibidos.aspx</DependentUpon>
+    <Compile Include="Proveedor\WebPedidosPendientes.aspx.cs">
+      <DependentUpon>WebPedidosPendientes.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Proveedor\WebRecibidos.aspx.designer.cs">
-      <DependentUpon>WebRecibidos.aspx</DependentUpon>
+    <Compile Include="Proveedor\WebPedidosPendientes.aspx.designer.cs">
+      <DependentUpon>WebPedidosPendientes.aspx</DependentUpon>
     </Compile>
     <Compile Include="WebCerrarSesion.aspx.cs">
       <DependentUpon>WebCerrarSesion.aspx</DependentUpon>

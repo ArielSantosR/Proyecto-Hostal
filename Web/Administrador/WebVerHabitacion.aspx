@@ -17,7 +17,6 @@
                             <SortedDescendingHeaderStyle BackColor="#4870BE" />
                             <Columns>
                                  <asp:BoundField DataField="NUMERO_HABITACION" HeaderText="Número de Habitación" />
-                                <asp:BoundField DataField="PRECIO_HABITACION" HeaderText="Precio" />
                                 <asp:BoundField DataField="ESTADO_HABITACION" HeaderText="Estado" />
                                 <asp:BoundField DataField="ID_TIPO_HABITACION" HeaderText="ID Tipo Habitación" />
                                 <asp:BoundField DataField="RUT_CLIENTE" HeaderText="RUT Cliente" />

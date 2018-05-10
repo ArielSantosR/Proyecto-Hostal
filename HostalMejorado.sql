@@ -576,6 +576,34 @@ BEGIN
   END IF;
 END;
 
+--Este Trigger Desactiva la notificacion del Proveedor segun su rut
+CREATE OR REPLACE TRIGGER TGR_D_NOTIFICACION_PROVEEDOR
+AFTER UPDATE ON PEDIDO
+FOR EACH ROW
+DECLARE
+CURSOR CUR_PROVEEDOR IS SELECT RUT_PROVEEDOR, ID_USUARIO FROM PROVEEDOR;
+CURSOR CUR_NOTIFICACION IS SELECT ID_NOTIFICACION, MENSAJE, ID_USUARIO, ESTADO_NOTIFICACION FROM NOTIFICACION;
+
+BEGIN
+	IF UPDATING('ESTADO_DESPACHO') THEN
+    IF :NEW.ESTADO_DESPACHO != 'Pendiente' THEN
+        FOR I IN CUR_PROVEEDOR LOOP
+            IF I.RUT_PROVEEDOR = :NEW.RUT_PROVEEDOR THEN
+                FOR J IN CUR_NOTIFICACION LOOP
+                  IF I.ID_USUARIO = J.ID_USUARIO THEN
+                    IF J.ESTADO_NOTIFICACION = 'Habilitado' THEN
+                      UPDATE NOTIFICACION
+                      SET ESTADO_NOTIFICACION = 'Deshabilitado'
+                      WHERE J.ID_USUARIO = I.ID_USUARIO;
+                    END IF;
+                  END IF;
+                END LOOP;
+            END IF;
+        END LOOP;
+    END IF;
+  END IF;
+END;
+
 --Este Trigger envía una notificación a cada uno de los administrador si hay nuevos pedidos pendientes.
 CREATE OR REPLACE TRIGGER TGR_NOTIFICACION_ADMIN
 AFTER INSERT ON PEDIDO
@@ -590,6 +618,34 @@ BEGIN
 		END IF;
 	END LOOP;
 END;
+
+CREATE OR REPLACE TRIGGER TGR_D_NOTIFICACION_ADMIN
+AFTER UPDATE ON PEDIDO
+FOR EACH ROW
+DECLARE
+CURSOR CUR_USUARIO IS SELECT ID_USUARIO, TIPO_USUARIO FROM USUARIO;
+CURSOR CUR_NOTIFICACION IS SELECT ID_NOTIFICACION, MENSAJE, ID_USUARIO, ESTADO_NOTIFICACION FROM NOTIFICACION;
+
+BEGIN
+	IF UPDATING('ESTADO_PEDIDO') THEN
+    IF :NEW.ESTADO_PEDIDO != 'Pendiente' THEN
+        FOR I IN CUR_USUARIO LOOP
+            IF I.TIPO_USUARIO = 'Administrador' THEN
+                FOR J IN CUR_NOTIFICACION LOOP
+                  IF I.ID_USUARIO = J.ID_USUARIO THEN
+                    IF J.ESTADO_NOTIFICACION = 'Habilitado' THEN
+                      UPDATE NOTIFICACION
+                      SET ESTADO_NOTIFICACION = 'Deshabilitado'
+                      WHERE J.ID_USUARIO = I.ID_USUARIO;
+                    END IF;
+                  END IF;
+                END LOOP;
+            END IF;
+        END LOOP;
+    END IF;
+  END IF;
+END;
+
 
 --Inserción de Usuarios
 --Contraseña: admin

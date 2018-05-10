@@ -23,7 +23,7 @@
               <label for="name" class="col-sm-12 control-label">Nombre del Producto</label>
                 <div class="col-sm-12">
                   <div class="input-group">
-                  <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                  <span class="input-group-text"><i class="fa fa-user fa" aria-hidden="true"></i></span>
                   <asp:TextBox ID="txtNombre" placeholder="Ingrese nombre del producto" runat="server" CssClass="form-control" required="required"></asp:TextBox>
                 </div>
               </div>
@@ -32,7 +32,7 @@
               <label for="name" class="col-sm-12 control-label">Precio</label>
                 <div class="col-sm-12">
                   <div class="input-group">
-                  <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                  <span class="input-group-text"><i class="fas fa-money-bill-alt" aria-hidden="true"></i></span>
                   <asp:TextBox ID="txtPrecio" placeholder="Ingrese Precio del Producto"  runat="server" CssClass="form-control" required="required"></asp:TextBox>
                 </div>
               </div>
@@ -41,7 +41,7 @@
               <label for="name" class="col-sm-12 control-label">Stock</label>
                 <div class="col-sm-12">
                   <div class="input-group">
-                  <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                  <span class="input-group-text"><i class="fa fa-user fa" aria-hidden="true"></i></span>
                   <asp:TextBox ID="txtStock" placeholder="Ingrese stock"  runat="server" CssClass="form-control" required="required"></asp:TextBox>
                 </div>
               </div>
@@ -50,7 +50,7 @@
               <label for="name" class="col-sm-12 control-label">Stock Critico</label>
                 <div class="col-sm-12">
                   <div class="input-group">
-                  <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                  <span class="input-group-text"><i class="fa fa-user fa" aria-hidden="true"></i></span>
                   <asp:TextBox ID="txtStockCritico" placeholder="Ingrese Stock Critico"  runat="server" CssClass="form-control" required="required"></asp:TextBox>
                 </div>
               </div>
@@ -59,7 +59,7 @@
               <label for="name" class="col-sm-12 control-label">Descripción</label>
                 <div class="col-sm-12">
                   <div class="input-group">
-                  <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                  <span class="input-group-text"><i class="fa fa-user fa" aria-hidden="true"></i></span>
                   <asp:TextBox ID="txtDescripcion" placeholder="Ingrese Descripción"  runat="server" CssClass="form-control" required="required"></asp:TextBox>
                 </div>
               </div>
@@ -72,7 +72,7 @@
               <label for="name" class="col-sm-12 control-label">Familia </label>
                 <div class="col-sm-12">
                   <div class="input-group">
-                  <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                  <span class="input-group-text"><i class="fa fa-user fa" aria-hidden="true"></i></span>
                       <asp:DropDownList ID="ddlFamilia" CssClass="form-control" runat="server">
                       </asp:DropDownList>    
                 </div>
@@ -82,7 +82,7 @@
               <label for="name" class="col-sm-12 control-label">Fecha de Vencimiento</label>
 &nbsp;<div class="col-sm-12">
                   <div class="input-group">
-                  <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                  <span class="input-group-text"><i class="fas fa-calendar-alt" aria-hidden="true"></i></span>
                   <asp:Calendar ID="calendarFecha" runat="server" BackColor="White" BorderColor="Black" BorderStyle="Solid" CellSpacing="1" Font-Names="Verdana" Font-Size="9pt" ForeColor="Black" Height="250px" NextPrevFormat="ShortMonth" Width="330px">
                   <DayHeaderStyle Font-Bold="True" Font-Size="8pt" ForeColor="#333333" Height="8pt" />
                   <DayStyle BackColor="#CCCCCC" />

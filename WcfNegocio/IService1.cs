@@ -252,6 +252,10 @@ namespace WcfNegocio
         [OperationContract]
         Pedido ObtenerPedido(string pedido);
 
+        //CRUD Notificacion
+        [OperationContract]
+        string listaNotificacion(string usuario);
+
         //DDL
         [OperationContract]
         string ListarTipoProveedor();

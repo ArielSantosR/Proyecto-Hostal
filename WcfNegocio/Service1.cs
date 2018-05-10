@@ -1371,6 +1371,46 @@ namespace WcfNegocio
             }
         }
 
+        public string listaNotificacion(string usuario)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.Usuario));
+            StringReader reader = new StringReader(usuario);
+            Modelo.Usuario u = (Modelo.Usuario)ser.Deserialize(reader);
+            ServicioNotificacion serv = new ServicioNotificacion();
+
+            Datos.USUARIO uDatos = new Datos.USUARIO();
+            uDatos.ID_USUARIO = u.ID_USUARIO;
+            uDatos.TIPO_USUARIO = u.TIPO_USUARIO;
+
+            List<Datos.NOTIFICACION> listaNotificacion = serv.ListaNotificacion(uDatos);
+
+            if (listaNotificacion == null)
+            {
+                return null;
+            }
+            else
+            {
+                XmlSerializer servicio = new XmlSerializer(typeof(Modelo.Notificacion));
+                Modelo.NotificacionCollection listaNotificacion2 = new Modelo.NotificacionCollection();
+
+                foreach (Datos.NOTIFICACION n in listaNotificacion)
+                {
+                    Modelo.Notificacion nModelo = new Modelo.Notificacion();
+                    nModelo.ID_NOTIFICACION = n.ID_NOTIFICACION;
+                    nModelo.MENSAJE = n.MENSAJE;
+                    nModelo.ESTADO_NOTIFICACION = n.ESTADO_NOTIFICACION;
+
+                    listaNotificacion2.Add(nModelo);
+                }
+
+                XmlSerializer ser2 = new XmlSerializer(typeof(Modelo.NotificacionCollection));
+                StringWriter writer = new StringWriter();
+                ser2.Serialize(writer, listaNotificacion2);
+                writer.Close();
+                return writer.ToString();
+            }
+        }
+
         //DDL
         public string ListarPais()
         {

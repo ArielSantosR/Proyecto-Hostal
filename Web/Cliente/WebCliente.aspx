@@ -17,11 +17,11 @@
             
             <div class="row" style="margin-top: 20px;">
                 <div class="col-md-6">
-                    <asp:button runat="server" text="Ver Historial" ID="btnHistorial" CssClass="btn btn-info btn-lg btn-block login-button" style="font-size: 15px;" OnClick="btnHistorial_Click" />
+                    <asp:button runat="server" text="Ver Historial" ID="btnHistorial" CssClass="btn btn-primary btn-lg btn-block login-button" style="font-size: 15px;" OnClick="btnHistorial_Click" />
                 </div>
                     
                 <div class="col-md-6">
-                    <asp:button runat="server" text="Crear Orden" ID="Button1" CssClass="btn btn-warning btn-lg btn-block login-button" style="font-size: 15px;" OnClick="btnCrearOrden_Click" />
+                    <asp:button runat="server" text="Crear Orden" ID="Button1" CssClass="btn btn-primary btn-lg btn-block login-button" style="font-size: 15px;" OnClick="btnCrearOrden_Click" />
                 </div>
             </div>
         </div>
