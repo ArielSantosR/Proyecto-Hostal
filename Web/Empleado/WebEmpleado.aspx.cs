@@ -1,10 +1,13 @@
 ﻿using Modelo;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Xml.Serialization;
+using WcfNegocio;
 
 namespace Web
 {
@@ -40,7 +43,30 @@ namespace Web
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            alerta.Visible = false;
 
+            Service1 service = new Service1();
+
+            Modelo.Usuario usuario = new Modelo.Usuario();
+            usuario = MiSesion;
+
+            XmlSerializer sr = new XmlSerializer(typeof(Modelo.Usuario));
+            StringWriter writer = new StringWriter();
+            sr.Serialize(writer, usuario);
+
+            string datos = service.listaNotificacion(writer.ToString());
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.NotificacionCollection));
+            StringReader reader = new StringReader(datos);
+
+            Modelo.NotificacionCollection listaNotificacion = (Modelo.NotificacionCollection)ser.Deserialize(reader);
+
+            MiSesionNotificacion = listaNotificacion;
+
+            foreach (Notificacion n in MiSesionNotificacion)
+            {
+                alerta.Visible = true;
+                notificacion.Text = n.MENSAJE;
+            }
         }
 
         //Creación de Sesión
@@ -57,6 +83,23 @@ namespace Web
             set
             {
                 Session["Usuario"] = value;
+            }
+        }
+
+        //Creación de Sesión
+        public List<Notificacion> MiSesionNotificacion
+        {
+            get
+            {
+                if (Session["Notificacion"] == null)
+                {
+                    Session["Notificacion"] = new List<Notificacion>();
+                }
+                return (List<Notificacion>)Session["Notificacion"];
+            }
+            set
+            {
+                Session["Notificacion"] = value;
             }
         }
 
@@ -93,6 +136,11 @@ namespace Web
         protected void btnRegistrarOrden_Click(object sender, EventArgs e)
         {
             Response.Redirect("WebRegistrarOrden.aspx");
+        }
+
+        protected void btnHistorial_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("WebHistorialPedidos.aspx");
         }
     }
 }

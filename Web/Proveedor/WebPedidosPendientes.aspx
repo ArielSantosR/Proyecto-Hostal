@@ -30,10 +30,10 @@
                                 <asp:BoundField DataField="NUMERO_PEDIDO" HeaderText="Número de Pedido" />
                                 <asp:BoundField DataField="FECHA_PEDIDO" HeaderText="Fecha de Pedido" />
                                 <asp:BoundField DataField="ESTADO_PEDIDO" HeaderText="Estado de Pedido" />
-                                <asp:BoundField DataField="NUMERO_RECEPCION" HeaderText="Número de Recepción" />
                                 <asp:BoundField DataField="RUT_EMPLEADO" HeaderText="RUT Empleado" />
                                 <asp:BoundField DataField="RUT_PROVEEDOR" HeaderText="RUT Proveedor" />
                                 <asp:BoundField DataField="ESTADO_DESPACHO" HeaderText="Estado de Despacho" />
+                                <asp:BoundField DataField="COMENTARIO" HeaderText="Comentario" />
                                 <asp:TemplateField>
                                     <ItemTemplate>
                                         <asp:LinkButton ID="btnInfo"  CssClass="btn btn-info" CommandArgument='<%#Eval("NUMERO_PEDIDO")%>'  text="Ver Detalle" runat="server"/>

@@ -576,7 +576,7 @@ BEGIN
   END IF;
 END;
 
---Este Trigger Desactiva la notificacion del Proveedor segun su rut
+--Este Trigger Desactiva la notificacion del Proveedor segun su rut y a su vez envia una notificacion de pedidos sin despachar
 CREATE OR REPLACE TRIGGER TGR_D_NOTIFICACION_PROVEEDOR
 AFTER UPDATE ON PEDIDO
 FOR EACH ROW
@@ -595,11 +595,34 @@ BEGIN
                       UPDATE NOTIFICACION
                       SET ESTADO_NOTIFICACION = 'Deshabilitado'
                       WHERE J.ID_USUARIO = I.ID_USUARIO;
+
+                      IF :NEW.ESTADO_PEDIDO = 'Aceptado' THEN 
+                        INSERT INTO NOTIFICACION VALUES(SEQ_NOTIFICACION.NEXTVAL, 'Tiene Productos sin despachar', I.ID_USUARIO, 'Habilitado');
+                      END IF;
                     END IF;
                   END IF;
                 END LOOP;
             END IF;
         END LOOP;
+    END IF;
+  END IF;
+END;
+
+--Este Trigger es para avisar al proveedor que tiene pedidos pendientes por despachar.
+CREATE OR REPLACE TRIGGER TGR_NOTIFICACION_EMPLEADO
+AFTER UPDATE ON PEDIDO
+FOR EACH ROW
+DECLARE
+CURSOR CUR_USUARIO IS SELECT ID_USUARIO, TIPO_USUARIO FROM USUARIO;
+
+BEGIN
+  IF UPDATING('ESTADO_DESPACHO') THEN
+    IF :NEW.ESTADO_PEDIDO = 'Despachado' THEN
+      FOR I IN CUR_USUARIO LOOP
+        IF I.TIPO_USUARIO = 'Empleado' Then
+			    INSERT INTO NOTIFICACION VALUES(SEQ_NOTIFICACION.NEXTVAL, 'Una orden de Pedido ha sido despachada, debe recepcionarla', I.ID_USUARIO, 'Habilitado');
+        END IF;
+      END LOOP;
     END IF;
   END IF;
 END;
@@ -643,6 +666,7 @@ BEGIN
     END IF;
   END IF;
 END;
+
 
 
 --Inserción de Usuarios

@@ -189,40 +189,6 @@ namespace WcfNegocio
         [OperationContract]
         Pais ObtenerPais(string pais);
 
-        //REGION
-        /*
-        [OperationContract]
-        bool AgregarRegion(string region);
-
-        [OperationContract]
-        bool EliminarRegion(string region);
-
-        [OperationContract]
-        bool ModificarRegion(string region);
-
-        [OperationContract]
-        bool ExisteRegion(string region);
-
-        [OperationContract]
-        Region ObtenerRegion(string region);
-
-        //COMUNA
-        [OperationContract]
-        bool AgregarComuna(string comuna);
-
-        [OperationContract]
-        bool EliminarComuna(string comuna);
-
-        [OperationContract]
-        bool ModificarComuna(string comuna);
-
-        [OperationContract]
-        bool ExisteComuna(string comuna);
-
-        [OperationContract]
-        Comuna ObtenerComuna(string comuna);
-        */
-
         //CRUD TIPO PROVEEDOR
         [OperationContract]
         bool AgregarTipoProveedor(string tipoProveedor);
@@ -263,6 +229,12 @@ namespace WcfNegocio
 
         [OperationContract]
         Pedido ObtenerPedido(string pedido);
+
+        [OperationContract]
+        string ListarHistorialProveedor(string proveedor);
+
+        [OperationContract]
+        string ListarPedidoDespacho(string proveedor);
 
         //CRUD Notificacion
         [OperationContract]

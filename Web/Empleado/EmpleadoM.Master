@@ -47,8 +47,9 @@
           Pedido
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
-          <a class="dropdown-item" href="../Empleado/WebCrearPedido.aspx">Crear Pedido</a>
-          <a class="dropdown-item" href="../Empleado/WebRecibirPedido.aspx">Recibir Pedido</a>
+            <a class="dropdown-item" href="../Empleado/WebCrearPedido.aspx">Crear Pedido</a>
+            <a class="dropdown-item" href="../Empleado/WebRecibirPedido.aspx">Recibir Pedido</a>
+            <a class="dropdown-item" href="../Empleado/WebHistorialPedidos.aspx">Historial Pedidos</a>
         </div>
       </li>
 

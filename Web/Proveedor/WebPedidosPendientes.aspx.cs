@@ -51,29 +51,38 @@ namespace Web.Proveedor
             Service1 service = new Service1();
 
             Modelo.Proveedor proveedor = new Modelo.Proveedor();
-            proveedor.ID_USUARIO = MiSesion.ID_USUARIO;
 
-            //Si el ID de empleado es encontrado, pasar al siguiente paso
-            Service1 s = new Service1();
-            XmlSerializer sr = new XmlSerializer(typeof(Modelo.Proveedor));
-            StringWriter writer = new StringWriter();
-            sr.Serialize(writer, proveedor);
-            writer.Close();
+            if (MiSesion.ID_USUARIO != 0)
+            {
+                proveedor.ID_USUARIO = MiSesion.ID_USUARIO;
 
-            Modelo.Proveedor proveedor2 = s.buscarIDP(writer.ToString());
-            XmlSerializer sr2 = new XmlSerializer(typeof(Modelo.Proveedor));
-            StringWriter writer2 = new StringWriter();
-            sr2.Serialize(writer2, proveedor2);
-            writer2.Close();
+                //Si el ID de empleado es encontrado, pasar al siguiente paso
+                Service1 s = new Service1();
+                XmlSerializer sr = new XmlSerializer(typeof(Modelo.Proveedor));
+                StringWriter writer = new StringWriter();
+                sr.Serialize(writer, proveedor);
+                writer.Close();
 
-            string datos = service.ListarPedidoProveedor(writer2.ToString());
-            XmlSerializer ser3 = new XmlSerializer(typeof(Modelo.PedidoCollection));
-            StringReader reader = new StringReader(datos);
+                Modelo.Proveedor proveedor2 = s.buscarIDP(writer.ToString());
+                XmlSerializer sr2 = new XmlSerializer(typeof(Modelo.Proveedor));
+                StringWriter writer2 = new StringWriter();
+                sr2.Serialize(writer2, proveedor2);
+                writer2.Close();
 
-            Modelo.PedidoCollection listaPedido = (Modelo.PedidoCollection)ser3.Deserialize(reader);
-            reader.Close();
-            gvPedido.DataSource = listaPedido;
-            gvPedido.DataBind();
+                string datos = service.ListarPedidoProveedor(writer2.ToString());
+                XmlSerializer ser3 = new XmlSerializer(typeof(Modelo.PedidoCollection));
+                StringReader reader = new StringReader(datos);
+
+                Modelo.PedidoCollection listaPedido = (Modelo.PedidoCollection)ser3.Deserialize(reader);
+                reader.Close();
+                gvPedido.DataSource = listaPedido;
+                gvPedido.DataBind();
+            }
+            else
+            {
+                Response.Write("<script language='javascript'>window.alert('Debe Iniciar Sesión Primero');window.location='../Hostal/WebLogin.aspx';</script>");
+            }
+            
         }
 
         //Creación de Sesión

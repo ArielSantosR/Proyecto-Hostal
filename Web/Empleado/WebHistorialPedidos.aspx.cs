@@ -49,41 +49,44 @@ namespace Web.Empleado
 
             Service1 service = new Service1();
             Modelo.Empleado empleado = new Modelo.Empleado();
-            empleado.ID_USUARIO = MiSesion.ID_USUARIO;
 
-            Service1 s = new Service1();
-            XmlSerializer sr = new XmlSerializer(typeof(Modelo.Empleado));
-            StringWriter writer = new StringWriter();
-            sr.Serialize(writer, empleado);
-            writer.Close();
+            if (MiSesion.ID_USUARIO != 0)
+            {
+                empleado.ID_USUARIO = MiSesion.ID_USUARIO;
 
-            Modelo.Empleado empleado2 = s.buscarIDE(writer.ToString());
-            XmlSerializer sr2 = new XmlSerializer(typeof(Modelo.Empleado));
-            StringWriter writer2 = new StringWriter();
-            sr2.Serialize(writer2, empleado2);
-            writer2.Close();
+                Service1 s = new Service1();
+                XmlSerializer sr = new XmlSerializer(typeof(Modelo.Empleado));
+                StringWriter writer = new StringWriter();
+                sr.Serialize(writer, empleado);
+                writer.Close();
 
-            string datosListo = service.ListarPedidoEmpleadoListo(writer2.ToString());
-            XmlSerializer serListo = new XmlSerializer(typeof(Modelo.PedidoCollection));
-            StringReader readerListo = new StringReader(datosListo);
+                Modelo.Empleado empleado2 = s.buscarIDE(writer.ToString());
+                XmlSerializer sr2 = new XmlSerializer(typeof(Modelo.Empleado));
+                StringWriter writer2 = new StringWriter();
+                sr2.Serialize(writer2, empleado2);
+                writer2.Close();
 
-            Modelo.PedidoCollection listaPedido2 = (Modelo.PedidoCollection)serListo.Deserialize(readerListo);
-            readerListo.Close();
-            gvPedidoListo.DataSource = listaPedido2;
-            gvPedidoListo.DataBind();
-            ///////////////////////Pedido Pendiente 
+                string datosListo = service.ListarPedidoEmpleadoListo(writer2.ToString());
+                XmlSerializer serListo = new XmlSerializer(typeof(Modelo.PedidoCollection));
+                StringReader readerListo = new StringReader(datosListo);
 
-            string datos = service.ListarPedidoEmpleadoPendiente();
-            XmlSerializer ser = new XmlSerializer(typeof(Modelo.PedidoCollection));
-            StringReader reader = new StringReader(datos);
-            Modelo.PedidoCollection listaPedido = (Modelo.PedidoCollection)ser.Deserialize(reader);
-            reader.Close();
-            gvPedidoPendiente.DataSource = listaPedido;
-            gvPedidoPendiente.DataBind();
+                Modelo.PedidoCollection listaPedido2 = (Modelo.PedidoCollection)serListo.Deserialize(readerListo);
+                readerListo.Close();
+                gvPedidoListo.DataSource = listaPedido2;
+                gvPedidoListo.DataBind();
 
-            
-            
-
+                string datos = service.ListarPedidoEmpleadoPendiente();
+                XmlSerializer ser = new XmlSerializer(typeof(Modelo.PedidoCollection));
+                StringReader reader = new StringReader(datos);
+                Modelo.PedidoCollection listaPedido = (Modelo.PedidoCollection)ser.Deserialize(reader);
+                reader.Close();
+                gvPedidoPendiente.DataSource = listaPedido;
+                gvPedidoPendiente.DataBind();
+            }
+            else
+            {
+                Response.Write("<script language='javascript'>window.alert('Debe Iniciar Sesión Primero');window.location='../Hostal/WebLogin.aspx';</script>");
+            }
         }
         public Usuario MiSesion
         {

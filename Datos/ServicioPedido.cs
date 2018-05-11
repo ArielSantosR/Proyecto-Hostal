@@ -59,11 +59,34 @@ namespace Datos
             return lista;
         }
 
+        public List<PEDIDO> ListarHistorialProveedor(PROVEEDOR proveedor)
+        {
+            var lista = (from consulta in ent.PEDIDO
+                         where consulta.RUT_PROVEEDOR == proveedor.RUT_PROVEEDOR
+                         && consulta.ESTADO_PEDIDO.Equals("Aceptado")
+                         && !consulta.ESTADO_DESPACHO.Equals("Aceptado")
+                         orderby consulta.NUMERO_PEDIDO
+                         select consulta).ToList();
+            return lista;
+        }
+
+        public List<PEDIDO> ListarPedidoDespacho(PROVEEDOR proveedor)
+        {
+            var lista = (from consulta in ent.PEDIDO
+                         where consulta.RUT_PROVEEDOR == proveedor.RUT_PROVEEDOR
+                         && consulta.ESTADO_PEDIDO.Equals("Aceptado")
+                         && consulta.ESTADO_DESPACHO.Equals("Aceptado")
+                         orderby consulta.NUMERO_PEDIDO
+                         select consulta).ToList();
+            return lista;
+        }
+
         public List<PEDIDO> ListarPedidoAdmin()
         {
             return (from a in ent.PEDIDO where a.ESTADO_PEDIDO.Equals("Pendiente") select a).ToList();
         }
 
+        //Falta filtrar por rut de empleado
         public List<PEDIDO> ListarPedidoEmpleadoPendiente()
         {
             return (from a in ent.PEDIDO where a.ESTADO_PEDIDO.Equals("Pendiente") select a).ToList();
@@ -72,7 +95,7 @@ namespace Datos
         {
             var lista = (from consulta in ent.PEDIDO
                          where consulta.RUT_EMPLEADO == empleado.RUT_EMPLEADO
-                         && consulta.ESTADO_PEDIDO.Equals("Aceptado") && consulta.ESTADO_PEDIDO.Equals("Rechazado")
+                         && !consulta.ESTADO_PEDIDO.Equals("Pendiente") 
                          orderby consulta.NUMERO_PEDIDO
                          select consulta).ToList();
             return lista;
