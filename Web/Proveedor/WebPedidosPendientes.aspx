@@ -37,8 +37,8 @@
                                 <asp:TemplateField>
                                     <ItemTemplate>
                                         <asp:LinkButton ID="btnInfo"  CssClass="btn btn-info" CommandArgument='<%#Eval("NUMERO_PEDIDO")%>'  text="Ver Detalle" runat="server"/>
-                                        <asp:LinkButton ID="btnEditar" CssClass="btn btn-success" CommandArgument='<%#Eval("NUMERO_PEDIDO")%>'  text="Aceptar" runat="server"/>
-                                        <asp:LinkButton ID="btnEliminar"  CssClass="btn btn-danger" CommandArgument='<%#Eval("NUMERO_PEDIDO")%>'  text="Rechazar" runat="server"/>
+                                        <asp:LinkButton ID="btnEditar" OnClick="btnEditar_Click" CssClass="btn btn-success" CommandArgument='<%#Eval("NUMERO_PEDIDO")%>'  text="Aceptar" runat="server"/>
+                                        <asp:LinkButton ID="btnEliminar" OnClick="btnEliminar_Click" CssClass="btn btn-danger" CommandArgument='<%#Eval("NUMERO_PEDIDO")%>'  text="Rechazar" runat="server"/>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                             </Columns>

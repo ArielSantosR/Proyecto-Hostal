@@ -69,7 +69,6 @@ C:\Users\Suzu\Documents\Proyecto-Hostal\.git\Web\bin\WcfNegocio.dll
 C:\Users\Suzu\Documents\Proyecto-Hostal\.git\Web\bin\EntityFramework.dll
 C:\Users\Suzu\Documents\Proyecto-Hostal\.git\Web\bin\Datos.pdb
 C:\Users\Suzu\Documents\Proyecto-Hostal\.git\Web\bin\Modelo.pdb
-C:\Users\Suzu\Documents\Proyecto-Hostal\.git\Web\bin\WcfNegocio.pdb
 C:\Users\Suzu\Documents\Proyecto-Hostal\.git\Web\bin\Microsoft.AI.DependencyCollector.xml
 C:\Users\Suzu\Documents\Proyecto-Hostal\.git\Web\bin\Microsoft.AI.ServerTelemetryChannel.xml
 C:\Users\Suzu\Documents\Proyecto-Hostal\.git\Web\bin\Microsoft.AI.Web.xml
@@ -121,3 +120,4 @@ C:\Users\shogu\Documents\GitHub\Proyecto-Hostal\Web\bin\EntityFramework.xml
 C:\Users\shogu\Documents\GitHub\Proyecto-Hostal\Web\obj\Debug\Web.csprojResolveAssemblyReference.cache
 C:\Users\shogu\Documents\GitHub\Proyecto-Hostal\Web\obj\Debug\Web.dll
 C:\Users\shogu\Documents\GitHub\Proyecto-Hostal\Web\obj\Debug\Web.pdb
+C:\Users\Suzu\Documents\Proyecto-Hostal\.git\Web\bin\WcfNegocio.pdb

@@ -92,5 +92,105 @@ namespace Web.Proveedor
                 Session["Usuario"] = value;
             }
         }
+
+        //Creación de Sesión
+        public Pedido MiSesionPedido
+        {
+            get
+            {
+                if (Session["Pedido"] == null)
+                {
+                    Session["Pedido"] = new Pedido();
+                }
+                return (Pedido)Session["Pedido"];
+            }
+            set
+            {
+                Session["Pedido"] = value;
+            }
+        }
+
+        protected void btnEditar_Click(object sender, EventArgs e)
+        {
+            //Lee los valores del LinkButton, primero usa la clase LinkButton para 
+            //Transformar los datos de Sender, luego los lee y los asigna a una variable
+            LinkButton btn = (LinkButton)(sender);
+            short numero_pedido = short.Parse(btn.CommandArgument);
+
+            Pedido pedido = new Pedido();
+            pedido.NUMERO_PEDIDO = numero_pedido;
+
+            Service1 s = new Service1();
+            XmlSerializer sr = new XmlSerializer(typeof(Modelo.Pedido));
+            StringWriter writer = new StringWriter();
+            sr.Serialize(writer, pedido);
+
+            if (s.ObtenerPedido(writer.ToString()) == null)
+            {
+                alerta_exito.Visible = false;
+                error.Text = "No se ha encontrado el Pedido";
+                alerta.Visible = true;
+            }
+            else
+            {
+                Pedido pedido2 = s.ObtenerPedido(writer.ToString());
+                pedido2.ESTADO_DESPACHO = "Aceptado";
+
+                XmlSerializer sr2 = new XmlSerializer(typeof(Modelo.Pedido));
+                StringWriter writer2 = new StringWriter();
+                sr2.Serialize(writer2, pedido2);
+
+                if (s.EditarEstadoPedido(writer2.ToString()))
+                {
+                    exito.Text = "El Pedido ha sido Aceptado, para despacharlo debe seleccionarlo en su Historial de pedidos.";
+                    alerta_exito.Visible = true;
+                    alerta.Visible = false;
+
+                    Modelo.Proveedor proveedor = new Modelo.Proveedor();
+                    proveedor.ID_USUARIO = MiSesion.ID_USUARIO;
+
+                    XmlSerializer sr3 = new XmlSerializer(typeof(Modelo.Proveedor));
+                    StringWriter writer3 = new StringWriter();
+                    sr3.Serialize(writer3, proveedor);
+                    writer.Close();
+
+                    Modelo.Proveedor proveedor2 = s.buscarIDP(writer3.ToString());
+                    XmlSerializer sr4 = new XmlSerializer(typeof(Modelo.Proveedor));
+                    StringWriter writer4 = new StringWriter();
+                    sr4.Serialize(writer4, proveedor2);
+                    writer4.Close();
+
+                    string datos = s.ListarPedidoProveedor(writer4.ToString());
+                    XmlSerializer ser5 = new XmlSerializer(typeof(Modelo.PedidoCollection));
+                    StringReader reader5 = new StringReader(datos);
+
+                    Modelo.PedidoCollection listaPedido = (Modelo.PedidoCollection)ser5.Deserialize(reader5);
+                    reader5.Close();
+                    gvPedido.DataSource = listaPedido;
+                    gvPedido.DataBind();
+                }
+                else
+                {
+                    alerta_exito.Visible = false;
+                    error.Text = "La modificación de Estado Pedido ha fallado";
+                    alerta.Visible = true;
+                }
+            }
+        }
+
+        protected void btnEliminar_Click(object sender, EventArgs e)
+        {
+            //Lee los valores del LinkButton, primero usa la clase LinkButton para 
+            //Transformar los datos de Sender, luego los lee y los asigna a una variable
+            LinkButton btn = (LinkButton)(sender);
+            short numero_pedido = short.Parse(btn.CommandArgument);
+
+            Pedido pedido = new Pedido();
+            pedido.NUMERO_PEDIDO = numero_pedido;
+
+            MiSesionPedido = pedido;
+
+            Response.Redirect("../Proveedor/WebRechazarPedido.aspx");
+        }
     }
 }

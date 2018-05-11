@@ -146,6 +146,7 @@
     <Content Include="Proveedor\WebHistorialPedidos.aspx" />
     <Content Include="Proveedor\WebEditarProveedor.aspx" />
     <Content Include="Proveedor\WebPedidosPendientes.aspx" />
+    <Content Include="Proveedor\WebRechazarPedido.aspx" />
     <Content Include="WebCerrarSesion.aspx" />
     <Content Include="Cliente\WebCliente.aspx" />
     <Content Include="Empleado\WebEmpleado.aspx" />
@@ -545,6 +546,13 @@
     </Compile>
     <Compile Include="Proveedor\WebPedidosPendientes.aspx.designer.cs">
       <DependentUpon>WebPedidosPendientes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proveedor\WebRechazarPedido.aspx.cs">
+      <DependentUpon>WebRechazarPedido.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proveedor\WebRechazarPedido.aspx.designer.cs">
+      <DependentUpon>WebRechazarPedido.aspx</DependentUpon>
     </Compile>
     <Compile Include="WebCerrarSesion.aspx.cs">
       <DependentUpon>WebCerrarSesion.aspx</DependentUpon>

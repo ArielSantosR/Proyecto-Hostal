@@ -53,6 +53,7 @@ namespace Datos
             var lista = (from consulta in ent.PEDIDO
                          where consulta.RUT_PROVEEDOR == proveedor.RUT_PROVEEDOR
                          && consulta.ESTADO_PEDIDO.Equals("Aceptado")
+                         && consulta.ESTADO_DESPACHO.Equals("Pendiente")
                          orderby consulta.NUMERO_PEDIDO
                          select consulta).ToList();
             return lista;
