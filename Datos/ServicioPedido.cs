@@ -48,7 +48,7 @@ namespace Datos
             return true;
         }
 
-        public List<PEDIDO> ListarPedido(PROVEEDOR proveedor)
+        public List<PEDIDO> ListarPedidoProveedor(PROVEEDOR proveedor)
         {
             var lista = (from consulta in ent.PEDIDO
                          where consulta.RUT_PROVEEDOR == proveedor.RUT_PROVEEDOR
@@ -62,6 +62,20 @@ namespace Datos
         public List<PEDIDO> ListarPedidoAdmin()
         {
             return (from a in ent.PEDIDO where a.ESTADO_PEDIDO.Equals("Pendiente") select a).ToList();
+        }
+
+        public List<PEDIDO> ListarPedidoEmpleadoPendiente()
+        {
+            return (from a in ent.PEDIDO where a.ESTADO_PEDIDO.Equals("Pendiente") select a).ToList();
+        }
+        public List<PEDIDO> ListarPedidoEmpleadoListo(EMPLEADO empleado)
+        {
+            var lista = (from consulta in ent.PEDIDO
+                         where consulta.RUT_EMPLEADO == empleado.RUT_EMPLEADO
+                         && consulta.ESTADO_PEDIDO.Equals("Aceptado") && consulta.ESTADO_PEDIDO.Equals("Rechazado")
+                         orderby consulta.NUMERO_PEDIDO
+                         select consulta).ToList();
+            return lista;
         }
 
         public PEDIDO ObtenerPedido(PEDIDO pedido)

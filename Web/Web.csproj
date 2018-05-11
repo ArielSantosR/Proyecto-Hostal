@@ -132,6 +132,7 @@
     <Content Include="Empleado\WebCrearMinuta.aspx" />
     <Content Include="Empleado\WebCrearPedido.aspx" />
     <Content Include="Empleado\WebEditarEmpleado.aspx" />
+    <Content Include="Empleado\WebHistorialPedidos.aspx" />
     <Content Include="Empleado\WebRecibirPedido.aspx" />
     <Content Include="Empleado\WebRegistrarOrden.aspx" />
     <Content Include="Empleado\WebVerFacturas.aspx" />
@@ -461,6 +462,13 @@
     </Compile>
     <Compile Include="Empleado\WebEditarEmpleado.aspx.designer.cs">
       <DependentUpon>WebEditarEmpleado.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Empleado\WebHistorialPedidos.aspx.cs">
+      <DependentUpon>WebHistorialPedidos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Empleado\WebHistorialPedidos.aspx.designer.cs">
+      <DependentUpon>WebHistorialPedidos.aspx</DependentUpon>
     </Compile>
     <Compile Include="Empleado\WebRecibirPedido.aspx.cs">
       <DependentUpon>WebRecibirPedido.aspx</DependentUpon>
