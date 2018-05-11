@@ -28,7 +28,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-12 control-label">Contraseña</label>
+                <label class="col-sm-12 control-label">Crear Nueva Contraseña</label>
                 <div class="col-sm-12">
                     <asp:TextBox ID="txtPass" placeholder="Ingrese su Contraseña" runat="server" CssClass="form-control" step="1" TextMode="Password"></asp:TextBox>
                 </div>

@@ -63,17 +63,28 @@ namespace Web.Cliente {
             reader2.Close();
 
             //Bloqueo de cambios dependiendo del usuario
-            if (MiSesion.TIPO_USUARIO.Equals(Tipo_Usuario.Cliente.ToString()) && MiSesion.ESTADO.Equals(Estado_Usuario.Habilitado.ToString())) {
-                txtNombre.Enabled = false;
-                txtRut.Enabled = false;
-                ddlEstado.Enabled = false;
+            if (MiSesion.ID_USUARIO != 0)
+            {
+                if (MiSesion.TIPO_USUARIO.Equals(Tipo_Usuario.Cliente.ToString()) && MiSesion.ESTADO.Equals(Estado_Usuario.Habilitado.ToString()))
+                {
+                    txtNombre.Enabled = false;
+                    txtRut.Enabled = false;
+                    ddlEstado.Enabled = false;
+                }
+                else
+                {
+                    txtNombre.Enabled = false;
+                    txtRut.Enabled = false;
+                }
             }
-            else {
-                txtNombre.Enabled = false;
-                txtRut.Enabled = false;
+            else
+            {
+                Response.Write("<script language='javascript'>window.alert('Debe Iniciar Sesión Primero');window.location='../Hostal/WebLogin.aspx';</script>");
             }
 
-            if (!IsPostBack) {
+
+            if (!IsPostBack)
+            {
 
                 ddlEstado.DataSource = Enum.GetValues(typeof(Estado_Usuario));
                 ddlEstado.DataBind();
@@ -88,13 +99,7 @@ namespace Web.Cliente {
                 ddlRegion.DataTextField = "Nombre";
                 ddlRegion.DataValueField = "Id_Region";
                 ddlRegion.DataBind();
-
-                ddlComuna.DataSource = coleccionComuna.Where(x => x.Id_Region == int.Parse(ddlRegion.SelectedValue));
-                ddlComuna.DataTextField = "Nombre";
-                ddlComuna.DataValueField = "Id_Comuna";
-                ddlComuna.DataBind();
-
-
+           
                 Comuna com = new Comuna();
 
                 var listaC = coleccionComuna.Where(x => x.Id_Comuna == SesionCl.ID_COMUNA).ToList();
@@ -129,9 +134,15 @@ namespace Web.Cliente {
 
                 txtTelefono.Text = SesionCl.TELEFONO_CLIENTE.ToString();
                 txtNombreC.Text = SesionCl.NOMBRE_CLIENTE;
-                ddlComuna.SelectedValue = com.Id_Comuna.ToString();
+                ddlPais.SelectedValue = pais.ID_PAIS.ToString();                
                 ddlRegion.SelectedValue = reg.Id_Region.ToString();
-                ddlPais.SelectedValue = pais.ID_PAIS.ToString();
+
+                ddlComuna.DataSource = coleccionComuna.Where(x => x.Id_Region == int.Parse(ddlRegion.SelectedValue));
+                ddlComuna.DataTextField = "Nombre";
+                ddlComuna.DataValueField = "Id_Comuna";
+                ddlComuna.DataBind();
+
+                ddlComuna.SelectedValue = com.Id_Comuna.ToString();
             }
         }
 

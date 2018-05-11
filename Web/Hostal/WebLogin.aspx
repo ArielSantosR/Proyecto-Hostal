@@ -24,7 +24,7 @@
                            <asp:Label ID="UserNameLabel" cssclass="col-sm-12 control-label" runat="server" AssociatedControlID="UserName">Nombre de usuario:</asp:Label>
                             <div class="col-sm-12">
                                 <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                                <span class="input-group-addon"><i class="fas fa-user fa" aria-hidden="true"></i></span>
                                     <asp:TextBox ID="UserName" CssClass="form-control" runat="server"></asp:TextBox>
                                     <asp:RequiredFieldValidator enabled="false" Display="Dynamic" ID="UserNameRequired" runat="server" ControlToValidate="UserName" ErrorMessage="El nombre de usuario es obligatorio." ToolTip="El nombre de usuario es obligatorio." ValidationGroup="Login1">*</asp:RequiredFieldValidator>
                                 </div>
@@ -34,7 +34,7 @@
                             <asp:Label ID="PasswordLabel" runat="server" cssclass="col-sm-12 control-label" AssociatedControlID="Password">Contraseña:</asp:Label>
                                 <div class="col-sm-12">
                                     <div class="input-group">
-										<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+										<span class="input-group-addon"><i class="fas fa-lock fa-lg" aria-hidden="true"></i></span>
                                         <asp:TextBox ID="Password"  CssClass="form-control" runat="server" TextMode="Password"></asp:TextBox>
                                         <asp:RequiredFieldValidator enabled="false" Display="Dynamic" ID="PasswordRequired" runat="server" ControlToValidate="Password" ErrorMessage="La contraseña es obligatoria." ToolTip="La contraseña es obligatoria." ValidationGroup="Login1">*</asp:RequiredFieldValidator>
                                     </div>

@@ -33,43 +33,55 @@ namespace Web.Proveedor {
         protected void Page_Load(object sender,EventArgs e) {
             error.Text = "";
             //Bloqueo de cambios dependiendo del usuario
-            if (MiSesion.TIPO_USUARIO.Equals(Tipo_Usuario.Empleado.ToString()) && MiSesion.ESTADO.Equals(Estado_Usuario.Habilitado.ToString())) {
-                txtRut.Enabled = false;
-                txtPNombre.Enabled = false;
-                txtSNombre.Enabled = false;
-                txtUsuario.Enabled = false;
-                txtApellidoP.Enabled = false;
-                txtApellidoM.Enabled = false;
-                ddlEstado.Enabled = false;
-            }
-            else {
-                txtUsuario.Enabled = false;
-                txtRut.Enabled = false;
-            }
-
-            if (!IsPostBack) {
-                ddlEstado.DataSource = Enum.GetValues(typeof(Estado_Usuario));
-                ddlEstado.DataBind();
-
-                ddlTipoProveedor.DataSource = TipoProveedorCollection.ListaTiposProveedor();
-                ddlTipoProveedor.DataTextField = "NOMBRE_TIPO";
-                ddlTipoProveedor.DataValueField = "ID_TIPO_PROVEEDOR";
-                ddlTipoProveedor.DataBind();
-
-                alerta.Visible = false;
-                //Carga de datos actuales
-                txtRut.Text = SesionPro.RUT_PROVEEDOR.ToString() + "-" + SesionPro.DV_PROVEEDOR;
-                txtPNombre.Text = SesionPro.PNOMBRE_PROVEEDOR;
-                txtSNombre.Text = SesionPro.SNOMBRE_PROVEEDOR;
-                if (MiSesion.TIPO_USUARIO.Equals(Tipo_Usuario.Empleado.ToString())) {
-                    txtUsuario.Text = MiSesion.NOMBRE_USUARIO;
+            if (MiSesion.ID_USUARIO != 0)
+            {
+                if (MiSesion.TIPO_USUARIO.Equals(Tipo_Usuario.Empleado.ToString()) && MiSesion.ESTADO.Equals(Estado_Usuario.Habilitado.ToString()))
+                {
+                    txtRut.Enabled = false;
+                    txtPNombre.Enabled = false;
+                    txtSNombre.Enabled = false;
+                    txtUsuario.Enabled = false;
+                    txtApellidoP.Enabled = false;
+                    txtApellidoM.Enabled = false;
+                    ddlEstado.Enabled = false;
                 }
-                else {
-                    txtUsuario.Text = SesionEdit.NOMBRE_USUARIO;
+                else
+                {
+                    txtUsuario.Enabled = false;
+                    txtRut.Enabled = false;
                 }
-                txtApellidoP.Text = SesionPro.APP_PATERNO_PROVEEDOR;
-                txtApellidoM.Text = SesionPro.APP_MATERNO_PROVEEDOR;
-                ddlTipoProveedor.SelectedValue = SesionPro.ID_TIPO_PROVEEDOR.ToString();
+
+                if (!IsPostBack)
+                {
+                    ddlEstado.DataSource = Enum.GetValues(typeof(Estado_Usuario));
+                    ddlEstado.DataBind();
+
+                    ddlTipoProveedor.DataSource = TipoProveedorCollection.ListaTiposProveedor();
+                    ddlTipoProveedor.DataTextField = "NOMBRE_TIPO";
+                    ddlTipoProveedor.DataValueField = "ID_TIPO_PROVEEDOR";
+                    ddlTipoProveedor.DataBind();
+
+                    alerta.Visible = false;
+                    //Carga de datos actuales
+                    txtRut.Text = SesionPro.RUT_PROVEEDOR.ToString() + "-" + SesionPro.DV_PROVEEDOR;
+                    txtPNombre.Text = SesionPro.PNOMBRE_PROVEEDOR;
+                    txtSNombre.Text = SesionPro.SNOMBRE_PROVEEDOR;
+                    if (MiSesion.TIPO_USUARIO.Equals(Tipo_Usuario.Empleado.ToString()))
+                    {
+                        txtUsuario.Text = MiSesion.NOMBRE_USUARIO;
+                    }
+                    else
+                    {
+                        txtUsuario.Text = SesionEdit.NOMBRE_USUARIO;
+                    }
+                    txtApellidoP.Text = SesionPro.APP_PATERNO_PROVEEDOR;
+                    txtApellidoM.Text = SesionPro.APP_MATERNO_PROVEEDOR;
+                    ddlTipoProveedor.SelectedValue = SesionPro.ID_TIPO_PROVEEDOR.ToString();
+                }
+            }
+            else
+            {
+                Response.Write("<script language='javascript'>window.alert('Debe Iniciar Sesión Primero');window.location='../Hostal/WebLogin.aspx';</script>");
             }
         }
 

@@ -50,7 +50,7 @@ namespace Web.Empleado
             Service1 service = new Service1();
             Modelo.Empleado empleado = new Modelo.Empleado();
 
-            if (MiSesion.ID_USUARIO != 0)
+            if (MiSesion != null)
             {
                 empleado.ID_USUARIO = MiSesion.ID_USUARIO;
 

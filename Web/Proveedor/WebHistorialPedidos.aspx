@@ -36,7 +36,7 @@
                                 <asp:BoundField DataField="COMENTARIO" HeaderText="Comentario" />
                                 <asp:TemplateField>
                                     <ItemTemplate>
-                                        <asp:LinkButton ID="btnInfo"  CssClass="btn btn-primary" CommandArgument='<%#Eval("NUMERO_PEDIDO")%>'  text="Despachar" runat="server"/>
+                                        <asp:LinkButton ID="btnInfo"  CssClass="btn btn-primary" CommandArgument='<%#Eval("NUMERO_PEDIDO")%>'  text="Despachar" OnClick="btnInfo_Click" runat="server"/>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                             </Columns>

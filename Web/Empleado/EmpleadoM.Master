@@ -13,7 +13,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
-    <link href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" rel="stylesheet">
+    <link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet">
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
@@ -63,12 +63,20 @@
         </div>
       </li>
     </ul>
+      <ul class="navbar-nav">
+         <li class="nav-item">
+            <a class="nav-link" href="../Empleado/WebEditarEmpleado.aspx"><i class="fas fa-user-edit"></i></a>
+         </li>
+     </ul>
       <span class="navbar-text">
         Bienvenid@ <asp:Literal ID="nombre_usuario" runat="server"></asp:Literal>
      </span>
       <ul class="navbar-nav">
          <li class="nav-item">
             <a class="nav-link" href="../WebCerrarSesion.aspx"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
+         </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://sites.google.com/view/manual-proveedor/p%C3%A1gina-principal"><i class="fas fa-question"></i></a>
          </li>
      </ul>
   </div>

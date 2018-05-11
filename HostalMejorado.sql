@@ -574,6 +574,16 @@ BEGIN
         END LOOP;
     END IF;
   END IF;
+
+  ELSE IF UPDATING('ESTADO_DESPACHO') THEN
+    IF :NEW.ESTADO_DESPACHO = 'Aceptado' THEN
+        FOR I IN CUR_PROVEEDOR LOOP
+            IF I.RUT_PROVEEDOR = :NEW.RUT_PROVEEDOR THEN
+                INSERT INTO NOTIFICACION VALUES(SEQ_NOTIFICACION.NEXTVAL, 'Tiene Productos sin despachar', I.ID_USUARIO, 'Habilitado');
+            END IF;
+        END LOOP;
+    END IF;
+  END IF;
 END;
 
 --Este Trigger Desactiva la notificacion del Proveedor segun su rut y a su vez envia una notificacion de pedidos sin despachar
@@ -587,41 +597,37 @@ CURSOR CUR_NOTIFICACION IS SELECT ID_NOTIFICACION, MENSAJE, ID_USUARIO, ESTADO_N
 BEGIN
 	IF UPDATING('ESTADO_DESPACHO') THEN
     IF :NEW.ESTADO_DESPACHO != 'Pendiente' THEN
-        FOR I IN CUR_PROVEEDOR LOOP
+      FOR I IN CUR_PROVEEDOR LOOP
+        FOR J IN CUR_NOTIFICACION LOOP
+          IF I.ID_USUARIO = J.ID_USUARIO THEN
             IF I.RUT_PROVEEDOR = :NEW.RUT_PROVEEDOR THEN
-                FOR J IN CUR_NOTIFICACION LOOP
-                  IF I.ID_USUARIO = J.ID_USUARIO THEN
-                    IF J.ESTADO_NOTIFICACION = 'Habilitado' THEN
-                      UPDATE NOTIFICACION
-                      SET ESTADO_NOTIFICACION = 'Deshabilitado'
-                      WHERE J.ID_USUARIO = I.ID_USUARIO;
-
-                      IF :NEW.ESTADO_PEDIDO = 'Aceptado' THEN 
-                        INSERT INTO NOTIFICACION VALUES(SEQ_NOTIFICACION.NEXTVAL, 'Tiene Productos sin despachar', I.ID_USUARIO, 'Habilitado');
-                      END IF;
-                    END IF;
-                  END IF;
-                END LOOP;
+              IF J.ESTADO_NOTIFICACION = 'Habilitado' THEN
+                UPDATE NOTIFICACION
+                SET ESTADO_NOTIFICACION = 'Deshabilitado'
+                WHERE J.ID_USUARIO = I.ID_USUARIO;
+              END IF;
             END IF;
+          END IF;
         END LOOP;
+      END LOOP;
     END IF;
   END IF;
 END;
 
---Este Trigger es para avisar al proveedor que tiene pedidos pendientes por despachar.
+
+
+--Este Trigger es para avisar al Empleado que sus pedidos ya han sido despachados
 CREATE OR REPLACE TRIGGER TGR_NOTIFICACION_EMPLEADO
 AFTER UPDATE ON PEDIDO
 FOR EACH ROW
 DECLARE
-CURSOR CUR_USUARIO IS SELECT ID_USUARIO, TIPO_USUARIO FROM USUARIO;
+CURSOR CUR_USUARIO IS SELECT ID_USUARIO, TIPO_USUARIO FROM USUARIO WHERE TIPO_USUARIO = 'Empleado';
 
 BEGIN
   IF UPDATING('ESTADO_DESPACHO') THEN
-    IF :NEW.ESTADO_PEDIDO = 'Despachado' THEN
+    IF :NEW.ESTADO_DESPACHO = 'Despachado' THEN
       FOR I IN CUR_USUARIO LOOP
-        IF I.TIPO_USUARIO = 'Empleado' Then
-			    INSERT INTO NOTIFICACION VALUES(SEQ_NOTIFICACION.NEXTVAL, 'Una orden de Pedido ha sido despachada, debe recepcionarla', I.ID_USUARIO, 'Habilitado');
-        END IF;
+			    INSERT INTO NOTIFICACION VALUES(SEQ_NOTIFICACION.NEXTVAL, 'Una orden de Pedido ha sido despachada, debe hacer su recepción', I.ID_USUARIO, 'Habilitado');
       END LOOP;
     END IF;
   END IF;

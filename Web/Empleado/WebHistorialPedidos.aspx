@@ -13,6 +13,20 @@
   <strong>Éxito!</strong> <asp:Literal ID="exito" runat="server"></asp:Literal>
 </div>
 
+    <% if (gvPedidoPendiente.Rows.Count != 0) { %>
+    <div class="container">
+        <div class="row" style="margin-top: 20px; margin-bottom: 20px;">
+            <div class="main-center">
+	            <div class="row">
+	                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+		                <h1>Pedidos Pendientes</h1>
+	                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <% } %>
+
     <div style="display: flex; justify-content: center; margin-bottom: 20px">
         <asp:GridView ID="gvPedidoPendiente" AutoGenerateColumns="false" runat="server" ForeColor="#333333" GridLines="Vertical">      
                             <AlternatingRowStyle BackColor="White" />
@@ -37,12 +51,38 @@
                                 <asp:TemplateField>
                                     <ItemTemplate>
                                         <asp:LinkButton ID="btnInfo"  CssClass="btn btn-info" CommandArgument='<%#Eval("NUMERO_PEDIDO")%>'  text="Ver Detalle" runat="server"/>
-                                        <asp:LinkButton ID="btnEditar" CssClass="btn btn-success" CommandArgument='<%#Eval("NUMERO_PEDIDO")%>' text="Editar" runat="server"/>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                             </Columns>
                         </asp:GridView>
         </div>
+
+    <% if (gvPedidoListo.Rows.Count != 0) { %>
+    <div class="container">
+        <div class="row" style="margin-top: 20px; margin-bottom: 20px;">
+            <div class="main-center">
+	            <div class="row">
+	                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+		                <h1>Historial Pedidos</h1>
+	                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <% } else { %>
+    <div class="container">
+        <div class="row" style="margin-top: 20px; margin-bottom: 20px;">
+            <div class="main-center">
+	            <div class="row">
+	                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+		                <h1>Su historial de Pedidos está vacío</h1>
+	                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <% } %>
+
     <div style="display: flex; justify-content: center; margin-bottom: 20px">
     <asp:GridView ID="gvPedidoListo" AutoGenerateColumns="false" runat="server" ForeColor="#333333" GridLines="Vertical">      
                             <AlternatingRowStyle BackColor="White" />
@@ -67,7 +107,6 @@
                                <asp:TemplateField>
                                     <ItemTemplate>
                                         <asp:LinkButton ID="btnInfo2"  CssClass="btn btn-info disabled" enabled="false" text="Ver Detalle" runat="server"/>
-                                        <asp:LinkButton ID="btnEditar2" CssClass="btn btn-success disabled" Enabled="false" text="Editar" runat="server"/>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                             </Columns>
