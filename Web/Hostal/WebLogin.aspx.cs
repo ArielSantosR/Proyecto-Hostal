@@ -32,7 +32,7 @@ namespace Web
                     }
                     else if (MiSesion.TIPO_USUARIO.Equals("Proveedor") && MiSesion.ESTADO.Equals("Habilitado"))
                     {
-                        Response.Redirect("../ProveedorWebProveedor.aspx");
+                        Response.Redirect("../Proveedor/WebProveedor.aspx");
                     }
                     else if (MiSesion.TIPO_USUARIO.Equals("Cliente") && MiSesion.ESTADO.Equals("Habilitado"))
                     {
