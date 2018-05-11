@@ -1343,6 +1343,78 @@ namespace WcfNegocio
             return writer.ToString();
         }
 
+        public string ListarPedidoEmpleadoPendiente()
+        {
+
+            ServicioPedido servicio = new ServicioPedido();
+            List<Datos.PEDIDO> pedido = servicio.ListarPedidoEmpleadoPendiente();
+            Modelo.PedidoCollection listaPedido = new Modelo.PedidoCollection();
+
+            foreach (Datos.PEDIDO p in pedido)
+            {
+                Modelo.Pedido pModelo = new Modelo.Pedido();
+                pModelo.NUMERO_PEDIDO = p.NUMERO_PEDIDO;
+                pModelo.ESTADO_PEDIDO = p.ESTADO_PEDIDO;
+                pModelo.FECHA_PEDIDO = p.FECHA_PEDIDO;
+                pModelo.RUT_EMPLEADO = p.RUT_EMPLEADO;
+                pModelo.NUMERO_RECEPCION = p.NUMERO_RECEPCION;
+                pModelo.RUT_PROVEEDOR = p.RUT_PROVEEDOR;
+                pModelo.ESTADO_DESPACHO = p.ESTADO_DESPACHO;
+                pModelo.COMENTARIO = p.COMENTARIO;
+
+                listaPedido.Add(pModelo);
+            }
+
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.PedidoCollection));
+            StringWriter writer = new StringWriter();
+            ser.Serialize(writer, listaPedido);
+            writer.Close();
+            return writer.ToString();
+        }
+
+        public string ListarPedidoEmpleadoListo(string empleado)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.Empleado));
+            StringReader reader = new StringReader(empleado);
+            Modelo.Empleado pr = (Modelo.Empleado)ser.Deserialize(reader);
+            ServicioPedido serv = new ServicioPedido();
+
+            Datos.EMPLEADO pDatos = new Datos.EMPLEADO();
+            pDatos.RUT_EMPLEADO = pr.RUT_EMPLEADO;
+
+            List<Datos.PEDIDO> listaPedido = serv.ListarPedidoEmpleadoListo(pDatos);
+
+            if (listaPedido == null)
+            {
+                return null;
+            }
+            else
+            {
+                Modelo.PedidoCollection listaPedido2 = new PedidoCollection();
+
+                foreach (Datos.PEDIDO p in listaPedido)
+                {
+                    Modelo.Pedido pModelo = new Modelo.Pedido();
+                    pModelo.NUMERO_PEDIDO = p.NUMERO_PEDIDO;
+                    pModelo.ESTADO_PEDIDO = p.ESTADO_PEDIDO;
+                    pModelo.FECHA_PEDIDO = p.FECHA_PEDIDO;
+                    pModelo.RUT_EMPLEADO = p.RUT_EMPLEADO;
+                    pModelo.NUMERO_RECEPCION = p.NUMERO_RECEPCION;
+                    pModelo.RUT_PROVEEDOR = p.RUT_PROVEEDOR;
+                    pModelo.ESTADO_DESPACHO = p.ESTADO_DESPACHO;
+                    pModelo.COMENTARIO = p.COMENTARIO;
+
+                    listaPedido2.Add(pModelo);
+                }
+
+                XmlSerializer ser2 = new XmlSerializer(typeof(Modelo.PedidoCollection));
+                StringWriter writer2 = new StringWriter();
+                ser2.Serialize(writer2, listaPedido2);
+                writer2.Close();
+                return writer2.ToString();
+            }
+        }
+
         public string ListarPedidoProveedor(string proveedor)
         {
             XmlSerializer ser = new XmlSerializer(typeof(Modelo.Proveedor));
@@ -1353,7 +1425,7 @@ namespace WcfNegocio
             Datos.PROVEEDOR pDatos = new Datos.PROVEEDOR();
             pDatos.RUT_PROVEEDOR = pr.RUT_PROVEEDOR;
 
-            List<Datos.PEDIDO> listaPedido = serv.ListarPedido(pDatos);
+            List<Datos.PEDIDO> listaPedido = serv.ListarPedidoProveedor(pDatos);
 
             if (listaPedido == null)
             {

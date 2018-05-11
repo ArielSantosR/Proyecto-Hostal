@@ -256,6 +256,12 @@ namespace WcfNegocio
         string ListarPedidoProveedor(string proveedor);
 
         [OperationContract]
+        string ListarPedidoEmpleadoListo(string empleado);
+
+        [OperationContract]
+        string ListarPedidoEmpleadoPendiente();
+
+        [OperationContract]
         Pedido ObtenerPedido(string pedido);
 
         //CRUD Notificacion

@@ -73,6 +73,7 @@ namespace Web.Empleado
                 //segun el valor seleccionado en el anterior DDL, hara una busqueda para cargar
                 //todos los datos
                 Modelo.Proveedor proveedor2 = new Modelo.Proveedor();
+                
                 proveedor2.RUT_PROVEEDOR = int.Parse(ddlRut.SelectedValue);
 
                 XmlSerializer sr = new XmlSerializer(typeof(Modelo.Proveedor));
