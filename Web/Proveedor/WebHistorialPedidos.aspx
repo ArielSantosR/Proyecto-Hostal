@@ -13,7 +13,21 @@
   <strong>Éxito!</strong> <asp:Literal ID="exito" runat="server"></asp:Literal>
 </div>
 
-    <div style="display: flex; justify-content: center; margin-bottom: 20px">
+    <% if (gvPedidoDespacho.Rows.Count != 0) { %>
+    <div class="container">
+        <div class="row" style="margin-top: 20px; margin-bottom: 20px;">
+            <div class="main-center">
+	            <div class="row">
+	                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+		                <h1>Pedidos por Despachar</h1>
+	                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <% } %>
+
+    <div style="display: flex; justify-content: center; margin-bottom: 70px">
         <asp:GridView ID="gvPedidoDespacho" AutoGenerateColumns="false" runat="server" ForeColor="#333333" GridLines="Vertical">      
                             <AlternatingRowStyle BackColor="White" />
                             <EditRowStyle BackColor="#2461BF" />
@@ -30,6 +44,7 @@
                                 <asp:BoundField DataField="NUMERO_PEDIDO" HeaderText="Número de Pedido" />
                                 <asp:BoundField DataField="FECHA_PEDIDO" HeaderText="Fecha de Pedido" />
                                 <asp:BoundField DataField="ESTADO_PEDIDO" HeaderText="Estado de Pedido" />
+                                <asp:BoundField DataField="NUMERO_RECEPCION" HeaderText="Número de Recepción" />
                                 <asp:BoundField DataField="RUT_EMPLEADO" HeaderText="RUT Empleado" />
                                 <asp:BoundField DataField="RUT_PROVEEDOR" HeaderText="RUT Proveedor" />
                                 <asp:BoundField DataField="ESTADO_DESPACHO" HeaderText="Estado de Despacho" />
@@ -42,7 +57,22 @@
                             </Columns>
                         </asp:GridView>
         </div>
-    <div style="display: flex; justify-content: center; margin-bottom: 20px">
+
+    <% if (gvPedidoListo.Rows.Count != 0) { %>
+    <div class="container">
+        <div class="row" style="margin-top: 20px; margin-bottom: 20px;">
+            <div class="main-center">
+	            <div class="row">
+	                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+		                <h1>Historial de Pedidos</h1>
+	                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <% } %>
+
+    <div style="display: flex; justify-content: center; margin-bottom: 70px">
     <asp:GridView ID="gvPedidoListo" AutoGenerateColumns="false" runat="server" ForeColor="#333333" GridLines="Vertical">      
                             <AlternatingRowStyle BackColor="White" />
                             <EditRowStyle BackColor="#2461BF" />
@@ -59,13 +89,14 @@
                                 <asp:BoundField DataField="NUMERO_PEDIDO" HeaderText="Número de Pedido" />
                                 <asp:BoundField DataField="FECHA_PEDIDO" HeaderText="Fecha de Pedido" />
                                 <asp:BoundField DataField="ESTADO_PEDIDO" HeaderText="Estado de Pedido" />
+                                <asp:BoundField DataField="NUMERO_RECEPCION" HeaderText="Número de Recepción" />
                                 <asp:BoundField DataField="RUT_EMPLEADO" HeaderText="RUT Empleado" />
                                 <asp:BoundField DataField="RUT_PROVEEDOR" HeaderText="RUT Proveedor" />
                                 <asp:BoundField DataField="ESTADO_DESPACHO" HeaderText="Estado de Despacho" />
                                 <asp:BoundField DataField="COMENTARIO" HeaderText="Comentario" />
                                <asp:TemplateField>
                                     <ItemTemplate>
-                                        <asp:LinkButton ID="btnInfo2"  CssClass="btn btn-primary disabled" enabled="false" text="Despachar" runat="server"/>
+                                        <asp:LinkButton ID="btnInfo2"  CssClass="btn btn-info" CommandArgument='<%#Eval("NUMERO_PEDIDO")%>' OnClick="btnInfo2_Click" text="Ver Detalle" runat="server"/>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                             </Columns>

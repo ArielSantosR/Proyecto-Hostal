@@ -9,9 +9,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="stylesheet" type="text/css" media="screen" href="../css/styles.css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
     <link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet">
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
@@ -32,7 +29,7 @@
         <a class="nav-link" href="../Cliente/WebCliente.aspx">Inicio <span class="sr-only">(current)</span></a>
       </li>
         <li class="nav-item">
-            <a class="nav-link" href="../Cliente/WebAgregarPasajeros.aspx">Agregar Pasajero</a>
+            <a class="nav-link" href="../Cliente/WebAgregarPasajeros.aspx">Agregar Huésped</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="../Cliente/WebVerHistorial.aspx">Historial</a>
@@ -54,7 +51,7 @@
             <a class="nav-link" href="../WebCerrarSesion.aspx"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
          </li>
           <li class="nav-item">
-            <a class="nav-link" href="https://sites.google.com/view/manual-proveedor/p%C3%A1gina-principal"><i class="fas fa-question"></i></a>
+            <a class="nav-link" href="https://sites.google.com/view/manual-proveedor/p%C3%A1gina-principal">Ayuda <i class="far fa-question-circle"></i></a>
          </li>
      </ul>
   </div>
@@ -72,14 +69,14 @@
 
 <!--        INICIO FOOTER        -->
 <footer>
+<div class="container">
 	<div class="row">
 		<div class="footer-content col-md-3">
-			<a style="color: #FFFFFF" href="#">contacto@donaclarita.cl</a>
+            <a style="color: #FFFFFF" href="#">contacto@donaclarita.cl</a>
 		</div>
 
 		<div class="footer-content col-md-3">
-		    <a style="color: #FFFFFF" href="#">+5624997364</a>
-
+			<a style="color: #FFFFFF" href="#">+5624997364</a>
 		</div>
 
 		<div class="footer-content col-md-3">
@@ -90,8 +87,11 @@
 			<a style="color: #FFFFFF" href="../Hostal/WebPoliticaPrivacidad.aspx">Políticas de privacidad</a>
 		</div>
 	</div>
+</div>
 </footer>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
         <!--        FIN FOOTER        -->
     </form>
 </body>

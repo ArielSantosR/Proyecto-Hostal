@@ -103,5 +103,36 @@ namespace Web.Empleado
                 Session["Usuario"] = value;
             }
         }
+
+        public Pedido MiSesionPedido
+        {
+            get
+            {
+                if (Session["Pedido"] == null)
+                {
+                    Session["Pedido"] = new Pedido();
+                }
+                return (Pedido)Session["Pedido"];
+            }
+            set
+            {
+                Session["Pedido"] = value;
+            }
+        }
+
+        protected void btnInfo2_Click(object sender, EventArgs e)
+        {
+            //Lee los valores del LinkButton, primero usa la clase LinkButton para 
+            //Transformar los datos de Sender, luego los lee y los asigna a una variable
+            LinkButton btn = (LinkButton)(sender);
+            short numero_pedido = short.Parse(btn.CommandArgument);
+
+            Pedido pedido = new Pedido();
+            pedido.NUMERO_PEDIDO = numero_pedido;
+
+            MiSesionPedido = pedido;
+
+            Response.Redirect("../Empleado/WebDetallePedido.aspx");
+        }
     }
 }

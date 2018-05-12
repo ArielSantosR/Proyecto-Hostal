@@ -69,5 +69,10 @@ namespace Web
         {
             Response.Redirect("WebCrearOrden.aspx");
         }
+
+        protected void btnHuesped_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -63,7 +63,8 @@ namespace Datos
         {
             var lista = (from consulta in ent.PEDIDO
                          where consulta.RUT_PROVEEDOR == proveedor.RUT_PROVEEDOR
-                         && consulta.ESTADO_PEDIDO.Equals("Aceptado")
+                         && (consulta.ESTADO_PEDIDO.Equals("Aceptado")
+                         || consulta.ESTADO_PEDIDO.Equals("Recepcionado"))
                          && !consulta.ESTADO_DESPACHO.Equals("Aceptado")
                          orderby consulta.NUMERO_PEDIDO
                          select consulta).ToList();
@@ -81,9 +82,30 @@ namespace Datos
             return lista;
         }
 
+        public List<PEDIDO> ListarPedidosPorDespachar(PROVEEDOR proveedor)
+        {
+            var lista = (from consulta in ent.PEDIDO
+                         where consulta.RUT_PROVEEDOR == proveedor.RUT_PROVEEDOR
+                         && consulta.ESTADO_PEDIDO.Equals("Aceptado")
+                         && consulta.ESTADO_DESPACHO.Equals("Despachado")
+                         orderby consulta.NUMERO_PEDIDO
+                         select consulta).ToList();
+            return lista;
+        }
+
         public List<PEDIDO> ListarPedidoAdmin()
         {
             return (from a in ent.PEDIDO where a.ESTADO_PEDIDO.Equals("Pendiente") select a).ToList();
+        }
+
+        public List<PEDIDO> ListarPedidoRecepcion()
+        {
+            var lista = (from consulta in ent.PEDIDO
+                         where !consulta.ESTADO_PEDIDO.Equals("Recepcionado")
+                         && consulta.ESTADO_DESPACHO.Equals("Despachado")
+                         orderby consulta.NUMERO_PEDIDO
+                         select consulta).ToList();
+            return lista;
         }
 
         //Falta filtrar por rut de empleado
@@ -114,6 +136,16 @@ namespace Datos
             {
                 return null;
             }
+        }
+
+        //Filtro Detalle Pedido
+        public List<DETALLE_PEDIDO> ListaDetallePedido(PEDIDO pedido)
+        {
+            var lista = (from consulta in ent.DETALLE_PEDIDO
+                         where consulta.NUMERO_PEDIDO == pedido.NUMERO_PEDIDO
+                         orderby consulta.ID_DETALLE_PEDIDO
+                         select consulta).ToList();
+            return lista;
         }
     }
 }

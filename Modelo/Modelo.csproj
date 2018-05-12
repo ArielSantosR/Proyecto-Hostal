@@ -49,6 +49,9 @@
     <Compile Include="Comuna.cs" />
     <Compile Include="ComunaCollection.cs" />
     <Compile Include="DetallePedido.cs" />
+    <Compile Include="DetallePedidoCollection.cs" />
+    <Compile Include="DetalleRecepcion.cs" />
+    <Compile Include="DetalleRecepcionCollection.cs" />
     <Compile Include="Empleado.cs" />
     <Compile Include="EmpleadoCollection.cs" />
     <Compile Include="Enumerable.cs" />
@@ -74,6 +77,8 @@
     <Compile Include="Proveedor.cs" />
     <Compile Include="ProveedorCollection.cs" />
     <Compile Include="ProveedorCollection2.cs" />
+    <Compile Include="Recepcion.cs" />
+    <Compile Include="RecepcionCollection.cs" />
     <Compile Include="Region.cs" />
     <Compile Include="RegionCollection.cs" />
     <Compile Include="TipoHabitacion.cs" />
