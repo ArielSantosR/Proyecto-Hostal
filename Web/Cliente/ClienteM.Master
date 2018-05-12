@@ -68,23 +68,23 @@
 <!--        INICIO FOOTER        -->
 
 <!--        INICIO FOOTER        -->
-<footer>
+<footer style="background-color: #343A40">
 <div class="container">
 	<div class="row">
 		<div class="footer-content col-md-3">
-            <a style="color: #FFFFFF" href="#">contacto@donaclarita.cl</a>
+            <a style="color: #A4A7A9" href="#">contacto@donaclarita.cl</a>
 		</div>
 
 		<div class="footer-content col-md-3">
-			<a style="color: #FFFFFF" href="#">+5624997364</a>
+			<a style="color: #A4A7A9" href="#">+5624997364</a>
 		</div>
 
 		<div class="footer-content col-md-3">
-			<a style="color: #FFFFFF" href="../Hostal/WebPoliticaReserva.aspx"> Políticas de reserva</a>
+			<a style="color: #A4A7A9" href="../Hostal/WebPoliticaReserva.aspx"> Políticas de reserva</a>
 		</div>
 
 		<div class="footer-content col-md-3">
-			<a style="color: #FFFFFF" href="../Hostal/WebPoliticaPrivacidad.aspx">Políticas de privacidad</a>
+			<a style="color: #A4A7A9" href="../Hostal/WebPoliticaPrivacidad.aspx">Políticas de privacidad</a>
 		</div>
 	</div>
 </div>
