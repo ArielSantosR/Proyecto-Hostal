@@ -66,11 +66,43 @@
                                     <ItemTemplate>
                                         <asp:LinkButton ID="btnInfo2"  CssClass="btn btn-info" CommandArgument='<%#Eval("NUMERO_PEDIDO")%>' OnClick="btnInfo2_Click" text="Ver Detalle" runat="server"/>
                                         <asp:LinkButton ID="btnEditar" CssClass="btn btn-primary" CommandArgument='<%#Eval("NUMERO_PEDIDO")%>' onclick="btnEditar_Click" text="Aceptar" runat="server"/>
-                                        <asp:LinkButton ID="btnEliminar" CssClass="btn btn-danger" CommandArgument='<%#Eval("NUMERO_PEDIDO")%>' OnClick="btnEliminar_Click"  text="Rechazar" runat="server"/>
+                                        <asp:LinkButton ID="btnEliminar" type="button" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap" CssClass="btn btn-danger" onclick="btnEliminar_Click" CommandArgument='<%#Eval("NUMERO_PEDIDO")%>' text="Rechazar" runat="server"/>
                                     </ItemTemplate>
                                 </asp:TemplateField>
+
                             </Columns>
                         </asp:GridView>
-        </div>
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Comentario</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        
+          
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">Mensaje:</label>
+              <asp:TextBox ID="txtComentario" runat="server" CssClass="form-control"></asp:TextBox>
+            
+          </div>
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" onclick="btnModal_Click" >Enviar</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+        
+     </div>
+
+
 
 </asp:Content>
