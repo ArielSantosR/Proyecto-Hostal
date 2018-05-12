@@ -48,7 +48,7 @@
         <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
           <a class="dropdown-item" href="../Cliente/WebCliente.aspx">Inicio Cliente</a>
           <a class="dropdown-item" href="../Cliente/WebCrearOrden.aspx">Crear Orden</a>
-          <a class="dropdown-item" href="../Cliente/WebCliente.aspx">Registro Huésped</a>
+          <a class="dropdown-item" href="../Cliente/WebAgregarPasajeros.aspx">Registro Huésped</a>
           <a class="dropdown-item" href="../Cliente/WebVerHistorial.aspx">Historial</a>
         </div>
       </li>
