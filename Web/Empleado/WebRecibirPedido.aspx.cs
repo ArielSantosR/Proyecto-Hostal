@@ -235,8 +235,76 @@ namespace Web.Empleado
 
         protected void btnEliminar_Click(object sender, EventArgs e)
         {
+            LinkButton btn = (LinkButton)(sender);
+            short numero_pedido = short.Parse(btn.CommandArgument);
 
+            Pedido pedido = new Pedido();
+            pedido.NUMERO_PEDIDO = numero_pedido;
+
+            MiSesionPedido = pedido;
         }
+
+
+        protected void btnModal_Click(object sender, EventArgs e)
+        {
+           
+            try
+            {
+                if (txtComentario.Text != string.Empty)
+                {
+                    Modelo.Pedido pedido = new Modelo.Pedido();
+                    pedido.NUMERO_PEDIDO = MiSesionPedido.NUMERO_PEDIDO;
+
+                    Service1 s = new Service1();
+                    XmlSerializer sr = new XmlSerializer(typeof(Modelo.Pedido));
+                    StringWriter writer = new StringWriter();
+                    sr.Serialize(writer, pedido);
+
+                    if (s.ObtenerPedido(writer.ToString()) != null)
+                    {
+                        pedido = s.ObtenerPedido(writer.ToString());
+                        pedido.COMENTARIO = txtComentario.Text;
+                        pedido.ESTADO_DESPACHO = "Rechazado";
+
+                        XmlSerializer sr2 = new XmlSerializer(typeof(Modelo.Pedido));
+                        StringWriter writer2 = new StringWriter();
+                        sr2.Serialize(writer2, pedido);
+
+                        if (s.EditarEstadoPedido(writer2.ToString()))
+                        {
+                            MiSesionPedido = null;
+
+                            Response.Write("<script language='javascript'>window.alert('Ha Rechazado el pedido');window.location='../Proveedor/WebProveedor.aspx';</script>");
+                        }
+                        else
+                        {
+                            alerta_exito.Visible = false;
+                            error.Text = "No se ha podido llevar a cabo la operacion";
+                            alerta.Visible = true;
+                        }
+                    }
+                    else
+                    {
+                        alerta_exito.Visible = false;
+                        error.Text = "Pedido no encontrado";
+                        alerta.Visible = true;
+                    }
+                }
+                else
+                {
+                    alerta_exito.Visible = false;
+                    error.Text = "Antes de rechazar el pedido debe mencionar las razones";
+                    alerta.Visible = true;
+                }
+            }
+            catch (Exception)
+            {
+                alerta_exito.Visible = false;
+                error.Text = "Excepcion";
+                alerta.Visible = true;
+            }
+        }
+    
 
         protected void btnInfo2_Click(object sender, EventArgs e)
         {
