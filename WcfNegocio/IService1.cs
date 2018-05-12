@@ -236,6 +236,22 @@ namespace WcfNegocio
         [OperationContract]
         string ListarPedidoDespacho(string proveedor);
 
+        [OperationContract]
+        string ListarPedidosporDespachar(string proveedor);
+
+        [OperationContract]
+        string ListarDetallePedido(string pedido);
+
+        [OperationContract]
+        string ListarPedidoRecepcion();
+
+        //CRUD Recepcion
+        [OperationContract]
+        bool AgregarRecepcion(string recepcion);
+
+        [OperationContract]
+        bool AgregarDetalleRecepcion(string detalle);
+
         //CRUD Notificacion
         [OperationContract]
         string listaNotificacion(string usuario);

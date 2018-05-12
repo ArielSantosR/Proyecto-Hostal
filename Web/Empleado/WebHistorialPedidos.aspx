@@ -27,7 +27,7 @@
     </div>
     <% } %>
 
-    <div style="display: flex; justify-content: center; margin-bottom: 20px">
+    <div style="display: flex; justify-content: center; margin-bottom:70px">
         <asp:GridView ID="gvPedidoPendiente" AutoGenerateColumns="false" runat="server" ForeColor="#333333" GridLines="Vertical">      
                             <AlternatingRowStyle BackColor="White" />
                             <EditRowStyle BackColor="#2461BF" />
@@ -48,9 +48,10 @@
                                 <asp:BoundField DataField="RUT_EMPLEADO" HeaderText="RUT Empleado" />
                                 <asp:BoundField DataField="RUT_PROVEEDOR" HeaderText="RUT Proveedor" />
                                 <asp:BoundField DataField="ESTADO_DESPACHO" HeaderText="Estado de Despacho" />
+                                <asp:BoundField DataField="COMENTARIO" HeaderText="Comentario" />
                                 <asp:TemplateField>
                                     <ItemTemplate>
-                                        <asp:LinkButton ID="btnInfo"  CssClass="btn btn-info" CommandArgument='<%#Eval("NUMERO_PEDIDO")%>'  text="Ver Detalle" runat="server"/>
+                                        <asp:LinkButton ID="btnInfo"  CssClass="btn btn-info" CommandArgument='<%#Eval("NUMERO_PEDIDO")%>' text="Ver Detalle" runat="server"/>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                             </Columns>
@@ -69,13 +70,15 @@
             </div>
         </div>
     </div>
-    <% } else { %>
+    <% } %>
+
+     <% if (gvPedidoListo.Rows.Count == 0 && gvPedidoPendiente.Rows.Count == 0) { %>
     <div class="container">
         <div class="row" style="margin-top: 20px; margin-bottom: 20px;">
             <div class="main-center">
 	            <div class="row">
 	                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
-		                <h1>Su historial de Pedidos está vacío</h1>
+		                <h3>Su historial de Pedidos está vacío</h3>
 	                </div>
                 </div>
             </div>
@@ -83,7 +86,7 @@
     </div>
     <% } %>
 
-    <div style="display: flex; justify-content: center; margin-bottom: 20px">
+    <div style="display: flex; justify-content: center; margin-bottom: 70px;">
     <asp:GridView ID="gvPedidoListo" AutoGenerateColumns="false" runat="server" ForeColor="#333333" GridLines="Vertical">      
                             <AlternatingRowStyle BackColor="White" />
                             <EditRowStyle BackColor="#2461BF" />
@@ -103,10 +106,11 @@
                                 <asp:BoundField DataField="NUMERO_RECEPCION" HeaderText="Número de Recepción" />
                                 <asp:BoundField DataField="RUT_EMPLEADO" HeaderText="RUT Empleado" />
                                 <asp:BoundField DataField="RUT_PROVEEDOR" HeaderText="RUT Proveedor" />
+                                <asp:BoundField DataField="ESTADO_DESPACHO" HeaderText="Estado de Despacho" />
                                 <asp:BoundField DataField="COMENTARIO" HeaderText="Comentario" />
                                <asp:TemplateField>
                                     <ItemTemplate>
-                                        <asp:LinkButton ID="btnInfo2"  CssClass="btn btn-info disabled" enabled="false" text="Ver Detalle" runat="server"/>
+                                        <asp:LinkButton ID="btnInfo2"  CssClass="btn btn-info" CommandArgument='<%#Eval("NUMERO_PEDIDO")%>' OnClick="btnInfo2_Click" text="Ver Detalle" runat="server"/>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                             </Columns>

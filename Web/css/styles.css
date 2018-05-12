@@ -10,18 +10,24 @@ body, html {
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#93cede', endColorstr='#49a5bf', GradientType=1 );
 }
 
-html{
-	height: 100%;
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 50px;
 }
 
 /*Al colocar esta etiqueta en el Master Page, en ASP: Content Place Holder  */
 .content {
-    min-height: calc(100vh - 100px);
+    min-height: calc(100vh - 250px);
     /* 80px header + 40px footer = 120px  */
 }
 
 .main {
-  margin:50px 15px;
+  margin:50px 15px 80px;
 }
 
 h5{ 
@@ -194,16 +200,16 @@ header {
 	margin-right: auto;
 }
 
-/* FOOTER 	*/
-
-footer{
-	overflow: hidden;
-	background-color: #0d1b4c;
-	font-family: Verdana, sans-serif;
-	bottom: 0;
-	width: 100%;
-	margin-top: auto;
-	position: relative;
+footer {
+  overflow: hidden;
+  position: absolute;
+  font-family: Verdana, sans-serif;
+  bottom: 0px;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 50px;
+  line-height: 60px; /* Vertically center the text there */
+  background-color: #0d1b4c;
 }
 
 .footer-content{

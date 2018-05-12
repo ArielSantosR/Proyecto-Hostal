@@ -160,6 +160,7 @@
     <Compile Include="ServicioPlato.cs" />
     <Compile Include="ServicioProducto.cs" />
     <Compile Include="ServicioProveedor.cs" />
+    <Compile Include="ServicioRecepcion.cs" />
     <Compile Include="ServicioUsuario.cs" />
     <Compile Include="TIPO_HABITACION.cs">
       <DependentUpon>Hostal.tt</DependentUpon>

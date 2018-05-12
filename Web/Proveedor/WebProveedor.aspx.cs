@@ -110,7 +110,12 @@ namespace Web
 
         protected void btnPendientes_Click(object sender, EventArgs e)
         {
-            Response.Redirect("../Proveedor/WebPedidosPendientes.aspx");
+            Response.Redirect("../Proveedor/WebPedidosRecibidos.aspx");
+        }
+
+        protected void btnDespacho_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("../Proveedor/WebPedidosDespacho.aspx");
         }
     }
 }

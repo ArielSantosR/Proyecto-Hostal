@@ -35,7 +35,7 @@ namespace Web.Proveedor {
             //Bloqueo de cambios dependiendo del usuario
             if (MiSesion.ID_USUARIO != 0)
             {
-                if (MiSesion.TIPO_USUARIO.Equals(Tipo_Usuario.Empleado.ToString()) && MiSesion.ESTADO.Equals(Estado_Usuario.Habilitado.ToString()))
+                if (MiSesion.TIPO_USUARIO.Equals(Tipo_Usuario.Proveedor.ToString()) && MiSesion.ESTADO.Equals(Estado_Usuario.Habilitado.ToString()))
                 {
                     txtRut.Enabled = false;
                     txtPNombre.Enabled = false;

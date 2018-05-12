@@ -1593,6 +1593,88 @@ namespace WcfNegocio
             }
         }
 
+        public string ListarPedidosporDespachar(string proveedor)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.Proveedor));
+            StringReader reader = new StringReader(proveedor);
+            Modelo.Proveedor pr = (Modelo.Proveedor)ser.Deserialize(reader);
+            ServicioPedido serv = new ServicioPedido();
+
+            Datos.PROVEEDOR pDatos = new Datos.PROVEEDOR();
+            pDatos.RUT_PROVEEDOR = pr.RUT_PROVEEDOR;
+
+            List<Datos.PEDIDO> listaPedido = serv.ListarPedidosPorDespachar(pDatos);
+
+            if (listaPedido == null)
+            {
+                return null;
+            }
+            else
+            {
+                Modelo.PedidoCollection listaPedido2 = new PedidoCollection();
+
+                foreach (Datos.PEDIDO p in listaPedido)
+                {
+                    Modelo.Pedido pModelo = new Modelo.Pedido();
+                    pModelo.NUMERO_PEDIDO = p.NUMERO_PEDIDO;
+                    pModelo.ESTADO_PEDIDO = p.ESTADO_PEDIDO;
+                    pModelo.FECHA_PEDIDO = p.FECHA_PEDIDO;
+                    pModelo.RUT_EMPLEADO = p.RUT_EMPLEADO;
+                    pModelo.NUMERO_RECEPCION = p.NUMERO_RECEPCION;
+                    pModelo.RUT_PROVEEDOR = p.RUT_PROVEEDOR;
+                    pModelo.ESTADO_DESPACHO = p.ESTADO_DESPACHO;
+                    pModelo.COMENTARIO = p.COMENTARIO;
+
+                    listaPedido2.Add(pModelo);
+                }
+
+                XmlSerializer ser2 = new XmlSerializer(typeof(Modelo.PedidoCollection));
+                StringWriter writer2 = new StringWriter();
+                ser2.Serialize(writer2, listaPedido2);
+                writer2.Close();
+                return writer2.ToString();
+            }
+        }
+
+        public string ListarDetallePedido(string pedido)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.Pedido));
+            StringReader reader = new StringReader(pedido);
+            Modelo.Pedido pr = (Modelo.Pedido)ser.Deserialize(reader);
+            ServicioPedido serv = new ServicioPedido();
+
+            Datos.PEDIDO pDatos = new Datos.PEDIDO();
+            pDatos.NUMERO_PEDIDO = pr.NUMERO_PEDIDO;
+
+            List<Datos.DETALLE_PEDIDO> listaDetalle = serv.ListaDetallePedido(pDatos);
+
+            if (listaDetalle == null)
+            {
+                return null;
+            }
+            else
+            {
+                Modelo.DetallePedidoCollection listaDetalle2 = new DetallePedidoCollection();
+
+                foreach (Datos.DETALLE_PEDIDO p in listaDetalle)
+                {
+                    Modelo.DetallePedido pModelo = new Modelo.DetallePedido();
+                    pModelo.NUMERO_PEDIDO = p.NUMERO_PEDIDO;
+                    pModelo.ID_PRODUCTO = p.ID_PRODUCTO;
+                    pModelo.ID_DETALLE_PEDIDO = p.ID_DETALLE_PEDIDO;
+                    pModelo.CANTIDAD = p.CANTIDAD;
+
+                    listaDetalle2.Add(pModelo);
+                }
+
+                XmlSerializer ser2 = new XmlSerializer(typeof(Modelo.DetallePedidoCollection));
+                StringWriter writer2 = new StringWriter();
+                ser2.Serialize(writer2, listaDetalle2);
+                writer2.Close();
+                return writer2.ToString();
+            }
+        }
+
         //CRUD Notificacion
         public string listaNotificacion(string usuario)
         {
@@ -1632,6 +1714,62 @@ namespace WcfNegocio
                 writer.Close();
                 return writer.ToString();
             }
+        }
+
+        public string ListarPedidoRecepcion()
+        {
+            ServicioPedido servicio = new ServicioPedido();
+            List<Datos.PEDIDO> pedido = servicio.ListarPedidoRecepcion();
+            Modelo.PedidoCollection listaPedido = new Modelo.PedidoCollection();
+
+            foreach (Datos.PEDIDO p in pedido)
+            {
+                Modelo.Pedido pModelo = new Modelo.Pedido();
+                pModelo.NUMERO_PEDIDO = p.NUMERO_PEDIDO;
+                pModelo.ESTADO_PEDIDO = p.ESTADO_PEDIDO;
+                pModelo.FECHA_PEDIDO = p.FECHA_PEDIDO;
+                pModelo.RUT_EMPLEADO = p.RUT_EMPLEADO;
+                pModelo.NUMERO_RECEPCION = p.NUMERO_RECEPCION;
+                pModelo.RUT_PROVEEDOR = p.RUT_PROVEEDOR;
+                pModelo.ESTADO_DESPACHO = p.ESTADO_DESPACHO;
+                pModelo.COMENTARIO = p.COMENTARIO;
+
+                listaPedido.Add(pModelo);
+            }
+
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.PedidoCollection));
+            StringWriter writer = new StringWriter();
+            ser.Serialize(writer, listaPedido);
+            writer.Close();
+            return writer.ToString();
+        }
+
+        //CRUD Recepcion
+        public bool AgregarRecepcion(string recepcion)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.Recepcion));
+            StringReader reader = new StringReader(recepcion);
+            Modelo.Recepcion r = (Modelo.Recepcion)ser.Deserialize(reader);
+            ServicioRecepcion serv = new ServicioRecepcion();
+            Datos.RECEPCION rDatos = new Datos.RECEPCION();
+            rDatos.RUT_EMPLEADO = r.RUT_EMPLEADO;
+            rDatos.RUT_PROVEEDOR = r.RUT_PROVEEDOR;
+            rDatos.FECHA_RECEPCION = r.FECHA_RECEPCION;
+
+            return serv.AgregarRecepcion(rDatos);
+        }
+
+        public bool AgregarDetalleRecepcion(string detalle)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.DetalleRecepcion));
+            StringReader reader = new StringReader(detalle);
+            Modelo.DetalleRecepcion d = (Modelo.DetalleRecepcion)ser.Deserialize(reader);
+            ServicioRecepcion serv = new ServicioRecepcion();
+            Datos.DETALLE_RECEPCION dDatos = new Datos.DETALLE_RECEPCION();
+            dDatos.ID_PRODUCTO = d.ID_PRODUCTO;
+            dDatos.CANTIDAD = d.CANTIDAD;
+
+            return serv.AgregarDetalleRecepcion(dDatos);
         }
 
         //DDL

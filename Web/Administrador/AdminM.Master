@@ -9,9 +9,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="stylesheet" type="text/css" media="screen" href="../css/styles.css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
     <link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet">
 
     
@@ -77,7 +74,8 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown4">
           <a class="dropdown-item" href="../Proveedor/WebProveedor.aspx">Inicio Proveedor</a>
-          <a class="dropdown-item" href="../Proveedor/WebPedidosPendientes.aspx">Pedidos Pendientes</a>
+          <a class="dropdown-item" href="../Proveedor/WebPedidosRecibidos.aspx">Pedidos Pendientes</a>
+          <a class="dropdown-item" href="../Proveedor/WebPedidosDespacho.aspx">Pedidos por Despachar</a>
           <a class="dropdown-item" href="../Proveedor/WebHistorialPedidos.aspx">Historial de Pedidos</a>
         </div>
       </li>
@@ -136,6 +134,7 @@
 
 <!--        INICIO FOOTER        -->
 <footer>
+<div class="container">
 	<div class="row">
 		<div class="footer-content col-md-3">
             <a style="color: #FFFFFF" href="#">contacto@donaclarita.cl</a>
@@ -153,7 +152,13 @@
 			<a style="color: #FFFFFF" href="../Hostal/WebPoliticaPrivacidad.aspx">Políticas de privacidad</a>
 		</div>
 	</div>
+</div>
 </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+
 </form>
 <!--        FIN FOOTER        -->
 </body>

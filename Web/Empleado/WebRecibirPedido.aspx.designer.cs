@@ -13,57 +13,48 @@ namespace Web.Empleado {
     public partial class WebRecibirPedido {
         
         /// <summary>
-        /// Control ddlCategoria.
+        /// Control alerta.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlCategoria;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl alerta;
         
         /// <summary>
-        /// Control ddlTipo.
+        /// Control error.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlTipo;
+        protected global::System.Web.UI.WebControls.Literal error;
         
         /// <summary>
-        /// Control txtCantidad.
+        /// Control alerta_exito.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCantidad;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl alerta_exito;
         
         /// <summary>
-        /// Control btnAgregar.
+        /// Control exito.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAgregar;
+        protected global::System.Web.UI.WebControls.Literal exito;
         
         /// <summary>
-        /// Control GridView1.
+        /// Control gvPedidoRecepcion.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridView1;
-        
-        /// <summary>
-        /// Control btnRecibirPedido.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnRecibirPedido;
+        protected global::System.Web.UI.WebControls.GridView gvPedidoRecepcion;
     }
 }

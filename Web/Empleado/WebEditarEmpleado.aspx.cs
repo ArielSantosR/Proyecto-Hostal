@@ -165,6 +165,13 @@ namespace Web.Empleado {
 
                 if (MiSesion.TIPO_USUARIO.Equals(Modelo.Tipo_Usuario.Administrador.ToString())) {
                     usuario.ESTADO = ddlEstado.SelectedValue.ToString();
+
+                    if (MiSesion.TIPO_USUARIO.Equals(Modelo.Tipo_Usuario.Administrador.ToString()) && usuario.ESTADO.Equals("Deshabilitado"))
+                    {
+                        error.Text = "No puede deshabilitar a un administrador.";
+                        flag = false;
+                        alerta.Visible = true;
+                    } 
                 }
 
                 if (flag) {
