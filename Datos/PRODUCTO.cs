@@ -18,8 +18,9 @@ namespace Datos
         {
             this.DETALLE_PEDIDO = new HashSet<DETALLE_PEDIDO>();
             this.DETALLE_RECEPCION = new HashSet<DETALLE_RECEPCION>();
+            this.NOTIFICACION = new HashSet<NOTIFICACION>();
         }
-    
+
         public long ID_PRODUCTO { get; set; }
         public string NOMBRE_PRODUCTO { get; set; }
         public DateTime? FECHA_VENCIMIENTO_PRODUCTO { get; set; }
@@ -34,12 +35,13 @@ namespace Datos
 
         public string NombreYPrecio
         {
-            get { return this.NOMBRE_PRODUCTO +  " " + this.UNIDAD_MEDIDA + " $" + this.PRECIO_PRODUCTO; }
+            get { return this.NOMBRE_PRODUCTO + " " + this.UNIDAD_MEDIDA + " $" + this.PRECIO_PRODUCTO; }
         }
 
         public virtual ICollection<DETALLE_PEDIDO> DETALLE_PEDIDO { get; set; }
         public virtual ICollection<DETALLE_RECEPCION> DETALLE_RECEPCION { get; set; }
         public virtual FAMILIA FAMILIA { get; set; }
         public virtual PROVEEDOR PROVEEDOR { get; set; }
+        public virtual ICollection<NOTIFICACION> NOTIFICACION { get; set; }
     }
 }

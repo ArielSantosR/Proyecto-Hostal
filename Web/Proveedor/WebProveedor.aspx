@@ -3,15 +3,6 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-
-    <div class="alert alert-primary alert-dismissible" id="alerta" runat="server">
-      <a href="a.aspx" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        <% for (int i = 0; i< MiSesionNotificacion.Count; i++) { %>
-      <strong>Información: </strong> <asp:Literal ID="notificacion" runat="server"></asp:Literal> <br />
-        <% } %>
-    </div>
-    
-
 <div class="container">
     <div class="row main">
         <div class="main-login main-center-wide">

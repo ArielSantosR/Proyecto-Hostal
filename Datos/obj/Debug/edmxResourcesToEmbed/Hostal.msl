@@ -311,6 +311,10 @@
     <EntitySetMapping Name="NOTIFICACION">
       <EntityTypeMapping TypeName="Hostal.NOTIFICACION">
         <MappingFragment StoreEntitySet="NOTIFICACION">
+          <ScalarProperty Name="NUMERO_ORDEN" ColumnName="NUMERO_ORDEN" />
+          <ScalarProperty Name="ID_PRODUCTO" ColumnName="ID_PRODUCTO" />
+          <ScalarProperty Name="NUMERO_PEDIDO" ColumnName="NUMERO_PEDIDO" />
+          <ScalarProperty Name="URL" ColumnName="URL" />
           <ScalarProperty Name="ESTADO_NOTIFICACION" ColumnName="ESTADO_NOTIFICACION" />
           <ScalarProperty Name="ID_USUARIO" ColumnName="ID_USUARIO" />
           <ScalarProperty Name="MENSAJE" ColumnName="MENSAJE" />

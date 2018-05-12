@@ -76,6 +76,9 @@
         <AssociationConnector Association="Hostal.FK_HUESPED_HABITACION" />
         <AssociationConnector Association="Hostal.FK_PENSION_HABITACION" />
         <EntityTypeShape EntityType="Hostal.LOG_ERRORES" Width="1.5" PointX="3.375" PointY="0.75" />
+        <AssociationConnector Association="Hostal.FK_NOTIFICACION_ORDEN" />
+        <AssociationConnector Association="Hostal.FK_NOTIFICACION_PEDIDO" />
+        <AssociationConnector Association="Hostal.FK_NOTIFICACION_PRODUCTO" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

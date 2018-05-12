@@ -1704,6 +1704,10 @@ namespace WcfNegocio
                     nModelo.ID_NOTIFICACION = n.ID_NOTIFICACION;
                     nModelo.MENSAJE = n.MENSAJE;
                     nModelo.ESTADO_NOTIFICACION = n.ESTADO_NOTIFICACION;
+                    nModelo.URL = n.URL;
+                    nModelo.NUMERO_ORDEN = n.NUMERO_ORDEN;
+                    nModelo.ID_PRODUCTO = n.ID_PRODUCTO;
+                    nModelo.NUMERO_PEDIDO = n.NUMERO_PEDIDO;
 
                     listaNotificacion2.Add(nModelo);
                 }
