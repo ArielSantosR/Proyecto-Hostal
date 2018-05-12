@@ -196,6 +196,7 @@
     <NavigationProperty Name="CLIENTE" Relationship="Self.FK_ORDEN_COMPRA_CLIENTE" FromRole="ORDEN_COMPRA" ToRole="CLIENTE" />
     <NavigationProperty Name="DETALLE_ORDEN" Relationship="Self.FK_ORDEN_DETALLE_ORDEN" FromRole="ORDEN_COMPRA" ToRole="DETALLE_ORDEN" />
     <NavigationProperty Name="EMPLEADO" Relationship="Self.FK_ORDEN_COMPRA_EMPLEADO" FromRole="ORDEN_COMPRA" ToRole="EMPLEADO" />
+    <NavigationProperty Name="NOTIFICACION" Relationship="Hostal.FK_NOTIFICACION_ORDEN" FromRole="ORDEN_COMPRA" ToRole="NOTIFICACION" />
   </EntityType>
   <EntityType Name="PAIS">
     <Key>
@@ -221,6 +222,7 @@
     <NavigationProperty Name="RECEPCION" Relationship="Self.FK_PEDIDO_RECEPCION" FromRole="PEDIDO" ToRole="RECEPCION" />
     <Property Name="ESTADO_DESPACHO" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
     <Property Name="COMENTARIO" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="NOTIFICACION" Relationship="Hostal.FK_NOTIFICACION_PEDIDO" FromRole="PEDIDO" ToRole="NOTIFICACION" />
   </EntityType>
   <EntityType Name="PENSION">
     <Key>
@@ -265,6 +267,7 @@
     <NavigationProperty Name="FAMILIA" Relationship="Self.FK_PRODUCTO_FAMILIA" FromRole="PRODUCTO" ToRole="FAMILIA" />
     <NavigationProperty Name="PROVEEDOR" Relationship="Self.FK_PRODUCTO_PROVEEDOR" FromRole="PRODUCTO" ToRole="PROVEEDOR" />
     <Property Name="UNIDAD_MEDIDA" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="NOTIFICACION" Relationship="Hostal.FK_NOTIFICACION_PRODUCTO" FromRole="PRODUCTO" ToRole="NOTIFICACION" />
   </EntityType>
   <EntityType Name="PROVEEDOR">
     <Key>
@@ -947,6 +950,18 @@
       <End Role="PENSION" EntitySet="PENSION" />
     </AssociationSet>
     <EntitySet Name="LOG_ERRORESSet" EntityType="Hostal.LOG_ERRORES" />
+    <AssociationSet Name="FK_NOTIFICACION_ORDEN" Association="Hostal.FK_NOTIFICACION_ORDEN">
+      <End Role="ORDEN_COMPRA" EntitySet="ORDEN_COMPRA" />
+      <End Role="NOTIFICACION" EntitySet="NOTIFICACION" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NOTIFICACION_PEDIDO" Association="Hostal.FK_NOTIFICACION_PEDIDO">
+      <End Role="PEDIDO" EntitySet="PEDIDO" />
+      <End Role="NOTIFICACION" EntitySet="NOTIFICACION" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NOTIFICACION_PRODUCTO" Association="Hostal.FK_NOTIFICACION_PRODUCTO">
+      <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+      <End Role="NOTIFICACION" EntitySet="NOTIFICACION" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="CATEGORIA_HABITACION">
     <Key>
@@ -966,6 +981,13 @@
     <Property Name="ID_USUARIO" Type="Int16" Nullable="false" />
     <NavigationProperty Name="USUARIO" Relationship="Hostal.FK_NOTIFICACION_USUARIO" FromRole="NOTIFICACION" ToRole="USUARIO" />
     <Property Name="ESTADO_NOTIFICACION" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="URL" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="NUMERO_PEDIDO" Type="Int16" />
+    <Property Name="ID_PRODUCTO" Type="Int64" />
+    <Property Name="NUMERO_ORDEN" Type="Int16" />
+    <NavigationProperty Name="ORDEN_COMPRA" Relationship="Hostal.FK_NOTIFICACION_ORDEN" FromRole="NOTIFICACION" ToRole="ORDEN_COMPRA" />
+    <NavigationProperty Name="PEDIDO" Relationship="Hostal.FK_NOTIFICACION_PEDIDO" FromRole="NOTIFICACION" ToRole="PEDIDO" />
+    <NavigationProperty Name="PRODUCTO" Relationship="Hostal.FK_NOTIFICACION_PRODUCTO" FromRole="NOTIFICACION" ToRole="PRODUCTO" />
   </EntityType>
   <Association Name="FK_NOTIFICACION_USUARIO">
     <End Type="Hostal.USUARIO" Role="USUARIO" Multiplicity="1" />
@@ -1062,4 +1084,40 @@
     <Property Name="NUMERO_ERROR" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
     <Property Name="MENSAJE" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
   </EntityType>
+  <Association Name="FK_NOTIFICACION_ORDEN">
+    <End Type="Hostal.ORDEN_COMPRA" Role="ORDEN_COMPRA" Multiplicity="0..1" />
+    <End Type="Hostal.NOTIFICACION" Role="NOTIFICACION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ORDEN_COMPRA">
+        <PropertyRef Name="NUMERO_ORDEN" />
+      </Principal>
+      <Dependent Role="NOTIFICACION">
+        <PropertyRef Name="NUMERO_ORDEN" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NOTIFICACION_PEDIDO">
+    <End Type="Hostal.PEDIDO" Role="PEDIDO" Multiplicity="0..1" />
+    <End Type="Hostal.NOTIFICACION" Role="NOTIFICACION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PEDIDO">
+        <PropertyRef Name="NUMERO_PEDIDO" />
+      </Principal>
+      <Dependent Role="NOTIFICACION">
+        <PropertyRef Name="NUMERO_PEDIDO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NOTIFICACION_PRODUCTO">
+    <End Type="Hostal.PRODUCTO" Role="PRODUCTO" Multiplicity="0..1" />
+    <End Type="Hostal.NOTIFICACION" Role="NOTIFICACION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUCTO">
+        <PropertyRef Name="ID_PRODUCTO" />
+      </Principal>
+      <Dependent Role="NOTIFICACION">
+        <PropertyRef Name="ID_PRODUCTO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

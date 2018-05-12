@@ -9,9 +9,9 @@ using System.Web.UI.WebControls;
 using System.Xml.Serialization;
 using WcfNegocio;
 
-namespace Web
+namespace Web.Empleado
 {
-    public partial class WebProveedor : System.Web.UI.Page
+    public partial class WebVerProductos : System.Web.UI.Page
     {
         void Page_PreInit(object sender, EventArgs e)
         {
@@ -22,12 +22,12 @@ namespace Web
                     if (MiSesion.TIPO_USUARIO.Equals("Administrador") &&
                     MiSesion.ESTADO.Equals("Habilitado"))
                     {
-                        MasterPageFile = "~/Administrador/AdminM.Master";
+                        Response.Redirect("../Administrador/WebVerProductos.aspx");
                     }
-                    else if (MiSesion.TIPO_USUARIO.Equals("Proveedor") &&
+                    else if (MiSesion.TIPO_USUARIO.Equals("Empleado") &&
                     MiSesion.ESTADO.Equals("Habilitado"))
                     {
-                        MasterPageFile = "~/Proveedor/ProveedorM.Master";
+                        MasterPageFile = "~/Empleado/EmpleadoM.Master";
                     }
                     else
                     {
@@ -43,7 +43,15 @@ namespace Web
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            Service1 service = new Service1();
+            string datos = service.ListarProducto();
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.ProductoCollection));
+            StringReader reader = new StringReader(datos);
+
+            Modelo.ProductoCollection listaProducto = (Modelo.ProductoCollection)ser.Deserialize(reader);
+            reader.Close();
+            gvProducto.DataSource = listaProducto;
+            gvProducto.DataBind();
         }
 
         //Creación de Sesión
@@ -61,38 +69,6 @@ namespace Web
             {
                 Session["Usuario"] = value;
             }
-        }
-
-        //Creación de Sesión
-        public List<Notificacion> MiSesionNotificacion
-        {
-            get
-            {
-                if (Session["Notificacion"] == null)
-                {
-                    Session["Notificacion"] = new List<Notificacion>();
-                }
-                return (List<Notificacion>)Session["Notificacion"];
-            }
-            set
-            {
-                Session["Notificacion"] = value;
-            }
-        }
-
-        protected void btnRecibidos_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("../Proveedor/WebHistorialPedidos.aspx");
-        }
-
-        protected void btnPendientes_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("../Proveedor/WebPedidosRecibidos.aspx");
-        }
-
-        protected void btnDespacho_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("../Proveedor/WebPedidosDespacho.aspx");
         }
     }
 }

@@ -17,6 +17,7 @@ namespace Datos
         public PEDIDO()
         {
             this.DETALLE_PEDIDO = new HashSet<DETALLE_PEDIDO>();
+            this.NOTIFICACION = new HashSet<NOTIFICACION>();
         }
     
         public short NUMERO_PEDIDO { get; set; }
@@ -32,5 +33,6 @@ namespace Datos
         public virtual EMPLEADO EMPLEADO { get; set; }
         public virtual PROVEEDOR PROVEEDOR { get; set; }
         public virtual RECEPCION RECEPCION { get; set; }
+        public virtual ICollection<NOTIFICACION> NOTIFICACION { get; set; }
     }
 }

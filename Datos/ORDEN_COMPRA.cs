@@ -17,6 +17,7 @@ namespace Datos
         public ORDEN_COMPRA()
         {
             this.DETALLE_ORDEN = new HashSet<DETALLE_ORDEN>();
+            this.NOTIFICACION = new HashSet<NOTIFICACION>();
         }
     
         public short NUMERO_ORDEN { get; set; }
@@ -29,5 +30,6 @@ namespace Datos
         public virtual CLIENTE CLIENTE { get; set; }
         public virtual ICollection<DETALLE_ORDEN> DETALLE_ORDEN { get; set; }
         public virtual EMPLEADO EMPLEADO { get; set; }
+        public virtual ICollection<NOTIFICACION> NOTIFICACION { get; set; }
     }
 }

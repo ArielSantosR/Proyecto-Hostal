@@ -179,6 +179,10 @@
     <Property Name="MENSAJE" Type="varchar2" MaxLength="250" Nullable="false" />
     <Property Name="ID_USUARIO" Type="number" Precision="5" Scale="0" Nullable="false" />
     <Property Name="ESTADO_NOTIFICACION" Type="varchar2" MaxLength="25" Nullable="false" />
+    <Property Name="URL" Type="varchar2" MaxLength="50" Nullable="false" />
+    <Property Name="NUMERO_PEDIDO" Type="number" Precision="5" Scale="0" />
+    <Property Name="ID_PRODUCTO" Type="number" Precision="19" Scale="0" />
+    <Property Name="NUMERO_ORDEN" Type="number" Precision="5" Scale="0" />
   </EntityType>
   <EntityType Name="ORDEN_COMPRA">
     <Key>
@@ -585,6 +589,42 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_NOTIFICACION_ORDEN">
+    <End Role="ORDEN_COMPRA" Type="Self.ORDEN_COMPRA" Multiplicity="0..1" />
+    <End Role="NOTIFICACION" Type="Self.NOTIFICACION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ORDEN_COMPRA">
+        <PropertyRef Name="NUMERO_ORDEN" />
+      </Principal>
+      <Dependent Role="NOTIFICACION">
+        <PropertyRef Name="NUMERO_ORDEN" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NOTIFICACION_PEDIDO">
+    <End Role="PEDIDO" Type="Self.PEDIDO" Multiplicity="0..1" />
+    <End Role="NOTIFICACION" Type="Self.NOTIFICACION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PEDIDO">
+        <PropertyRef Name="NUMERO_PEDIDO" />
+      </Principal>
+      <Dependent Role="NOTIFICACION">
+        <PropertyRef Name="NUMERO_PEDIDO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NOTIFICACION_PRODUCTO">
+    <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="0..1" />
+    <End Role="NOTIFICACION" Type="Self.NOTIFICACION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUCTO">
+        <PropertyRef Name="ID_PRODUCTO" />
+      </Principal>
+      <Dependent Role="NOTIFICACION">
+        <PropertyRef Name="ID_PRODUCTO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_NOTIFICACION_USUARIO">
     <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
     <End Role="NOTIFICACION" Type="Self.NOTIFICACION" Multiplicity="*" />
@@ -918,6 +958,18 @@
     <AssociationSet Name="FK_HUESPED_HABITACION" Association="Self.FK_HUESPED_HABITACION">
       <End Role="HABITACION" EntitySet="HABITACION" />
       <End Role="HUESPED" EntitySet="HUESPED" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NOTIFICACION_ORDEN" Association="Self.FK_NOTIFICACION_ORDEN">
+      <End Role="ORDEN_COMPRA" EntitySet="ORDEN_COMPRA" />
+      <End Role="NOTIFICACION" EntitySet="NOTIFICACION" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NOTIFICACION_PEDIDO" Association="Self.FK_NOTIFICACION_PEDIDO">
+      <End Role="PEDIDO" EntitySet="PEDIDO" />
+      <End Role="NOTIFICACION" EntitySet="NOTIFICACION" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NOTIFICACION_PRODUCTO" Association="Self.FK_NOTIFICACION_PRODUCTO">
+      <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+      <End Role="NOTIFICACION" EntitySet="NOTIFICACION" />
     </AssociationSet>
     <AssociationSet Name="FK_NOTIFICACION_USUARIO" Association="Self.FK_NOTIFICACION_USUARIO">
       <End Role="USUARIO" EntitySet="USUARIO" />

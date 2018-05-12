@@ -1,9 +1,9 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Administrador/AdminM.Master" AutoEventWireup="true" CodeBehind="WebVerProductos.aspx.cs" Inherits="Web.Administrador.WebVerProductos" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Empleado/EmpleadoM.Master" AutoEventWireup="true" CodeBehind="WebVerProductos.aspx.cs" Inherits="Web.Empleado.WebVerProductos" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div style="display: flex; justify-content: center; margin-bottom: 70px">
-        <asp:GridView ID="gvProducto" AutoGenerateColumns="false" runat="server" ForeColor="#333333" GridLines="Vertical">      
+    <asp:GridView ID="gvProducto" AutoGenerateColumns="false" runat="server" ForeColor="#333333" GridLines="Vertical">      
                             <AlternatingRowStyle BackColor="White" />
                             <EditRowStyle BackColor="#2461BF" />
                             <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
@@ -24,13 +24,7 @@
                                 <asp:BoundField DataField="STOCK_CRITICO_PRODUCTO" HeaderText="Stock Crítico" />
                                 <asp:BoundField DataField="ID_FAMILIA" HeaderText="ID Familia" />
                                 <asp:BoundField DataField="FECHA_VENCIMIENTO_PRODUCTO" HeaderText="Fecha de Vencimiento" />
-                                <asp:TemplateField>
-                                    <ItemTemplate>
-                                        <asp:LinkButton ID="btnEditar"  onclick="btnEditar_Click" CssClass="btn btn-success" text="Editar" CommandArgument='<%#Eval("ID_PRODUCTO")%>' runat="server"/>
-                                        <asp:LinkButton ID="btnEliminar"  onclick="btnEliminar_Click" CssClass="btn btn-danger" text="Eliminar" CommandArgument='<%#Eval("ID_PRODUCTO")%>' runat="server"/>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
                             </Columns>
                         </asp:GridView>
-        </div>    
+        </div>  
 </asp:Content>

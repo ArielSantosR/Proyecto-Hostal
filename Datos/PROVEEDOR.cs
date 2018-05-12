@@ -20,7 +20,7 @@ namespace Datos
             this.PRODUCTO = new HashSet<PRODUCTO>();
             this.RECEPCION = new HashSet<RECEPCION>();
         }
-    
+
         public int RUT_PROVEEDOR { get; set; }
         public string DV_PROVEEDOR { get; set; }
         public string PNOMBRE_PROVEEDOR { get; set; }

@@ -137,6 +137,7 @@
     <Content Include="Empleado\WebRecibirPedido.aspx" />
     <Content Include="Empleado\WebRegistrarOrden.aspx" />
     <Content Include="Empleado\WebVerFacturas.aspx" />
+    <Content Include="Empleado\WebVerProductos.aspx" />
     <Content Include="Hostal\WebContacto.aspx" />
     <Content Include="Hostal\WebFaqs.aspx" />
     <Content Include="Hostal\WebPoliticaReserva.aspx" />
@@ -500,6 +501,13 @@
     </Compile>
     <Compile Include="Empleado\WebVerFacturas.aspx.designer.cs">
       <DependentUpon>WebVerFacturas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Empleado\WebVerProductos.aspx.cs">
+      <DependentUpon>WebVerProductos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Empleado\WebVerProductos.aspx.designer.cs">
+      <DependentUpon>WebVerProductos.aspx</DependentUpon>
     </Compile>
     <Compile Include="Hostal\HostalM.Master.cs">
       <DependentUpon>HostalM.Master</DependentUpon>
