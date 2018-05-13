@@ -101,7 +101,8 @@ namespace Datos
         public List<PEDIDO> ListarPedidoRecepcion()
         {
             var lista = (from consulta in ent.PEDIDO
-                         where !consulta.ESTADO_PEDIDO.Equals("Recepcionado")
+                         where (!consulta.ESTADO_PEDIDO.Equals("Recepcionado")
+                         && !consulta.ESTADO_PEDIDO.Equals("No Recepcionado"))
                          && consulta.ESTADO_DESPACHO.Equals("Despachado")
                          orderby consulta.NUMERO_PEDIDO
                          select consulta).ToList();

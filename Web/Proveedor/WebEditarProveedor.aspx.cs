@@ -66,7 +66,7 @@ namespace Web.Proveedor {
                     txtRut.Text = SesionPro.RUT_PROVEEDOR.ToString() + "-" + SesionPro.DV_PROVEEDOR;
                     txtPNombre.Text = SesionPro.PNOMBRE_PROVEEDOR;
                     txtSNombre.Text = SesionPro.SNOMBRE_PROVEEDOR;
-                    if (MiSesion.TIPO_USUARIO.Equals(Tipo_Usuario.Empleado.ToString()))
+                    if (MiSesion.TIPO_USUARIO.Equals(Tipo_Usuario.Proveedor.ToString()))
                     {
                         txtUsuario.Text = MiSesion.NOMBRE_USUARIO;
                     }
@@ -129,7 +129,7 @@ namespace Web.Proveedor {
                 Usuario usuario = new Modelo.Usuario();
                 Modelo.Proveedor proveedor = SesionPro;
 
-                if (MiSesion.TIPO_USUARIO.Equals(Tipo_Usuario.Empleado.ToString()) && MiSesion.ESTADO.Equals(Estado_Usuario.Habilitado.ToString())) {
+                if (MiSesion.TIPO_USUARIO.Equals(Tipo_Usuario.Proveedor.ToString()) && MiSesion.ESTADO.Equals(Estado_Usuario.Habilitado.ToString())) {
                     usuario = MiSesion;
                 }
                 else {
@@ -175,7 +175,7 @@ namespace Web.Proveedor {
                 if (flag) {
                     if (usuario.Update() && proveedor.Update()) {
                         if (MiSesion.TIPO_USUARIO.Equals(Tipo_Usuario.Cliente.ToString()) && MiSesion.ESTADO.Equals(Estado_Usuario.Habilitado.ToString())) {
-                            Response.Write("<script language='javascript'>window.alert('Se ha actualizado con éxito.');window.location='../Proveedor/WebEmpleado.aspx';</script>");
+                            Response.Write("<script language='javascript'>window.alert('Se ha actualizado con éxito.');window.location='../Hostal/WebLogin.aspx';</script>");
                         }
                         else {
                             Response.Write("<script language='javascript'>window.alert('Se ha actualizado con éxito.');window.location='../Administrador/WebVerUsuarios.aspx';</script>");

@@ -242,6 +242,8 @@ namespace Web.Empleado
             pedido.NUMERO_PEDIDO = numero_pedido;
 
             MiSesionPedido = pedido;
+
+            ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modal", "$('#exampleModal').modal();", true);
         }
 
 
@@ -264,7 +266,7 @@ namespace Web.Empleado
                     {
                         pedido = s.ObtenerPedido(writer.ToString());
                         pedido.COMENTARIO = txtComentario.Text;
-                        pedido.ESTADO_DESPACHO = "Rechazado";
+                        pedido.ESTADO_PEDIDO = "No Recepcionado";
 
                         XmlSerializer sr2 = new XmlSerializer(typeof(Modelo.Pedido));
                         StringWriter writer2 = new StringWriter();
@@ -274,7 +276,8 @@ namespace Web.Empleado
                         {
                             MiSesionPedido = null;
 
-                            Response.Write("<script language='javascript'>window.alert('Ha Rechazado el pedido');window.location='../Proveedor/WebProveedor.aspx';</script>");
+                            Response.Write("<script language='javascript'>window.alert('Ha Rechazado el pedido');window.location='../Empleado/WebRecibirPedido.aspx';</script>");
+
                         }
                         else
                         {

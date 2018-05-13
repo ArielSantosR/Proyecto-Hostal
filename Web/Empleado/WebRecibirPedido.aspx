@@ -66,12 +66,14 @@
                                     <ItemTemplate>
                                         <asp:LinkButton ID="btnInfo2"  CssClass="btn btn-info" CommandArgument='<%#Eval("NUMERO_PEDIDO")%>' OnClick="btnInfo2_Click" text="Ver Detalle" runat="server"/>
                                         <asp:LinkButton ID="btnEditar" CssClass="btn btn-primary" CommandArgument='<%#Eval("NUMERO_PEDIDO")%>' onclick="btnEditar_Click" text="Aceptar" runat="server"/>
-                                        <asp:LinkButton ID="btnEliminar" type="button" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap" CssClass="btn btn-danger" onclick="btnEliminar_Click" CommandArgument='<%#Eval("NUMERO_PEDIDO")%>' text="Rechazar" runat="server"/>
+                                        <asp:LinkButton ID="btnEliminar" type="button" CssClass="btn btn-danger" onclick="btnEliminar_Click" CommandArgument='<%#Eval("NUMERO_PEDIDO")%>' text="Rechazar" runat="server"/>
                                     </ItemTemplate>
                                 </asp:TemplateField>
 
                             </Columns>
                         </asp:GridView>
+        </div>
+<asp:ScriptManager runat="server"></asp:ScriptManager>             
 
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -83,25 +85,21 @@
         </button>
       </div>
       <div class="modal-body">
-        
           
           <div class="form-group">
-            <label for="message-text" class="col-form-label">Mensaje:</label>
-              <asp:TextBox ID="txtComentario" runat="server" CssClass="form-control"></asp:TextBox>
-            
+            <label for="message-text" class="col-form-label">Para rechazar un Pedido debe especificar las razones</label>
+              <asp:TextBox ID="txtComentario" placeholder="Ingrese un mensaje" runat="server" CssClass="form-control"></asp:TextBox>
           </div>
-        
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary" onclick="btnModal_Click" >Enviar</button>
-
+        <asp:Button ID="btnAgregar" runat="server" Text="Enviar" onclick="btnModal_Click" CssClass="btn btn-danger btn-block login-button" />
       </div>
     </div>
   </div>
 </div>
-        
-     </div>
+    
+     
 
 
 

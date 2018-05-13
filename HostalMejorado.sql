@@ -1100,9 +1100,6 @@ BEGIN
           UPDATE NOTIFICACION
           SET ESTADO_NOTIFICACION = 'Deshabilitado'
           WHERE ID_USUARIO = I.ID_USUARIO AND NUMERO_PEDIDO = :NEW.NUMERO_PEDIDO;
-
-          INSERT INTO NOTIFICACION(ID_NOTIFICACION, MENSAJE, ID_USUARIO, ESTADO_NOTIFICACION, URL, NUMERO_PEDIDO)
-          VALUES(SEQ_NOTIFICACION.NEXTVAL, 'Una orden de Pedido ha sido despachada, debe hacer su recepción', I.ID_USUARIO, 'Habilitado', '../Empleado/WebRecibirPedido.aspx', :NEW.NUMERO_PEDIDO);
       END LOOP;
     END IF;
   END IF;
@@ -1127,7 +1124,18 @@ BEGIN
       END LOOP;
     END IF;
   END IF;
+
+  IF UPDATING('ESTADO_DESPACHO') THEN 
+    IF :NEW.ESTADO_DESPACHO = 'Despachado' THEN
+        FOR I IN CUR_USUARIO LOOP
+            INSERT INTO NOTIFICACION(ID_NOTIFICACION, MENSAJE, ID_USUARIO, ESTADO_NOTIFICACION, URL, NUMERO_PEDIDO)
+            VALUES(SEQ_NOTIFICACION.NEXTVAL, 'Una orden de Pedido ha sido despachada, debe hacer su recepción', I.ID_USUARIO, 'Habilitado', '../Empleado/WebRecibirPedido.aspx', :NEW.NUMERO_PEDIDO); 
+        END LOOP;
+    END IF;
+  END IF;
 END;
+
+
 
 /
 

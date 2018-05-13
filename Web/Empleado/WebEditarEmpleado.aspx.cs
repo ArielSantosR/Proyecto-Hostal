@@ -177,7 +177,7 @@ namespace Web.Empleado {
                 if (flag) {
                     if (usuario.Update() && empleado.Update()) {
                         if (MiSesion.TIPO_USUARIO.Equals(Tipo_Usuario.Cliente.ToString()) && MiSesion.ESTADO.Equals(Estado_Usuario.Habilitado.ToString())) {
-                            Response.Write("<script language='javascript'>window.alert('Se ha actualizado con éxito.');window.location='../Empleado/WebEmpleado.aspx';</script>");
+                            Response.Write("<script language='javascript'>window.alert('Se ha actualizado con éxito.');window.location='../Hostal/WebLogin.aspx';</script>");
                         }
                         else {
                             Response.Write("<script language='javascript'>window.alert('Se ha actualizado con éxito.');window.location='../Administrador/WebVerUsuarios.aspx';</script>");
