@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Datos {
     public class ServicioOrdenCompra {
+        /*
         HostalEntities ent = new HostalEntities();
 
         public bool AgregarOrdenCompra(ORDEN_COMPRA orden) {
@@ -129,5 +130,7 @@ namespace Datos {
                          select consulta).ToList();
             return lista;
         }
+        */
     }
+    
 }

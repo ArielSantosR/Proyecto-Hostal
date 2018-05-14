@@ -38,15 +38,13 @@ namespace Web.Cliente {
         }
 
         protected void Page_Load(object sender,EventArgs e) {
-<<<<<<< HEAD
-            if (MiSesion.TIPO_USUARIO.Equals(Tipo_Usuario.Cliente.ToString()) && MiSesion.ESTADO.Equals(Estado_Usuario.Habilitado.ToString())) {
-=======
+
             error.Text = "";
             exito.Text = "";
             alerta_exito.Visible = false;
             alerta.Visible = false;
             if (MiSesion.TIPO_USUARIO.Equals(Tipo_Usuario.Administrador.ToString()) && MiSesion.ESTADO.Equals(Estado_Usuario.Habilitado.ToString())) {
->>>>>>> a660efd664511daa2ecc417eb28da6436671f326
+
                 if (!IsPostBack) {
                     List<Modelo.Cliente> clientes = ClienteCollection.ListaClientes();
                     ddlEmpresa.DataSource = clientes;
