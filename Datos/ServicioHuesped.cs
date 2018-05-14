@@ -53,7 +53,7 @@ namespace Datos
             }
             else
             {
-                ent.HUESPED.Remove(h);
+                ent.HUESPED.Remove(huesped);
                 ent.SaveChanges();
                 return true;
             }

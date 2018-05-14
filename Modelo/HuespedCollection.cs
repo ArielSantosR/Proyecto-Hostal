@@ -28,8 +28,8 @@ namespace Modelo
                 huesped.RUT_CLIENTE = dato.RUT_CLIENTE;
                 huesped.RUT_HUESPED = dato.RUT_HUESPED;
                 huesped.SNOMBRE_HUESPED = dato.SNOMBRE_HUESPED;
-                huesped.TELEFONO_HUESPED = huesped.TELEFONO_HUESPED;
-                huesped.REGISTRADO = huesped.REGISTRADO;
+                huesped.TELEFONO_HUESPED = dato.TELEFONO_HUESPED;
+                huesped.REGISTRADO = dato.REGISTRADO;
 
                 list.Add(huesped);
             }

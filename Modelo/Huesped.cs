@@ -21,6 +21,22 @@ namespace Modelo
         public Nullable<short> NUMERO_HABITACION { get; set; }
         public int RUT_CLIENTE { get; set; }
 
+        public bool Crear() {
+            ServicioHuesped serv = new ServicioHuesped();
+            HUESPED datos = new HUESPED();
+            datos.APP_MATERNO_HUESPED = this.APP_MATERNO_HUESPED;
+            datos.APP_PATERNO_HUESPED = this.APP_PATERNO_HUESPED;
+            datos.DV_HUESPED = this.DV_HUESPED;
+            datos.PNOMBRE_HUESPED = this.PNOMBRE_HUESPED;
+            datos.RUT_CLIENTE = this.RUT_CLIENTE;
+            datos.SNOMBRE_HUESPED = this.SNOMBRE_HUESPED;
+            datos.RUT_HUESPED = this.RUT_HUESPED;
+            datos.NUMERO_HABITACION = this.NUMERO_HABITACION;
+            datos.TELEFONO_HUESPED = this.TELEFONO_HUESPED;
+            datos.REGISTRADO = this.REGISTRADO;
+
+            return serv.RegistrarHuesped(datos);
+        }
         public bool Update() {
             ServicioHuesped serv = new ServicioHuesped();
             HUESPED datos = new HUESPED();
@@ -61,5 +77,19 @@ namespace Modelo
             }
         }
 
+        public bool ExisteRut() {
+            ServicioHuesped serv = new ServicioHuesped();
+            HUESPED h = new HUESPED();
+            h.RUT_HUESPED = this.RUT_HUESPED;
+            return serv.ExisteHuesped(h);
+             
+        }
+
+        public bool Delete() {
+            ServicioHuesped serv = new ServicioHuesped();
+            HUESPED h = new HUESPED();
+            h.RUT_HUESPED = this.RUT_HUESPED;
+            return serv.EliminarHuesped(h);
+        }
     }
 }
