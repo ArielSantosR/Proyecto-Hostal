@@ -16,4 +16,9 @@ namespace Modelo {
         Habilitado,
         Deshabilitado
     }
+
+    public enum Registrado_Huesped {
+        N,
+        S
+    }
 }

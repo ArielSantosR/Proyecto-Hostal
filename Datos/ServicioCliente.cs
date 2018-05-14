@@ -61,6 +61,5 @@ namespace Datos
             CLIENTE c = ent.CLIENTE.FirstOrDefault(x => x.ID_USUARIO == ID_USUARIO);
             return c;
         }
-
     }
 }

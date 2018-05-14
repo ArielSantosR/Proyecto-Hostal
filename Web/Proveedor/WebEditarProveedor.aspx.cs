@@ -174,7 +174,7 @@ namespace Web.Proveedor {
 
                 if (flag) {
                     if (usuario.Update() && proveedor.Update()) {
-                        if (MiSesion.TIPO_USUARIO.Equals(Tipo_Usuario.Cliente.ToString()) && MiSesion.ESTADO.Equals(Estado_Usuario.Habilitado.ToString())) {
+                        if (MiSesion.TIPO_USUARIO.Equals(Tipo_Usuario.Proveedor.ToString()) && MiSesion.ESTADO.Equals(Estado_Usuario.Habilitado.ToString())) {
                             Response.Write("<script language='javascript'>window.alert('Se ha actualizado con éxito.');window.location='../Hostal/WebLogin.aspx';</script>");
                         }
                         else {

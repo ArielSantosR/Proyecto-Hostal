@@ -72,7 +72,7 @@ namespace Web
 
         protected void btnHuesped_Click(object sender, EventArgs e)
         {
-
+            Response.Redirect("WebAgregarPasajeros.aspx");
         }
     }
 }

@@ -126,6 +126,7 @@
     <Content Include="Cliente\WebAgregarPasajeros.aspx" />
     <Content Include="Cliente\WebCrearOrden.aspx" />
     <Content Include="Cliente\WebEditarCliente.aspx" />
+    <Content Include="Cliente\WebEditarPasajero.aspx" />
     <Content Include="Cliente\WebVerHistorial.aspx" />
     <Content Include="Empleado\WebAsignarHabitacion.aspx" />
     <Content Include="Empleado\WebCrearFactura.aspx" />
@@ -417,6 +418,13 @@
     </Compile>
     <Compile Include="Cliente\WebEditarCliente.aspx.designer.cs">
       <DependentUpon>WebEditarCliente.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Cliente\WebEditarPasajero.aspx.cs">
+      <DependentUpon>WebEditarPasajero.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Cliente\WebEditarPasajero.aspx.designer.cs">
+      <DependentUpon>WebEditarPasajero.aspx</DependentUpon>
     </Compile>
     <Compile Include="Cliente\WebVerHistorial.aspx.cs">
       <DependentUpon>WebVerHistorial.aspx</DependentUpon>
