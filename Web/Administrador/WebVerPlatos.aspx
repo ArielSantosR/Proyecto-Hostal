@@ -2,6 +2,34 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    
+    <% if (gvPlato.Rows.Count != 0) { %>
+    <div class="container">
+        <div class="row" style="margin-top: 20px; margin-bottom: 20px;">
+            <div class="main-center">
+	            <div class="row">
+	                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+		                <h1>Lista de Platos</h1>
+	                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <% } else { %>
+    <div class="container">
+        <div class="row" style="margin-top: 20px; margin-bottom: 20px;">
+            <div class="main-center">
+	            <div class="row">
+	                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+		                <h1>No hay Platos</h1>
+	                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <% } %>
+    
+    
     <div style="display: flex; justify-content: center; margin-bottom: 20px">
         <asp:GridView ID="gvPlato" AutoGenerateColumns="false" runat="server" ForeColor="#333333" GridLines="Vertical">      
                             <AlternatingRowStyle BackColor="White" />

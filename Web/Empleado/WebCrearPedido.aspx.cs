@@ -50,56 +50,68 @@ namespace Web.Empleado
             btnLimpiar.CausesValidation = false;
             btnLimpiar.UseSubmitBehavior = false;
 
-            //Cargando DDL Rut
-            Service1 service = new Service1();
-
-            string proveedor = service.ListarProveedor();
-            XmlSerializer ser2 = new XmlSerializer(typeof(Modelo.ProveedorCollection2));
-            StringReader reader2 = new StringReader(proveedor);
-            Modelo.ProveedorCollection2 coleccionProveedor = (Modelo.ProveedorCollection2)ser2.Deserialize(reader2);
-            reader2.Close();
-
-            txtPrecio.ReadOnly = true;
-
-            if (!IsPostBack)
+            try
             {
-                ddlRut.DataSource = coleccionProveedor;
-                ddlRut.DataTextField = "RutYNombre";
-                ddlRut.DataValueField = "RUT_PROVEEDOR";
-                ddlRut.DataBind();
+                //Cargando DDL Rut
+                Service1 service = new Service1();
 
-                ddlRut.SelectedIndex = 0;
+                string proveedor = service.ListarProveedor();
+                XmlSerializer ser2 = new XmlSerializer(typeof(Modelo.ProveedorCollection2));
+                StringReader reader2 = new StringReader(proveedor);
+                Modelo.ProveedorCollection2 coleccionProveedor = (Modelo.ProveedorCollection2)ser2.Deserialize(reader2);
+                reader2.Close();
 
-                //segun el valor seleccionado en el anterior DDL, hara una busqueda para cargar
-                //todos los datos
-                Modelo.Proveedor proveedor2 = new Modelo.Proveedor();
-                
-                proveedor2.RUT_PROVEEDOR = int.Parse(ddlRut.SelectedValue);
+                txtPrecio.ReadOnly = true;
 
-                XmlSerializer sr = new XmlSerializer(typeof(Modelo.Proveedor));
-                StringWriter writer = new StringWriter();
-                sr.Serialize(writer, proveedor2);
+                if (!IsPostBack)
+                {
+                    ddlRut.DataSource = coleccionProveedor;
+                    ddlRut.DataTextField = "RutYNombre";
+                    ddlRut.DataValueField = "RUT_PROVEEDOR";
+                    ddlRut.DataBind();
 
-                //Ya con los datos, al fin puede hacer una busqueda en Cascada en el DDL
+                    ddlRut.SelectedIndex = 0;
 
-                string productos = service.ListarProductosProveedor(writer.ToString());
-                XmlSerializer ser = new XmlSerializer(typeof(Modelo.ProductoCollection));
-                StringReader reader = new StringReader(productos);
-                Modelo.ProductoCollection coleccionProducto = (Modelo.ProductoCollection)ser.Deserialize(reader);
-                reader.Close();
+                    //segun el valor seleccionado en el anterior DDL, hara una busqueda para cargar
+                    //todos los datos
+                    Modelo.Proveedor proveedor2 = new Modelo.Proveedor();
 
-                ddlProducto.DataSource = coleccionProducto;
-                ddlProducto.DataTextField = "NombreYPrecio";
-                ddlProducto.DataValueField = "ID_PRODUCTO";
-                ddlProducto.DataBind();
+                    proveedor2.RUT_PROVEEDOR = int.Parse(ddlRut.SelectedValue);
 
-                //Para funcionar requiere que el update panel tenga el Modo Condicional
-                UpdatePanel2.Update();
+                    XmlSerializer sr = new XmlSerializer(typeof(Modelo.Proveedor));
+                    StringWriter writer = new StringWriter();
+                    sr.Serialize(writer, proveedor2);
+
+                    //Ya con los datos, al fin puede hacer una busqueda en Cascada en el DDL
+
+                    string productos = service.ListarProductosProveedor(writer.ToString());
+                    XmlSerializer ser = new XmlSerializer(typeof(Modelo.ProductoCollection));
+                    StringReader reader = new StringReader(productos);
+                    Modelo.ProductoCollection coleccionProducto = (Modelo.ProductoCollection)ser.Deserialize(reader);
+                    reader.Close();
+
+                    ddlProducto.DataSource = coleccionProducto;
+                    ddlProducto.DataTextField = "NombreYPrecio";
+                    ddlProducto.DataValueField = "ID_PRODUCTO";
+                    ddlProducto.DataBind();
+
+                    //Para funcionar requiere que el update panel tenga el Modo Condicional
+                    UpdatePanel2.Update();
+
+                    MiSesionD = null;
+                }
+                gvDetalle.DataSource = MiSesionD;
+                gvDetalle.DataBind();
+
+                UpdatePanel3.Update();
             }
-            gvDetalle.DataSource = MiSesionD;
-            gvDetalle.DataBind();
+            catch (Exception ex)
+            {
+                alerta_exito.Visible = false;
+                error.Text = "Excepción: " + ex.ToString();
+                alerta.Visible = true;
+            }
 
-            UpdatePanel3.Update();
         }
 
         protected void btnRegistrar_Click(object sender, EventArgs e)
@@ -178,85 +190,82 @@ namespace Web.Empleado
                     alerta.Visible = true;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 alerta_exito.Visible = false;
-                error.Text = "Excepcion";
+                error.Text = "Excepción: " + ex.ToString();
                 alerta.Visible = true;
             }
         }
 
         protected void btnLimpiar_Click(object sender, EventArgs e)
         {
-            if (MiSesionD.Count > 0)
+            try
             {
-                Modelo.Empleado empleado = new Modelo.Empleado();
-                empleado.ID_USUARIO = MiSesion.ID_USUARIO;
-
-                //Si el ID de empleado es encontrado, pasar al siguiente paso
-                Service1 s = new Service1();
-                XmlSerializer sr = new XmlSerializer(typeof(Modelo.Empleado));
-                StringWriter writer = new StringWriter();
-                sr.Serialize(writer, empleado);
-                writer.Close();
-
-                Modelo.Empleado empleado2 = s.buscarIDE(writer.ToString());
-
-                if (empleado2 != null)
+                if (MiSesionD.Count > 0)
                 {
+                    Modelo.Empleado empleado = new Modelo.Empleado();
+                    empleado.ID_USUARIO = MiSesion.ID_USUARIO;
 
-                    Modelo.Pedido pedido = new Modelo.Pedido();
-                    pedido.FECHA_PEDIDO = DateTime.Now;
-                    pedido.ESTADO_PEDIDO = "Pendiente";
-                    pedido.RUT_EMPLEADO = empleado2.RUT_EMPLEADO;
-                    pedido.RUT_PROVEEDOR = int.Parse(ddlRut.SelectedValue);
-                    pedido.ESTADO_DESPACHO = "Pendiente";
+                    //Si el ID de empleado es encontrado, pasar al siguiente paso
+                    Service1 s = new Service1();
+                    XmlSerializer sr = new XmlSerializer(typeof(Modelo.Empleado));
+                    StringWriter writer = new StringWriter();
+                    sr.Serialize(writer, empleado);
+                    writer.Close();
 
-                    XmlSerializer sr2 = new XmlSerializer(typeof(Modelo.Pedido));
-                    StringWriter writer2 = new StringWriter();
-                    sr2.Serialize(writer2, pedido);
+                    Modelo.Empleado empleado2 = s.buscarIDE(writer.ToString());
 
-                    if (s.AgregarPedido(writer2.ToString()))
+                    if (empleado2 != null)
                     {
-                        bool v_exito = true;
 
-                        foreach (DetallePedido d in MiSesionD)
+                        Modelo.Pedido pedido = new Modelo.Pedido();
+                        pedido.FECHA_PEDIDO = DateTime.Now;
+                        pedido.ESTADO_PEDIDO = "Pendiente";
+                        pedido.RUT_EMPLEADO = empleado2.RUT_EMPLEADO;
+                        pedido.RUT_PROVEEDOR = int.Parse(ddlRut.SelectedValue);
+                        pedido.ESTADO_DESPACHO = "Pendiente";
+
+                        XmlSerializer sr2 = new XmlSerializer(typeof(Modelo.Pedido));
+                        StringWriter writer2 = new StringWriter();
+                        sr2.Serialize(writer2, pedido);
+
+                        if (s.AgregarPedido(writer2.ToString()))
                         {
-                            Modelo.DetallePedido detalle = new Modelo.DetallePedido();
-                            detalle.CANTIDAD = d.CANTIDAD;
-                            detalle.ID_PRODUCTO = d.ID_PRODUCTO;
+                            bool v_exito = true;
 
-                            XmlSerializer sr3 = new XmlSerializer(typeof(Modelo.DetallePedido));
-                            StringWriter writer3 = new StringWriter();
-                            sr3.Serialize(writer3, detalle);
-
-                            if (!s.AgregarDetallePedido(writer3.ToString()))
+                            foreach (DetallePedido d in MiSesionD)
                             {
-                                v_exito = false;
+                                Modelo.DetallePedido detalle = new Modelo.DetallePedido();
+                                detalle.CANTIDAD = d.CANTIDAD;
+                                detalle.ID_PRODUCTO = d.ID_PRODUCTO;
+
+                                XmlSerializer sr3 = new XmlSerializer(typeof(Modelo.DetallePedido));
+                                StringWriter writer3 = new StringWriter();
+                                sr3.Serialize(writer3, detalle);
+
+                                if (!s.AgregarDetallePedido(writer3.ToString()))
+                                {
+                                    v_exito = false;
+                                }
                             }
-                        }
 
-                        if (v_exito)
-                        {
-                            if (MiSesion.TIPO_USUARIO.Equals("Empleado"))
+                            if (v_exito)
                             {
-                                exito.Text = "Pedido Realizado, el administrador debe confirmar su envío";
-                                alerta_exito.Visible = true;
-                                alerta.Visible = false;
-                                MiSesionD.Clear();
-                                gvDetalle.DataSource = MiSesionD;
-                                gvDetalle.DataBind();
-                                UpdatePanel3.Update();
+                                if (MiSesion.TIPO_USUARIO.Equals("Empleado"))
+                                {
+                                    Response.Write("<script language='javascript'>window.alert('Pedido Realizado, el administrador debe confirmar su envío');window.location='../Empleado/WebHistorialPedidos.aspx';</script>");
+                                }
+                                else
+                                {
+                                    Response.Write("<script language='javascript'>window.alert('Pedido Realizado, debe confirmar su envío al Proveedor');window.location='../Administrador/WebVerPedido.aspx';</script>");
+                                }
                             }
                             else
                             {
-                                exito.Text = "Pedido Realizado, para que el proveedor lo reciba debe confirmar el Pedido";
-                                alerta_exito.Visible = true;
-                                alerta.Visible = false;
-                                MiSesionD.Clear();
-                                gvDetalle.DataSource = MiSesionD;
-                                gvDetalle.DataBind();
-                                UpdatePanel3.Update();
+                                alerta_exito.Visible = false;
+                                error.Text = "No se ha podido hacer el Pedido";
+                                alerta.Visible = true;
                             }
                         }
                         else
@@ -269,21 +278,21 @@ namespace Web.Empleado
                     else
                     {
                         alerta_exito.Visible = false;
-                        error.Text = "No se ha podido hacer el Pedido";
+                        error.Text = "Error, no se pudo encontrar al Empleado";
                         alerta.Visible = true;
                     }
                 }
                 else
                 {
                     alerta_exito.Visible = false;
-                    error.Text = "Error, no se pudo encontrar al Empleado";
+                    error.Text = "Error, debe ingresar objetos a la lista para Registrar una Orden";
                     alerta.Visible = true;
                 }
             }
-            else
+            catch (Exception ex)
             {
                 alerta_exito.Visible = false;
-                error.Text = "Error, debe ingresar objetos a la lista para Registrar una Orden";
+                error.Text = "Excepción: " + ex.ToString();
                 alerta.Visible = true;
             }
         }
@@ -324,94 +333,119 @@ namespace Web.Empleado
 
         protected void ddlProducto_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Service1 service = new Service1();
-            //segun el valor seleccionado en el anterior DDL, hara una busqueda para cargar
-            //todos los datos
-            Modelo.Proveedor proveedor2 = new Modelo.Proveedor();
-            proveedor2.RUT_PROVEEDOR = int.Parse(ddlRut.SelectedValue);
-
-            XmlSerializer sr = new XmlSerializer(typeof(Modelo.Proveedor));
-            StringWriter writer = new StringWriter();
-            sr.Serialize(writer, proveedor2);
-
-            //Ya con los datos, al fin puede hacer una busqueda en Cascada en el DDL
-
-            string productos = service.ListarProductosProveedor(writer.ToString());
-            XmlSerializer ser = new XmlSerializer(typeof(Modelo.ProductoCollection));
-            StringReader reader = new StringReader(productos);
-            Modelo.ProductoCollection coleccionProducto = (Modelo.ProductoCollection)ser.Deserialize(reader);
-            reader.Close();
-
-            ddlProducto.DataSource = coleccionProducto;
-            ddlProducto.DataTextField = "NombreYPrecio";
-            ddlProducto.DataValueField = "ID_PRODUCTO";
-            ddlProducto.DataBind();
-
-            //Para funcionar requiere que el update panel tenga el Modo Condicional
-            txtCantidad.Text = "";
-            txtPrecio.Text = "";
-            UpdatePanel1.Update();
-            UpdatePanel2.Update();
-
-            MiSesionD.Clear();
-
-            gvDetalle.DataSource = MiSesionD;
-            gvDetalle.DataBind();
-
-            UpdatePanel3.Update();
-
-        }
-
-        protected void txtCantidad_TextChanged(object sender, EventArgs e)
-        {
-            int cantidad = 0;
-
-            if (int.TryParse(txtCantidad.Text, out cantidad))
+            try
             {
                 Service1 service = new Service1();
                 //segun el valor seleccionado en el anterior DDL, hara una busqueda para cargar
                 //todos los datos
-                Modelo.Producto producto = new Modelo.Producto();
-                producto.ID_PRODUCTO = long.Parse(ddlProducto.SelectedValue);
+                Modelo.Proveedor proveedor2 = new Modelo.Proveedor();
+                proveedor2.RUT_PROVEEDOR = int.Parse(ddlRut.SelectedValue);
 
-                XmlSerializer sr = new XmlSerializer(typeof(Modelo.Producto));
+                XmlSerializer sr = new XmlSerializer(typeof(Modelo.Proveedor));
                 StringWriter writer = new StringWriter();
-                sr.Serialize(writer, producto);
+                sr.Serialize(writer, proveedor2);
 
-                //Una vez encuentra sus datos los carga en una segunda variable
-                Producto producto2 = service.ObtenerProducto(writer.ToString());
+                //Ya con los datos, al fin puede hacer una busqueda en Cascada en el DDL
 
-                txtPrecio.Text = "$" + producto2.PRECIO_PRODUCTO * cantidad;
-            }
-            else
-            {
+                string productos = service.ListarProductosProveedor(writer.ToString());
+                XmlSerializer ser = new XmlSerializer(typeof(Modelo.ProductoCollection));
+                StringReader reader = new StringReader(productos);
+                Modelo.ProductoCollection coleccionProducto = (Modelo.ProductoCollection)ser.Deserialize(reader);
+                reader.Close();
+
+                ddlProducto.DataSource = coleccionProducto;
+                ddlProducto.DataTextField = "NombreYPrecio";
+                ddlProducto.DataValueField = "ID_PRODUCTO";
+                ddlProducto.DataBind();
+
+                //Para funcionar requiere que el update panel tenga el Modo Condicional
                 txtCantidad.Text = "";
                 txtPrecio.Text = "";
-            }
+                UpdatePanel1.Update();
+                UpdatePanel2.Update();
 
-            UpdatePanel1.Update();
+                MiSesionD.Clear();
+
+                gvDetalle.DataSource = MiSesionD;
+                gvDetalle.DataBind();
+
+                UpdatePanel3.Update();
+            }
+            catch (Exception ex)
+            {
+                alerta_exito.Visible = false;
+                error.Text = "Excepción: " + ex.ToString();
+                alerta.Visible = true;
+            }
+        }
+
+        protected void txtCantidad_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                int cantidad = 0;
+
+                if (int.TryParse(txtCantidad.Text, out cantidad))
+                {
+                    Service1 service = new Service1();
+                    //segun el valor seleccionado en el anterior DDL, hara una busqueda para cargar
+                    //todos los datos
+                    Modelo.Producto producto = new Modelo.Producto();
+                    producto.ID_PRODUCTO = long.Parse(ddlProducto.SelectedValue);
+
+                    XmlSerializer sr = new XmlSerializer(typeof(Modelo.Producto));
+                    StringWriter writer = new StringWriter();
+                    sr.Serialize(writer, producto);
+
+                    //Una vez encuentra sus datos los carga en una segunda variable
+                    Producto producto2 = service.ObtenerProducto(writer.ToString());
+
+                    txtPrecio.Text = "$" + producto2.PRECIO_PRODUCTO * cantidad;
+                }
+                else
+                {
+                    txtCantidad.Text = "";
+                    txtPrecio.Text = "";
+                }
+
+                UpdatePanel1.Update();
+            }
+            catch (Exception ex)
+            {
+                alerta_exito.Visible = false;
+                error.Text = "Excepción: " + ex.ToString();
+                alerta.Visible = true;
+            }
         }
 
         protected void btnEliminar_Click(object sender, EventArgs e)
         {
-            //Lee los valores del LinkButton, primero usa la clase LinkButton para 
-            //Transformar los datos de Sender, luego los lee y los asigna a una variable
-            LinkButton btn = (LinkButton)(sender);
-            long ID_PRODUCTO = long.Parse(btn.CommandArgument);
-
-            foreach (DetallePedido d in MiSesionD.ToList())
+            try
             {
-                if (d.ID_PRODUCTO == ID_PRODUCTO)
+                //Lee los valores del LinkButton, primero usa la clase LinkButton para 
+                //Transformar los datos de Sender, luego los lee y los asigna a una variable
+                LinkButton btn = (LinkButton)(sender);
+                long ID_PRODUCTO = long.Parse(btn.CommandArgument);
+
+                foreach (DetallePedido d in MiSesionD.ToList())
                 {
-                    MiSesionD.Remove(d);
+                    if (d.ID_PRODUCTO == ID_PRODUCTO)
+                    {
+                        MiSesionD.Remove(d);
+                    }
                 }
+
+                gvDetalle.DataSource = MiSesionD;
+                gvDetalle.DataBind();
+
+                UpdatePanel3.Update();
             }
-
-            gvDetalle.DataSource = MiSesionD;
-            gvDetalle.DataBind();
-
-            UpdatePanel3.Update();
-
+            catch (Exception ex)
+            {
+                alerta_exito.Visible = false;
+                error.Text = "Excepción: " + ex.ToString();
+                alerta.Visible = true;
+            }
         }
     }
 }

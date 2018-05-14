@@ -38,111 +38,120 @@ namespace Web.Cliente {
             }
         }
         protected void Page_Load(object sender,EventArgs e) {
-            error.Text = "";
-
-            //Cargando DDL Pais
-            Service1 service = new Service1();
-            string paises = service.ListarPais();
-            XmlSerializer ser = new XmlSerializer(typeof(Modelo.PaisCollection));
-            StringReader reader = new StringReader(paises);
-            Modelo.PaisCollection coleccionPais = (Modelo.PaisCollection)ser.Deserialize(reader);
-            reader.Close();
-
-            //Cargando DDL Regiones
-            string regiones = service.ListarRegion();
-            XmlSerializer ser1 = new XmlSerializer(typeof(Modelo.RegionCollection));
-            StringReader reader1 = new StringReader(regiones);
-            coleccionRegion = (Modelo.RegionCollection)ser1.Deserialize(reader1);
-            reader1.Close();
-
-            //Cargando DDL Comunas
-            string comunas = service.ListarComuna();
-            XmlSerializer ser2 = new XmlSerializer(typeof(Modelo.ComunaCollection));
-            StringReader reader2 = new StringReader(comunas);
-            coleccionComuna = (Modelo.ComunaCollection)ser2.Deserialize(reader2);
-            reader2.Close();
-
-            //Bloqueo de cambios dependiendo del usuario
-            if (MiSesion.ID_USUARIO != 0)
+            try
             {
-                if (MiSesion.TIPO_USUARIO.Equals(Tipo_Usuario.Cliente.ToString()) && MiSesion.ESTADO.Equals(Estado_Usuario.Habilitado.ToString()))
+                error.Text = "";
+
+                //Cargando DDL Pais
+                Service1 service = new Service1();
+                string paises = service.ListarPais();
+                XmlSerializer ser = new XmlSerializer(typeof(Modelo.PaisCollection));
+                StringReader reader = new StringReader(paises);
+                Modelo.PaisCollection coleccionPais = (Modelo.PaisCollection)ser.Deserialize(reader);
+                reader.Close();
+
+                //Cargando DDL Regiones
+                string regiones = service.ListarRegion();
+                XmlSerializer ser1 = new XmlSerializer(typeof(Modelo.RegionCollection));
+                StringReader reader1 = new StringReader(regiones);
+                coleccionRegion = (Modelo.RegionCollection)ser1.Deserialize(reader1);
+                reader1.Close();
+
+                //Cargando DDL Comunas
+                string comunas = service.ListarComuna();
+                XmlSerializer ser2 = new XmlSerializer(typeof(Modelo.ComunaCollection));
+                StringReader reader2 = new StringReader(comunas);
+                coleccionComuna = (Modelo.ComunaCollection)ser2.Deserialize(reader2);
+                reader2.Close();
+
+                //Bloqueo de cambios dependiendo del usuario
+                if (MiSesion.ID_USUARIO != 0)
                 {
-                    txtNombre.Enabled = false;
-                    txtRut.Enabled = false;
-                    ddlEstado.Enabled = false;
+                    if (MiSesion.TIPO_USUARIO.Equals(Tipo_Usuario.Administrador.ToString()) && MiSesion.ESTADO.Equals(Estado_Usuario.Habilitado.ToString()))
+                    {
+                        txtNombre.Enabled = false;
+                        txtRut.Enabled = false;
+                        ddlEstado.Enabled = false;
+                    }
+                    else
+                    {
+                        txtNombre.Enabled = false;
+                        txtRut.Enabled = false;
+                    }
                 }
                 else
                 {
-                    txtNombre.Enabled = false;
-                    txtRut.Enabled = false;
+                    Response.Write("<script language='javascript'>window.alert('Debe Iniciar Sesión Primero');window.location='../Hostal/WebLogin.aspx';</script>");
+                }
+
+
+                if (!IsPostBack)
+                {
+
+                    ddlEstado.DataSource = Enum.GetValues(typeof(Estado_Usuario));
+                    ddlEstado.DataBind();
+
+                    alerta.Visible = false;
+                    ddlPais.DataSource = coleccionPais;
+                    ddlPais.DataTextField = "NOMBRE_PAIS";
+                    ddlPais.DataValueField = "ID_PAIS";
+                    ddlPais.DataBind();
+
+                    ddlRegion.DataSource = coleccionRegion.Where(x => x.Id_Pais == int.Parse(ddlPais.SelectedValue));
+                    ddlRegion.DataTextField = "Nombre";
+                    ddlRegion.DataValueField = "Id_Region";
+                    ddlRegion.DataBind();
+
+                    Comuna com = new Comuna();
+
+                    var listaC = coleccionComuna.Where(x => x.Id_Comuna == SesionCl.ID_COMUNA).ToList();
+                    com.Id_Comuna = listaC[0].Id_Comuna;
+                    com.Id_Region = listaC[0].Id_Region;
+                    com.Nombre = listaC[0].Nombre;
+
+                    Region reg = new Region();
+
+                    var listaR = coleccionRegion.Where(x => x.Id_Region == com.Id_Region).ToList();
+                    reg.Id_Pais = listaR[0].Id_Pais;
+                    reg.Id_Region = listaR[0].Id_Region;
+                    reg.Nombre = listaR[0].Nombre;
+
+                    Pais pais = new Pais();
+
+                    var listaP = coleccionPais.Where(x => x.ID_PAIS == reg.Id_Pais).ToList();
+                    pais.ID_PAIS = listaP[0].ID_PAIS;
+                    pais.NOMBRE_PAIS = listaP[0].NOMBRE_PAIS;
+
+                    //Carga de datos actuales
+                    txtRut.Text = SesionCl.RUT_CLIENTE.ToString() + "-" + SesionCl.DV_CLIENTE;
+                    txtDireccion.Text = SesionCl.DIRECCION_CLIENTE;
+                    txtEmail.Text = SesionCl.CORREO_CLIENTE;
+                    if (MiSesion.TIPO_USUARIO.Equals(Tipo_Usuario.Cliente.ToString()) &&
+                            MiSesion.ESTADO.Equals(Estado_Usuario.Habilitado.ToString()))
+                    {
+                        txtNombre.Text = MiSesion.NOMBRE_USUARIO;
+                    }
+                    else
+                    {
+                        txtNombre.Text = SesionEdit.NOMBRE_USUARIO;
+                    }
+
+                    txtTelefono.Text = SesionCl.TELEFONO_CLIENTE.ToString();
+                    txtNombreC.Text = SesionCl.NOMBRE_CLIENTE;
+                    ddlPais.SelectedValue = pais.ID_PAIS.ToString();
+                    ddlRegion.SelectedValue = reg.Id_Region.ToString();
+
+                    ddlComuna.DataSource = coleccionComuna.Where(x => x.Id_Region == int.Parse(ddlRegion.SelectedValue));
+                    ddlComuna.DataTextField = "Nombre";
+                    ddlComuna.DataValueField = "Id_Comuna";
+                    ddlComuna.DataBind();
+
+                    ddlComuna.SelectedValue = com.Id_Comuna.ToString();
                 }
             }
-            else
+            catch (Exception)
             {
                 Response.Write("<script language='javascript'>window.alert('Debe Iniciar Sesión Primero');window.location='../Hostal/WebLogin.aspx';</script>");
-            }
-
-
-            if (!IsPostBack)
-            {
-
-                ddlEstado.DataSource = Enum.GetValues(typeof(Estado_Usuario));
-                ddlEstado.DataBind();
-
-                alerta.Visible = false;
-                ddlPais.DataSource = coleccionPais;
-                ddlPais.DataTextField = "NOMBRE_PAIS";
-                ddlPais.DataValueField = "ID_PAIS";
-                ddlPais.DataBind();
-
-                ddlRegion.DataSource = coleccionRegion.Where(x => x.Id_Pais == int.Parse(ddlPais.SelectedValue));
-                ddlRegion.DataTextField = "Nombre";
-                ddlRegion.DataValueField = "Id_Region";
-                ddlRegion.DataBind();
-           
-                Comuna com = new Comuna();
-
-                var listaC = coleccionComuna.Where(x => x.Id_Comuna == SesionCl.ID_COMUNA).ToList();
-                com.Id_Comuna = listaC[0].Id_Comuna;
-                com.Id_Region = listaC[0].Id_Region;
-                com.Nombre = listaC[0].Nombre;
-
-                Region reg = new Region();
-
-                var listaR = coleccionRegion.Where(x => x.Id_Region == com.Id_Region).ToList();
-                reg.Id_Pais = listaR[0].Id_Pais;
-                reg.Id_Region = listaR[0].Id_Region;
-                reg.Nombre = listaR[0].Nombre;
-
-                Pais pais = new Pais();
-
-                var listaP = coleccionPais.Where(x => x.ID_PAIS == reg.Id_Pais).ToList();
-                pais.ID_PAIS = listaP[0].ID_PAIS;
-                pais.NOMBRE_PAIS = listaP[0].NOMBRE_PAIS;
-
-                //Carga de datos actuales
-                txtRut.Text = SesionCl.RUT_CLIENTE.ToString() + "-" + SesionCl.DV_CLIENTE;
-                txtDireccion.Text = SesionCl.DIRECCION_CLIENTE;
-                txtEmail.Text = SesionCl.CORREO_CLIENTE;
-                if (MiSesion.TIPO_USUARIO.Equals(Tipo_Usuario.Cliente.ToString()) &&
-                        MiSesion.ESTADO.Equals(Estado_Usuario.Habilitado.ToString())) {
-                    txtNombre.Text = MiSesion.NOMBRE_USUARIO;
-                }
-                else {
-                    txtNombre.Text = SesionEdit.NOMBRE_USUARIO;
-                }
-
-                txtTelefono.Text = SesionCl.TELEFONO_CLIENTE.ToString();
-                txtNombreC.Text = SesionCl.NOMBRE_CLIENTE;
-                ddlPais.SelectedValue = pais.ID_PAIS.ToString();                
-                ddlRegion.SelectedValue = reg.Id_Region.ToString();
-
-                ddlComuna.DataSource = coleccionComuna.Where(x => x.Id_Region == int.Parse(ddlRegion.SelectedValue));
-                ddlComuna.DataTextField = "Nombre";
-                ddlComuna.DataValueField = "Id_Comuna";
-                ddlComuna.DataBind();
-
-                ddlComuna.SelectedValue = com.Id_Comuna.ToString();
             }
         }
 

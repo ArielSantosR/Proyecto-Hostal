@@ -1,51 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Cliente/ClienteM.Master" AutoEventWireup="true" CodeBehind="WebAgregarPasajeros.aspx.cs" Inherits="Web.Cliente.WebAgregarPasajeros" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <script type="text/javascript" src="../js/scriptRut.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    
-    <script type="text/javascript">
-        
-        $(function () {
-            $(".cliente").hide();
-            $('.cliente').find(':input').prop('disabled', true);
-            $(".proveedor").hide();
-            $('.proveedor').find(':input').prop('disabled', true);
-            $(".empleado").hide();
-            $('.empleado').find(':input').prop('disabled', true);
-
-            PermisosDeUsuario();
-
-        });
-
-        function PermisosDeUsuario() {
-
-         var tipo = <%= this.MiSesion.TIPO_USUARIO%>;
-
-         if (tipo == "Administrador") {
-             $(".admin").delay(200).show(1500);
-             $('.cliente').find(':input').prop('disabled', false);
-             $(".proveedor").hide(1000);
-             $('.proveedor').find(':input').prop('disabled', true);
-             $(".empleado").hide(1000);
-             $('.empleado').find(':input').prop('disabled', true);
-         } else if (tipo == "Proveedor") {
-             $(".cliente").hide(1000);
-             $('.cliente').find(':input').prop('disabled', true);
-             $(".proveedor").delay(200).show(1500);
-             $('.proveedor').find(':input').prop('disabled', false);
-             $(".empleado").hide(1000);
-             $('.empleado').find(':input').prop('disabled', true);
-         } else if (tipo == "Empleado") {
-             $(".cliente").hide(1000);
-             $('.cliente').find(':input').prop('disabled', true);
-             $(".proveedor").hide(1000);
-             $('.proveedor').find(':input').prop('disabled', true);
-             $(".empleado").delay(200).show(1500);
-             $('.empleado').find(':input').prop('disabled', false);
-         }
-     }
-    </script>
     <div class="alert alert-danger alert-dismissible" id="alerta" runat="server">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
         <strong>Error!</strong>

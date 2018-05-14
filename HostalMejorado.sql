@@ -397,7 +397,7 @@ V_ID_PRODUCTO NUMERIC:= 0;
 BEGIN 
 
 SELECT CONCAT(CONCAT(CONCAT(SUBSTR(P_ID_PROVEEDOR, 1, 3),
-	LPAD(P_ID_FAMILIA, 3, 0)),
+	  LPAD(P_ID_FAMILIA, 3, 0)),
     NVL(CONCAT(CONCAT(SUBSTR(P_FECHA_VENCIMIENTO, 1, 2), SUBSTR(P_FECHA_VENCIMIENTO, 4, 2)), SUBSTR(TO_CHAR(P_FECHA_VENCIMIENTO, 'DD/MM/YYYY'), 7, 4)), LPAD(0, '8', 0))),
     LPAD(P_ID_PRODUCTO_S, 3, 0))
 
@@ -1058,7 +1058,7 @@ BEGIN
         FOR I IN CUR_PROVEEDOR LOOP
             IF I.RUT_PROVEEDOR = :NEW.RUT_PROVEEDOR THEN
               INSERT INTO NOTIFICACION(ID_NOTIFICACION, MENSAJE, ID_USUARIO, ESTADO_NOTIFICACION, URL, NUMERO_PEDIDO)
-              VALUES(SEQ_NOTIFICACION.NEXTVAL, 'Ha Recibido un nuevo Pedido', I.ID_USUARIO, 'Habilitado', '../Proveedor/WebPedidosRecibidos.aspx', :NEW.NUMERO_PEDIDO);
+              VALUES(SEQ_NOTIFICACION.NEXTVAL, 'Ha Recibido un nuevo Pedido, su número de Pedido es ' || :new.NUMERO_PEDIDO, I.ID_USUARIO, 'Habilitado', '../Proveedor/WebPedidosRecibidos.aspx', :NEW.NUMERO_PEDIDO);
             END IF;
         END LOOP;
     END IF;
@@ -1069,7 +1069,7 @@ BEGIN
         FOR I IN CUR_PROVEEDOR LOOP
             IF I.RUT_PROVEEDOR = :NEW.RUT_PROVEEDOR THEN
                 INSERT INTO NOTIFICACION(ID_NOTIFICACION, MENSAJE, ID_USUARIO, ESTADO_NOTIFICACION, URL, NUMERO_PEDIDO)
-                VALUES(SEQ_NOTIFICACION.NEXTVAL, 'Tiene Productos sin despachar', I.ID_USUARIO, 'Habilitado', '../Proveedor/WebHistorialPedidos.aspx', :NEW.NUMERO_PEDIDO);
+                VALUES(SEQ_NOTIFICACION.NEXTVAL, 'Tiene que despachar el Pedido ' || :new.NUMERO_PEDIDO, I.ID_USUARIO, 'Habilitado', '../Proveedor/WebHistorialPedidos.aspx', :NEW.NUMERO_PEDIDO);
             END IF;
         END LOOP;
     END IF;
@@ -1129,7 +1129,7 @@ BEGIN
     IF :NEW.ESTADO_DESPACHO = 'Despachado' THEN
         FOR I IN CUR_USUARIO LOOP
             INSERT INTO NOTIFICACION(ID_NOTIFICACION, MENSAJE, ID_USUARIO, ESTADO_NOTIFICACION, URL, NUMERO_PEDIDO)
-            VALUES(SEQ_NOTIFICACION.NEXTVAL, 'Una orden de Pedido ha sido despachada, debe hacer su recepción', I.ID_USUARIO, 'Habilitado', '../Empleado/WebRecibirPedido.aspx', :NEW.NUMERO_PEDIDO); 
+            VALUES(SEQ_NOTIFICACION.NEXTVAL, 'La orden de Pedido ' || :new.NUMERO_PEDIDO || ' ha sido despachada, debe hacer su recepción', I.ID_USUARIO, 'Habilitado', '../Empleado/WebRecibirPedido.aspx', :NEW.NUMERO_PEDIDO); 
         END LOOP;
     END IF;
   END IF;
@@ -1180,7 +1180,7 @@ BEGIN
 	FOR I IN CUR_USUARIO LOOP
 		IF I.TIPO_USUARIO = 'Administrador' THEN
       INSERT INTO NOTIFICACION(ID_NOTIFICACION, MENSAJE, ID_USUARIO, ESTADO_NOTIFICACION, URL, NUMERO_PEDIDO)
-      VALUES(SEQ_NOTIFICACION.NEXTVAL, 'Hay nuevos pedidos pendientes', I.ID_USUARIO, 'Habilitado', '../Administrador/WebVerPedido.aspx', :NEW.NUMERO_PEDIDO);
+      VALUES(SEQ_NOTIFICACION.NEXTVAL, 'El Pedido ' || :new.numero_pedido || ' está pendiente, revise los Pedidos Pendientes', I.ID_USUARIO, 'Habilitado', '../Administrador/WebVerPedido.aspx', :NEW.NUMERO_PEDIDO);
 		END IF;
 	END LOOP;
 END;
@@ -1188,7 +1188,7 @@ END;
 /
 
 CREATE OR REPLACE TRIGGER TGR_D_NOTIFICACION_ADMIN
-AFTER UPDATE ON PEDIDO
+AFTER UPDATE OR DELETE ON PEDIDO
 FOR EACH ROW
 DECLARE
 CURSOR CUR_USUARIO IS SELECT ID_USUARIO, TIPO_USUARIO FROM USUARIO WHERE TIPO_USUARIO = 'Administrador';
@@ -1202,7 +1202,26 @@ BEGIN
             WHERE ID_USUARIO = I.ID_USUARIO AND NUMERO_PEDIDO = :NEW.NUMERO_PEDIDO;
           END LOOP;
     END IF;
+  
+  ELSIF DELETING THEN
+    FOR I IN CUR_USUARIO LOOP
+      UPDATE NOTIFICACION 
+      SET ESTADO_NOTIFICACION = 'Deshabilitado'
+      WHERE ID_USUARIO = I.ID_USUARIO AND NUMERO_PEDIDO = :OLD.NUMERO_PEDIDO;
+    END LOOP;
   END IF;
+END;
+
+--Cambios: 14/05
+
+create or replace TRIGGER TGR_DETALLE_PEDIDO2
+BEFORE INSERT ON DETALLE_PEDIDO
+FOR EACH ROW
+ WHEN (new.ID_DETALLE_PEDIDO IS NULL or new.ID_DETALLE_PEDIDO = 0) 
+BEGIN
+  SELECT seq_detalle_pedido.NEXTVAL
+  INTO :new.ID_DETALLE_PEDIDO
+  FROM dual;
 END;
 
 

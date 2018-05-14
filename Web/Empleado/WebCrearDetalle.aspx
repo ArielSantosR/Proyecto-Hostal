@@ -1,12 +1,6 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Empleado/EmpleadoM.Master" AutoEventWireup="true" CodeBehind="WebCrearPedido.aspx.cs" Inherits="Web.Empleado.WebCrearPedido" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Empleado/EmpleadoM.Master" AutoEventWireup="true" CodeBehind="WebCrearDetalle.aspx.cs" Inherits="Web.Empleado.WebCrearDetalle" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <script type="text/javascript">
-     $(function () {
-         document.getElementById('<%=ddlRut.ClientID %>').selectedIndex = 0;
-     });
-    </script>
 </asp:Content>
-
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="alert alert-danger alert-dismissible" id="alerta" runat="server">
   <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -35,7 +29,7 @@
                 <div class="col-sm-12">
                   <div class="input-group">
                   <span class="input-group-text"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                      <asp:DropDownList ID="ddlRut" CssClass="form-control" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlProducto_SelectedIndexChanged">
+                      <asp:DropDownList ID="ddlRut"  CssClass="form-control" runat="server" AutoPostBack="true">
                       </asp:DropDownList>
                 </div>
               </div>
@@ -78,11 +72,8 @@
               </asp:UpdatePanel>
 
           <div class="row"> 
-                  <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                       <br/> <asp:Button ID="btnRegistrar" runat="server" Text="Agregar a la Lista"  CssClass="btn btn-primary btn-lg btn-block login-button" OnClick="btnRegistrar_Click" />
-                  </div>
-                  <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                      <br/> <asp:Button ID="btnLimpiar" runat="server" Text="Pedir Productos"  CssClass="btn btn-warning btn-lg btn-block login-button" OnClick="btnLimpiar_Click"/>
                   </div>
                 </div>   
           </div>
@@ -106,11 +97,6 @@
                             <Columns>
                                     <asp:BoundField DataField="ID_PRODUCTO" HeaderText="ID Producto" />
                                     <asp:BoundField DataField="CANTIDAD" HeaderText="Cantidad" />                    
-                                <asp:TemplateField>
-                                    <ItemTemplate>
-                                        <asp:LinkButton ID="btnEliminar" OnClick="btnEliminar_Click" CssClass="btn btn-danger" CommandArgument='<%#Eval("ID_PRODUCTO")%>'  text="Eliminar" runat="server"/>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
                             </Columns>
                         </asp:GridView>
                   </ContentTemplate>

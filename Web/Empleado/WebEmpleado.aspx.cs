@@ -43,30 +43,6 @@ namespace Web
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            alerta.Visible = false;
-
-            Service1 service = new Service1();
-
-            Modelo.Usuario usuario = new Modelo.Usuario();
-            usuario = MiSesion;
-
-            XmlSerializer sr = new XmlSerializer(typeof(Modelo.Usuario));
-            StringWriter writer = new StringWriter();
-            sr.Serialize(writer, usuario);
-
-            string datos = service.listaNotificacion(writer.ToString());
-            XmlSerializer ser = new XmlSerializer(typeof(Modelo.NotificacionCollection));
-            StringReader reader = new StringReader(datos);
-
-            Modelo.NotificacionCollection listaNotificacion = (Modelo.NotificacionCollection)ser.Deserialize(reader);
-
-            MiSesionNotificacion = listaNotificacion;
-
-            foreach (Notificacion n in MiSesionNotificacion)
-            {
-                alerta.Visible = true;
-                notificacion.Text = n.MENSAJE;
-            }
         }
 
         //Creación de Sesión

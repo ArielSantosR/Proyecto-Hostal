@@ -50,38 +50,47 @@ namespace Web.Proveedor
 
             Service1 service = new Service1();
 
-            Modelo.Proveedor proveedor = new Modelo.Proveedor();
-
-            if (MiSesion != null)
+            try
             {
-                if (MiSesion.TIPO_USUARIO.Equals("Proveedor"))
+                Modelo.Proveedor proveedor = new Modelo.Proveedor();
+
+                if (MiSesion != null)
                 {
-                    proveedor.ID_USUARIO = MiSesion.ID_USUARIO;
+                    if (MiSesion.TIPO_USUARIO.Equals("Proveedor"))
+                    {
+                        proveedor.ID_USUARIO = MiSesion.ID_USUARIO;
 
-                    //Si el ID de empleado es encontrado, pasar al siguiente paso
-                    Service1 s = new Service1();
-                    XmlSerializer sr = new XmlSerializer(typeof(Modelo.Proveedor));
-                    StringWriter writer = new StringWriter();
-                    sr.Serialize(writer, proveedor);
-                    writer.Close();
+                        //Si el ID de empleado es encontrado, pasar al siguiente paso
+                        Service1 s = new Service1();
+                        XmlSerializer sr = new XmlSerializer(typeof(Modelo.Proveedor));
+                        StringWriter writer = new StringWriter();
+                        sr.Serialize(writer, proveedor);
+                        writer.Close();
 
-                    Modelo.Proveedor proveedor2 = s.buscarIDP(writer.ToString());
-                    XmlSerializer sr2 = new XmlSerializer(typeof(Modelo.Proveedor));
-                    StringWriter writer2 = new StringWriter();
-                    sr2.Serialize(writer2, proveedor2);
-                    writer2.Close();
+                        Modelo.Proveedor proveedor2 = s.buscarIDP(writer.ToString());
+                        XmlSerializer sr2 = new XmlSerializer(typeof(Modelo.Proveedor));
+                        StringWriter writer2 = new StringWriter();
+                        sr2.Serialize(writer2, proveedor2);
+                        writer2.Close();
 
-                    string datos = service.ListarPedidosporDespachar(writer2.ToString());
-                    XmlSerializer ser3 = new XmlSerializer(typeof(Modelo.PedidoCollection));
-                    StringReader reader = new StringReader(datos);
+                        string datos = service.ListarPedidosporDespachar(writer2.ToString());
+                        XmlSerializer ser3 = new XmlSerializer(typeof(Modelo.PedidoCollection));
+                        StringReader reader = new StringReader(datos);
 
-                    Modelo.PedidoCollection listaPedido = (Modelo.PedidoCollection)ser3.Deserialize(reader);
-                    reader.Close();
-                    gvPedidoDespacho.DataSource = listaPedido;
-                    gvPedidoDespacho.DataBind();
+                        Modelo.PedidoCollection listaPedido = (Modelo.PedidoCollection)ser3.Deserialize(reader);
+                        reader.Close();
+                        gvPedidoDespacho.DataSource = listaPedido;
+                        gvPedidoDespacho.DataBind();
 
+                    }
+                    //Else si es el administrador deberia decir algo supongo
                 }
-                //Else si es el administrador deberia decir algo supongo
+            }
+            catch (Exception ex)
+            {
+                alerta_exito.Visible = false;
+                error.Text = "Excepción: " + ex.ToString();
+                alerta.Visible = true;
             }
         }
 
@@ -121,17 +130,26 @@ namespace Web.Proveedor
 
         protected void btnInfo2_Click(object sender, EventArgs e)
         {
-            //Lee los valores del LinkButton, primero usa la clase LinkButton para 
-            //Transformar los datos de Sender, luego los lee y los asigna a una variable
-            LinkButton btn = (LinkButton)(sender);
-            short numero_pedido = short.Parse(btn.CommandArgument);
+            try
+            {
+                //Lee los valores del LinkButton, primero usa la clase LinkButton para 
+                //Transformar los datos de Sender, luego los lee y los asigna a una variable
+                LinkButton btn = (LinkButton)(sender);
+                short numero_pedido = short.Parse(btn.CommandArgument);
 
-            Pedido pedido = new Pedido();
-            pedido.NUMERO_PEDIDO = numero_pedido;
+                Pedido pedido = new Pedido();
+                pedido.NUMERO_PEDIDO = numero_pedido;
 
-            MiSesionPedido = pedido;
+                MiSesionPedido = pedido;
 
-            Response.Redirect("../Proveedor/WebDetallePedido.aspx");
+                Response.Redirect("../Proveedor/WebDetallePedido.aspx");
+            }
+            catch (Exception ex)
+            {
+                alerta_exito.Visible = false;
+                error.Text = "Excepción: " + ex.ToString();
+                alerta.Visible = true;
+            }
         }
     }
 }

@@ -43,27 +43,35 @@ namespace Web.Empleado
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (MiSesion != null)
+            try
             {
-                error.Text = "";
-                exito.Text = "";
-                alerta_exito.Visible = false;
-                alerta.Visible = false;
+                if (MiSesion != null)
+                {
+                    error.Text = "";
+                    exito.Text = "";
+                    alerta_exito.Visible = false;
+                    alerta.Visible = false;
 
-                Service1 s = new Service1();
-                string datos = s.ListarPedidoRecepcion();
-                XmlSerializer ser = new XmlSerializer(typeof(Modelo.PedidoCollection));
-                StringReader reader = new StringReader(datos);
+                    Service1 s = new Service1();
+                    string datos = s.ListarPedidoRecepcion();
+                    XmlSerializer ser = new XmlSerializer(typeof(Modelo.PedidoCollection));
+                    StringReader reader = new StringReader(datos);
 
-                Modelo.PedidoCollection listaPedido = (Modelo.PedidoCollection)ser.Deserialize(reader);
-                reader.Close();
-                gvPedidoRecepcion.DataSource = listaPedido;
-                gvPedidoRecepcion.DataBind();
+                    Modelo.PedidoCollection listaPedido = (Modelo.PedidoCollection)ser.Deserialize(reader);
+                    reader.Close();
+                    gvPedidoRecepcion.DataSource = listaPedido;
+                    gvPedidoRecepcion.DataBind();
+                }
+                else
+                {
+                    Response.Write("<script language='javascript'>window.alert('Debe Iniciar Sesión Primero');window.location='../Hostal/WebLogin.aspx';</script>");
+                }
             }
-            else
+            catch (Exception)
             {
                 Response.Write("<script language='javascript'>window.alert('Debe Iniciar Sesión Primero');window.location='../Hostal/WebLogin.aspx';</script>");
             }
+            
         }
 
         //Creación de Sesión
@@ -103,110 +111,111 @@ namespace Web.Empleado
         {
             //Lee los valores del LinkButton, primero usa la clase LinkButton para 
             //Transformar los datos de Sender, luego los lee y los asigna a una variable
-            LinkButton btn = (LinkButton)(sender);
-            short numero_pedido = short.Parse(btn.CommandArgument);
 
-            Pedido pedido = new Pedido();
-            pedido.NUMERO_PEDIDO = numero_pedido;
-
-            Service1 s = new Service1();
-            XmlSerializer sr = new XmlSerializer(typeof(Modelo.Pedido));
-            StringWriter writer = new StringWriter();
-            sr.Serialize(writer, pedido);
-
-            if (s.ObtenerPedido(writer.ToString()) == null)
+            try
             {
-                alerta_exito.Visible = false;
-                error.Text = "No se ha encontrado el Pedido";
-                alerta.Visible = true;
-            }
-            else
-            {
-                Pedido pedido2 = s.ObtenerPedido(writer.ToString());
-                pedido2.ESTADO_PEDIDO = "Recepcionado";
+                LinkButton btn = (LinkButton)(sender);
+                short numero_pedido = short.Parse(btn.CommandArgument);
 
-                XmlSerializer sr2 = new XmlSerializer(typeof(Modelo.Pedido));
-                StringWriter writer2 = new StringWriter();
-                sr2.Serialize(writer2, pedido2);
+                Pedido pedido = new Pedido();
+                pedido.NUMERO_PEDIDO = numero_pedido;
 
-                if (s.EditarEstadoPedido(writer2.ToString()))
+                Service1 s = new Service1();
+                XmlSerializer sr = new XmlSerializer(typeof(Modelo.Pedido));
+                StringWriter writer = new StringWriter();
+                sr.Serialize(writer, pedido);
+
+                if (s.ObtenerPedido(writer.ToString()) == null)
                 {
-                    if (s.ListarDetallePedido(writer2.ToString()) != null)
+                    alerta_exito.Visible = false;
+                    error.Text = "No se ha encontrado el Pedido";
+                    alerta.Visible = true;
+                }
+                else
+                {
+                    Pedido pedido2 = s.ObtenerPedido(writer.ToString());
+                    pedido2.ESTADO_PEDIDO = "Recepcionado";
+
+                    XmlSerializer sr2 = new XmlSerializer(typeof(Modelo.Pedido));
+                    StringWriter writer2 = new StringWriter();
+                    sr2.Serialize(writer2, pedido2);
+
+                    if (s.EditarEstadoPedido(writer2.ToString()))
                     {
-                        string datosDetalle = s.ListarDetallePedido(writer.ToString());
-                        XmlSerializer ser3 = new XmlSerializer(typeof(Modelo.DetallePedidoCollection));
-                        StringReader reader = new StringReader(datosDetalle);
-
-                        Modelo.DetallePedidoCollection listaDetalle = (Modelo.DetallePedidoCollection)ser3.Deserialize(reader);
-
-                        Modelo.Recepcion recepcion = new Modelo.Recepcion();
-                        recepcion.FECHA_RECEPCION = DateTime.Now;
-                        recepcion.RUT_PROVEEDOR = pedido2.RUT_PROVEEDOR;
-
-                        Modelo.Empleado empleado = new Modelo.Empleado();
-
-                        if (MiSesion != null)
+                        if (s.ListarDetallePedido(writer2.ToString()) != null)
                         {
-                            empleado.ID_USUARIO = MiSesion.ID_USUARIO;
+                            string datosDetalle = s.ListarDetallePedido(writer.ToString());
+                            XmlSerializer ser3 = new XmlSerializer(typeof(Modelo.DetallePedidoCollection));
+                            StringReader reader = new StringReader(datosDetalle);
 
-                            XmlSerializer ser5 = new XmlSerializer(typeof(Modelo.Empleado));
-                            StringWriter writer5 = new StringWriter();
-                            ser5.Serialize(writer5, empleado);
-                            writer5.Close();
+                            Modelo.DetallePedidoCollection listaDetalle = (Modelo.DetallePedidoCollection)ser3.Deserialize(reader);
 
-                            Modelo.Empleado empleado2 = s.buscarIDE(writer5.ToString());
-                            recepcion.RUT_EMPLEADO = empleado2.RUT_EMPLEADO;
+                            Modelo.Recepcion recepcion = new Modelo.Recepcion();
+                            recepcion.FECHA_RECEPCION = DateTime.Now;
+                            recepcion.RUT_PROVEEDOR = pedido2.RUT_PROVEEDOR;
 
-                            XmlSerializer ser6 = new XmlSerializer(typeof(Modelo.Recepcion));
-                            StringWriter writer6 = new StringWriter();
-                            ser6.Serialize(writer6, recepcion);
+                            Modelo.Empleado empleado = new Modelo.Empleado();
 
-                            if (s.AgregarRecepcion(writer6.ToString()))
+                            if (MiSesion != null)
                             {
-                                bool v_exito = true;
+                                empleado.ID_USUARIO = MiSesion.ID_USUARIO;
 
-                                foreach (DetallePedido d in listaDetalle)
+                                XmlSerializer ser5 = new XmlSerializer(typeof(Modelo.Empleado));
+                                StringWriter writer5 = new StringWriter();
+                                ser5.Serialize(writer5, empleado);
+                                writer5.Close();
+
+                                Modelo.Empleado empleado2 = s.buscarIDE(writer5.ToString());
+                                recepcion.RUT_EMPLEADO = empleado2.RUT_EMPLEADO;
+
+                                XmlSerializer ser6 = new XmlSerializer(typeof(Modelo.Recepcion));
+                                StringWriter writer6 = new StringWriter();
+                                ser6.Serialize(writer6, recepcion);
+
+                                if (s.AgregarRecepcion(writer6.ToString()))
                                 {
-                                    Modelo.DetalleRecepcion detalle = new Modelo.DetalleRecepcion();
-                                    detalle.CANTIDAD = d.CANTIDAD;
-                                    detalle.ID_PRODUCTO = d.ID_PRODUCTO;
+                                    bool v_exito = true;
 
-                                    XmlSerializer sr7 = new XmlSerializer(typeof(Modelo.DetalleRecepcion));
-                                    StringWriter writer7 = new StringWriter();
-                                    sr7.Serialize(writer7, detalle);
-
-                                    if (!s.AgregarDetalleRecepcion(writer7.ToString()))
+                                    foreach (DetallePedido d in listaDetalle)
                                     {
-                                        v_exito = false;
+                                        Modelo.DetalleRecepcion detalle = new Modelo.DetalleRecepcion();
+                                        detalle.CANTIDAD = d.CANTIDAD;
+                                        detalle.ID_PRODUCTO = d.ID_PRODUCTO;
+
+                                        XmlSerializer sr7 = new XmlSerializer(typeof(Modelo.DetalleRecepcion));
+                                        StringWriter writer7 = new StringWriter();
+                                        sr7.Serialize(writer7, detalle);
+
+                                        if (!s.AgregarDetalleRecepcion(writer7.ToString()))
+                                        {
+                                            v_exito = false;
+                                        }
                                     }
-                                }
 
-                                if (v_exito)
-                                {
-                                    exito.Text = "Recepción de Producto realizada con éxito";
-                                    alerta_exito.Visible = true;
-                                    alerta.Visible = false;
+                                    if (v_exito)
+                                    {
+                                        MiSesionPedido = null;
 
-                                    string datos = s.ListarPedidoRecepcion();
-                                    XmlSerializer ser8 = new XmlSerializer(typeof(Modelo.PedidoCollection));
-                                    StringReader reader8 = new StringReader(datos);
-
-                                    Modelo.PedidoCollection listaPedido = (Modelo.PedidoCollection)ser8.Deserialize(reader8);
-                                    reader.Close();
-                                    gvPedidoRecepcion.DataSource = listaPedido;
-                                    gvPedidoRecepcion.DataBind();
+                                        Response.Write("<script language='javascript'>window.alert('Recepción de Producto realizada con éxito');window.location='../Empleado/WebRecibirPedido.aspx';</script>");
+                                    }
+                                    else
+                                    {
+                                        alerta_exito.Visible = false;
+                                        error.Text = "El detalle de Recepción ha fallado";
+                                        alerta.Visible = true;
+                                    }
                                 }
                                 else
                                 {
                                     alerta_exito.Visible = false;
-                                    error.Text = "El detalle de Recepción ha fallado";
+                                    error.Text = "La Recepción ha fallado";
                                     alerta.Visible = true;
                                 }
                             }
                             else
                             {
                                 alerta_exito.Visible = false;
-                                error.Text = "La Recepción ha fallado";
+                                error.Text = "No se pudo cargar el Detalle del Pedido";
                                 alerta.Visible = true;
                             }
                         }
@@ -220,16 +229,16 @@ namespace Web.Empleado
                     else
                     {
                         alerta_exito.Visible = false;
-                        error.Text = "No se pudo cargar el Detalle del Pedido";
+                        error.Text = "La modificación de Estado Pedido ha fallado";
                         alerta.Visible = true;
                     }
                 }
-                else
-                {
-                    alerta_exito.Visible = false;
-                    error.Text = "La modificación de Estado Pedido ha fallado";
-                    alerta.Visible = true;
-                }
+            }
+            catch (Exception ex)
+            {
+                alerta_exito.Visible = false;
+                error.Text = "Excepción: " + ex.ToString();
+                alerta.Visible = true;
             }
         }
 
@@ -300,10 +309,10 @@ namespace Web.Empleado
                     alerta.Visible = true;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 alerta_exito.Visible = false;
-                error.Text = "Excepcion";
+                error.Text = "Excepción: " + ex.ToString();
                 alerta.Visible = true;
             }
         }
@@ -311,17 +320,49 @@ namespace Web.Empleado
 
         protected void btnInfo2_Click(object sender, EventArgs e)
         {
-            //Lee los valores del LinkButton, primero usa la clase LinkButton para 
-            //Transformar los datos de Sender, luego los lee y los asigna a una variable
-            LinkButton btn = (LinkButton)(sender);
-            short numero_pedido = short.Parse(btn.CommandArgument);
 
-            Pedido pedido = new Pedido();
-            pedido.NUMERO_PEDIDO = numero_pedido;
+            try
+            {
+                LinkButton btn = (LinkButton)(sender);
+                short numero_pedido = short.Parse(btn.CommandArgument);
 
-            MiSesionPedido = pedido;
+                Pedido pedido = new Pedido();
+                pedido.NUMERO_PEDIDO = numero_pedido;
 
-            Response.Redirect("../Empleado/WebDetallePedido.aspx");
+                MiSesionPedido = pedido;
+
+                if (MiSesionPedido.NUMERO_PEDIDO != 0)
+                {
+                    Service1 s = new Service1();
+                    XmlSerializer sr = new XmlSerializer(typeof(Modelo.Pedido));
+                    StringWriter writer = new StringWriter();
+                    sr.Serialize(writer, pedido);
+
+                    if (s.ListarDetallePedido(writer.ToString()) != null)
+                    {
+                        string datos = s.ListarDetallePedido(writer.ToString());
+                        XmlSerializer ser3 = new XmlSerializer(typeof(Modelo.DetallePedidoCollection));
+                        StringReader reader = new StringReader(datos);
+
+                        Modelo.DetallePedidoCollection listaDetalle = (Modelo.DetallePedidoCollection)ser3.Deserialize(reader);
+                        reader.Close();
+                        gvDetalleHistorial.DataSource = listaDetalle;
+                        gvDetalleHistorial.DataBind();
+                    }
+
+                    ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modal", "$('#exampleModal2').modal();", true);
+                }
+                else
+                {
+                    Response.Write("<script language='javascript'>window.alert('Debe Iniciar Sesión Primero');window.location='../Hostal/WebLogin.aspx';</script>");
+                }
+            }
+            catch (Exception ex)
+            {
+                alerta_exito.Visible = false;
+                error.Text = "Excepción: " + ex.ToString();
+                alerta.Visible = true;
+            }
         }
     }
 }

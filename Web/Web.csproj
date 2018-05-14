@@ -128,11 +128,12 @@
     <Content Include="Cliente\WebEditarCliente.aspx" />
     <Content Include="Cliente\WebVerHistorial.aspx" />
     <Content Include="Empleado\WebAsignarHabitacion.aspx" />
+    <Content Include="Empleado\WebCrearDetalle.aspx" />
     <Content Include="Empleado\WebCrearFactura.aspx" />
     <Content Include="Empleado\WebCrearMinuta.aspx" />
     <Content Include="Empleado\WebCrearPedido.aspx" />
-    <Content Include="Empleado\WebDetallePedido.aspx" />
     <Content Include="Empleado\WebEditarEmpleado.aspx" />
+    <Content Include="Empleado\WebEditarPedido.aspx" />
     <Content Include="Empleado\WebHistorialPedidos.aspx" />
     <Content Include="Empleado\WebRecibirPedido.aspx" />
     <Content Include="Empleado\WebRegistrarOrden.aspx" />
@@ -146,12 +147,10 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Administrador\WebAdmin.aspx" />
-    <Content Include="Proveedor\WebDetallePedido.aspx" />
     <Content Include="Proveedor\WebHistorialPedidos.aspx" />
     <Content Include="Proveedor\WebEditarProveedor.aspx" />
     <Content Include="Proveedor\WebPedidosDespacho.aspx" />
     <Content Include="Proveedor\WebPedidosRecibidos.aspx" />
-    <Content Include="Proveedor\WebRechazarPedido.aspx" />
     <Content Include="WebCerrarSesion.aspx" />
     <Content Include="Cliente\WebCliente.aspx" />
     <Content Include="Empleado\WebEmpleado.aspx" />
@@ -439,6 +438,13 @@
     <Compile Include="Empleado\WebAsignarHabitacion.aspx.designer.cs">
       <DependentUpon>WebAsignarHabitacion.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Empleado\WebCrearDetalle.aspx.cs">
+      <DependentUpon>WebCrearDetalle.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Empleado\WebCrearDetalle.aspx.designer.cs">
+      <DependentUpon>WebCrearDetalle.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Empleado\WebCrearFactura.aspx.cs">
       <DependentUpon>WebCrearFactura.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -460,19 +466,19 @@
     <Compile Include="Empleado\WebCrearPedido.aspx.designer.cs">
       <DependentUpon>WebCrearPedido.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Empleado\WebDetallePedido.aspx.cs">
-      <DependentUpon>WebDetallePedido.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Empleado\WebDetallePedido.aspx.designer.cs">
-      <DependentUpon>WebDetallePedido.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Empleado\WebEditarEmpleado.aspx.cs">
       <DependentUpon>WebEditarEmpleado.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Empleado\WebEditarEmpleado.aspx.designer.cs">
       <DependentUpon>WebEditarEmpleado.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Empleado\WebEditarPedido.aspx.cs">
+      <DependentUpon>WebEditarPedido.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Empleado\WebEditarPedido.aspx.designer.cs">
+      <DependentUpon>WebEditarPedido.aspx</DependentUpon>
     </Compile>
     <Compile Include="Empleado\WebHistorialPedidos.aspx.cs">
       <DependentUpon>WebHistorialPedidos.aspx</DependentUpon>
@@ -552,13 +558,6 @@
     <Compile Include="Administrador\WebAdmin.aspx.designer.cs">
       <DependentUpon>WebAdmin.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Proveedor\WebDetallePedido.aspx.cs">
-      <DependentUpon>WebDetallePedido.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Proveedor\WebDetallePedido.aspx.designer.cs">
-      <DependentUpon>WebDetallePedido.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Proveedor\WebHistorialPedidos.aspx.cs">
       <DependentUpon>WebHistorialPedidos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -586,13 +585,6 @@
     </Compile>
     <Compile Include="Proveedor\WebPedidosRecibidos.aspx.designer.cs">
       <DependentUpon>WebPedidosRecibidos.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Proveedor\WebRechazarPedido.aspx.cs">
-      <DependentUpon>WebRechazarPedido.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Proveedor\WebRechazarPedido.aspx.designer.cs">
-      <DependentUpon>WebRechazarPedido.aspx</DependentUpon>
     </Compile>
     <Compile Include="WebCerrarSesion.aspx.cs">
       <DependentUpon>WebCerrarSesion.aspx</DependentUpon>

@@ -110,9 +110,14 @@ namespace Datos
         }
 
         //Falta filtrar por rut de empleado
-        public List<PEDIDO> ListarPedidoEmpleadoPendiente()
+        public List<PEDIDO> ListarPedidoEmpleadoPendiente(EMPLEADO empleado)
         {
-            return (from a in ent.PEDIDO where a.ESTADO_PEDIDO.Equals("Pendiente") select a).ToList();
+            var lista = (from consulta in ent.PEDIDO
+                         where consulta.RUT_EMPLEADO == empleado.RUT_EMPLEADO
+                         && consulta.ESTADO_PEDIDO.Equals("Pendiente")
+                         orderby consulta.NUMERO_PEDIDO
+                         select consulta).ToList();
+            return lista;
         }
         public List<PEDIDO> ListarPedidoEmpleadoListo(EMPLEADO empleado)
         {
@@ -147,6 +152,23 @@ namespace Datos
                          orderby consulta.ID_DETALLE_PEDIDO
                          select consulta).ToList();
             return lista;
+        }
+
+        public bool EliminarDetallePedido(DETALLE_PEDIDO detalle)
+        {
+            DETALLE_PEDIDO d = ent.DETALLE_PEDIDO.FirstOrDefault(objeto =>
+                objeto.ID_DETALLE_PEDIDO.Equals(detalle.ID_DETALLE_PEDIDO));
+
+            if (d != null)
+            {
+                ent.DETALLE_PEDIDO.Remove(d);
+                ent.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

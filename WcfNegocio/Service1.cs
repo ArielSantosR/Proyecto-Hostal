@@ -1311,6 +1311,7 @@ namespace WcfNegocio
             //Datos Pedido
             dDatos.CANTIDAD = d.CANTIDAD;
             dDatos.ID_PRODUCTO = d.ID_PRODUCTO;
+            dDatos.NUMERO_PEDIDO = d.NUMERO_PEDIDO;
             return servicio.AgregarDetallePedido(dDatos);
         }
 
@@ -1343,33 +1344,47 @@ namespace WcfNegocio
             return writer.ToString();
         }
 
-        public string ListarPedidoEmpleadoPendiente()
+        public string ListarPedidoEmpleadoPendiente(string empleado)
         {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.Empleado));
+            StringReader reader = new StringReader(empleado);
+            Modelo.Empleado pr = (Modelo.Empleado)ser.Deserialize(reader);
+            ServicioPedido serv = new ServicioPedido();
 
-            ServicioPedido servicio = new ServicioPedido();
-            List<Datos.PEDIDO> pedido = servicio.ListarPedidoEmpleadoPendiente();
-            Modelo.PedidoCollection listaPedido = new Modelo.PedidoCollection();
+            Datos.EMPLEADO pDatos = new Datos.EMPLEADO();
+            pDatos.RUT_EMPLEADO = pr.RUT_EMPLEADO;
 
-            foreach (Datos.PEDIDO p in pedido)
+            List<Datos.PEDIDO> listaPedido = serv.ListarPedidoEmpleadoPendiente(pDatos);
+
+            if (listaPedido == null)
             {
-                Modelo.Pedido pModelo = new Modelo.Pedido();
-                pModelo.NUMERO_PEDIDO = p.NUMERO_PEDIDO;
-                pModelo.ESTADO_PEDIDO = p.ESTADO_PEDIDO;
-                pModelo.FECHA_PEDIDO = p.FECHA_PEDIDO;
-                pModelo.RUT_EMPLEADO = p.RUT_EMPLEADO;
-                pModelo.NUMERO_RECEPCION = p.NUMERO_RECEPCION;
-                pModelo.RUT_PROVEEDOR = p.RUT_PROVEEDOR;
-                pModelo.ESTADO_DESPACHO = p.ESTADO_DESPACHO;
-                pModelo.COMENTARIO = p.COMENTARIO;
-
-                listaPedido.Add(pModelo);
+                return null;
             }
+            else
+            {
+                Modelo.PedidoCollection listaPedido2 = new PedidoCollection();
 
-            XmlSerializer ser = new XmlSerializer(typeof(Modelo.PedidoCollection));
-            StringWriter writer = new StringWriter();
-            ser.Serialize(writer, listaPedido);
-            writer.Close();
-            return writer.ToString();
+                foreach (Datos.PEDIDO p in listaPedido)
+                {
+                    Modelo.Pedido pModelo = new Modelo.Pedido();
+                    pModelo.NUMERO_PEDIDO = p.NUMERO_PEDIDO;
+                    pModelo.ESTADO_PEDIDO = p.ESTADO_PEDIDO;
+                    pModelo.FECHA_PEDIDO = p.FECHA_PEDIDO;
+                    pModelo.RUT_EMPLEADO = p.RUT_EMPLEADO;
+                    pModelo.NUMERO_RECEPCION = p.NUMERO_RECEPCION;
+                    pModelo.RUT_PROVEEDOR = p.RUT_PROVEEDOR;
+                    pModelo.ESTADO_DESPACHO = p.ESTADO_DESPACHO;
+                    pModelo.COMENTARIO = p.COMENTARIO;
+
+                    listaPedido2.Add(pModelo);
+                }
+
+                XmlSerializer ser2 = new XmlSerializer(typeof(Modelo.PedidoCollection));
+                StringWriter writer2 = new StringWriter();
+                ser2.Serialize(writer2, listaPedido2);
+                writer2.Close();
+                return writer2.ToString();
+            }
         }
 
         public string ListarPedidoEmpleadoListo(string empleado)
@@ -1746,6 +1761,20 @@ namespace WcfNegocio
             ser.Serialize(writer, listaPedido);
             writer.Close();
             return writer.ToString();
+        }
+
+        public bool EliminarDetallePedido(string detalle)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.DetallePedido));
+            StringReader reader = new StringReader(detalle);
+            Modelo.DetallePedido d = (Modelo.DetallePedido)ser.Deserialize(reader);
+            ServicioPedido servicio = new ServicioPedido();
+
+            Datos.DETALLE_PEDIDO dDatos = new Datos.DETALLE_PEDIDO();
+            //Datos Detalle
+            dDatos.ID_DETALLE_PEDIDO = d.ID_DETALLE_PEDIDO;
+
+            return servicio.EliminarDetallePedido(dDatos);
         }
 
         //CRUD Recepcion

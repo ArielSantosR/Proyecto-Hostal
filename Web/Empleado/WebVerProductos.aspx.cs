@@ -43,15 +43,23 @@ namespace Web.Empleado
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            Service1 service = new Service1();
-            string datos = service.ListarProducto();
-            XmlSerializer ser = new XmlSerializer(typeof(Modelo.ProductoCollection));
-            StringReader reader = new StringReader(datos);
+            try
+            {
+                Service1 service = new Service1();
+                string datos = service.ListarProducto();
+                XmlSerializer ser = new XmlSerializer(typeof(Modelo.ProductoCollection));
+                StringReader reader = new StringReader(datos);
 
-            Modelo.ProductoCollection listaProducto = (Modelo.ProductoCollection)ser.Deserialize(reader);
-            reader.Close();
-            gvProducto.DataSource = listaProducto;
-            gvProducto.DataBind();
+                Modelo.ProductoCollection listaProducto = (Modelo.ProductoCollection)ser.Deserialize(reader);
+                reader.Close();
+                gvProducto.DataSource = listaProducto;
+                gvProducto.DataBind();
+            }
+            catch (Exception)
+            {
+                Response.Write("<script language='javascript'>window.alert('Debe Iniciar Sesión Primero');window.location='../Hostal/WebLogin.aspx';</script>");
+            }
+
         }
 
         //Creación de Sesión

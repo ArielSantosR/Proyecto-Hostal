@@ -43,20 +43,28 @@ namespace Web.Empleado
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            Service1 service = new Service1();
-            string tipoplato = service.ListarTipoPlato();
-            XmlSerializer ser1 = new XmlSerializer(typeof(Modelo.TipoPlatoCollection));
-            StringReader reader1 = new StringReader(tipoplato);
-            Modelo.TipoPlatoCollection coleccionTipoPlato = (Modelo.TipoPlatoCollection)ser1.Deserialize(reader1);
-            reader1.Close();
-
-            if (!IsPostBack)
+            try
             {
-                ddlTipoPlato.DataSource = coleccionTipoPlato;
-                ddlTipoPlato.DataTextField = "NOMBRE_TIPO_PLATO";
-                ddlTipoPlato.DataValueField = "ID_TIPO_PLATO";
-                ddlTipoPlato.DataBind();
+                Service1 service = new Service1();
+                string tipoplato = service.ListarTipoPlato();
+                XmlSerializer ser1 = new XmlSerializer(typeof(Modelo.TipoPlatoCollection));
+                StringReader reader1 = new StringReader(tipoplato);
+                Modelo.TipoPlatoCollection coleccionTipoPlato = (Modelo.TipoPlatoCollection)ser1.Deserialize(reader1);
+                reader1.Close();
+
+                if (!IsPostBack)
+                {
+                    ddlTipoPlato.DataSource = coleccionTipoPlato;
+                    ddlTipoPlato.DataTextField = "NOMBRE_TIPO_PLATO";
+                    ddlTipoPlato.DataValueField = "ID_TIPO_PLATO";
+                    ddlTipoPlato.DataBind();
+                }
             }
+            catch (Exception ex)
+            {
+                Response.Write("<script language='javascript'>window.alert('Debe Iniciar Sesión Primero');window.location='../Hostal/WebLogin.aspx';</script>");
+            }
+            
         }
 
         //Creación de Sesión

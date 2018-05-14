@@ -225,7 +225,7 @@ namespace WcfNegocio
         string ListarPedidoEmpleadoListo(string empleado);
 
         [OperationContract]
-        string ListarPedidoEmpleadoPendiente();
+        string ListarPedidoEmpleadoPendiente(string empleado);
 
         [OperationContract]
         Pedido ObtenerPedido(string pedido);
@@ -244,6 +244,9 @@ namespace WcfNegocio
 
         [OperationContract]
         string ListarPedidoRecepcion();
+
+        [OperationContract]
+        bool EliminarDetallePedido(string detalle);
 
         //CRUD Recepcion
         [OperationContract]

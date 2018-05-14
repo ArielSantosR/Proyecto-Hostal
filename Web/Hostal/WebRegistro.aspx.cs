@@ -20,48 +20,56 @@ namespace Web
             btnLimpiar.CausesValidation = false;
             btnLimpiar.UseSubmitBehavior = false;
 
-            error.Text = "";
-            //ddlComuna.Enabled = false;
-            //ddlRegion.Enabled = false;
-            //Cargando DDL Pais
-            Service1 service = new Service1();
-            string paises = service.ListarPais();
-            XmlSerializer ser = new XmlSerializer(typeof(Modelo.PaisCollection));
-            StringReader reader = new StringReader(paises);
-            Modelo.PaisCollection coleccionPais = (Modelo.PaisCollection)ser.Deserialize(reader);
-            reader.Close();
-
-            //Cargando DDL Regiones
-            string regiones = service.ListarRegion();
-            XmlSerializer ser1 = new XmlSerializer(typeof(Modelo.RegionCollection));
-            StringReader reader1 = new StringReader(regiones);
-            coleccionRegion = (Modelo.RegionCollection)ser1.Deserialize(reader1);
-            reader1.Close();
-
-            //Cargando DDL Comunas
-            string comunas = service.ListarComuna();
-            XmlSerializer ser2 = new XmlSerializer(typeof(Modelo.ComunaCollection));
-            StringReader reader2 = new StringReader(comunas);
-            coleccionComuna = (Modelo.ComunaCollection)ser2.Deserialize(reader2);
-            reader2.Close();
-
-            if (!IsPostBack)
+            try
             {
-                alerta.Visible = false;
-                ddlPais.DataSource = coleccionPais;
-                ddlPais.DataTextField = "NOMBRE_PAIS";
-                ddlPais.DataValueField = "ID_PAIS";
-                ddlPais.DataBind();
+                error.Text = "";
+                //ddlComuna.Enabled = false;
+                //ddlRegion.Enabled = false;
+                //Cargando DDL Pais
+                Service1 service = new Service1();
+                string paises = service.ListarPais();
+                XmlSerializer ser = new XmlSerializer(typeof(Modelo.PaisCollection));
+                StringReader reader = new StringReader(paises);
+                Modelo.PaisCollection coleccionPais = (Modelo.PaisCollection)ser.Deserialize(reader);
+                reader.Close();
 
-                ddlRegion.DataSource = coleccionRegion.Where(x => x.Id_Pais == int.Parse(ddlPais.SelectedValue));
-                ddlRegion.DataTextField = "Nombre";
-                ddlRegion.DataValueField = "Id_Region";
-                ddlRegion.DataBind();
+                //Cargando DDL Regiones
+                string regiones = service.ListarRegion();
+                XmlSerializer ser1 = new XmlSerializer(typeof(Modelo.RegionCollection));
+                StringReader reader1 = new StringReader(regiones);
+                coleccionRegion = (Modelo.RegionCollection)ser1.Deserialize(reader1);
+                reader1.Close();
 
-                ddlComuna.DataSource = coleccionComuna.Where(x => x.Id_Region == int.Parse(ddlRegion.SelectedValue));
-                ddlComuna.DataTextField = "Nombre";
-                ddlComuna.DataValueField = "Id_Comuna";
-                ddlComuna.DataBind();
+                //Cargando DDL Comunas
+                string comunas = service.ListarComuna();
+                XmlSerializer ser2 = new XmlSerializer(typeof(Modelo.ComunaCollection));
+                StringReader reader2 = new StringReader(comunas);
+                coleccionComuna = (Modelo.ComunaCollection)ser2.Deserialize(reader2);
+                reader2.Close();
+
+                if (!IsPostBack)
+                {
+                    alerta.Visible = false;
+                    ddlPais.DataSource = coleccionPais;
+                    ddlPais.DataTextField = "NOMBRE_PAIS";
+                    ddlPais.DataValueField = "ID_PAIS";
+                    ddlPais.DataBind();
+
+                    ddlRegion.DataSource = coleccionRegion.Where(x => x.Id_Pais == int.Parse(ddlPais.SelectedValue));
+                    ddlRegion.DataTextField = "Nombre";
+                    ddlRegion.DataValueField = "Id_Region";
+                    ddlRegion.DataBind();
+
+                    ddlComuna.DataSource = coleccionComuna.Where(x => x.Id_Region == int.Parse(ddlRegion.SelectedValue));
+                    ddlComuna.DataTextField = "Nombre";
+                    ddlComuna.DataValueField = "Id_Comuna";
+                    ddlComuna.DataBind();
+                }
+            }
+            catch (Exception ex)
+            {
+                error.Text = "Excepción: " + ex.ToString();
+                alerta.Visible = true;
             }
         }
 
@@ -256,9 +264,9 @@ namespace Web
                     alerta.Visible = true;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                error.Text = "Excepcion";
+                error.Text = "Excepción: " + ex.ToString();
                 alerta.Visible = true;
             }
         }

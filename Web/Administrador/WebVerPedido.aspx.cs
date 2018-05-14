@@ -71,6 +71,22 @@ namespace Web.Administrador
             }
         }
 
+        public Pedido MiSesionPedido
+        {
+            get
+            {
+                if (Session["Pedido"] == null)
+                {
+                    Session["Pedido"] = new Pedido();
+                }
+                return (Pedido)Session["Pedido"];
+            }
+            set
+            {
+                Session["Pedido"] = value;
+            }
+        }
+
         protected void btnEditar_Click(object sender, EventArgs e)
         {
             //Lee los valores del LinkButton, primero usa la clase LinkButton para 
@@ -103,18 +119,7 @@ namespace Web.Administrador
 
                 if (s.EditarEstadoPedido(writer2.ToString()))
                 {
-                    exito.Text = "El Pedido ha sido Aceptado";
-                    alerta_exito.Visible = true;
-                    alerta.Visible = false;
-
-                    string datos = s.ListarPedidoAdmin();
-                    XmlSerializer ser2 = new XmlSerializer(typeof(Modelo.PedidoCollection));
-                    StringReader reader2 = new StringReader(datos);
-
-                    Modelo.PedidoCollection listaPedido = (Modelo.PedidoCollection)ser2.Deserialize(reader2);
-                    reader2.Close();
-                    gvPedido.DataSource = listaPedido;
-                    gvPedido.DataBind();
+                    Response.Write("<script language='javascript'>window.alert('Ha Aceptado el pedido');window.location='../Administrador/WebVerPedido.aspx';</script>");
                 }
                 else
                 {
@@ -157,18 +162,7 @@ namespace Web.Administrador
 
                 if (s.EditarEstadoPedido(writer2.ToString()))
                 {
-                    exito.Text = "El Pedido ha sido Rechazado";
-                    alerta_exito.Visible = true;
-                    alerta.Visible = false;
-
-                    string datos = s.ListarPedidoAdmin();
-                    XmlSerializer ser2 = new XmlSerializer(typeof(Modelo.PedidoCollection));
-                    StringReader reader2 = new StringReader(datos);
-
-                    Modelo.PedidoCollection listaPedido = (Modelo.PedidoCollection)ser2.Deserialize(reader2);
-                    reader2.Close();
-                    gvPedido.DataSource = listaPedido;
-                    gvPedido.DataBind();
+                    Response.Write("<script language='javascript'>window.alert('Ha Rechazado el pedido');window.location='../Administrador/WebVerPedido.aspx';</script>");
                 }
                 else
                 {
@@ -177,6 +171,40 @@ namespace Web.Administrador
                     alerta.Visible = true;
                 }
             }
+        }
+
+        protected void btnInfo_Click(object sender, EventArgs e)
+        {
+            LinkButton btn = (LinkButton)(sender);
+            short numero_pedido = short.Parse(btn.CommandArgument);
+
+            Pedido pedido = new Pedido();
+            pedido.NUMERO_PEDIDO = numero_pedido;
+
+            MiSesionPedido = pedido;
+
+            if (MiSesionPedido.NUMERO_PEDIDO != 0)
+            {
+
+                Service1 s = new Service1();
+                XmlSerializer sr = new XmlSerializer(typeof(Modelo.Pedido));
+                StringWriter writer = new StringWriter();
+                sr.Serialize(writer, pedido);
+
+                if (s.ListarDetallePedido(writer.ToString()) != null)
+                {
+                    string datos = s.ListarDetallePedido(writer.ToString());
+                    XmlSerializer ser3 = new XmlSerializer(typeof(Modelo.DetallePedidoCollection));
+                    StringReader reader = new StringReader(datos);
+
+                    Modelo.DetallePedidoCollection listaDetalle = (Modelo.DetallePedidoCollection)ser3.Deserialize(reader);
+                    reader.Close();
+                    gvDetalleHistorial.DataSource = listaDetalle;
+                    gvDetalleHistorial.DataBind();
+                }
+            }
+
+            ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modal", "$('#exampleModal2').modal();", true);
         }
     }
 }

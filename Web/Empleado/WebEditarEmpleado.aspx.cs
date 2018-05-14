@@ -190,8 +190,9 @@ namespace Web.Empleado {
                 }
 
             }
-            catch (Exception ex) {
-                error.Text = "Excepcion" + ex.Message;
+            catch (Exception ex)
+            {
+                error.Text = "Excepción: " + ex.ToString();
                 alerta.Visible = true;
             }
         }

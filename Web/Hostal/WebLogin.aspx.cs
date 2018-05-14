@@ -44,51 +44,60 @@ namespace Web
 
         protected void Login1_Authenticate(object sender, AuthenticateEventArgs e)
         {
-            if (Login1.UserName != string.Empty && Login1.Password != string.Empty)
+            try
             {
-                Modelo.Usuario u = new Modelo.Usuario();
-                u.NOMBRE_USUARIO = Login1.UserName;
-                u.PASSWORD = Login1.Password;
-                Service1 s = new Service1();
-                //Envía los datos de Usuario(Modelo) como un string
-                XmlSerializer sr = new XmlSerializer(typeof(Modelo.Usuario));
-                StringWriter writer = new StringWriter();
-                sr.Serialize(writer, u);
-
-                if (s.Login(writer.ToString()))
+                if (Login1.UserName != string.Empty && Login1.Password != string.Empty)
                 {
-                    Modelo.Usuario sesionUsuario = s.GetUsuario(writer.ToString());
-                    MiSesion = sesionUsuario;
+                    Modelo.Usuario u = new Modelo.Usuario();
+                    u.NOMBRE_USUARIO = Login1.UserName;
+                    u.PASSWORD = Login1.Password;
+                    Service1 s = new Service1();
+                    //Envía los datos de Usuario(Modelo) como un string
+                    XmlSerializer sr = new XmlSerializer(typeof(Modelo.Usuario));
+                    StringWriter writer = new StringWriter();
+                    sr.Serialize(writer, u);
 
-                    if (MiSesion.TIPO_USUARIO.Equals("Administrador") && MiSesion.ESTADO.Equals("Habilitado"))
+                    if (s.Login(writer.ToString()))
                     {
-                        Response.Redirect("../Administrador/WebAdmin.aspx");
-                    }
-                    else if (MiSesion.TIPO_USUARIO.Equals("Empleado") && MiSesion.ESTADO.Equals("Habilitado"))
-                    {
-                        Response.Redirect("../Empleado/WebEmpleado.aspx");
-                    }
-                    else if (MiSesion.TIPO_USUARIO.Equals("Proveedor") && MiSesion.ESTADO.Equals("Habilitado"))
-                    {
-                        Response.Redirect("../Proveedor/WebProveedor.aspx");
-                    }
-                    else if (MiSesion.TIPO_USUARIO.Equals("Cliente") && MiSesion.ESTADO.Equals("Habilitado"))
-                    {
-                        Response.Redirect("../Cliente/WebCliente.aspx");
+                        Modelo.Usuario sesionUsuario = s.GetUsuario(writer.ToString());
+                        MiSesion = sesionUsuario;
+
+                        if (MiSesion.TIPO_USUARIO.Equals("Administrador") && MiSesion.ESTADO.Equals("Habilitado"))
+                        {
+                            Response.Redirect("../Administrador/WebAdmin.aspx");
+                        }
+                        else if (MiSesion.TIPO_USUARIO.Equals("Empleado") && MiSesion.ESTADO.Equals("Habilitado"))
+                        {
+                            Response.Redirect("../Empleado/WebEmpleado.aspx");
+                        }
+                        else if (MiSesion.TIPO_USUARIO.Equals("Proveedor") && MiSesion.ESTADO.Equals("Habilitado"))
+                        {
+                            Response.Redirect("../Proveedor/WebProveedor.aspx");
+                        }
+                        else if (MiSesion.TIPO_USUARIO.Equals("Cliente") && MiSesion.ESTADO.Equals("Habilitado"))
+                        {
+                            Response.Redirect("../Cliente/WebCliente.aspx");
+                        }
+                        else
+                        {
+                            Response.Write("<script language='javascript'>window.alert('Posee Permisos incorrectos o su cuenta ha sido Deshabilitada. Contáctese con un Administrador para más Información');window.location='../Hostal/WebLogin.aspx';</script>");
+                        }
                     }
                     else
                     {
-                        Response.Write("<script language='javascript'>window.alert('Posee Permisos incorrectos o su cuenta ha sido Deshabilitada. Contáctese con un Administrador para más Información');window.location='../Hostal/WebLogin.aspx';</script>");
+                        error.Text = "Su Nombre de Usuario o Contraseña es Incorrecta. Vuelva a intentarlo";
+                        alerta.Visible = true;
                     }
                 }
                 else
                 {
-                    error.Text = "Su Nombre de Usuario o Contraseña es Incorrecta. Vuelva a intentarlo";
+                    error.Text = "Debe ingresar su Usuario y Contraseña";
                     alerta.Visible = true;
                 }
-            } else
+            }
+            catch (Exception ex)
             {
-                error.Text = "Debe ingresar su Usuario y Contraseña";
+                error.Text = "Excepción: " + ex.ToString();
                 alerta.Visible = true;
             }
         }
