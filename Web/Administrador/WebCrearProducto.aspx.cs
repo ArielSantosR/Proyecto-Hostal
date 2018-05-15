@@ -68,7 +68,7 @@ namespace Web.Administrador
 
                 ddlRut.DataSource = coleccionProveedor;
                 ddlRut.DataValueField = "RUT_PROVEEDOR";
-                ddlRut.DataTextField = "RUT_PROVEEDOR";
+                ddlRut.DataTextField = "RutYNombre";
                 ddlRut.DataBind();
 
                 ddlUnidad.Items.Add("Unidad");

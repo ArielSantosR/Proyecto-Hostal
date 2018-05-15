@@ -1,12 +1,3 @@
-C:\Users\Cliente\Documents\GitHub\Proyecto-Hostal\Modelo\bin\Debug\Modelo.dll
-C:\Users\Cliente\Documents\GitHub\Proyecto-Hostal\Modelo\bin\Debug\Modelo.pdb
-C:\Users\Cliente\Documents\GitHub\Proyecto-Hostal\Modelo\bin\Debug\Datos.dll
-C:\Users\Cliente\Documents\GitHub\Proyecto-Hostal\Modelo\bin\Debug\EntityFramework.dll
-C:\Users\Cliente\Documents\GitHub\Proyecto-Hostal\Modelo\bin\Debug\Datos.pdb
-C:\Users\Cliente\Documents\GitHub\Proyecto-Hostal\Modelo\bin\Debug\EntityFramework.xml
-C:\Users\Cliente\Documents\GitHub\Proyecto-Hostal\Modelo\obj\Debug\Modelo.csprojResolveAssemblyReference.cache
-C:\Users\Cliente\Documents\GitHub\Proyecto-Hostal\Modelo\obj\Debug\Modelo.dll
-C:\Users\Cliente\Documents\GitHub\Proyecto-Hostal\Modelo\obj\Debug\Modelo.pdb
 C:\Users\Suzu\Documents\Proyecto-Hostal\.git\Modelo\bin\Debug\Modelo.dll
 C:\Users\Suzu\Documents\Proyecto-Hostal\.git\Modelo\bin\Debug\Modelo.pdb
 C:\Users\Suzu\Documents\Proyecto-Hostal\.git\Modelo\bin\Debug\Datos.dll
@@ -25,3 +16,12 @@ C:\Users\shogu\Documents\GitHub\Proyecto-Hostal\Modelo\bin\Debug\EntityFramework
 C:\Users\shogu\Documents\GitHub\Proyecto-Hostal\Modelo\obj\Debug\Modelo.csprojResolveAssemblyReference.cache
 C:\Users\shogu\Documents\GitHub\Proyecto-Hostal\Modelo\obj\Debug\Modelo.dll
 C:\Users\shogu\Documents\GitHub\Proyecto-Hostal\Modelo\obj\Debug\Modelo.pdb
+C:\Users\Cliente\Documents\GitHub\Proyecto-Hostal\Modelo\bin\Debug\Modelo.dll
+C:\Users\Cliente\Documents\GitHub\Proyecto-Hostal\Modelo\bin\Debug\Modelo.pdb
+C:\Users\Cliente\Documents\GitHub\Proyecto-Hostal\Modelo\bin\Debug\Datos.dll
+C:\Users\Cliente\Documents\GitHub\Proyecto-Hostal\Modelo\bin\Debug\EntityFramework.dll
+C:\Users\Cliente\Documents\GitHub\Proyecto-Hostal\Modelo\bin\Debug\Datos.pdb
+C:\Users\Cliente\Documents\GitHub\Proyecto-Hostal\Modelo\bin\Debug\EntityFramework.xml
+C:\Users\Cliente\Documents\GitHub\Proyecto-Hostal\Modelo\obj\Debug\Modelo.csprojResolveAssemblyReference.cache
+C:\Users\Cliente\Documents\GitHub\Proyecto-Hostal\Modelo\obj\Debug\Modelo.dll
+C:\Users\Cliente\Documents\GitHub\Proyecto-Hostal\Modelo\obj\Debug\Modelo.pdb

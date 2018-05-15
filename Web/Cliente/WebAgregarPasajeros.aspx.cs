@@ -37,6 +37,7 @@ namespace Web.Cliente {
             }
         }
 
+<<<<<<< HEAD
         protected void Page_Load(object sender, EventArgs e)
         {
             if (MiSesion.TIPO_USUARIO.Equals(Tipo_Usuario.Cliente.ToString()) && MiSesion.ESTADO.Equals(Estado_Usuario.Habilitado.ToString()))
@@ -65,6 +66,38 @@ namespace Web.Cliente {
                     {
                         divGrid.Visible = false;
                     }
+=======
+        protected void Page_Load(object sender,EventArgs e) {
+
+            error.Text = "";
+            exito.Text = "";
+            alerta_exito.Visible = false;
+            alerta.Visible = false;
+            if (MiSesion.TIPO_USUARIO.Equals(Tipo_Usuario.Administrador.ToString()) && MiSesion.ESTADO.Equals(Estado_Usuario.Habilitado.ToString())) {
+
+                if (!IsPostBack) {
+                    List<Modelo.Cliente> clientes = ClienteCollection.ListaClientes();
+                    ddlEmpresa.DataSource = clientes;
+                    ddlEmpresa.DataTextField = "NOMBRE_CLIENTE";
+                    ddlEmpresa.DataValueField = "RUT_CLIENTE";
+                    ddlEmpresa.DataBind();   
+                }
+                pasajeros = HuespedCollection.ListaHuesped().Where(x => x.RUT_CLIENTE == int.Parse(ddlEmpresa.SelectedValue)).ToList<Huesped>();
+                if (pasajeros.Count != 0) {
+                    divGrid.Visible = true;
+                    CargarGridView(pasajeros);
+                }
+                else {
+                    divGrid.Visible = false;
+                }
+            }
+            else {
+                divEmpresas.Visible = false;
+                pasajeros = HuespedCollection.ListaHuesped().Where(x => x.RUT_CLIENTE == SesionCl.RUT_CLIENTE).ToList<Huesped>();
+                if (pasajeros.Count != 0) {
+                    divGrid.Visible = true;
+                    CargarGridView(pasajeros);
+>>>>>>> e9658894b1a852c0ce674fb292040f697e4681bc
                 }
                 else
                 {

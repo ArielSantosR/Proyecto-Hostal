@@ -103,6 +103,7 @@ namespace Web.Administrador
                 ddlComuna.DataBind();
                 ddlComuna.Enabled = true;
 
+
                 ddlTipo.Items.Add("Cliente");
                 ddlTipo.Items.Add("Proveedor");
                 ddlTipo.Items.Add("Empleado");
