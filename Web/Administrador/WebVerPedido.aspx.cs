@@ -132,44 +132,75 @@ namespace Web.Administrador
 
         protected void btnEliminar_Click(object sender, EventArgs e)
         {
-            //Lee los valores del LinkButton, primero usa la clase LinkButton para 
-            //Transformar los datos de Sender, luego los lee y los asigna a una variable
             LinkButton btn = (LinkButton)(sender);
             short numero_pedido = short.Parse(btn.CommandArgument);
 
             Pedido pedido = new Pedido();
             pedido.NUMERO_PEDIDO = numero_pedido;
 
-            Service1 s = new Service1();
-            XmlSerializer sr = new XmlSerializer(typeof(Modelo.Pedido));
-            StringWriter writer = new StringWriter();
-            sr.Serialize(writer, pedido);
+            MiSesionPedido = pedido;
 
-            if (s.ObtenerPedido(writer.ToString()) == null)
+            ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modal", "$('#exampleModal').modal();", true);
+        }
+
+        protected void btnModal_Click(object sender, EventArgs e)
+        {
+
+            try
             {
-                alerta_exito.Visible = false;
-                error.Text = "No se ha encontrado el Pedido";
-                alerta.Visible = true;
-            }
-            else
-            {
-                Pedido pedido2 = s.ObtenerPedido(writer.ToString());
-                pedido2.ESTADO_PEDIDO = "Rechazado";
-
-                XmlSerializer sr2 = new XmlSerializer(typeof(Modelo.Pedido));
-                StringWriter writer2 = new StringWriter();
-                sr.Serialize(writer2, pedido2);
-
-                if (s.EditarEstadoPedido(writer2.ToString()))
+                if (txtComentario.Text != string.Empty)
                 {
-                    Response.Write("<script language='javascript'>window.alert('Ha Rechazado el pedido');window.location='../Administrador/WebVerPedido.aspx';</script>");
+                    Modelo.Pedido pedido = new Modelo.Pedido();
+                    pedido.NUMERO_PEDIDO = MiSesionPedido.NUMERO_PEDIDO;
+
+                    Service1 s = new Service1();
+                    XmlSerializer sr = new XmlSerializer(typeof(Modelo.Pedido));
+                    StringWriter writer = new StringWriter();
+                    sr.Serialize(writer, pedido);
+
+                    if (s.ObtenerPedido(writer.ToString()) != null)
+                    {
+                        pedido = s.ObtenerPedido(writer.ToString());
+                        pedido.COMENTARIO = txtComentario.Text;
+                        pedido.ESTADO_PEDIDO = "No Recepcionado";
+
+                        XmlSerializer sr2 = new XmlSerializer(typeof(Modelo.Pedido));
+                        StringWriter writer2 = new StringWriter();
+                        sr2.Serialize(writer2, pedido);
+
+                        if (s.EditarEstadoPedido(writer2.ToString()))
+                        {
+                            MiSesionPedido = null;
+
+                            Response.Write("<script language='javascript'>window.alert('Ha Rechazado el pedido');window.location='../Administrador/WebVerPedido.aspx';</script>");
+
+                        }
+                        else
+                        {
+                            alerta_exito.Visible = false;
+                            error.Text = "No se ha podido modificar el Estado de Producto";
+                            alerta.Visible = true;
+                        }
+                    }
+                    else
+                    {
+                        alerta_exito.Visible = false;
+                        error.Text = "Pedido no encontrado";
+                        alerta.Visible = true;
+                    }
                 }
                 else
                 {
                     alerta_exito.Visible = false;
-                    error.Text = "La modificación de Estado Pedido ha fallado";
+                    error.Text = "Antes de rechazar el pedido debe mencionar las razones";
                     alerta.Visible = true;
                 }
+            }
+            catch (Exception ex)
+            {
+                alerta_exito.Visible = false;
+                error.Text = "Excepción: " + ex.ToString();
+                alerta.Visible = true;
             }
         }
 

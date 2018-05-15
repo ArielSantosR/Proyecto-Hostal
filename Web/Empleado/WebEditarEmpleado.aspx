@@ -77,8 +77,8 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                    <br/><asp:Button ID="btnActualizar" runat="server" Text="Actualizar" cssClass="btn btn-primary btn-lg btn-block login-button" OnClick="btnActualizar_Click"/>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <br/><asp:Button ID="btnActualizar" runat="server" Text="Actualizar" cssClass="btn btn-success btn-lg btn-block login-button" OnClick="btnActualizar_Click"/>
                 </div>
             </div>
         </div>

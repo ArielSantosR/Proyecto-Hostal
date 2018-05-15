@@ -265,6 +265,9 @@ namespace WcfNegocio
         [OperationContract]
         string listaNotificacion(string usuario);
 
+        [OperationContract]
+        string HistorialNotificacion(string usuario);
+
         //DDL
         [OperationContract]
         string ListarTipoProveedor();

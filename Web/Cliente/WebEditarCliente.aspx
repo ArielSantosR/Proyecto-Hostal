@@ -131,11 +131,8 @@
                     </div>
                   </div>
                 <div class="row"> 
-                  <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                      <br/> <asp:Button ID="btnEditar" runat="server" Text="Editar"  CssClass="btn btn-primary btn-lg btn-block login-button" OnClick="btnEditar_Click" />
-                  </div>
-                  <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                      <br/> 
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                      <br/> <asp:Button ID="btnEditar" runat="server" Text="Editar"  CssClass="btn btn-success btn-lg btn-block login-button" OnClick="btnEditar_Click" />
                   </div>
                 </div>             
             </div>

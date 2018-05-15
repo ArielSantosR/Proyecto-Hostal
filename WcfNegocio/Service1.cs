@@ -1779,6 +1779,49 @@ namespace WcfNegocio
             }
         }
 
+        public string HistorialNotificacion(string usuario)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.Usuario));
+            StringReader reader = new StringReader(usuario);
+            Modelo.Usuario u = (Modelo.Usuario)ser.Deserialize(reader);
+            ServicioNotificacion serv = new ServicioNotificacion();
+
+            Datos.USUARIO uDatos = new Datos.USUARIO();
+            uDatos.ID_USUARIO = u.ID_USUARIO;
+
+            List<Datos.NOTIFICACION> listaNotificacion = serv.HistorialNotificacion(uDatos);
+
+            if (listaNotificacion == null)
+            {
+                return null;
+            }
+            else
+            {
+                XmlSerializer servicio = new XmlSerializer(typeof(Modelo.Notificacion));
+                Modelo.NotificacionCollection listaNotificacion2 = new Modelo.NotificacionCollection();
+
+                foreach (Datos.NOTIFICACION n in listaNotificacion)
+                {
+                    Modelo.Notificacion nModelo = new Modelo.Notificacion();
+                    nModelo.ID_NOTIFICACION = n.ID_NOTIFICACION;
+                    nModelo.MENSAJE = n.MENSAJE;
+                    nModelo.ESTADO_NOTIFICACION = n.ESTADO_NOTIFICACION;
+                    nModelo.URL = n.URL;
+                    nModelo.NUMERO_ORDEN = n.NUMERO_ORDEN;
+                    nModelo.ID_PRODUCTO = n.ID_PRODUCTO;
+                    nModelo.NUMERO_PEDIDO = n.NUMERO_PEDIDO;
+
+                    listaNotificacion2.Add(nModelo);
+                }
+
+                XmlSerializer ser2 = new XmlSerializer(typeof(Modelo.NotificacionCollection));
+                StringWriter writer = new StringWriter();
+                ser2.Serialize(writer, listaNotificacion2);
+                writer.Close();
+                return writer.ToString();
+            }
+        }
+
         public string ListarPedidoRecepcion()
         {
             ServicioPedido servicio = new ServicioPedido();

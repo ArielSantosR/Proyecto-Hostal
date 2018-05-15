@@ -24,3 +24,4 @@ C:\Users\Cliente\Documents\GitHub\Proyecto-Hostal\Datos\bin\Debug\Oracle.Managed
 C:\Users\Cliente\Documents\GitHub\Proyecto-Hostal\Datos\bin\Debug\EntityFramework.xml
 C:\Users\Cliente\Documents\GitHub\Proyecto-Hostal\Datos\obj\Debug\Datos.dll
 C:\Users\Cliente\Documents\GitHub\Proyecto-Hostal\Datos\obj\Debug\Datos.pdb
+C:\Users\Suzu\Documents\Proyecto-Hostal\.git\Datos\obj\Debug\Datos.csprojResolveAssemblyReference.cache

@@ -114,6 +114,7 @@
     <Content Include="Administrador\WebEliminarTipoPlato.aspx" />
     <Content Include="Administrador\WebEliminarTipoProveedor.aspx" />
     <Content Include="Administrador\WebInformes.aspx" />
+    <Content Include="Administrador\WebNotificacion.aspx" />
     <Content Include="Administrador\WebVerCategoriaPlato.aspx" />
     <Content Include="Administrador\WebVerHabitacion.aspx" />
     <Content Include="Administrador\WebRegistroAdmin.aspx" />
@@ -127,6 +128,7 @@
     <Content Include="Cliente\WebCrearOrden.aspx" />
     <Content Include="Cliente\WebEditarCliente.aspx" />
     <Content Include="Cliente\WebEditarPasajero.aspx" />
+    <Content Include="Cliente\WebNotificacion.aspx" />
     <Content Include="Cliente\WebVerHistorial.aspx" />
     <Content Include="Empleado\WebAsignarHabitacion.aspx" />
     <Content Include="Empleado\WebCrearDetalle.aspx" />
@@ -136,6 +138,7 @@
     <Content Include="Empleado\WebEditarEmpleado.aspx" />
     <Content Include="Empleado\WebEditarPedido.aspx" />
     <Content Include="Empleado\WebHistorialPedidos.aspx" />
+    <Content Include="Empleado\WebNotificacion.aspx" />
     <Content Include="Empleado\WebRecibirPedido.aspx" />
     <Content Include="Empleado\WebRegistrarOrden.aspx" />
     <Content Include="Empleado\WebVerFacturas.aspx" />
@@ -150,6 +153,7 @@
     <Content Include="Administrador\WebAdmin.aspx" />
     <Content Include="Proveedor\WebHistorialPedidos.aspx" />
     <Content Include="Proveedor\WebEditarProveedor.aspx" />
+    <Content Include="Proveedor\WebNotificacion.aspx" />
     <Content Include="Proveedor\WebPedidosDespacho.aspx" />
     <Content Include="Proveedor\WebPedidosRecibidos.aspx" />
     <Content Include="WebCerrarSesion.aspx" />
@@ -327,6 +331,13 @@
     <Compile Include="Administrador\WebInformes.aspx.designer.cs">
       <DependentUpon>WebInformes.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Administrador\WebNotificacion.aspx.cs">
+      <DependentUpon>WebNotificacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\WebNotificacion.aspx.designer.cs">
+      <DependentUpon>WebNotificacion.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Administrador\WebVerCategoriaPlato.aspx.cs">
       <DependentUpon>WebVerCategoriaPlato.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -425,6 +436,13 @@
     <Compile Include="Cliente\WebEditarPasajero.aspx.designer.cs">
       <DependentUpon>WebEditarPasajero.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Cliente\WebNotificacion.aspx.cs">
+      <DependentUpon>WebNotificacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Cliente\WebNotificacion.aspx.designer.cs">
+      <DependentUpon>WebNotificacion.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Cliente\WebVerHistorial.aspx.cs">
       <DependentUpon>WebVerHistorial.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -494,6 +512,13 @@
     </Compile>
     <Compile Include="Empleado\WebHistorialPedidos.aspx.designer.cs">
       <DependentUpon>WebHistorialPedidos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Empleado\WebNotificacion.aspx.cs">
+      <DependentUpon>WebNotificacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Empleado\WebNotificacion.aspx.designer.cs">
+      <DependentUpon>WebNotificacion.aspx</DependentUpon>
     </Compile>
     <Compile Include="Empleado\WebRecibirPedido.aspx.cs">
       <DependentUpon>WebRecibirPedido.aspx</DependentUpon>
@@ -579,6 +604,13 @@
     </Compile>
     <Compile Include="Proveedor\WebEditarProveedor.aspx.designer.cs">
       <DependentUpon>WebEditarProveedor.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proveedor\WebNotificacion.aspx.cs">
+      <DependentUpon>WebNotificacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proveedor\WebNotificacion.aspx.designer.cs">
+      <DependentUpon>WebNotificacion.aspx</DependentUpon>
     </Compile>
     <Compile Include="Proveedor\WebPedidosDespacho.aspx.cs">
       <DependentUpon>WebPedidosDespacho.aspx</DependentUpon>

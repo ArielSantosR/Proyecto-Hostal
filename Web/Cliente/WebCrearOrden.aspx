@@ -15,7 +15,7 @@
               <label for="name" class="col-sm-12 control-label">Nombre Pasajero</label>
                 <div class="col-sm-12">
                   <div class="input-group">
-                  <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                  <span class="input-group-text"><i class="fa fa-user fa" aria-hidden="true"></i></span>
                   <asp:TextBox ID="txtNombrePasajero" placeholder="Ingrese Nombre del Pasajero" runat="server" CssClass="form-control" required="required"></asp:TextBox>
                 </div>
               </div>
@@ -24,7 +24,7 @@
               <label for="rut" class="col-sm-12 control-label">Rut Pasajero</label>
                 <div class="col-sm-12">
                   <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-user-secret" aria-hidden="true"></i></span>
+                    <span class="input-group-text"><i class="fa fa-user-secret" aria-hidden="true"></i></span>
                     <asp:TextBox ID="txtRutPasajero" placeholder="Ingrese Rut sin puntos ni guión" runat="server" oninput="checkRut(this)" required="required" CssClass="form-control"></asp:TextBox>
                 </div>
               </div>
@@ -33,7 +33,7 @@
               <label for="email" class="col-sm-12 control-label">Correo Electrónico</label>
               <div class="col-sm-12">
                 <div class="input-group">
-                  <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+                  <span class="input-group-text"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
                   <asp:TextBox ID="txtEmailPasajero" placeholder="Ingrese Correo Electrónico" TextMode="Email" runat="server" CssClass="form-control"></asp:TextBox>
                 </div>
               </div>
@@ -42,7 +42,7 @@
                 <label for="phone" class="col-sm-12 control-label">Teléfono</label>
                   <div class="col-sm-12">
                     <div class="input-group">
-                      <span class="input-group-addon"><i class="fa fa-phone fa-lg" aria-hidden="true"></i></span>
+                      <span class="input-group-text"><i class="fa fa-phone fa-lg" aria-hidden="true"></i></span>
                       <asp:TextBox ID="txtTelefonoPasajero" placeholder="Ingrese Teléfono del Pasajero" runat="server" TextMode="Number" CssClass="form-control"></asp:TextBox>
                     </div>
                   </div>
@@ -54,7 +54,7 @@
                   <label for="country" class="col-sm-12 control-label">Menú</label>
                     <div class="col-sm-12">
                       <div class="input-group">
-                        <span class="input-group-addon"><i class="fas fa-utensils" aria-hidden="true"></i></span>
+                        <span class="input-group-text"><i class="fas fa-utensils" aria-hidden="true"></i></span>
                           <asp:DropDownList ID="ddlMenu" CssClass="form-control" runat="server" AutoPostBack="True"> </asp:DropDownList>
                       </div>
                     </div>
@@ -66,13 +66,13 @@
                   <label for="direction" class="col-sm-12 control-label">Dirección</label>
                     <div class="col-sm-12">
                       <div class="input-group">
-                        <span class="input-group-addon"><i class="fa fa-home fa-lg" aria-hidden="true"></i></span>
+                        <span class="input-group-text"><i class="fa fa-home fa-lg" aria-hidden="true"></i></span>
                         <asp:TextBox ID="txtDireccion" placeholder="Ingrese su dirección" runat="server" CssClass="form-control" required="required"></asp:TextBox>
                       </div>
                     </div>
                   </div>
                 <div class="row"> 
-                  <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                       <br/> <asp:Button ID="btnAgregar" runat="server" Text="Agregar Pasajero"  CssClass="btn btn-primary btn-lg btn-block login-button" />
                   </div>
                   
