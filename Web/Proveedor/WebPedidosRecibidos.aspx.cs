@@ -212,8 +212,6 @@ namespace Web.Proveedor
         {
             try
             {
-                //Lee los valores del LinkButton, primero usa la clase LinkButton para 
-                //Transformar los datos de Sender, luego los lee y los asigna a una variable
                 LinkButton btn = (LinkButton)(sender);
                 short numero_pedido = short.Parse(btn.CommandArgument);
 
@@ -222,7 +220,31 @@ namespace Web.Proveedor
 
                 MiSesionPedido = pedido;
 
-                Response.Redirect("../Proveedor/WebDetallePedido.aspx");
+                if (MiSesionPedido.NUMERO_PEDIDO != 0)
+                {
+
+                    Service1 s = new Service1();
+                    XmlSerializer sr = new XmlSerializer(typeof(Modelo.Pedido));
+                    StringWriter writer = new StringWriter();
+                    sr.Serialize(writer, pedido);
+
+                    if (s.ListarDetallePedido(writer.ToString()) != null)
+                    {
+                        string datos = s.ListarDetallePedido(writer.ToString());
+                        XmlSerializer ser3 = new XmlSerializer(typeof(Modelo.DetallePedidoCollection));
+                        StringReader reader = new StringReader(datos);
+
+                        Modelo.DetallePedidoCollection listaDetalle = (Modelo.DetallePedidoCollection)ser3.Deserialize(reader);
+                        reader.Close();
+                        gvDetalle.DataSource = listaDetalle;
+                        gvDetalle.DataBind();
+
+                        MiSesionPedido = s.ObtenerPedido(writer.ToString());
+
+                        ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modal", "$('#exampleModal2').modal();", true);
+                    }
+                }
+
             }
             catch (Exception ex)
             {

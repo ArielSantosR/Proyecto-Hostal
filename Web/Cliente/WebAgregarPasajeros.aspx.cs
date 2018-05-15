@@ -37,44 +37,52 @@ namespace Web.Cliente {
             }
         }
 
-        protected void Page_Load(object sender,EventArgs e) {
-<<<<<<< HEAD
-            if (MiSesion.TIPO_USUARIO.Equals(Tipo_Usuario.Cliente.ToString()) && MiSesion.ESTADO.Equals(Estado_Usuario.Habilitado.ToString())) {
-=======
-            error.Text = "";
-            exito.Text = "";
-            alerta_exito.Visible = false;
-            alerta.Visible = false;
-            if (MiSesion.TIPO_USUARIO.Equals(Tipo_Usuario.Administrador.ToString()) && MiSesion.ESTADO.Equals(Estado_Usuario.Habilitado.ToString())) {
->>>>>>> a660efd664511daa2ecc417eb28da6436671f326
-                if (!IsPostBack) {
-                    List<Modelo.Cliente> clientes = ClienteCollection.ListaClientes();
-                    ddlEmpresa.DataSource = clientes;
-                    ddlEmpresa.DataTextField = "NOMBRE_CLIENTE";
-                    ddlEmpresa.DataValueField = "RUT_CLIENTE";
-                    ddlEmpresa.DataBind();   
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (MiSesion.TIPO_USUARIO.Equals(Tipo_Usuario.Cliente.ToString()) && MiSesion.ESTADO.Equals(Estado_Usuario.Habilitado.ToString()))
+            {
+                error.Text = "";
+                exito.Text = "";
+                alerta_exito.Visible = false;
+                alerta.Visible = false;
+                if (MiSesion.TIPO_USUARIO.Equals(Tipo_Usuario.Administrador.ToString()) && MiSesion.ESTADO.Equals(Estado_Usuario.Habilitado.ToString()))
+                {
+                    if (!IsPostBack)
+                    {
+                        List<Modelo.Cliente> clientes = ClienteCollection.ListaClientes();
+                        ddlEmpresa.DataSource = clientes;
+                        ddlEmpresa.DataTextField = "NOMBRE_CLIENTE";
+                        ddlEmpresa.DataValueField = "RUT_CLIENTE";
+                        ddlEmpresa.DataBind();
+                    }
+                    pasajeros = HuespedCollection.ListaHuesped().Where(x => x.RUT_CLIENTE == int.Parse(ddlEmpresa.SelectedValue)).ToList<Huesped>();
+                    if (pasajeros.Count != 0)
+                    {
+                        divGrid.Visible = true;
+                        CargarGridView(pasajeros);
+                    }
+                    else
+                    {
+                        divGrid.Visible = false;
+                    }
                 }
-                pasajeros = HuespedCollection.ListaHuesped().Where(x => x.RUT_CLIENTE == int.Parse(ddlEmpresa.SelectedValue)).ToList<Huesped>();
-                if (pasajeros.Count != 0) {
-                    divGrid.Visible = true;
-                    CargarGridView(pasajeros);
-                }
-                else {
-                    divGrid.Visible = false;
-                }
-            }
-            else {
-                divEmpresas.Visible = false;
-                pasajeros = HuespedCollection.ListaHuesped().Where(x => x.RUT_CLIENTE == SesionCl.RUT_CLIENTE).ToList<Huesped>();
-                if (pasajeros.Count != 0) {
-                    divGrid.Visible = true;
-                    CargarGridView(pasajeros);
-                }
-                else {
-                    divGrid.Visible = false;
+                else
+                {
+                    divEmpresas.Visible = false;
+                    pasajeros = HuespedCollection.ListaHuesped().Where(x => x.RUT_CLIENTE == SesionCl.RUT_CLIENTE).ToList<Huesped>();
+                    if (pasajeros.Count != 0)
+                    {
+                        divGrid.Visible = true;
+                        CargarGridView(pasajeros);
+                    }
+                    else
+                    {
+                        divGrid.Visible = false;
+                    }
                 }
             }
         }
+        
 
         private void CargarGridView(List<Huesped> pasajeros) {
 

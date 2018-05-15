@@ -13,7 +13,7 @@ namespace Datos {
             ent.SaveChanges();
             return true;
         }
-
+        /*
         public bool EditarEstadoOrden(ORDEN_COMPRA orden) {
             ORDEN_COMPRA oc = ent.ORDEN_COMPRA.FirstOrDefault(objeto =>
             objeto.NUMERO_ORDEN.Equals(orden.NUMERO_ORDEN));
@@ -34,13 +34,13 @@ namespace Datos {
                 return false;
             }
         }
-
+        */
         public bool AgregarDetalleOrden(DETALLE_ORDEN d) {
             ent.DETALLE_ORDEN.Add(d);
             ent.SaveChanges();
             return true;
         }
-
+        /*
         public List<ORDEN_COMPRA> ListarOrdenes(ORDEN_COMPRA orden) {
             var lista = (from consulta in ent.PEDIDO
                          where consulta.RUT_PROVEEDOR == proveedor.RUT_PROVEEDOR
@@ -129,5 +129,6 @@ namespace Datos {
                          select consulta).ToList();
             return lista;
         }
+        */
     }
 }

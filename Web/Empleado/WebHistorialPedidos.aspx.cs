@@ -292,6 +292,7 @@ namespace Web.Empleado
                         {
                             Pedido pedido2 = s.ObtenerPedido(writer2.ToString());
                             pedido2.ESTADO_PEDIDO = "Rechazado";
+                            pedido2.COMENTARIO = "No tiene ningún detalle Pedido asociado";
 
                             XmlSerializer sr3 = new XmlSerializer(typeof(Modelo.Pedido));
                             StringWriter writer3 = new StringWriter();

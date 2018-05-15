@@ -1,54 +1,54 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Administrador/AdminM.Master" AutoEventWireup="true" CodeBehind="WebRegistroAdmin.aspx.cs" Inherits="Web.Administrador.WebRegistroAdmin" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script type="text/javascript" src="../js/scriptRut.js"></script>
+     <script type="text/javascript">
 
-</asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    
- <script type="text/javascript">
+   
 
-     $(function () {
-         document.getElementById('<%=ddlPais.ClientID %>').selectedIndex = 0;
-         document.getElementById('<%=ddlRegion.ClientID %>').selectedIndex = 0;
+    function pageLoad() {
+        console.log('pageLoad');
+        $(document).ready(function () {
+            PermisosDeUsuario();
+        });
+    };
 
-         $(".cliente").hide();
-         $('.cliente').find(':input').prop('disabled', true);
-         $(".proveedor").hide();
-         $('.proveedor').find(':input').prop('disabled', true);
-         $(".empleado").hide();
-         $('.empleado').find(':input').prop('disabled', true);
-
-         PermisosDeUsuario();
-     });
 
      function PermisosDeUsuario() {
          var control = document.getElementById('<%= ddlTipo.ClientID %>');
          var tipo = control.options[control.selectedIndex].value;
 
+         document.getElementById('<%=ddlPais.ClientID %>').selectedIndex = 0;
+         document.getElementById('<%=ddlRegion.ClientID %>').selectedIndex = 0;
+         
+
          if (tipo == "Cliente") {
-             $(".cliente").delay(200).show(1500);
-             $('.cliente').find(':input').prop('disabled', false);
-             $(".proveedor").hide(1000);
-             $('.proveedor').find(':input').prop('disabled', true);
-             $(".empleado").hide(1000);
-             $('.empleado').find(':input').prop('disabled', true);
+             $("#cliente").collapse('show');
+             $('#cliente').find(':input').prop('disabled', false);
+             $("#proveedor").collapse('hide');
+             $('#proveedor').find(':input').prop('disabled', true);
+             $("#empleado").collapse('hide');
+             $('#empleado').find(':input').prop('disabled', true);
          } else if (tipo == "Proveedor") {
-             $(".cliente").hide(1000);
-             $('.cliente').find(':input').prop('disabled', true);
-             $(".proveedor").delay(200).show(1500);
-             $('.proveedor').find(':input').prop('disabled', false);
-             $(".empleado").hide(1000);
-             $('.empleado').find(':input').prop('disabled', true);
+             $("#cliente").collapse('hide');
+             $('#cliente').find(':input').prop('disabled', true);
+             $("#proveedor").collapse('show');
+             $('#proveedor').find(':input').prop('disabled', false);
+             $("#empleado").collapse('hide');
+             $('#empleado').find(':input').prop('disabled', true);
          } else if (tipo == "Empleado") {
-             $(".cliente").hide(1000);
-             $('.cliente').find(':input').prop('disabled', true);
-             $(".proveedor").hide(1000);
-             $('.proveedor').find(':input').prop('disabled', true);
-             $(".empleado").delay(200).show(1500);
-             $('.empleado').find(':input').prop('disabled', false);
+             $("#cliente").collapse('hide');
+             $('#cliente').find(':input').prop('disabled', true);
+             $("#proveedor").collapse('hide');
+             $('#proveedor').find(':input').prop('disabled', true);
+             $("#empleado").collapse('show');
+             $('#empleado').find(':input').prop('disabled', false);
          } 
      }
     </script>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    
+
 
 <div class="alert alert-danger alert-dismissible" id="alerta" runat="server">
   <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -132,7 +132,7 @@
              
           <!-- DATOS CLIENTE -->
           
-          <div class="cliente">
+          <div id="cliente" class="collapse" data-toggle="false" aria-expanded="false">
             <div class="form-group">
               <label for="rut" class="col-sm-12 control-label">Rut Cliente</label>
                 <div class="col-sm-12">
@@ -213,7 +213,7 @@
               </div>
 
           <!-- DATOS EMPLEADO -->
-          <div class="empleado">
+          <div id="empleado" class="collapse" aria-expanded="false">
             <div class="form-group">
               <label for="rut" class="col-sm-12 control-label">Rut Empleado</label>
                 <div class="col-sm-12">
@@ -262,7 +262,7 @@
         </div> 
 
           <!-- DATOS Proveedor -->
-          <div class="proveedor">
+          <div id="proveedor" class="collapse" aria-expanded="false">
             <div class="form-group">
               <label for="rut" class="col-sm-12 control-label">Rut Proveedor</label>
                 <div class="col-sm-12">
