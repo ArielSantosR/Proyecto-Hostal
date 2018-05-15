@@ -128,6 +128,22 @@ namespace Web.Empleado
             }
         }
 
+        public DetallePedido MiSesionDetalle
+        {
+            get
+            {
+                if (Session["DetallePedido"] == null)
+                {
+                    Session["DetallePedido"] = new Pedido();
+                }
+                return (DetallePedido)Session["DetallePedido"];
+            }
+            set
+            {
+                Session["DetallePedido"] = value;
+            }
+        }
+
         public List<DetallePedido> MiSesionD
         {
             get
@@ -240,7 +256,17 @@ namespace Web.Empleado
         {
             try
             {
+                MiSesionD = null;
 
+                LinkButton btn = (LinkButton)(sender);
+                short ID_DETALLE_PEDIDO = short.Parse(btn.CommandArgument);
+
+                DetallePedido detalle = new DetallePedido();
+                detalle.ID_DETALLE_PEDIDO = ID_DETALLE_PEDIDO;
+
+                MiSesionDetalle = detalle;
+
+                Response.Redirect("../Empleado/WebEditarPedido.aspx");
             }
             catch (Exception ex)
             {

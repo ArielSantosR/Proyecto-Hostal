@@ -1493,6 +1493,24 @@ namespace WcfNegocio
             return servicio.EditarEstadoPedido(pDatos);
         }
 
+        public bool EditarDetallePedido(string detalle)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.DetallePedido));
+            StringReader reader = new StringReader(detalle);
+            Modelo.DetallePedido d = (Modelo.DetallePedido)ser.Deserialize(reader);
+            ServicioPedido servicio = new ServicioPedido();
+
+            Datos.DETALLE_PEDIDO dDatos = new Datos.DETALLE_PEDIDO();
+
+            dDatos.NUMERO_PEDIDO = d.NUMERO_PEDIDO;
+            dDatos.ID_DETALLE_PEDIDO = d.ID_DETALLE_PEDIDO;
+            dDatos.ID_PRODUCTO = d.ID_PRODUCTO;
+            dDatos.CANTIDAD = d.CANTIDAD;
+            
+
+            return servicio.EditarDetallePedido(dDatos);
+        }
+
         public Pedido ObtenerPedido(string pedido)
         {
             XmlSerializer ser = new XmlSerializer(typeof(Modelo.Pedido));
@@ -1519,6 +1537,32 @@ namespace WcfNegocio
                 p.RUT_PROVEEDOR = Datos2.RUT_PROVEEDOR;
 
                 return p;
+            }
+        }
+
+        public DetallePedido obtenerDetallePedido(string detalle)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.DetallePedido));
+            StringReader reader = new StringReader(detalle);
+            Modelo.DetallePedido d = (Modelo.DetallePedido)ser.Deserialize(reader);
+            ServicioPedido serv = new ServicioPedido();
+            Datos.DETALLE_PEDIDO Datos = new Datos.DETALLE_PEDIDO();
+            Datos.ID_DETALLE_PEDIDO = d.ID_DETALLE_PEDIDO;
+
+            if (serv.obtenerDetallePedido(Datos) == null)
+            {
+                return null;
+            }
+            else
+            {
+                Datos.DETALLE_PEDIDO Datos2 = serv.obtenerDetallePedido(Datos);
+
+                d.NUMERO_PEDIDO = Datos2.NUMERO_PEDIDO;
+                d.ID_DETALLE_PEDIDO = Datos2.ID_DETALLE_PEDIDO;
+                d.ID_PRODUCTO = Datos2.ID_PRODUCTO;
+                d.CANTIDAD = Datos2.CANTIDAD;
+
+                return d;
             }
         }
 

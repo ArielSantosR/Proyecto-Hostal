@@ -117,8 +117,6 @@ namespace Web.Empleado
                 }
                 ddlRut.SelectedValue = MiSesionPedido.RUT_PROVEEDOR + "";
                 ddlRut.Attributes.Add("disabled", "disabled");
-
-                
             }
             catch (Exception ex)
             {

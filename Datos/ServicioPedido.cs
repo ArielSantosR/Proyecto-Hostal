@@ -144,6 +144,42 @@ namespace Datos
             }
         }
 
+        public DETALLE_PEDIDO obtenerDetallePedido(DETALLE_PEDIDO detalle)
+        {
+            DETALLE_PEDIDO d = ent.DETALLE_PEDIDO.FirstOrDefault(objeto =>
+            objeto.ID_DETALLE_PEDIDO == detalle.ID_DETALLE_PEDIDO);
+
+            if (d != null)
+            {
+                return d;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public bool EditarDetallePedido(DETALLE_PEDIDO detalle)
+        {
+            DETALLE_PEDIDO d = ent.DETALLE_PEDIDO.FirstOrDefault(objeto =>
+            objeto.ID_DETALLE_PEDIDO == detalle.ID_DETALLE_PEDIDO);
+
+            if (d != null)
+            {
+                d.ID_DETALLE_PEDIDO = detalle.ID_DETALLE_PEDIDO;
+                d.CANTIDAD = detalle.CANTIDAD;
+                d.NUMERO_PEDIDO = detalle.NUMERO_PEDIDO;
+                d.ID_PRODUCTO = detalle.ID_PRODUCTO;
+
+                ent.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         //Filtro Detalle Pedido
         public List<DETALLE_PEDIDO> ListaDetallePedido(PEDIDO pedido)
         {

@@ -1,5 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Empleado/EmpleadoM.Master" AutoEventWireup="true" CodeBehind="WebEditarPedido.aspx.cs" Inherits="Web.Empleado.WebEditarPedido" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="alert alert-danger alert-dismissible" id="alerta" runat="server">
   <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
   <strong>Error!</strong> <asp:Literal ID="error" runat="server"></asp:Literal>
@@ -71,7 +73,7 @@
 
           <div class="row"> 
                   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                      <br/> <asp:Button ID="btnRegistrar" runat="server" Text="Agregar a la Lista"  CssClass="btn btn-primary btn-lg btn-block login-button" OnClick="btnRegistrar_Click" />
+                      <br/> <asp:Button ID="btnRegistrar" runat="server" Text="Editar Detalle"  CssClass="btn btn-success btn-lg btn-block login-button" OnClick="btnRegistrar_Click" />
                   </div>
                 </div>   
           </div>

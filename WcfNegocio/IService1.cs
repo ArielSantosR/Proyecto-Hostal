@@ -213,6 +213,9 @@ namespace WcfNegocio
         bool EditarEstadoPedido(string pedido);
 
         [OperationContract]
+        bool EditarDetallePedido(string detalle);
+
+        [OperationContract]
         bool AgregarDetallePedido(string detalle);
 
         [OperationContract]
@@ -229,6 +232,9 @@ namespace WcfNegocio
 
         [OperationContract]
         Pedido ObtenerPedido(string pedido);
+
+        [OperationContract]
+        DetallePedido obtenerDetallePedido(string detalle);
 
         [OperationContract]
         string ListarHistorialProveedor(string proveedor);

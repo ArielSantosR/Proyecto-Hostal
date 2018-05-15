@@ -1135,8 +1135,6 @@ BEGIN
   END IF;
 END;
 
-
-
 /
 
 --Este Trigger es para avisar a cada Empleado que un producto tiene stock crítico y las desactiva en caso contrario.
@@ -1212,7 +1210,6 @@ BEGIN
   END IF;
 END;
 
-<<<<<<< HEAD
 --Cambios: 14/05
 
 create or replace TRIGGER TGR_DETALLE_PEDIDO2
@@ -1225,13 +1222,6 @@ BEGIN
   FROM dual;
 END;
 
-=======
---Cambios 13-05-2018
-CREATE SEQUENCE seq_orden_compra
-MINVALUE 1
-START WITH 1
-INCREMENT BY 1;
->>>>>>> a660efd664511daa2ecc417eb28da6436671f326
 
 CREATE SEQUENCE seq_detalle_orden
 MINVALUE 1
@@ -1261,4 +1251,23 @@ BEGIN
   SELECT seq_detalle_orden.NEXTVAL
   INTO :new.ID_DETALLE
   FROM dual;
+END;
+
+--Creación Trigger para Reponer productos tras Recepcionar un pedido.
+CREATE OR REPLACE TRIGGER TGR_STOCK_PRODUCTO
+AFTER UPDATE ON PEDIDO
+FOR EACH ROW
+DECLARE
+CURSOR CUR_DETALLE IS SELECT ID_PRODUCTO, CANTIDAD FROM DETALLE_PEDIDO WHERE NUMERO_PEDIDO = :NEW.NUMERO_PEDIDO;
+
+BEGIN
+	IF UPDATING('ESTADO_PEDIDO') THEN
+    IF :NEW.ESTADO_PEDIDO = 'Recepcionado' THEN
+          FOR I IN CUR_DETALLE LOOP
+            UPDATE PRODUCTO
+            SET STOCK_PRODUCTO = STOCK_PRODUCTO + I.CANTIDAD
+            WHERE ID_PRODUCTO = I.ID_PRODUCTO;
+          END LOOP;
+    END IF;
+  END IF;
 END;
