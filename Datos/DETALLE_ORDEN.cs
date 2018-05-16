@@ -17,8 +17,12 @@ namespace Datos
         public int ID_DETALLE { get; set; }
         public short NUMERO_ORDEN { get; set; }
         public int RUT_HUESPED { get; set; }
+        public short ID_CATEGORIA_HABITACION { get; set; }
+        public short ID_PENSION { get; set; }
     
         public virtual HUESPED HUESPED { get; set; }
         public virtual ORDEN_COMPRA ORDEN_COMPRA { get; set; }
+        public virtual CATEGORIA_HABITACION CATEGORIA_HABITACION { get; set; }
+        public virtual PENSION PENSION { get; set; }
     }
 }

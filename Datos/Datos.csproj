@@ -157,11 +157,12 @@
     <Compile Include="ServicioHuesped.cs" />
     <Compile Include="ServicioNotificacion.cs" />
     <Compile Include="ServicioOrdenCompra.cs" />
-    <Compile Include="ServicioPedido.cs" />
+    <Compile Include="ServicioOrden.cs" />
     <Compile Include="ServicioPlato.cs" />
     <Compile Include="ServicioProducto.cs" />
     <Compile Include="ServicioProveedor.cs" />
     <Compile Include="ServicioRecepcion.cs" />
+    <Compile Include="ServicioReserva.cs" />
     <Compile Include="ServicioUsuario.cs" />
     <Compile Include="TIPO_HABITACION.cs">
       <DependentUpon>Hostal.tt</DependentUpon>

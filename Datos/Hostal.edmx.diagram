@@ -79,6 +79,8 @@
         <AssociationConnector Association="Hostal.FK_NOTIFICACION_ORDEN" />
         <AssociationConnector Association="Hostal.FK_NOTIFICACION_PEDIDO" />
         <AssociationConnector Association="Hostal.FK_NOTIFICACION_PRODUCTO" />
+        <AssociationConnector Association="Hostal.FK_DETALLE_ORDEN_CATEGORIA" />
+        <AssociationConnector Association="Hostal.FK_DETALLE_ORDEN_PENSION" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

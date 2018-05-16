@@ -15,29 +15,36 @@ namespace Web.Empleado
     {
         void Page_PreInit(object sender, EventArgs e)
         {
-            if (MiSesion != null)
+            try
             {
-                if (MiSesion.TIPO_USUARIO != null && MiSesion.ESTADO != null)
+                if (MiSesion != null)
                 {
-                    if (MiSesion.TIPO_USUARIO.Equals("Administrador") &&
-                    MiSesion.ESTADO.Equals("Habilitado"))
+                    if (MiSesion.TIPO_USUARIO != null && MiSesion.ESTADO != null)
                     {
-                        MasterPageFile = "~/Administrador/AdminM.Master";
-                    }
-                    else if (MiSesion.TIPO_USUARIO.Equals("Empleado") &&
-                    MiSesion.ESTADO.Equals("Habilitado"))
-                    {
-                        MasterPageFile = "~/Empleado/EmpleadoM.Master";
+                        if (MiSesion.TIPO_USUARIO.Equals("Administrador") &&
+                        MiSesion.ESTADO.Equals("Habilitado"))
+                        {
+                            MasterPageFile = "~/Administrador/AdminM.Master";
+                        }
+                        else if (MiSesion.TIPO_USUARIO.Equals("Empleado") &&
+                        MiSesion.ESTADO.Equals("Habilitado"))
+                        {
+                            MasterPageFile = "~/Empleado/EmpleadoM.Master";
+                        }
+                        else
+                        {
+                            Response.Write("<script language='javascript'>window.alert('No Posee los permisos necesarios');window.location='../Hostal/WebLogin.aspx';</script>");
+                        }
                     }
                     else
                     {
-                        Response.Write("<script language='javascript'>window.alert('No Posee los permisos necesarios');window.location='../Hostal/WebLogin.aspx';</script>");
+                        Response.Write("<script language='javascript'>window.alert('Debe Iniciar Sesión Primero');window.location='../Hostal/WebLogin.aspx';</script>");
                     }
                 }
-                else
-                {
-                    Response.Write("<script language='javascript'>window.alert('Debe Iniciar Sesión Primero');window.location='../Hostal/WebLogin.aspx';</script>");
-                }
+            }
+            catch (Exception)
+            {
+                Response.Write("<script language='javascript'>window.alert('Debe Iniciar Sesión Primero');window.location='../Hostal/WebLogin.aspx';</script>");
             }
         }
 
@@ -164,7 +171,7 @@ namespace Web.Empleado
                             else
                             {
                                 alerta_exito.Visible = false;
-                                error.Text = "Error, debe seleccionar un producto ";
+                                error.Text = "Debe seleccionar un producto ";
                                 alerta.Visible = true;
                             }
                         }
