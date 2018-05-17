@@ -81,6 +81,8 @@
           <Property Name="ID_DETALLE" Type="number" Precision="10" Scale="0" Nullable="false" />
           <Property Name="NUMERO_ORDEN" Type="number" Precision="5" Scale="0" Nullable="false" />
           <Property Name="RUT_HUESPED" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="ID_CATEGORIA_HABITACION" Type="number" Precision="3" Scale="0" Nullable="false" />
+          <Property Name="ID_PENSION" Type="number" Precision="5" Scale="0" Nullable="false" />
         </EntityType>
         <EntityType Name="DETALLE_PEDIDO">
           <Key>
@@ -411,6 +413,30 @@
             </Principal>
             <Dependent Role="DETALLE_FACTURA">
               <PropertyRef Name="ID_FACTURA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DETALLE_ORDEN_CATEGORIA">
+          <End Role="CATEGORIA_HABITACION" Type="Self.CATEGORIA_HABITACION" Multiplicity="1" />
+          <End Role="DETALLE_ORDEN" Type="Self.DETALLE_ORDEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CATEGORIA_HABITACION">
+              <PropertyRef Name="ID_CATEGORIA_HABITACION" />
+            </Principal>
+            <Dependent Role="DETALLE_ORDEN">
+              <PropertyRef Name="ID_CATEGORIA_HABITACION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DETALLE_ORDEN_PENSION">
+          <End Role="PENSION" Type="Self.PENSION" Multiplicity="1" />
+          <End Role="DETALLE_ORDEN" Type="Self.DETALLE_ORDEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PENSION">
+              <PropertyRef Name="ID_PENSION" />
+            </Principal>
+            <Dependent Role="DETALLE_ORDEN">
+              <PropertyRef Name="ID_PENSION" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -904,6 +930,14 @@
             <End Role="FACTURA" EntitySet="FACTURA" />
             <End Role="DETALLE_FACTURA" EntitySet="DETALLE_FACTURA" />
           </AssociationSet>
+          <AssociationSet Name="FK_DETALLE_ORDEN_CATEGORIA" Association="Self.FK_DETALLE_ORDEN_CATEGORIA">
+            <End Role="CATEGORIA_HABITACION" EntitySet="CATEGORIA_HABITACION" />
+            <End Role="DETALLE_ORDEN" EntitySet="DETALLE_ORDEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DETALLE_ORDEN_PENSION" Association="Self.FK_DETALLE_ORDEN_PENSION">
+            <End Role="PENSION" EntitySet="PENSION" />
+            <End Role="DETALLE_ORDEN" EntitySet="DETALLE_ORDEN" />
+          </AssociationSet>
           <AssociationSet Name="FK_DETALLE_PEDIDO_PEDIDO" Association="Self.FK_DETALLE_PEDIDO_PEDIDO">
             <End Role="PEDIDO" EntitySet="PEDIDO" />
             <End Role="DETALLE_PEDIDO" EntitySet="DETALLE_PEDIDO" />
@@ -1136,6 +1170,10 @@
           <Property Name="RUT_HUESPED" Type="Int32" Nullable="false" />
           <NavigationProperty Name="HUESPED" Relationship="Self.FK_HUESPED_DETALLE_ORDEN" FromRole="DETALLE_ORDEN" ToRole="HUESPED" />
           <NavigationProperty Name="ORDEN_COMPRA" Relationship="Self.FK_ORDEN_DETALLE_ORDEN" FromRole="DETALLE_ORDEN" ToRole="ORDEN_COMPRA" />
+          <Property Name="ID_CATEGORIA_HABITACION" Type="Int16" Nullable="false" />
+          <Property Name="ID_PENSION" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="CATEGORIA_HABITACION" Relationship="Hostal.FK_DETALLE_ORDEN_CATEGORIA" FromRole="DETALLE_ORDEN" ToRole="CATEGORIA_HABITACION" />
+          <NavigationProperty Name="PENSION" Relationship="Hostal.FK_DETALLE_ORDEN_PENSION" FromRole="DETALLE_ORDEN" ToRole="PENSION" />
         </EntityType>
         <EntityType Name="DETALLE_PEDIDO">
           <Key>
@@ -1283,6 +1321,7 @@
           <Property Name="NUMERO_HABITACION" Type="Int16" Nullable="false" />
           <NavigationProperty Name="DETALLE_PLATOS" Relationship="Self.FK_DETALLE_PLATOS_PENSION" FromRole="PENSION" ToRole="DETALLE_PLATOS" />
           <NavigationProperty Name="HABITACION" Relationship="Hostal.FK_PENSION_HABITACION" FromRole="PENSION" ToRole="HABITACION" />
+          <NavigationProperty Name="DETALLE_ORDEN" Relationship="Hostal.FK_DETALLE_ORDEN_PENSION" FromRole="PENSION" ToRole="DETALLE_ORDEN" />
         </EntityType>
         <EntityType Name="PLATO">
           <Key>
@@ -2011,6 +2050,14 @@
             <End Role="PRODUCTO" EntitySet="PRODUCTO" />
             <End Role="NOTIFICACION" EntitySet="NOTIFICACION" />
           </AssociationSet>
+          <AssociationSet Name="FK_DETALLE_ORDEN_CATEGORIA" Association="Hostal.FK_DETALLE_ORDEN_CATEGORIA">
+            <End Role="CATEGORIA_HABITACION" EntitySet="CATEGORIA_HABITACION" />
+            <End Role="DETALLE_ORDEN" EntitySet="DETALLE_ORDEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DETALLE_ORDEN_PENSION" Association="Hostal.FK_DETALLE_ORDEN_PENSION">
+            <End Role="PENSION" EntitySet="PENSION" />
+            <End Role="DETALLE_ORDEN" EntitySet="DETALLE_ORDEN" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="CATEGORIA_HABITACION">
           <Key>
@@ -2020,6 +2067,7 @@
           <Property Name="NOMBRE_CATEGORIA" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="PRECIO_CATEGORIA" Type="Int32" Nullable="false" />
           <NavigationProperty Name="HABITACION" Relationship="Hostal.FK_HABITACION_CATEGORIA_HAB" FromRole="CATEGORIA_HABITACION" ToRole="HABITACION" />
+          <NavigationProperty Name="DETALLE_ORDEN" Relationship="Hostal.FK_DETALLE_ORDEN_CATEGORIA" FromRole="CATEGORIA_HABITACION" ToRole="DETALLE_ORDEN" />
         </EntityType>
         <EntityType Name="NOTIFICACION">
           <Key>
@@ -2169,6 +2217,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_DETALLE_ORDEN_CATEGORIA">
+          <End Type="Hostal.CATEGORIA_HABITACION" Role="CATEGORIA_HABITACION" Multiplicity="1" />
+          <End Type="Hostal.DETALLE_ORDEN" Role="DETALLE_ORDEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CATEGORIA_HABITACION">
+              <PropertyRef Name="ID_CATEGORIA_HABITACION" />
+            </Principal>
+            <Dependent Role="DETALLE_ORDEN">
+              <PropertyRef Name="ID_CATEGORIA_HABITACION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DETALLE_ORDEN_PENSION">
+          <End Type="Hostal.PENSION" Role="PENSION" Multiplicity="1" />
+          <End Type="Hostal.DETALLE_ORDEN" Role="DETALLE_ORDEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PENSION">
+              <PropertyRef Name="ID_PENSION" />
+            </Principal>
+            <Dependent Role="DETALLE_ORDEN">
+              <PropertyRef Name="ID_PENSION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2244,6 +2316,8 @@
           <EntitySetMapping Name="DETALLE_ORDEN">
             <EntityTypeMapping TypeName="Hostal.DETALLE_ORDEN">
               <MappingFragment StoreEntitySet="DETALLE_ORDEN">
+                <ScalarProperty Name="ID_PENSION" ColumnName="ID_PENSION" />
+                <ScalarProperty Name="ID_CATEGORIA_HABITACION" ColumnName="ID_CATEGORIA_HABITACION" />
                 <ScalarProperty Name="ID_DETALLE" ColumnName="ID_DETALLE" />
                 <ScalarProperty Name="NUMERO_ORDEN" ColumnName="NUMERO_ORDEN" />
                 <ScalarProperty Name="RUT_HUESPED" ColumnName="RUT_HUESPED" />

@@ -23,7 +23,7 @@
       <div class="main-login main-center">
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
-                    <h5>Crear Pedido</h5>         
+                    <h5><strong>Crear Pedido</strong></h5>
                 </div>
             </div>
             
@@ -82,7 +82,7 @@
                       <br/> <asp:Button ID="btnRegistrar" runat="server" Text="Agregar a la Lista"  CssClass="btn btn-primary btn-lg btn-block login-button" OnClick="btnRegistrar_Click" />
                   </div>
                   <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                      <br/> <asp:Button ID="btnLimpiar" runat="server" Text="Pedir Productos"  CssClass="btn btn-warning btn-lg btn-block login-button" OnClick="btnLimpiar_Click"/>
+                      <br/> <asp:Button ID="btnLimpiar" runat="server" Text="Pedir Productos"  CssClass="btn btn-secondary btn-lg btn-block login-button" OnClick="btnLimpiar_Click"/>
                   </div>
                 </div>   
           </div>

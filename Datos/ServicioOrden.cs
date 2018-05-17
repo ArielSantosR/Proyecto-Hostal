@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Datos
 {
-    public class ServicioPedido
+    public class ServicioOrden
     {
         HostalEntities ent = new HostalEntities();
 

@@ -1287,7 +1287,7 @@ namespace WcfNegocio
             XmlSerializer ser = new XmlSerializer(typeof(Modelo.Pedido));
             StringReader reader = new StringReader(pedido);
             Modelo.Pedido p = (Modelo.Pedido)ser.Deserialize(reader);
-            ServicioPedido servicio = new ServicioPedido();
+            ServicioOrden servicio = new ServicioOrden();
 
             Datos.PEDIDO pDatos = new Datos.PEDIDO();
             //Datos Pedido
@@ -1305,7 +1305,7 @@ namespace WcfNegocio
             XmlSerializer ser = new XmlSerializer(typeof(Modelo.DetallePedido));
             StringReader reader = new StringReader(detalle);
             Modelo.DetallePedido d = (Modelo.DetallePedido)ser.Deserialize(reader);
-            ServicioPedido servicio = new ServicioPedido();
+            ServicioOrden servicio = new ServicioOrden();
 
             Datos.DETALLE_PEDIDO dDatos = new Datos.DETALLE_PEDIDO();
             //Datos Pedido
@@ -1318,7 +1318,7 @@ namespace WcfNegocio
         public string ListarPedidoAdmin()
         {
 
-            ServicioPedido servicio = new ServicioPedido();
+            ServicioOrden servicio = new ServicioOrden();
             List<Datos.PEDIDO> pedido = servicio.ListarPedidoAdmin();
             Modelo.PedidoCollection listaPedido = new Modelo.PedidoCollection();
 
@@ -1349,7 +1349,7 @@ namespace WcfNegocio
             XmlSerializer ser = new XmlSerializer(typeof(Modelo.Empleado));
             StringReader reader = new StringReader(empleado);
             Modelo.Empleado pr = (Modelo.Empleado)ser.Deserialize(reader);
-            ServicioPedido serv = new ServicioPedido();
+            ServicioOrden serv = new ServicioOrden();
 
             Datos.EMPLEADO pDatos = new Datos.EMPLEADO();
             pDatos.RUT_EMPLEADO = pr.RUT_EMPLEADO;
@@ -1392,7 +1392,7 @@ namespace WcfNegocio
             XmlSerializer ser = new XmlSerializer(typeof(Modelo.Empleado));
             StringReader reader = new StringReader(empleado);
             Modelo.Empleado pr = (Modelo.Empleado)ser.Deserialize(reader);
-            ServicioPedido serv = new ServicioPedido();
+            ServicioOrden serv = new ServicioOrden();
 
             Datos.EMPLEADO pDatos = new Datos.EMPLEADO();
             pDatos.RUT_EMPLEADO = pr.RUT_EMPLEADO;
@@ -1435,7 +1435,7 @@ namespace WcfNegocio
             XmlSerializer ser = new XmlSerializer(typeof(Modelo.Proveedor));
             StringReader reader = new StringReader(proveedor);
             Modelo.Proveedor pr = (Modelo.Proveedor)ser.Deserialize(reader);
-            ServicioPedido serv = new ServicioPedido();
+            ServicioOrden serv = new ServicioOrden();
 
             Datos.PROVEEDOR pDatos = new Datos.PROVEEDOR();
             pDatos.RUT_PROVEEDOR = pr.RUT_PROVEEDOR;
@@ -1478,7 +1478,7 @@ namespace WcfNegocio
             XmlSerializer ser = new XmlSerializer(typeof(Modelo.Pedido));
             StringReader reader = new StringReader(pedido);
             Modelo.Pedido p = (Modelo.Pedido)ser.Deserialize(reader);
-            ServicioPedido servicio = new ServicioPedido();
+            ServicioOrden servicio = new ServicioOrden();
 
             Datos.PEDIDO pDatos = new Datos.PEDIDO();
 
@@ -1498,7 +1498,7 @@ namespace WcfNegocio
             XmlSerializer ser = new XmlSerializer(typeof(Modelo.DetallePedido));
             StringReader reader = new StringReader(detalle);
             Modelo.DetallePedido d = (Modelo.DetallePedido)ser.Deserialize(reader);
-            ServicioPedido servicio = new ServicioPedido();
+            ServicioOrden servicio = new ServicioOrden();
 
             Datos.DETALLE_PEDIDO dDatos = new Datos.DETALLE_PEDIDO();
 
@@ -1516,7 +1516,7 @@ namespace WcfNegocio
             XmlSerializer ser = new XmlSerializer(typeof(Modelo.Pedido));
             StringReader reader = new StringReader(pedido);
             Modelo.Pedido p = (Modelo.Pedido)ser.Deserialize(reader);
-            ServicioPedido serv = new ServicioPedido();
+            ServicioOrden serv = new ServicioOrden();
             Datos.PEDIDO Datos = new Datos.PEDIDO();
             Datos.NUMERO_PEDIDO = p.NUMERO_PEDIDO;
 
@@ -1545,7 +1545,7 @@ namespace WcfNegocio
             XmlSerializer ser = new XmlSerializer(typeof(Modelo.DetallePedido));
             StringReader reader = new StringReader(detalle);
             Modelo.DetallePedido d = (Modelo.DetallePedido)ser.Deserialize(reader);
-            ServicioPedido serv = new ServicioPedido();
+            ServicioOrden serv = new ServicioOrden();
             Datos.DETALLE_PEDIDO Datos = new Datos.DETALLE_PEDIDO();
             Datos.ID_DETALLE_PEDIDO = d.ID_DETALLE_PEDIDO;
 
@@ -1571,7 +1571,7 @@ namespace WcfNegocio
             XmlSerializer ser = new XmlSerializer(typeof(Modelo.Proveedor));
             StringReader reader = new StringReader(proveedor);
             Modelo.Proveedor pr = (Modelo.Proveedor)ser.Deserialize(reader);
-            ServicioPedido serv = new ServicioPedido();
+            ServicioOrden serv = new ServicioOrden();
 
             Datos.PROVEEDOR pDatos = new Datos.PROVEEDOR();
             pDatos.RUT_PROVEEDOR = pr.RUT_PROVEEDOR;
@@ -1614,7 +1614,7 @@ namespace WcfNegocio
             XmlSerializer ser = new XmlSerializer(typeof(Modelo.Proveedor));
             StringReader reader = new StringReader(proveedor);
             Modelo.Proveedor pr = (Modelo.Proveedor)ser.Deserialize(reader);
-            ServicioPedido serv = new ServicioPedido();
+            ServicioOrden serv = new ServicioOrden();
 
             Datos.PROVEEDOR pDatos = new Datos.PROVEEDOR();
             pDatos.RUT_PROVEEDOR = pr.RUT_PROVEEDOR;
@@ -1657,7 +1657,7 @@ namespace WcfNegocio
             XmlSerializer ser = new XmlSerializer(typeof(Modelo.Proveedor));
             StringReader reader = new StringReader(proveedor);
             Modelo.Proveedor pr = (Modelo.Proveedor)ser.Deserialize(reader);
-            ServicioPedido serv = new ServicioPedido();
+            ServicioOrden serv = new ServicioOrden();
 
             Datos.PROVEEDOR pDatos = new Datos.PROVEEDOR();
             pDatos.RUT_PROVEEDOR = pr.RUT_PROVEEDOR;
@@ -1700,7 +1700,7 @@ namespace WcfNegocio
             XmlSerializer ser = new XmlSerializer(typeof(Modelo.Pedido));
             StringReader reader = new StringReader(pedido);
             Modelo.Pedido pr = (Modelo.Pedido)ser.Deserialize(reader);
-            ServicioPedido serv = new ServicioPedido();
+            ServicioOrden serv = new ServicioOrden();
 
             Datos.PEDIDO pDatos = new Datos.PEDIDO();
             pDatos.NUMERO_PEDIDO = pr.NUMERO_PEDIDO;
@@ -1824,7 +1824,7 @@ namespace WcfNegocio
 
         public string ListarPedidoRecepcion()
         {
-            ServicioPedido servicio = new ServicioPedido();
+            ServicioOrden servicio = new ServicioOrden();
             List<Datos.PEDIDO> pedido = servicio.ListarPedidoRecepcion();
             Modelo.PedidoCollection listaPedido = new Modelo.PedidoCollection();
 
@@ -1855,7 +1855,7 @@ namespace WcfNegocio
             XmlSerializer ser = new XmlSerializer(typeof(Modelo.DetallePedido));
             StringReader reader = new StringReader(detalle);
             Modelo.DetallePedido d = (Modelo.DetallePedido)ser.Deserialize(reader);
-            ServicioPedido servicio = new ServicioPedido();
+            ServicioOrden servicio = new ServicioOrden();
 
             Datos.DETALLE_PEDIDO dDatos = new Datos.DETALLE_PEDIDO();
             //Datos Detalle
