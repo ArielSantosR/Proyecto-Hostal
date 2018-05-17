@@ -72,20 +72,26 @@ namespace Web.Administrador
                 ddlRut.DataBind();
 
                 ddlUnidad.Items.Add("Unidad");
+                ddlUnidad.Items.Add("Gramos");
                 ddlUnidad.Items.Add("100 Gramos");
                 ddlUnidad.Items.Add("200 Gramos");
                 ddlUnidad.Items.Add("500 Gramos");
+                ddlUnidad.Items.Add("Kilos");
                 ddlUnidad.Items.Add("1 Kilogramo");
                 ddlUnidad.Items.Add("2 Kilogramos");
                 ddlUnidad.Items.Add("5 Kilogramos");
+                ddlUnidad.Items.Add("Milílitros");
                 ddlUnidad.Items.Add("350 Milílitros");
                 ddlUnidad.Items.Add("500 Milílitros");
                 ddlUnidad.Items.Add("750 Milílitros");
+                ddlUnidad.Items.Add("Litros");
                 ddlUnidad.Items.Add("1 Litro");
                 ddlUnidad.Items.Add("1.5 Litros");
                 ddlUnidad.Items.Add("2 Litros");
                 ddlUnidad.Items.Add("2.5 Litros");
                 ddlUnidad.Items.Add("3 Litros");
+                ddlUnidad.Items.Add("Galón");
+                ddlUnidad.Items.Add("Saco");
 
                 calendarFecha.SelectedDate = Convert.ToDateTime("01/01/2000");
             }

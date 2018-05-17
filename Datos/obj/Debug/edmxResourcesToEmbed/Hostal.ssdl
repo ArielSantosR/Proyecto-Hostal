@@ -76,6 +76,8 @@
     <Property Name="ID_DETALLE" Type="number" Precision="10" Scale="0" Nullable="false" />
     <Property Name="NUMERO_ORDEN" Type="number" Precision="5" Scale="0" Nullable="false" />
     <Property Name="RUT_HUESPED" Type="number" Precision="8" Scale="0" Nullable="false" />
+    <Property Name="ID_CATEGORIA_HABITACION" Type="number" Precision="3" Scale="0" Nullable="false" />
+    <Property Name="ID_PENSION" Type="number" Precision="5" Scale="0" Nullable="false" />
   </EntityType>
   <EntityType Name="DETALLE_PEDIDO">
     <Key>
@@ -406,6 +408,30 @@
       </Principal>
       <Dependent Role="DETALLE_FACTURA">
         <PropertyRef Name="ID_FACTURA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DETALLE_ORDEN_CATEGORIA">
+    <End Role="CATEGORIA_HABITACION" Type="Self.CATEGORIA_HABITACION" Multiplicity="1" />
+    <End Role="DETALLE_ORDEN" Type="Self.DETALLE_ORDEN" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CATEGORIA_HABITACION">
+        <PropertyRef Name="ID_CATEGORIA_HABITACION" />
+      </Principal>
+      <Dependent Role="DETALLE_ORDEN">
+        <PropertyRef Name="ID_CATEGORIA_HABITACION" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DETALLE_ORDEN_PENSION">
+    <End Role="PENSION" Type="Self.PENSION" Multiplicity="1" />
+    <End Role="DETALLE_ORDEN" Type="Self.DETALLE_ORDEN" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PENSION">
+        <PropertyRef Name="ID_PENSION" />
+      </Principal>
+      <Dependent Role="DETALLE_ORDEN">
+        <PropertyRef Name="ID_PENSION" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -898,6 +924,14 @@
     <AssociationSet Name="FK_DETALLE_FACTURA_FACTURA" Association="Self.FK_DETALLE_FACTURA_FACTURA">
       <End Role="FACTURA" EntitySet="FACTURA" />
       <End Role="DETALLE_FACTURA" EntitySet="DETALLE_FACTURA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DETALLE_ORDEN_CATEGORIA" Association="Self.FK_DETALLE_ORDEN_CATEGORIA">
+      <End Role="CATEGORIA_HABITACION" EntitySet="CATEGORIA_HABITACION" />
+      <End Role="DETALLE_ORDEN" EntitySet="DETALLE_ORDEN" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DETALLE_ORDEN_PENSION" Association="Self.FK_DETALLE_ORDEN_PENSION">
+      <End Role="PENSION" EntitySet="PENSION" />
+      <End Role="DETALLE_ORDEN" EntitySet="DETALLE_ORDEN" />
     </AssociationSet>
     <AssociationSet Name="FK_DETALLE_PEDIDO_PEDIDO" Association="Self.FK_DETALLE_PEDIDO_PEDIDO">
       <End Role="PEDIDO" EntitySet="PEDIDO" />

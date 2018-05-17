@@ -70,6 +70,8 @@
     <EntitySetMapping Name="DETALLE_ORDEN">
       <EntityTypeMapping TypeName="Hostal.DETALLE_ORDEN">
         <MappingFragment StoreEntitySet="DETALLE_ORDEN">
+          <ScalarProperty Name="ID_PENSION" ColumnName="ID_PENSION" />
+          <ScalarProperty Name="ID_CATEGORIA_HABITACION" ColumnName="ID_CATEGORIA_HABITACION" />
           <ScalarProperty Name="ID_DETALLE" ColumnName="ID_DETALLE" />
           <ScalarProperty Name="NUMERO_ORDEN" ColumnName="NUMERO_ORDEN" />
           <ScalarProperty Name="RUT_HUESPED" ColumnName="RUT_HUESPED" />
