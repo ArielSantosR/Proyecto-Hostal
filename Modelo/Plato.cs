@@ -14,5 +14,12 @@ namespace Modelo
         public int PRECIO_PLATO { get; set; }
         public short ID_CATEGORIA { get; set; }
         public short ID_TIPO_PLATO { get; set; }
+
+        public string NombreYPrecio
+        {
+            get { return this.NOMBRE_PLATO + " $" + this.PRECIO_PLATO; }
+        }
     }
+
+    
 }
