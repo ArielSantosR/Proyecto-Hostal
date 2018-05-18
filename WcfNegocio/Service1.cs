@@ -2063,7 +2063,7 @@ namespace WcfNegocio
             return writer.ToString();
         }
 
-        public string ListarHuesped(string cliente)
+        public string ListarHuespedService(string cliente)
         {
             XmlSerializer ser = new XmlSerializer(typeof(Modelo.Cliente));
             StringReader reader = new StringReader(cliente);

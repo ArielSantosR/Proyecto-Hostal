@@ -297,6 +297,6 @@ namespace WcfNegocio
         string ListarFamilia();
 
         [OperationContract]
-        string ListarHuesped(string cliente);
+        string ListarHuespedService(string cliente);
     }
 }

@@ -73,7 +73,7 @@ namespace Web.Cliente
                         sr2.Serialize(writer2, cliente2);
                         writer2.Close();
 
-                        string datos = service.ListarHuesped(writer2.ToString());
+                        string datos = service.ListarHuespedService(writer2.ToString());
                         XmlSerializer ser3 = new XmlSerializer(typeof(Modelo.HuespedCollection));
                         StringReader reader = new StringReader(datos);
                         Modelo.HuespedCollection coleccionHuesped = (Modelo.HuespedCollection)ser3.Deserialize(reader);
