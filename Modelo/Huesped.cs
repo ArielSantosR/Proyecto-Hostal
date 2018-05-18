@@ -21,6 +21,11 @@ namespace Modelo
         public Nullable<short> NUMERO_HABITACION { get; set; }
         public int RUT_CLIENTE { get; set; }
 
+        public string RutYNombre
+        {
+            get { return this.RUT_HUESPED + "-" + this.DV_HUESPED + " " + this.PNOMBRE_HUESPED + " " + this.APP_PATERNO_HUESPED; }
+        }
+
         public bool Crear() {
             ServicioHuesped serv = new ServicioHuesped();
             HUESPED datos = new HUESPED();

@@ -76,40 +76,31 @@ namespace Web.Cliente {
         protected global::System.Web.UI.WebControls.DropDownList ddlRut;
         
         /// <summary>
-        /// Control ddlProducto.
+        /// Control ddlCategoria.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlProducto;
+        protected global::System.Web.UI.WebControls.DropDownList ddlCategoria;
         
         /// <summary>
-        /// Control UpdatePanel3.
+        /// Control ddlPension.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel3;
+        protected global::System.Web.UI.WebControls.DropDownList ddlPension;
         
         /// <summary>
-        /// Control txtCantidad.
+        /// Control calendarFecha.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCantidad;
-        
-        /// <summary>
-        /// Control txtPrecio.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPrecio;
+        protected global::System.Web.UI.WebControls.Calendar calendarFecha;
         
         /// <summary>
         /// Control btnRegistrar.

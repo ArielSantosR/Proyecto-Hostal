@@ -18,7 +18,7 @@
       <div class="main-login main-center">
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
-                    <h5><strong>Crear Pedido</strong></h5>
+                    <h5><strong>Crear Reserva</strong></h5>
                 </div>
             </div>
             
@@ -26,7 +26,7 @@
           <asp:UpdatePanel ID="UpdatePanel2" UpdateMode="Conditional" runat="server">
             <ContentTemplate>
                 <div class="form-group">
-              <label for="name" class="col-sm-12 control-label">RUT Proveedor </label>
+              <label for="name" class="col-sm-12 control-label">RUT Huésped </label>
                 <div class="col-sm-12">
                   <div class="input-group">
                   <span class="input-group-text"><i class="fa fa-user fa" aria-hidden="true"></i></span>
@@ -36,41 +36,45 @@
               </div>
             </div>    
                 <div class="form-group">
-              <label for="name" class="col-sm-12 control-label">Producto </label>
+              <label for="name" class="col-sm-12 control-label">Categoría Habitación </label>
                 <div class="col-sm-12">
                   <div class="input-group">
                   <span class="input-group-text"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                      <asp:DropDownList ID="ddlProducto" CssClass="form-control" runat="server">
+                      <asp:DropDownList ID="ddlCategoria" CssClass="form-control" runat="server">
                       </asp:DropDownList>
                 </div>
               </div>
-            </div>          
-                </ContentTemplate>
-            </asp:UpdatePanel>
-
-          <asp:UpdatePanel ID="UpdatePanel3" UpdateMode="Conditional" runat="server">
-              <ContentTemplate>
-          <div class="form-group">
-              <label for="name" class="col-sm-12 control-label">Cantidad</label>
+            </div>
+                <div class="form-group">
+              <label for="name" class="col-sm-12 control-label">Minuta</label>
                 <div class="col-sm-12">
                   <div class="input-group">
                   <span class="input-group-text"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                  <asp:TextBox ID="txtCantidad" placeholder="Ingrese cantidad de Productos" TextMode="Number" runat="server" CssClass="form-control" required="required" min="1" AutoPostBack="true"></asp:TextBox>
+                      <asp:DropDownList ID="ddlPension" CssClass="form-control" runat="server">
+                      </asp:DropDownList>
+                </div>
+              </div>
+            </div>           
+                </ContentTemplate>
+            </asp:UpdatePanel>
+          <div class="form-group">
+              <label for="name" class="col-sm-12 control-label">Fecha de Vencimiento</label>
+                  &nbsp;<div class="col-sm-12">
+                  <div class="input-group">
+                  <span class="input-group-text"><i class="fas fa-calendar-alt" aria-hidden="true"></i></span>
+                  <asp:Calendar ID="calendarFecha" runat="server" BackColor="White" BorderColor="Black" BorderStyle="Solid" CellSpacing="1" Font-Names="Verdana" Font-Size="9pt" ForeColor="Black" Height="250px" NextPrevFormat="ShortMonth" Width="330px">
+                  <DayHeaderStyle Font-Bold="True" Font-Size="8pt" ForeColor="#333333" Height="8pt" />
+                  <DayStyle BackColor="#CCCCCC" />
+                  <NextPrevStyle Font-Bold="True" Font-Size="8pt" ForeColor="White" />
+                  <OtherMonthDayStyle ForeColor="#999999" />
+                  <SelectedDayStyle BackColor="#333399" ForeColor="White" />
+                  <TitleStyle BackColor="#333399" BorderStyle="Solid" Font-Bold="True" Font-Size="12pt" ForeColor="White" Height="12pt" />
+                  <TodayDayStyle BackColor="#CCCCCC"/>
+              </asp:Calendar>
                 </div>
               </div>
             </div>
 
-          <div class="form-group">
-              <label for="name" class="col-sm-12 control-label">Precio Total</label>
-                <div class="col-sm-12">
-                  <div class="input-group">
-                  <span class="input-group-text"><i class="fas fa-money-bill-alt" aria-hidden="true"></i></span>
-                  <asp:TextBox ID="txtPrecio" placeholder="Ingrese cantidad de Productos para ver Total" runat="server" CssClass="form-control" required="required"></asp:TextBox>
-                </div>
-              </div>
-            </div>
-                  </ContentTemplate>
-              </asp:UpdatePanel>
 
           <div class="row"> 
                   <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">

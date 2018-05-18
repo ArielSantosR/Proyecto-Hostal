@@ -310,7 +310,25 @@ namespace WcfNegocio
             return servicio.AgregarCliente(cDatos);
         }
 
+        public Cliente buscarIDC(string cliente){
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.Cliente));
+            StringReader reader = new StringReader(cliente);
+            Modelo.Cliente c = (Modelo.Cliente)ser.Deserialize(reader);
+            ServicioCliente serv = new ServicioCliente();
+            Datos.CLIENTE cDatos = new Datos.CLIENTE();
+            cDatos.ID_USUARIO = c.ID_USUARIO;
 
+            if (serv.BuscarIDC(cDatos) == null)
+            {
+                return null;
+            }
+            else
+            {
+                Datos.CLIENTE cDatos2 = serv.BuscarIDC(cDatos);
+                c.RUT_CLIENTE = cDatos2.RUT_CLIENTE;
+                return c;
+            }
+        }
 
         //CRUD Empleado
         public bool ExisteRutE(string empleado)
@@ -2043,6 +2061,48 @@ namespace WcfNegocio
             ser.Serialize(writer, listaFamilia);
             writer.Close();
             return writer.ToString();
+        }
+
+        public string ListarHuesped(string cliente)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.Cliente));
+            StringReader reader = new StringReader(cliente);
+            Modelo.Cliente c = (Modelo.Cliente)ser.Deserialize(reader);
+            ServicioCliente serv = new ServicioCliente();
+
+            Datos.CLIENTE cDatos = new Datos.CLIENTE();
+            cDatos.RUT_CLIENTE = c.RUT_CLIENTE;
+
+            List<Datos.HUESPED> listaHuesped = serv.ListarHuesped(cDatos);
+
+            if (listaHuesped == null)
+            {
+                return null;
+            }
+            else
+            {
+                XmlSerializer servicio = new XmlSerializer(typeof(Modelo.Huesped));
+                Modelo.HuespedCollection listaHuesped2 = new Modelo.HuespedCollection();
+
+                foreach (Datos.HUESPED h in listaHuesped)
+                {
+                    Modelo.Huesped hModelo = new Modelo.Huesped();
+                    hModelo.RUT_HUESPED = h.RUT_HUESPED;
+                    hModelo.DV_HUESPED = h.DV_HUESPED;
+                    hModelo.PNOMBRE_HUESPED = h.PNOMBRE_HUESPED;
+                    hModelo.SNOMBRE_HUESPED = h.SNOMBRE_HUESPED;
+                    hModelo.APP_PATERNO_HUESPED = h.APP_PATERNO_HUESPED;
+                    hModelo.APP_PATERNO_HUESPED = h.APP_PATERNO_HUESPED;
+
+                    listaHuesped2.Add(hModelo);
+                }
+
+                XmlSerializer ser2 = new XmlSerializer(typeof(Modelo.HuespedCollection));
+                StringWriter writer = new StringWriter();
+                ser2.Serialize(writer, listaHuesped2);
+                writer.Close();
+                return writer.ToString();
+            }
         }
     }
 }

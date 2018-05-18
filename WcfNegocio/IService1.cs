@@ -55,6 +55,9 @@ namespace WcfNegocio
 
         [OperationContract]
         bool RegistroCliente(string cliente);
+
+        [OperationContract]
+        Cliente buscarIDC(string cliente);
         //CRUD Empleado
         [OperationContract]
         bool ExisteRutE(string empleado);
@@ -293,6 +296,7 @@ namespace WcfNegocio
         [OperationContract]
         string ListarFamilia();
 
-        
+        [OperationContract]
+        string ListarHuesped(string cliente);
     }
 }

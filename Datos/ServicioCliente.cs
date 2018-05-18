@@ -40,6 +40,14 @@ namespace Datos
             return lista;
         }
 
+        public List<HUESPED> ListarHuesped(CLIENTE cliente)
+        {
+            var lista = (from consulta in ent.HUESPED
+                         where consulta.RUT_CLIENTE == cliente.RUT_CLIENTE
+                         select consulta).ToList();
+            return lista;
+        }
+
         public bool UpdateCliente(CLIENTE cliente) {
             CLIENTE c = ent.CLIENTE.FirstOrDefault(x => x.RUT_CLIENTE == cliente.RUT_CLIENTE);
             if (c != null) {
@@ -60,6 +68,20 @@ namespace Datos
         public CLIENTE BuscarCliente(short ID_USUARIO) {
             CLIENTE c = ent.CLIENTE.FirstOrDefault(x => x.ID_USUARIO == ID_USUARIO);
             return c;
+        }
+
+        public CLIENTE BuscarIDC(CLIENTE cliente)
+        {
+            CLIENTE p = ent.CLIENTE.FirstOrDefault(objeto =>
+            objeto.ID_USUARIO.Equals(cliente.ID_USUARIO));
+            if (p != null)
+            {
+                return p;
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }
