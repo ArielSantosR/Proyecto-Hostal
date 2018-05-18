@@ -92,6 +92,27 @@ namespace Web.Administrador
                 ddlFamilia.DataValueField = "ID_FAMILIA";
                 ddlFamilia.DataBind();
 
+                ddlUnidad.Items.Add("Unidad");
+                ddlUnidad.Items.Add("Gramos");
+                ddlUnidad.Items.Add("100 Gramos");
+                ddlUnidad.Items.Add("200 Gramos");
+                ddlUnidad.Items.Add("500 Gramos");
+                ddlUnidad.Items.Add("Kilos");
+                ddlUnidad.Items.Add("1 Kilogramo");
+                ddlUnidad.Items.Add("2 Kilogramos");
+                ddlUnidad.Items.Add("5 Kilogramos");
+                ddlUnidad.Items.Add("Milílitros");
+                ddlUnidad.Items.Add("350 Milílitros");
+                ddlUnidad.Items.Add("500 Milílitros");
+                ddlUnidad.Items.Add("750 Milílitros");
+                ddlUnidad.Items.Add("Litros");
+                ddlUnidad.Items.Add("1 Litro");
+                ddlUnidad.Items.Add("1.5 Litros");
+                ddlUnidad.Items.Add("2 Litros");
+                ddlUnidad.Items.Add("2.5 Litros");
+                ddlUnidad.Items.Add("3 Litros");
+                ddlUnidad.Items.Add("Galón");
+                ddlUnidad.Items.Add("Saco");
 
                 if (MiSesionP.ID_PRODUCTO != 0)
                 {
@@ -147,6 +168,7 @@ namespace Web.Administrador
                     producto.ID_FAMILIA = short.Parse(ddlFamilia.SelectedValue);
                     producto.DESCRIPCION_PRODUCTO = txtDescripcion.Text;
                     producto.FECHA_VENCIMIENTO_PRODUCTO = calendarFecha.SelectedDate;
+                    producto.UNIDAD_MEDIDA = ddlUnidad.SelectedValue;
 
                     if (short.TryParse(txtStock.Text, out stock) &&
                         short.TryParse(txtStockCritico.Text, out stockCritico) &&
@@ -188,10 +210,10 @@ namespace Web.Administrador
                     alerta.Visible = true;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 alerta_exito.Visible = false;
-                error.Text = "Excepcion";
+                error.Text = "Excepcion" + ex.Message;
                 alerta.Visible = true;
             }
         }

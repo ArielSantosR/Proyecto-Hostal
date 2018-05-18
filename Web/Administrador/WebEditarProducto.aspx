@@ -79,6 +79,16 @@
               </div>
             </div> 
                 <div class="form-group">
+              <label for="name" class="col-sm-12 control-label">Unidad de Medida </label>
+                <div class="col-sm-12">
+                  <div class="input-group">
+                  <span class="input-group-text"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                      <asp:DropDownList ID="ddlUnidad" CssClass="form-control" runat="server">
+                      </asp:DropDownList>    
+                </div>
+              </div>
+            </div> 
+                <div class="form-group">
               <label for="name" class="col-sm-12 control-label">Fecha de Vencimiento</label>
 &nbsp;<div class="col-sm-12">
                   <div class="input-group">
