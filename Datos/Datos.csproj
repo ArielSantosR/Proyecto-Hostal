@@ -156,7 +156,6 @@
     <Compile Include="ServicioMinuta.cs" />
     <Compile Include="ServicioHuesped.cs" />
     <Compile Include="ServicioNotificacion.cs" />
-    <Compile Include="ServicioOrdenCompra.cs" />
     <Compile Include="ServicioOrden.cs" />
     <Compile Include="ServicioPlato.cs" />
     <Compile Include="ServicioProducto.cs" />

@@ -140,7 +140,7 @@
     <Content Include="Empleado\WebHistorialPedidos.aspx" />
     <Content Include="Empleado\WebNotificacion.aspx" />
     <Content Include="Empleado\WebRecibirPedido.aspx" />
-    <Content Include="Empleado\WebRegistrarOrden.aspx" />
+    <Content Include="Empleado\WebReservasPendientes.aspx" />
     <Content Include="Empleado\WebVerFacturas.aspx" />
     <Content Include="Empleado\WebVerProductos.aspx" />
     <Content Include="Hostal\WebContacto.aspx" />
@@ -527,12 +527,12 @@
     <Compile Include="Empleado\WebRecibirPedido.aspx.designer.cs">
       <DependentUpon>WebRecibirPedido.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Empleado\WebRegistrarOrden.aspx.cs">
-      <DependentUpon>WebRegistrarOrden.aspx</DependentUpon>
+    <Compile Include="Empleado\WebReservasPendientes.aspx.cs">
+      <DependentUpon>WebReservasPendientes.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Empleado\WebRegistrarOrden.aspx.designer.cs">
-      <DependentUpon>WebRegistrarOrden.aspx</DependentUpon>
+    <Compile Include="Empleado\WebReservasPendientes.aspx.designer.cs">
+      <DependentUpon>WebReservasPendientes.aspx</DependentUpon>
     </Compile>
     <Compile Include="Empleado\WebVerFacturas.aspx.cs">
       <DependentUpon>WebVerFacturas.aspx</DependentUpon>

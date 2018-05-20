@@ -201,6 +201,8 @@
     <NavigationProperty Name="DETALLE_ORDEN" Relationship="Self.FK_ORDEN_DETALLE_ORDEN" FromRole="ORDEN_COMPRA" ToRole="DETALLE_ORDEN" />
     <NavigationProperty Name="EMPLEADO" Relationship="Self.FK_ORDEN_COMPRA_EMPLEADO" FromRole="ORDEN_COMPRA" ToRole="EMPLEADO" />
     <NavigationProperty Name="NOTIFICACION" Relationship="Hostal.FK_NOTIFICACION_ORDEN" FromRole="ORDEN_COMPRA" ToRole="NOTIFICACION" />
+    <Property Name="ESTADO_ORDEN" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="COMENTARIO" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="PAIS">
     <Key>

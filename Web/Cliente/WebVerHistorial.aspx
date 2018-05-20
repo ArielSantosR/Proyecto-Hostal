@@ -2,53 +2,114 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <div class="alert alert-danger alert-dismissible" id="alerta" runat="server">
+  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  <strong>Error!</strong> <asp:Literal ID="error" runat="server"></asp:Literal>
+</div>
+
+<div class="alert alert-success alert-dismissible" id="alerta_exito" runat="server">
+  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  <strong>Éxito!</strong> <asp:Literal ID="exito" runat="server"></asp:Literal>
+</div>
+    
+    <% if (gvOrden.Rows.Count != 0) { %>
     <div class="container">
-       <div class="row main">
-         <div class="main-login main-center-wide">
-             <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
-                        <h5>Ver Historial de Reservas</h5>
+        <div class="row" style="margin-top: 20px; margin-bottom: 20px;">
+            <div class="main-center">
+	            <div class="row">
+	                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+		                <h1>Historial de Reserva</h1>
+	                </div>
                 </div>
-           </div>
-           <div class="row">
-                  <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
-                      Filtro: Fecha Inicio
-                      <asp:Calendar ID="Calendar1" runat="server" BackColor="White" BorderColor="Black" BorderStyle="Solid" CellSpacing="1" Font-Names="Verdana" Font-Size="9pt" ForeColor="Black" Height="250px" NextPrevFormat="ShortMonth" Width="330px">
-                          <DayHeaderStyle Font-Bold="True" Font-Size="8pt" ForeColor="#333333" Height="8pt" />
-                          <DayStyle BackColor="#CCCCCC" />
-                          <NextPrevStyle Font-Bold="True" Font-Size="8pt" ForeColor="White" />
-                          <OtherMonthDayStyle ForeColor="#999999" />
-                          <SelectedDayStyle BackColor="#333399" ForeColor="White" />
-                          <TitleStyle BackColor="#333399" BorderStyle="Solid" Font-Bold="True" Font-Size="12pt" ForeColor="White" Height="12pt" />
-                          <TodayDayStyle BackColor="#999999" ForeColor="White" />
-                      </asp:Calendar>
-                  </div>
-                  <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
-                      Fecha: Fin
-                      <asp:Calendar ID="Calendar2" runat="server" BackColor="White" BorderColor="Black" BorderStyle="Solid" CellSpacing="1" Font-Names="Verdana" Font-Size="9pt" ForeColor="Black" Height="250px" NextPrevFormat="ShortMonth" Width="330px">
-                          <DayHeaderStyle Font-Bold="True" Font-Size="8pt" ForeColor="#333333" Height="8pt" />
-                          <DayStyle BackColor="#CCCCCC" />
-                          <NextPrevStyle Font-Bold="True" Font-Size="8pt" ForeColor="White" />
-                          <OtherMonthDayStyle ForeColor="#999999" />
-                          <SelectedDayStyle BackColor="#333399" ForeColor="White" />
-                          <TitleStyle BackColor="#333399" BorderStyle="Solid" Font-Bold="True" Font-Size="12pt" ForeColor="White" Height="12pt" />
-                          <TodayDayStyle BackColor="#999999" ForeColor="White" />
-                      </asp:Calendar>
-                  </div>
-                  <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                        <asp:Button ID="btnBuscar" runat="server" Text="Buscar" CssClass="btn btn-success btn-lg btn-block login-button" style="font-size: 15px"/>
-                </div>
-              </div>
-
-         </div>
             </div>
+        </div>
     </div>
+    <% } else { %>
+    <div class="container">
+        <div class="row" style="margin-top: 20px; margin-bottom: 20px;">
+            <div class="main-center">
+	            <div class="row">
+	                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+		                <h1>No ha realizado ninguna reserva</h1>
+	                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <% } %>
 
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                GridView con todos los datos, que sera modificado con el filtro
-                <asp:GridView ID="GridView1" runat="server"></asp:GridView>
-            </div>     
-              
+    <div style="display: flex; justify-content: center; margin-bottom: 70px">
+    <asp:GridView ID="gvOrden" AutoGenerateColumns="false" runat="server" ForeColor="#333333" GridLines="Vertical">      
+                            <AlternatingRowStyle BackColor="White" />
+                            <EditRowStyle BackColor="#2461BF" />
+                            <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+                            <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+                            <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+                            <RowStyle BackColor="#EFF3FB" />
+                            <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
+                            <SortedAscendingCellStyle BackColor="#F5F7FB" />
+                            <SortedAscendingHeaderStyle BackColor="#6D95E1" />
+                            <SortedDescendingCellStyle BackColor="#E9EBEF" />
+                            <SortedDescendingHeaderStyle BackColor="#4870BE" />
+                            <Columns>
+                                <asp:BoundField DataField="NUMERO_ORDEN" HeaderText="Número de Reserva" />
+                                <asp:BoundField DataField="CANTIDAD_HUESPEDES" HeaderText="Cantidad de Huéspedes" />
+                                <asp:BoundField DataField="FECHA_LLEGADA" HeaderText="Fecha de Llegada" />
+                                <asp:BoundField DataField="FECHA_SALIDA" HeaderText="Fecha de Salida" />
+                                <asp:BoundField DataField="RUT_EMPLEADO" HeaderText="RUT Empleado" />
+                                <asp:BoundField DataField="RUT_CLIENTE" HeaderText="RUT Cliente" />
+                                <asp:BoundField DataField="ESTADO_ORDEN" HeaderText="Estado Orden" />
+                                <asp:BoundField DataField="COMENTARIO" HeaderText="Comentario" />
+                                <asp:TemplateField>
+                                    <ItemTemplate>
+                                        <asp:LinkButton ID="btnInfo2"  CssClass="btn btn-info" CommandArgument='<%#Eval("NUMERO_ORDEN")%>' OnClick="btnInfo2_Click" text="Ver Detalle" runat="server"/>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                            </Columns>
+                        </asp:GridView>
+        </div>
+
+    <asp:ScriptManager runat="server"></asp:ScriptManager>             
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Detalle Pedido</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+           <div style="display: flex; justify-content: center; margin-bottom: 70px">
+        <asp:GridView ID="gvDetalle" AutoGenerateColumns="false" runat="server" ForeColor="#333333" GridLines="Vertical">      
+                            <AlternatingRowStyle BackColor="White" />
+                            <EditRowStyle BackColor="#2461BF" />
+                            <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+                            <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+                            <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+                            <RowStyle BackColor="#EFF3FB" />
+                            <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
+                            <SortedAscendingCellStyle BackColor="#F5F7FB" />
+                            <SortedAscendingHeaderStyle BackColor="#6D95E1" />
+                            <SortedDescendingCellStyle BackColor="#E9EBEF" />
+                            <SortedDescendingHeaderStyle BackColor="#4870BE" />
+                            <Columns>
+                                <asp:BoundField DataField="ID_DETALLE" HeaderText="ID Detalle" />
+                                <asp:BoundField DataField="NUMERO_ORDEN" HeaderText="Número de Orden" />
+                                <asp:BoundField DataField="RUT_HUESPED" HeaderText="RUT Huésped" />
+                                <asp:BoundField DataField="ID_CATEGORIA_HABITACION" HeaderText="ID Categoría" />
+                                <asp:BoundField DataField="ID_PENSION" HeaderText="ID Pensión" />
+                            </Columns>
+                        </asp:GridView>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
          
           
        

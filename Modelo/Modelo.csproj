@@ -48,8 +48,12 @@
     <Compile Include="ClienteCollection.cs" />
     <Compile Include="Comuna.cs" />
     <Compile Include="ComunaCollection.cs" />
+    <Compile Include="DetalleOrden.cs" />
+    <Compile Include="DetalleOrdenCollection.cs" />
     <Compile Include="DetallePedido.cs" />
     <Compile Include="DetallePedidoCollection.cs" />
+    <Compile Include="DetallePlato.cs" />
+    <Compile Include="DetallePlatoCollection.cs" />
     <Compile Include="DetalleRecepcion.cs" />
     <Compile Include="DetalleRecepcionCollection.cs" />
     <Compile Include="Empleado.cs" />
@@ -65,10 +69,14 @@
     <Compile Include="MinutaCollection.cs" />
     <Compile Include="Notificacion.cs" />
     <Compile Include="NotificacionCollection.cs" />
+    <Compile Include="OrdenCompra.cs" />
+    <Compile Include="OrdenCompraCollection.cs" />
     <Compile Include="Pais.cs" />
     <Compile Include="PaisCollection.cs" />
     <Compile Include="Pedido.cs" />
     <Compile Include="PedidoCollection.cs" />
+    <Compile Include="Pension.cs" />
+    <Compile Include="PensionCollection.cs" />
     <Compile Include="Plato.cs" />
     <Compile Include="PlatoCollection.cs" />
     <Compile Include="Producto.cs" />

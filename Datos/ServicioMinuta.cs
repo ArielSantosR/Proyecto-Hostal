@@ -17,5 +17,13 @@ namespace Datos
             return true;
         }
 
+        public List<PENSION> ListarMinuta()
+        {
+            var lista = (from consulta in ent.PENSION
+                         orderby consulta.ID_PENSION
+                         select consulta).ToList();
+            return lista;
+        }
+
     }
 }

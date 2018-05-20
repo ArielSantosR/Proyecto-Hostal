@@ -271,6 +271,28 @@ namespace WcfNegocio
         [OperationContract]
         string HistorialNotificacion(string usuario);
 
+        //CRUD Reserva
+        [OperationContract]
+        bool AgregarReserva(string orden);
+
+        [OperationContract]
+        bool AgregarDetalleReserva(string detalle);
+
+        [OperationContract]
+        string HistorialReserva(string cliente);
+
+        [OperationContract]
+        OrdenCompra ObtenerReserva(string reserva);
+
+        [OperationContract]
+        string ListarDetalleReserva(string orden);
+
+        [OperationContract]
+        string ListarReservaAdmin();
+
+        [OperationContract]
+        bool EditarEstadoReserva(string orden);
+
         //DDL
         [OperationContract]
         string ListarTipoProveedor();
@@ -298,5 +320,8 @@ namespace WcfNegocio
 
         [OperationContract]
         string ListarHuespedService(string cliente);
+
+        [OperationContract]
+        string ListarMinuta();
     }
 }

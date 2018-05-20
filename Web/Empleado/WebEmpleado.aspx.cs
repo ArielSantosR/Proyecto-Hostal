@@ -111,7 +111,7 @@ namespace Web
 
         protected void btnRegistrarOrden_Click(object sender, EventArgs e)
         {
-            Response.Redirect("WebRegistrarOrden.aspx");
+            Response.Redirect("WebReservasPendientes.aspx");
         }
 
         protected void btnHistorial_Click(object sender, EventArgs e)

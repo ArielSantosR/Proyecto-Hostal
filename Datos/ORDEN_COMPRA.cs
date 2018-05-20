@@ -26,6 +26,8 @@ namespace Datos
         public Nullable<System.DateTime> FECHA_SALIDA { get; set; }
         public Nullable<int> RUT_EMPLEADO { get; set; }
         public Nullable<int> RUT_CLIENTE { get; set; }
+        public string ESTADO_ORDEN { get; set; }
+        public string COMENTARIO { get; set; }
     
         public virtual CLIENTE CLIENTE { get; set; }
         public virtual ICollection<DETALLE_ORDEN> DETALLE_ORDEN { get; set; }

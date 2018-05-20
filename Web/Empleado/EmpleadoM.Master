@@ -3,7 +3,11 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Hostal Doña Clarita</title>
+    <title>Hostal Doña Clarita 
+        <% if (MiSesionNotificacion.Count > 0){ %>
+            (<%= MiSesionNotificacion.Count %>)
+        <% } %>
+    </title>
     <meta name="description" content="Hostal Doña Clarita"/>
     <meta name="author" content="SitePoint"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -36,7 +40,7 @@
             <a class="nav-link" href="../Empleado/WebAsignarHabitacion.aspx">Asignar Habitación</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="../Empleado/WebRegistrarOrden.aspx">Registrar Orden</a>
+            <a class="nav-link" href="../Empleado/WebReservasPendientes.aspx">Reservas Pendientes</a>
         </li>
         <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

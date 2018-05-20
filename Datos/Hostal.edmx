@@ -201,6 +201,8 @@
           <Property Name="FECHA_SALIDA" Type="date" />
           <Property Name="RUT_EMPLEADO" Type="number" Precision="8" Scale="0" />
           <Property Name="RUT_CLIENTE" Type="number" Precision="8" Scale="0" />
+          <Property Name="ESTADO_ORDEN" Type="varchar2" MaxLength="25" Nullable="false" />
+          <Property Name="COMENTARIO" Type="varchar2" MaxLength="256" />
         </EntityType>
         <EntityType Name="PAIS">
           <Key>
@@ -229,7 +231,7 @@
           <Property Name="ID_PENSION" Type="number" Precision="5" Scale="0" Nullable="false" />
           <Property Name="NOMBRE_PENSION" Type="varchar2" MaxLength="25" Nullable="false" />
           <Property Name="VALOR_PENSION" Type="number" Precision="10" Scale="0" Nullable="false" />
-          <Property Name="NUMERO_HABITACION" Type="number" Precision="5" Scale="0" Nullable="false" />
+          <Property Name="NUMERO_HABITACION" Type="number" Precision="5" Scale="0" />
         </EntityType>
         <EntityType Name="PLATO">
           <Key>
@@ -741,7 +743,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PENSION_HABITACION">
-          <End Role="HABITACION" Type="Self.HABITACION" Multiplicity="1" />
+          <End Role="HABITACION" Type="Self.HABITACION" Multiplicity="0..1" />
           <End Role="PENSION" Type="Self.PENSION" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="HABITACION">
@@ -1284,6 +1286,8 @@
           <NavigationProperty Name="DETALLE_ORDEN" Relationship="Self.FK_ORDEN_DETALLE_ORDEN" FromRole="ORDEN_COMPRA" ToRole="DETALLE_ORDEN" />
           <NavigationProperty Name="EMPLEADO" Relationship="Self.FK_ORDEN_COMPRA_EMPLEADO" FromRole="ORDEN_COMPRA" ToRole="EMPLEADO" />
           <NavigationProperty Name="NOTIFICACION" Relationship="Hostal.FK_NOTIFICACION_ORDEN" FromRole="ORDEN_COMPRA" ToRole="NOTIFICACION" />
+          <Property Name="ESTADO_ORDEN" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="COMENTARIO" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="PAIS">
           <Key>
@@ -2408,6 +2412,8 @@
           <EntitySetMapping Name="ORDEN_COMPRA">
             <EntityTypeMapping TypeName="Hostal.ORDEN_COMPRA">
               <MappingFragment StoreEntitySet="ORDEN_COMPRA">
+                <ScalarProperty Name="COMENTARIO" ColumnName="COMENTARIO" />
+                <ScalarProperty Name="ESTADO_ORDEN" ColumnName="ESTADO_ORDEN" />
                 <ScalarProperty Name="NUMERO_ORDEN" ColumnName="NUMERO_ORDEN" />
                 <ScalarProperty Name="CANTIDAD_HUESPEDES" ColumnName="CANTIDAD_HUESPEDES" />
                 <ScalarProperty Name="FECHA_LLEGADA" ColumnName="FECHA_LLEGADA" />

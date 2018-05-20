@@ -285,14 +285,14 @@ namespace Web.Empleado
                     else
                     {
                         alerta_exito.Visible = false;
-                        error.Text = "Error, no se pudo encontrar al Empleado";
+                        error.Text = "no se pudo encontrar al Empleado";
                         alerta.Visible = true;
                     }
                 }
                 else
                 {
                     alerta_exito.Visible = false;
-                    error.Text = "Error, debe ingresar objetos a la lista para Registrar una Orden";
+                    error.Text = "debe ingresar objetos a la lista para Registrar una Orden";
                     alerta.Visible = true;
                 }
             }

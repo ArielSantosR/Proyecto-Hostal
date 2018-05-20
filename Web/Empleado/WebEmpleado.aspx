@@ -23,7 +23,7 @@
             <div class="row" style="margin-top: 20px;">
                 <div class="col-md-4">
                     <asp:button runat="server" text="Asignar Habitación" ID="btnAsignarHabitacion" CssClass="btn btn-primary btn-lg btn-block login-button" style="font-size: 15px" OnClick="btnAsignarHabitacion_Click"/>
-                    <asp:button runat="server" text="Registrar Orden" ID="btnRegistrarOrden" CssClass="btn btn-primary btn-lg btn-block login-button" style="font-size: 15px" OnClick="btnRegistrarOrden_Click" />
+                    <asp:button runat="server" text="Reservas Pendientes" ID="btnRegistrarOrden" CssClass="btn btn-primary btn-lg btn-block login-button" style="font-size: 15px" OnClick="btnRegistrarOrden_Click" />
                     <asp:button runat="server" text="Crear Minuta" ID="btnMinuta" CssClass="btn btn-primary btn-lg btn-block login-button" style="font-size: 15px" OnClick="btnMinuta_Click" />
                 </div>
                     

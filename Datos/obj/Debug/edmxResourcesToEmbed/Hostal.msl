@@ -162,6 +162,8 @@
     <EntitySetMapping Name="ORDEN_COMPRA">
       <EntityTypeMapping TypeName="Hostal.ORDEN_COMPRA">
         <MappingFragment StoreEntitySet="ORDEN_COMPRA">
+          <ScalarProperty Name="COMENTARIO" ColumnName="COMENTARIO" />
+          <ScalarProperty Name="ESTADO_ORDEN" ColumnName="ESTADO_ORDEN" />
           <ScalarProperty Name="NUMERO_ORDEN" ColumnName="NUMERO_ORDEN" />
           <ScalarProperty Name="CANTIDAD_HUESPEDES" ColumnName="CANTIDAD_HUESPEDES" />
           <ScalarProperty Name="FECHA_LLEGADA" ColumnName="FECHA_LLEGADA" />

@@ -1910,6 +1910,199 @@ namespace WcfNegocio
             return serv.AgregarDetalleRecepcion(dDatos);
         }
 
+        //CRUD Reserva
+        public bool AgregarReserva(string orden)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.OrdenCompra));
+            StringReader reader = new StringReader(orden);
+            Modelo.OrdenCompra o = (Modelo.OrdenCompra)ser.Deserialize(reader);
+            ServicioReserva serv = new ServicioReserva();
+            Datos.ORDEN_COMPRA oDatos = new Datos.ORDEN_COMPRA();
+            oDatos.RUT_CLIENTE = o.RUT_CLIENTE;
+            oDatos.FECHA_LLEGADA = o.FECHA_LLEGADA;
+            oDatos.CANTIDAD_HUESPEDES = o.CANTIDAD_HUESPEDES;
+            oDatos.ESTADO_ORDEN = o.ESTADO_ORDEN;
+
+            return serv.AgregarOrdenCompra(oDatos);
+        }
+
+        public bool AgregarDetalleReserva(string detalle)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.DetalleOrden));
+            StringReader reader = new StringReader(detalle);
+            Modelo.DetalleOrden d = (Modelo.DetalleOrden)ser.Deserialize(reader);
+            ServicioReserva serv = new ServicioReserva();
+            Datos.DETALLE_ORDEN dDatos = new Datos.DETALLE_ORDEN();
+            dDatos.RUT_HUESPED = d.RUT_HUESPED;
+            dDatos.ID_PENSION = d.ID_PENSION;
+            dDatos.ID_CATEGORIA_HABITACION = d.ID_CATEGORIA_HABITACION;
+
+            return serv.AgregarDetalleOrden(dDatos);
+        }
+
+        public string HistorialReserva(string cliente)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.Cliente));
+            StringReader reader = new StringReader(cliente);
+            Modelo.Cliente pr = (Modelo.Cliente)ser.Deserialize(reader);
+            ServicioReserva serv = new ServicioReserva();
+
+            Datos.CLIENTE cDatos = new Datos.CLIENTE();
+            cDatos.RUT_CLIENTE = pr.RUT_CLIENTE;
+
+            List<Datos.ORDEN_COMPRA> listaOrden = serv.HistorialOrdenCompra(cDatos);
+
+            if (listaOrden == null)
+            {
+                return null;
+            }
+            else
+            {
+                Modelo.OrdenCompraCollection listaOrden2 = new OrdenCompraCollection();
+
+                foreach (Datos.ORDEN_COMPRA o in listaOrden)
+                {
+                    Modelo.OrdenCompra oModelo = new Modelo.OrdenCompra();
+                    oModelo.NUMERO_ORDEN = o.NUMERO_ORDEN;
+                    oModelo.CANTIDAD_HUESPEDES = o.CANTIDAD_HUESPEDES;
+                    oModelo.FECHA_LLEGADA = o.FECHA_LLEGADA;
+                    oModelo.FECHA_SALIDA = o.FECHA_SALIDA;
+                    oModelo.RUT_EMPLEADO = o.RUT_EMPLEADO;
+                    oModelo.RUT_CLIENTE = o.RUT_CLIENTE;
+                    oModelo.ESTADO_ORDEN = o.ESTADO_ORDEN;
+                    oModelo.COMENTARIO = o.COMENTARIO;
+
+                    listaOrden2.Add(oModelo);
+                }
+
+                XmlSerializer ser2 = new XmlSerializer(typeof(Modelo.OrdenCompraCollection));
+                StringWriter writer2 = new StringWriter();
+                ser2.Serialize(writer2, listaOrden2);
+                writer2.Close();
+                return writer2.ToString();
+            }
+        }
+
+        public OrdenCompra ObtenerReserva(string reserva)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.OrdenCompra));
+            StringReader reader = new StringReader(reserva);
+            Modelo.OrdenCompra o = (Modelo.OrdenCompra)ser.Deserialize(reader);
+            ServicioReserva serv = new ServicioReserva();
+            Datos.ORDEN_COMPRA Datos = new Datos.ORDEN_COMPRA();
+            Datos.NUMERO_ORDEN = o.NUMERO_ORDEN;
+
+            if (serv.ObtenerReserva(Datos) == null)
+            {
+                return null;
+            }
+            else
+            {
+                Datos.ORDEN_COMPRA Datos2 = serv.ObtenerReserva(Datos);
+
+                o.NUMERO_ORDEN = Datos2.NUMERO_ORDEN;
+                o.CANTIDAD_HUESPEDES = Datos2.CANTIDAD_HUESPEDES;
+                o.FECHA_LLEGADA = Datos2.FECHA_LLEGADA;
+                o.FECHA_SALIDA = Datos2.FECHA_SALIDA;
+                o.RUT_EMPLEADO = Datos2.RUT_EMPLEADO;
+                o.RUT_CLIENTE = Datos2.RUT_CLIENTE;
+                o.ESTADO_ORDEN = Datos2.ESTADO_ORDEN;
+                o.COMENTARIO = Datos2.COMENTARIO;
+
+                return o;
+            }
+        }
+
+        public string ListarDetalleReserva(string orden)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.OrdenCompra));
+            StringReader reader = new StringReader(orden);
+            Modelo.OrdenCompra or = (Modelo.OrdenCompra)ser.Deserialize(reader);
+            ServicioReserva serv = new ServicioReserva();
+
+            Datos.ORDEN_COMPRA oDatos = new Datos.ORDEN_COMPRA();
+            oDatos.NUMERO_ORDEN = or.NUMERO_ORDEN;
+
+            List<Datos.DETALLE_ORDEN> listaDetalle = serv.ListaDetalleReserva(oDatos);
+
+            if (listaDetalle == null)
+            {
+                return null;
+            }
+            else
+            {
+                Modelo.DetalleOrdenCollection listaDetalle2 = new DetalleOrdenCollection();
+
+                foreach (Datos.DETALLE_ORDEN o in listaDetalle)
+                {
+                    Modelo.DetalleOrden oModelo = new Modelo.DetalleOrden();
+                    oModelo.NUMERO_ORDEN = o.NUMERO_ORDEN;
+                    oModelo.ID_PENSION = o.ID_PENSION;
+                    oModelo.RUT_HUESPED = o.RUT_HUESPED;
+                    oModelo.ID_CATEGORIA_HABITACION = o.ID_CATEGORIA_HABITACION;
+                    oModelo.ID_DETALLE = o.ID_DETALLE;
+
+                    listaDetalle2.Add(oModelo);
+                }
+
+                XmlSerializer ser2 = new XmlSerializer(typeof(Modelo.DetalleOrdenCollection));
+                StringWriter writer2 = new StringWriter();
+                ser2.Serialize(writer2, listaDetalle2);
+                writer2.Close();
+                return writer2.ToString();
+            }
+        }
+
+        public string ListarReservaAdmin()
+        {
+
+            ServicioReserva servicio = new ServicioReserva();
+            List<Datos.ORDEN_COMPRA> orden = servicio.ListarReservaAdmin();
+            Modelo.OrdenCompraCollection listaOrden = new Modelo.OrdenCompraCollection();
+
+            foreach (Datos.ORDEN_COMPRA o in orden)
+            {
+                Modelo.OrdenCompra oModelo = new Modelo.OrdenCompra();
+                oModelo.NUMERO_ORDEN = o.NUMERO_ORDEN;
+                oModelo.CANTIDAD_HUESPEDES = o.CANTIDAD_HUESPEDES;
+                oModelo.FECHA_LLEGADA = o.FECHA_LLEGADA;
+                oModelo.FECHA_SALIDA = o.FECHA_SALIDA;
+                oModelo.RUT_EMPLEADO = o.RUT_EMPLEADO;
+                oModelo.RUT_CLIENTE = o.RUT_CLIENTE;
+                oModelo.ESTADO_ORDEN = o.ESTADO_ORDEN;
+                oModelo.COMENTARIO = o.COMENTARIO;
+
+                listaOrden.Add(oModelo);
+            }
+
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.OrdenCompraCollection));
+            StringWriter writer = new StringWriter();
+            ser.Serialize(writer, listaOrden);
+            writer.Close();
+            return writer.ToString();
+        }
+
+        public bool EditarEstadoReserva(string orden)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.OrdenCompra));
+            StringReader reader = new StringReader(orden);
+            Modelo.OrdenCompra o = (Modelo.OrdenCompra)ser.Deserialize(reader);
+            ServicioReserva servicio = new ServicioReserva();
+
+            Datos.ORDEN_COMPRA oDatos = new Datos.ORDEN_COMPRA();
+
+            oDatos.NUMERO_ORDEN = o.NUMERO_ORDEN;
+            oDatos.FECHA_LLEGADA = o.FECHA_LLEGADA;
+            oDatos.FECHA_SALIDA = o.FECHA_SALIDA;
+            oDatos.COMENTARIO = o.COMENTARIO;
+            oDatos.ESTADO_ORDEN = o.ESTADO_ORDEN;
+            oDatos.CANTIDAD_HUESPEDES = o.CANTIDAD_HUESPEDES;
+            oDatos.RUT_CLIENTE = o.RUT_CLIENTE;
+            oDatos.RUT_EMPLEADO = o.RUT_EMPLEADO;
+
+            return servicio.EditarEstadoReserva(oDatos);
+        }
+
         //DDL
         public string ListarPais()
         {
@@ -2103,6 +2296,29 @@ namespace WcfNegocio
                 writer.Close();
                 return writer.ToString();
             }
+        }
+
+        public string ListarMinuta()
+        {
+            ServicioMinuta servicio = new ServicioMinuta();
+            List<Datos.PENSION> minuta = servicio.ListarMinuta();
+            Modelo.PensionCollection listaPension = new Modelo.PensionCollection();
+
+            foreach (Datos.PENSION p in minuta)
+            {
+                Modelo.Pension pModelo = new Modelo.Pension();
+                pModelo.ID_PENSION = p.ID_PENSION;
+                pModelo.NOMBRE_PENSION = p.NOMBRE_PENSION;
+                pModelo.VALOR_PENSION = p.VALOR_PENSION;
+
+                listaPension.Add(pModelo);
+            }
+
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.PensionCollection));
+            StringWriter writer = new StringWriter();
+            ser.Serialize(writer, listaPension);
+            writer.Close();
+            return writer.ToString();
         }
     }
 }
