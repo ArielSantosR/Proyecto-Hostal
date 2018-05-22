@@ -57,6 +57,11 @@ namespace Datos
             }
         }
 
+        public PRODUCTO BuscarProducto(long ID_PRODUCTO) {
+            PRODUCTO p = ent.PRODUCTO.FirstOrDefault(objeto => objeto.ID_PRODUCTO.Equals(ID_PRODUCTO));
+            return p;
+        }
+
         public bool EliminarProducto(PRODUCTO producto)
         {
             PRODUCTO P = ent.PRODUCTO.FirstOrDefault(objeto =>

@@ -1,6 +1,7 @@
 ﻿using Modelo;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -160,6 +161,30 @@ namespace Web.Empleado
             }
         }
 
+        private void CargarTabla(List<DetallePedido> lista) {
+            Producto producto = new Producto();
+            DataTable dt = new DataTable();
+            dt.Columns.AddRange(new DataColumn[] {
+                new DataColumn("ID_DETALLE_PEDIDO",typeof(short)),
+                new DataColumn("Código", typeof(long)),
+                new DataColumn("Nombre", typeof(string)),
+                new DataColumn("Descripción",typeof(string)),
+                new DataColumn("Unidad Medida",typeof(string)),
+                new DataColumn("Cantidad Pedida",typeof(int))
+            });
+            foreach (DetallePedido item in lista) {
+                producto = new Producto();
+                producto.ID_PRODUCTO = item.ID_PRODUCTO;
+                producto.Read();
+
+                dt.Rows.Add(item.ID_DETALLE_PEDIDO,producto.ID_PRODUCTO,producto.NOMBRE_PRODUCTO,producto.DESCRIPCION_PRODUCTO,producto.UNIDAD_MEDIDA,item.CANTIDAD);
+            }
+
+            
+            gvDetalle.DataSource = dt;
+            gvDetalle.DataBind();
+        }
+
         protected void btnInfo2_Click(object sender, EventArgs e)
         {
             try
@@ -234,8 +259,8 @@ namespace Web.Empleado
 
                         Modelo.DetallePedidoCollection listaDetalle = (Modelo.DetallePedidoCollection)ser3.Deserialize(reader);
                         reader.Close();
-                        gvDetalle.DataSource = listaDetalle;
-                        gvDetalle.DataBind();
+                        CargarTabla(listaDetalle);
+                        gvDetalle.Columns[0].Visible = false;
 
                         MiSesionPedido = s.ObtenerPedido(writer.ToString());
 

@@ -4,180 +4,176 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Hostal Doña Clarita 
-        <% if (MiSesionNotificacion.Count > 0){ %>
+        <% if (MiSesionNotificacion.Count > 0) { %>
             (<%= MiSesionNotificacion.Count %>)
         <% } %>
     </title>
-    <meta name="description" content="Hostal Doña Clarita"/>
-    <meta name="author" content="SitePoint"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content="Hostal Doña Clarita" />
+    <meta name="author" content="SitePoint" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" type="text/css" media="screen" href="../css/styles.css" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
-    <link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" />
+    <link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet" />
 
-    
+
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
 <body>
-        <!--        COMIENZO NAVBAR ADMIN        -->
-       <form runat="server">
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="../Hostal/WebInicio.aspx"><i class="fa fa-home"></i> Hostal Doña Clarita</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+    <!--        COMIENZO NAVBAR ADMIN        -->
+    <form runat="server">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="../Hostal/WebInicio.aspx"><i class="fa fa-home"></i>Hostal Doña Clarita</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="../Administrador/WebAdmin.aspx">Inicio <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Usuarios
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="../Administrador/WebVerUsuarios.aspx">Ver Usuarios</a>
-          <a class="dropdown-item" href="../Administrador/WebRegistroAdmin.aspx">Registrar Usuario</a>
-        </div>
-      </li>
-        <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Cliente
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
-          <a class="dropdown-item" href="../Cliente/WebCliente.aspx">Inicio Cliente</a>
-          <a class="dropdown-item" href="../Cliente/WebCrearOrden.aspx">Crear Orden</a>
-          <a class="dropdown-item" href="../Cliente/WebAgregarPasajeros.aspx">Registro Huésped</a>
-          <a class="dropdown-item" href="../Cliente/WebVerHistorial.aspx">Historial</a>
-        </div>
-      </li>
-        <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Empleado
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown3">
-          <a class="dropdown-item" href="../Empleado/WebEmpleado.aspx">Inicio Empleado</a>
-          <a class="dropdown-item" href="../Empleado/WebAsignarHabitacion.aspx">Asignar Habitación</a>
-          <a class="dropdown-item" href="../Empleado/WebCrearMinuta.aspx">Crear Minuta</a>
-          <a class="dropdown-item" href="../Empleado/WebReservasPendientes.aspx">Reservas Pendientes</a>
-          
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="../Empleado/WebCrearPedido.aspx">Crear Pedido</a>
-          <a class="dropdown-item" href="../Empleado/WebRecibirPedido.aspx">Recibir Pedido</a>
-          <a class="dropdown-item" href="../Empleado/WebHistorialPedidos.aspx">Historial Pedidos</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="../Empleado/WebCrearFactura.aspx">Crear Factura</a>
-          <a class="dropdown-item" href="../Empleado/WebVerFacturas.aspx">Ver Facturas</a>
-        </div>
-      </li>
-        <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown4" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Proveedor
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown4">
-          <a class="dropdown-item" href="../Proveedor/WebProveedor.aspx">Inicio Proveedor</a>
-          <a class="dropdown-item" href="../Proveedor/WebPedidosRecibidos.aspx">Pedidos Pendientes</a>
-          <a class="dropdown-item" href="../Proveedor/WebPedidosDespacho.aspx">Pedidos por Despachar</a>
-          <a class="dropdown-item" href="../Proveedor/WebHistorialPedidos.aspx">Historial de Pedidos</a>
-        </div>
-      </li>
-        <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown5" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Gestión
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown5">
-          <a class="dropdown-item" href="../Administrador/WebCrearHabitacion.aspx">Crear Habitación</a>
-          <a class="dropdown-item" href="../Administrador/WebVerHabitacion.aspx">Ver Habitaciones</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="../Administrador/WebAgregarPlato.aspx">Agregar Plato</a>
-          <a class="dropdown-item" href="../Administrador/WebVerPlatos.aspx">Ver Platos</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="../Administrador/WebCrearProducto.aspx">Agregar Producto</a>
-          <a class="dropdown-item" href="../Administrador/WebVerProductos.aspx">Ver Producto</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="../Administrador/WebVerPedido.aspx">Ver Pedidos Pendientes</a>
-        </div>
-      </li>
-        <li class="nav-item">
-        <a class="nav-link" href="../Administrador/WebInformes.aspx">Informes</a>
-      </li>
-    </ul>
-      <span class="navbar-text">
-        Bienvenid@ <asp:Literal ID="nombre_usuario" runat="server"></asp:Literal>
-     </span>
-      <ul class="navbar-nav">
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown7" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <i class="fas fa-bell"></i> <span class="badge badge-light"> <%= (MiSesionNotificacion.Count) %> </span>
-            </a>
-            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown7">
-                <% if (MiSesionNotificacion.Count == 0) { %>
-                    <a class="dropdown-item" href="#"> No tiene notificaciones nuevas</a>
-                <% } else { %>
-                    <asp:Panel ID="panel" runat="server"></asp:Panel>
-              <% } %>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="../Administrador/WebAdmin.aspx">Inicio <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Usuarios
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="../Administrador/WebVerUsuarios.aspx">Ver Usuarios</a>
+                            <a class="dropdown-item" href="../Administrador/WebRegistroAdmin.aspx">Registrar Usuario</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Cliente
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
+                            <a class="dropdown-item" href="../Cliente/WebCliente.aspx">Inicio Cliente</a>
+                            <a class="dropdown-item" href="../Cliente/WebCrearOrden.aspx">Crear Orden</a>
+                            <a class="dropdown-item" href="../Cliente/WebAgregarPasajeros.aspx">Registro Huésped</a>
+                            <a class="dropdown-item" href="../Cliente/WebVerHistorial.aspx">Historial</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Empleado
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown3">
+                            <a class="dropdown-item" href="../Empleado/WebEmpleado.aspx">Inicio Empleado</a>
+                            <a class="dropdown-item" href="../Empleado/WebAsignarHabitacion.aspx">Asignar Habitación</a>
+                            <a class="dropdown-item" href="../Empleado/WebCrearMinuta.aspx">Crear Minuta</a>
+                            <a class="dropdown-item" href="../Empleado/WebReservasPendientes.aspx">Reservas Pendientes</a>
+
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="../Empleado/WebCrearPedido.aspx">Crear Pedido</a>
+                            <a class="dropdown-item" href="../Empleado/WebRecibirPedido.aspx">Recibir Pedido</a>
+                            <a class="dropdown-item" href="../Empleado/WebHistorialPedidos.aspx">Historial Pedidos</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="../Empleado/WebCrearFactura.aspx">Crear Factura</a>
+                            <a class="dropdown-item" href="../Empleado/WebVerFacturas.aspx">Ver Facturas</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown4" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Proveedor
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown4">
+                            <a class="dropdown-item" href="../Proveedor/WebProveedor.aspx">Inicio Proveedor</a>
+                            <a class="dropdown-item" href="../Proveedor/WebPedidosRecibidos.aspx">Pedidos Pendientes</a>
+                            <a class="dropdown-item" href="../Proveedor/WebPedidosDespacho.aspx">Pedidos por Despachar</a>
+                            <a class="dropdown-item" href="../Proveedor/WebHistorialPedidos.aspx">Historial de Pedidos</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown5" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Gestión
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown5">
+                            <a class="dropdown-item" href="../Administrador/WebCrearHabitacion.aspx">Crear Habitación</a>
+                            <a class="dropdown-item" href="../Administrador/WebVerHabitacion.aspx">Ver Habitaciones</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="../Administrador/WebAgregarPlato.aspx">Agregar Plato</a>
+                            <a class="dropdown-item" href="../Administrador/WebVerPlatos.aspx">Ver Platos</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="../Administrador/WebCrearProducto.aspx">Agregar Producto</a>
+                            <a class="dropdown-item" href="../Administrador/WebVerProductos.aspx">Ver Producto</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="../Administrador/WebVerPedido.aspx">Ver Pedidos Pendientes</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../Administrador/WebInformes.aspx">Informes</a>
+                    </li>
+                </ul>
+                <span class="navbar-text">Bienvenid@
+                    <asp:Literal ID="nombre_usuario" runat="server"></asp:Literal>
+                </span>
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown7" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-bell"></i><span class="badge badge-light"><%= (MiSesionNotificacion.Count) %> </span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown7">
+                            <% if (MiSesionNotificacion.Count == 0) { %>
+                            <a class="dropdown-item" href="#">No tiene notificaciones nuevas</a>
+                            <% }
+                            else { %>
+                            <asp:Panel ID="panel" runat="server"></asp:Panel>
+                            <% } %>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown8" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-user fa" aria-hidden="true"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown8">
+                            <a class="dropdown-item" href="https://sites.google.com/view/manual-proveedor/p%C3%A1gina-principal" target="_blank" style="text-align: right">Ayuda <i class="far fa-question-circle"></i></a>
+                            <a class="dropdown-item" href="../Administrador/WebVerUsuarios.aspx" style="text-align: right">Editar Usuario <i class="fas fa-user"></i></a>
+                            <a class="dropdown-item" href="../Administrador/WebNotificacion.aspx" style="text-align: right">Notificaciones <i class="fas fa-bell"></i></a>
+                            <a class="dropdown-item" href="../WebCerrarSesion.aspx" style="text-align: right">Cerrar Sesión <i class="fas fa-sign-out-alt"></i></a>
+                        </div>
+                    </li>
+                </ul>
             </div>
-         </li>
-         <li class="nav-item dropdown">
-         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown8" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-             <i class="fas fa-user fa" aria-hidden="true"></i>
-        </a>
-        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown8">
-            <a class="dropdown-item" href="https://sites.google.com/view/manual-proveedor/p%C3%A1gina-principal" target="_blank" style="text-align:right">Ayuda <i class="far fa-question-circle"></i></a>
-            <a class="dropdown-item" href="../Administrador/WebVerUsuarios.aspx" style="text-align:right"> Editar Usuario <i class="fas fa-user"></i></a>
-            <a class="dropdown-item" href="../Administrador/WebNotificacion.aspx" style="text-align:right"> Notificaciones <i class="fas fa-bell"></i></a>
-            <a class="dropdown-item" href="../WebCerrarSesion.aspx" style="text-align:right"> Cerrar Sesión <i class="fas fa-sign-out-alt"></i></a>
-        </div>
-         </li>
-     </ul>
-  </div>
-</nav>
-  <!--        FIN DE NAVBAR        -->      
+        </nav>
+        <!--        FIN DE NAVBAR        -->
 
-<!--        COMIENZO DE CONTENIDO        -->
+        <!--        COMIENZO DE CONTENIDO        -->
 
-         
-       <div class="content">
-        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-    </asp:ContentPlaceHolder>
+
+        <div class="content">
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
         </div>
 
-     
-     
-<!--        FIN DE CONTENIDO        -->
-
-<!--        INICIO FOOTER        -->
-
-<footer style="background-color: #343A40">
-<div class="container">
-	<div class="row">
-		<div class="footer-content col-md-3">
-            <a style="color: #A4A7A9" href="#">contacto@donaclarita.cl</a>
-		</div>
-
-		<div class="footer-content col-md-3">
-			<a style="color: #A4A7A9" href="#">+5624997364</a>
-		</div>
-
-		<div class="footer-content col-md-3">
-			<a style="color: #A4A7A9" href="../Hostal/WebPoliticaReserva.aspx"> Políticas de reserva</a>
-		</div>
-
-		<div class="footer-content col-md-3">
-			<a style="color: #A4A7A9" href="../Hostal/WebPoliticaPrivacidad.aspx">Políticas de privacidad</a>
-		</div>
-	</div>
-</div>
-</footer>
 
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+        <!--        FIN DE CONTENIDO        -->
 
-</form>
-<!--        FIN FOOTER        -->
+        <!--        INICIO FOOTER        -->
+
+        <footer style="background-color: #343A40">
+            <div class="container">
+                <div class="row">
+                    <div class="footer-content col-md-3">
+                        <a style="color: #A4A7A9" href="#">contacto@donaclarita.cl</a>
+                    </div>
+
+                    <div class="footer-content col-md-3">
+                        <a style="color: #A4A7A9" href="#">+5624997364</a>
+                    </div>
+
+                    <div class="footer-content col-md-3">
+                        <a style="color: #A4A7A9" href="../Hostal/WebPoliticaReserva.aspx">Políticas de reserva</a>
+                    </div>
+
+                    <div class="footer-content col-md-3">
+                        <a style="color: #A4A7A9" href="../Hostal/WebPoliticaPrivacidad.aspx">Políticas de privacidad</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+
+    </form>
+    <!--        FIN FOOTER        -->
 </body>
 </html>

@@ -92,7 +92,7 @@ namespace Web.Cliente {
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 Response.Write("<script language='javascript'>window.alert('Debe Iniciar Sesión Primero');window.location='../Hostal/WebLogin.aspx';</script>");
             }
