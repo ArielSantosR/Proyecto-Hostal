@@ -35,52 +35,51 @@ namespace Web.Empleado {
         }
 
         protected void Page_Load(object sender,EventArgs e) {
-            error.Text = "";
-            //Bloqueo de cambios dependiendo del usuario
-            if (MiSesion != null)
-            {
-                if (MiSesion.TIPO_USUARIO.Equals(Tipo_Usuario.Empleado.ToString()) && MiSesion.ESTADO.Equals(Estado_Usuario.Habilitado.ToString()))
-                {
-                    txtRut.Enabled = false;
-                    txtPNombre.Enabled = false;
-                    txtSNombre.Enabled = false;
-                    txtUsuario.Enabled = false;
-                    txtApellidoP.Enabled = false;
-                    txtApellidoM.Enabled = false;
-                    ddlEstado.Enabled = false;
-                }
-                else
-                {
-                    txtUsuario.Enabled = false;
-                    txtRut.Enabled = false;
-                }
-
-                if (!IsPostBack)
-                {
-                    ddlEstado.DataSource = Enum.GetValues(typeof(Estado_Usuario));
-                    ddlEstado.DataBind();
-
-                    alerta.Visible = false;
-                    //Carga de datos actuales
-                    txtRut.Text = SesionEmp.RUT_EMPLEADO.ToString() + "-" + SesionEmp.DV_EMPLEADO;
-                    txtPNombre.Text = SesionEmp.PNOMBRE_EMPLEADO;
-                    txtSNombre.Text = SesionEmp.SNOMBRE_EMPLEADO;
-                    if (MiSesion.TIPO_USUARIO.Equals(Tipo_Usuario.Empleado.ToString()))
-                    {
-                        txtUsuario.Text = MiSesion.NOMBRE_USUARIO;
+            try {
+                error.Text = "";
+                //Bloqueo de cambios dependiendo del usuario
+                if (MiSesion != null) {
+                    if (MiSesion.TIPO_USUARIO.Equals(Tipo_Usuario.Empleado.ToString()) && MiSesion.ESTADO.Equals(Estado_Usuario.Habilitado.ToString())) {
+                        txtRut.Enabled = false;
+                        txtPNombre.Enabled = false;
+                        txtSNombre.Enabled = false;
+                        txtUsuario.Enabled = false;
+                        txtApellidoP.Enabled = false;
+                        txtApellidoM.Enabled = false;
+                        ddlEstado.Enabled = false;
                     }
-                    else
-                    {
-                        txtUsuario.Text = SesionEdit.NOMBRE_USUARIO;
+                    else {
+                        txtUsuario.Enabled = false;
+                        txtRut.Enabled = false;
                     }
-                    txtApellidoP.Text = SesionEmp.APP_PATERNO_EMPLEADO;
-                    txtApellidoM.Text = SesionEmp.APP_MATERNO_EMPLEADO;
+
+                    if (!IsPostBack) {
+                        ddlEstado.DataSource = Enum.GetValues(typeof(Estado_Usuario));
+                        ddlEstado.DataBind();
+
+                        alerta.Visible = false;
+                        //Carga de datos actuales
+                        txtRut.Text = SesionEmp.RUT_EMPLEADO.ToString() + "-" + SesionEmp.DV_EMPLEADO;
+                        txtPNombre.Text = SesionEmp.PNOMBRE_EMPLEADO;
+                        txtSNombre.Text = SesionEmp.SNOMBRE_EMPLEADO;
+                        if (MiSesion.TIPO_USUARIO.Equals(Tipo_Usuario.Empleado.ToString())) {
+                            txtUsuario.Text = MiSesion.NOMBRE_USUARIO;
+                        }
+                        else {
+                            txtUsuario.Text = SesionEdit.NOMBRE_USUARIO;
+                        }
+                        txtApellidoP.Text = SesionEmp.APP_PATERNO_EMPLEADO;
+                        txtApellidoM.Text = SesionEmp.APP_MATERNO_EMPLEADO;
+                    }
+                }
+                else {
+                    Response.Write("<script language='javascript'>window.alert('Debe Iniciar Sesión Primero');window.location='../Hostal/WebLogin.aspx';</script>");
                 }
             }
-            else
-            {
+            catch (Exception) {
                 Response.Write("<script language='javascript'>window.alert('Debe Iniciar Sesión Primero');window.location='../Hostal/WebLogin.aspx';</script>");
             }
+            
             
         }
 

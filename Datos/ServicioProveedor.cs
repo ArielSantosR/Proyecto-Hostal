@@ -59,6 +59,13 @@ namespace Datos
             return lista2;
         }
 
+        public List<PROVEEDOR> ListarProveedorFull() {
+            var lista = (from consulta in ent.PROVEEDOR
+                         orderby consulta.ID_USUARIO
+                         select consulta).ToList();
+            return lista;
+        }
+
         public List<PROVEEDOR> ListarProveedorProducto(PRODUCTO p)
         {
             return (from a in ent.PROVEEDOR where a.RUT_PROVEEDOR.Equals(p.RUT_PROVEEDOR) select a).ToList();

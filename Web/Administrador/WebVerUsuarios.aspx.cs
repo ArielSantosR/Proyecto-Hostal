@@ -45,7 +45,13 @@ namespace Web.Administrador
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            CargarGriedView();
+            try {
+
+                CargarGriedView();
+            }
+            catch (Exception) {
+                Response.Write("<script language='javascript'>window.alert('Debe Iniciar Sesión Primero');window.location='../Hostal/WebLogin.aspx';</script>");
+            }
         }
 
         //Creación de Sesión

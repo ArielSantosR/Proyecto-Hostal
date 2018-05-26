@@ -9,7 +9,7 @@ namespace Modelo {
     public class ProveedorCollection {
         public static List<Proveedor> ListaProveedores() {
             ServicioProveedor serv = new ServicioProveedor();
-            return GenerarLista(serv.ListarProveedor());
+            return GenerarLista(serv.ListarProveedorFull());
         }
 
         private static List<Proveedor> GenerarLista(List<PROVEEDOR> listDatos) {

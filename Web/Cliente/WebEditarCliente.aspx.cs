@@ -69,7 +69,7 @@ namespace Web.Cliente {
                 //Bloqueo de cambios dependiendo del usuario
                 if (MiSesion.ID_USUARIO != 0)
                 {
-                    if (MiSesion.TIPO_USUARIO.Equals(Tipo_Usuario.Administrador.ToString()) && MiSesion.ESTADO.Equals(Estado_Usuario.Habilitado.ToString()))
+                    if (MiSesion.TIPO_USUARIO.Equals(Tipo_Usuario.Cliente.ToString()) && MiSesion.ESTADO.Equals(Estado_Usuario.Habilitado.ToString()))
                     {
                         txtNombre.Enabled = false;
                         txtRut.Enabled = false;
