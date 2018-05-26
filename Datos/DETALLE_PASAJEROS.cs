@@ -12,22 +12,15 @@ namespace Datos
     using System;
     using System.Collections.Generic;
     
-    public partial class BOLETA
+    public partial class DETALLE_PASAJEROS
     {
-        public BOLETA()
-        {
-            this.DETALLE_BOLETA = new HashSet<DETALLE_BOLETA>();
-        }
+        public short ID_DETALLE_PASAJEROS { get; set; }
+        public Nullable<short> NUMERO_HABITACION { get; set; }
+        public Nullable<int> RUT_HUESPED { get; set; }
+        public short ID_PENSION { get; set; }
     
-        public int ID_BOLETA { get; set; }
-        public Nullable<decimal> VALOR_DESC_BOLETA { get; set; }
-        public long VALOR_TOTAL_BOLETA { get; set; }
-        public System.DateTime FECHA_EMISION_BOLETA { get; set; }
-        public int RUT_EMPLEADO { get; set; }
-        public int RUT_HUESPED { get; set; }
-    
-        public virtual EMPLEADO EMPLEADO { get; set; }
+        public virtual PENSION PENSION { get; set; }
+        public virtual HABITACION HABITACION { get; set; }
         public virtual HUESPED HUESPED { get; set; }
-        public virtual ICollection<DETALLE_BOLETA> DETALLE_BOLETA { get; set; }
     }
 }

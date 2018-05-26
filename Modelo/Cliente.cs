@@ -18,6 +18,7 @@ namespace Modelo
         public short ID_COMUNA { get; set; }
         public short ID_USUARIO { get; set; }
         public string NOMBRE_CLIENTE { get; set; }
+        public short ID_GIRO { get; set; }
 
         public bool Update() {
             ServicioCliente serv = new ServicioCliente();
@@ -30,6 +31,7 @@ namespace Modelo
             datos.NOMBRE_CLIENTE = this.NOMBRE_CLIENTE;
             datos.RUT_CLIENTE = this.RUT_CLIENTE;
             datos.TELEFONO_CLIENTE = this.TELEFONO_CLIENTE;
+            datos.ID_GIRO = this.ID_GIRO;
 
             return serv.UpdateCliente(datos);
         }
@@ -46,6 +48,7 @@ namespace Modelo
                 this.NOMBRE_CLIENTE = datos.NOMBRE_CLIENTE;
                 this.RUT_CLIENTE = datos.RUT_CLIENTE;
                 this.TELEFONO_CLIENTE = datos.TELEFONO_CLIENTE;
+                this.ID_GIRO = datos.ID_GIRO;
 
                 return true;
             }

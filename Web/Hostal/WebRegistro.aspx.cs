@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Modelo;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -47,6 +48,8 @@ namespace Web
                 coleccionComuna = (Modelo.ComunaCollection)ser2.Deserialize(reader2);
                 reader2.Close();
 
+                List<Giro> giros = GiroCollection.ListaGiro();
+
                 if (!IsPostBack)
                 {
                     alerta.Visible = false;
@@ -64,6 +67,11 @@ namespace Web
                     ddlComuna.DataTextField = "Nombre";
                     ddlComuna.DataValueField = "Id_Comuna";
                     ddlComuna.DataBind();
+
+                    ddlGiro.DataSource = giros;
+                    ddlGiro.DataTextField = "NOMBRE_GIRO";
+                    ddlGiro.DataValueField = "ID_GIRO";
+                    ddlGiro.DataBind();
                 }
             }
             catch (Exception ex)
@@ -124,6 +132,7 @@ namespace Web
                                     }
 
                                     cliente.TELEFONO_CLIENTE = telefono;
+                                    cliente.ID_GIRO = short.Parse(ddlGiro.SelectedValue);
 
                                     XmlSerializer sr2 = new XmlSerializer(typeof(Modelo.Cliente));
                                     StringWriter writer2 = new StringWriter();
@@ -184,6 +193,7 @@ namespace Web
                                         }
 
                                         cliente.TELEFONO_CLIENTE = telefono;
+                                        cliente.ID_GIRO = short.Parse(ddlGiro.SelectedValue);
 
                                         XmlSerializer sr2 = new XmlSerializer(typeof(Modelo.Cliente));
                                         StringWriter writer2 = new StringWriter();
@@ -218,6 +228,7 @@ namespace Web
                                                 ddlPais.SelectedIndex = 0;
                                                 ddlRegion.SelectedIndex = 0;
                                                 ddlComuna.SelectedIndex = 0;
+                                                ddlGiro.SelectedIndex = 0;
 
                                                 Response.Write("<script language='javascript'>window.alert('Se ha registrado con éxito. pruebe iniciar sesión');window.location='../Hostal/WebLogin.aspx';</script>");
                                             }

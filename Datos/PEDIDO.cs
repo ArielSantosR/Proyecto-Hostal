@@ -31,8 +31,8 @@ namespace Datos
     
         public virtual ICollection<DETALLE_PEDIDO> DETALLE_PEDIDO { get; set; }
         public virtual EMPLEADO EMPLEADO { get; set; }
+        public virtual ICollection<NOTIFICACION> NOTIFICACION { get; set; }
         public virtual PROVEEDOR PROVEEDOR { get; set; }
         public virtual RECEPCION RECEPCION { get; set; }
-        public virtual ICollection<NOTIFICACION> NOTIFICACION { get; set; }
     }
 }

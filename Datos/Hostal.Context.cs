@@ -27,18 +27,25 @@ namespace Datos
     
         public DbSet<BOLETA> BOLETA { get; set; }
         public DbSet<CATEGORIA> CATEGORIA { get; set; }
+        public DbSet<CATEGORIA_HABITACION> CATEGORIA_HABITACION { get; set; }
         public DbSet<CLIENTE> CLIENTE { get; set; }
         public DbSet<COMUNA> COMUNA { get; set; }
         public DbSet<DETALLE_BOLETA> DETALLE_BOLETA { get; set; }
         public DbSet<DETALLE_FACTURA> DETALLE_FACTURA { get; set; }
+        public DbSet<DETALLE_HABITACION> DETALLE_HABITACION { get; set; }
         public DbSet<DETALLE_ORDEN> DETALLE_ORDEN { get; set; }
+        public DbSet<DETALLE_PASAJEROS> DETALLE_PASAJEROS { get; set; }
         public DbSet<DETALLE_PEDIDO> DETALLE_PEDIDO { get; set; }
         public DbSet<DETALLE_PLATOS> DETALLE_PLATOS { get; set; }
         public DbSet<DETALLE_RECEPCION> DETALLE_RECEPCION { get; set; }
         public DbSet<EMPLEADO> EMPLEADO { get; set; }
         public DbSet<FACTURA> FACTURA { get; set; }
         public DbSet<FAMILIA> FAMILIA { get; set; }
+        public DbSet<GIRO> GIRO { get; set; }
+        public DbSet<HABITACION> HABITACION { get; set; }
         public DbSet<HUESPED> HUESPED { get; set; }
+        public DbSet<LOG_ERRORES> LOG_ERRORES { get; set; }
+        public DbSet<NOTIFICACION> NOTIFICACION { get; set; }
         public DbSet<ORDEN_COMPRA> ORDEN_COMPRA { get; set; }
         public DbSet<PAIS> PAIS { get; set; }
         public DbSet<PEDIDO> PEDIDO { get; set; }
@@ -52,9 +59,5 @@ namespace Datos
         public DbSet<TIPO_PLATO> TIPO_PLATO { get; set; }
         public DbSet<TIPO_PROVEEDOR> TIPO_PROVEEDOR { get; set; }
         public DbSet<USUARIO> USUARIO { get; set; }
-        public DbSet<CATEGORIA_HABITACION> CATEGORIA_HABITACION { get; set; }
-        public DbSet<NOTIFICACION> NOTIFICACION { get; set; }
-        public DbSet<HABITACION> HABITACION { get; set; }
-        public DbSet<LOG_ERRORES> LOG_ERRORESSet { get; set; }
     }
 }

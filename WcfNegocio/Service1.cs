@@ -186,7 +186,6 @@ namespace WcfNegocio
             uDatos.APP_MATERNO_HUESPED = hp.APP_MATERNO_HUESPED;
             uDatos.APP_PATERNO_HUESPED = hp.APP_PATERNO_HUESPED;
             uDatos.DV_HUESPED = hp.DV_HUESPED;
-            uDatos.NUMERO_HABITACION = hp.NUMERO_HABITACION;
             uDatos.PNOMBRE_HUESPED = hp.PNOMBRE_HUESPED;
             uDatos.REGISTRADO = hp.REGISTRADO;
             uDatos.RUT_CLIENTE = hp.RUT_CLIENTE;
@@ -223,7 +222,6 @@ namespace WcfNegocio
                 h.PNOMBRE_HUESPED = hp.PNOMBRE_HUESPED;
                 h.SNOMBRE_HUESPED = hp.SNOMBRE_HUESPED;
                 h.TELEFONO_HUESPED = hp.TELEFONO_HUESPED;
-                h.NUMERO_HABITACION = hp.NUMERO_HABITACION;
                 h.APP_MATERNO_HUESPED = hp.APP_MATERNO_HUESPED;
                 h.APP_PATERNO_HUESPED = hp.APP_PATERNO_HUESPED;
                 h.REGISTRADO = hp.REGISTRADO;
@@ -248,7 +246,6 @@ namespace WcfNegocio
             Datos.HUESPED hues = new Datos.HUESPED();
             //Datos de Huesped
             hues.RUT_HUESPED = hp.RUT_HUESPED;
-            hues.NUMERO_HABITACION = hp.NUMERO_HABITACION;
             hues.DV_HUESPED = hp.DV_HUESPED;
             hues.APP_PATERNO_HUESPED = hp.APP_PATERNO_HUESPED;
             hues.APP_MATERNO_HUESPED = hp.APP_MATERNO_HUESPED;
@@ -306,6 +303,7 @@ namespace WcfNegocio
             cDatos.ID_COMUNA = c.ID_COMUNA;
             cDatos.ID_USUARIO = 0;
             cDatos.NOMBRE_CLIENTE = c.NOMBRE_CLIENTE;
+            cDatos.ID_GIRO = c.ID_GIRO;
 
             return servicio.AgregarCliente(cDatos);
         }

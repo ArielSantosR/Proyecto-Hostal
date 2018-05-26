@@ -64,6 +64,8 @@ namespace Web.Cliente {
                 coleccionComuna = (Modelo.ComunaCollection)ser2.Deserialize(reader2);
                 reader2.Close();
 
+                List<Giro> giros = GiroCollection.ListaGiro();
+
                 //Bloqueo de cambios dependiendo del usuario
                 if (MiSesion.ID_USUARIO != 0)
                 {
@@ -101,6 +103,11 @@ namespace Web.Cliente {
                     ddlRegion.DataTextField = "Nombre";
                     ddlRegion.DataValueField = "Id_Region";
                     ddlRegion.DataBind();
+
+                    ddlGiro.DataSource = giros;
+                    ddlGiro.DataTextField = "NOMBRE_GIRO";
+                    ddlGiro.DataValueField = "ID_GIRO";
+                    ddlGiro.DataBind();
 
                     Comuna com = new Comuna();
 
@@ -147,6 +154,7 @@ namespace Web.Cliente {
                     ddlComuna.DataBind();
 
                     ddlComuna.SelectedValue = com.Id_Comuna.ToString();
+                    ddlGiro.SelectedValue = SesionCl.ID_GIRO.ToString();
                 }
             }
             catch (Exception)
@@ -235,8 +243,12 @@ namespace Web.Cliente {
                     cliente.TELEFONO_CLIENTE = long.Parse(txtTelefono.Text);
                 }
 
-                if (MiSesion.TIPO_USUARIO.Equals(Modelo.Tipo_Usuario.Administrador.ToString())) {
+                if (MiSesion.TIPO_USUARIO.Equals(Tipo_Usuario.Administrador.ToString())) {
                     usuario.ESTADO = ddlEstado.SelectedValue.ToString();
+                }
+
+                if (!ddlGiro.SelectedValue.Equals(cliente.ID_GIRO.ToString())) {
+                    cliente.ID_GIRO = short.Parse(ddlGiro.SelectedValue.ToString());
                 }
 
                 if (flag) {

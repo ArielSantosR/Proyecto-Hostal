@@ -23,7 +23,6 @@ namespace Modelo
                 huesped.APP_MATERNO_HUESPED = dato.APP_MATERNO_HUESPED;
                 huesped.APP_PATERNO_HUESPED = dato.APP_PATERNO_HUESPED;
                 huesped.DV_HUESPED = dato.DV_HUESPED;
-                huesped.NUMERO_HABITACION = dato.NUMERO_HABITACION;
                 huesped.PNOMBRE_HUESPED = dato.PNOMBRE_HUESPED;
                 huesped.RUT_CLIENTE = dato.RUT_CLIENTE;
                 huesped.RUT_HUESPED = dato.RUT_HUESPED;

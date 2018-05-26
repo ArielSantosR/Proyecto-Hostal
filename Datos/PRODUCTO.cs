@@ -23,7 +23,7 @@ namespace Datos
     
         public long ID_PRODUCTO { get; set; }
         public string NOMBRE_PRODUCTO { get; set; }
-        public DateTime? FECHA_VENCIMIENTO_PRODUCTO { get; set; }
+        public Nullable<System.DateTime> FECHA_VENCIMIENTO_PRODUCTO { get; set; }
         public short STOCK_PRODUCTO { get; set; }
         public short STOCK_CRITICO_PRODUCTO { get; set; }
         public string DESCRIPCION_PRODUCTO { get; set; }
@@ -36,7 +36,7 @@ namespace Datos
         public virtual ICollection<DETALLE_PEDIDO> DETALLE_PEDIDO { get; set; }
         public virtual ICollection<DETALLE_RECEPCION> DETALLE_RECEPCION { get; set; }
         public virtual FAMILIA FAMILIA { get; set; }
-        public virtual PROVEEDOR PROVEEDOR { get; set; }
         public virtual ICollection<NOTIFICACION> NOTIFICACION { get; set; }
+        public virtual PROVEEDOR PROVEEDOR { get; set; }
     }
 }

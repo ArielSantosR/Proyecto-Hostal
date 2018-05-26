@@ -16,17 +16,17 @@ namespace Datos
     {
         public PENSION()
         {
-            this.DETALLE_PLATOS = new HashSet<DETALLE_PLATOS>();
             this.DETALLE_ORDEN = new HashSet<DETALLE_ORDEN>();
+            this.DETALLE_PASAJEROS = new HashSet<DETALLE_PASAJEROS>();
+            this.DETALLE_PLATOS = new HashSet<DETALLE_PLATOS>();
         }
     
         public short ID_PENSION { get; set; }
         public string NOMBRE_PENSION { get; set; }
         public int VALOR_PENSION { get; set; }
-        public Nullable<short> NUMERO_HABITACION { get; set; }
     
-        public virtual ICollection<DETALLE_PLATOS> DETALLE_PLATOS { get; set; }
-        public virtual HABITACION HABITACION { get; set; }
         public virtual ICollection<DETALLE_ORDEN> DETALLE_ORDEN { get; set; }
+        public virtual ICollection<DETALLE_PASAJEROS> DETALLE_PASAJEROS { get; set; }
+        public virtual ICollection<DETALLE_PLATOS> DETALLE_PLATOS { get; set; }
     }
 }

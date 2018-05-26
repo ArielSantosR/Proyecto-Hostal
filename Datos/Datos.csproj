@@ -70,7 +70,13 @@
     <Compile Include="DETALLE_FACTURA.cs">
       <DependentUpon>Hostal.tt</DependentUpon>
     </Compile>
+    <Compile Include="DETALLE_HABITACION.cs">
+      <DependentUpon>Hostal.tt</DependentUpon>
+    </Compile>
     <Compile Include="DETALLE_ORDEN.cs">
+      <DependentUpon>Hostal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DETALLE_PASAJEROS.cs">
       <DependentUpon>Hostal.tt</DependentUpon>
     </Compile>
     <Compile Include="DETALLE_PEDIDO.cs">
@@ -89,6 +95,9 @@
       <DependentUpon>Hostal.tt</DependentUpon>
     </Compile>
     <Compile Include="FAMILIA.cs">
+      <DependentUpon>Hostal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GIRO.cs">
       <DependentUpon>Hostal.tt</DependentUpon>
     </Compile>
     <Compile Include="HABITACION.cs">

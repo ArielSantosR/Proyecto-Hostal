@@ -1,28 +1,37 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="HostalStoreContainer" CdmEntityContainer="HostalEntities">
+  <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="HostalEntities">
     <EntitySetMapping Name="BOLETA">
-      <EntityTypeMapping TypeName="Hostal.BOLETA">
+      <EntityTypeMapping TypeName="Model.BOLETA">
         <MappingFragment StoreEntitySet="BOLETA">
           <ScalarProperty Name="ID_BOLETA" ColumnName="ID_BOLETA" />
           <ScalarProperty Name="VALOR_DESC_BOLETA" ColumnName="VALOR_DESC_BOLETA" />
           <ScalarProperty Name="VALOR_TOTAL_BOLETA" ColumnName="VALOR_TOTAL_BOLETA" />
           <ScalarProperty Name="FECHA_EMISION_BOLETA" ColumnName="FECHA_EMISION_BOLETA" />
           <ScalarProperty Name="RUT_EMPLEADO" ColumnName="RUT_EMPLEADO" />
-          <ScalarProperty Name="RUT_CLIENTE" ColumnName="RUT_CLIENTE" />
+          <ScalarProperty Name="RUT_HUESPED" ColumnName="RUT_HUESPED" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="CATEGORIA">
-      <EntityTypeMapping TypeName="Hostal.CATEGORIA">
+      <EntityTypeMapping TypeName="Model.CATEGORIA">
         <MappingFragment StoreEntitySet="CATEGORIA">
           <ScalarProperty Name="ID_CATEGORIA" ColumnName="ID_CATEGORIA" />
           <ScalarProperty Name="NOMBRE_CATEGORIA" ColumnName="NOMBRE_CATEGORIA" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="CATEGORIA_HABITACION">
+      <EntityTypeMapping TypeName="Model.CATEGORIA_HABITACION">
+        <MappingFragment StoreEntitySet="CATEGORIA_HABITACION">
+          <ScalarProperty Name="ID_CATEGORIA_HABITACION" ColumnName="ID_CATEGORIA_HABITACION" />
+          <ScalarProperty Name="NOMBRE_CATEGORIA" ColumnName="NOMBRE_CATEGORIA" />
+          <ScalarProperty Name="PRECIO_CATEGORIA" ColumnName="PRECIO_CATEGORIA" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="CLIENTE">
-      <EntityTypeMapping TypeName="Hostal.CLIENTE">
+      <EntityTypeMapping TypeName="Model.CLIENTE">
         <MappingFragment StoreEntitySet="CLIENTE">
           <ScalarProperty Name="RUT_CLIENTE" ColumnName="RUT_CLIENTE" />
           <ScalarProperty Name="DV_CLIENTE" ColumnName="DV_CLIENTE" />
@@ -32,11 +41,12 @@
           <ScalarProperty Name="ID_COMUNA" ColumnName="ID_COMUNA" />
           <ScalarProperty Name="ID_USUARIO" ColumnName="ID_USUARIO" />
           <ScalarProperty Name="NOMBRE_CLIENTE" ColumnName="NOMBRE_CLIENTE" />
+          <ScalarProperty Name="ID_GIRO" ColumnName="ID_GIRO" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="COMUNA">
-      <EntityTypeMapping TypeName="Hostal.COMUNA">
+      <EntityTypeMapping TypeName="Model.COMUNA">
         <MappingFragment StoreEntitySet="COMUNA">
           <ScalarProperty Name="ID_COMUNA" ColumnName="ID_COMUNA" />
           <ScalarProperty Name="NOMBRE_COMUNA" ColumnName="NOMBRE_COMUNA" />
@@ -45,7 +55,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="DETALLE_BOLETA">
-      <EntityTypeMapping TypeName="Hostal.DETALLE_BOLETA">
+      <EntityTypeMapping TypeName="Model.DETALLE_BOLETA">
         <MappingFragment StoreEntitySet="DETALLE_BOLETA">
           <ScalarProperty Name="ID_DETALLE_BOLETA" ColumnName="ID_DETALLE_BOLETA" />
           <ScalarProperty Name="DESCRIPCION_DETALLE" ColumnName="DESCRIPCION_DETALLE" />
@@ -56,7 +66,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="DETALLE_FACTURA">
-      <EntityTypeMapping TypeName="Hostal.DETALLE_FACTURA">
+      <EntityTypeMapping TypeName="Model.DETALLE_FACTURA">
         <MappingFragment StoreEntitySet="DETALLE_FACTURA">
           <ScalarProperty Name="ID_DETALLE_FACTURA" ColumnName="ID_DETALLE_FACTURA" />
           <ScalarProperty Name="DESCRIPCION_DETALLE" ColumnName="DESCRIPCION_DETALLE" />
@@ -67,19 +77,40 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="DETALLE_HABITACION">
+      <EntityTypeMapping TypeName="Model.DETALLE_HABITACION">
+        <MappingFragment StoreEntitySet="DETALLE_HABITACION">
+          <ScalarProperty Name="ID_DETALLE_H" ColumnName="ID_DETALLE_H" />
+          <ScalarProperty Name="FECHA_LLEGADA" ColumnName="FECHA_LLEGADA" />
+          <ScalarProperty Name="FECHA_SALIDA" ColumnName="FECHA_SALIDA" />
+          <ScalarProperty Name="NUMERO_HABITACION" ColumnName="NUMERO_HABITACION" />
+          <ScalarProperty Name="RUT_CLIENTE" ColumnName="RUT_CLIENTE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="DETALLE_ORDEN">
-      <EntityTypeMapping TypeName="Hostal.DETALLE_ORDEN">
+      <EntityTypeMapping TypeName="Model.DETALLE_ORDEN">
         <MappingFragment StoreEntitySet="DETALLE_ORDEN">
-          <ScalarProperty Name="ID_PENSION" ColumnName="ID_PENSION" />
-          <ScalarProperty Name="ID_CATEGORIA_HABITACION" ColumnName="ID_CATEGORIA_HABITACION" />
           <ScalarProperty Name="ID_DETALLE" ColumnName="ID_DETALLE" />
           <ScalarProperty Name="NUMERO_ORDEN" ColumnName="NUMERO_ORDEN" />
           <ScalarProperty Name="RUT_HUESPED" ColumnName="RUT_HUESPED" />
+          <ScalarProperty Name="ID_CATEGORIA_HABITACION" ColumnName="ID_CATEGORIA_HABITACION" />
+          <ScalarProperty Name="ID_PENSION" ColumnName="ID_PENSION" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DETALLE_PASAJEROS">
+      <EntityTypeMapping TypeName="Model.DETALLE_PASAJEROS">
+        <MappingFragment StoreEntitySet="DETALLE_PASAJEROS">
+          <ScalarProperty Name="ID_DETALLE_PASAJEROS" ColumnName="ID_DETALLE_PASAJEROS" />
+          <ScalarProperty Name="NUMERO_HABITACION" ColumnName="NUMERO_HABITACION" />
+          <ScalarProperty Name="RUT_HUESPED" ColumnName="RUT_HUESPED" />
+          <ScalarProperty Name="ID_PENSION" ColumnName="ID_PENSION" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="DETALLE_PEDIDO">
-      <EntityTypeMapping TypeName="Hostal.DETALLE_PEDIDO">
+      <EntityTypeMapping TypeName="Model.DETALLE_PEDIDO">
         <MappingFragment StoreEntitySet="DETALLE_PEDIDO">
           <ScalarProperty Name="ID_DETALLE_PEDIDO" ColumnName="ID_DETALLE_PEDIDO" />
           <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
@@ -89,7 +120,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="DETALLE_PLATOS">
-      <EntityTypeMapping TypeName="Hostal.DETALLE_PLATOS">
+      <EntityTypeMapping TypeName="Model.DETALLE_PLATOS">
         <MappingFragment StoreEntitySet="DETALLE_PLATOS">
           <ScalarProperty Name="ID_DETALLE_PLATOS" ColumnName="ID_DETALLE_PLATOS" />
           <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
@@ -99,7 +130,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="DETALLE_RECEPCION">
-      <EntityTypeMapping TypeName="Hostal.DETALLE_RECEPCION">
+      <EntityTypeMapping TypeName="Model.DETALLE_RECEPCION">
         <MappingFragment StoreEntitySet="DETALLE_RECEPCION">
           <ScalarProperty Name="ID_DETALLE_RECEPCION" ColumnName="ID_DETALLE_RECEPCION" />
           <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
@@ -109,7 +140,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="EMPLEADO">
-      <EntityTypeMapping TypeName="Hostal.EMPLEADO">
+      <EntityTypeMapping TypeName="Model.EMPLEADO">
         <MappingFragment StoreEntitySet="EMPLEADO">
           <ScalarProperty Name="RUT_EMPLEADO" ColumnName="RUT_EMPLEADO" />
           <ScalarProperty Name="DV_EMPLEADO" ColumnName="DV_EMPLEADO" />
@@ -122,7 +153,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="FACTURA">
-      <EntityTypeMapping TypeName="Hostal.FACTURA">
+      <EntityTypeMapping TypeName="Model.FACTURA">
         <MappingFragment StoreEntitySet="FACTURA">
           <ScalarProperty Name="ID_FACTURA" ColumnName="ID_FACTURA" />
           <ScalarProperty Name="VALOR_NETO_FACTURA" ColumnName="VALOR_NETO_FACTURA" />
@@ -136,15 +167,34 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="FAMILIA">
-      <EntityTypeMapping TypeName="Hostal.FAMILIA">
+      <EntityTypeMapping TypeName="Model.FAMILIA">
         <MappingFragment StoreEntitySet="FAMILIA">
           <ScalarProperty Name="ID_FAMILIA" ColumnName="ID_FAMILIA" />
           <ScalarProperty Name="NOMBRE_FAMILIA" ColumnName="NOMBRE_FAMILIA" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="GIRO">
+      <EntityTypeMapping TypeName="Model.GIRO">
+        <MappingFragment StoreEntitySet="GIRO">
+          <ScalarProperty Name="ID_GIRO" ColumnName="ID_GIRO" />
+          <ScalarProperty Name="NOMBRE_GIRO" ColumnName="NOMBRE_GIRO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HABITACION">
+      <EntityTypeMapping TypeName="Model.HABITACION">
+        <MappingFragment StoreEntitySet="HABITACION">
+          <ScalarProperty Name="NUMERO_HABITACION" ColumnName="NUMERO_HABITACION" />
+          <ScalarProperty Name="ESTADO_HABITACION" ColumnName="ESTADO_HABITACION" />
+          <ScalarProperty Name="ID_TIPO_HABITACION" ColumnName="ID_TIPO_HABITACION" />
+          <ScalarProperty Name="RUT_CLIENTE" ColumnName="RUT_CLIENTE" />
+          <ScalarProperty Name="ID_CATEGORIA_HABITACION" ColumnName="ID_CATEGORIA_HABITACION" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="HUESPED">
-      <EntityTypeMapping TypeName="Hostal.HUESPED">
+      <EntityTypeMapping TypeName="Model.HUESPED">
         <MappingFragment StoreEntitySet="HUESPED">
           <ScalarProperty Name="RUT_HUESPED" ColumnName="RUT_HUESPED" />
           <ScalarProperty Name="DV_HUESPED" ColumnName="DV_HUESPED" />
@@ -154,27 +204,49 @@
           <ScalarProperty Name="APP_MATERNO_HUESPED" ColumnName="APP_MATERNO_HUESPED" />
           <ScalarProperty Name="TELEFONO_HUESPED" ColumnName="TELEFONO_HUESPED" />
           <ScalarProperty Name="REGISTRADO" ColumnName="REGISTRADO" />
-          <ScalarProperty Name="NUMERO_HABITACION" ColumnName="NUMERO_HABITACION" />
           <ScalarProperty Name="RUT_CLIENTE" ColumnName="RUT_CLIENTE" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="LOG_ERRORES">
+      <EntityTypeMapping TypeName="Model.LOG_ERRORES">
+        <MappingFragment StoreEntitySet="LOG_ERRORES">
+          <ScalarProperty Name="ID_ERROR" ColumnName="ID_ERROR" />
+          <ScalarProperty Name="NUMERO_ERROR" ColumnName="NUMERO_ERROR" />
+          <ScalarProperty Name="MENSAJE" ColumnName="MENSAJE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NOTIFICACION">
+      <EntityTypeMapping TypeName="Model.NOTIFICACION">
+        <MappingFragment StoreEntitySet="NOTIFICACION">
+          <ScalarProperty Name="ID_NOTIFICACION" ColumnName="ID_NOTIFICACION" />
+          <ScalarProperty Name="MENSAJE" ColumnName="MENSAJE" />
+          <ScalarProperty Name="ID_USUARIO" ColumnName="ID_USUARIO" />
+          <ScalarProperty Name="ESTADO_NOTIFICACION" ColumnName="ESTADO_NOTIFICACION" />
+          <ScalarProperty Name="URL" ColumnName="URL" />
+          <ScalarProperty Name="NUMERO_PEDIDO" ColumnName="NUMERO_PEDIDO" />
+          <ScalarProperty Name="ID_PRODUCTO" ColumnName="ID_PRODUCTO" />
+          <ScalarProperty Name="NUMERO_ORDEN" ColumnName="NUMERO_ORDEN" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="ORDEN_COMPRA">
-      <EntityTypeMapping TypeName="Hostal.ORDEN_COMPRA">
+      <EntityTypeMapping TypeName="Model.ORDEN_COMPRA">
         <MappingFragment StoreEntitySet="ORDEN_COMPRA">
-          <ScalarProperty Name="COMENTARIO" ColumnName="COMENTARIO" />
-          <ScalarProperty Name="ESTADO_ORDEN" ColumnName="ESTADO_ORDEN" />
           <ScalarProperty Name="NUMERO_ORDEN" ColumnName="NUMERO_ORDEN" />
           <ScalarProperty Name="CANTIDAD_HUESPEDES" ColumnName="CANTIDAD_HUESPEDES" />
           <ScalarProperty Name="FECHA_LLEGADA" ColumnName="FECHA_LLEGADA" />
           <ScalarProperty Name="FECHA_SALIDA" ColumnName="FECHA_SALIDA" />
           <ScalarProperty Name="RUT_EMPLEADO" ColumnName="RUT_EMPLEADO" />
           <ScalarProperty Name="RUT_CLIENTE" ColumnName="RUT_CLIENTE" />
+          <ScalarProperty Name="ESTADO_ORDEN" ColumnName="ESTADO_ORDEN" />
+          <ScalarProperty Name="COMENTARIO" ColumnName="COMENTARIO" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="PAIS">
-      <EntityTypeMapping TypeName="Hostal.PAIS">
+      <EntityTypeMapping TypeName="Model.PAIS">
         <MappingFragment StoreEntitySet="PAIS">
           <ScalarProperty Name="ID_PAIS" ColumnName="ID_PAIS" />
           <ScalarProperty Name="NOMBRE_PAIS" ColumnName="NOMBRE_PAIS" />
@@ -182,31 +254,30 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="PEDIDO">
-      <EntityTypeMapping TypeName="Hostal.PEDIDO">
+      <EntityTypeMapping TypeName="Model.PEDIDO">
         <MappingFragment StoreEntitySet="PEDIDO">
-          <ScalarProperty Name="COMENTARIO" ColumnName="COMENTARIO" />
-          <ScalarProperty Name="ESTADO_DESPACHO" ColumnName="ESTADO_DESPACHO" />
           <ScalarProperty Name="NUMERO_PEDIDO" ColumnName="NUMERO_PEDIDO" />
           <ScalarProperty Name="FECHA_PEDIDO" ColumnName="FECHA_PEDIDO" />
           <ScalarProperty Name="ESTADO_PEDIDO" ColumnName="ESTADO_PEDIDO" />
           <ScalarProperty Name="RUT_EMPLEADO" ColumnName="RUT_EMPLEADO" />
           <ScalarProperty Name="NUMERO_RECEPCION" ColumnName="NUMERO_RECEPCION" />
           <ScalarProperty Name="RUT_PROVEEDOR" ColumnName="RUT_PROVEEDOR" />
+          <ScalarProperty Name="ESTADO_DESPACHO" ColumnName="ESTADO_DESPACHO" />
+          <ScalarProperty Name="COMENTARIO" ColumnName="COMENTARIO" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="PENSION">
-      <EntityTypeMapping TypeName="Hostal.PENSION">
+      <EntityTypeMapping TypeName="Model.PENSION">
         <MappingFragment StoreEntitySet="PENSION">
           <ScalarProperty Name="ID_PENSION" ColumnName="ID_PENSION" />
           <ScalarProperty Name="NOMBRE_PENSION" ColumnName="NOMBRE_PENSION" />
           <ScalarProperty Name="VALOR_PENSION" ColumnName="VALOR_PENSION" />
-          <ScalarProperty Name="NUMERO_HABITACION" ColumnName="NUMERO_HABITACION" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="PLATO">
-      <EntityTypeMapping TypeName="Hostal.PLATO">
+      <EntityTypeMapping TypeName="Model.PLATO">
         <MappingFragment StoreEntitySet="PLATO">
           <ScalarProperty Name="ID_PLATO" ColumnName="ID_PLATO" />
           <ScalarProperty Name="NOMBRE_PLATO" ColumnName="NOMBRE_PLATO" />
@@ -217,9 +288,8 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="PRODUCTO">
-      <EntityTypeMapping TypeName="Hostal.PRODUCTO">
+      <EntityTypeMapping TypeName="Model.PRODUCTO">
         <MappingFragment StoreEntitySet="PRODUCTO">
-          <ScalarProperty Name="UNIDAD_MEDIDA" ColumnName="UNIDAD_MEDIDA" />
           <ScalarProperty Name="ID_PRODUCTO" ColumnName="ID_PRODUCTO" />
           <ScalarProperty Name="NOMBRE_PRODUCTO" ColumnName="NOMBRE_PRODUCTO" />
           <ScalarProperty Name="FECHA_VENCIMIENTO_PRODUCTO" ColumnName="FECHA_VENCIMIENTO_PRODUCTO" />
@@ -230,11 +300,12 @@
           <ScalarProperty Name="ID_FAMILIA" ColumnName="ID_FAMILIA" />
           <ScalarProperty Name="RUT_PROVEEDOR" ColumnName="RUT_PROVEEDOR" />
           <ScalarProperty Name="ID_PRODUCTO_SEQ" ColumnName="ID_PRODUCTO_SEQ" />
+          <ScalarProperty Name="UNIDAD_MEDIDA" ColumnName="UNIDAD_MEDIDA" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="PROVEEDOR">
-      <EntityTypeMapping TypeName="Hostal.PROVEEDOR">
+      <EntityTypeMapping TypeName="Model.PROVEEDOR">
         <MappingFragment StoreEntitySet="PROVEEDOR">
           <ScalarProperty Name="RUT_PROVEEDOR" ColumnName="RUT_PROVEEDOR" />
           <ScalarProperty Name="DV_PROVEEDOR" ColumnName="DV_PROVEEDOR" />
@@ -248,7 +319,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="RECEPCION">
-      <EntityTypeMapping TypeName="Hostal.RECEPCION">
+      <EntityTypeMapping TypeName="Model.RECEPCION">
         <MappingFragment StoreEntitySet="RECEPCION">
           <ScalarProperty Name="NUMERO_RECEPCION" ColumnName="NUMERO_RECEPCION" />
           <ScalarProperty Name="FECHA_RECEPCION" ColumnName="FECHA_RECEPCION" />
@@ -258,7 +329,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="REGION">
-      <EntityTypeMapping TypeName="Hostal.REGION">
+      <EntityTypeMapping TypeName="Model.REGION">
         <MappingFragment StoreEntitySet="REGION">
           <ScalarProperty Name="ID_REGION" ColumnName="ID_REGION" />
           <ScalarProperty Name="NOMBRE_REGION" ColumnName="NOMBRE_REGION" />
@@ -267,17 +338,17 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="TIPO_HABITACION">
-      <EntityTypeMapping TypeName="Hostal.TIPO_HABITACION">
+      <EntityTypeMapping TypeName="Model.TIPO_HABITACION">
         <MappingFragment StoreEntitySet="TIPO_HABITACION">
-          <ScalarProperty Name="PRECIO_TIPO" ColumnName="PRECIO_TIPO" />
           <ScalarProperty Name="ID_TIPO_HABITACION" ColumnName="ID_TIPO_HABITACION" />
           <ScalarProperty Name="NOMBRE_TIPO_HABITACION" ColumnName="NOMBRE_TIPO_HABITACION" />
           <ScalarProperty Name="CANTIDAD_PASAJERO" ColumnName="CANTIDAD_PASAJERO" />
+          <ScalarProperty Name="PRECIO_TIPO" ColumnName="PRECIO_TIPO" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="TIPO_PLATO">
-      <EntityTypeMapping TypeName="Hostal.TIPO_PLATO">
+      <EntityTypeMapping TypeName="Model.TIPO_PLATO">
         <MappingFragment StoreEntitySet="TIPO_PLATO">
           <ScalarProperty Name="ID_TIPO_PLATO" ColumnName="ID_TIPO_PLATO" />
           <ScalarProperty Name="NOMBRE_TIPO_PLATO" ColumnName="NOMBRE_TIPO_PLATO" />
@@ -285,7 +356,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="TIPO_PROVEEDOR">
-      <EntityTypeMapping TypeName="Hostal.TIPO_PROVEEDOR">
+      <EntityTypeMapping TypeName="Model.TIPO_PROVEEDOR">
         <MappingFragment StoreEntitySet="TIPO_PROVEEDOR">
           <ScalarProperty Name="ID_TIPO_PROVEEDOR" ColumnName="ID_TIPO_PROVEEDOR" />
           <ScalarProperty Name="NOMBRE_TIPO" ColumnName="NOMBRE_TIPO" />
@@ -293,56 +364,13 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="USUARIO">
-      <EntityTypeMapping TypeName="Hostal.USUARIO">
+      <EntityTypeMapping TypeName="Model.USUARIO">
         <MappingFragment StoreEntitySet="USUARIO">
           <ScalarProperty Name="ID_USUARIO" ColumnName="ID_USUARIO" />
           <ScalarProperty Name="NOMBRE_USUARIO" ColumnName="NOMBRE_USUARIO" />
           <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
           <ScalarProperty Name="TIPO_USUARIO" ColumnName="TIPO_USUARIO" />
           <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="CATEGORIA_HABITACION">
-      <EntityTypeMapping TypeName="Hostal.CATEGORIA_HABITACION">
-        <MappingFragment StoreEntitySet="CATEGORIA_HABITACION">
-          <ScalarProperty Name="PRECIO_CATEGORIA" ColumnName="PRECIO_CATEGORIA" />
-          <ScalarProperty Name="NOMBRE_CATEGORIA" ColumnName="NOMBRE_CATEGORIA" />
-          <ScalarProperty Name="ID_CATEGORIA_HABITACION" ColumnName="ID_CATEGORIA_HABITACION" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="NOTIFICACION">
-      <EntityTypeMapping TypeName="Hostal.NOTIFICACION">
-        <MappingFragment StoreEntitySet="NOTIFICACION">
-          <ScalarProperty Name="NUMERO_ORDEN" ColumnName="NUMERO_ORDEN" />
-          <ScalarProperty Name="ID_PRODUCTO" ColumnName="ID_PRODUCTO" />
-          <ScalarProperty Name="NUMERO_PEDIDO" ColumnName="NUMERO_PEDIDO" />
-          <ScalarProperty Name="URL" ColumnName="URL" />
-          <ScalarProperty Name="ESTADO_NOTIFICACION" ColumnName="ESTADO_NOTIFICACION" />
-          <ScalarProperty Name="ID_USUARIO" ColumnName="ID_USUARIO" />
-          <ScalarProperty Name="MENSAJE" ColumnName="MENSAJE" />
-          <ScalarProperty Name="ID_NOTIFICACION" ColumnName="ID_NOTIFICACION" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="HABITACION">
-      <EntityTypeMapping TypeName="Hostal.HABITACION">
-        <MappingFragment StoreEntitySet="HABITACION">
-          <ScalarProperty Name="ID_CATEGORIA_HABITACION" ColumnName="ID_CATEGORIA_HABITACION" />
-          <ScalarProperty Name="RUT_CLIENTE" ColumnName="RUT_CLIENTE" />
-          <ScalarProperty Name="ID_TIPO_HABITACION" ColumnName="ID_TIPO_HABITACION" />
-          <ScalarProperty Name="ESTADO_HABITACION" ColumnName="ESTADO_HABITACION" />
-          <ScalarProperty Name="NUMERO_HABITACION" ColumnName="NUMERO_HABITACION" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="LOG_ERRORESSet">
-      <EntityTypeMapping TypeName="Hostal.LOG_ERRORES">
-        <MappingFragment StoreEntitySet="LOG_ERRORES">
-          <ScalarProperty Name="MENSAJE" ColumnName="MENSAJE" />
-          <ScalarProperty Name="NUMERO_ERROR" ColumnName="NUMERO_ERROR" />
-          <ScalarProperty Name="ID_ERROR" ColumnName="ID_ERROR" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -18,7 +18,6 @@ namespace Modelo
         public string APP_MATERNO_HUESPED { get; set; }
         public Nullable<long> TELEFONO_HUESPED { get; set; }
         public string REGISTRADO { get; set; }
-        public Nullable<short> NUMERO_HABITACION { get; set; }
         public int RUT_CLIENTE { get; set; }
 
         public string RutYNombre
@@ -36,7 +35,6 @@ namespace Modelo
             datos.RUT_CLIENTE = this.RUT_CLIENTE;
             datos.SNOMBRE_HUESPED = this.SNOMBRE_HUESPED;
             datos.RUT_HUESPED = this.RUT_HUESPED;
-            datos.NUMERO_HABITACION = this.NUMERO_HABITACION;
             datos.TELEFONO_HUESPED = this.TELEFONO_HUESPED;
             datos.REGISTRADO = this.REGISTRADO;
 
@@ -52,7 +50,6 @@ namespace Modelo
             datos.RUT_CLIENTE = this.RUT_CLIENTE;
             datos.SNOMBRE_HUESPED = this.SNOMBRE_HUESPED;
             datos.RUT_HUESPED = this.RUT_HUESPED;
-            datos.NUMERO_HABITACION = this.NUMERO_HABITACION;
             datos.TELEFONO_HUESPED = this.TELEFONO_HUESPED;
             datos.REGISTRADO = this.REGISTRADO;
 
@@ -72,7 +69,6 @@ namespace Modelo
                 this.RUT_HUESPED = datos.RUT_HUESPED;
                 this.SNOMBRE_HUESPED = datos.SNOMBRE_HUESPED;
                 this.TELEFONO_HUESPED = datos.TELEFONO_HUESPED;
-                this.NUMERO_HABITACION = datos.NUMERO_HABITACION;
 
                 return true;
             }

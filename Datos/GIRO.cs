@@ -12,25 +12,16 @@ namespace Datos
     using System;
     using System.Collections.Generic;
     
-    public partial class USUARIO
+    public partial class GIRO
     {
-        public USUARIO()
+        public GIRO()
         {
             this.CLIENTE = new HashSet<CLIENTE>();
-            this.EMPLEADO = new HashSet<EMPLEADO>();
-            this.NOTIFICACION = new HashSet<NOTIFICACION>();
-            this.PROVEEDOR = new HashSet<PROVEEDOR>();
         }
     
-        public short ID_USUARIO { get; set; }
-        public string NOMBRE_USUARIO { get; set; }
-        public string PASSWORD { get; set; }
-        public string TIPO_USUARIO { get; set; }
-        public string ESTADO { get; set; }
+        public short ID_GIRO { get; set; }
+        public string NOMBRE_GIRO { get; set; }
     
         public virtual ICollection<CLIENTE> CLIENTE { get; set; }
-        public virtual ICollection<EMPLEADO> EMPLEADO { get; set; }
-        public virtual ICollection<NOTIFICACION> NOTIFICACION { get; set; }
-        public virtual ICollection<PROVEEDOR> PROVEEDOR { get; set; }
     }
 }

@@ -90,7 +90,6 @@ namespace Datos
                 huesped.APP_MATERNO_HUESPED = h.APP_MATERNO_HUESPED;
                 huesped.TELEFONO_HUESPED = h.TELEFONO_HUESPED;
                 huesped.REGISTRADO = h.REGISTRADO;
-                huesped.NUMERO_HABITACION = h.NUMERO_HABITACION;
                 huesped.RUT_CLIENTE = h.RUT_CLIENTE;
 
                 ent.SaveChanges();

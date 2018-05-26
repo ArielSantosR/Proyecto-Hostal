@@ -56,6 +56,7 @@ namespace Datos
                 c.DIRECCION_CLIENTE = cliente.DIRECCION_CLIENTE;
                 c.ID_COMUNA = cliente.ID_COMUNA;
                 c.TELEFONO_CLIENTE = cliente.TELEFONO_CLIENTE;
+                c.ID_GIRO = cliente.ID_GIRO;
 
                 ent.SaveChanges();
                 return true;
@@ -63,6 +64,10 @@ namespace Datos
             else {
                 return false;
             }
+        }
+
+        public List<GIRO> ListarGiro() {
+            return ent.GIRO.ToList();
         }
 
         public CLIENTE BuscarCliente(short ID_USUARIO) {

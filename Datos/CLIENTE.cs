@@ -16,12 +16,12 @@ namespace Datos
     {
         public CLIENTE()
         {
-            this.BOLETA = new HashSet<BOLETA>();
+            this.DETALLE_HABITACION = new HashSet<DETALLE_HABITACION>();
             this.DETALLE_FACTURA = new HashSet<DETALLE_FACTURA>();
             this.FACTURA = new HashSet<FACTURA>();
+            this.HABITACION = new HashSet<HABITACION>();
             this.HUESPED = new HashSet<HUESPED>();
             this.ORDEN_COMPRA = new HashSet<ORDEN_COMPRA>();
-            this.HABITACION = new HashSet<HABITACION>();
         }
     
         public int RUT_CLIENTE { get; set; }
@@ -32,14 +32,16 @@ namespace Datos
         public short ID_COMUNA { get; set; }
         public short ID_USUARIO { get; set; }
         public string NOMBRE_CLIENTE { get; set; }
+        public short ID_GIRO { get; set; }
     
-        public virtual ICollection<BOLETA> BOLETA { get; set; }
         public virtual COMUNA COMUNA { get; set; }
+        public virtual ICollection<DETALLE_HABITACION> DETALLE_HABITACION { get; set; }
+        public virtual GIRO GIRO { get; set; }
         public virtual USUARIO USUARIO { get; set; }
         public virtual ICollection<DETALLE_FACTURA> DETALLE_FACTURA { get; set; }
         public virtual ICollection<FACTURA> FACTURA { get; set; }
+        public virtual ICollection<HABITACION> HABITACION { get; set; }
         public virtual ICollection<HUESPED> HUESPED { get; set; }
         public virtual ICollection<ORDEN_COMPRA> ORDEN_COMPRA { get; set; }
-        public virtual ICollection<HABITACION> HABITACION { get; set; }
     }
 }

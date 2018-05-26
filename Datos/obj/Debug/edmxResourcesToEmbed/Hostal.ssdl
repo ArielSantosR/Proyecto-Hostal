@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="Hostal.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="11.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="Model.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="11.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="BOLETA">
     <Key>
       <PropertyRef Name="ID_BOLETA" />
@@ -9,7 +9,7 @@
     <Property Name="VALOR_TOTAL_BOLETA" Type="number" Precision="15" Scale="0" Nullable="false" />
     <Property Name="FECHA_EMISION_BOLETA" Type="date" Nullable="false" />
     <Property Name="RUT_EMPLEADO" Type="number" Precision="8" Scale="0" Nullable="false" />
-    <Property Name="RUT_CLIENTE" Type="number" Precision="8" Scale="0" />
+    <Property Name="RUT_HUESPED" Type="number" Precision="8" Scale="0" Nullable="false" />
   </EntityType>
   <EntityType Name="CATEGORIA">
     <Key>
@@ -38,6 +38,7 @@
     <Property Name="ID_COMUNA" Type="number" Precision="5" Scale="0" Nullable="false" />
     <Property Name="ID_USUARIO" Type="number" Precision="5" Scale="0" Nullable="false" />
     <Property Name="NOMBRE_CLIENTE" Type="varchar2" MaxLength="100" Nullable="false" />
+    <Property Name="ID_GIRO" Type="number" Precision="5" Scale="0" Nullable="false" />
   </EntityType>
   <EntityType Name="COMUNA">
     <Key>
@@ -69,6 +70,16 @@
     <Property Name="ID_FACTURA" Type="number" Precision="10" Scale="0" Nullable="false" />
     <Property Name="RUT_CLIENTE" Type="number" Precision="8" Scale="0" Nullable="false" />
   </EntityType>
+  <EntityType Name="DETALLE_HABITACION">
+    <Key>
+      <PropertyRef Name="ID_DETALLE_H" />
+    </Key>
+    <Property Name="ID_DETALLE_H" Type="number" Precision="5" Scale="0" Nullable="false" />
+    <Property Name="FECHA_LLEGADA" Type="date" Nullable="false" />
+    <Property Name="FECHA_SALIDA" Type="date" Nullable="false" />
+    <Property Name="NUMERO_HABITACION" Type="number" Precision="5" Scale="0" Nullable="false" />
+    <Property Name="RUT_CLIENTE" Type="number" Precision="8" Scale="0" Nullable="false" />
+  </EntityType>
   <EntityType Name="DETALLE_ORDEN">
     <Key>
       <PropertyRef Name="ID_DETALLE" />
@@ -77,6 +88,15 @@
     <Property Name="NUMERO_ORDEN" Type="number" Precision="5" Scale="0" Nullable="false" />
     <Property Name="RUT_HUESPED" Type="number" Precision="8" Scale="0" Nullable="false" />
     <Property Name="ID_CATEGORIA_HABITACION" Type="number" Precision="3" Scale="0" Nullable="false" />
+    <Property Name="ID_PENSION" Type="number" Precision="5" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DETALLE_PASAJEROS">
+    <Key>
+      <PropertyRef Name="ID_DETALLE_PASAJEROS" />
+    </Key>
+    <Property Name="ID_DETALLE_PASAJEROS" Type="number" Precision="5" Scale="0" Nullable="false" />
+    <Property Name="NUMERO_HABITACION" Type="number" Precision="5" Scale="0" />
+    <Property Name="RUT_HUESPED" Type="number" Precision="8" Scale="0" />
     <Property Name="ID_PENSION" Type="number" Precision="5" Scale="0" Nullable="false" />
   </EntityType>
   <EntityType Name="DETALLE_PEDIDO">
@@ -140,6 +160,13 @@
     <Property Name="ID_FAMILIA" Type="number" Precision="5" Scale="0" Nullable="false" />
     <Property Name="NOMBRE_FAMILIA" Type="varchar2" MaxLength="250" Nullable="false" />
   </EntityType>
+  <EntityType Name="GIRO">
+    <Key>
+      <PropertyRef Name="ID_GIRO" />
+    </Key>
+    <Property Name="ID_GIRO" Type="number" Precision="5" Scale="0" Nullable="false" />
+    <Property Name="NOMBRE_GIRO" Type="varchar2" MaxLength="25" Nullable="false" />
+  </EntityType>
   <EntityType Name="HABITACION">
     <Key>
       <PropertyRef Name="NUMERO_HABITACION" />
@@ -162,7 +189,6 @@
     <Property Name="APP_MATERNO_HUESPED" Type="varchar2" MaxLength="50" Nullable="false" />
     <Property Name="TELEFONO_HUESPED" Type="number" Precision="12" Scale="0" />
     <Property Name="REGISTRADO" Type="varchar2" MaxLength="1" Nullable="false" />
-    <Property Name="NUMERO_HABITACION" Type="number" Precision="5" Scale="0" />
     <Property Name="RUT_CLIENTE" Type="number" Precision="8" Scale="0" Nullable="false" />
   </EntityType>
   <EntityType Name="LOG_ERRORES">
@@ -226,7 +252,6 @@
     <Property Name="ID_PENSION" Type="number" Precision="5" Scale="0" Nullable="false" />
     <Property Name="NOMBRE_PENSION" Type="varchar2" MaxLength="25" Nullable="false" />
     <Property Name="VALOR_PENSION" Type="number" Precision="10" Scale="0" Nullable="false" />
-    <Property Name="NUMERO_HABITACION" Type="number" Precision="5" Scale="0" />
   </EntityType>
   <EntityType Name="PLATO">
     <Key>
@@ -317,18 +342,6 @@
     <Property Name="TIPO_USUARIO" Type="varchar2" MaxLength="25" Nullable="false" />
     <Property Name="ESTADO" Type="varchar2" MaxLength="15" Nullable="false" />
   </EntityType>
-  <Association Name="FK_BOLETA_CLIENTE">
-    <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="0..1" />
-    <End Role="BOLETA" Type="Self.BOLETA" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="CLIENTE">
-        <PropertyRef Name="RUT_CLIENTE" />
-      </Principal>
-      <Dependent Role="BOLETA">
-        <PropertyRef Name="RUT_CLIENTE" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_BOLETA_EMPLEADO">
     <End Role="EMPLEADO" Type="Self.EMPLEADO" Multiplicity="1" />
     <End Role="BOLETA" Type="Self.BOLETA" Multiplicity="*" />
@@ -341,6 +354,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_BOLETA_HUESPED">
+    <End Role="HUESPED" Type="Self.HUESPED" Multiplicity="1" />
+    <End Role="BOLETA" Type="Self.BOLETA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HUESPED">
+        <PropertyRef Name="RUT_HUESPED" />
+      </Principal>
+      <Dependent Role="BOLETA">
+        <PropertyRef Name="RUT_HUESPED" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_CLIENTE_COMUNA">
     <End Role="COMUNA" Type="Self.COMUNA" Multiplicity="1" />
     <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="*" />
@@ -350,6 +375,30 @@
       </Principal>
       <Dependent Role="CLIENTE">
         <PropertyRef Name="ID_COMUNA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CLIENTE_DETALLE_H">
+    <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="1" />
+    <End Role="DETALLE_HABITACION" Type="Self.DETALLE_HABITACION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CLIENTE">
+        <PropertyRef Name="RUT_CLIENTE" />
+      </Principal>
+      <Dependent Role="DETALLE_HABITACION">
+        <PropertyRef Name="RUT_CLIENTE" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CLIENTE_GIRO">
+    <End Role="GIRO" Type="Self.GIRO" Multiplicity="1" />
+    <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GIRO">
+        <PropertyRef Name="ID_GIRO" />
+      </Principal>
+      <Dependent Role="CLIENTE">
+        <PropertyRef Name="ID_GIRO" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -461,6 +510,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_DETALLE_PENSION_P">
+    <End Role="PENSION" Type="Self.PENSION" Multiplicity="1" />
+    <End Role="DETALLE_PASAJEROS" Type="Self.DETALLE_PASAJEROS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PENSION">
+        <PropertyRef Name="ID_PENSION" />
+      </Principal>
+      <Dependent Role="DETALLE_PASAJEROS">
+        <PropertyRef Name="ID_PENSION" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_DETALLE_PLATOS_PENSION">
     <End Role="PENSION" Type="Self.PENSION" Multiplicity="1" />
     <End Role="DETALLE_PLATOS" Type="Self.DETALLE_PLATOS" Multiplicity="*" />
@@ -569,6 +630,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_HABITACION_DETALLE_H">
+    <End Role="HABITACION" Type="Self.HABITACION" Multiplicity="1" />
+    <End Role="DETALLE_HABITACION" Type="Self.DETALLE_HABITACION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HABITACION">
+        <PropertyRef Name="NUMERO_HABITACION" />
+      </Principal>
+      <Dependent Role="DETALLE_HABITACION">
+        <PropertyRef Name="NUMERO_HABITACION" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HABITACION_DETALLE_P">
+    <End Role="HABITACION" Type="Self.HABITACION" Multiplicity="0..1" />
+    <End Role="DETALLE_PASAJEROS" Type="Self.DETALLE_PASAJEROS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HABITACION">
+        <PropertyRef Name="NUMERO_HABITACION" />
+      </Principal>
+      <Dependent Role="DETALLE_PASAJEROS">
+        <PropertyRef Name="NUMERO_HABITACION" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_HABITACION_TIPO_HABITACION">
     <End Role="TIPO_HABITACION" Type="Self.TIPO_HABITACION" Multiplicity="1" />
     <End Role="HABITACION" Type="Self.HABITACION" Multiplicity="*" />
@@ -605,15 +690,15 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_HUESPED_HABITACION">
-    <End Role="HABITACION" Type="Self.HABITACION" Multiplicity="0..1" />
-    <End Role="HUESPED" Type="Self.HUESPED" Multiplicity="*" />
+  <Association Name="FK_HUESPED_DETALLE_P">
+    <End Role="HUESPED" Type="Self.HUESPED" Multiplicity="0..1" />
+    <End Role="DETALLE_PASAJEROS" Type="Self.DETALLE_PASAJEROS" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="HABITACION">
-        <PropertyRef Name="NUMERO_HABITACION" />
+      <Principal Role="HUESPED">
+        <PropertyRef Name="RUT_HUESPED" />
       </Principal>
-      <Dependent Role="HUESPED">
-        <PropertyRef Name="NUMERO_HABITACION" />
+      <Dependent Role="DETALLE_PASAJEROS">
+        <PropertyRef Name="RUT_HUESPED" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -737,18 +822,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_PENSION_HABITACION">
-    <End Role="HABITACION" Type="Self.HABITACION" Multiplicity="0..1" />
-    <End Role="PENSION" Type="Self.PENSION" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="HABITACION">
-        <PropertyRef Name="NUMERO_HABITACION" />
-      </Principal>
-      <Dependent Role="PENSION">
-        <PropertyRef Name="NUMERO_HABITACION" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_PLATO_CATEGORIA">
     <End Role="CATEGORIA" Type="Self.CATEGORIA" Multiplicity="1" />
     <End Role="PLATO" Type="Self.PLATO" Multiplicity="*" />
@@ -857,13 +930,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Function Name="FN_PRODUCTO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="HOSTAL" ReturnType="number">
-    <Parameter Name="P_ID_PROVEEDOR" Type="number" Mode="In" />
-    <Parameter Name="P_ID_FAMILIA" Type="number" Mode="In" />
-    <Parameter Name="P_FECHA_VENCIMIENTO" Type="date" Mode="In" />
-    <Parameter Name="P_ID_PRODUCTO_S" Type="number" Mode="In" />
-  </Function>
-  <EntityContainer Name="HostalStoreContainer">
+  <EntityContainer Name="ModelStoreContainer">
     <EntitySet Name="BOLETA" EntityType="Self.BOLETA" Schema="HOSTAL" store:Type="Tables" />
     <EntitySet Name="CATEGORIA" EntityType="Self.CATEGORIA" Schema="HOSTAL" store:Type="Tables" />
     <EntitySet Name="CATEGORIA_HABITACION" EntityType="Self.CATEGORIA_HABITACION" Schema="HOSTAL" store:Type="Tables" />
@@ -871,13 +938,16 @@
     <EntitySet Name="COMUNA" EntityType="Self.COMUNA" Schema="HOSTAL" store:Type="Tables" />
     <EntitySet Name="DETALLE_BOLETA" EntityType="Self.DETALLE_BOLETA" Schema="HOSTAL" store:Type="Tables" />
     <EntitySet Name="DETALLE_FACTURA" EntityType="Self.DETALLE_FACTURA" Schema="HOSTAL" store:Type="Tables" />
+    <EntitySet Name="DETALLE_HABITACION" EntityType="Self.DETALLE_HABITACION" Schema="HOSTAL" store:Type="Tables" />
     <EntitySet Name="DETALLE_ORDEN" EntityType="Self.DETALLE_ORDEN" Schema="HOSTAL" store:Type="Tables" />
+    <EntitySet Name="DETALLE_PASAJEROS" EntityType="Self.DETALLE_PASAJEROS" Schema="HOSTAL" store:Type="Tables" />
     <EntitySet Name="DETALLE_PEDIDO" EntityType="Self.DETALLE_PEDIDO" Schema="HOSTAL" store:Type="Tables" />
     <EntitySet Name="DETALLE_PLATOS" EntityType="Self.DETALLE_PLATOS" Schema="HOSTAL" store:Type="Tables" />
     <EntitySet Name="DETALLE_RECEPCION" EntityType="Self.DETALLE_RECEPCION" Schema="HOSTAL" store:Type="Tables" />
     <EntitySet Name="EMPLEADO" EntityType="Self.EMPLEADO" Schema="HOSTAL" store:Type="Tables" />
     <EntitySet Name="FACTURA" EntityType="Self.FACTURA" Schema="HOSTAL" store:Type="Tables" />
     <EntitySet Name="FAMILIA" EntityType="Self.FAMILIA" Schema="HOSTAL" store:Type="Tables" />
+    <EntitySet Name="GIRO" EntityType="Self.GIRO" Schema="HOSTAL" store:Type="Tables" />
     <EntitySet Name="HABITACION" EntityType="Self.HABITACION" Schema="HOSTAL" store:Type="Tables" />
     <EntitySet Name="HUESPED" EntityType="Self.HUESPED" Schema="HOSTAL" store:Type="Tables" />
     <EntitySet Name="LOG_ERRORES" EntityType="Self.LOG_ERRORES" Schema="HOSTAL" store:Type="Tables" />
@@ -895,16 +965,24 @@
     <EntitySet Name="TIPO_PLATO" EntityType="Self.TIPO_PLATO" Schema="HOSTAL" store:Type="Tables" />
     <EntitySet Name="TIPO_PROVEEDOR" EntityType="Self.TIPO_PROVEEDOR" Schema="HOSTAL" store:Type="Tables" />
     <EntitySet Name="USUARIO" EntityType="Self.USUARIO" Schema="HOSTAL" store:Type="Tables" />
-    <AssociationSet Name="FK_BOLETA_CLIENTE" Association="Self.FK_BOLETA_CLIENTE">
-      <End Role="CLIENTE" EntitySet="CLIENTE" />
-      <End Role="BOLETA" EntitySet="BOLETA" />
-    </AssociationSet>
     <AssociationSet Name="FK_BOLETA_EMPLEADO" Association="Self.FK_BOLETA_EMPLEADO">
       <End Role="EMPLEADO" EntitySet="EMPLEADO" />
       <End Role="BOLETA" EntitySet="BOLETA" />
     </AssociationSet>
+    <AssociationSet Name="FK_BOLETA_HUESPED" Association="Self.FK_BOLETA_HUESPED">
+      <End Role="HUESPED" EntitySet="HUESPED" />
+      <End Role="BOLETA" EntitySet="BOLETA" />
+    </AssociationSet>
     <AssociationSet Name="FK_CLIENTE_COMUNA" Association="Self.FK_CLIENTE_COMUNA">
       <End Role="COMUNA" EntitySet="COMUNA" />
+      <End Role="CLIENTE" EntitySet="CLIENTE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CLIENTE_DETALLE_H" Association="Self.FK_CLIENTE_DETALLE_H">
+      <End Role="CLIENTE" EntitySet="CLIENTE" />
+      <End Role="DETALLE_HABITACION" EntitySet="DETALLE_HABITACION" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CLIENTE_GIRO" Association="Self.FK_CLIENTE_GIRO">
+      <End Role="GIRO" EntitySet="GIRO" />
       <End Role="CLIENTE" EntitySet="CLIENTE" />
     </AssociationSet>
     <AssociationSet Name="FK_CLIENTE_USUARIO" Association="Self.FK_CLIENTE_USUARIO">
@@ -943,6 +1021,10 @@
       <End Role="PRODUCTO" EntitySet="PRODUCTO" />
       <End Role="DETALLE_PEDIDO" EntitySet="DETALLE_PEDIDO" />
     </AssociationSet>
+    <AssociationSet Name="FK_DETALLE_PENSION_P" Association="Self.FK_DETALLE_PENSION_P">
+      <End Role="PENSION" EntitySet="PENSION" />
+      <End Role="DETALLE_PASAJEROS" EntitySet="DETALLE_PASAJEROS" />
+    </AssociationSet>
     <AssociationSet Name="FK_DETALLE_PLATOS_PENSION" Association="Self.FK_DETALLE_PLATOS_PENSION">
       <End Role="PENSION" EntitySet="PENSION" />
       <End Role="DETALLE_PLATOS" EntitySet="DETALLE_PLATOS" />
@@ -979,6 +1061,14 @@
       <End Role="CLIENTE" EntitySet="CLIENTE" />
       <End Role="HABITACION" EntitySet="HABITACION" />
     </AssociationSet>
+    <AssociationSet Name="FK_HABITACION_DETALLE_H" Association="Self.FK_HABITACION_DETALLE_H">
+      <End Role="HABITACION" EntitySet="HABITACION" />
+      <End Role="DETALLE_HABITACION" EntitySet="DETALLE_HABITACION" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HABITACION_DETALLE_P" Association="Self.FK_HABITACION_DETALLE_P">
+      <End Role="HABITACION" EntitySet="HABITACION" />
+      <End Role="DETALLE_PASAJEROS" EntitySet="DETALLE_PASAJEROS" />
+    </AssociationSet>
     <AssociationSet Name="FK_HABITACION_TIPO_HABITACION" Association="Self.FK_HABITACION_TIPO_HABITACION">
       <End Role="TIPO_HABITACION" EntitySet="TIPO_HABITACION" />
       <End Role="HABITACION" EntitySet="HABITACION" />
@@ -991,9 +1081,9 @@
       <End Role="HUESPED" EntitySet="HUESPED" />
       <End Role="DETALLE_ORDEN" EntitySet="DETALLE_ORDEN" />
     </AssociationSet>
-    <AssociationSet Name="FK_HUESPED_HABITACION" Association="Self.FK_HUESPED_HABITACION">
-      <End Role="HABITACION" EntitySet="HABITACION" />
+    <AssociationSet Name="FK_HUESPED_DETALLE_P" Association="Self.FK_HUESPED_DETALLE_P">
       <End Role="HUESPED" EntitySet="HUESPED" />
+      <End Role="DETALLE_PASAJEROS" EntitySet="DETALLE_PASAJEROS" />
     </AssociationSet>
     <AssociationSet Name="FK_NOTIFICACION_ORDEN" Association="Self.FK_NOTIFICACION_ORDEN">
       <End Role="ORDEN_COMPRA" EntitySet="ORDEN_COMPRA" />
@@ -1034,10 +1124,6 @@
     <AssociationSet Name="FK_PEDIDO_RECEPCION" Association="Self.FK_PEDIDO_RECEPCION">
       <End Role="RECEPCION" EntitySet="RECEPCION" />
       <End Role="PEDIDO" EntitySet="PEDIDO" />
-    </AssociationSet>
-    <AssociationSet Name="FK_PENSION_HABITACION" Association="Self.FK_PENSION_HABITACION">
-      <End Role="HABITACION" EntitySet="HABITACION" />
-      <End Role="PENSION" EntitySet="PENSION" />
     </AssociationSet>
     <AssociationSet Name="FK_PLATO_CATEGORIA" Association="Self.FK_PLATO_CATEGORIA">
       <End Role="CATEGORIA" EntitySet="CATEGORIA" />

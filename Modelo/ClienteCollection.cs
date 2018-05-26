@@ -27,6 +27,7 @@ namespace Modelo {
                 cliente.NOMBRE_CLIENTE = dato.NOMBRE_CLIENTE;
                 cliente.RUT_CLIENTE = dato.RUT_CLIENTE;
                 cliente.TELEFONO_CLIENTE = dato.TELEFONO_CLIENTE;
+                cliente.ID_GIRO = dato.ID_GIRO;
 
                 list.Add(cliente);
             }

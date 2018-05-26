@@ -16,8 +16,8 @@ namespace Datos
     {
         public HABITACION()
         {
-            this.HUESPED = new HashSet<HUESPED>();
-            this.PENSION = new HashSet<PENSION>();
+            this.DETALLE_HABITACION = new HashSet<DETALLE_HABITACION>();
+            this.DETALLE_PASAJEROS = new HashSet<DETALLE_PASAJEROS>();
         }
     
         public short NUMERO_HABITACION { get; set; }
@@ -28,8 +28,8 @@ namespace Datos
     
         public virtual CATEGORIA_HABITACION CATEGORIA_HABITACION { get; set; }
         public virtual CLIENTE CLIENTE { get; set; }
+        public virtual ICollection<DETALLE_HABITACION> DETALLE_HABITACION { get; set; }
+        public virtual ICollection<DETALLE_PASAJEROS> DETALLE_PASAJEROS { get; set; }
         public virtual TIPO_HABITACION TIPO_HABITACION { get; set; }
-        public virtual ICollection<HUESPED> HUESPED { get; set; }
-        public virtual ICollection<PENSION> PENSION { get; set; }
     }
 }
