@@ -45,6 +45,8 @@ namespace Web.Administrador
             btnLimpiar.CausesValidation = false;
             btnLimpiar.UseSubmitBehavior = false;
 
+            txtNombre.Attributes.Add("Required", "Required");
+
             //Cargando DDL Categoria
             Service1 service = new Service1();
             string categoria = service.ListarCategoria();

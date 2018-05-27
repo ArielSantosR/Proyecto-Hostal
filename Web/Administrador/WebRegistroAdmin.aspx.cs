@@ -79,6 +79,8 @@ namespace Web.Administrador
             Modelo.TipoProveedorCollection coleccionTipo = (Modelo.TipoProveedorCollection)ser3.Deserialize(reader3);
             reader.Close();
 
+            List<Giro> giros = GiroCollection.ListaGiro();
+
             if (!IsPostBack)
             {
                 alerta.Visible = false;
@@ -102,6 +104,11 @@ namespace Web.Administrador
                 ddlComuna.DataValueField = "Id_Comuna";
                 ddlComuna.DataBind();
                 ddlComuna.Enabled = true;
+
+                ddlGiro.DataSource = giros;
+                ddlGiro.DataTextField = "NOMBRE_GIRO";
+                ddlGiro.DataValueField = "ID_GIRO";
+                ddlGiro.DataBind();
 
 
                 ddlTipo.Items.Add("Cliente");
@@ -168,6 +175,7 @@ namespace Web.Administrador
                                         }
 
                                         cliente.TELEFONO_CLIENTE = telefono;
+                                        cliente.ID_GIRO = short.Parse(ddlGiro.SelectedValue);
 
                                         XmlSerializer sr2 = new XmlSerializer(typeof(Modelo.Cliente));
                                         StringWriter writer2 = new StringWriter();
@@ -197,6 +205,7 @@ namespace Web.Administrador
                                                 ddlPais.SelectedIndex = 0;
                                                 ddlRegion.SelectedIndex = 0;
                                                 ddlComuna.SelectedIndex = 0;
+                                                ddlGiro.SelectedIndex = 0;
 
                                                 //Datos Empleado
                                                 txtRut2.Text = string.Empty;
@@ -257,6 +266,7 @@ namespace Web.Administrador
                                             }
 
                                             cliente.TELEFONO_CLIENTE = telefono;
+                                            cliente.ID_GIRO = short.Parse(ddlGiro.SelectedValue);
 
                                             XmlSerializer sr2 = new XmlSerializer(typeof(Modelo.Cliente));
                                             StringWriter writer2 = new StringWriter();
