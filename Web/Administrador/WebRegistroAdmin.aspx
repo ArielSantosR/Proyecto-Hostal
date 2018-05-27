@@ -173,6 +173,15 @@
             <asp:UpdatePanel ID="UpdatePanel1" runat="server">
             <ContentTemplate>
                 <div class="form-group">
+                            <label for="country" class="col-sm-12 control-label">Giro</label>
+                            <div class="col-sm-12">
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fa fa-globe fa-lg" aria-hidden="true"></i></span>
+                                    <asp:DropDownList ID="ddlGiro" CssClass="form-control" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlPais_SelectedIndexChanged"></asp:DropDownList>
+                                </div>
+                            </div>
+                        </div>
+                <div class="form-group">
                   <label for="country" class="col-sm-12 control-label">País</label>
                     <div class="col-sm-12">
                       <div class="input-group">
