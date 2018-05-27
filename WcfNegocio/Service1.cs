@@ -17,12 +17,8 @@ namespace WcfNegocio
     // NOTA: puede usar el comando "Rename" del menú "Refactorizar" para cambiar el nombre de clase "Service1" en el código y en el archivo de configuración a la vez.
     public class Service1 : IService1
     {
-        ServicioLogin servicioLogin = new ServicioLogin();
-        /// <summary>
-        /// Login de usuario.
-        /// </summary>
-        /// <param name="user">El parámetro es un string que contiene usuario y contraseña</param>
-        /// <returns bool></returns>
+        #region Usuario
+
         //CRUD Usuario
         public bool Login(string user)
         {
@@ -155,6 +151,9 @@ namespace WcfNegocio
                 return false;
             }
         }
+        #endregion
+
+        #region Huesped
 
         //  CRUD HUESPED
         public bool ExisteHuesped(string user)
@@ -254,7 +253,7 @@ namespace WcfNegocio
             hues.TELEFONO_HUESPED = hp.TELEFONO_HUESPED;
             hues.REGISTRADO = hp.REGISTRADO;
             hues.RUT_CLIENTE = hp.RUT_CLIENTE;
-            
+
 
             if (servicio.ModificarHuesped(hues))
             {
@@ -265,7 +264,9 @@ namespace WcfNegocio
                 return false;
             }
         }
+        #endregion
 
+        #region Cliente
         //CRUD Cliente
         public bool ExisteRutC(string cliente)
         {
@@ -308,7 +309,7 @@ namespace WcfNegocio
             return servicio.AgregarCliente(cDatos);
         }
 
-        public Cliente buscarIDC(string cliente){
+        public Cliente buscarIDC(string cliente) {
             XmlSerializer ser = new XmlSerializer(typeof(Modelo.Cliente));
             StringReader reader = new StringReader(cliente);
             Modelo.Cliente c = (Modelo.Cliente)ser.Deserialize(reader);
@@ -327,7 +328,9 @@ namespace WcfNegocio
                 return c;
             }
         }
+        #endregion
 
+        #region Empleado
         //CRUD Empleado
         public bool ExisteRutE(string empleado)
         {
@@ -388,7 +391,9 @@ namespace WcfNegocio
                 return e;
             }
         }
+        #endregion
 
+        #region Proveedor
         //CRUD Proveedor
         public bool ExisteRutP(string proveedor)
         {
@@ -539,7 +544,9 @@ namespace WcfNegocio
                 return writer.ToString();
             }
         }
+        #endregion
 
+        #region Habitacion
         //CRUD Habitacion
         public bool AgregarHabitacion(string habitacion)
         {
@@ -577,7 +584,7 @@ namespace WcfNegocio
 
             XmlSerializer ser = new XmlSerializer(typeof(Modelo.HabitacionCollection));
             StringWriter writer = new StringWriter();
-            ser.Serialize(writer,listaHabitacion);
+            ser.Serialize(writer, listaHabitacion);
             writer.Close();
             return writer.ToString();
         }
@@ -656,7 +663,9 @@ namespace WcfNegocio
 
             return serv.EliminarHabitacion(hDatos);
         }
+        #endregion
 
+        #region Producto
         //CRUD Producto
         public bool AgregarProducto(string producto)
         {
@@ -699,7 +708,7 @@ namespace WcfNegocio
             pDatos.STOCK_PRODUCTO = p.STOCK_PRODUCTO;
             pDatos.UNIDAD_MEDIDA = p.UNIDAD_MEDIDA;
 
-            return serv.EditarProducto(pDatos); 
+            return serv.EditarProducto(pDatos);
         }
 
         public bool ExisteProducto(string producto)
@@ -831,8 +840,9 @@ namespace WcfNegocio
                 return writer.ToString();
             }
         }
+        #endregion
 
-
+        #region Plato
         //CRUD Plato
         public bool AgregarPlato(string plato)
         {
@@ -869,7 +879,7 @@ namespace WcfNegocio
                 return true;
             }
         }
-       
+
 
         public Plato ObtenerPlato(string plato)
         {
@@ -949,7 +959,7 @@ namespace WcfNegocio
             Datos.PLATO pDatos = new Datos.PLATO();
 
             pDatos.ID_PLATO = p.ID_PLATO;
-     
+
             return serv.EliminarPlato(pDatos);
         }
 
@@ -1038,7 +1048,9 @@ namespace WcfNegocio
 
             return serv.EliminarTipoPlato(tpDatos);
         }
+        #endregion
 
+        #region Tipo Proveedor
         // tipo proveedor
         public bool AgregarTipoProveedor(string tipoProveedor)
         {
@@ -1124,8 +1136,10 @@ namespace WcfNegocio
 
             return serv.EliminarTipoProveedor(tpDatos);
         }
-        //Categoria plato
+        #endregion
 
+        #region Categoria Plato
+        //Categoria plato
         public bool AgregarCategoria(string categoria)
         {
             //Datos tipo PROVEEDOR
@@ -1210,6 +1224,9 @@ namespace WcfNegocio
 
             return serv.EliminarCategoria(Datos);
         }
+        #endregion
+
+        #region Pais
         //PAIS
         public bool AgregarPais(string pais)
         {
@@ -1219,7 +1236,7 @@ namespace WcfNegocio
             Modelo.Pais p = (Modelo.Pais)ser.Deserialize(reader);
             ServicioDireccion serv = new ServicioDireccion();
             Datos.PAIS Datos = new Datos.PAIS();
-            
+
             Datos.ID_PAIS = p.ID_PAIS;
             Datos.NOMBRE_PAIS = p.NOMBRE_PAIS;
 
@@ -1297,6 +1314,9 @@ namespace WcfNegocio
             return serv.EliminarPais(Datos);
         }
 
+        #endregion
+
+        #region Pedido
         //CRUD Pedido
         public bool AgregarPedido(string pedido)
         {
@@ -1522,7 +1542,7 @@ namespace WcfNegocio
             dDatos.ID_DETALLE_PEDIDO = d.ID_DETALLE_PEDIDO;
             dDatos.ID_PRODUCTO = d.ID_PRODUCTO;
             dDatos.CANTIDAD = d.CANTIDAD;
-            
+
 
             return servicio.EditarDetallePedido(dDatos);
         }
@@ -1750,6 +1770,50 @@ namespace WcfNegocio
             }
         }
 
+        public string ListarPedidoRecepcion()
+        {
+            ServicioOrden servicio = new ServicioOrden();
+            List<Datos.PEDIDO> pedido = servicio.ListarPedidoRecepcion();
+            Modelo.PedidoCollection listaPedido = new Modelo.PedidoCollection();
+
+            foreach (Datos.PEDIDO p in pedido)
+            {
+                Modelo.Pedido pModelo = new Modelo.Pedido();
+                pModelo.NUMERO_PEDIDO = p.NUMERO_PEDIDO;
+                pModelo.ESTADO_PEDIDO = p.ESTADO_PEDIDO;
+                pModelo.FECHA_PEDIDO = p.FECHA_PEDIDO;
+                pModelo.RUT_EMPLEADO = p.RUT_EMPLEADO;
+                pModelo.NUMERO_RECEPCION = p.NUMERO_RECEPCION;
+                pModelo.RUT_PROVEEDOR = p.RUT_PROVEEDOR;
+                pModelo.ESTADO_DESPACHO = p.ESTADO_DESPACHO;
+                pModelo.COMENTARIO = p.COMENTARIO;
+
+                listaPedido.Add(pModelo);
+            }
+
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.PedidoCollection));
+            StringWriter writer = new StringWriter();
+            ser.Serialize(writer, listaPedido);
+            writer.Close();
+            return writer.ToString();
+        }
+
+        public bool EliminarDetallePedido(string detalle)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.DetallePedido));
+            StringReader reader = new StringReader(detalle);
+            Modelo.DetallePedido d = (Modelo.DetallePedido)ser.Deserialize(reader);
+            ServicioOrden servicio = new ServicioOrden();
+
+            Datos.DETALLE_PEDIDO dDatos = new Datos.DETALLE_PEDIDO();
+            //Datos Detalle
+            dDatos.ID_DETALLE_PEDIDO = d.ID_DETALLE_PEDIDO;
+
+            return servicio.EliminarDetallePedido(dDatos);
+        }
+        #endregion
+
+        #region Notificacion
         //CRUD Notificacion
         public string listaNotificacion(string usuario)
         {
@@ -1837,49 +1901,9 @@ namespace WcfNegocio
                 return writer.ToString();
             }
         }
+        #endregion
 
-        public string ListarPedidoRecepcion()
-        {
-            ServicioOrden servicio = new ServicioOrden();
-            List<Datos.PEDIDO> pedido = servicio.ListarPedidoRecepcion();
-            Modelo.PedidoCollection listaPedido = new Modelo.PedidoCollection();
-
-            foreach (Datos.PEDIDO p in pedido)
-            {
-                Modelo.Pedido pModelo = new Modelo.Pedido();
-                pModelo.NUMERO_PEDIDO = p.NUMERO_PEDIDO;
-                pModelo.ESTADO_PEDIDO = p.ESTADO_PEDIDO;
-                pModelo.FECHA_PEDIDO = p.FECHA_PEDIDO;
-                pModelo.RUT_EMPLEADO = p.RUT_EMPLEADO;
-                pModelo.NUMERO_RECEPCION = p.NUMERO_RECEPCION;
-                pModelo.RUT_PROVEEDOR = p.RUT_PROVEEDOR;
-                pModelo.ESTADO_DESPACHO = p.ESTADO_DESPACHO;
-                pModelo.COMENTARIO = p.COMENTARIO;
-
-                listaPedido.Add(pModelo);
-            }
-
-            XmlSerializer ser = new XmlSerializer(typeof(Modelo.PedidoCollection));
-            StringWriter writer = new StringWriter();
-            ser.Serialize(writer, listaPedido);
-            writer.Close();
-            return writer.ToString();
-        }
-
-        public bool EliminarDetallePedido(string detalle)
-        {
-            XmlSerializer ser = new XmlSerializer(typeof(Modelo.DetallePedido));
-            StringReader reader = new StringReader(detalle);
-            Modelo.DetallePedido d = (Modelo.DetallePedido)ser.Deserialize(reader);
-            ServicioOrden servicio = new ServicioOrden();
-
-            Datos.DETALLE_PEDIDO dDatos = new Datos.DETALLE_PEDIDO();
-            //Datos Detalle
-            dDatos.ID_DETALLE_PEDIDO = d.ID_DETALLE_PEDIDO;
-
-            return servicio.EliminarDetallePedido(dDatos);
-        }
-
+        #region Recepcion
         //CRUD Recepcion
         public bool AgregarRecepcion(string recepcion)
         {
@@ -1908,6 +1932,9 @@ namespace WcfNegocio
             return serv.AgregarDetalleRecepcion(dDatos);
         }
 
+        #endregion
+
+        #region Reserva
         //CRUD Reserva
         public bool AgregarReserva(string orden)
         {
@@ -2101,6 +2128,37 @@ namespace WcfNegocio
             return servicio.EditarEstadoReserva(oDatos);
         }
 
+        public string ListarReservaAceptada()
+        {
+
+            ServicioReserva servicio = new ServicioReserva();
+            List<Datos.ORDEN_COMPRA> orden = servicio.ListarReservaAceptada();
+            Modelo.OrdenCompraCollection listaOrden = new Modelo.OrdenCompraCollection();
+
+            foreach (Datos.ORDEN_COMPRA o in orden)
+            {
+                Modelo.OrdenCompra oModelo = new Modelo.OrdenCompra();
+                oModelo.NUMERO_ORDEN = o.NUMERO_ORDEN;
+                oModelo.CANTIDAD_HUESPEDES = o.CANTIDAD_HUESPEDES;
+                oModelo.FECHA_LLEGADA = o.FECHA_LLEGADA;
+                oModelo.FECHA_SALIDA = o.FECHA_SALIDA;
+                oModelo.RUT_EMPLEADO = o.RUT_EMPLEADO;
+                oModelo.RUT_CLIENTE = o.RUT_CLIENTE;
+                oModelo.ESTADO_ORDEN = o.ESTADO_ORDEN;
+                oModelo.COMENTARIO = o.COMENTARIO;
+
+                listaOrden.Add(oModelo);
+            }
+
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.OrdenCompraCollection));
+            StringWriter writer = new StringWriter();
+            ser.Serialize(writer, listaOrden);
+            writer.Close();
+            return writer.ToString();
+        }
+        #endregion
+
+        #region DDL
         //DDL
         public string ListarPais()
         {
@@ -2318,5 +2376,6 @@ namespace WcfNegocio
             writer.Close();
             return writer.ToString();
         }
+        #endregion
     }
 }

@@ -1,10 +1,13 @@
 ﻿using Modelo;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Xml.Serialization;
+using WcfNegocio;
 
 namespace Web.Empleado
 {
@@ -40,7 +43,34 @@ namespace Web.Empleado
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            try
+            {
+                if (MiSesion != null)
+                {
+                    error.Text = "";
+                    exito.Text = "";
+                    alerta_exito.Visible = false;
+                    alerta.Visible = false;
 
+                    Service1 s = new Service1();
+                    string datos = s.ListarReservaAdmin();
+                    XmlSerializer ser = new XmlSerializer(typeof(Modelo.OrdenCompraCollection));
+                    StringReader reader = new StringReader(datos);
+
+                    Modelo.OrdenCompraCollection listaOrden = (Modelo.OrdenCompraCollection)ser.Deserialize(reader);
+                    reader.Close();
+                    gvOrden.DataSource = listaOrden;
+                    gvOrden.DataBind();
+                }
+                else
+                {
+                    Response.Write("<script language='javascript'>window.alert('Debe Iniciar Sesión Primero');window.location='../Hostal/WebLogin.aspx';</script>");
+                }
+            }
+            catch (Exception)
+            {
+                Response.Write("<script language='javascript'>window.alert('Debe Iniciar Sesión Primero');window.location='../Hostal/WebLogin.aspx';</script>");
+            }
         }
 
         //Creación de Sesión
@@ -57,6 +87,88 @@ namespace Web.Empleado
             set
             {
                 Session["Usuario"] = value;
+            }
+        }
+
+        public OrdenCompra MiSesionOrden
+        {
+            get
+            {
+                if (Session["OrdenCompra"] == null)
+                {
+                    Session["OrdenCompra"] = new OrdenCompra();
+                }
+                return (OrdenCompra)Session["OrdenCompra"];
+            }
+            set
+            {
+                Session["OrdenCompra"] = value;
+            }
+        }
+
+        protected void btnEditar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                LinkButton btn = (LinkButton)(sender);
+                short numero_orden = short.Parse(btn.CommandArgument);
+
+                OrdenCompra orden = new OrdenCompra();
+                orden.NUMERO_ORDEN = numero_orden;
+
+                MiSesionOrden = orden;
+
+                Response.Redirect("");
+            }
+            catch (Exception ex)
+            {
+                alerta_exito.Visible = false;
+                error.Text = "Excepción: " + ex.ToString();
+                alerta.Visible = true;
+            }
+        }
+
+        protected void btnInfo2_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                LinkButton btn = (LinkButton)(sender);
+                short numero_orden = short.Parse(btn.CommandArgument);
+
+                OrdenCompra orden = new OrdenCompra();
+                orden.NUMERO_ORDEN = numero_orden;
+
+                MiSesionOrden = orden;
+
+                if (MiSesionOrden.NUMERO_ORDEN != 0)
+                {
+                    Service1 s = new Service1();
+                    XmlSerializer sr = new XmlSerializer(typeof(Modelo.OrdenCompra));
+                    StringWriter writer = new StringWriter();
+                    sr.Serialize(writer, orden);
+
+                    if (s.ListarDetalleReserva(writer.ToString()) != null)
+                    {
+                        string datos = s.ListarDetalleReserva(writer.ToString());
+                        XmlSerializer ser3 = new XmlSerializer(typeof(Modelo.DetalleOrdenCollection));
+                        StringReader reader = new StringReader(datos);
+
+                        Modelo.DetalleOrdenCollection listaDetalle = (Modelo.DetalleOrdenCollection)ser3.Deserialize(reader);
+                        reader.Close();
+                        gvDetalle.DataSource = listaDetalle;
+                        gvDetalle.DataBind();
+
+                        MiSesionOrden = s.ObtenerReserva(writer.ToString());
+
+                        ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modal", "$('#exampleModal2').modal();", true);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                alerta_exito.Visible = false;
+                error.Text = "Excepción: " + ex.ToString();
+                alerta.Visible = true;
             }
         }
     }

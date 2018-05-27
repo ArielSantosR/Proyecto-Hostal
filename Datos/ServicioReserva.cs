@@ -57,6 +57,15 @@ namespace Datos
             return lista;
         }
 
+        public List<ORDEN_COMPRA> ListarReservaAceptada()
+        {
+            var lista = (from consulta in ent.ORDEN_COMPRA
+                         where consulta.ESTADO_ORDEN.Equals("Aceptado")
+                         orderby consulta.NUMERO_ORDEN
+                         select consulta).ToList();
+            return lista;
+        }
+
         public List<ORDEN_COMPRA> ListarReservaAdmin()
         {
             return (from a in ent.ORDEN_COMPRA where a.ESTADO_ORDEN.Equals("Pendiente") select a).ToList();

@@ -12,6 +12,7 @@ namespace WcfNegocio
     [ServiceContract]
     public interface IService1
     {
+        #region Usuario
         //CRUD Usuario
         [OperationContract]
         bool Login(string user);
@@ -33,6 +34,10 @@ namespace WcfNegocio
 
         [OperationContract]
         string ListarUsuarios();
+
+        #endregion
+
+        #region Huesped
         //Huesped
         [OperationContract]
         bool ExisteHuesped(string huesped);
@@ -49,6 +54,9 @@ namespace WcfNegocio
         [OperationContract]
         string ListarHuesped();
 
+        #endregion
+
+        #region Cliente
         //CRUD Cliente
         [OperationContract]
         bool ExisteRutC(string cliente);
@@ -58,6 +66,9 @@ namespace WcfNegocio
 
         [OperationContract]
         Cliente buscarIDC(string cliente);
+        #endregion
+
+        #region Empleado
         //CRUD Empleado
         [OperationContract]
         bool ExisteRutE(string empleado);
@@ -67,6 +78,9 @@ namespace WcfNegocio
 
         [OperationContract]
         bool RegistroEmpleado(string empleado);
+        #endregion
+
+        #region Proveedor
         //CRUD Proveedor
         [OperationContract]
         bool ExisteRutP(string proveedor);
@@ -83,6 +97,9 @@ namespace WcfNegocio
         [OperationContract]
         Proveedor buscarIDP(string proveedor);
 
+        #endregion
+
+        #region Habitacion
         //CRUD Habitacion
         [OperationContract]
         bool AgregarHabitacion(string habitacion);
@@ -101,7 +118,9 @@ namespace WcfNegocio
 
         [OperationContract]
         bool EliminarHabitacion(string habitacion);
+        #endregion
 
+        #region Producto
         //CRUD Producto
         [OperationContract]
         bool AgregarProducto(string producto);
@@ -123,7 +142,9 @@ namespace WcfNegocio
 
         [OperationContract]
         string ListarProveedorProducto(string producto);
+        #endregion
 
+        #region Plato
         //CRUD Plato
         [OperationContract]
         bool AgregarPlato(string plato);
@@ -142,7 +163,9 @@ namespace WcfNegocio
 
         [OperationContract]
         bool EliminarPlato(string plato);
+        #endregion
 
+        #region Tipo Plato
         //CRUD tipo plato
         [OperationContract]
         bool AgregarTipoPlato(string tipoPlato);
@@ -158,7 +181,9 @@ namespace WcfNegocio
 
         [OperationContract]
         TipoPlato ObtenerTipoPlato(string tipoPlato);
+        #endregion
 
+        #region Categoría Plato
         //categoria_plato
 
         [OperationContract]
@@ -175,7 +200,9 @@ namespace WcfNegocio
 
         [OperationContract]
         Categoria ObtenerCategoria(string categoria);
+        #endregion
 
+        #region Pais
         //PAIS
         [OperationContract]
         bool AgregarPais(string pais);
@@ -191,7 +218,9 @@ namespace WcfNegocio
 
         [OperationContract]
         Pais ObtenerPais(string pais);
+        #endregion
 
+        #region Tipo Proveedor
         //CRUD TIPO PROVEEDOR
         [OperationContract]
         bool AgregarTipoProveedor(string tipoProveedor);
@@ -207,7 +236,9 @@ namespace WcfNegocio
 
         [OperationContract]
         TipoProveedor ObtenerTipoProveedor(string tipoProveedor);
+        #endregion
 
+        #region Pedido
         //CRUD Pedido
         [OperationContract]
         bool AgregarPedido(string pedido);
@@ -256,21 +287,27 @@ namespace WcfNegocio
 
         [OperationContract]
         bool EliminarDetallePedido(string detalle);
+        #endregion
 
+        #region Recepcion
         //CRUD Recepcion
         [OperationContract]
         bool AgregarRecepcion(string recepcion);
 
         [OperationContract]
         bool AgregarDetalleRecepcion(string detalle);
+        #endregion
 
+        #region Notificacion
         //CRUD Notificacion
         [OperationContract]
         string listaNotificacion(string usuario);
 
         [OperationContract]
         string HistorialNotificacion(string usuario);
+        #endregion
 
+        #region Reserva
         //CRUD Reserva
         [OperationContract]
         bool AgregarReserva(string orden);
@@ -293,6 +330,11 @@ namespace WcfNegocio
         [OperationContract]
         bool EditarEstadoReserva(string orden);
 
+        [OperationContract]
+        string ListarReservaAceptada();
+        #endregion
+
+        #region DDL
         //DDL
         [OperationContract]
         string ListarTipoProveedor();
@@ -323,5 +365,6 @@ namespace WcfNegocio
 
         [OperationContract]
         string ListarMinuta();
+        #endregion
     }
 }
