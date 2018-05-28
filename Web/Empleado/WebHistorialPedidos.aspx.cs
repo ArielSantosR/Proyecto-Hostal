@@ -179,8 +179,8 @@ namespace Web.Empleado
 
                 dt.Rows.Add(item.ID_DETALLE_PEDIDO,producto.ID_PRODUCTO,producto.NOMBRE_PRODUCTO,producto.DESCRIPCION_PRODUCTO,producto.UNIDAD_MEDIDA,item.CANTIDAD);
             }
-
             
+
             gvDetalle.DataSource = dt;
             gvDetalle.DataBind();
         }
@@ -389,6 +389,10 @@ namespace Web.Empleado
                 error.Text = "Excepción: " + ex.ToString();
                 alerta.Visible = true;
             }
+        }
+
+        protected void gvDetalle_RowDataBound(object sender,GridViewRowEventArgs e) {
+            e.Row.Cells[2].Visible = false;
         }
     }
 }

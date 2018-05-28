@@ -74,7 +74,7 @@
                 </div>
                 <div class="modal-body">
                     <div style="display: flex; justify-content: center; margin-bottom: 70px">
-                        <asp:GridView ID="gvDetalle" AutoGenerateColumns="true" runat="server" ForeColor="#333333" GridLines="Vertical">
+                        <asp:GridView ID="gvDetalle" AutoGenerateColumns="true" runat="server" ForeColor="#333333" GridLines="Vertical" OnRowDataBound="gvDetalle_RowDataBound">
                             <AlternatingRowStyle BackColor="White" />
                             <EditRowStyle BackColor="#2461BF" />
                             <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
@@ -91,7 +91,7 @@
                                 <asp:TemplateField>
                                     <ItemTemplate>
                                         <asp:LinkButton ID="btnEditar" CssClass="btn btn-success" CommandArgument='<%#Eval("ID_DETALLE_PEDIDO")%>' OnClick="btnEditar_Click" Text="Editar" runat="server" />
-                                        <asp:LinkButton ID="btnEliminar" CssClass="btn btn-danger" CommandArgument='<%#Eval("ID_DETALLE_PEDIDO")%>' OnClick="btnEliminar_Click" Text="Eliminar" runat="server" />
+                                        <asp:LinkButton ID="btnEliminar" CssClass="btn btn-danger" CommandArgument='<%#Eval("ID_DETALLE_PEDIDO")%>' OnClick="btnEliminar_Click" Text="Borrar" runat="server" />
                                     </ItemTemplate>
                                 </asp:TemplateField>
                             </Columns>
