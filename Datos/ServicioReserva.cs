@@ -118,5 +118,43 @@ namespace Datos
                 return null;
             }
         }
+
+        public bool AgregarDetalleHabitacion(DETALLE_HABITACION detalle)
+        {
+            ent.DETALLE_HABITACION.Add(detalle);
+            ent.SaveChanges();
+            return true;
+        }
+
+        public bool AgregarDetallePasajeros(DETALLE_PASAJEROS detalle)
+        {
+            ent.DETALLE_PASAJEROS.Add(detalle);
+            ent.SaveChanges();
+            return true;
+        }
+
+        public bool EditarDetalleReserva(DETALLE_ORDEN detalle)
+        {
+            DETALLE_ORDEN d = ent.DETALLE_ORDEN.FirstOrDefault(objeto => objeto.ID_DETALLE == detalle.ID_DETALLE);
+
+            if (d != null)
+            {
+                d.ID_DETALLE = detalle.ID_DETALLE;
+                d.ID_PENSION = detalle.ID_PENSION;
+                d.NUMERO_ORDEN = detalle.NUMERO_ORDEN;
+                d.RUT_HUESPED = detalle.RUT_HUESPED;
+                d.ESTADO = detalle.ESTADO;
+                d.ORDEN_COMPRA = detalle.ORDEN_COMPRA;
+                d.ID_CATEGORIA_HABITACION = detalle.ID_CATEGORIA_HABITACION;
+
+                ent.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
     }
 }

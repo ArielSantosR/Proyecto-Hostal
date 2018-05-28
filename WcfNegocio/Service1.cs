@@ -2225,6 +2225,58 @@ namespace WcfNegocio
                 return d;
             }
         }
+
+        public bool EditarEstadoDetalleReserva(string detalle)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.DetalleOrden));
+            StringReader reader = new StringReader(detalle);
+            Modelo.DetalleOrden d = (Modelo.DetalleOrden)ser.Deserialize(reader);
+            ServicioReserva servicio = new ServicioReserva();
+
+            Datos.DETALLE_ORDEN dDatos = new Datos.DETALLE_ORDEN();
+
+            dDatos.ID_DETALLE = d.ID_DETALLE;
+            dDatos.ID_PENSION = d.ID_PENSION;
+            dDatos.ID_CATEGORIA_HABITACION = d.ID_CATEGORIA_HABITACION;
+            dDatos.ESTADO = d.ESTADO;
+            dDatos.RUT_HUESPED = d.RUT_HUESPED;
+            dDatos.NUMERO_ORDEN = d.NUMERO_ORDEN;
+
+            return servicio.EditarDetalleReserva(dDatos);
+        }
+        #endregion
+
+        #region Detalle Habitacion
+        public bool AgregarDetalleHabitacion(string detalle)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.DetalleHabitacion));
+            StringReader reader = new StringReader(detalle);
+            Modelo.DetalleHabitacion d = (Modelo.DetalleHabitacion)ser.Deserialize(reader);
+            ServicioReserva serv = new ServicioReserva();
+            Datos.DETALLE_HABITACION dDatos = new Datos.DETALLE_HABITACION();
+            dDatos.NUMERO_HABITACION = d.NUMERO_HABITACION;
+            dDatos.RUT_CLIENTE = d.RUT_CLIENTE;
+
+            return serv.AgregarDetalleHabitacion(dDatos);
+        }
+        #endregion
+
+        #region Detalle Pasajeros
+        public bool AgregarDetallePasajeros(string detalle)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.DetallePasajeros));
+            StringReader reader = new StringReader(detalle);
+            Modelo.DetallePasajeros d = (Modelo.DetallePasajeros)ser.Deserialize(reader);
+            ServicioReserva serv = new ServicioReserva();
+            Datos.DETALLE_PASAJEROS dDatos = new Datos.DETALLE_PASAJEROS();
+            dDatos.NUMERO_HABITACION = d.NUMERO_HABITACION;
+            dDatos.RUT_HUESPED = d.RUT_HUESPED;
+            dDatos.FECHA_LLEGADA = d.FECHA_LLEGADA;
+            dDatos.FECHA_SALIDA = d.FECHA_SALIDA;
+            dDatos.ID_PENSION = d.ID_PENSION;
+
+            return serv.AgregarDetallePasajeros(dDatos);
+        }
         #endregion
 
         #region DDL

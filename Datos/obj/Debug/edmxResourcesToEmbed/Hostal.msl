@@ -81,8 +81,6 @@
       <EntityTypeMapping TypeName="Model.DETALLE_HABITACION">
         <MappingFragment StoreEntitySet="DETALLE_HABITACION">
           <ScalarProperty Name="ID_DETALLE_H" ColumnName="ID_DETALLE_H" />
-          <ScalarProperty Name="FECHA_LLEGADA" ColumnName="FECHA_LLEGADA" />
-          <ScalarProperty Name="FECHA_SALIDA" ColumnName="FECHA_SALIDA" />
           <ScalarProperty Name="NUMERO_HABITACION" ColumnName="NUMERO_HABITACION" />
           <ScalarProperty Name="RUT_CLIENTE" ColumnName="RUT_CLIENTE" />
         </MappingFragment>
@@ -103,6 +101,8 @@
     <EntitySetMapping Name="DETALLE_PASAJEROS">
       <EntityTypeMapping TypeName="Model.DETALLE_PASAJEROS">
         <MappingFragment StoreEntitySet="DETALLE_PASAJEROS">
+          <ScalarProperty Name="FECHA_SALIDA" ColumnName="FECHA_SALIDA" />
+          <ScalarProperty Name="FECHA_LLEGADA" ColumnName="FECHA_LLEGADA" />
           <ScalarProperty Name="ID_DETALLE_PASAJEROS" ColumnName="ID_DETALLE_PASAJEROS" />
           <ScalarProperty Name="NUMERO_HABITACION" ColumnName="NUMERO_HABITACION" />
           <ScalarProperty Name="RUT_HUESPED" ColumnName="RUT_HUESPED" />

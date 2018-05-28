@@ -111,6 +111,7 @@ namespace Datos
                                       where consulta.ESTADO_HABITACION.Equals("Disponible")
                                       || consulta.ESTADO_HABITACION.Equals("Vacante 2")
                                       || consulta.ESTADO_HABITACION.Equals("Vacante 1")
+                                      orderby consulta.ID_CATEGORIA_HABITACION
                                       select consulta).ToList();
 
             return lista;

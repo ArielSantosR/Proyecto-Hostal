@@ -75,8 +75,6 @@
       <PropertyRef Name="ID_DETALLE_H" />
     </Key>
     <Property Name="ID_DETALLE_H" Type="number" Precision="5" Scale="0" Nullable="false" />
-    <Property Name="FECHA_LLEGADA" Type="date" Nullable="false" />
-    <Property Name="FECHA_SALIDA" Type="date" Nullable="false" />
     <Property Name="NUMERO_HABITACION" Type="number" Precision="5" Scale="0" Nullable="false" />
     <Property Name="RUT_CLIENTE" Type="number" Precision="8" Scale="0" Nullable="false" />
   </EntityType>
@@ -99,6 +97,8 @@
     <Property Name="NUMERO_HABITACION" Type="number" Precision="5" Scale="0" Nullable="false" />
     <Property Name="RUT_HUESPED" Type="number" Precision="8" Scale="0" Nullable="false" />
     <Property Name="ID_PENSION" Type="number" Precision="5" Scale="0" Nullable="false" />
+    <Property Name="FECHA_LLEGADA" Type="date" Nullable="false" />
+    <Property Name="FECHA_SALIDA" Type="date" Nullable="false" />
   </EntityType>
   <EntityType Name="DETALLE_PEDIDO">
     <Key>

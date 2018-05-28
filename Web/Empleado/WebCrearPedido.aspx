@@ -106,6 +106,11 @@
                             <SortedAscendingHeaderStyle BackColor="#6D95E1" />
                             <SortedDescendingCellStyle BackColor="#E9EBEF" />
                             <SortedDescendingHeaderStyle BackColor="#4870BE" />
+                            <Columns>
+                            <asp:CommandField ShowDeleteButton="true">
+                                <ControlStyle CssClass="btn btn-danger" ForeColor="White" />
+                            </asp:CommandField>
+                        </Columns>
                         </asp:GridView>
                     </div>
                 </div>

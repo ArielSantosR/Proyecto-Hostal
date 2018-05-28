@@ -165,7 +165,7 @@ namespace Web.Empleado
             Producto producto = new Producto();
             DataTable dt = new DataTable();
             dt.Columns.AddRange(new DataColumn[] {
-                new DataColumn("ID_DETALLE_PEDIDO",typeof(short)),
+                new DataColumn("ID Detalle",typeof(short)),
                 new DataColumn("Código", typeof(long)),
                 new DataColumn("Nombre", typeof(string)),
                 new DataColumn("Descripción",typeof(string)),

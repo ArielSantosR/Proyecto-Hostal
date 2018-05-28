@@ -18,6 +18,8 @@ namespace Datos
         public short NUMERO_HABITACION { get; set; }
         public int RUT_HUESPED { get; set; }
         public short ID_PENSION { get; set; }
+        public System.DateTime FECHA_LLEGADA { get; set; }
+        public System.DateTime FECHA_SALIDA { get; set; }
     
         public virtual PENSION PENSION { get; set; }
         public virtual HABITACION HABITACION { get; set; }

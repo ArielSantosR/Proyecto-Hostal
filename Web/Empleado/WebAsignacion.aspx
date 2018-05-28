@@ -64,7 +64,7 @@
                                     <asp:TemplateField>
                                         <ItemTemplate>
                                             <asp:LinkButton ID="btnInfo2"  CssClass="btn btn-info" CommandArgument='<%#Eval("ID_DETALLE")%>' onclick="btnInfo2_Click" text="Seleccionar Habitación" runat="server"/>
-                                            <asp:LinkButton ID="btnEliminar" CssClass="btn btn-danger" CommandArgument='<%#Eval("ID_DETALLE")%>'  text="Rechazar" runat="server"/>
+                                            <asp:LinkButton ID="btnEliminar" CssClass="btn btn-danger" CommandArgument='<%#Eval("ID_DETALLE")%>' onclick="btnEliminar_Click" text="Rechazar" runat="server"/>
                                         </ItemTemplate>
                                 </asp:TemplateField>
                                 </Columns>
@@ -82,7 +82,7 @@
         </button>
       </div>
       <div class="modal-body">
-           <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+           <asp:UpdatePanel ID="UpdatePanel2" runat="server" UpdateMode="Conditional">
             <ContentTemplate>
         <div class="form-group">
               <label for="name" class="col-sm-12 control-label">Habitación </label>
@@ -98,7 +98,8 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <asp:Button ID="btnAgregar" runat="server" Text="Asignar" onclick="btnAgregar_Click" CssClass="btn btn-primary btn-block login-button" />
+        <asp:Button ID="btnModificar" runat="server" Text="Ver Todas las Habitaciones Disponibles" OnClick="btnModificar_Click" CssClass="btn btn-success" />
+        <asp:Button ID="btnAgregar" runat="server" Text="Asignar" onclick="btnAgregar_Click" CssClass="btn btn-primary" />
       </div>
     </div>
   </div>

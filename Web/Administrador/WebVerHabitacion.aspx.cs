@@ -77,6 +77,12 @@ namespace Web.Administrador
             Response.Redirect("../Administrador/WebEliminarHabitacion.aspx");
         }
 
+        protected void gvHabitacion_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            gvHabitacion.PageIndex = e.NewPageIndex;
+            gvHabitacion.DataBind();
+        }
+
         //Creación de Sesión
         public Usuario MiSesion
         {

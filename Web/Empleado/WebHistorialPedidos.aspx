@@ -90,8 +90,8 @@
                                 <asp:BoundField DataField="ID_DETALLE_PEDIDO" HeaderText="Detalle Pedido" Visible="false" />
                                 <asp:TemplateField>
                                     <ItemTemplate>
-                                        <asp:LinkButton ID="btnEditar" CssClass="btn btn-success" CommandArgument='<%#Eval("ID_DETALLE_PEDIDO")%>' OnClick="btnEditar_Click" Text="Editar" runat="server" />
-                                        <asp:LinkButton ID="btnEliminar" CssClass="btn btn-danger" CommandArgument='<%#Eval("ID_DETALLE_PEDIDO")%>' OnClick="btnEliminar_Click" Text="Borrar" runat="server" />
+                                        <asp:LinkButton ID="btnEditar" CssClass="btn btn-success" CommandArgument='<%#Eval("ID Detalle")%>' OnClick="btnEditar_Click" Text="Editar" runat="server" />
+                                        <asp:LinkButton ID="btnEliminar" CssClass="btn btn-danger" CommandArgument='<%#Eval("ID Detalle")%>' OnClick="btnEliminar_Click" Text="Eliminar" runat="server" />
                                     </ItemTemplate>
                                 </asp:TemplateField>
                             </Columns>

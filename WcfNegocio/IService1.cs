@@ -338,6 +338,19 @@ namespace WcfNegocio
 
         [OperationContract]
         DetalleOrden ObtenerDetalleReserva(string detalle);
+
+        [OperationContract]
+        bool EditarEstadoDetalleReserva(string detalle);
+        #endregion
+
+        #region Detalle Habitacion
+        [OperationContract]
+        bool AgregarDetalleHabitacion(string detalle);
+        #endregion
+
+        #region Detalle Pasajeros
+        [OperationContract]
+        bool AgregarDetallePasajeros(string detalle);
         #endregion
 
         #region DDL

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Model.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="11.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Model.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="11.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="BOLETA">
           <Key>
             <PropertyRef Name="ID_BOLETA" />
@@ -80,8 +80,6 @@
             <PropertyRef Name="ID_DETALLE_H" />
           </Key>
           <Property Name="ID_DETALLE_H" Type="number" Precision="5" Scale="0" Nullable="false" />
-          <Property Name="FECHA_LLEGADA" Type="date" Nullable="false" />
-          <Property Name="FECHA_SALIDA" Type="date" Nullable="false" />
           <Property Name="NUMERO_HABITACION" Type="number" Precision="5" Scale="0" Nullable="false" />
           <Property Name="RUT_CLIENTE" Type="number" Precision="8" Scale="0" Nullable="false" />
         </EntityType>
@@ -104,6 +102,8 @@
           <Property Name="NUMERO_HABITACION" Type="number" Precision="5" Scale="0" Nullable="false" />
           <Property Name="RUT_HUESPED" Type="number" Precision="8" Scale="0" Nullable="false" />
           <Property Name="ID_PENSION" Type="number" Precision="5" Scale="0" Nullable="false" />
+          <Property Name="FECHA_LLEGADA" Type="date" Nullable="false" />
+          <Property Name="FECHA_SALIDA" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="DETALLE_PEDIDO">
           <Key>
@@ -1174,8 +1174,7 @@
             <End Role="REGION" EntitySet="REGION" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1273,8 +1272,6 @@
             <PropertyRef Name="ID_DETALLE_H" />
           </Key>
           <Property Name="ID_DETALLE_H" Type="Int16" Nullable="false" />
-          <Property Name="FECHA_LLEGADA" Type="DateTime" Nullable="false" />
-          <Property Name="FECHA_SALIDA" Type="DateTime" Nullable="false" />
           <Property Name="NUMERO_HABITACION" Type="Int16" Nullable="false" />
           <Property Name="RUT_CLIENTE" Type="Int32" Nullable="false" />
           <NavigationProperty Name="CLIENTE" Relationship="Self.FK_CLIENTE_DETALLE_H" FromRole="DETALLE_HABITACION" ToRole="CLIENTE" />
@@ -1306,6 +1303,8 @@
           <NavigationProperty Name="PENSION" Relationship="Self.FK_DETALLE_PENSION_P" FromRole="DETALLE_PASAJEROS" ToRole="PENSION" />
           <NavigationProperty Name="HABITACION" Relationship="Self.FK_HABITACION_DETALLE_P" FromRole="DETALLE_PASAJEROS" ToRole="HABITACION" />
           <NavigationProperty Name="HUESPED" Relationship="Self.FK_HUESPED_DETALLE_P" FromRole="DETALLE_PASAJEROS" ToRole="HUESPED" />
+          <Property Name="FECHA_LLEGADA" Type="DateTime" Nullable="false" />
+          <Property Name="FECHA_SALIDA" Type="DateTime" Nullable="false" />
         </EntityType>
         <EntityType Name="DETALLE_PEDIDO">
           <Key>
@@ -2526,8 +2525,6 @@
             <EntityTypeMapping TypeName="Model.DETALLE_HABITACION">
               <MappingFragment StoreEntitySet="DETALLE_HABITACION">
                 <ScalarProperty Name="ID_DETALLE_H" ColumnName="ID_DETALLE_H" />
-                <ScalarProperty Name="FECHA_LLEGADA" ColumnName="FECHA_LLEGADA" />
-                <ScalarProperty Name="FECHA_SALIDA" ColumnName="FECHA_SALIDA" />
                 <ScalarProperty Name="NUMERO_HABITACION" ColumnName="NUMERO_HABITACION" />
                 <ScalarProperty Name="RUT_CLIENTE" ColumnName="RUT_CLIENTE" />
               </MappingFragment>
@@ -2548,6 +2545,8 @@
           <EntitySetMapping Name="DETALLE_PASAJEROS">
             <EntityTypeMapping TypeName="Model.DETALLE_PASAJEROS">
               <MappingFragment StoreEntitySet="DETALLE_PASAJEROS">
+                <ScalarProperty Name="FECHA_SALIDA" ColumnName="FECHA_SALIDA" />
+                <ScalarProperty Name="FECHA_LLEGADA" ColumnName="FECHA_LLEGADA" />
                 <ScalarProperty Name="ID_DETALLE_PASAJEROS" ColumnName="ID_DETALLE_PASAJEROS" />
                 <ScalarProperty Name="NUMERO_HABITACION" ColumnName="NUMERO_HABITACION" />
                 <ScalarProperty Name="RUT_HUESPED" ColumnName="RUT_HUESPED" />

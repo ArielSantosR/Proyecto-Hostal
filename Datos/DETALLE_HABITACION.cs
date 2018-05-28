@@ -15,8 +15,6 @@ namespace Datos
     public partial class DETALLE_HABITACION
     {
         public short ID_DETALLE_H { get; set; }
-        public System.DateTime FECHA_LLEGADA { get; set; }
-        public System.DateTime FECHA_SALIDA { get; set; }
         public short NUMERO_HABITACION { get; set; }
         public int RUT_CLIENTE { get; set; }
     

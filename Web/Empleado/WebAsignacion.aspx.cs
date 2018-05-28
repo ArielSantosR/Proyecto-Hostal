@@ -67,10 +67,32 @@ namespace Web.Empleado
 
                         Modelo.DetalleOrdenCollection listaDetalle = (Modelo.DetalleOrdenCollection)ser3.Deserialize(reader);
                         reader.Close();
-                        gvDetalle.DataSource = listaDetalle;
-                        gvDetalle.DataBind();
 
                         MiSesionOrden = s.ObtenerReserva(writer.ToString());
+
+                        if (listaDetalle.Count > 0)
+                        {
+                            gvDetalle.DataSource = listaDetalle;
+                            gvDetalle.DataBind();
+                        }
+                        else
+                        {
+                            //Cambia el estado de la orden de compra a Asignado
+                            MiSesionOrden.ESTADO_ORDEN = "Asignado";
+                            OrdenCompra orden2 = MiSesionOrden;
+                            XmlSerializer ser4 = new XmlSerializer(typeof(Modelo.OrdenCompra));
+                            StringWriter writer4 = new StringWriter();
+                            ser4.Serialize(writer4, orden2);
+
+                            if (s.EditarEstadoReserva(writer4.ToString()))
+                            {
+                                Response.Write("<script language='javascript'>window.alert('La reserva ha sido asignada con éxito');window.location='../Empleado/WebAsignarHabitacion.aspx';</script>");
+                            }
+                            else
+                            {
+                                Response.Write("<script language='javascript'>window.alert('Ha ocurrido un Error');window.location='../Hostal/WebLogin.aspx';</script>");
+                            }
+                        }
                     }
                 }
                 else
@@ -78,7 +100,7 @@ namespace Web.Empleado
                     Response.Write("<script language='javascript'>window.alert('Necesita asignar una orden de Habitación');window.location='../Hostal/WebLogin.aspx';</script>");
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 Response.Write("<script language='javascript'>window.alert('Debe Iniciar Sesión Primero');window.location='../Hostal/WebLogin.aspx';</script>");
             }
@@ -170,31 +192,30 @@ namespace Web.Empleado
                             Modelo.HabitacionCollection coleccionHabitacion = (Modelo.HabitacionCollection)ser3.Deserialize(reader3);
                             reader3.Close();
 
-                            ddlHabitacion.DataSource = coleccionHabitacion;
-                            ddlHabitacion.DataTextField = "DatosHabitacion";
-                            ddlHabitacion.DataValueField = "NUMERO_HABITACION";
-                            ddlHabitacion.DataBind();
-                        }
-                        else if (s.ListarHabitacionDisponible(writer2.ToString()) != null)
-                        {
-                            string habitacion = s.ListarHabitacionDisponible(writer2.ToString());
-                            XmlSerializer ser3 = new XmlSerializer(typeof(Modelo.HabitacionCollection));
-                            StringReader reader3 = new StringReader(habitacion);
-                            Modelo.HabitacionCollection coleccionHabitacion = (Modelo.HabitacionCollection)ser3.Deserialize(reader3);
-                            reader3.Close();
+                            if (coleccionHabitacion.Count == 0)
+                            {
+                                string habitacion2 = s.ListarHabitacionDisponible(writer2.ToString());
+                                XmlSerializer ser4 = new XmlSerializer(typeof(Modelo.HabitacionCollection));
+                                StringReader reader4 = new StringReader(habitacion2);
+                                coleccionHabitacion = (Modelo.HabitacionCollection)ser4.Deserialize(reader4);
+                                reader3.Close();
+
+                                if (coleccionHabitacion.Count == 0)
+                                {
+                                    Response.Write("<script language=javascript>alert('No hay ninguna habitación disponible. tendrá que rechazar la reserva')</script>");
+                                }
+                                else
+                                {
+                                    Response.Write("<script language=javascript>alert('No quedan habitaciones vacantes de esa categoría, escoja otra categoría')</script>");
+                                }
+                            }
 
                             ddlHabitacion.DataSource = coleccionHabitacion;
                             ddlHabitacion.DataTextField = "DatosHabitacion";
                             ddlHabitacion.DataValueField = "NUMERO_HABITACION";
                             ddlHabitacion.DataBind();
-
-                            Response.Write("<script language=javascript>alert('No quedan habitaciones de esa categoría disponible. Tendrá que elegir otra categoría')</script>");
                         }
-                        else
-                        {
-                            Response.Write("<script language=javascript>alert('No hay ninguna habitación disponible. tendrá que rechazar la reserva')</script>");
-                        }
-
+                       
                         ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modal", "$('#exampleModal2').modal();", true);
                     }
                 }
@@ -208,12 +229,30 @@ namespace Web.Empleado
         //Al Rechazar
         protected void btnEliminar_Click(object sender, EventArgs e)
         {
+            DetalleOrden detalleOrden = MiSesionDetalleO;
+            detalleOrden.ESTADO = "No Asignado";
 
+            Service1 s = new Service1();
+            XmlSerializer sr5 = new XmlSerializer(typeof(Modelo.DetalleOrden));
+            StringWriter writer5 = new StringWriter();
+            sr5.Serialize(writer5, detalleOrden);
+
+            if (s.EditarEstadoDetalleReserva(writer5.ToString()))
+            {
+                Response.Write("<script language='javascript'>window.alert('Huésped No Asignado');window.location='../Empleado/WebAsignacion.aspx';</script>");
+            }
+            else
+            {
+                alerta_exito.Visible = false;
+                error.Text = "No se pudo editar el detalle de la Reserva";
+                alerta.Visible = true;
+            }
         }
 
         //Al Asignar la habitación finalmente
         protected void btnAgregar_Click(object sender, EventArgs e)
         {
+            #region Cambiar Estado de Habitacion
             try
             {
                 //1- Cambiando el estado de Habitación a Ocupado
@@ -228,7 +267,37 @@ namespace Web.Empleado
                 if (s.ObtenerHabitacion(writer.ToString()) != null)
                 {
                     habitacion = s.ObtenerHabitacion(writer.ToString());
-                    habitacion.ESTADO_HABITACION = "Ocupado";
+
+                    if (habitacion.ID_TIPO_HABITACION == 1)
+                    {
+                        habitacion.ESTADO_HABITACION = "Ocupado";
+                    }
+                    else if (habitacion.ID_TIPO_HABITACION == 2)
+                    {
+                        if (habitacion.ESTADO_HABITACION.Equals("Disponible"))
+                        {
+                            habitacion.ESTADO_HABITACION = "Vacante 1";
+                        }
+                        else
+                        {
+                            habitacion.ESTADO_HABITACION = "Ocupado";
+                        }
+                    }
+                    else if(habitacion.ID_TIPO_HABITACION == 3)
+                    {
+                        if (habitacion.ESTADO_HABITACION.Equals("Disponible"))
+                        {
+                            habitacion.ESTADO_HABITACION = "Vacante 2";
+                        }
+                        else if(habitacion.ESTADO_HABITACION.Equals("Vacante 2"))
+                        {
+                            habitacion.ESTADO_HABITACION = "Vacante 1";
+                        }
+                        else
+                        {
+                            habitacion.ESTADO_HABITACION = "Ocupado";
+                        }
+                    }
 
                     XmlSerializer sr2 = new XmlSerializer(typeof(Modelo.Habitacion));
                     StringWriter writer2 = new StringWriter();
@@ -236,13 +305,78 @@ namespace Web.Empleado
 
                     if (s.ModificarHabitacion(writer2.ToString()))
                     {
-                        //2- Agregando el detalle de habitación junto con la fecha de entrada y salida
+                        #region Agregando Detalle de Habitacion
+                        //2- Agregando el detalle de habitación 
+                        DetalleHabitacion detalleHabitacion = new DetalleHabitacion();
+                        //Esta linea consulta si tiene un numero asignado, en caso contrario no hara nada.
+                        if (MiSesionOrden.RUT_CLIENTE.HasValue)
+                        {
+                            detalleHabitacion.RUT_CLIENTE = MiSesionOrden.RUT_CLIENTE.Value;
+                            detalleHabitacion.NUMERO_HABITACION = short.Parse(ddlHabitacion.SelectedValue);
 
-                        //3- Agregando el detalle de pasajeros de la habitación
+                            XmlSerializer sr3 = new XmlSerializer(typeof(Modelo.DetalleHabitacion));
+                            StringWriter writer3 = new StringWriter();
+                            sr3.Serialize(writer3, detalleHabitacion);
 
-                        //4- Modificando el estado del detalle de orden a Asignado
+                            if (s.AgregarDetalleHabitacion(writer3.ToString()))
+                            {
+                                #region Detalle Pasajeros
+                                //3- Agregando el detalle de pasajeros de la habitación junto con la fecha de entrada y salida
+                                DetallePasajeros detallePasajeros = new DetallePasajeros();
+                                detallePasajeros.RUT_HUESPED = MiSesionDetalleO.RUT_HUESPED;
+                                detallePasajeros.FECHA_LLEGADA = MiSesionOrden.FECHA_LLEGADA;
+                                detallePasajeros.FECHA_SALIDA = MiSesionOrden.FECHA_SALIDA;
+                                detallePasajeros.ID_PENSION = MiSesionDetalleO.ID_PENSION;
+                                detallePasajeros.NUMERO_HABITACION = short.Parse(ddlHabitacion.SelectedValue);
 
-                        //5- Modificando el estado de la orden de compra a Asignado
+                                XmlSerializer sr4 = new XmlSerializer(typeof(Modelo.DetallePasajeros));
+                                StringWriter writer4 = new StringWriter();
+                                sr4.Serialize(writer4, detallePasajeros);
+
+                                if (s.AgregarDetallePasajeros(writer4.ToString()))
+                                {
+                                    #region Detalle Orden
+                                    //4- Modificando el estado del detalle de orden a Asignado
+                                    DetalleOrden detalleOrden = MiSesionDetalleO;
+                                    detalleOrden.ESTADO = "Asignado";
+
+                                    XmlSerializer sr5 = new XmlSerializer(typeof(Modelo.DetalleOrden));
+                                    StringWriter writer5 = new StringWriter();
+                                    sr5.Serialize(writer5, detalleOrden);
+
+                                    if (s.EditarEstadoDetalleReserva(writer5.ToString()))
+                                    {
+                                        Response.Write("<script language='javascript'>window.alert('Huésped Asignado');window.location='../Empleado/WebAsignacion.aspx';</script>");
+                                    }
+                                    else
+                                    {
+                                        alerta_exito.Visible = false;
+                                        error.Text = "No se pudo editar el detalle de la Reserva";
+                                        alerta.Visible = true;
+                                    }
+                                    #endregion
+                                }
+                                else
+                                {
+                                    alerta_exito.Visible = false;
+                                    error.Text = "No se pudo agregar el detalle de pasajeros";
+                                    alerta.Visible = true;
+                                }
+
+                                #endregion
+                            }
+                            else
+                            {
+                                alerta_exito.Visible = false;
+                                error.Text = "No se pudo agregar el detalle de habitación";
+                                alerta.Visible = true;
+                            }
+                        }
+                        else
+                        {
+                            Response.Write("<script language='javascript'>window.alert('Vuelva a cargar la orden');window.location='../Hostal/WebAsignarHabitacion.aspx';</script>");
+                        }
+                        #endregion
                     }
                     else
                     {
@@ -264,6 +398,32 @@ namespace Web.Empleado
                 error.Text = "Excepción: " + ex.ToString();
                 alerta.Visible = true;
             }
+            #endregion
+        }
+
+        protected void btnModificar_Click(object sender, EventArgs e)
+        {
+            Service1 s = new Service1();
+
+            DetalleOrden detalle2 = MiSesionDetalleO;
+            XmlSerializer sr2 = new XmlSerializer(typeof(Modelo.DetalleOrden));
+            StringWriter writer2 = new StringWriter();
+            sr2.Serialize(writer2, detalle2);
+
+            string habitacion2 = s.ListarHabitacionDisponible(writer2.ToString());
+            XmlSerializer ser4 = new XmlSerializer(typeof(Modelo.HabitacionCollection));
+            StringReader reader4 = new StringReader(habitacion2);
+            Modelo.HabitacionCollection coleccionHabitacion = (Modelo.HabitacionCollection)ser4.Deserialize(reader4);
+            reader4.Close();
+
+            ddlHabitacion.DataSource = coleccionHabitacion;
+            ddlHabitacion.DataTextField = "DatosHabitacion";
+            ddlHabitacion.DataValueField = "NUMERO_HABITACION";
+            ddlHabitacion.DataBind();
+
+            UpdatePanel2.Update();
+
+            ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modal", "$('#exampleModal2').modal();", true);
         }
     }
 }
