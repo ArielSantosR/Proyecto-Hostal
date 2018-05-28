@@ -19,7 +19,6 @@ namespace Datos
             this.DETALLE_HABITACION = new HashSet<DETALLE_HABITACION>();
             this.DETALLE_FACTURA = new HashSet<DETALLE_FACTURA>();
             this.FACTURA = new HashSet<FACTURA>();
-            this.HABITACION = new HashSet<HABITACION>();
             this.HUESPED = new HashSet<HUESPED>();
             this.ORDEN_COMPRA = new HashSet<ORDEN_COMPRA>();
         }
@@ -36,11 +35,10 @@ namespace Datos
     
         public virtual COMUNA COMUNA { get; set; }
         public virtual ICollection<DETALLE_HABITACION> DETALLE_HABITACION { get; set; }
-        public virtual GIRO GIRO { get; set; }
         public virtual USUARIO USUARIO { get; set; }
         public virtual ICollection<DETALLE_FACTURA> DETALLE_FACTURA { get; set; }
         public virtual ICollection<FACTURA> FACTURA { get; set; }
-        public virtual ICollection<HABITACION> HABITACION { get; set; }
+        public virtual GIRO GIRO { get; set; }
         public virtual ICollection<HUESPED> HUESPED { get; set; }
         public virtual ICollection<ORDEN_COMPRA> ORDEN_COMPRA { get; set; }
     }

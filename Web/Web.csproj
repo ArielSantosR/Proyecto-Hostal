@@ -130,6 +130,7 @@
     <Content Include="Cliente\WebEditarPasajero.aspx" />
     <Content Include="Cliente\WebNotificacion.aspx" />
     <Content Include="Cliente\WebVerHistorial.aspx" />
+    <Content Include="Empleado\WebAsignacion.aspx" />
     <Content Include="Empleado\WebAsignarHabitacion.aspx" />
     <Content Include="Empleado\WebCrearDetalle.aspx" />
     <Content Include="Empleado\WebCrearFactura.aspx" />
@@ -456,6 +457,13 @@
     </Compile>
     <Compile Include="Empleado\EmpleadoM.Master.designer.cs">
       <DependentUpon>EmpleadoM.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Empleado\WebAsignacion.aspx.cs">
+      <DependentUpon>WebAsignacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Empleado\WebAsignacion.aspx.designer.cs">
+      <DependentUpon>WebAsignacion.aspx</DependentUpon>
     </Compile>
     <Compile Include="Empleado\WebAsignarHabitacion.aspx.cs">
       <DependentUpon>WebAsignarHabitacion.aspx</DependentUpon>

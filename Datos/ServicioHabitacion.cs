@@ -65,7 +65,6 @@ namespace Datos
             if (h != null)
             {
                 h.ID_TIPO_HABITACION = habitacion.ID_TIPO_HABITACION;
-                h.RUT_CLIENTE = habitacion.RUT_CLIENTE;
                 h.ESTADO_HABITACION = habitacion.ESTADO_HABITACION;
 
                 ent.SaveChanges();
@@ -92,6 +91,29 @@ namespace Datos
             {
                 return false;
             }
+        }
+
+        public List<HABITACION> listarHabitacionDisponibleCategoria(DETALLE_ORDEN detalle)
+        {
+            List<HABITACION> lista = (from consulta in ent.HABITACION
+                                     where (consulta.ESTADO_HABITACION.Equals("Disponible")
+                                     || consulta.ESTADO_HABITACION.Equals("Vacante 2")
+                                     || consulta.ESTADO_HABITACION.Equals("Vacante 1"))
+                                     && consulta.ID_CATEGORIA_HABITACION == detalle.ID_CATEGORIA_HABITACION
+                                     select consulta).ToList();
+
+            return lista;
+        }
+
+        public List<HABITACION> listarHabitacionDisponible(DETALLE_ORDEN detalle)
+        {
+            List<HABITACION> lista = (from consulta in ent.HABITACION
+                                      where consulta.ESTADO_HABITACION.Equals("Disponible")
+                                      || consulta.ESTADO_HABITACION.Equals("Vacante 2")
+                                      || consulta.ESTADO_HABITACION.Equals("Vacante 1")
+                                      select consulta).ToList();
+
+            return lista;
         }
     }
 }

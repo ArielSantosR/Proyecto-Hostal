@@ -2,25 +2,16 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script type="text/javascript" src="../js/scriptRut.js"></script>
      <script type="text/javascript">
-
-   
-
     function pageLoad() {
         console.log('pageLoad');
         $(document).ready(function () {
             PermisosDeUsuario();
         });
     };
-
-
      function PermisosDeUsuario() {
          var control = document.getElementById('<%= ddlTipo.ClientID %>');
          var tipo = control.options[control.selectedIndex].value;
-
-         document.getElementById('<%=ddlPais.ClientID %>').selectedIndex = 0;
-         document.getElementById('<%=ddlRegion.ClientID %>').selectedIndex = 0;
          
-
          if (tipo == "Cliente") {
              $("#cliente").collapse('show');
              $('#cliente').find(':input').prop('disabled', false);
@@ -170,6 +161,16 @@
                     </div>
                   </div>
                 </div>
+
+              <div class="form-group">
+                            <label for="country" class="col-sm-12 control-label">Giro</label>
+                            <div class="col-sm-12">
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fa fa-globe fa-lg" aria-hidden="true"></i></span>
+                                    <asp:DropDownList ID="ddlGiro" CssClass="form-control" runat="server"></asp:DropDownList>
+                                </div>
+                            </div>
+                        </div>
             <asp:UpdatePanel ID="UpdatePanel1" runat="server">
             <ContentTemplate>
                 <div class="form-group">
@@ -177,10 +178,11 @@
                             <div class="col-sm-12">
                                 <div class="input-group">
                                     <span class="input-group-text"><i class="fa fa-globe fa-lg" aria-hidden="true"></i></span>
-                                    <asp:DropDownList ID="ddlGiro" CssClass="form-control" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlPais_SelectedIndexChanged"></asp:DropDownList>
+                                    <asp:DropDownList ID="DropDownList1" CssClass="form-control" runat="server"></asp:DropDownList>
                                 </div>
                             </div>
                         </div>
+
                 <div class="form-group">
                   <label for="country" class="col-sm-12 control-label">País</label>
                     <div class="col-sm-12">

@@ -78,6 +78,11 @@ namespace Web.Cliente
                         StringReader reader = new StringReader(datos);
                         Modelo.HuespedCollection coleccionHuesped = (Modelo.HuespedCollection)ser3.Deserialize(reader);
 
+                        if (coleccionHuesped.Count == 0)
+                        {
+                            Response.Write("<script language='javascript'>window.alert('Para hacer una Reserva debe registrar huéspedes primero');window.location='../Hostal/WebAgregarPasajeros.aspx';</script>");
+                        }
+
                         string categoria_habitacion = service.ListarCategoriaHabitacion();
                         XmlSerializer ser1 = new XmlSerializer(typeof(Modelo.CategoriaHabitacionCollection));
                         StringReader reader1 = new StringReader(categoria_habitacion);
@@ -114,7 +119,10 @@ namespace Web.Cliente
 
                         UpdatePanel4.Update();
                     }
-                    //Else Pendiente
+                    else
+                    {
+                        Response.Write("<script language='javascript'>window.alert('Sólo los clientes pueden hacer reservas');window.location='../Hostal/WebLogin.aspx';</script>");
+                    }
                 }
                 else
                 {
@@ -207,7 +215,7 @@ namespace Web.Cliente
             {
                 if (MiSesionO.Count > 0)
                 {
-                    if (calendarFecha.SelectedDate > DateTime.Now)
+                    if (calendarFecha.SelectedDate >= DateTime.Today && calendarSalida.SelectedDate >= calendarFecha.SelectedDate)
                     {
                         Modelo.Cliente cliente = new Modelo.Cliente();
                         cliente.ID_USUARIO = MiSesion.ID_USUARIO;
@@ -226,6 +234,7 @@ namespace Web.Cliente
                             Modelo.OrdenCompra orden = new Modelo.OrdenCompra();
                             orden.CANTIDAD_HUESPEDES = MiSesionO.Count;
                             orden.FECHA_LLEGADA = calendarFecha.SelectedDate;
+                            orden.FECHA_SALIDA = calendarSalida.SelectedDate;
                             orden.RUT_CLIENTE = cliente2.RUT_CLIENTE;
                             orden.ESTADO_ORDEN = "Pendiente";
 
@@ -243,6 +252,7 @@ namespace Web.Cliente
                                     detalle.RUT_HUESPED = o.RUT_HUESPED;
                                     detalle.ID_PENSION = o.ID_PENSION;
                                     detalle.ID_CATEGORIA_HABITACION = o.ID_CATEGORIA_HABITACION;
+                                    detalle.ESTADO = "Pendiente";
 
                                     XmlSerializer sr3 = new XmlSerializer(typeof(Modelo.DetalleOrden));
                                     StringWriter writer3 = new StringWriter();
@@ -281,7 +291,7 @@ namespace Web.Cliente
                     else
                     {
                         alerta_exito.Visible = false;
-                        error.Text = "debe ingresar una fecha válida, superior a la actual";
+                        error.Text = "debe ingresar una fecha válida, igual a la fecha actual o superior";
                         alerta.Visible = true;
                     }
                 }

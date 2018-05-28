@@ -102,6 +102,7 @@
                                 <asp:BoundField DataField="RUT_HUESPED" HeaderText="RUT Huésped" />
                                 <asp:BoundField DataField="ID_CATEGORIA_HABITACION" HeaderText="ID Categoría" />
                                 <asp:BoundField DataField="ID_PENSION" HeaderText="ID Pensión" />
+                                <asp:BoundField DataField="ESTADO" HeaderText="Estado" />
                             </Columns>
                         </asp:GridView>
         </div>

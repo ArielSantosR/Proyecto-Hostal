@@ -323,7 +323,7 @@ namespace WcfNegocio
 
         [OperationContract]
         string ListarDetalleReserva(string orden);
-
+     
         [OperationContract]
         string ListarReservaAdmin();
 
@@ -332,6 +332,12 @@ namespace WcfNegocio
 
         [OperationContract]
         string ListarReservaAceptada();
+
+        [OperationContract]
+        string ListaHuespedesNoAsignados(string orden);
+
+        [OperationContract]
+        DetalleOrden ObtenerDetalleReserva(string detalle);
         #endregion
 
         #region DDL
@@ -365,6 +371,12 @@ namespace WcfNegocio
 
         [OperationContract]
         string ListarMinuta();
+
+        [OperationContract]
+        string ListarHabitacionDisponibleCategoria(string detalle);
+
+        [OperationContract]
+        string ListarHabitacionDisponible(string detalle);
         #endregion
     }
 }

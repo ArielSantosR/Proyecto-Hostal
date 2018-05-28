@@ -15,8 +15,8 @@ namespace Datos
     public partial class DETALLE_PASAJEROS
     {
         public short ID_DETALLE_PASAJEROS { get; set; }
-        public Nullable<short> NUMERO_HABITACION { get; set; }
-        public Nullable<int> RUT_HUESPED { get; set; }
+        public short NUMERO_HABITACION { get; set; }
+        public int RUT_HUESPED { get; set; }
         public short ID_PENSION { get; set; }
     
         public virtual PENSION PENSION { get; set; }

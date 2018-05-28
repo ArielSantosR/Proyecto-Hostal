@@ -23,8 +23,8 @@ namespace Datos
         public Nullable<decimal> VALOR_DESC_BOLETA { get; set; }
         public long VALOR_TOTAL_BOLETA { get; set; }
         public System.DateTime FECHA_EMISION_BOLETA { get; set; }
-        public int RUT_EMPLEADO { get; set; }
         public int RUT_HUESPED { get; set; }
+        public int RUT_EMPLEADO { get; set; }
     
         public virtual EMPLEADO EMPLEADO { get; set; }
         public virtual HUESPED HUESPED { get; set; }

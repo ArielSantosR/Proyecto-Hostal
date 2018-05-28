@@ -576,7 +576,6 @@ namespace WcfNegocio
                 hModelo.NUMERO_HABITACION = h.NUMERO_HABITACION;
                 hModelo.ESTADO_HABITACION = h.ESTADO_HABITACION;
                 hModelo.ID_TIPO_HABITACION = h.ID_TIPO_HABITACION;
-                hModelo.RUT_CLIENTE = h.RUT_CLIENTE;
                 hModelo.ID_CATEGORIA_HABITACION = h.ID_CATEGORIA_HABITACION;
 
                 listaHabitacion.Add(hModelo);
@@ -626,7 +625,6 @@ namespace WcfNegocio
                 Datos.HABITACION hDatos2 = serv.obtenerHabitacion(hDatos);
                 h.NUMERO_HABITACION = hDatos2.NUMERO_HABITACION;
                 h.ESTADO_HABITACION = hDatos2.ESTADO_HABITACION;
-                h.RUT_CLIENTE = hDatos2.RUT_CLIENTE;
                 h.ID_TIPO_HABITACION = hDatos2.ID_TIPO_HABITACION;
                 h.ID_CATEGORIA_HABITACION = hDatos2.ID_CATEGORIA_HABITACION;
 
@@ -645,7 +643,6 @@ namespace WcfNegocio
             hDatos.NUMERO_HABITACION = h.NUMERO_HABITACION;
             hDatos.ID_TIPO_HABITACION = h.ID_TIPO_HABITACION;
             hDatos.ESTADO_HABITACION = h.ESTADO_HABITACION;
-            hDatos.RUT_CLIENTE = h.RUT_CLIENTE;
             hDatos.ID_CATEGORIA_HABITACION = h.ID_CATEGORIA_HABITACION;
 
             return serv.EditarHabitacion(hDatos);
@@ -1947,6 +1944,7 @@ namespace WcfNegocio
             oDatos.FECHA_LLEGADA = o.FECHA_LLEGADA;
             oDatos.CANTIDAD_HUESPEDES = o.CANTIDAD_HUESPEDES;
             oDatos.ESTADO_ORDEN = o.ESTADO_ORDEN;
+            oDatos.FECHA_SALIDA = o.FECHA_SALIDA;
 
             return serv.AgregarOrdenCompra(oDatos);
         }
@@ -1961,6 +1959,7 @@ namespace WcfNegocio
             dDatos.RUT_HUESPED = d.RUT_HUESPED;
             dDatos.ID_PENSION = d.ID_PENSION;
             dDatos.ID_CATEGORIA_HABITACION = d.ID_CATEGORIA_HABITACION;
+            dDatos.ESTADO = d.ESTADO;
 
             return serv.AgregarDetalleOrden(dDatos);
         }
@@ -2066,6 +2065,7 @@ namespace WcfNegocio
                     oModelo.RUT_HUESPED = o.RUT_HUESPED;
                     oModelo.ID_CATEGORIA_HABITACION = o.ID_CATEGORIA_HABITACION;
                     oModelo.ID_DETALLE = o.ID_DETALLE;
+                    oModelo.ESTADO = o.ESTADO;
 
                     listaDetalle2.Add(oModelo);
                 }
@@ -2155,6 +2155,75 @@ namespace WcfNegocio
             ser.Serialize(writer, listaOrden);
             writer.Close();
             return writer.ToString();
+        }
+
+        public string ListaHuespedesNoAsignados(string orden)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.OrdenCompra));
+            StringReader reader = new StringReader(orden);
+            Modelo.OrdenCompra or = (Modelo.OrdenCompra)ser.Deserialize(reader);
+            ServicioReserva serv = new ServicioReserva();
+
+            Datos.ORDEN_COMPRA oDatos = new Datos.ORDEN_COMPRA();
+            oDatos.NUMERO_ORDEN = or.NUMERO_ORDEN;
+
+            List<Datos.DETALLE_ORDEN> listaDetalle = serv.ListaHuespedesNoAsignados(oDatos);
+
+            if (listaDetalle == null)
+            {
+                return null;
+            }
+            else
+            {
+                Modelo.DetalleOrdenCollection listaDetalle2 = new DetalleOrdenCollection();
+
+                foreach (Datos.DETALLE_ORDEN o in listaDetalle)
+                {
+                    Modelo.DetalleOrden oModelo = new Modelo.DetalleOrden();
+                    oModelo.NUMERO_ORDEN = o.NUMERO_ORDEN;
+                    oModelo.ID_PENSION = o.ID_PENSION;
+                    oModelo.RUT_HUESPED = o.RUT_HUESPED;
+                    oModelo.ID_CATEGORIA_HABITACION = o.ID_CATEGORIA_HABITACION;
+                    oModelo.ID_DETALLE = o.ID_DETALLE;
+                    oModelo.ESTADO = o.ESTADO;
+
+                    listaDetalle2.Add(oModelo);
+                }
+
+                XmlSerializer ser2 = new XmlSerializer(typeof(Modelo.DetalleOrdenCollection));
+                StringWriter writer2 = new StringWriter();
+                ser2.Serialize(writer2, listaDetalle2);
+                writer2.Close();
+                return writer2.ToString();
+            }
+        }
+
+        public DetalleOrden ObtenerDetalleReserva(string detalle)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.DetalleOrden));
+            StringReader reader = new StringReader(detalle);
+            Modelo.DetalleOrden d = (Modelo.DetalleOrden)ser.Deserialize(reader);
+            ServicioReserva serv = new ServicioReserva();
+            Datos.DETALLE_ORDEN Datos = new Datos.DETALLE_ORDEN();
+            Datos.ID_DETALLE = d.ID_DETALLE;
+
+            if (serv.ObtenerDetalleReserva(Datos) == null)
+            {
+                return null;
+            }
+            else
+            {
+                Datos.DETALLE_ORDEN Datos2 = serv.ObtenerDetalleReserva(Datos);
+
+                d.ID_DETALLE = Datos2.ID_DETALLE;
+                d.NUMERO_ORDEN = Datos2.NUMERO_ORDEN;
+                d.ID_PENSION = Datos2.ID_PENSION;
+                d.RUT_HUESPED = Datos2.RUT_HUESPED;
+                d.ID_CATEGORIA_HABITACION = Datos2.ID_CATEGORIA_HABITACION;
+                d.ESTADO = Datos2.ESTADO;
+
+                return d;
+            }
         }
         #endregion
 
@@ -2375,6 +2444,86 @@ namespace WcfNegocio
             ser.Serialize(writer, listaPension);
             writer.Close();
             return writer.ToString();
+        }
+
+        public string ListarHabitacionDisponibleCategoria(string detalle)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.DetalleOrden));
+            StringReader reader = new StringReader(detalle);
+            Modelo.DetalleOrden d = (Modelo.DetalleOrden)ser.Deserialize(reader);
+            ServicioHabitacion serv = new ServicioHabitacion();
+
+            Datos.DETALLE_ORDEN dDatos = new Datos.DETALLE_ORDEN();
+            dDatos.ID_CATEGORIA_HABITACION = d.ID_CATEGORIA_HABITACION;
+
+            List<Datos.HABITACION> listaHabitacion = serv.listarHabitacionDisponibleCategoria(dDatos);
+
+            if (listaHabitacion == null)
+            {
+                return null;
+            }
+            else
+            {
+                XmlSerializer servicio = new XmlSerializer(typeof(Modelo.Habitacion));
+                Modelo.HabitacionCollection listaHabitacion2 = new Modelo.HabitacionCollection();
+
+                foreach (Datos.HABITACION h in listaHabitacion)
+                {
+                    Modelo.Habitacion hModelo = new Modelo.Habitacion();
+                    hModelo.NUMERO_HABITACION = h.NUMERO_HABITACION;
+                    hModelo.ESTADO_HABITACION = h.ESTADO_HABITACION;
+                    hModelo.ID_CATEGORIA_HABITACION = h.ID_CATEGORIA_HABITACION;
+                    hModelo.ID_TIPO_HABITACION = h.ID_TIPO_HABITACION;
+
+                    listaHabitacion2.Add(hModelo);
+                }
+
+                XmlSerializer ser2 = new XmlSerializer(typeof(Modelo.HabitacionCollection));
+                StringWriter writer = new StringWriter();
+                ser2.Serialize(writer, listaHabitacion2);
+                writer.Close();
+                return writer.ToString();
+            }
+        }
+
+        public string ListarHabitacionDisponible(string detalle)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.DetalleOrden));
+            StringReader reader = new StringReader(detalle);
+            Modelo.DetalleOrden d = (Modelo.DetalleOrden)ser.Deserialize(reader);
+            ServicioHabitacion serv = new ServicioHabitacion();
+
+            Datos.DETALLE_ORDEN dDatos = new Datos.DETALLE_ORDEN();
+            dDatos.ID_CATEGORIA_HABITACION = d.ID_CATEGORIA_HABITACION;
+
+            List<Datos.HABITACION> listaHabitacion = serv.listarHabitacionDisponible(dDatos);
+
+            if (listaHabitacion == null)
+            {
+                return null;
+            }
+            else
+            {
+                XmlSerializer servicio = new XmlSerializer(typeof(Modelo.Habitacion));
+                Modelo.HabitacionCollection listaHabitacion2 = new Modelo.HabitacionCollection();
+
+                foreach (Datos.HABITACION h in listaHabitacion)
+                {
+                    Modelo.Habitacion hModelo = new Modelo.Habitacion();
+                    hModelo.NUMERO_HABITACION = h.NUMERO_HABITACION;
+                    hModelo.ESTADO_HABITACION = h.ESTADO_HABITACION;
+                    hModelo.ID_CATEGORIA_HABITACION = h.ID_CATEGORIA_HABITACION;
+                    hModelo.ID_TIPO_HABITACION = h.ID_TIPO_HABITACION;
+
+                    listaHabitacion2.Add(hModelo);
+                }
+
+                XmlSerializer ser2 = new XmlSerializer(typeof(Modelo.HabitacionCollection));
+                StringWriter writer = new StringWriter();
+                ser2.Serialize(writer, listaHabitacion2);
+                writer.Close();
+                return writer.ToString();
+            }
         }
         #endregion
     }

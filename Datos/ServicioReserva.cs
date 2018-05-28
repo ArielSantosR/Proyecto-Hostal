@@ -57,6 +57,16 @@ namespace Datos
             return lista;
         }
 
+        public List<DETALLE_ORDEN> ListaHuespedesNoAsignados(ORDEN_COMPRA orden)
+        {
+            var lista = (from consulta in ent.DETALLE_ORDEN
+                         where consulta.NUMERO_ORDEN == orden.NUMERO_ORDEN
+                         && consulta.ESTADO.Equals("Pendiente")
+                         orderby consulta.ID_DETALLE
+                         select consulta).ToList();
+            return lista;
+        }
+
         public List<ORDEN_COMPRA> ListarReservaAceptada()
         {
             var lista = (from consulta in ent.ORDEN_COMPRA
@@ -92,6 +102,20 @@ namespace Datos
             else
             {
                 return false;
+            }
+        }
+
+        public DETALLE_ORDEN ObtenerDetalleReserva(DETALLE_ORDEN detalle)
+        {
+            DETALLE_ORDEN d = ent.DETALLE_ORDEN.FirstOrDefault(objeto => objeto.ID_DETALLE == detalle.ID_DETALLE);
+
+            if (d != null)
+            {
+                return d;
+            }
+            else
+            {
+                return null;
             }
         }
     }

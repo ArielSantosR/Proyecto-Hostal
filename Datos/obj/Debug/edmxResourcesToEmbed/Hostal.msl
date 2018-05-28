@@ -8,8 +8,8 @@
           <ScalarProperty Name="VALOR_DESC_BOLETA" ColumnName="VALOR_DESC_BOLETA" />
           <ScalarProperty Name="VALOR_TOTAL_BOLETA" ColumnName="VALOR_TOTAL_BOLETA" />
           <ScalarProperty Name="FECHA_EMISION_BOLETA" ColumnName="FECHA_EMISION_BOLETA" />
-          <ScalarProperty Name="RUT_EMPLEADO" ColumnName="RUT_EMPLEADO" />
           <ScalarProperty Name="RUT_HUESPED" ColumnName="RUT_HUESPED" />
+          <ScalarProperty Name="RUT_EMPLEADO" ColumnName="RUT_EMPLEADO" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -96,6 +96,7 @@
           <ScalarProperty Name="RUT_HUESPED" ColumnName="RUT_HUESPED" />
           <ScalarProperty Name="ID_CATEGORIA_HABITACION" ColumnName="ID_CATEGORIA_HABITACION" />
           <ScalarProperty Name="ID_PENSION" ColumnName="ID_PENSION" />
+          <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -188,7 +189,6 @@
           <ScalarProperty Name="NUMERO_HABITACION" ColumnName="NUMERO_HABITACION" />
           <ScalarProperty Name="ESTADO_HABITACION" ColumnName="ESTADO_HABITACION" />
           <ScalarProperty Name="ID_TIPO_HABITACION" ColumnName="ID_TIPO_HABITACION" />
-          <ScalarProperty Name="RUT_CLIENTE" ColumnName="RUT_CLIENTE" />
           <ScalarProperty Name="ID_CATEGORIA_HABITACION" ColumnName="ID_CATEGORIA_HABITACION" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -222,12 +222,12 @@
         <MappingFragment StoreEntitySet="NOTIFICACION">
           <ScalarProperty Name="ID_NOTIFICACION" ColumnName="ID_NOTIFICACION" />
           <ScalarProperty Name="MENSAJE" ColumnName="MENSAJE" />
-          <ScalarProperty Name="ID_USUARIO" ColumnName="ID_USUARIO" />
-          <ScalarProperty Name="ESTADO_NOTIFICACION" ColumnName="ESTADO_NOTIFICACION" />
           <ScalarProperty Name="URL" ColumnName="URL" />
+          <ScalarProperty Name="ID_USUARIO" ColumnName="ID_USUARIO" />
           <ScalarProperty Name="NUMERO_PEDIDO" ColumnName="NUMERO_PEDIDO" />
           <ScalarProperty Name="ID_PRODUCTO" ColumnName="ID_PRODUCTO" />
           <ScalarProperty Name="NUMERO_ORDEN" ColumnName="NUMERO_ORDEN" />
+          <ScalarProperty Name="ESTADO_NOTIFICACION" ColumnName="ESTADO_NOTIFICACION" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -273,6 +273,7 @@
           <ScalarProperty Name="ID_PENSION" ColumnName="ID_PENSION" />
           <ScalarProperty Name="NOMBRE_PENSION" ColumnName="NOMBRE_PENSION" />
           <ScalarProperty Name="VALOR_PENSION" ColumnName="VALOR_PENSION" />
+          <ScalarProperty Name="NUMERO_HABITACION" ColumnName="NUMERO_HABITACION" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -296,11 +297,11 @@
           <ScalarProperty Name="STOCK_PRODUCTO" ColumnName="STOCK_PRODUCTO" />
           <ScalarProperty Name="STOCK_CRITICO_PRODUCTO" ColumnName="STOCK_CRITICO_PRODUCTO" />
           <ScalarProperty Name="DESCRIPCION_PRODUCTO" ColumnName="DESCRIPCION_PRODUCTO" />
-          <ScalarProperty Name="PRECIO_PRODUCTO" ColumnName="PRECIO_PRODUCTO" />
+          <ScalarProperty Name="UNIDAD_MEDIDA" ColumnName="UNIDAD_MEDIDA" />
           <ScalarProperty Name="ID_FAMILIA" ColumnName="ID_FAMILIA" />
           <ScalarProperty Name="RUT_PROVEEDOR" ColumnName="RUT_PROVEEDOR" />
           <ScalarProperty Name="ID_PRODUCTO_SEQ" ColumnName="ID_PRODUCTO_SEQ" />
-          <ScalarProperty Name="UNIDAD_MEDIDA" ColumnName="UNIDAD_MEDIDA" />
+          <ScalarProperty Name="PRECIO_PRODUCTO" ColumnName="PRECIO_PRODUCTO" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -18,18 +18,18 @@ namespace Datos
         {
             this.DETALLE_HABITACION = new HashSet<DETALLE_HABITACION>();
             this.DETALLE_PASAJEROS = new HashSet<DETALLE_PASAJEROS>();
+            this.PENSION = new HashSet<PENSION>();
         }
     
         public short NUMERO_HABITACION { get; set; }
         public string ESTADO_HABITACION { get; set; }
         public short ID_TIPO_HABITACION { get; set; }
-        public Nullable<int> RUT_CLIENTE { get; set; }
         public short ID_CATEGORIA_HABITACION { get; set; }
     
         public virtual CATEGORIA_HABITACION CATEGORIA_HABITACION { get; set; }
-        public virtual CLIENTE CLIENTE { get; set; }
         public virtual ICollection<DETALLE_HABITACION> DETALLE_HABITACION { get; set; }
         public virtual ICollection<DETALLE_PASAJEROS> DETALLE_PASAJEROS { get; set; }
         public virtual TIPO_HABITACION TIPO_HABITACION { get; set; }
+        public virtual ICollection<PENSION> PENSION { get; set; }
     }
 }

@@ -16,12 +16,12 @@ namespace Datos
     {
         public int ID_NOTIFICACION { get; set; }
         public string MENSAJE { get; set; }
-        public short ID_USUARIO { get; set; }
-        public string ESTADO_NOTIFICACION { get; set; }
         public string URL { get; set; }
+        public short ID_USUARIO { get; set; }
         public Nullable<short> NUMERO_PEDIDO { get; set; }
         public Nullable<long> ID_PRODUCTO { get; set; }
         public Nullable<short> NUMERO_ORDEN { get; set; }
+        public string ESTADO_NOTIFICACION { get; set; }
     
         public virtual ORDEN_COMPRA ORDEN_COMPRA { get; set; }
         public virtual PEDIDO PEDIDO { get; set; }

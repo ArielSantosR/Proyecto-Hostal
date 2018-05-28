@@ -53,7 +53,7 @@ namespace Web.Empleado
                     alerta.Visible = false;
 
                     Service1 s = new Service1();
-                    string datos = s.ListarReservaAdmin();
+                    string datos = s.ListarReservaAceptada();
                     XmlSerializer ser = new XmlSerializer(typeof(Modelo.OrdenCompraCollection));
                     StringReader reader = new StringReader(datos);
 
@@ -117,8 +117,6 @@ namespace Web.Empleado
                 orden.NUMERO_ORDEN = numero_orden;
 
                 MiSesionOrden = orden;
-
-                Response.Redirect("");
             }
             catch (Exception ex)
             {
@@ -126,6 +124,7 @@ namespace Web.Empleado
                 error.Text = "Excepción: " + ex.ToString();
                 alerta.Visible = true;
             }
+            Response.Redirect("WebAsignacion.aspx");
         }
 
         protected void btnInfo2_Click(object sender, EventArgs e)
