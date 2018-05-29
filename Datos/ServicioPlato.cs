@@ -284,6 +284,11 @@ namespace Datos
             }
         }
 
+        public List<PLATO> listaPlatoTipo(TIPO_PLATO tipo)
+        {
+            
+        }
+
 
     }
 }
