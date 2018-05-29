@@ -40,15 +40,6 @@ namespace Web {
         protected global::System.Web.UI.WebControls.Button btnCliente;
         
         /// <summary>
-        /// Control btnEmpleado.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnEmpleado;
-        
-        /// <summary>
         /// Control btnProveedor.
         /// </summary>
         /// <remarks>
@@ -148,15 +139,6 @@ namespace Web {
         protected global::System.Web.UI.WebControls.Button btnVerTipoProveedor;
         
         /// <summary>
-        /// Control btnVerPedido.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnVerPedido;
-        
-        /// <summary>
         /// Control btnCrearCategoriaPlato.
         /// </summary>
         /// <remarks>
@@ -175,12 +157,57 @@ namespace Web {
         protected global::System.Web.UI.WebControls.Button btnVerCategoriaPlato;
         
         /// <summary>
-        /// Control btnVerInforme.
+        /// Control btnCrearPedido.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnVerInforme;
+        protected global::System.Web.UI.WebControls.Button btnCrearPedido;
+        
+        /// <summary>
+        /// Control btnRecibirPedido.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnRecibirPedido;
+        
+        /// <summary>
+        /// Control btnHistorialPedidos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnHistorialPedidos;
+        
+        /// <summary>
+        /// Control btnReservPendien.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnReservPendien;
+        
+        /// <summary>
+        /// Control btnAsignarHabitacion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAsignarHabitacion;
+        
+        /// <summary>
+        /// Control btnVerPedido.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnVerPedido;
     }
 }

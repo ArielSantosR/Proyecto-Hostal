@@ -169,5 +169,33 @@ namespace Web
         {
             Response.Redirect("WebVerPais.aspx");
         }
+
+        protected void btnCrearPedido_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("../Empleado/WebCrearPedido.aspx");
+        }
+
+        protected void btnRecibirPedido_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("../Empleado/WebRecibirPedido.aspx");
+        }
+
+        protected void btnHistorialPedidos_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("../Empleado/WebHistorialPedidos.aspx");
+
+        }
+
+        protected void btnReservPendien_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("../Empleado/WebReservasPendientes.aspx");
+
+        }
+
+        protected void btnAsignarHabitacion_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("../Empleado/WebAsignarHabitacion.aspx");
+
+        }
     }
 }

@@ -32,7 +32,6 @@
                         <asp:button runat="server" text="Registro Usuario" ID="btnCrearUsuario" CssClass="btn btn-primary btn-lg btn-block login-button" style="font-size: 15px; " OnClick="btnCrearUsuario_Click" />
                         <asp:button runat="server" text="Ver Usuarios" ID="btnVerUsuarios" CssClass="btn btn-primary btn-lg btn-block login-button" style="font-size: 15px;" OnClick="btnVerUsuarios_Click" />
                         <asp:button runat="server" text="Menú Cliente" ID="btnCliente" CssClass="btn btn-primary btn-lg btn-block login-button" style="font-size: 15px;" OnClick="btnCliente_Click" />
-                        <asp:button runat="server" text="Menú Empleado" ID="btnEmpleado" CssClass="btn btn-primary btn-lg btn-block login-button" style="font-size: 15px;" OnClick="btnEmpleado_Click"/>
                         <asp:button runat="server" text="Menú Proveedor" ID="btnProveedor" CssClass="btn btn-primary btn-lg btn-block login-button"  style="font-size: 15px;" OnClick="btnProveedor_Click"/>
                     </div>
                 </div>
@@ -50,7 +49,6 @@
                         <asp:button runat="server" text="Ver Tipo Plato" ID="btnVerTipoPlato" CssClass="btn btn-primary btn-lg btn-block login-button" style="font-size: 15px" OnClick="btnVerTipoPlato_Click"  />
                          <asp:button runat="server" text="Crear Tipo Proveedor" ID="btnCrearTipoProveedor" CssClass="btn btn-primary btn-lg btn-block login-button" style="font-size: 15px" OnClick="btnCrearTipoProveedor_Click"  />
                          <asp:button runat="server" text="Ver Tipo Proveedor" ID="btnVerTipoProveedor" CssClass="btn btn-primary btn-lg btn-block login-button" style="font-size: 15px" OnClick="btnVerTipoProveedor_Click"  />
-                        <asp:button runat="server" text="Ver Pedidos Pendientes" ID="btnVerPedido" CssClass="btn btn-primary btn-lg btn-block login-button" style="font-size: 15px" OnClick="btnVerPedido_Click"  />
                          <asp:button runat="server" text="Crear Categoría Plato" ID="btnCrearCategoriaPlato" CssClass="btn btn-primary btn-lg btn-block login-button" style="font-size: 15px" OnClick="btnCrearCategoriaPlato_Click"  />
                          <asp:button runat="server" text="Ver Categoría Plato" ID="btnVerCategoriaPlato" CssClass="btn btn-primary btn-lg btn-block login-button" style="font-size: 15px" OnClick="btnVerCategoriaPlato_Click"  />
  
@@ -58,9 +56,16 @@
                 </div>
 
                 <div class="col-md-4">
-                        <asp:button runat="server" Text="Informe" CssClass="btn btn-primary btn-lg btn-block active" data-toggle="collapse" data-target="#informe" OnClientClick="return false" />
+                        <asp:button runat="server" Text="Empleado" CssClass="btn btn-primary btn-lg btn-block active" data-toggle="collapse" data-target="#informe" OnClientClick="return false" />
                         <div id="informe" class="collapse" style="margin-top: 10px;">
-                            <asp:button runat="server" text="Ver Informes" ID="btnVerInforme" CssClass="btn btn-primary btn-lg btn-block login-button" style="font-size: 15px" OnClick="btnVerInforme_Click" />
+                             <asp:button runat="server" text="Crear Pedido" ID="btnCrearPedido" CssClass="btn btn-primary btn-lg btn-block login-button" style="font-size: 15px" OnClick="btnCrearPedido_Click"  />
+                             <asp:button runat="server" text="Recibir Pedido" ID="btnRecibirPedido" CssClass="btn btn-primary btn-lg btn-block login-button" style="font-size: 15px" OnClick="btnRecibirPedido_Click" />
+                             <asp:button runat="server" text="Historial Pedidos" ID="btnHistorialPedidos" CssClass="btn btn-primary btn-lg btn-block login-button" style="font-size: 15px" OnClick="btnHistorialPedidos_Click"  />
+                            <asp:button runat="server" text="Reservas Pendientes" ID="btnReservPendien" CssClass="btn btn-primary btn-lg btn-block login-button" style="font-size: 15px" OnClick="btnReservPendien_Click"  />
+
+                             <asp:button runat="server" text="Asignar Habitación" ID="btnAsignarHabitacion" CssClass="btn btn-primary btn-lg btn-block login-button" style="font-size: 15px" OnClick="btnAsignarHabitacion_Click" />
+                             <asp:button runat="server" text="Ver Pedidos Pendientes" ID="btnVerPedido" CssClass="btn btn-primary btn-lg btn-block login-button" style="font-size: 15px" OnClick="btnVerPedido_Click"  />
+
                         </div>
                 </div>
             </div>
