@@ -1534,3 +1534,7 @@ BEGIN
   INTO :new.ID_DETALLE_PASAJEROS
   FROM dual;
 END;
+
+-- Cambios fecha 30-05
+alter table pension drop CONSTRAINT FK_PENSION_HABITACION;
+alter table pension drop COLUMN NUMERO_HABITACION;
