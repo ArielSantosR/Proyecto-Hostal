@@ -40,9 +40,7 @@
 							    </div>
 						</div>
                           <div class="row"> 
-							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                <asp:CheckBox ID="RememberMe" runat="server" cssclass="col-sm-12 control-label text-center" Text="Recordármelo la próxima vez." />
-							</div>
+							
 						</div>
                           <div class="row"> 
                               <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">   
