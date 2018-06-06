@@ -161,7 +161,7 @@ namespace Web.Empleado
             }
         }
 
-        private void CargarTabla(List<DetallePedido> lista) {
+        private void CargarTablaDetalle(List<DetallePedido> lista) {
             Producto producto = new Producto();
             DataTable dt = new DataTable();
             dt.Columns.AddRange(new DataColumn[] {
@@ -183,6 +183,30 @@ namespace Web.Empleado
 
             gvDetalle.DataSource = dt;
             gvDetalle.DataBind();
+        }
+
+        private void CargarTablaHistorial(List<DetallePedido> lista) {
+            Producto producto = new Producto();
+            DataTable dt = new DataTable();
+            dt.Columns.AddRange(new DataColumn[] {
+                new DataColumn("ID Detalle",typeof(short)),
+                new DataColumn("Código", typeof(long)),
+                new DataColumn("Nombre", typeof(string)),
+                new DataColumn("Descripción",typeof(string)),
+                new DataColumn("Unidad Medida",typeof(string)),
+                new DataColumn("Cantidad Pedida",typeof(int))
+            });
+            foreach (DetallePedido item in lista) {
+                producto = new Producto();
+                producto.ID_PRODUCTO = item.ID_PRODUCTO;
+                producto.Read();
+
+                dt.Rows.Add(item.ID_DETALLE_PEDIDO,producto.ID_PRODUCTO,producto.NOMBRE_PRODUCTO,producto.DESCRIPCION_PRODUCTO,producto.UNIDAD_MEDIDA,item.CANTIDAD);
+            }
+
+
+            gvDetalleHistorial.DataSource = dt;
+            gvDetalleHistorial.DataBind();
         }
 
         protected void btnInfo2_Click(object sender, EventArgs e)
@@ -213,8 +237,7 @@ namespace Web.Empleado
 
                         Modelo.DetallePedidoCollection listaDetalle = (Modelo.DetallePedidoCollection)ser3.Deserialize(reader);
                         reader.Close();
-                        gvDetalleHistorial.DataSource = listaDetalle;
-                        gvDetalleHistorial.DataBind();
+                        CargarTablaHistorial(listaDetalle);
 
                         ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modal", "$('#exampleModal2').modal();", true);
                     }
@@ -259,8 +282,7 @@ namespace Web.Empleado
 
                         Modelo.DetallePedidoCollection listaDetalle = (Modelo.DetallePedidoCollection)ser3.Deserialize(reader);
                         reader.Close();
-                        CargarTabla(listaDetalle);
-                        gvDetalle.Columns[0].Visible = false;
+                        CargarTablaDetalle(listaDetalle);
 
                         MiSesionPedido = s.ObtenerPedido(writer.ToString());
 
@@ -392,7 +414,11 @@ namespace Web.Empleado
         }
 
         protected void gvDetalle_RowDataBound(object sender,GridViewRowEventArgs e) {
-            e.Row.Cells[2].Visible = false;
+            e.Row.Cells[1].Visible = false;
+        }
+
+        protected void gvDetalleHistorial_RowDataBound(object sender,GridViewRowEventArgs e) {
+            e.Row.Cells[0].Visible = false;
         }
     }
 }

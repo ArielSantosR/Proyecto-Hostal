@@ -46,8 +46,20 @@ namespace Web.Administrador
         protected void Page_Load(object sender, EventArgs e)
         {
             try {
+                error.Text = string.Empty;
+                exito.Text = string.Empty;
 
-                CargarGriedView();
+                alerta.Visible = false;
+                alerta_exito.Visible = false;
+
+                if (!IsPostBack) {
+                    ddlFiltro.DataSource = Enum.GetValues(typeof(Modelo.Tipo_Usuario));
+                    ddlFiltro.DataBind();
+
+                    ddlFiltro.Items.Insert(0,new ListItem("Seleccione filtro...","0"));
+
+                    CargarGriedView();
+                }
             }
             catch (Exception) {
                 Response.Write("<script language='javascript'>window.alert('Debe Iniciar Sesión Primero');window.location='../Hostal/WebLogin.aspx';</script>");
@@ -262,6 +274,108 @@ namespace Web.Administrador
             }
             set {
                 Session["UsuarioEdit"] = value;
+            }
+        }
+
+        private void Filtra(string filtro) {
+            //Carga listas con datos
+            users = UsuarioCollection.ListaUsuarios();
+            empleados = EmpleadoCollection.ListaEmpleados();
+            clientes = ClienteCollection.ListaClientes();
+            proveedores = ProveedorCollection.ListaProveedores();
+
+            Usuario user;
+
+            //Creacion DataTable
+            DataTable dt = new DataTable();
+            dt.Columns.AddRange(new DataColumn[5] {
+                new DataColumn("ID", typeof(int)),
+                new DataColumn("Nombre", typeof(string)),
+                new DataColumn("Usuario",typeof(string)),
+                new DataColumn("Tipo",typeof(string)),
+                new DataColumn("Estado",typeof(string))
+            });
+
+            //Carga de datos en DataTable
+            if (filtro.Equals(Tipo_Usuario.Cliente.ToString())) {
+                var listaFil = users.Where(x => x.TIPO_USUARIO == Tipo_Usuario.Cliente.ToString()).ToList();
+                foreach (Modelo.Cliente c in clientes) {
+                    user = new Usuario();
+                    var list = users.Where(x => x.ID_USUARIO == c.ID_USUARIO).ToList();
+                    foreach (var item in list) {
+                        user.NOMBRE_USUARIO = item.NOMBRE_USUARIO;
+                        user.TIPO_USUARIO = item.TIPO_USUARIO;
+                        user.PASSWORD = item.PASSWORD;
+                        user.ESTADO = item.ESTADO;
+                    }
+                    dt.Rows.Add(c.ID_USUARIO,c.NOMBRE_CLIENTE,user.NOMBRE_USUARIO,user.TIPO_USUARIO,user.ESTADO);
+                }
+
+            }
+
+            if (filtro.Equals(Tipo_Usuario.Empleado.ToString())) {
+                var listaFil = users.Where(x => x.TIPO_USUARIO == Tipo_Usuario.Empleado.ToString()).ToList();
+                foreach (Modelo.Empleado e in empleados) {
+                    user = new Usuario();
+                    var list = users.Where(x => x.ID_USUARIO == e.ID_USUARIO).ToList();
+                    foreach (var item in list) {
+                        user.NOMBRE_USUARIO = item.NOMBRE_USUARIO;
+                        user.TIPO_USUARIO = item.TIPO_USUARIO;
+                        user.PASSWORD = item.PASSWORD;
+                        user.ESTADO = item.ESTADO;
+                    }
+                    dt.Rows.Add(e.ID_USUARIO,e.PNOMBRE_EMPLEADO + " " + e.APP_PATERNO_EMPLEADO + " " + e.APP_MATERNO_EMPLEADO,user.NOMBRE_USUARIO,user.TIPO_USUARIO,user.ESTADO);
+                }
+            }
+
+            if (filtro.Equals(Tipo_Usuario.Administrador.ToString())) {
+                var listaFil = users.Where(x => x.TIPO_USUARIO == Tipo_Usuario.Administrador.ToString()).ToList();
+                foreach (Modelo.Empleado e in empleados) {
+                    user = new Usuario();
+                    var list = listaFil.Where(x => x.ID_USUARIO == e.ID_USUARIO).ToList();
+                    foreach (var item in list) {
+                        user.NOMBRE_USUARIO = item.NOMBRE_USUARIO;
+                        user.TIPO_USUARIO = item.TIPO_USUARIO;
+                        user.PASSWORD = item.PASSWORD;
+                        user.ESTADO = item.ESTADO;
+                    }
+                    dt.Rows.Add(e.ID_USUARIO,e.PNOMBRE_EMPLEADO + " " + e.APP_PATERNO_EMPLEADO + " " + e.APP_MATERNO_EMPLEADO,user.NOMBRE_USUARIO,user.TIPO_USUARIO,user.ESTADO);
+                }
+            }
+
+            if (filtro.Equals(Tipo_Usuario.Proveedor.ToString())) {
+                var listaFil = users.Where(x => x.TIPO_USUARIO == Tipo_Usuario.Proveedor.ToString()).ToList();
+                foreach (Modelo.Proveedor p in proveedores) {
+                    user = new Usuario();
+                    var list = users.Where(x => x.ID_USUARIO == p.ID_USUARIO).ToList();
+                    foreach (var item in list) {
+                        user.NOMBRE_USUARIO = item.NOMBRE_USUARIO;
+                        user.TIPO_USUARIO = item.TIPO_USUARIO;
+                        user.PASSWORD = item.PASSWORD;
+                        user.ESTADO = item.ESTADO;
+                    }
+                    dt.Rows.Add(p.ID_USUARIO,p.PNOMBRE_PROVEEDOR + " " + p.APP_PATERNO_PROVEEDOR + " " + p.APP_MATERNO_PROVEEDOR,user.NOMBRE_USUARIO,user.TIPO_USUARIO,user.ESTADO);
+                }
+            }
+            
+            //Carga de GriedView
+            gvUsuario.DataSource = dt;
+            gvUsuario.DataBind();
+
+        }
+
+        protected void btnFiltrar_Click(object sender,EventArgs e) {
+            try {
+                if (ddlFiltro.SelectedIndex != 0) {
+                    string filtro = ddlFiltro.SelectedItem.ToString();
+                    Filtra(filtro);
+                }else {
+                    error.Text = "Error: Debe seleccionar un filtro válido";
+                    alerta.Visible = true;
+                }
+            }catch(Exception ex) {
+                error.Text = "Excepcion: " + ex.Message;
+                alerta.Visible = true;
             }
         }
     }

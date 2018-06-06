@@ -1,6 +1,7 @@
 ﻿using Modelo;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -230,12 +231,34 @@ namespace Web.Administrador
 
                     Modelo.DetallePedidoCollection listaDetalle = (Modelo.DetallePedidoCollection)ser3.Deserialize(reader);
                     reader.Close();
-                    gvDetalleHistorial.DataSource = listaDetalle;
-                    gvDetalleHistorial.DataBind();
+                    CargarTablaHistorial(listaDetalle);
                 }
             }
 
             ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modal", "$('#exampleModal2').modal();", true);
+        }
+
+        private void CargarTablaHistorial(List<DetallePedido> lista) {
+            Producto producto = new Producto();
+            DataTable dt = new DataTable();
+            dt.Columns.AddRange(new DataColumn[] {
+                new DataColumn("Código", typeof(long)),
+                new DataColumn("Nombre", typeof(string)),
+                new DataColumn("Descripción",typeof(string)),
+                new DataColumn("Unidad Medida",typeof(string)),
+                new DataColumn("Cantidad Pedida",typeof(int))
+            });
+            foreach (DetallePedido item in lista) {
+                producto = new Producto();
+                producto.ID_PRODUCTO = item.ID_PRODUCTO;
+                producto.Read();
+
+                dt.Rows.Add(producto.ID_PRODUCTO,producto.NOMBRE_PRODUCTO,producto.DESCRIPCION_PRODUCTO,producto.UNIDAD_MEDIDA,item.CANTIDAD);
+            }
+
+
+            gvDetalleHistorial.DataSource = dt;
+            gvDetalleHistorial.DataBind();
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Modelo;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -109,14 +110,12 @@ namespace Web.Empleado
 
                         Modelo.DetallePedidoCollection listaDetalle = (Modelo.DetallePedidoCollection)ser4.Deserialize(reader4);
                         reader.Close();
-                        gvDetalle.DataSource = listaDetalle;
-                        gvDetalle.DataBind();
+                        CargarTablaDetalles(listaDetalle);
 
                         MiSesionD = listaDetalle;
                     }
                 }
                 ddlRut.SelectedValue = MiSesionPedido.RUT_PROVEEDOR + "";
-                ddlRut.Attributes.Add("disabled", "disabled");
             }
             catch (Exception ex)
             {
@@ -301,6 +300,29 @@ namespace Web.Empleado
                 error.Text = "Excepción: " + ex.ToString();
                 alerta.Visible = true;
             }
+        }
+
+        private void CargarTablaDetalles(List<DetallePedido> lista) {
+            Producto producto = new Producto();
+            DataTable dt = new DataTable();
+            dt.Columns.AddRange(new DataColumn[] {
+                new DataColumn("Código", typeof(long)),
+                new DataColumn("Nombre", typeof(string)),
+                new DataColumn("Descripción",typeof(string)),
+                new DataColumn("Unidad Medida",typeof(string)),
+                new DataColumn("Cantidad Pedida",typeof(int))
+            });
+            foreach (DetallePedido item in lista) {
+                producto = new Producto();
+                producto.ID_PRODUCTO = item.ID_PRODUCTO;
+                producto.Read();
+
+                dt.Rows.Add(producto.ID_PRODUCTO,producto.NOMBRE_PRODUCTO,producto.DESCRIPCION_PRODUCTO,producto.UNIDAD_MEDIDA,item.CANTIDAD);
+            }
+
+
+            gvDetalle.DataSource = dt;
+            gvDetalle.DataBind();
         }
     }
 }

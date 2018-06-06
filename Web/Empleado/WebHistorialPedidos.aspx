@@ -64,7 +64,7 @@
     <asp:ScriptManager runat="server"></asp:ScriptManager>
 
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-dialog modal-lg" role="document" style="max-width: 1024px">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Detalle Pedido</h5>
@@ -87,7 +87,6 @@
                             <SortedDescendingCellStyle BackColor="#E9EBEF" />
                             <SortedDescendingHeaderStyle BackColor="#4870BE" />
                             <Columns>
-                                <asp:BoundField DataField="ID_DETALLE_PEDIDO" HeaderText="Detalle Pedido" Visible="false" />
                                 <asp:TemplateField>
                                     <ItemTemplate>
                                         <asp:LinkButton ID="btnEditar" CssClass="btn btn-success" CommandArgument='<%#Eval("ID Detalle")%>' OnClick="btnEditar_Click" Text="Editar" runat="server" />
@@ -177,7 +176,7 @@
                 </div>
                 <div class="modal-body">
                     <div style="display: flex; justify-content: center; margin-bottom: 70px">
-                        <asp:GridView ID="gvDetalleHistorial" AutoGenerateColumns="false" runat="server" ForeColor="#333333" GridLines="Vertical">
+                        <asp:GridView ID="gvDetalleHistorial" AutoGenerateColumns="true" runat="server" ForeColor="#333333" GridLines="Vertical" OnRowDataBound="gvDetalleHistorial_RowDataBound">
                             <AlternatingRowStyle BackColor="White" />
                             <EditRowStyle BackColor="#2461BF" />
                             <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
@@ -189,12 +188,6 @@
                             <SortedAscendingHeaderStyle BackColor="#6D95E1" />
                             <SortedDescendingCellStyle BackColor="#E9EBEF" />
                             <SortedDescendingHeaderStyle BackColor="#4870BE" />
-                            <Columns>
-                                <asp:BoundField DataField="ID_DETALLE_PEDIDO" HeaderText="Detalle Pedido" />
-                                <asp:BoundField DataField="NUMERO_PEDIDO" HeaderText="Número de Pedido" />
-                                <asp:BoundField DataField="ID_PRODUCTO" HeaderText="ID Producto" />
-                                <asp:BoundField DataField="CANTIDAD" HeaderText="Cantidad" />
-                            </Columns>
                         </asp:GridView>
                     </div>
                 </div>
