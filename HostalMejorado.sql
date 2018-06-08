@@ -1532,6 +1532,7 @@ BEGIN
   FROM dual;
 END;
 
+<<<<<<< HEAD
 INSERT INTO CATEGORIA VALUES(1, 'Bronce');
 INSERT INTO CATEGORIA VALUES(2, 'Plata');
 INSERT INTO CATEGORIA VALUES(3, 'Oro');
@@ -1560,3 +1561,8 @@ INSERT INTO PLATO VALUES(NULL, 'Pasta de pesto', 2000, 1, 3);
 
 
 
+=======
+-- Cambios fecha 30-05
+alter table pension drop CONSTRAINT FK_PENSION_HABITACION;
+alter table pension drop COLUMN NUMERO_HABITACION;
+>>>>>>> 134ce8e5ef6483fe0fa3354c0c74b6cb078248b6

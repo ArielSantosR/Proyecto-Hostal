@@ -51,13 +51,12 @@
   <EntityType Name="DETALLE_BOLETA">
     <Key>
       <PropertyRef Name="ID_DETALLE_BOLETA" />
-      <PropertyRef Name="ID_BOLETA" />
     </Key>
     <Property Name="ID_DETALLE_BOLETA" Type="number" Precision="10" Scale="0" Nullable="false" />
     <Property Name="DESCRIPCION_DETALLE" Type="varchar2" MaxLength="250" Nullable="false" />
     <Property Name="CANTIDAD" Type="number" Precision="10" Scale="0" Nullable="false" />
     <Property Name="VALOR_TOTAL" Type="number" Precision="10" Scale="0" Nullable="false" />
-    <Property Name="ID_BOLETA" Type="number" Precision="10" Scale="0" Nullable="false" />
+    <Property Name="ID_BOLETA" Type="number" Precision="10" Scale="0" />
   </EntityType>
   <EntityType Name="DETALLE_FACTURA">
     <Key>
@@ -103,7 +102,6 @@
   <EntityType Name="DETALLE_PEDIDO">
     <Key>
       <PropertyRef Name="ID_DETALLE_PEDIDO" />
-      <PropertyRef Name="ID_PRODUCTO" />
     </Key>
     <Property Name="ID_DETALLE_PEDIDO" Type="number" Precision="5" Scale="0" Nullable="false" />
     <Property Name="CANTIDAD" Type="number" Precision="10" Scale="0" Nullable="false" />
@@ -122,7 +120,6 @@
   <EntityType Name="DETALLE_RECEPCION">
     <Key>
       <PropertyRef Name="ID_DETALLE_RECEPCION" />
-      <PropertyRef Name="NUMERO_RECEPCION" />
     </Key>
     <Property Name="ID_DETALLE_RECEPCION" Type="number" Precision="5" Scale="0" Nullable="false" />
     <Property Name="CANTIDAD" Type="number" Precision="10" Scale="0" Nullable="false" />
@@ -252,7 +249,6 @@
     <Property Name="ID_PENSION" Type="number" Precision="5" Scale="0" Nullable="false" />
     <Property Name="NOMBRE_PENSION" Type="varchar2" MaxLength="25" Nullable="false" />
     <Property Name="VALOR_PENSION" Type="number" Precision="10" Scale="0" Nullable="false" />
-    <Property Name="NUMERO_HABITACION" Type="number" Precision="5" Scale="0" />
   </EntityType>
   <EntityType Name="PLATO">
     <Key>
@@ -270,6 +266,7 @@
     </Key>
     <Property Name="ID_PRODUCTO" Type="number" Precision="19" Scale="0" Nullable="false" />
     <Property Name="NOMBRE_PRODUCTO" Type="varchar2" MaxLength="50" Nullable="false" />
+    <Property Name="PRECIO_PRODUCTO" Type="number" Precision="10" Scale="0" Nullable="false" />
     <Property Name="FECHA_VENCIMIENTO_PRODUCTO" Type="date" />
     <Property Name="STOCK_PRODUCTO" Type="number" Precision="5" Scale="0" Nullable="false" />
     <Property Name="STOCK_CRITICO_PRODUCTO" Type="number" Precision="5" Scale="0" Nullable="false" />
@@ -278,7 +275,6 @@
     <Property Name="ID_FAMILIA" Type="number" Precision="5" Scale="0" Nullable="false" />
     <Property Name="RUT_PROVEEDOR" Type="number" Precision="8" Scale="0" Nullable="false" />
     <Property Name="ID_PRODUCTO_SEQ" Type="number" Precision="5" Scale="0" Nullable="false" />
-    <Property Name="PRECIO_PRODUCTO" Type="number" Precision="8" Scale="0" Nullable="false" />
   </EntityType>
   <EntityType Name="PROVEEDOR">
     <Key>
@@ -416,7 +412,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_DETALLE_BOLETA_BOLETA">
-    <End Role="BOLETA" Type="Self.BOLETA" Multiplicity="1" />
+    <End Role="BOLETA" Type="Self.BOLETA" Multiplicity="0..1" />
     <End Role="DETALLE_BOLETA" Type="Self.DETALLE_BOLETA" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="BOLETA">
@@ -811,18 +807,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_PENSION_HABITACION">
-    <End Role="HABITACION" Type="Self.HABITACION" Multiplicity="0..1" />
-    <End Role="PENSION" Type="Self.PENSION" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="HABITACION">
-        <PropertyRef Name="NUMERO_HABITACION" />
-      </Principal>
-      <Dependent Role="PENSION">
-        <PropertyRef Name="NUMERO_HABITACION" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_PLATO_CATEGORIA">
     <End Role="CATEGORIA" Type="Self.CATEGORIA" Multiplicity="1" />
     <End Role="PLATO" Type="Self.PLATO" Multiplicity="*" />
@@ -931,12 +915,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Function Name="FN_PRODUCTO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="HOSTAL" ReturnType="number">
-    <Parameter Name="P_ID_PROVEEDOR" Type="number" Mode="In" />
-    <Parameter Name="P_ID_FAMILIA" Type="number" Mode="In" />
-    <Parameter Name="P_FECHA_VENCIMIENTO" Type="date" Mode="In" />
-    <Parameter Name="P_ID_PRODUCTO_S" Type="number" Mode="In" />
-  </Function>
   <EntityContainer Name="ModelStoreContainer">
     <EntitySet Name="BOLETA" EntityType="Self.BOLETA" Schema="HOSTAL" store:Type="Tables" />
     <EntitySet Name="CATEGORIA" EntityType="Self.CATEGORIA" Schema="HOSTAL" store:Type="Tables" />
@@ -1127,10 +1105,6 @@
     <AssociationSet Name="FK_PEDIDO_RECEPCION" Association="Self.FK_PEDIDO_RECEPCION">
       <End Role="RECEPCION" EntitySet="RECEPCION" />
       <End Role="PEDIDO" EntitySet="PEDIDO" />
-    </AssociationSet>
-    <AssociationSet Name="FK_PENSION_HABITACION" Association="Self.FK_PENSION_HABITACION">
-      <End Role="HABITACION" EntitySet="HABITACION" />
-      <End Role="PENSION" EntitySet="PENSION" />
     </AssociationSet>
     <AssociationSet Name="FK_PLATO_CATEGORIA" Association="Self.FK_PLATO_CATEGORIA">
       <End Role="CATEGORIA" EntitySet="CATEGORIA" />

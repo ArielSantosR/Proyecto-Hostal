@@ -67,13 +67,12 @@
   <EntityType Name="DETALLE_BOLETA">
     <Key>
       <PropertyRef Name="ID_DETALLE_BOLETA" />
-      <PropertyRef Name="ID_BOLETA" />
     </Key>
     <Property Name="ID_DETALLE_BOLETA" Type="Int32" Nullable="false" />
     <Property Name="DESCRIPCION_DETALLE" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="CANTIDAD" Type="Int32" Nullable="false" />
     <Property Name="VALOR_TOTAL" Type="Int32" Nullable="false" />
-    <Property Name="ID_BOLETA" Type="Int32" Nullable="false" />
+    <Property Name="ID_BOLETA" Type="Int32" />
     <NavigationProperty Name="BOLETA" Relationship="Self.FK_DETALLE_BOLETA_BOLETA" FromRole="DETALLE_BOLETA" ToRole="BOLETA" />
   </EntityType>
   <EntityType Name="DETALLE_FACTURA">
@@ -122,16 +121,15 @@
     <Property Name="NUMERO_HABITACION" Type="Int16" Nullable="false" />
     <Property Name="RUT_HUESPED" Type="Int32" Nullable="false" />
     <Property Name="ID_PENSION" Type="Int16" Nullable="false" />
+    <Property Name="FECHA_LLEGADA" Type="DateTime" Nullable="false" />
+    <Property Name="FECHA_SALIDA" Type="DateTime" Nullable="false" />
     <NavigationProperty Name="PENSION" Relationship="Self.FK_DETALLE_PENSION_P" FromRole="DETALLE_PASAJEROS" ToRole="PENSION" />
     <NavigationProperty Name="HABITACION" Relationship="Self.FK_HABITACION_DETALLE_P" FromRole="DETALLE_PASAJEROS" ToRole="HABITACION" />
     <NavigationProperty Name="HUESPED" Relationship="Self.FK_HUESPED_DETALLE_P" FromRole="DETALLE_PASAJEROS" ToRole="HUESPED" />
-    <Property Name="FECHA_LLEGADA" Type="DateTime" Nullable="false" />
-    <Property Name="FECHA_SALIDA" Type="DateTime" Nullable="false" />
   </EntityType>
   <EntityType Name="DETALLE_PEDIDO">
     <Key>
       <PropertyRef Name="ID_DETALLE_PEDIDO" />
-      <PropertyRef Name="ID_PRODUCTO" />
     </Key>
     <Property Name="ID_DETALLE_PEDIDO" Type="Int16" Nullable="false" />
     <Property Name="CANTIDAD" Type="Int32" Nullable="false" />
@@ -154,7 +152,6 @@
   <EntityType Name="DETALLE_RECEPCION">
     <Key>
       <PropertyRef Name="ID_DETALLE_RECEPCION" />
-      <PropertyRef Name="NUMERO_RECEPCION" />
     </Key>
     <Property Name="ID_DETALLE_RECEPCION" Type="Int16" Nullable="false" />
     <Property Name="CANTIDAD" Type="Int32" Nullable="false" />
@@ -225,7 +222,6 @@
     <NavigationProperty Name="DETALLE_HABITACION" Relationship="Self.FK_HABITACION_DETALLE_H" FromRole="HABITACION" ToRole="DETALLE_HABITACION" />
     <NavigationProperty Name="DETALLE_PASAJEROS" Relationship="Self.FK_HABITACION_DETALLE_P" FromRole="HABITACION" ToRole="DETALLE_PASAJEROS" />
     <NavigationProperty Name="TIPO_HABITACION" Relationship="Self.FK_HABITACION_TIPO_HABITACION" FromRole="HABITACION" ToRole="TIPO_HABITACION" />
-    <NavigationProperty Name="PENSION" Relationship="Self.FK_PENSION_HABITACION" FromRole="HABITACION" ToRole="PENSION" />
   </EntityType>
   <EntityType Name="HUESPED">
     <Key>
@@ -320,11 +316,9 @@
     <Property Name="ID_PENSION" Type="Int16" Nullable="false" />
     <Property Name="NOMBRE_PENSION" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="VALOR_PENSION" Type="Int32" Nullable="false" />
-    <Property Name="NUMERO_HABITACION" Type="Int16" />
     <NavigationProperty Name="DETALLE_ORDEN" Relationship="Self.FK_DETALLE_ORDEN_PENSION" FromRole="PENSION" ToRole="DETALLE_ORDEN" />
     <NavigationProperty Name="DETALLE_PASAJEROS" Relationship="Self.FK_DETALLE_PENSION_P" FromRole="PENSION" ToRole="DETALLE_PASAJEROS" />
     <NavigationProperty Name="DETALLE_PLATOS" Relationship="Self.FK_DETALLE_PLATOS_PENSION" FromRole="PENSION" ToRole="DETALLE_PLATOS" />
-    <NavigationProperty Name="HABITACION" Relationship="Self.FK_PENSION_HABITACION" FromRole="PENSION" ToRole="HABITACION" />
   </EntityType>
   <EntityType Name="PLATO">
     <Key>
@@ -345,6 +339,7 @@
     </Key>
     <Property Name="ID_PRODUCTO" Type="Int64" Nullable="false" />
     <Property Name="NOMBRE_PRODUCTO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PRECIO_PRODUCTO" Type="Int32" Nullable="false" />
     <Property Name="FECHA_VENCIMIENTO_PRODUCTO" Type="DateTime" />
     <Property Name="STOCK_PRODUCTO" Type="Int16" Nullable="false" />
     <Property Name="STOCK_CRITICO_PRODUCTO" Type="Int16" Nullable="false" />
@@ -353,7 +348,6 @@
     <Property Name="ID_FAMILIA" Type="Int16" Nullable="false" />
     <Property Name="RUT_PROVEEDOR" Type="Int32" Nullable="false" />
     <Property Name="ID_PRODUCTO_SEQ" Type="Int16" Nullable="false" />
-    <Property Name="PRECIO_PRODUCTO" Type="Int32" Nullable="false" />
     <NavigationProperty Name="DETALLE_PEDIDO" Relationship="Self.FK_DETALLE_PEDIDO_PRODUCTO" FromRole="PRODUCTO" ToRole="DETALLE_PEDIDO" />
     <NavigationProperty Name="DETALLE_RECEPCION" Relationship="Self.FK_DETALLE_RECEPCION_PRODUCTO" FromRole="PRODUCTO" ToRole="DETALLE_RECEPCION" />
     <NavigationProperty Name="FAMILIA" Relationship="Self.FK_PRODUCTO_FAMILIA" FromRole="PRODUCTO" ToRole="FAMILIA" />
@@ -466,7 +460,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_DETALLE_BOLETA_BOLETA">
-    <End Role="BOLETA" Type="Self.BOLETA" Multiplicity="1" />
+    <End Role="BOLETA" Type="Self.BOLETA" Multiplicity="0..1" />
     <End Role="DETALLE_BOLETA" Type="Self.DETALLE_BOLETA" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="BOLETA">
@@ -873,18 +867,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_PENSION_HABITACION">
-    <End Role="HABITACION" Type="Self.HABITACION" Multiplicity="0..1" />
-    <End Role="PENSION" Type="Self.PENSION" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="HABITACION">
-        <PropertyRef Name="NUMERO_HABITACION" />
-      </Principal>
-      <Dependent Role="PENSION">
-        <PropertyRef Name="NUMERO_HABITACION" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_NOTIFICACION_ORDEN">
     <End Role="ORDEN_COMPRA" Type="Self.ORDEN_COMPRA" Multiplicity="0..1" />
     <End Role="NOTIFICACION" Type="Self.NOTIFICACION" Multiplicity="*" />
@@ -1207,10 +1189,6 @@
     <AssociationSet Name="FK_HABITACION_TIPO_HABITACION" Association="Self.FK_HABITACION_TIPO_HABITACION">
       <End Role="TIPO_HABITACION" EntitySet="TIPO_HABITACION" />
       <End Role="HABITACION" EntitySet="HABITACION" />
-    </AssociationSet>
-    <AssociationSet Name="FK_PENSION_HABITACION" Association="Self.FK_PENSION_HABITACION">
-      <End Role="HABITACION" EntitySet="HABITACION" />
-      <End Role="PENSION" EntitySet="PENSION" />
     </AssociationSet>
     <AssociationSet Name="FK_NOTIFICACION_ORDEN" Association="Self.FK_NOTIFICACION_ORDEN">
       <End Role="ORDEN_COMPRA" EntitySet="ORDEN_COMPRA" />

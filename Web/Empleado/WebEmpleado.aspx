@@ -22,21 +22,30 @@
             
             <div class="row" style="margin-top: 20px;">
                 <div class="col-md-4">
+                    <asp:button runat="server" Text="Habitación" CssClass="btn btn-primary active  btn-lg btn-block login-button" data-toggle="collapse" data-target="#habitacion" OnClientClick="return false" />
+                    <div id="habitacion" class="collapse" style="margin-top: 10px;">
                     <asp:button runat="server" text="Asignar Habitación" ID="btnAsignarHabitacion" CssClass="btn btn-primary btn-lg btn-block login-button" style="font-size: 15px" OnClick="btnAsignarHabitacion_Click"/>
                     <asp:button runat="server" text="Reservas Pendientes" ID="btnRegistrarOrden" CssClass="btn btn-primary btn-lg btn-block login-button" style="font-size: 15px" OnClick="btnRegistrarOrden_Click" />
                     <asp:button runat="server" text="Crear Minuta" ID="btnMinuta" CssClass="btn btn-primary btn-lg btn-block login-button" style="font-size: 15px" OnClick="btnMinuta_Click" />
+                    </div>
                 </div>
                     
                 <div class="col-md-4">
-                    <asp:button runat="server" text="Crear Pedido" ID="btnCrearPedido" CssClass="btn btn-primary btn-lg btn-block login-button"  style="font-size: 15px" OnClick="btnCrearPedido_Click" />
-                    <asp:button runat="server" text="Recepcionar Pedido" ID="btnRecepcionarPedido" CssClass="btn btn-primary btn-lg btn-block login-button" style="font-size: 15px" OnClick="btnRecepcionarPedido_Click" />
-                    <asp:button runat="server" text="Historial de Pedidos" ID="btnHistorial" cssClass="btn btn-primary btn-lg btn-block login-button" style="font-size: 15px" OnClick="btnHistorial_Click"   />
-                </div>
+                      <asp:button runat="server" Text="Pedidos" CssClass="btn btn-primary active  btn-lg btn-block login-button" data-toggle="collapse" data-target="#pedidos" OnClientClick="return false" />
+                    <div id="pedidos" class="collapse" style="margin-top: 10px;">
+                     <asp:button runat="server" text="Crear Pedido" ID="btnCrearPedido" CssClass="btn btn-primary btn-lg btn-block login-button"  style="font-size: 15px" OnClick="btnCrearPedido_Click" />
+                     <asp:button runat="server" text="Recepcionar Pedido" ID="btnRecepcionarPedido" CssClass="btn btn-primary btn-lg btn-block login-button" style="font-size: 15px" OnClick="btnRecepcionarPedido_Click" />
+                     <asp:button runat="server" text="Historial de Pedidos" ID="btnHistorial" cssClass="btn btn-primary btn-lg btn-block login-button" style="font-size: 15px" OnClick="btnHistorial_Click"   />
+                    </div>
+                  </div>
 
                 <div class="col-md-4">
-                    <asp:button runat="server" text="Crear Factura" ID="btnCrearFactura" cssClass="btn btn-primary btn-lg btn-block login-button" style="font-size: 15px" OnClick="btnCrearFactura_Click" />
-                    <asp:button runat="server" text="Facturas Emitidas" ID="btnVerFacturas" CssClass="btn btn-primary btn-lg btn-block login-button" style="font-size: 15px" OnClick="btnVerFacturas_Click" />
-                </div>
+                     <asp:button runat="server" Text="Factura" CssClass="btn btn-primary active  btn-lg btn-block login-button" data-toggle="collapse" data-target="#factura" OnClientClick="return false" />
+                    <div id="factura" class="collapse" style="margin-top: 10px;">
+                     <asp:button runat="server" text="Crear Factura" ID="btnCrearFactura" cssClass="btn btn-primary btn-lg btn-block login-button" style="font-size: 15px" OnClick="btnCrearFactura_Click" />
+                     <asp:button runat="server" text="Facturas Emitidas" ID="btnVerFacturas" CssClass="btn btn-primary btn-lg btn-block login-button" style="font-size: 15px" OnClick="btnVerFacturas_Click" />
+                    </div>
+                  </div>
             </div>
         </div>
     </div>

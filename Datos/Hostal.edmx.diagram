@@ -4,40 +4,40 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="da780357ce974f689c826b16eee8652c" Name="Diagram1" ZoomLevel="64">
-        <EntityTypeShape EntityType="Model.BOLETA" Width="1.5" PointX="7.5" PointY="28.125" IsExpanded="true" />
+      <Diagram DiagramId="4c739c63355b4eb6b60dcf585d8a6c42" Name="Diagram1">
+        <EntityTypeShape EntityType="Model.BOLETA" Width="1.5" PointX="7.5" PointY="27.875" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.CATEGORIA" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.CATEGORIA_HABITACION" Width="1.5" PointX="0.75" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.CATEGORIA_HABITACION" Width="1.5" PointX="3.75" PointY="12.5" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.CLIENTE" Width="1.5" PointX="3" PointY="18.625" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.COMUNA" Width="1.5" PointX="0.75" PointY="16.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.DETALLE_BOLETA" Width="1.5" PointX="9.75" PointY="33.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.DETALLE_BOLETA" Width="1.5" PointX="9.75" PointY="33.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.DETALLE_FACTURA" Width="1.5" PointX="8.25" PointY="19.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.DETALLE_HABITACION" Width="1.5" PointX="5.25" PointY="15.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.DETALLE_ORDEN" Width="1.5" PointX="7.5" PointY="31.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.DETALLE_PASAJEROS" Width="1.5" PointX="10.5" PointY="30" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.DETALLE_PEDIDO" Width="1.5" PointX="13.5" PointY="20.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.DETALLE_PLATOS" Width="1.5" PointX="13.5" PointY="14.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.DETALLE_RECEPCION" Width="1.5" PointX="13.5" PointY="17.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.DETALLE_HABITACION" Width="1.5" PointX="8.25" PointY="16.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.DETALLE_ORDEN" Width="1.5" PointX="7.5" PointY="32.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.DETALLE_PASAJEROS" Width="1.5" PointX="10.5" PointY="29.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.DETALLE_PEDIDO" Width="1.5" PointX="16.5" PointY="22.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.DETALLE_PLATOS" Width="1.5" PointX="14.5" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.DETALLE_RECEPCION" Width="1.5" PointX="16.5" PointY="18.875" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.EMPLEADO" Width="1.5" PointX="3" PointY="24.125" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.FACTURA" Width="1.5" PointX="11.25" PointY="21.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.FAMILIA" Width="1.5" PointX="9" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.FAMILIA" Width="1.5" PointX="12" PointY="15" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.GIRO" Width="1.5" PointX="0.75" PointY="23.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.HABITACION" Width="1.5" PointX="3" PointY="5.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.HUESPED" Width="1.5" PointX="5.25" PointY="29.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.LOG_ERRORES" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.NOTIFICACION" Width="1.5" PointX="16.5" PointY="19.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.ORDEN_COMPRA" Width="1.5" PointX="8.25" PointY="15.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.HABITACION" Width="1.5" PointX="6" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.HUESPED" Width="1.5" PointX="5.25" PointY="29" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.LOG_ERRORES" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.NOTIFICACION" Width="1.5" PointX="19.5" PointY="20.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.ORDEN_COMPRA" Width="1.5" PointX="11.25" PointY="17.5" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.PAIS" Width="1.5" PointX="1.5" PointY="10.875" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.PEDIDO" Width="1.5" PointX="5.25" PointY="24.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.PENSION" Width="1.5" PointX="8.25" PointY="36.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.PENSION" Width="1.5" PointX="8.25" PointY="36.625" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.PLATO" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.PRODUCTO" Width="1.5" PointX="11.25" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.PRODUCTO" Width="1.5" PointX="14.25" PointY="18.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.PROVEEDOR" Width="1.5" PointX="6" PointY="19.125" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.RECEPCION" Width="1.5" PointX="8.25" PointY="24.625" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.REGION" Width="1.5" PointX="1.5" PointY="13.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.TIPO_HABITACION" Width="1.5" PointX="0.75" PointY="7.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.TIPO_PLATO" Width="1.5" PointX="0.75" PointY="26.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.TIPO_PROVEEDOR" Width="1.5" PointX="3.75" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.TIPO_HABITACION" Width="1.5" PointX="3.75" PointY="15.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.TIPO_PLATO" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.TIPO_PROVEEDOR" Width="1.5" PointX="3.75" PointY="10" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.USUARIO" Width="1.5" PointX="0.75" PointY="19.5" IsExpanded="true" />
         <AssociationConnector Association="Model.FK_BOLETA_EMPLEADO" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_BOLETA_HUESPED" ManuallyRouted="false" />
@@ -75,7 +75,6 @@
         <AssociationConnector Association="Model.FK_RECEPCION_EMPLEADO" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_PRODUCTO_FAMILIA" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_HABITACION_TIPO_HABITACION" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK_PENSION_HABITACION" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_NOTIFICACION_ORDEN" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_NOTIFICACION_PEDIDO" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_NOTIFICACION_PRODUCTO" ManuallyRouted="false" />
