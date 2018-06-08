@@ -30,7 +30,7 @@
             <div class="main-center">
 	            <div class="row">
 	                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
-		                <h1>No ha realizado ninguna reserva</h1>
+		                <h1>No hay reservas pendientes</h1>
 	                </div>
                 </div>
             </div>

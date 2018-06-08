@@ -65,44 +65,31 @@ namespace Web.Empleado
 
             try
             {
+                //Cargando Tipo de Plato
+
                 //Cargando DDL Plato
                 Service1 service = new Service1();
 
-                string plato = service.ListarPlato();
-                XmlSerializer ser2 = new XmlSerializer(typeof(Modelo.PlatoCollection));
-                StringReader reader2 = new StringReader(plato);
-                Modelo.PlatoCollection coleccionPlato = (Modelo.PlatoCollection)ser2.Deserialize(reader2);
+                string datos = service.ListarTipoPlato();
+                XmlSerializer ser2 = new XmlSerializer(typeof(Modelo.TipoPlatoCollection));
+                StringReader reader2 = new StringReader(datos);
+                Modelo.TipoPlatoCollection coleccionTipoPlato = (Modelo.TipoPlatoCollection)ser2.Deserialize(reader2);
                 reader2.Close();
 
                 txtPrecio.ReadOnly = true;
 
                 if (!IsPostBack)
                 {
-                    ddlDesayuno.DataSource = coleccionPlato;
-                    ddlDesayuno.DataTextField = "NombreYPrecio";
-                    ddlDesayuno.DataValueField = "ID_PLATO";
-                    ddlDesayuno.DataBind();
+                    ddlTipo.DataSource = coleccionTipoPlato;
+                    ddlTipo.DataTextField = "NOMBRE_TIPO_PLATO";
+                    ddlTipo.DataValueField = "ID_TIPO_PLATO";
+                    ddlTipo.DataBind();
 
-                    ddlDesayuno.SelectedIndex = 0;
-
-                    ddlAlmuerzo.DataSource = coleccionPlato;
-                    ddlAlmuerzo.DataTextField = "NombreYPrecio";
-                    ddlAlmuerzo.DataValueField = "ID_PLATO";
-                    ddlAlmuerzo.DataBind();
-
-                    ddlAlmuerzo.SelectedIndex = 0;
-
-                    ddlCena.DataSource = coleccionPlato;
-                    ddlCena.DataTextField = "NombreYPrecio";
-                    ddlCena.DataValueField = "ID_PLATO";
-                    ddlCena.DataBind();
-
-                    ddlCena.SelectedIndex = 0;
                     //segun el valor seleccionado en el anterior DDL, hara una busqueda para cargar
                     //todos los datos
                     Modelo.Plato plato2 = new Modelo.Plato();
 
-                    plato2.ID_PLATO = short.Parse(ddlDesayuno.SelectedValue);
+                    //plato2.ID_PLATO = short.Parse(ddlDesayuno.SelectedValue);
 
                     XmlSerializer sr = new XmlSerializer(typeof(Modelo.Plato));
                     StringWriter writer = new StringWriter();

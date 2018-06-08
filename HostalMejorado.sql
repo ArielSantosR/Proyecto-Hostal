@@ -1531,3 +1531,32 @@ BEGIN
   INTO :new.ID_DETALLE_PASAJEROS
   FROM dual;
 END;
+
+INSERT INTO CATEGORIA VALUES(1, 'Bronce');
+INSERT INTO CATEGORIA VALUES(2, 'Plata');
+INSERT INTO CATEGORIA VALUES(3, 'Oro');
+
+INSERT INTO TIPO_PLATO VALUES(1, 'Desayuno');
+INSERT INTO TIPO_PLATO VALUES(2, 'Almuerzo');
+INSERT INTO TIPO_PLATO VALUES(3, 'Once');
+
+--Valores seleccionados al azar, modificar si es necesario
+INSERT INTO PLATO VALUES(NULL, 'Pollo salteado con espárragos y limón', 4500, 3, 3);
+INSERT INTO PLATO VALUES(NULL, 'Omelette con vegetales', 5000, 3, 1);
+INSERT INTO PLATO VALUES(NULL, 'Sopa de pescado', 2200, 1, 2);
+INSERT INTO PLATO VALUES(NULL, 'Consomé de pollo', 3700, 1, 2);
+INSERT INTO PLATO VALUES(NULL, 'Lomito a la parrilla', 5400, 2, 2);
+INSERT INTO PLATO VALUES(NULL, 'Churrasco de lomito', 3800, 2, 2);
+INSERT INTO PLATO VALUES(NULL, 'Fajitas de pollo', 2500, 1, 2);
+INSERT INTO PLATO VALUES(NULL, 'Avena con fruta', 2500, 3, 1);
+INSERT INTO PLATO VALUES(NULL, 'Croissants con almendras', 3300, 3, 1);
+INSERT INTO PLATO VALUES(NULL, 'Croissants con capuccino', 4000, 3, 1);
+INSERT INTO PLATO VALUES(NULL, 'Queque de zanahoria', 2000, 1, 1);
+INSERT INTO PLATO VALUES(NULL, 'Risotto con calabaza', 3300, 1, 3);
+INSERT INTO PLATO VALUES(NULL, 'Salmón con agregado', 2800, 2, 3);
+INSERT INTO PLATO VALUES(NULL, 'Espagueti', 1400, 1, 3);
+INSERT INTO PLATO VALUES(NULL, 'Sofrito de camarones y brócoli', 5000, 3, 3);
+INSERT INTO PLATO VALUES(NULL, 'Pasta de pesto', 2000, 1, 3);
+
+
+
