@@ -284,6 +284,12 @@ namespace Datos
             }
         }
 
-
+        public List<PLATO> listaPlatoTipo(TIPO_PLATO tipo)
+        {
+            var lista = (from consulta in ent.PLATO
+                         where consulta.ID_TIPO_PLATO == tipo.ID_TIPO_PLATO
+                         select consulta).ToList();
+            return lista;
+        }
     }
 }

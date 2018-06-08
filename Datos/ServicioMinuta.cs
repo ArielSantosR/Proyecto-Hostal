@@ -25,5 +25,12 @@ namespace Datos
             return lista;
         }
 
+        public bool AgregarDetalleMinuta(DETALLE_PLATOS detalle)
+        {
+            ent.DETALLE_PLATOS.Add(detalle);
+            ent.SaveChanges();
+            return true;
+        }
+
     }
 }
