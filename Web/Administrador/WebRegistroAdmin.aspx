@@ -33,7 +33,14 @@
              $('#proveedor').find(':input').prop('disabled', true);
              $("#empleado").collapse('show');
              $('#empleado').find(':input').prop('disabled', false);
-         } 
+         } else if (tipo == "Administrador") {
+             $("#cliente").collapse('hide');
+             $('#cliente').find(':input').prop('disabled', true);
+             $("#proveedor").collapse('hide');
+             $('#proveedor').find(':input').prop('disabled', true);
+             $("#empleado").collapse('show');
+             $('#empleado').find(':input').prop('disabled', false);
+         }
      }
     </script>
 </asp:Content>
