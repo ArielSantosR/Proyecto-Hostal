@@ -56,67 +56,84 @@ namespace Web.Empleado
                 Session["Usuario"] = value;
             }
         }
+
+        public List<DetallePlato> MiSesionM
+        {
+            get
+            {
+                if (Session["DetallePlato"] == null)
+                {
+                    Session["DetallePlato"] = new List<DetallePlato>();
+                }
+                return (List<DetallePlato>)Session["DetallePlato"];
+            }
+            set
+            {
+                Session["DetallePlato"] = value;
+            }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             error.Text = "";
             exito.Text = "";
             alerta_exito.Visible = false;
             alerta.Visible = false;
+            btnLimpiar.CausesValidation = false;
+            btnLimpiar.UseSubmitBehavior = false;
+            btnVer.CausesValidation = false;
+            btnVer.UseSubmitBehavior = false;
 
             try
             {
                 //Cargando Tipo de Plato
-
-                //Cargando DDL Plato
                 Service1 service = new Service1();
 
-                string datos = service.ListarTipoPlato();
+                string tipoPlato = service.ListarTipoPlato();
                 XmlSerializer ser2 = new XmlSerializer(typeof(Modelo.TipoPlatoCollection));
-                StringReader reader2 = new StringReader(datos);
-                Modelo.TipoPlatoCollection coleccionTipoPlato = (Modelo.TipoPlatoCollection)ser2.Deserialize(reader2);
+                StringReader reader2 = new StringReader(tipoPlato);
+                Modelo.TipoPlatoCollection coleccionProveedor = (Modelo.TipoPlatoCollection)ser2.Deserialize(reader2);
                 reader2.Close();
 
                 txtPrecio.ReadOnly = true;
 
                 if (!IsPostBack)
                 {
-                    ddlTipo.DataSource = coleccionTipoPlato;
+                    ddlTipo.DataSource = coleccionProveedor;
                     ddlTipo.DataTextField = "NOMBRE_TIPO_PLATO";
                     ddlTipo.DataValueField = "ID_TIPO_PLATO";
                     ddlTipo.DataBind();
 
+                    ddlTipo.SelectedIndex = 0;
+
                     //segun el valor seleccionado en el anterior DDL, hara una busqueda para cargar
                     //todos los datos
-                    Modelo.Plato plato2 = new Modelo.Plato();
+                    Modelo.TipoPlato tipo_plato = new Modelo.TipoPlato();
 
-                    //plato2.ID_PLATO = short.Parse(ddlDesayuno.SelectedValue);
+                    tipo_plato.ID_TIPO_PLATO = short.Parse(ddlTipo.SelectedValue);
 
-                    XmlSerializer sr = new XmlSerializer(typeof(Modelo.Plato));
+                    XmlSerializer sr = new XmlSerializer(typeof(Modelo.TipoPlato));
                     StringWriter writer = new StringWriter();
-                    sr.Serialize(writer, plato2);
+                    sr.Serialize(writer, tipo_plato);
 
-                    //Ya con los datos, al fin puede hacer una busqueda en Cascada en el DDL
-                    
-                   // string platos = service.ListarPlato(writer.ToString());
-                    XmlSerializer ser = new XmlSerializer(typeof(Modelo.Plato));
-                    //StringReader reader = new StringReader(productos);
-                    //Modelo.ProductoCollection coleccionProducto = (Modelo.ProductoCollection)ser.Deserialize(reader);
-                    //reader.Close();
+                    string platos = service.ListarPlatoPorTipo(writer.ToString());
+                    XmlSerializer ser = new XmlSerializer(typeof(Modelo.PlatoCollection));
+                    StringReader reader = new StringReader(platos);
+                    Modelo.PlatoCollection coleccionProducto = (Modelo.PlatoCollection)ser.Deserialize(reader);
+                    reader.Close();
 
-                    /*ddlProducto.DataSource = coleccionProducto;
-                    ddlProducto.DataTextField = "NombreYPrecio";
-                    ddlProducto.DataValueField = "ID_PRODUCTO";
-                    ddlProducto.DataBind();*/
+                    ddlPlato.DataSource = coleccionProducto;
+                    ddlPlato.DataTextField = "NombreYPrecio";
+                    ddlPlato.DataValueField = "ID_PLATO";
+                    ddlPlato.DataBind();
 
                     //Para funcionar requiere que el update panel tenga el Modo Condicional
                     UpdatePanel2.Update();
 
-                    MiSesionD = null;
+                    MiSesionM = null;
+                    btnLimpiar.Enabled = false;
+                    btnVer.Enabled = false;
                 }
-                gvDetalle.DataSource = MiSesionD;
-                gvDetalle.DataBind();
-
-                UpdatePanel3.Update();
             }
             catch (Exception ex)
             {
@@ -127,99 +144,182 @@ namespace Web.Empleado
 
         }
 
-        protected void btnAgregar_Click(object sender, EventArgs e)
-        {
-            
-        }
-
-        protected void btnCrear_Click(object sender, EventArgs e)
+        protected void btnRegistrar_Click(object sender, EventArgs e)
         {
             try
             {
-                if (MiSesionD.Count > 0)
+                short cantidad = 0;
+
+                if (txtCantidad.Text != string.Empty)
                 {
-                    Modelo.Empleado empleado = new Modelo.Empleado();
-                    empleado.ID_USUARIO = MiSesion.ID_USUARIO;
-
-                    //Si el ID de empleado es encontrado, pasar al siguiente paso
-                    Service1 s = new Service1();
-                    XmlSerializer sr = new XmlSerializer(typeof(Modelo.Empleado));
-                    StringWriter writer = new StringWriter();
-                    sr.Serialize(writer, empleado);
-                    writer.Close();
-
-                    Modelo.Empleado empleado2 = s.buscarIDE(writer.ToString());
-
-                    if (empleado2 != null)
+                    if (short.TryParse(txtCantidad.Text, out cantidad))
                     {
-
-                        Modelo.Minuta minuta = new Modelo.Minuta();
-                        minuta.NOMBRE_PENSION = txtNombreMinuta.Text;
-                        minuta.NUMERO_HABITACION = 0;
-                        minuta.VALOR_PENSION = int.Parse(txtPrecio.Text);
-                        
-                        
-
-                        XmlSerializer sr2 = new XmlSerializer(typeof(Modelo.Minuta));
-                        StringWriter writer2 = new StringWriter();
-                        sr2.Serialize(writer2, minuta);
-
-                        if (s.AgregarPlato(writer2.ToString()))
+                        if (cantidad > 0)
                         {
-                            bool v_exito = true;
-
-                            foreach (DetallePedido d in MiSesionD)
+                            if (ddlPlato.SelectedValue != string.Empty)
                             {
-                                Modelo.DetallePedido detalle = new Modelo.DetallePedido();
-                                detalle.CANTIDAD = d.CANTIDAD;
-                                detalle.ID_PRODUCTO = d.ID_PRODUCTO;
+                                Modelo.DetallePlato detalle = new Modelo.DetallePlato();
+                                detalle.CANTIDAD = cantidad;
+                                detalle.ID_PLATO = short.Parse(ddlPlato.SelectedValue);
 
-                                XmlSerializer sr3 = new XmlSerializer(typeof(Modelo.DetallePedido));
-                                StringWriter writer3 = new StringWriter();
-                                sr3.Serialize(writer3, detalle);
+                                bool existe = false;
 
-                                if (!s.AgregarDetallePedido(writer3.ToString()))
+                                foreach (DetallePlato d in MiSesionM)
                                 {
-                                    v_exito = false;
+                                    if (detalle.ID_PLATO == d.ID_PLATO)
+                                    {
+                                        existe = true;
+                                    }
                                 }
-                            }
-
-                            if (v_exito)
-                            {
-                                if (MiSesion.TIPO_USUARIO.Equals("Empleado"))
+                                if (existe)
                                 {
-                                    Response.Write("<script language='javascript'>window.alert('Pedido Realizado, el administrador debe confirmar su envío');window.location='../Empleado/WebHistorialPedidos.aspx';</script>");
+                                    alerta_exito.Visible = false;
+                                    error.Text = "Este Plato ya ha sido agregado";
+                                    alerta.Visible = true;
                                 }
                                 else
                                 {
-                                    Response.Write("<script language='javascript'>window.alert('Pedido Realizado, debe confirmar su envío al Proveedor');window.location='../Administrador/WebVerPedido.aspx';</script>");
+                                    exito.Text = "Plato Agregado a la Lista.";
+                                    alerta_exito.Visible = true;
+                                    alerta.Visible = false;
+                                    MiSesionM.Add(detalle);
+                                    btnLimpiar.Enabled = true;
+                                    btnVer.Enabled = true;
+                                    txtCantidad.Text = "";
+                                    txtPrecio.Text = "";
+                                    gvDetalle.DataSource = MiSesionM;
+                                    gvDetalle.DataBind();
+                                    ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modal", "$('#exampleModal2').modal();", true);
                                 }
                             }
                             else
                             {
                                 alerta_exito.Visible = false;
-                                error.Text = "No se ha podido hacer el Pedido";
+                                error.Text = "Debe seleccionar un Plato ";
                                 alerta.Visible = true;
                             }
                         }
                         else
                         {
                             alerta_exito.Visible = false;
-                            error.Text = "No se ha podido hacer el Pedido";
+                            error.Text = "Debe Ingresar una cantidad superior a 0";
                             alerta.Visible = true;
                         }
+
                     }
                     else
                     {
                         alerta_exito.Visible = false;
-                        error.Text = "Error, no se pudo encontrar al Empleado";
+                        error.Text = "Datos Ingresados incorrectamente, verifique que ha ingresado números correctamente";
                         alerta.Visible = true;
                     }
                 }
                 else
                 {
                     alerta_exito.Visible = false;
-                    error.Text = "Error, debe ingresar objetos a la lista para Registrar una Orden";
+                    error.Text = "Debe llenar todos los datos";
+                    alerta.Visible = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                alerta_exito.Visible = false;
+                error.Text = "Excepción: " + ex.Message;
+                alerta.Visible = true;
+            }
+        }
+
+        protected void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (MiSesionM.Count > 0)
+                {
+                    if (txtNombreMinuta.Text != string.Empty)
+                    {
+                        Modelo.Pension pension = new Modelo.Pension();
+                        pension.NOMBRE_PENSION = txtNombreMinuta.Text;
+                        pension.VALOR_PENSION = 0;
+
+                        Service1 s = new Service1();
+                        XmlSerializer sr = new XmlSerializer(typeof(Modelo.Plato));
+                        
+
+                        //Desayuno VIP
+                        foreach (DetallePlato d in MiSesionM)
+                        {
+                            Modelo.Plato p = new Modelo.Plato();
+                            p.ID_PLATO = d.ID_PLATO;
+                            StringWriter writer = new StringWriter();
+                            sr.Serialize(writer, p);
+                            Modelo.Plato plato2 = s.ObtenerPlato(writer.ToString());
+                            pension.VALOR_PENSION = pension.VALOR_PENSION + (plato2.PRECIO_PLATO * d.CANTIDAD);
+                        }
+
+                        if (pension.VALOR_PENSION > 0)
+                        {
+                            XmlSerializer sr2 = new XmlSerializer(typeof(Modelo.Pension));
+                            StringWriter writer2 = new StringWriter();
+                            sr2.Serialize(writer2, pension);
+                            writer2.Close();
+                            
+                            if (s.AgregarMinuta(writer2.ToString()))
+                            {
+                                bool v_exito = true;
+
+                                foreach (DetallePlato d in MiSesionM)
+                                {
+                                    Modelo.DetallePlato detalle = new Modelo.DetallePlato();
+                                    detalle.CANTIDAD = d.CANTIDAD;
+                                    detalle.ID_PLATO = d.ID_PLATO;
+
+                                    XmlSerializer sr3 = new XmlSerializer(typeof(Modelo.DetallePlato));
+                                    StringWriter writer3 = new StringWriter();
+                                    sr3.Serialize(writer3, detalle);
+
+                                    if (!s.AgregarDetalleMinuta(writer3.ToString()))
+                                    {
+                                        v_exito = false;
+                                    }
+                                }
+
+                                if (v_exito)
+                                {
+                                    Response.Write("<script language='javascript'>window.alert('Minuta Creada');window.location='../Empleado/WebVerMinuta.aspx';</script>");
+                                }
+                                else
+                                {
+                                    alerta_exito.Visible = false;
+                                    error.Text = "No se ha podido crear la minuta";
+                                    alerta.Visible = true;
+                                }
+                                
+                            }
+                            else
+                            {
+                                alerta_exito.Visible = false;
+                                error.Text = "No se ha podido añadir el detalle de Minuta";
+                                alerta.Visible = true;
+                            }
+                        }
+                        else
+                        {
+                            alerta_exito.Visible = false;
+                            error.Text = "Precio no válido";
+                            alerta.Visible = true;
+                        }
+                    }
+                    else
+                    {
+                        alerta_exito.Visible = false;
+                        error.Text = "Debe ponerle un nombre a la minuta";
+                        alerta.Visible = true;
+                    }
+                }
+                else
+                {
+                    alerta_exito.Visible = false;
+                    error.Text = "debe ingresar platos para poder hacer una Minuta";
                     alerta.Visible = true;
                 }
             }
@@ -231,58 +331,9 @@ namespace Web.Empleado
             }
         }
 
-        protected void ddlProducto_SelectedIndexChanged(object sender, EventArgs e)
-        {
-           /* try
-            {
-                Service1 service = new Service1();
-                //segun el valor seleccionado en el anterior DDL, hara una busqueda para cargar
-                //todos los datos
-                Modelo.Proveedor proveedor2 = new Modelo.Proveedor();
-                proveedor2.RUT_PROVEEDOR = int.Parse(ddlRut.SelectedValue);
-
-                XmlSerializer sr = new XmlSerializer(typeof(Modelo.Proveedor));
-                StringWriter writer = new StringWriter();
-                sr.Serialize(writer, proveedor2);
-
-                //Ya con los datos, al fin puede hacer una busqueda en Cascada en el DDL
-
-                string productos = service.ListarProductosProveedor(writer.ToString());
-                XmlSerializer ser = new XmlSerializer(typeof(Modelo.ProductoCollection));
-                StringReader reader = new StringReader(productos);
-                Modelo.ProductoCollection coleccionProducto = (Modelo.ProductoCollection)ser.Deserialize(reader);
-                reader.Close();
-
-                ddlProducto.DataSource = coleccionProducto;
-                ddlProducto.DataTextField = "NombreYPrecio";
-                ddlProducto.DataValueField = "ID_PRODUCTO";
-                ddlProducto.DataBind();
-
-                //Para funcionar requiere que el update panel tenga el Modo Condicional
-                txtCantidad.Text = "";
-                txtPrecio.Text = "";
-                UpdatePanel1.Update();
-                UpdatePanel2.Update();
-
-                MiSesionD.Clear();
-
-                gvDetalle.DataSource = MiSesionD;
-                gvDetalle.DataBind();
-
-                UpdatePanel3.Update();
-            }
-            catch (Exception ex)
-            {
-                alerta_exito.Visible = false;
-                error.Text = "Excepción: " + ex.ToString();
-                alerta.Visible = true;
-            }
-            */
-        }
-
         protected void txtCantidad_TextChanged(object sender, EventArgs e)
         {
-            /*try
+            try
             {
                 int cantidad = 0;
 
@@ -291,17 +342,17 @@ namespace Web.Empleado
                     Service1 service = new Service1();
                     //segun el valor seleccionado en el anterior DDL, hara una busqueda para cargar
                     //todos los datos
-                    Modelo.Producto producto = new Modelo.Producto();
-                    producto.ID_PRODUCTO = long.Parse(ddlProducto.SelectedValue);
+                    Modelo.Plato plato = new Modelo.Plato();
+                    plato.ID_PLATO = short.Parse(ddlPlato.SelectedValue);
 
-                    XmlSerializer sr = new XmlSerializer(typeof(Modelo.Producto));
+                    XmlSerializer sr = new XmlSerializer(typeof(Modelo.Plato));
                     StringWriter writer = new StringWriter();
-                    sr.Serialize(writer, producto);
+                    sr.Serialize(writer, plato);
 
                     //Una vez encuentra sus datos los carga en una segunda variable
-                    Producto producto2 = service.ObtenerProducto(writer.ToString());
+                    Plato plato2 = service.ObtenerPlato(writer.ToString());
 
-                    txtPrecio.Text = "$" + producto2.PRECIO_PRODUCTO * cantidad;
+                    txtPrecio.Text = "$" + plato2.PRECIO_PLATO * cantidad;
                 }
                 else
                 {
@@ -317,46 +368,33 @@ namespace Web.Empleado
                 error.Text = "Excepción: " + ex.ToString();
                 alerta.Visible = true;
             }
-            */
         }
-        public List<DetallePedido> MiSesionD
-        {
-            get
-            {
-                if (Session["ListaDetalle"] == null)
-                {
-                    Session["ListaDetalle"] = new List<DetallePedido>();
-                }
-                return (List<DetallePedido>)Session["ListaDetalle"];
-            }
-            set
-            {
-                Session["ListaDetalle"] = value;
-            }
-        }
-        //////
-        /*
-          protected void btnEliminar_Click(object sender, EventArgs e)
+        
+        protected void btnEliminar_Click(object sender, EventArgs e)
         {
             try
             {
                 //Lee los valores del LinkButton, primero usa la clase LinkButton para 
                 //Transformar los datos de Sender, luego los lee y los asigna a una variable
                 LinkButton btn = (LinkButton)(sender);
-                long ID_PRODUCTO = long.Parse(btn.CommandArgument);
+                short ID_PLATO = short.Parse(btn.CommandArgument);
 
-                foreach (DetallePedido d in MiSesionD.ToList())
+                foreach (DetallePlato d in MiSesionM.ToList())
                 {
-                    if (d.ID_PRODUCTO == ID_PRODUCTO)
+                    if (d.ID_PLATO == ID_PLATO)
                     {
-                        MiSesionD.Remove(d);
+                        MiSesionM.Remove(d);
                     }
                 }
 
-                gvDetalle.DataSource = MiSesionD;
-                gvDetalle.DataBind();
+                if (MiSesionM.Count == 0)
+                {
+                    btnVer.Enabled = false;
+                    btnLimpiar.Enabled = false;
+                }
 
-                UpdatePanel3.Update();
+                gvDetalle.DataSource = MiSesionM;
+                gvDetalle.DataBind();
             }
             catch (Exception ex)
             {
@@ -365,13 +403,58 @@ namespace Web.Empleado
                 alerta.Visible = true;
             }
         }
-         */
 
+        protected void btnVer_Click(object sender, EventArgs e)
+        {
+            ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modal", "$('#exampleModal2').modal();", true);
+        }
 
+        protected void ddlTipo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                Service1 service = new Service1();
+                //segun el valor seleccionado en el anterior DDL, hara una busqueda para cargar
+                //todos los datos
+                Modelo.TipoPlato tipo_plato = new Modelo.TipoPlato();
 
+                tipo_plato.ID_TIPO_PLATO = short.Parse(ddlTipo.SelectedValue);
 
+                XmlSerializer sr = new XmlSerializer(typeof(Modelo.TipoPlato));
+                StringWriter writer = new StringWriter();
+                sr.Serialize(writer, tipo_plato);
 
+                string platos = service.ListarPlatoPorTipo(writer.ToString());
+                XmlSerializer ser = new XmlSerializer(typeof(Modelo.PlatoCollection));
+                StringReader reader = new StringReader(platos);
+                Modelo.PlatoCollection coleccionProducto = (Modelo.PlatoCollection)ser.Deserialize(reader);
+                reader.Close();
 
+                ddlPlato.DataSource = coleccionProducto;
+                ddlPlato.DataTextField = "NombreYPrecio";
+                ddlPlato.DataValueField = "ID_PLATO";
+                ddlPlato.DataBind();
+
+                //Para funcionar requiere que el update panel tenga el Modo Condicional
+                txtCantidad.Text = "";
+                txtPrecio.Text = "";
+                UpdatePanel1.Update();
+                UpdatePanel2.Update();
+
+                btnLimpiar.Enabled = false;
+                btnVer.Enabled = false;
+                MiSesionM.Clear();
+
+                gvDetalle.DataSource = MiSesionM;
+                gvDetalle.DataBind();
+            }
+            catch (Exception ex)
+            {
+                alerta_exito.Visible = false;
+                error.Text = "Excepción: " + ex.ToString();
+                alerta.Visible = true;
+            }
+        }
     }
 }
  

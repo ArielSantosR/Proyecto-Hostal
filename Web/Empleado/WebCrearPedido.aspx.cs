@@ -57,6 +57,8 @@ namespace Web.Empleado
             alerta.Visible = false;
             btnLimpiar.CausesValidation = false;
             btnLimpiar.UseSubmitBehavior = false;
+            btnVer.CausesValidation = false;
+            btnVer.UseSubmitBehavior = false;
 
             try
             {
@@ -70,7 +72,7 @@ namespace Web.Empleado
                 reader2.Close();
 
                 txtPrecio.ReadOnly = true;
-
+               
                 if (!IsPostBack)
                 {
                     ddlRut.DataSource = coleccionProveedor;
@@ -107,6 +109,8 @@ namespace Web.Empleado
                     UpdatePanel2.Update();
 
                     MiSesionD = null;
+                    btnLimpiar.Enabled = false;
+                    btnVer.Enabled = false;
                 }
                 CargarTabla(MiSesionD);
                 
@@ -145,7 +149,6 @@ namespace Web.Empleado
                                     if (detalle.ID_PRODUCTO == d.ID_PRODUCTO)
                                     {
                                         existe = true;
-
                                     }
                                 }
                                 if (existe)
@@ -160,6 +163,11 @@ namespace Web.Empleado
                                     alerta_exito.Visible = true;
                                     alerta.Visible = false;
                                     MiSesionD.Add(detalle);
+                                    btnLimpiar.Enabled = true;
+                                    btnVer.Enabled = true;
+                                    txtCantidad.Text = "";
+                                    txtPrecio.Text = "";
+                                    ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modal", "$('#exampleModal2').modal();", true);
                                 }
 
                                 
@@ -394,6 +402,8 @@ namespace Web.Empleado
                 UpdatePanel1.Update();
                 UpdatePanel2.Update();
 
+                btnLimpiar.Enabled = false;
+                btnVer.Enabled = false;
                 MiSesionD.Clear();
 
                 CargarTabla(MiSesionD);
@@ -460,6 +470,12 @@ namespace Web.Empleado
                     }
                 }
 
+                if (MiSesionD.Count == 0)
+                {
+                    btnLimpiar.Enabled = false;
+                    btnVer.Enabled = false;
+                }
+
                 CargarTabla(MiSesionD);
             }
             catch (Exception ex)
@@ -468,6 +484,11 @@ namespace Web.Empleado
                 error.Text = "Excepción: " + ex.ToString();
                 alerta.Visible = true;
             }
+        }
+
+        protected void btnVer_Click(object sender, EventArgs e)
+        {
+            ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modal", "$('#exampleModal2').modal();", true);
         }
     }
 }

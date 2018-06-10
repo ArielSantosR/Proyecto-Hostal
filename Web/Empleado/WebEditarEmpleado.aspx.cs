@@ -15,6 +15,9 @@ namespace Web.Empleado {
                     if (MiSesion.TIPO_USUARIO.Equals(Tipo_Usuario.Administrador.ToString()) &&
                     MiSesion.ESTADO.Equals(Estado_Usuario.Habilitado.ToString())) {
                         MasterPageFile = "~/Administrador/AdminM.Master";
+                        Modelo.Empleado emp = new Modelo.Empleado();
+                        emp.BuscarEmpleado(MiSesion.ID_USUARIO);
+                        SesionEmp = emp;
                     }
                     else if (MiSesion.TIPO_USUARIO.Equals(Tipo_Usuario.Empleado.ToString()) &&
                     MiSesion.ESTADO.Equals(Estado_Usuario.Habilitado.ToString())) {

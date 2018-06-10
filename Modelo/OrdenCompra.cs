@@ -17,5 +17,21 @@ namespace Modelo
         public Nullable<int> RUT_CLIENTE { get; set; }
         public string ESTADO_ORDEN { get; set; }
         public string COMENTARIO { get; set; }
+
+        public string FechaLlegada
+        {
+            get
+            {
+                return FECHA_LLEGADA.ToString("dd/MM/yyyy");
+            }
+        }
+
+        public string FechaSalida
+        {
+            get
+            {
+                return FECHA_SALIDA.ToString("dd/MM/yyyy");
+            }
+        }
     }
 }

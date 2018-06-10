@@ -15,7 +15,7 @@ namespace Web
             if (MiSesion != null)
             {
                 Session.Abandon();
-                Response.Write("<script language='javascript'>window.alert('Sesión cerrada exitosamente');window.location='../Hostal/WebLogin.aspx';</script>");
+                Response.Redirect("Hostal/WebLogin.aspx");
             }
         }
 

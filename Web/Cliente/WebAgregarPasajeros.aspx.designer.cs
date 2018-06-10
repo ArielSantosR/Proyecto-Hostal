@@ -148,13 +148,13 @@ namespace Web.Cliente {
         protected global::System.Web.UI.WebControls.Button btnAgregar;
         
         /// <summary>
-        /// Control divGrid.
+        /// Control btnVer.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divGrid;
+        protected global::System.Web.UI.WebControls.Button btnVer;
         
         /// <summary>
         /// Control gvPasajeros.

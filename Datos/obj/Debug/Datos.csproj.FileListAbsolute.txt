@@ -1,11 +1,3 @@
-C:\Users\Suzu\Documents\Proyecto-Hostal\.git\Datos\bin\Debug\Datos.dll.config
-C:\Users\Suzu\Documents\Proyecto-Hostal\.git\Datos\bin\Debug\Datos.dll
-C:\Users\Suzu\Documents\Proyecto-Hostal\.git\Datos\bin\Debug\Datos.pdb
-C:\Users\Suzu\Documents\Proyecto-Hostal\.git\Datos\bin\Debug\EntityFramework.dll
-C:\Users\Suzu\Documents\Proyecto-Hostal\.git\Datos\bin\Debug\Oracle.ManagedDataAccess.dll
-C:\Users\Suzu\Documents\Proyecto-Hostal\.git\Datos\bin\Debug\EntityFramework.xml
-C:\Users\Suzu\Documents\Proyecto-Hostal\.git\Datos\obj\Debug\Datos.dll
-C:\Users\Suzu\Documents\Proyecto-Hostal\.git\Datos\obj\Debug\Datos.pdb
 C:\Users\Cliente\Documents\GitHub\Proyecto-Hostal\Datos\obj\Debug\Datos.csprojResolveAssemblyReference.cache
 C:\Users\Cliente\Documents\GitHub\Proyecto-Hostal\Datos\bin\Debug\Datos.dll.config
 C:\Users\Cliente\Documents\GitHub\Proyecto-Hostal\Datos\bin\Debug\Datos.dll
@@ -15,7 +7,6 @@ C:\Users\Cliente\Documents\GitHub\Proyecto-Hostal\Datos\bin\Debug\Oracle.Managed
 C:\Users\Cliente\Documents\GitHub\Proyecto-Hostal\Datos\bin\Debug\EntityFramework.xml
 C:\Users\Cliente\Documents\GitHub\Proyecto-Hostal\Datos\obj\Debug\Datos.dll
 C:\Users\Cliente\Documents\GitHub\Proyecto-Hostal\Datos\obj\Debug\Datos.pdb
-C:\Users\Suzu\Documents\Proyecto-Hostal\.git\Datos\obj\Debug\Datos.csprojResolveAssemblyReference.cache
 C:\Users\56975\Documents\GitHub\Proyecto-Hostal\Datos\bin\Debug\Datos.dll.config
 C:\Users\56975\Documents\GitHub\Proyecto-Hostal\Datos\bin\Debug\Datos.dll
 C:\Users\56975\Documents\GitHub\Proyecto-Hostal\Datos\bin\Debug\Datos.pdb
@@ -33,3 +24,12 @@ C:\Users\shogu\Documents\GitHub\Proyecto-Hostal\Datos\bin\Debug\EntityFramework.
 C:\Users\shogu\Documents\GitHub\Proyecto-Hostal\Datos\obj\Debug\Datos.csprojResolveAssemblyReference.cache
 C:\Users\shogu\Documents\GitHub\Proyecto-Hostal\Datos\obj\Debug\Datos.dll
 C:\Users\shogu\Documents\GitHub\Proyecto-Hostal\Datos\obj\Debug\Datos.pdb
+C:\Users\Suzu\Documents\Proyecto-Hostal\.git\Datos\bin\Debug\Datos.dll.config
+C:\Users\Suzu\Documents\Proyecto-Hostal\.git\Datos\bin\Debug\Datos.dll
+C:\Users\Suzu\Documents\Proyecto-Hostal\.git\Datos\bin\Debug\Datos.pdb
+C:\Users\Suzu\Documents\Proyecto-Hostal\.git\Datos\bin\Debug\EntityFramework.dll
+C:\Users\Suzu\Documents\Proyecto-Hostal\.git\Datos\bin\Debug\Oracle.ManagedDataAccess.dll
+C:\Users\Suzu\Documents\Proyecto-Hostal\.git\Datos\bin\Debug\EntityFramework.xml
+C:\Users\Suzu\Documents\Proyecto-Hostal\.git\Datos\obj\Debug\Datos.csprojResolveAssemblyReference.cache
+C:\Users\Suzu\Documents\Proyecto-Hostal\.git\Datos\obj\Debug\Datos.dll
+C:\Users\Suzu\Documents\Proyecto-Hostal\.git\Datos\obj\Debug\Datos.pdb

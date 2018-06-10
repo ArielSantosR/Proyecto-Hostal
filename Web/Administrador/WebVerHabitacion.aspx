@@ -19,7 +19,7 @@
                                  <asp:BoundField DataField="NUMERO_HABITACION" HeaderText="Número de Habitación" />
                                 <asp:BoundField DataField="ESTADO_HABITACION" HeaderText="Estado" />
                                 <asp:BoundField DataField="ID_TIPO_HABITACION" HeaderText="ID Tipo Habitación" />
-                                <asp:BoundField DataField="RUT_CLIENTE" HeaderText="RUT Cliente" />
+                                <asp:BoundField DataField="ID_CATEGORIA_HABITACION" HeaderText="Categoría Habitación" />
                                 <asp:TemplateField>
                                     <ItemTemplate>
                                         <asp:LinkButton ID="btnEditar" onclick="btnEditar_Click" CssClass="btn btn-success" CommandArgument='<%#Eval("NUMERO_HABITACION")%>'  text="Editar" runat="server"/>

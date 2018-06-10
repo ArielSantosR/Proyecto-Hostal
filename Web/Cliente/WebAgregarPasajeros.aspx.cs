@@ -45,6 +45,9 @@ namespace Web.Cliente {
                 exito.Text = "";
                 alerta_exito.Visible = false;
                 alerta.Visible = false;
+                btnVer.CausesValidation = false;
+                btnVer.UseSubmitBehavior = false;
+
                 if (MiSesion.TIPO_USUARIO.Equals(Tipo_Usuario.Administrador.ToString()) && MiSesion.ESTADO.Equals(Estado_Usuario.Habilitado.ToString()))
                 {
 
@@ -59,12 +62,12 @@ namespace Web.Cliente {
                     pasajeros = HuespedCollection.ListaHuesped().Where(x => x.RUT_CLIENTE == int.Parse(ddlEmpresa.SelectedValue)).ToList<Huesped>();
                     if (pasajeros.Count != 0)
                     {
-                        divGrid.Visible = true;
+                        btnVer.Enabled = true;
                         CargarGridView(pasajeros);
                     }
                     else
                     {
-                        divGrid.Visible = false;
+                        btnVer.Enabled = false;
                     }
                 }
                 else
@@ -73,7 +76,7 @@ namespace Web.Cliente {
                     pasajeros = HuespedCollection.ListaHuesped().Where(x => x.RUT_CLIENTE == SesionCl.RUT_CLIENTE).ToList<Huesped>();
                     if (pasajeros.Count != 0)
                     {
-                        divGrid.Visible = true;
+                        btnVer.Enabled = true;
                         CargarGridView(pasajeros);
                     }
                     else
@@ -82,12 +85,12 @@ namespace Web.Cliente {
                         pasajeros = HuespedCollection.ListaHuesped().Where(x => x.RUT_CLIENTE == SesionCl.RUT_CLIENTE).ToList<Huesped>();
                         if (pasajeros.Count != 0)
                         {
-                            divGrid.Visible = true;
+                            btnVer.Enabled = true;
                             CargarGridView(pasajeros);
                         }
                         else
                         {
-                            divGrid.Visible = false;
+                            btnVer.Enabled = false;
                         }
                     }
                 }
@@ -197,21 +200,21 @@ namespace Web.Cliente {
                                 if (MiSesion.TIPO_USUARIO.Equals(Tipo_Usuario.Administrador.ToString()) && MiSesion.ESTADO.Equals(Estado_Usuario.Habilitado.ToString())) {
                                     pasajeros = HuespedCollection.ListaHuesped().Where(x => x.RUT_CLIENTE == int.Parse(ddlEmpresa.SelectedValue)).ToList<Huesped>();
                                     if (pasajeros.Count != 0) {
-                                        divGrid.Visible = true;
+                                        btnVer.Enabled = true;
                                         CargarGridView(pasajeros);
                                     }
                                     else {
-                                        divGrid.Visible = false;
+                                        btnVer.Enabled = false;
                                     }
                                 }
                                 else {
                                     pasajeros = HuespedCollection.ListaHuesped().Where(x => x.RUT_CLIENTE == SesionCl.RUT_CLIENTE).ToList<Huesped>();
                                     if (pasajeros.Count != 0) {
-                                        divGrid.Visible = true;
+                                        btnVer.Enabled = true;
                                         CargarGridView(pasajeros);
                                     }
                                     else {
-                                        divGrid.Visible = false;
+                                        btnVer.Enabled = false;
                                     }
                                 }
 
@@ -256,21 +259,21 @@ namespace Web.Cliente {
                                     if (MiSesion.TIPO_USUARIO.Equals(Tipo_Usuario.Administrador.ToString()) && MiSesion.ESTADO.Equals(Estado_Usuario.Habilitado.ToString())) {
                                         pasajeros = HuespedCollection.ListaHuesped().Where(x => x.RUT_CLIENTE == int.Parse(ddlEmpresa.SelectedValue)).ToList<Huesped>();
                                         if (pasajeros.Count != 0) {
-                                            divGrid.Visible = true;
+                                            btnVer.Enabled = true;
                                             CargarGridView(pasajeros);
                                         }
                                         else {
-                                            divGrid.Visible = false;
+                                            btnVer.Enabled = false;
                                         }
                                     }
                                     else {
                                         pasajeros = HuespedCollection.ListaHuesped().Where(x => x.RUT_CLIENTE == SesionCl.RUT_CLIENTE).ToList<Huesped>();
                                         if (pasajeros.Count != 0) {
-                                            divGrid.Visible = true;
+                                            btnVer.Enabled = true;
                                             CargarGridView(pasajeros);
                                         }
                                         else {
-                                            divGrid.Visible = false;
+                                            btnVer.Enabled = false;
                                         }
                                     }
                                 }
@@ -318,11 +321,11 @@ namespace Web.Cliente {
             if (huesped.Delete()) {
                 pasajeros = HuespedCollection.ListaHuesped().Where(x => x.RUT_CLIENTE == int.Parse(ddlEmpresa.SelectedValue)).ToList<Huesped>();
                 if (pasajeros.Count != 0) {
-                    divGrid.Visible = true;
+                    btnVer.Enabled = true;
                     CargarGridView(pasajeros);
                 }
                 else {
-                    divGrid.Visible = false;
+                    btnVer.Enabled = false;
                 }
                 exito.Text = "Se ha eliminado con exito";
                 alerta_exito.Visible = true;
@@ -339,6 +342,11 @@ namespace Web.Cliente {
             huesped.BuscarHuesped();
             SesionEdit = huesped;
             Response.Redirect("../Cliente/WebEditarPasajero.aspx");
+        }
+
+        protected void btnVer_Click(object sender, EventArgs e)
+        {
+            ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modal", "$('#exampleModal2').modal();", true);
         }
     }
 }

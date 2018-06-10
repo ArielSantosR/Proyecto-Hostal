@@ -960,6 +960,49 @@ namespace WcfNegocio
             return serv.EliminarPlato(pDatos);
         }
 
+        public string ListarPlatoPorTipo(string tipo)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.TipoPlato));
+            StringReader reader = new StringReader(tipo);
+            Modelo.TipoPlato t = (Modelo.TipoPlato)ser.Deserialize(reader);
+            ServicioPlato serv = new ServicioPlato();
+
+            Datos.TIPO_PLATO tDatos = new Datos.TIPO_PLATO();
+            tDatos.ID_TIPO_PLATO = t.ID_TIPO_PLATO;
+
+            List<Datos.PLATO> listaPlato = serv.listaPlatoTipo(tDatos);
+
+            if (listaPlato == null)
+            {
+                return null;
+            }
+            else
+            {
+                XmlSerializer servicio = new XmlSerializer(typeof(Modelo.Plato));
+                Modelo.PlatoCollection listaPlato2 = new Modelo.PlatoCollection();
+
+                foreach (Datos.PLATO pl in listaPlato)
+                {
+                    Modelo.Plato pModelo = new Modelo.Plato();
+                    pModelo.ID_PLATO = pl.ID_PLATO;
+                    pModelo.NOMBRE_PLATO = pl.NOMBRE_PLATO;
+                    pModelo.PRECIO_PLATO = pl.PRECIO_PLATO;
+                    pModelo.ID_CATEGORIA = pl.ID_CATEGORIA;
+                    pModelo.ID_TIPO_PLATO = pl.ID_TIPO_PLATO;
+
+                    listaPlato2.Add(pModelo);
+                }
+
+                XmlSerializer ser2 = new XmlSerializer(typeof(Modelo.PlatoCollection));
+                StringWriter writer = new StringWriter();
+                ser2.Serialize(writer, listaPlato2);
+                writer.Close();
+                return writer.ToString();
+            }
+        }
+        #endregion
+
+        #region Tipo Plato
         //TIPO PLATO
         public bool AgregarTipoPlato(string tipoPlato)
         {
@@ -2276,6 +2319,34 @@ namespace WcfNegocio
             dDatos.ID_PENSION = d.ID_PENSION;
 
             return serv.AgregarDetallePasajeros(dDatos);
+        }
+        #endregion
+
+        #region Minuta
+        public bool AgregarMinuta(string pension)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.Pension));
+            StringReader reader = new StringReader(pension);
+            Modelo.Pension p = (Modelo.Pension)ser.Deserialize(reader);
+            ServicioMinuta serv = new ServicioMinuta();
+            Datos.PENSION pdatos = new Datos.PENSION();
+            pdatos.NOMBRE_PENSION = p.NOMBRE_PENSION;
+            pdatos.VALOR_PENSION = p.VALOR_PENSION;
+
+            return serv.AgregarMinuta(pdatos);
+        }
+
+        public bool AgregarDetalleMinuta(string detalle)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.DetallePlato));
+            StringReader reader = new StringReader(detalle);
+            Modelo.DetallePlato d = (Modelo.DetallePlato)ser.Deserialize(reader);
+            ServicioMinuta serv = new ServicioMinuta();
+            Datos.DETALLE_PLATOS dDatos = new Datos.DETALLE_PLATOS();
+            dDatos.ID_PLATO = d.ID_PLATO;
+            dDatos.CANTIDAD = d.CANTIDAD;
+
+            return serv.AgregarDetalleMinuta(dDatos);
         }
         #endregion
 

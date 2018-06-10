@@ -29,15 +29,7 @@
                 </div>
               </div>
             </div>
-          <div class="form-group">
-              <label for="name" class="col-sm-12 control-label">Precio</label>
-                <div class="col-sm-12">
-                  <div class="input-group">
-                  <span class="input-group-text"><i class="fas fa-money-bill-alt" aria-hidden="true"></i></span>
-                  <asp:TextBox ID="txtPrecio" placeholder="Ingrese Precio de Habitación" TextMode="Number" runat="server" CssClass="form-control" required="required"></asp:TextBox>
-                </div>
-              </div>
-            </div>
+
 
               <asp:ScriptManager ID="ScriptManager2" runat="server"></asp:ScriptManager>
           <asp:UpdatePanel ID="UpdatePanel2" runat="server">
@@ -49,20 +41,19 @@
                   <span class="input-group-text"><i class="fa fa-user fa" aria-hidden="true"></i></span>
                       <asp:DropDownList ID="ddlEstado" CssClass="form-control" runat="server">
                       </asp:DropDownList>
-                      
-                </div>
-              </div>
-            </div>
-                <div class="form-group">
-              <label for="name" class="col-sm-12 control-label">RUT Cliente</label>
-                <div class="col-sm-12">
-                  <div class="input-group">
-                  <span class="input-group-text"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                  <asp:TextBox ID="txtRut" placeholder="RUT Cliente" runat="server" CssClass="form-control" required="required"></asp:TextBox>
                 </div>
               </div>
             </div> 
-            
+        <div class="form-group">
+              <label for="name" class="col-sm-12 control-label">Categoría </label>
+                <div class="col-sm-12">
+                  <div class="input-group">
+                  <span class="input-group-text"><i class="fa fa-user fa" aria-hidden="true"> </i></span>
+                      <asp:DropDownList ID="ddlCategoria" CssClass="form-control" runat="server">
+                      </asp:DropDownList>
+                </div>
+              </div>
+            </div>     
 
         <div class="form-group">
               <label for="name" class="col-sm-12 control-label">Tipo de Habitación </label>
@@ -76,10 +67,6 @@
             </div> 
                 </ContentTemplate>
             </asp:UpdatePanel>
-
-
-
-
           <div class="row"> 
                   <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                       <br/> <asp:Button ID="btnRegistrar" runat="server" Text="Editar"  CssClass="btn btn-primary btn-lg btn-block login-button" OnClick="btnRegistrar_Click" />

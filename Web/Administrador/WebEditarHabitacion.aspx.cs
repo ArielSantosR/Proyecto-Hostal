@@ -45,12 +45,19 @@ namespace Web.Administrador
             btnLimpiar.CausesValidation = false;
             btnLimpiar.UseSubmitBehavior = false;
 
-            //Cargando DDL Tipo habitacion
+            //Cargando DDL Tipo Habitacion
             Service1 service = new Service1();
             string tipo_habitacion = service.ListarTipoHabitacion();
             XmlSerializer ser = new XmlSerializer(typeof(Modelo.TipoHabitacionCollection));
             StringReader reader = new StringReader(tipo_habitacion);
             Modelo.TipoHabitacionCollection coleccionTipoHabitacion = (Modelo.TipoHabitacionCollection)ser.Deserialize(reader);
+            reader.Close();
+
+            //Cargando DDL Categoria
+            string categoria_habitacion = service.ListarCategoriaHabitacion();
+            XmlSerializer ser1 = new XmlSerializer(typeof(Modelo.CategoriaHabitacionCollection));
+            StringReader reader1 = new StringReader(categoria_habitacion);
+            Modelo.CategoriaHabitacionCollection coleccionCategoria = (Modelo.CategoriaHabitacionCollection)ser1.Deserialize(reader1);
             reader.Close();
 
             if (!IsPostBack)
@@ -63,6 +70,11 @@ namespace Web.Administrador
                 ddlEstado.Items.Add("Disponible");
                 ddlEstado.Items.Add("Ocupada");
                 ddlEstado.Items.Add("Mantenimiento");
+
+                ddlCategoria.DataSource = coleccionCategoria;
+                ddlCategoria.DataTextField = "NOMBRE_CATEGORIA";
+                ddlCategoria.DataValueField = "ID_CATEGORIA_HABITACION";
+                ddlCategoria.DataBind();
 
                 if (MiSesionH.NUMERO_HABITACION != 0)
                 {
@@ -83,7 +95,6 @@ namespace Web.Administrador
                         ddlTipo.SelectedIndex = habitacion.ID_TIPO_HABITACION - 1;
 
                         txtNumero.ReadOnly = true;
-                        txtRut.ReadOnly = true;
                     }
                 }
                 else
@@ -98,22 +109,16 @@ namespace Web.Administrador
             try
             {
                 short numero = 0;
-                int precio = 0;
 
-                if (txtNumero.Text != string.Empty && txtPrecio.Text != string.Empty)
+                if (txtNumero.Text != string.Empty)
                 {
-                    if (short.TryParse(txtNumero.Text, out numero) && int.TryParse(txtPrecio.Text, out precio))
+                    if (short.TryParse(txtNumero.Text, out numero))
                     {
                         Modelo.Habitacion habitacion = new Modelo.Habitacion();
                         habitacion.NUMERO_HABITACION = numero;
                         habitacion.ESTADO_HABITACION = ddlEstado.SelectedValue;
                         habitacion.ID_TIPO_HABITACION = short.Parse(ddlTipo.SelectedValue);
-
-                        if (txtRut.Text != string.Empty)
-                        {
-                            habitacion.RUT_CLIENTE = int.Parse(txtRut.Text);
-                        }
-                        
+                        habitacion.ID_CATEGORIA_HABITACION = short.Parse(ddlCategoria.SelectedValue);
 
                         Service1 s = new Service1();
                         XmlSerializer sr = new XmlSerializer(typeof(Modelo.Habitacion));
@@ -159,9 +164,9 @@ namespace Web.Administrador
 
         protected void btnLimpiar_Click(object sender, EventArgs e)
         {
-            txtPrecio.Text = string.Empty;
             ddlEstado.SelectedIndex = 0;
             ddlTipo.SelectedIndex = 0;
+            ddlCategoria.SelectedIndex = 0;
         }
 
 

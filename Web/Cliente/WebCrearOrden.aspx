@@ -99,47 +99,65 @@
 
 
           <div class="row"> 
-                  <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                      <br/> <asp:Button ID="btnRegistrar" runat="server" OnClick="btnRegistrar_Click" Text="Agregar Huésped"  CssClass="btn btn-primary btn-lg btn-block login-button"  />
-                  </div>
-                  <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                      <br/> <asp:Button ID="btnLimpiar" runat="server" OnClick="btnLimpiar_Click" Text="Realizar Reserva"  CssClass="btn btn-secondary btn-lg btn-block login-button"/>
-                  </div>
+                  <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <br />
+                        <asp:Button ID="btnRegistrar" runat="server" Text="Agregar" CssClass="btn btn-primary btn-lg btn-block login-button" OnClick="btnRegistrar_Click" />
+                    </div>
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <br />
+                        <asp:Button ID="btnVer" runat="server" Text="Lista" CssClass="btn btn-info btn-lg btn-block login-button" onclick="btnVer_Click"/>
+                    </div>
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <br />
+                        <asp:Button ID="btnLimpiar" runat="server" Text="Reservar" CssClass="btn btn-secondary btn-lg btn-block login-button" OnClick="btnLimpiar_Click" />
+                    </div>
                 </div>   
           </div>
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"> 
-                <div style="display: flex; justify-content: center; margin-top: 35px;">
-        <asp:UpdatePanel ID="UpdatePanel4" UpdateMode="Conditional" runat="server">
-              <ContentTemplate>
-            <asp:GridView ID="gvDetalle" AutoGenerateColumns="false" runat="server" ForeColor="#333333" GridLines="Vertical">      
-                            <AlternatingRowStyle BackColor="White" />
-                            <EditRowStyle BackColor="#2461BF" />
-                            <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
-                            <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
-                            <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
-                            <RowStyle BackColor="#EFF3FB" />
-                            <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
-                            <SortedAscendingCellStyle BackColor="#F5F7FB" />
-                            <SortedAscendingHeaderStyle BackColor="#6D95E1" />
-                            <SortedDescendingCellStyle BackColor="#E9EBEF" />
-                            <SortedDescendingHeaderStyle BackColor="#4870BE" />
-                            <Columns>
-                                    <asp:BoundField DataField="RUT_HUESPED" HeaderText="RUT Huésped" />
-                                    <asp:BoundField DataField="ID_PENSION" HeaderText="ID Pensión" />     
-                                    <asp:BoundField DataField="ID_CATEGORIA_HABITACION" HeaderText="ID Categoría Habitación" />                
-                                <asp:TemplateField>
-                                    <ItemTemplate>
-                                        <asp:LinkButton ID="btnEliminar" OnClick="btnEliminar_Click" CssClass="btn btn-danger" CommandArgument='<%#Eval("RUT_HUESPED")%>'  text="Eliminar" runat="server"/>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-                            </Columns>
-                        </asp:GridView>
-                  </ContentTemplate>
-              </asp:UpdatePanel>
-                    </div>
+
+        <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModal2Label">Detalle Pedido</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div style="display: flex; justify-content: center; margin-top: 35px;">
+                <asp:GridView ID="gvDetalle" AutoGenerateColumns="false" runat="server" ForeColor="#333333" GridLines="Vertical">      
+                                <AlternatingRowStyle BackColor="White" />
+                                <EditRowStyle BackColor="#2461BF" />
+                                <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+                                <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+                                <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+                                <RowStyle BackColor="#EFF3FB" />
+                                <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
+                                <SortedAscendingCellStyle BackColor="#F5F7FB" />
+                                <SortedAscendingHeaderStyle BackColor="#6D95E1" />
+                                <SortedDescendingCellStyle BackColor="#E9EBEF" />
+                                <SortedDescendingHeaderStyle BackColor="#4870BE" />
+                                <Columns>
+                                        <asp:BoundField DataField="RUT_HUESPED" HeaderText="RUT Huésped" />
+                                        <asp:BoundField DataField="ID_PENSION" HeaderText="ID Pensión" />     
+                                        <asp:BoundField DataField="ID_CATEGORIA_HABITACION" HeaderText="ID Categoría Habitación" />                
+                                    <asp:TemplateField>
+                                        <ItemTemplate>
+                                            <asp:LinkButton ID="btnEliminar" OnClick="btnEliminar_Click" CssClass="btn btn-danger" CommandArgument='<%#Eval("RUT_HUESPED")%>'  text="Eliminar" runat="server"/>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                </Columns>
+                            </asp:GridView>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                 </div>
             </div>
         </div>
+    </div>
+
+                
+
       </div>  
 </asp:Content>

@@ -45,7 +45,7 @@ namespace Web.Administrador
             btnLimpiar.CausesValidation = false;
             btnLimpiar.UseSubmitBehavior = false;
 
-            //Cargando DDL Tipo Plato
+            //Cargando DDL Tipo Habitacion
             Service1 service = new Service1();
             string tipo_habitacion = service.ListarTipoHabitacion();
             XmlSerializer ser = new XmlSerializer(typeof(Modelo.TipoHabitacionCollection));

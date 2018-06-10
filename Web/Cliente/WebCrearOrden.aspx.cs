@@ -113,11 +113,11 @@ namespace Web.Cliente
                             ddlPension.DataBind();
 
                             MiSesionO = null;
+                            btnVer.Enabled = false;
+                            btnLimpiar.Enabled = false;
                         }
                         gvDetalle.DataSource = MiSesionO;
                         gvDetalle.DataBind();
-
-                        UpdatePanel4.Update();
                     }
                     else
                     {
@@ -166,10 +166,12 @@ namespace Web.Cliente
                     alerta_exito.Visible = true;
                     alerta.Visible = false;
                     MiSesionO.Add(detalle);
+                    btnVer.Enabled = true;
+                    btnLimpiar.Enabled = true;
+                    ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modal", "$('#exampleModal2').modal();", true);
                 }
                 gvDetalle.DataSource = MiSesionO;
                 gvDetalle.DataBind();
-                UpdatePanel4.Update();
             }
             catch (Exception ex)
             {
@@ -195,11 +197,14 @@ namespace Web.Cliente
                         MiSesionO.Remove(o);
                     }
                 }
-
                 gvDetalle.DataSource = MiSesionO;
                 gvDetalle.DataBind();
 
-                UpdatePanel4.Update();
+                if (MiSesionO.Count == 0)
+                {
+                    btnVer.Enabled = false;
+                    btnLimpiar.Enabled = false;
+                }
             }
             catch (Exception ex)
             {
@@ -341,6 +346,11 @@ namespace Web.Cliente
             {
                 Session["DetalleOrden"] = value;
             }
+        }
+
+        protected void btnVer_Click(object sender, EventArgs e)
+        {
+            ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modal", "$('#exampleModal2').modal();", true);
         }
     }
 }

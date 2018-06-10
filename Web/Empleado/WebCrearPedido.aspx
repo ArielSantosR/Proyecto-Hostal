@@ -81,18 +81,28 @@
                 </asp:UpdatePanel>
 
                 <div class="row">
-                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                        <br />
-                        <asp:Button ID="btnRegistrar" runat="server" Text="Agregar a la Lista" CssClass="btn btn-primary btn-lg btn-block login-button" OnClick="btnRegistrar_Click" />
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <asp:Button ID="btnRegistrar" runat="server" Text="Agregar" CssClass="btn btn-primary btn-lg btn-block login-button" OnClick="btnRegistrar_Click" />
                     </div>
-                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                        <br />
-                        <asp:Button ID="btnLimpiar" runat="server" Text="Pedir Productos" CssClass="btn btn-secondary btn-lg btn-block login-button" OnClick="btnLimpiar_Click" />
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <asp:Button ID="btnVer" runat="server" Text="Lista" CssClass="btn btn-info btn-lg btn-block login-button" onclick="btnVer_Click"/>
+                    </div>
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <asp:Button ID="btnLimpiar" runat="server" Text="Pedir" CssClass="btn btn-secondary btn-lg btn-block login-button" OnClick="btnLimpiar_Click" />
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+            <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModal2Label">Detalle Pedido</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
                     <div style="display: flex; justify-content: center; margin-top: 35px;">
                         <asp:GridView ID="gvDetalle" AutoGenerateColumns="true" runat="server" ForeColor="#333333" GridLines="Vertical" DataKeyNames="Código" OnRowDeleting="gvDetalle_RowDeleting">
                             <AlternatingRowStyle BackColor="White" />
@@ -114,7 +124,12 @@
                         </asp:GridView>
                     </div>
                 </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
             </div>
         </div>
     </div>
+            </div>
+        </div>
 </asp:Content>

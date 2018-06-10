@@ -25,7 +25,7 @@
                 <div class="col-sm-12">
                   <div class="input-group">
                   <span class="input-group-text"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                      <asp:TextBox ID="txtNombreMinuta" placeholder="Ingrese un nombre descriptivo de la Minuta" runat="server" CssClass="form-control"></asp:TextBox>
+                      <asp:TextBox ID="txtNombreMinuta" placeholder="Ejemplo: Desayuno VIP" runat="server" CssClass="form-control"></asp:TextBox>
                 </div>
               </div>
             </div>  
@@ -38,7 +38,7 @@
                 <div class="col-sm-12">
                   <div class="input-group">
                   <span class="input-group-text"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                      <asp:DropDownList ID="ddlTipo" CssClass="form-control" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlProducto_SelectedIndexChanged">
+                      <asp:DropDownList ID="ddlTipo" CssClass="form-control" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlTipo_SelectedIndexChanged">
                       </asp:DropDownList>
                 </div>
               </div>
@@ -49,7 +49,7 @@
                 <div class="col-sm-12">
                   <div class="input-group">
                   <span class="input-group-text"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                      <asp:DropDownList ID="ddlPlato" CssClass="form-control" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlProducto_SelectedIndexChanged">
+                      <asp:DropDownList ID="ddlPlato" CssClass="form-control" runat="server">
                       </asp:DropDownList>
                 </div>
               </div>
@@ -64,7 +64,7 @@
                 <div class="col-sm-12">
                   <div class="input-group">
                   <span class="input-group-text"><i class="fas fa-money-bill-alt" aria-hidden="true"></i></span>
-                  <asp:TextBox ID="txtCantidad" placeholder="Ingrese la cantidad" runat="server" CssClass="form-control" required="required"></asp:TextBox>
+                  <asp:TextBox ID="txtCantidad" placeholder="Ingrese la cantidad" runat="server" CssClass="form-control" required="required" min="1" AutoPostBack="true" OnTextChanged="txtCantidad_TextChanged"></asp:TextBox>
                 </div>
               </div>
             </div>
@@ -82,19 +82,29 @@
               </asp:UpdatePanel>
 
           <div class="row"> 
-                  <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                      <br/> <asp:Button ID="btnRegistrar" runat="server" Text="Agregar a la Lista"  CssClass="btn btn-primary btn-lg btn-block login-button" OnClick="btnAgregar_Click" />
-                  </div>
-                  <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                      <br/> <asp:Button ID="btnLimpiar" runat="server" Text="Crear Minuta"  CssClass="btn btn-secondary btn-lg btn-block login-button" OnClick="btnCrear_Click"/>
-                  </div>
+                  <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <asp:Button ID="btnRegistrar" runat="server" Text="Agregar" CssClass="btn btn-primary btn-lg btn-block login-button" OnClick="btnRegistrar_Click" />
+                    </div>
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <asp:Button ID="btnVer" runat="server" Text="Lista" CssClass="btn btn-info btn-lg btn-block login-button" onclick="btnVer_Click"/>
+                    </div>
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <asp:Button ID="btnLimpiar" runat="server" Text="Pedir" CssClass="btn btn-secondary btn-lg btn-block login-button" OnClick="btnLimpiar_Click" />
+                    </div>
                 </div>   
           </div>
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"> 
-                <div style="display: flex; justify-content: center; margin-top: 35px;">
-        <asp:UpdatePanel ID="UpdatePanel3" UpdateMode="Conditional" runat="server">
-              <ContentTemplate>
+        
+        <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModal2Label">Detalle Minuta</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div style="display: flex; justify-content: center; margin-top: 35px;">
             <asp:GridView ID="gvDetalle" AutoGenerateColumns="false" runat="server" ForeColor="#333333" GridLines="Vertical">      
                             <AlternatingRowStyle BackColor="White" />
                             <EditRowStyle BackColor="#2461BF" />
@@ -108,20 +118,26 @@
                             <SortedDescendingCellStyle BackColor="#E9EBEF" />
                             <SortedDescendingHeaderStyle BackColor="#4870BE" />
                             <Columns>
-                                    <asp:BoundField DataField="ID_PRODUCTO" HeaderText="ID Producto" />
-                                    <asp:BoundField DataField="CANTIDAD" HeaderText="Cantidad" />                    
+                                    <asp:BoundField DataField="ID_PLATO" HeaderText="ID Plato" />
+                                    <asp:BoundField DataField="CANTIDAD" HeaderText="Cantidad" /> 
                                 <asp:TemplateField>
                                     <ItemTemplate>
-                                        <asp:LinkButton ID="btnEliminar" <!--OnClick="btnEliminar_Click"--> CssClass="btn btn-danger" CommandArgument='<%#Eval("ID_PRODUCTO")%>'  text="Eliminar" runat="server"/>
+                                        <asp:LinkButton ID="btnEliminar" onclick="btnEliminar_Click" CssClass="btn btn-danger" CommandArgument='<%#Eval("ID_PLATO")%>'  text="Eliminar" runat="server"/>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                             </Columns>
                         </asp:GridView>
-                  </ContentTemplate>
-              </asp:UpdatePanel>
-                    </div>
+                    
+            </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                 </div>
             </div>
+        </div>
+    </div>
+
+                
         </div>
       </div>
 </asp:Content>

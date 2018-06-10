@@ -163,6 +163,9 @@ namespace WcfNegocio
 
         [OperationContract]
         bool EliminarPlato(string plato);
+
+        [OperationContract]
+        string ListarPlatoPorTipo(string tipo);
         #endregion
 
         #region Tipo Plato
@@ -351,6 +354,14 @@ namespace WcfNegocio
         #region Detalle Pasajeros
         [OperationContract]
         bool AgregarDetallePasajeros(string detalle);
+        #endregion
+
+        #region Minuta
+        [OperationContract]
+        bool AgregarMinuta(string pension);
+
+        [OperationContract]
+        bool AgregarDetalleMinuta(string detalle);
         #endregion
 
         #region DDL
