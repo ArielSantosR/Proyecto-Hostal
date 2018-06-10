@@ -46,13 +46,20 @@ namespace Web.Administrador
         protected void Page_Load(object sender, EventArgs e)
         {
             try {
-                error.Text = string.Empty;
-                exito.Text = string.Empty;
-
-                alerta.Visible = false;
-                alerta_exito.Visible = false;
+                
+                //Carga listas con datos
+                users = UsuarioCollection.ListaUsuarios();
+                empleados = EmpleadoCollection.ListaEmpleados();
+                clientes = ClienteCollection.ListaClientes();
+                proveedores = ProveedorCollection.ListaProveedores();
 
                 if (!IsPostBack) {
+                    error.Text = string.Empty;
+                    exito.Text = string.Empty;
+
+                    alerta.Visible = false;
+                    alerta_exito.Visible = false;
+
                     ddlFiltro.DataSource = Enum.GetValues(typeof(Modelo.Tipo_Usuario));
                     ddlFiltro.DataBind();
 
@@ -86,12 +93,7 @@ namespace Web.Administrador
 
         
         private void CargarGriedView() {
-            //Carga listas con datos
-            users = UsuarioCollection.ListaUsuarios();
-            empleados = EmpleadoCollection.ListaEmpleados();
-            clientes = ClienteCollection.ListaClientes();
-            proveedores = ProveedorCollection.ListaProveedores();
-
+            
             Usuario user;
             
             //Creacion DataTable
@@ -278,12 +280,7 @@ namespace Web.Administrador
         }
 
         private void Filtra(string filtro) {
-            //Carga listas con datos
-            users = UsuarioCollection.ListaUsuarios();
-            empleados = EmpleadoCollection.ListaEmpleados();
-            clientes = ClienteCollection.ListaClientes();
-            proveedores = ProveedorCollection.ListaProveedores();
-
+            
             Usuario user;
 
             //Creacion DataTable
