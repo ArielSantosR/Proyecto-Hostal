@@ -66,7 +66,7 @@
                 </asp:UpdatePanel>
                 <div class="form-group">
                     <div style="display: flex; justify-content: center; margin-bottom: 20px">
-                        <asp:GridView ID="gvUsuario" runat="server" ForeColor="#333333" GridLines="Vertical" DataKeyNames="Tipo,ID" OnRowEditing="gvUsuario_RowEditing">
+                        <asp:GridView ID="gvUsuario" runat="server" ForeColor="#333333" GridLines="Vertical" DataKeyNames="Tipo,ID" OnRowEditing="gvUsuario_RowEditing" AutoGenerateColumns="true">
 
                             <AlternatingRowStyle BackColor="White" />
                             <EditRowStyle BackColor="#2461BF" />

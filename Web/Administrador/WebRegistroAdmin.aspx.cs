@@ -114,6 +114,7 @@ namespace Web.Administrador
                 ddlTipo.Items.Add("Cliente");
                 ddlTipo.Items.Add("Proveedor");
                 ddlTipo.Items.Add("Empleado");
+                ddlTipo.Items.Add("Administrador");
 
                 ddlTipo.SelectedIndex = 0;
                 //Deshabilitar un Atributo del Dropdown list, con esto se puede hacer el atributo de ReadOnly.
@@ -345,7 +346,7 @@ namespace Web.Administrador
                                     alerta_exito.Visible = false;
                                 }
                             }
-                            else if (usuario.TIPO_USUARIO.Equals("Empleado"))
+                            else if (usuario.TIPO_USUARIO.Equals("Empleado") || usuario.TIPO_USUARIO.Equals("Administrador"))
                             {
                                 if (txtRut2.Text != string.Empty && txtNombreE.Text != string.Empty && txtApellidoP.Text != string.Empty && txtApellidoM.Text != string.Empty)
                                 {
