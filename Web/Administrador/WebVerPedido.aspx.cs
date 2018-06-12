@@ -54,6 +54,16 @@ namespace Web.Administrador
             gvPedido.DataSource = listaPedido;
             gvPedido.DataBind();
         }
+        protected void gvPedido_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            gvPedido.PageIndex = e.NewPageIndex;
+            gvPedido.DataBind();
+        }
+        protected void gvDetalleHistorial_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            gvDetalleHistorial.PageIndex = e.NewPageIndex;
+            gvDetalleHistorial.DataBind();
+        }
 
         //Creación de Sesión
         public Usuario MiSesion

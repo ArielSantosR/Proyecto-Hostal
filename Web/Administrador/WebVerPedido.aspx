@@ -44,7 +44,7 @@
     <% } %>
 
     <div style="display: flex; justify-content: center; margin-bottom: 20px">
-        <asp:GridView ID="gvPedido" AutoGenerateColumns="false" runat="server" ForeColor="#333333" GridLines="Vertical">
+        <asp:GridView ID="gvPedido" AutoGenerateColumns="false" runat="server" ForeColor="#333333" GridLines="Vertical" AllowPaging="True" PageSize="8" OnPageIndexChanging="gvPedido_PageIndexChanging">
             <AlternatingRowStyle BackColor="White" />
             <EditRowStyle BackColor="#2461BF" />
             <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
@@ -112,7 +112,7 @@
                 </div>
                 <div class="modal-body">
                     <div style="display: flex; justify-content: center; margin-bottom: 70px">
-                        <asp:GridView ID="gvDetalleHistorial" AutoGenerateColumns="true" runat="server" ForeColor="#333333" GridLines="Vertical">
+                        <asp:GridView ID="gvDetalleHistorial" AutoGenerateColumns="true" runat="server" ForeColor="#333333" GridLines="Vertical" AllowPaging="True" PageSize="8" OnPageIndexChanging="gvDetalleHistorial_PageIndexChanging">
                             <AlternatingRowStyle BackColor="White" />
                             <EditRowStyle BackColor="#2461BF" />
                             <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />

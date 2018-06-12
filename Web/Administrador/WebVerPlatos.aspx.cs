@@ -77,6 +77,12 @@ namespace Web
             Response.Redirect("../Administrador/WebEliminarPlato.aspx");
         }
 
+        protected void gvPlato_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            gvPlato.PageIndex = e.NewPageIndex;
+            gvPlato.DataBind();
+        }
+
         //Creación de Sesión
         public Usuario MiSesion
         {
