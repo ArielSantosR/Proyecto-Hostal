@@ -63,31 +63,16 @@
 	
 		<div>
         <img src="../images/habitacion1.jpeg"/>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-            Pellentesque cursus tortor nec elit porta, cursus tincidunt 
-            dolor commodo. Orci varius natoque penatibus et magnis dis 
-            parturient montes, nascetur ridiculus mus. Nam tincidunt, 
-            lacus ut fermentum facilisis, urna odio cursus felis, quis gravida 
-            purus tellus at magna. In id iaculis nunc.</p>
+        <p>Grandes habitaciones amplias e iluminadas, perfectas para darte el mejor confort durante tu estadía.</p>
 		</div>
     </div>
     <div class="seccion col-md-4">
         <img src="../images/habitacion2.jpg"/>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                Pellentesque cursus tortor nec elit porta, cursus tincidunt 
-                dolor commodo. Orci varius natoque penatibus et magnis dis 
-                parturient montes, nascetur ridiculus mus. Nam tincidunt, 
-                lacus ut fermentum facilisis, urna odio cursus felis, quis gravida 
-                purus tellus at magna. In id iaculis nunc.</p>
+        <p>Ofecemos un especial servicio de alimentación para quienes deseen llegar a su habitación y que la comida los esté esperando.</p>
     </div>
     <div class="seccion col-md-4">
         <img src="../images/habitacion3.jpg"/>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                Pellentesque cursus tortor nec elit porta, cursus tincidunt 
-                dolor commodo. Orci varius natoque penatibus et magnis dis 
-                parturient montes, nascetur ridiculus mus. Nam tincidunt, 
-                lacus ut fermentum facilisis, urna odio cursus felis, quis gravida 
-                purus tellus at magna. In id iaculis nunc.</p>
+        <p>Una ubicación inmejorable, nunca tendrá problemas para llegar a su destino.</p>
     </div>
 </div>
 </div>

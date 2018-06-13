@@ -79,7 +79,7 @@ namespace Web.Empleado
             gvMinuta.PageIndex = e.NewPageIndex;
             gvMinuta.DataBind();
         }
-        
+       /* 
         protected void btnEditar_Click(object sender, EventArgs e)
         {
             //Lee los valores del LinkButton, primero usa la clase LinkButton para 
