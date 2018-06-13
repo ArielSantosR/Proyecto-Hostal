@@ -15,9 +15,11 @@ namespace Web.Empleado {
                     if (MiSesion.TIPO_USUARIO.Equals(Tipo_Usuario.Administrador.ToString()) &&
                     MiSesion.ESTADO.Equals(Estado_Usuario.Habilitado.ToString())) {
                         MasterPageFile = "~/Administrador/AdminM.Master";
-                        Modelo.Empleado emp = new Modelo.Empleado();
-                        emp.BuscarEmpleado(MiSesion.ID_USUARIO);
-                        SesionEmp = emp;
+                        if (!SesionVerUser) {
+                            Modelo.Empleado emp = new Modelo.Empleado();
+                            emp.BuscarEmpleado(MiSesion.ID_USUARIO);
+                            SesionEmp = emp;
+                        }
                     }
                     else if (MiSesion.TIPO_USUARIO.Equals(Tipo_Usuario.Empleado.ToString()) &&
                     MiSesion.ESTADO.Equals(Estado_Usuario.Habilitado.ToString())) {
@@ -60,19 +62,24 @@ namespace Web.Empleado {
                         ddlEstado.DataSource = Enum.GetValues(typeof(Estado_Usuario));
                         ddlEstado.DataBind();
 
+                        ddlEstado.Items.Insert(0,new ListItem("Seleccione Estado...","0"));
+
                         alerta.Visible = false;
                         //Carga de datos actuales
                         txtRut.Text = SesionEmp.RUT_EMPLEADO.ToString() + "-" + SesionEmp.DV_EMPLEADO;
                         txtPNombre.Text = SesionEmp.PNOMBRE_EMPLEADO;
                         txtSNombre.Text = SesionEmp.SNOMBRE_EMPLEADO;
-                        if (MiSesion.TIPO_USUARIO.Equals(Tipo_Usuario.Empleado.ToString())) {
+                        if ((MiSesion.TIPO_USUARIO.Equals(Tipo_Usuario.Empleado.ToString()) || MiSesion.TIPO_USUARIO.Equals(Tipo_Usuario.Administrador.ToString())) && !SesionVerUser) {
                             txtUsuario.Text = MiSesion.NOMBRE_USUARIO;
+                            ddlEstado.SelectedValue = MiSesion.ESTADO;
                         }
                         else {
                             txtUsuario.Text = SesionEdit.NOMBRE_USUARIO;
+                            ddlEstado.SelectedValue = SesionEdit.ESTADO;
                         }
                         txtApellidoP.Text = SesionEmp.APP_PATERNO_EMPLEADO;
                         txtApellidoM.Text = SesionEmp.APP_MATERNO_EMPLEADO;
+                        
                     }
                 }
                 else {
@@ -124,6 +131,18 @@ namespace Web.Empleado {
             }
         }
 
+        public bool SesionVerUser {
+            get {
+                if (Session["PaginaWeb"] == null) {
+                    Session["PaginaWeb"] = false;
+                }
+                return (bool)Session["PaginaWeb"];
+            }
+            set {
+                Session["PaginaWeb"] = value;
+            }
+        }
+
         protected void btnActualizar_Click(object sender,EventArgs e) {
             try {
                 bool flag = true;
@@ -168,7 +187,7 @@ namespace Web.Empleado {
                 if (MiSesion.TIPO_USUARIO.Equals(Modelo.Tipo_Usuario.Administrador.ToString())) {
                     usuario.ESTADO = ddlEstado.SelectedValue.ToString();
 
-                    if (MiSesion.TIPO_USUARIO.Equals(Modelo.Tipo_Usuario.Administrador.ToString()) && usuario.ESTADO.Equals("Deshabilitado"))
+                    if (SesionEdit.TIPO_USUARIO.Equals(Modelo.Tipo_Usuario.Administrador.ToString()) && usuario.ESTADO.Equals("Deshabilitado"))
                     {
                         error.Text = "No puede deshabilitar a un administrador.";
                         flag = false;
