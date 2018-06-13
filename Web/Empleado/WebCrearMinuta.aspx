@@ -20,25 +20,14 @@
                     <h5>Crear Minuta</h5>         
                 </div>
             </div>
-          <div class="form-group">
-              <label for="name" class="col-sm-12 control-label">Nombre Minuta</label>
-                <div class="col-sm-12">
-                  <div class="input-group">
-                  <span class="input-group-text"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                      <asp:TextBox ID="txtNombreMinuta" placeholder="Ejemplo: Desayuno VIP" runat="server" CssClass="form-control"></asp:TextBox>
-                </div>
-              </div>
-            </div>  
-            
-              <asp:ScriptManager ID="ScriptManager2" runat="server"></asp:ScriptManager>
-          <asp:UpdatePanel ID="UpdatePanel2" UpdateMode="Conditional" runat="server">
+                      
             <ContentTemplate>
                 <div class="form-group">
-              <label for="name" class="col-sm-12 control-label">Tipo de Minuta</label>
+              <label for="name" class="col-sm-12 control-label">Categoría de Minuta</label>
                 <div class="col-sm-12">
                   <div class="input-group">
                   <span class="input-group-text"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                      <asp:DropDownList ID="ddlTipo" CssClass="form-control" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlTipo_SelectedIndexChanged">
+                      <asp:DropDownList ID="ddlCategoria" CssClass="form-control" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlCategoria_SelectedIndexChanged">
                       </asp:DropDownList>
                 </div>
               </div>
@@ -54,32 +43,8 @@
                 </div>
               </div>
             </div>  
-                </ContentTemplate>
-            </asp:UpdatePanel>
-
-          <asp:UpdatePanel ID="UpdatePanel1" UpdateMode="Conditional" runat="server">
-              <ContentTemplate>
-                  <div class="form-group">
-              <label for="name" class="col-sm-12 control-label">Cantidad de Platos</label>
-                <div class="col-sm-12">
-                  <div class="input-group">
-                  <span class="input-group-text"><i class="fas fa-money-bill-alt" aria-hidden="true"></i></span>
-                  <asp:TextBox ID="txtCantidad" placeholder="Ingrese la cantidad" runat="server" CssClass="form-control" required="required" min="1" AutoPostBack="true" OnTextChanged="txtCantidad_TextChanged"></asp:TextBox>
-                </div>
-              </div>
-            </div>
-
-          <div class="form-group">
-              <label for="name" class="col-sm-12 control-label">Precio Total</label>
-                <div class="col-sm-12">
-                  <div class="input-group">
-                  <span class="input-group-text"><i class="fas fa-money-bill-alt" aria-hidden="true"></i></span>
-                  <asp:TextBox ID="txtPrecio" placeholder="Precio" runat="server" CssClass="form-control" required="required"></asp:TextBox>
-                </div>
-              </div>
-            </div>
-                  </ContentTemplate>
-              </asp:UpdatePanel>
+                
+            
 
           <div class="row"> 
                   <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
@@ -93,6 +58,7 @@
                     </div>
                 </div>   
           </div>
+                
         
         <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">

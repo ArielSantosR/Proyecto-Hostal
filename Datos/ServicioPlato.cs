@@ -284,10 +284,11 @@ namespace Datos
             }
         }
 
-        public List<PLATO> listaPlatoTipo(TIPO_PLATO tipo)
+        public List<PLATO> listaPlatoCategoria(CATEGORIA categoria)
         {
             var lista = (from consulta in ent.PLATO
-                         where consulta.ID_TIPO_PLATO == tipo.ID_TIPO_PLATO
+                         where consulta.ID_CATEGORIA == categoria.ID_CATEGORIA
+                         orderby consulta.ID_TIPO_PLATO
                          select consulta).ToList();
             return lista;
         }

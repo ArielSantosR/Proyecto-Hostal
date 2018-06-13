@@ -17,7 +17,26 @@ namespace Modelo
 
         public string NombreYPrecio
         {
-            get { return this.NOMBRE_PLATO + " $" + this.PRECIO_PLATO; }
+            get
+            {
+                string nombre_precio = string.Empty;
+
+                switch (this.ID_TIPO_PLATO){
+                    case 1:
+                        nombre_precio = "Desayuno: " + this.NOMBRE_PLATO + " $" + this.PRECIO_PLATO;
+                        break;
+
+                    case 2:
+                        nombre_precio = "Almuerzo: " + this.NOMBRE_PLATO + " $" + this.PRECIO_PLATO;
+                        break;
+
+                    case 3:
+                        nombre_precio = "Cena: " + this.NOMBRE_PLATO + " $" + this.PRECIO_PLATO;
+                        break;
+
+                }
+                return nombre_precio;
+            }
         }
     }
 

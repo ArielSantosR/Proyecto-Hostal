@@ -404,6 +404,14 @@ namespace Web.Empleado
 
                 btnLimpiar.Enabled = false;
                 btnVer.Enabled = false;
+
+                if (MiSesionD.Count > 0)
+                {
+                    alerta_exito.Visible = false;
+                    error.Text = "Sólo se pueden hacer pedidos a un proveedor";
+                    alerta.Visible = true;
+                }
+
                 MiSesionD.Clear();
 
                 CargarTabla(MiSesionD);

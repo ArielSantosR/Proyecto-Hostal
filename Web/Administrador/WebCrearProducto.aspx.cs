@@ -156,25 +156,34 @@ namespace Web.Administrador
                             short.TryParse(txtStockCritico.Text, out stockCritico) &&
                             int.TryParse(txtPrecio.Text, out precio))
                         {
-                            producto.STOCK_PRODUCTO = stock;
-                            producto.STOCK_CRITICO_PRODUCTO = stockCritico;
-                            producto.PRECIO_PRODUCTO = precio;
-
-                            Service1 s = new Service1();
-                            XmlSerializer sr = new XmlSerializer(typeof(Modelo.Producto));
-                            StringWriter writer = new StringWriter();
-                            sr.Serialize(writer, producto);
-
-                            if (s.AgregarProducto(writer.ToString()))
+                            if (stock > 0 && stockCritico > 0 && precio > 0)
                             {
-                                exito.Text = "El producto ha sido agregado con éxito";
-                                alerta_exito.Visible = true;
-                                alerta.Visible = false;
+                                producto.STOCK_PRODUCTO = stock;
+                                producto.STOCK_CRITICO_PRODUCTO = stockCritico;
+                                producto.PRECIO_PRODUCTO = precio;
+
+                                Service1 s = new Service1();
+                                XmlSerializer sr = new XmlSerializer(typeof(Modelo.Producto));
+                                StringWriter writer = new StringWriter();
+                                sr.Serialize(writer, producto);
+
+                                if (s.AgregarProducto(writer.ToString()))
+                                {
+                                    exito.Text = "El producto ha sido agregado con éxito";
+                                    alerta_exito.Visible = true;
+                                    alerta.Visible = false;
+                                }
+                                else
+                                {
+                                    alerta_exito.Visible = false;
+                                    error.Text = "El ingreso de Producto ha fallado";
+                                    alerta.Visible = true;
+                                }
                             }
                             else
                             {
                                 alerta_exito.Visible = false;
-                                error.Text = "El ingreso de Producto ha fallado";
+                                error.Text = "Los números deben ser superiores a 0";
                                 alerta.Visible = true;
                             }
                         }

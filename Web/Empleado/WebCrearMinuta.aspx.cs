@@ -89,34 +89,32 @@ namespace Web.Empleado
                 //Cargando Tipo de Plato
                 Service1 service = new Service1();
 
-                string tipoPlato = service.ListarTipoPlato();
-                XmlSerializer ser2 = new XmlSerializer(typeof(Modelo.TipoPlatoCollection));
-                StringReader reader2 = new StringReader(tipoPlato);
-                Modelo.TipoPlatoCollection coleccionProveedor = (Modelo.TipoPlatoCollection)ser2.Deserialize(reader2);
+                string categoria = service.ListarCategoria();
+                XmlSerializer ser2 = new XmlSerializer(typeof(Modelo.CategoriaCollection));
+                StringReader reader2 = new StringReader(categoria);
+                Modelo.CategoriaCollection coleccionProveedor = (Modelo.CategoriaCollection)ser2.Deserialize(reader2);
                 reader2.Close();
-
-                txtPrecio.ReadOnly = true;
 
                 if (!IsPostBack)
                 {
-                    ddlTipo.DataSource = coleccionProveedor;
-                    ddlTipo.DataTextField = "NOMBRE_TIPO_PLATO";
-                    ddlTipo.DataValueField = "ID_TIPO_PLATO";
-                    ddlTipo.DataBind();
+                    ddlCategoria.DataSource = coleccionProveedor;
+                    ddlCategoria.DataTextField = "NOMBRE_CATEGORIA";
+                    ddlCategoria.DataValueField = "ID_CATEGORIA";
+                    ddlCategoria.DataBind();
 
-                    ddlTipo.SelectedIndex = 0;
+                    ddlCategoria.SelectedIndex = 0;
 
                     //segun el valor seleccionado en el anterior DDL, hara una busqueda para cargar
                     //todos los datos
-                    Modelo.TipoPlato tipo_plato = new Modelo.TipoPlato();
+                    Modelo.Categoria categoria2 = new Modelo.Categoria();
 
-                    tipo_plato.ID_TIPO_PLATO = short.Parse(ddlTipo.SelectedValue);
+                    categoria2.ID_CATEGORIA = short.Parse(ddlCategoria.SelectedValue);
 
-                    XmlSerializer sr = new XmlSerializer(typeof(Modelo.TipoPlato));
+                    XmlSerializer sr = new XmlSerializer(typeof(Modelo.Categoria));
                     StringWriter writer = new StringWriter();
-                    sr.Serialize(writer, tipo_plato);
+                    sr.Serialize(writer, categoria2);
 
-                    string platos = service.ListarPlatoPorTipo(writer.ToString());
+                    string platos = service.ListarPlatoPorCategoria(writer.ToString());
                     XmlSerializer ser = new XmlSerializer(typeof(Modelo.PlatoCollection));
                     StringReader reader = new StringReader(platos);
                     Modelo.PlatoCollection coleccionProducto = (Modelo.PlatoCollection)ser.Deserialize(reader);
@@ -128,9 +126,8 @@ namespace Web.Empleado
                     ddlPlato.DataBind();
 
                     //Para funcionar requiere que el update panel tenga el Modo Condicional
-                    UpdatePanel2.Update();
 
-                   // MiSesionM = null;
+                    MiSesionM = null;
                     btnLimpiar.Enabled = false;
                     btnVer.Enabled = false;
                 }
@@ -148,76 +145,67 @@ namespace Web.Empleado
         {
             try
             {
-                short cantidad = 0;
-
-                if (txtCantidad.Text != string.Empty)
+                short cantidad = 1;
+                if (ddlPlato.SelectedValue != string.Empty)
                 {
-                    if (short.TryParse(txtCantidad.Text, out cantidad))
+                    Modelo.DetallePlato detalle = new Modelo.DetallePlato();
+                    detalle.CANTIDAD = cantidad;
+                    detalle.ID_PLATO = short.Parse(ddlPlato.SelectedValue);
+                    Service1 s = new Service1();
+                    XmlSerializer sr = new XmlSerializer(typeof(Modelo.Plato));
+                    bool existe = false;
+                    bool repetido = false;
+
+                    foreach (DetallePlato d in MiSesionM)
                     {
-                        if (cantidad > 0)
+                        if (detalle.ID_PLATO == d.ID_PLATO)
                         {
-                            if (ddlPlato.SelectedValue != string.Empty)
-                            {
-                                Modelo.DetallePlato detalle = new Modelo.DetallePlato();
-                                detalle.CANTIDAD = cantidad;
-                                detalle.ID_PLATO = short.Parse(ddlPlato.SelectedValue);
-
-                                bool existe = false;
-
-                                foreach (DetallePlato d in MiSesionM)
-                                {
-                                    if (detalle.ID_PLATO == d.ID_PLATO)
-                                    {
-                                        existe = true;
-                                    }
-                                }
-                                if (existe)
-                                {
-                                    alerta_exito.Visible = false;
-                                    error.Text = "Este Plato ya ha sido agregado";
-                                    alerta.Visible = true;
-                                }
-                                else
-                                {
-                                    exito.Text = "Plato Agregado a la Lista.";
-                                    alerta_exito.Visible = true;
-                                    alerta.Visible = false;
-                                    MiSesionM.Add(detalle);
-                                    btnLimpiar.Enabled = true;
-                                    btnVer.Enabled = true;
-                                    txtCantidad.Text = "";
-                                    txtPrecio.Text = "";
-                                    gvDetalle.DataSource = MiSesionM;
-                                    gvDetalle.DataBind();
-                                    ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modal", "$('#exampleModal2').modal();", true);
-                                }
-                            }
-                            else
-                            {
-                                alerta_exito.Visible = false;
-                                error.Text = "Debe seleccionar un Plato ";
-                                alerta.Visible = true;
-                            }
+                            existe = true;
                         }
-                        else
+                        Modelo.Plato p = new Modelo.Plato();
+                        p.ID_PLATO = detalle.ID_PLATO;
+                        StringWriter writer = new StringWriter();
+                        sr.Serialize(writer, p);
+                        Modelo.Plato plato2 = s.ObtenerPlato(writer.ToString());
+                        Modelo.Plato p2 = new Modelo.Plato();
+                        p2.ID_PLATO = d.ID_PLATO;
+                        StringWriter writer2 = new StringWriter();
+                        sr.Serialize(writer2, p2);
+                        Modelo.Plato plato3 = s.ObtenerPlato(writer2.ToString());
+                        if (plato2.ID_TIPO_PLATO == plato3.ID_TIPO_PLATO)
                         {
-                            alerta_exito.Visible = false;
-                            error.Text = "Debe Ingresar una cantidad superior a 0";
-                            alerta.Visible = true;
+                            repetido = true;
                         }
-
+                    }
+                    if (existe)
+                    {
+                        alerta_exito.Visible = false;
+                        error.Text = "Este Plato ya ha sido agregado";
+                        alerta.Visible = true;
+                    }
+                    else if (repetido)
+                    {
+                        alerta_exito.Visible = false;
+                        error.Text = "Solo puede tener una sola categoría de plato a la vez";
+                        alerta.Visible = true;
                     }
                     else
                     {
-                        alerta_exito.Visible = false;
-                        error.Text = "Datos Ingresados incorrectamente, verifique que ha ingresado números correctamente";
-                        alerta.Visible = true;
+                        exito.Text = "Plato Agregado a la Lista.";
+                        alerta_exito.Visible = true;
+                        alerta.Visible = false;
+                        MiSesionM.Add(detalle);
+                        btnLimpiar.Enabled = true;
+                        btnVer.Enabled = true;
+                        gvDetalle.DataSource = MiSesionM;
+                        gvDetalle.DataBind();
+                        ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modal", "$('#exampleModal2').modal();", true);
                     }
                 }
                 else
                 {
                     alerta_exito.Visible = false;
-                    error.Text = "Debe llenar todos los datos";
+                    error.Text = "Debe seleccionar un Plato ";
                     alerta.Visible = true;
                 }
             }
@@ -235,83 +223,127 @@ namespace Web.Empleado
             {
                 if (MiSesionM.Count > 0)
                 {
-                    if (txtNombreMinuta.Text != string.Empty)
+                    Modelo.Pension pension = new Modelo.Pension();
+                    pension.NOMBRE_PENSION = string.Empty;
+                    pension.VALOR_PENSION = 0;
+
+                    Service1 s = new Service1();
+                    XmlSerializer sr = new XmlSerializer(typeof(Modelo.Plato));
+
+                    foreach (DetallePlato d in MiSesionM)
                     {
-                        Modelo.Pension pension = new Modelo.Pension();
-                        pension.NOMBRE_PENSION = txtNombreMinuta.Text;
-                        pension.VALOR_PENSION = 0;
+                        Modelo.Plato p = new Modelo.Plato();
+                        p.ID_PLATO = d.ID_PLATO;
+                        StringWriter writer = new StringWriter();
+                        sr.Serialize(writer, p);
+                        Modelo.Plato plato = s.ObtenerPlato(writer.ToString());
+                        pension.VALOR_PENSION = pension.VALOR_PENSION + (plato.PRECIO_PLATO * d.CANTIDAD);
 
-                        Service1 s = new Service1();
-                        XmlSerializer sr = new XmlSerializer(typeof(Modelo.Plato));
-                        
-
-                        //Desayuno VIP
-                        foreach (DetallePlato d in MiSesionM)
+                        if (pension.NOMBRE_PENSION.Equals(string.Empty))
                         {
-                            Modelo.Plato p = new Modelo.Plato();
-                            p.ID_PLATO = d.ID_PLATO;
-                            StringWriter writer = new StringWriter();
-                            sr.Serialize(writer, p);
-                            Modelo.Plato plato2 = s.ObtenerPlato(writer.ToString());
-                            pension.VALOR_PENSION = pension.VALOR_PENSION + (plato2.PRECIO_PLATO * d.CANTIDAD);
-                        }
-
-                        if (pension.VALOR_PENSION > 0)
-                        {
-                            XmlSerializer sr2 = new XmlSerializer(typeof(Modelo.Pension));
-                            StringWriter writer2 = new StringWriter();
-                            sr2.Serialize(writer2, pension);
-                            writer2.Close();
-                            
-                            if (s.AgregarMinuta(writer2.ToString()))
+                            switch (plato.ID_TIPO_PLATO)
                             {
-                                bool v_exito = true;
+                                case 1:
+                                    pension.NOMBRE_PENSION = "Desayuno";
+                                    break;
 
-                                foreach (DetallePlato d in MiSesionM)
+                                case 2:
+                                    pension.NOMBRE_PENSION = "Almuerzo";
+                                    break;
+
+                                case 3:
+                                    pension.NOMBRE_PENSION = "Cena";
+                                    break;
+                            }                            
+                        }
+                        else
+                        {
+                            switch (plato.ID_TIPO_PLATO)
+                            {
+                                case 1:
+                                    pension.NOMBRE_PENSION = pension.NOMBRE_PENSION + "-Desayuno";
+                                    break;
+
+                                case 2:
+                                    pension.NOMBRE_PENSION = pension.NOMBRE_PENSION + "-Almuerzo";
+                                    break;
+
+                                case 3:
+                                    pension.NOMBRE_PENSION = pension.NOMBRE_PENSION + "-Cena";
+                                    break;
+                            }
+                        }
+                    }
+
+                    Modelo.Plato p2 = new Modelo.Plato();
+                    p2.ID_PLATO = MiSesionM[0].ID_PLATO;
+                    StringWriter writer2 = new StringWriter();
+                    sr.Serialize(writer2, p2);
+                    Modelo.Plato plato2 = s.ObtenerPlato(writer2.ToString());
+
+                    switch (plato2.ID_CATEGORIA)
+                    {
+                        case 1:
+                            pension.NOMBRE_PENSION = pension.NOMBRE_PENSION + " Bronce";
+                            break;
+
+                        case 2:
+                            pension.NOMBRE_PENSION = pension.NOMBRE_PENSION + " Plata";
+                            break;
+
+                        case 3:
+                            pension.NOMBRE_PENSION = pension.NOMBRE_PENSION + " Oro";
+                            break;
+                    }
+                    if (pension.VALOR_PENSION > 0)
+                    {
+                        XmlSerializer sr2 = new XmlSerializer(typeof(Modelo.Pension));
+                        StringWriter writer3 = new StringWriter();
+                        sr2.Serialize(writer3, pension);
+                        writer2.Close();
+
+                        if (s.AgregarMinuta(writer3.ToString()))
+                        {
+
+                            bool v_exito = true;
+
+                            foreach (DetallePlato d in MiSesionM)
+
+                            {
+                                Modelo.DetallePlato detalle = new Modelo.DetallePlato();
+                                detalle.CANTIDAD = d.CANTIDAD;
+                                detalle.ID_PLATO = d.ID_PLATO;
+                                XmlSerializer sr3 = new XmlSerializer(typeof(Modelo.DetallePlato));
+                                StringWriter writer4 = new StringWriter();
+                                sr3.Serialize(writer4, detalle);
+
+                                if (!s.AgregarDetalleMinuta(writer4.ToString()))
                                 {
-                                    Modelo.DetallePlato detalle = new Modelo.DetallePlato();
-                                    detalle.CANTIDAD = d.CANTIDAD;
-                                    detalle.ID_PLATO = d.ID_PLATO;
-
-                                    XmlSerializer sr3 = new XmlSerializer(typeof(Modelo.DetallePlato));
-                                    StringWriter writer3 = new StringWriter();
-                                    sr3.Serialize(writer3, detalle);
-
-                                    if (!s.AgregarDetalleMinuta(writer3.ToString()))
-                                    {
-                                        v_exito = false;
-                                    }
+                                    v_exito = false;
                                 }
-
-                                if (v_exito)
-                                {
-                                    Response.Write("<script language='javascript'>window.alert('Minuta Creada');window.location='../Empleado/WebVerMinuta.aspx';</script>");
-                                }
-                                else
-                                {
-                                    alerta_exito.Visible = false;
-                                    error.Text = "No se ha podido crear la minuta";
-                                    alerta.Visible = true;
-                                }
+                            }
+                            if (v_exito)
+                            {
+                                Response.Write("<script language='javascript'>window.alert('Minuta Creada');window.location='../Empleado/WebVerMinuta.aspx';</script>");
                             }
                             else
                             {
                                 alerta_exito.Visible = false;
-                                error.Text = "No se ha podido añadir el detalle de Minuta";
+                                error.Text = "No se ha podido crear la minuta";
                                 alerta.Visible = true;
                             }
                         }
                         else
                         {
                             alerta_exito.Visible = false;
-                            error.Text = "Precio no válido";
+                            error.Text = "No se ha podido añadir el detalle de Minuta";
                             alerta.Visible = true;
                         }
                     }
                     else
                     {
                         alerta_exito.Visible = false;
-                        error.Text = "Debe ponerle un nombre a la minuta";
+                        error.Text = "Precio no válido";
                         alerta.Visible = true;
                     }
                 }
@@ -321,45 +353,6 @@ namespace Web.Empleado
                     error.Text = "debe ingresar platos para poder hacer una Minuta";
                     alerta.Visible = true;
                 }
-            }
-            catch (Exception ex)
-            {
-                alerta_exito.Visible = false;
-                error.Text = "Excepción: " + ex.ToString();
-                alerta.Visible = true;
-            }
-        }
-
-        protected void txtCantidad_TextChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                int cantidad = 0;
-
-                if (int.TryParse(txtCantidad.Text, out cantidad))
-                {
-                    Service1 service = new Service1();
-                    //segun el valor seleccionado en el anterior DDL, hara una busqueda para cargar
-                    //todos los datos
-                    Modelo.Plato plato = new Modelo.Plato();
-                    plato.ID_PLATO = short.Parse(ddlPlato.SelectedValue);
-
-                    XmlSerializer sr = new XmlSerializer(typeof(Modelo.Plato));
-                    StringWriter writer = new StringWriter();
-                    sr.Serialize(writer, plato);
-
-                    //Una vez encuentra sus datos los carga en una segunda variable
-                    Plato plato2 = service.ObtenerPlato(writer.ToString());
-
-                    txtPrecio.Text = "$" + plato2.PRECIO_PLATO * cantidad;
-                }
-                else
-                {
-                    txtCantidad.Text = "";
-                    txtPrecio.Text = "";
-                }
-
-                UpdatePanel1.Update();
             }
             catch (Exception ex)
             {
@@ -408,40 +401,44 @@ namespace Web.Empleado
             ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modal", "$('#exampleModal2').modal();", true);
         }
 
-        protected void ddlTipo_SelectedIndexChanged(object sender, EventArgs e)
+        protected void ddlCategoria_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
             {
                 Service1 service = new Service1();
                 //segun el valor seleccionado en el anterior DDL, hara una busqueda para cargar
                 //todos los datos
-                Modelo.TipoPlato tipo_plato = new Modelo.TipoPlato();
+                Modelo.Categoria categoria2 = new Modelo.Categoria();
 
-                tipo_plato.ID_TIPO_PLATO = short.Parse(ddlTipo.SelectedValue);
+                categoria2.ID_CATEGORIA = short.Parse(ddlCategoria.SelectedValue);
 
-                XmlSerializer sr = new XmlSerializer(typeof(Modelo.TipoPlato));
+                XmlSerializer sr = new XmlSerializer(typeof(Modelo.Categoria));
                 StringWriter writer = new StringWriter();
-                sr.Serialize(writer, tipo_plato);
+                sr.Serialize(writer, categoria2);
 
-                string platos = service.ListarPlatoPorTipo(writer.ToString());
+                string platos = service.ListarPlatoPorCategoria(writer.ToString());
                 XmlSerializer ser = new XmlSerializer(typeof(Modelo.PlatoCollection));
                 StringReader reader = new StringReader(platos);
-                Modelo.PlatoCollection coleccionProducto = (Modelo.PlatoCollection)ser.Deserialize(reader);
+                Modelo.PlatoCollection coleccionPlato = (Modelo.PlatoCollection)ser.Deserialize(reader);
                 reader.Close();
 
-                ddlPlato.DataSource = coleccionProducto;
+                ddlPlato.DataSource = coleccionPlato;
                 ddlPlato.DataTextField = "NombreYPrecio";
                 ddlPlato.DataValueField = "ID_PLATO";
                 ddlPlato.DataBind();
 
-                //Para funcionar requiere que el update panel tenga el Modo Condicional
-                txtCantidad.Text = "";
-                txtPrecio.Text = "";
-                UpdatePanel1.Update();
-                UpdatePanel2.Update();
-
                 btnLimpiar.Enabled = false;
                 btnVer.Enabled = false;
+
+                //Para funcionar requiere que el update panel tenga el Modo Condicional
+
+                if (MiSesionM.Count > 0)
+                {
+                    alerta_exito.Visible = false;
+                    error.Text = "La minuta solo puede tener una categoría, por lo que los platos seleccionados serán eliminados";
+                    alerta.Visible = true;
+                }
+
                 MiSesionM.Clear();
 
                 gvDetalle.DataSource = MiSesionM;

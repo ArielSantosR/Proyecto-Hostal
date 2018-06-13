@@ -165,7 +165,7 @@ namespace WcfNegocio
         bool EliminarPlato(string plato);
 
         [OperationContract]
-        string ListarPlatoPorTipo(string tipo);
+        string ListarPlatoPorCategoria(string categoria);
         #endregion
 
         #region Tipo Plato
