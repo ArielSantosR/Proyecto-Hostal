@@ -2348,6 +2348,37 @@ namespace WcfNegocio
 
             return serv.AgregarDetalleMinuta(dDatos);
         }
+        /*
+        public Minuta ObtenerMinuta(string minuta)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.Minuta));
+            StringReader reader = new StringReader(minuta);
+            Modelo.Minuta m = (Modelo.Minuta)ser.Deserialize(reader);
+            ServicioMinuta serv = new ServicioMinuta();
+            Datos.PENSION Datos = new Datos.PENSION();
+            Datos.ID_PENSION = m.ID_PENSION;
+
+            if (serv.ObtenerMinuta(Datos) == null)
+            {
+                return null;
+            }
+            else
+            {
+                Datos. Datos2 = serv.ObtenerMinuta(Datos);
+
+                m.ID_PENSION = Datos2
+                m.NOMBRE_PENSION = Datos2
+                m.VALOR_PENSION = Datos2
+                m.NUMERO_HABITACION = Datos2
+
+
+
+         
+
+                return m;
+            }
+        }
+        */
         #endregion
 
         #region DDL

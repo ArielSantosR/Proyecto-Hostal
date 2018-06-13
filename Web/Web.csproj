@@ -143,6 +143,7 @@
     <Content Include="Empleado\WebRecibirPedido.aspx" />
     <Content Include="Empleado\WebReservasPendientes.aspx" />
     <Content Include="Empleado\WebVerFacturas.aspx" />
+    <Content Include="Empleado\WebVerMinuta.aspx" />
     <Content Include="Empleado\WebVerProductos.aspx" />
     <Content Include="Hostal\WebContacto.aspx" />
     <Content Include="Hostal\WebFaqs.aspx" />
@@ -548,6 +549,13 @@
     </Compile>
     <Compile Include="Empleado\WebVerFacturas.aspx.designer.cs">
       <DependentUpon>WebVerFacturas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Empleado\WebVerMinuta.aspx.cs">
+      <DependentUpon>WebVerMinuta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Empleado\WebVerMinuta.aspx.designer.cs">
+      <DependentUpon>WebVerMinuta.aspx</DependentUpon>
     </Compile>
     <Compile Include="Empleado\WebVerProductos.aspx.cs">
       <DependentUpon>WebVerProductos.aspx</DependentUpon>
