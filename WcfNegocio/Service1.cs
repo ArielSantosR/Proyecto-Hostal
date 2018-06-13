@@ -960,17 +960,17 @@ namespace WcfNegocio
             return serv.EliminarPlato(pDatos);
         }
 
-        public string ListarPlatoPorTipo(string tipo)
+        public string ListarPlatoPorCategoria(string categoria)
         {
-            XmlSerializer ser = new XmlSerializer(typeof(Modelo.TipoPlato));
-            StringReader reader = new StringReader(tipo);
-            Modelo.TipoPlato t = (Modelo.TipoPlato)ser.Deserialize(reader);
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.Categoria));
+            StringReader reader = new StringReader(categoria);
+            Modelo.Categoria c = (Modelo.Categoria)ser.Deserialize(reader);
             ServicioPlato serv = new ServicioPlato();
 
-            Datos.TIPO_PLATO tDatos = new Datos.TIPO_PLATO();
-            tDatos.ID_TIPO_PLATO = t.ID_TIPO_PLATO;
+            Datos.CATEGORIA cDatos = new Datos.CATEGORIA();
+            cDatos.ID_CATEGORIA = c.ID_CATEGORIA;
 
-            List<Datos.PLATO> listaPlato = serv.listaPlatoTipo(tDatos);
+            List<Datos.PLATO> listaPlato = serv.listaPlatoCategoria(cDatos);
 
             if (listaPlato == null)
             {

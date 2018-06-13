@@ -30,6 +30,5 @@ C:\Users\Suzu\Documents\Proyecto-Hostal\.git\Datos\bin\Debug\Datos.pdb
 C:\Users\Suzu\Documents\Proyecto-Hostal\.git\Datos\bin\Debug\EntityFramework.dll
 C:\Users\Suzu\Documents\Proyecto-Hostal\.git\Datos\bin\Debug\Oracle.ManagedDataAccess.dll
 C:\Users\Suzu\Documents\Proyecto-Hostal\.git\Datos\bin\Debug\EntityFramework.xml
-C:\Users\Suzu\Documents\Proyecto-Hostal\.git\Datos\obj\Debug\Datos.csprojResolveAssemblyReference.cache
 C:\Users\Suzu\Documents\Proyecto-Hostal\.git\Datos\obj\Debug\Datos.dll
 C:\Users\Suzu\Documents\Proyecto-Hostal\.git\Datos\obj\Debug\Datos.pdb

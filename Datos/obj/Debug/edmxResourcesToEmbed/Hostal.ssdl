@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="Model.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="11.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="Hostal.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="11.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="BOLETA">
     <Key>
       <PropertyRef Name="ID_BOLETA" />
@@ -51,12 +51,13 @@
   <EntityType Name="DETALLE_BOLETA">
     <Key>
       <PropertyRef Name="ID_DETALLE_BOLETA" />
+      <PropertyRef Name="ID_BOLETA" />
     </Key>
     <Property Name="ID_DETALLE_BOLETA" Type="number" Precision="10" Scale="0" Nullable="false" />
     <Property Name="DESCRIPCION_DETALLE" Type="varchar2" MaxLength="250" Nullable="false" />
     <Property Name="CANTIDAD" Type="number" Precision="10" Scale="0" Nullable="false" />
     <Property Name="VALOR_TOTAL" Type="number" Precision="10" Scale="0" Nullable="false" />
-    <Property Name="ID_BOLETA" Type="number" Precision="10" Scale="0" />
+    <Property Name="ID_BOLETA" Type="number" Precision="10" Scale="0" Nullable="false" />
   </EntityType>
   <EntityType Name="DETALLE_FACTURA">
     <Key>
@@ -102,10 +103,11 @@
   <EntityType Name="DETALLE_PEDIDO">
     <Key>
       <PropertyRef Name="ID_DETALLE_PEDIDO" />
+      <PropertyRef Name="ID_PRODUCTO" />
     </Key>
     <Property Name="ID_DETALLE_PEDIDO" Type="number" Precision="5" Scale="0" Nullable="false" />
     <Property Name="CANTIDAD" Type="number" Precision="10" Scale="0" Nullable="false" />
-    <Property Name="NUMERO_PEDIDO" Type="number" Precision="5" Scale="0" />
+    <Property Name="NUMERO_PEDIDO" Type="number" Precision="5" Scale="0" Nullable="false" />
     <Property Name="ID_PRODUCTO" Type="number" Precision="19" Scale="0" Nullable="false" />
   </EntityType>
   <EntityType Name="DETALLE_PLATOS">
@@ -120,6 +122,7 @@
   <EntityType Name="DETALLE_RECEPCION">
     <Key>
       <PropertyRef Name="ID_DETALLE_RECEPCION" />
+      <PropertyRef Name="NUMERO_RECEPCION" />
     </Key>
     <Property Name="ID_DETALLE_RECEPCION" Type="number" Precision="5" Scale="0" Nullable="false" />
     <Property Name="CANTIDAD" Type="number" Precision="10" Scale="0" Nullable="false" />
@@ -247,7 +250,7 @@
       <PropertyRef Name="ID_PENSION" />
     </Key>
     <Property Name="ID_PENSION" Type="number" Precision="5" Scale="0" Nullable="false" />
-    <Property Name="NOMBRE_PENSION" Type="varchar2" MaxLength="25" Nullable="false" />
+    <Property Name="NOMBRE_PENSION" Type="varchar2" MaxLength="35" Nullable="false" />
     <Property Name="VALOR_PENSION" Type="number" Precision="10" Scale="0" Nullable="false" />
   </EntityType>
   <EntityType Name="PLATO">
@@ -266,7 +269,6 @@
     </Key>
     <Property Name="ID_PRODUCTO" Type="number" Precision="19" Scale="0" Nullable="false" />
     <Property Name="NOMBRE_PRODUCTO" Type="varchar2" MaxLength="50" Nullable="false" />
-    <Property Name="PRECIO_PRODUCTO" Type="number" Precision="10" Scale="0" Nullable="false" />
     <Property Name="FECHA_VENCIMIENTO_PRODUCTO" Type="date" />
     <Property Name="STOCK_PRODUCTO" Type="number" Precision="5" Scale="0" Nullable="false" />
     <Property Name="STOCK_CRITICO_PRODUCTO" Type="number" Precision="5" Scale="0" Nullable="false" />
@@ -275,6 +277,7 @@
     <Property Name="ID_FAMILIA" Type="number" Precision="5" Scale="0" Nullable="false" />
     <Property Name="RUT_PROVEEDOR" Type="number" Precision="8" Scale="0" Nullable="false" />
     <Property Name="ID_PRODUCTO_SEQ" Type="number" Precision="5" Scale="0" Nullable="false" />
+    <Property Name="PRECIO_PRODUCTO" Type="number" Precision="8" Scale="0" Nullable="false" />
   </EntityType>
   <EntityType Name="PROVEEDOR">
     <Key>
@@ -412,7 +415,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_DETALLE_BOLETA_BOLETA">
-    <End Role="BOLETA" Type="Self.BOLETA" Multiplicity="0..1" />
+    <End Role="BOLETA" Type="Self.BOLETA" Multiplicity="1" />
     <End Role="DETALLE_BOLETA" Type="Self.DETALLE_BOLETA" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="BOLETA">
@@ -472,7 +475,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_DETALLE_PEDIDO_PEDIDO">
-    <End Role="PEDIDO" Type="Self.PEDIDO" Multiplicity="0..1" />
+    <End Role="PEDIDO" Type="Self.PEDIDO" Multiplicity="1" />
     <End Role="DETALLE_PEDIDO" Type="Self.DETALLE_PEDIDO" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="PEDIDO">
@@ -915,7 +918,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="ModelStoreContainer">
+  <EntityContainer Name="HostalStoreContainer">
     <EntitySet Name="BOLETA" EntityType="Self.BOLETA" Schema="HOSTAL" store:Type="Tables" />
     <EntitySet Name="CATEGORIA" EntityType="Self.CATEGORIA" Schema="HOSTAL" store:Type="Tables" />
     <EntitySet Name="CATEGORIA_HABITACION" EntityType="Self.CATEGORIA_HABITACION" Schema="HOSTAL" store:Type="Tables" />

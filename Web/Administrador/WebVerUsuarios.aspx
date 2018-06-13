@@ -43,8 +43,8 @@
     </div>
     <% } %>
     <div class="container">
-        <div class="row main" >
-            <div class="main-login main-center" style="max-width:1024px">
+        <div class="row main">
+            <div class="main-login main-center" style="max-width: 1024px">
                 <asp:ScriptManager ID="ScriptManager2" runat="server"></asp:ScriptManager>
                 <asp:UpdatePanel ID="UpdatePanel2" UpdateMode="Conditional" runat="server">
                     <ContentTemplate>
@@ -56,14 +56,14 @@
                                     <asp:DropDownList ID="ddlFiltro" CssClass="form-control" runat="server" AutoPostBack="true">
                                     </asp:DropDownList>
                                 </div>
-                                <div>
-                                    <asp:Button CssClass="btn btn-primary" ID="btnFiltrar" runat="server" Text="Filtar" OnClick="btnFiltrar_Click" />
-                                    <asp:Button CssClass="btn btn-primary" ID="Limpiar" runat="server" Text="Limpiar Filtro" />
-                                </div>
                             </div>
                         </div>
                     </ContentTemplate>
                 </asp:UpdatePanel>
+                <div class="form-group">
+                    <asp:Button CssClass="btn btn-primary" ID="btnFiltrar" runat="server" Text="Filtar" OnClick="btnFiltrar_Click" />
+                    <asp:Button CssClass="btn btn-primary" ID="Limpiar" runat="server" Text="Limpiar Filtro" OnClick="Limpiar_Click" />
+                </div>
                 <div class="form-group">
                     <div style="display: flex; justify-content: center; margin-bottom: 20px">
                         <asp:GridView ID="gvUsuario" runat="server" ForeColor="#333333" GridLines="Vertical" DataKeyNames="Tipo,ID" OnRowEditing="gvUsuario_RowEditing" AutoGenerateColumns="true">

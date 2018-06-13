@@ -18,7 +18,7 @@ namespace Datos
         public string DESCRIPCION_DETALLE { get; set; }
         public int CANTIDAD { get; set; }
         public int VALOR_TOTAL { get; set; }
-        public Nullable<int> ID_BOLETA { get; set; }
+        public int ID_BOLETA { get; set; }
     
         public virtual BOLETA BOLETA { get; set; }
     }
