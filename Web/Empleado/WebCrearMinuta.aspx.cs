@@ -293,7 +293,6 @@ namespace Web.Empleado
                                     error.Text = "No se ha podido crear la minuta";
                                     alerta.Visible = true;
                                 }
-                                
                             }
                             else
                             {
