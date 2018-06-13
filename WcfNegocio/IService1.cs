@@ -362,6 +362,16 @@ namespace WcfNegocio
 
         [OperationContract]
         bool AgregarDetalleMinuta(string detalle);
+
+        [OperationContract]
+        string ListarMinuta();
+
+        // [OperationContract]
+        // Minuta ObtenerMinuta(string minuta);
+
+
+
+
         #endregion
 
         #region DDL
@@ -393,8 +403,8 @@ namespace WcfNegocio
         [OperationContract]
         string ListarHuespedService(string cliente);
 
-        [OperationContract]
-        string ListarMinuta();
+        //[OperationContract]
+        //string ListarMinuta();
 
         [OperationContract]
         string ListarHabitacionDisponibleCategoria(string detalle);

@@ -25,6 +25,30 @@ namespace Datos
             return lista;
         }
 
+        public bool AgregarDetallePlatos(DETALLE_PLATOS d)
+        {
+            ent.DETALLE_PLATOS.Add(d);
+            ent.SaveChanges();
+            return true;
+        }
+
+        public bool EliminarDetallePlatos(DETALLE_PLATOS detalle)
+        {
+            DETALLE_PLATOS d = ent.DETALLE_PLATOS.FirstOrDefault(objeto =>
+                objeto.ID_DETALLE_PLATOS.Equals(detalle.ID_DETALLE_PLATOS));
+
+            if (d != null)
+            {
+                ent.DETALLE_PLATOS.Remove(d);
+                ent.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public bool AgregarDetalleMinuta(DETALLE_PLATOS detalle)
         {
             ent.DETALLE_PLATOS.Add(detalle);

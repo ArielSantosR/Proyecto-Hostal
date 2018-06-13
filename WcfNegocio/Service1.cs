@@ -2348,37 +2348,34 @@ namespace WcfNegocio
 
             return serv.AgregarDetalleMinuta(dDatos);
         }
-        /*
-        public Minuta ObtenerMinuta(string minuta)
+
+        public string ListarMinuta()
         {
-            XmlSerializer ser = new XmlSerializer(typeof(Modelo.Minuta));
-            StringReader reader = new StringReader(minuta);
-            Modelo.Minuta m = (Modelo.Minuta)ser.Deserialize(reader);
-            ServicioMinuta serv = new ServicioMinuta();
-            Datos.PENSION Datos = new Datos.PENSION();
-            Datos.ID_PENSION = m.ID_PENSION;
 
-            if (serv.ObtenerMinuta(Datos) == null)
+            ServicioMinuta servicio = new ServicioMinuta();
+            List<Datos.PENSION> minuta = servicio.ListarMinuta();
+            Modelo.MinutaCollection listaMinuta = new Modelo.MinutaCollection();
+
+            foreach (Datos.PENSION p in minuta)
             {
-                return null;
+                Modelo.Minuta pMinuta = new Modelo.Minuta();
+
+                pMinuta.ID_PENSION = p.ID_PENSION;
+                pMinuta.NOMBRE_PENSION = p.NOMBRE_PENSION;
+                pMinuta.VALOR_PENSION = p.VALOR_PENSION;
+
+       
+
+                listaMinuta.Add(pMinuta);
             }
-            else
-            {
-                Datos. Datos2 = serv.ObtenerMinuta(Datos);
 
-                m.ID_PENSION = Datos2
-                m.NOMBRE_PENSION = Datos2
-                m.VALOR_PENSION = Datos2
-                m.NUMERO_HABITACION = Datos2
-
-
-
-         
-
-                return m;
-            }
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.MinutaCollection));
+            StringWriter writer = new StringWriter();
+            ser.Serialize(writer, listaMinuta);
+            writer.Close();
+            return writer.ToString();
         }
-        */
+        
         #endregion
 
         #region DDL
@@ -2577,7 +2574,7 @@ namespace WcfNegocio
             }
         }
 
-        public string ListarMinuta()
+       /* public string ListarMinuta()
         {
             ServicioMinuta servicio = new ServicioMinuta();
             List<Datos.PENSION> minuta = servicio.ListarMinuta();
@@ -2599,6 +2596,7 @@ namespace WcfNegocio
             writer.Close();
             return writer.ToString();
         }
+        */
 
         public string ListarHabitacionDisponibleCategoria(string detalle)
         {
