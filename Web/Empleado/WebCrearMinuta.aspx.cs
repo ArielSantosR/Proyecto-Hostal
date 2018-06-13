@@ -130,7 +130,7 @@ namespace Web.Empleado
                     //Para funcionar requiere que el update panel tenga el Modo Condicional
                     UpdatePanel2.Update();
 
-                    MiSesionM = null;
+                   // MiSesionM = null;
                     btnLimpiar.Enabled = false;
                     btnVer.Enabled = false;
                 }

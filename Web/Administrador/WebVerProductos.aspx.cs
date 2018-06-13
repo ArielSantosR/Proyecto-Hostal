@@ -76,6 +76,11 @@ namespace Web.Administrador
 
             Response.Redirect("../Administrador/WebEliminarProducto.aspx");
         }
+        protected void gvProducto_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            gvProducto.PageIndex = e.NewPageIndex;
+            gvProducto.DataBind();
+        }
 
 
         public Producto MiSesionp

@@ -97,6 +97,26 @@ namespace Web.Empleado
             }
             
         }
+        protected void gvDetalle_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            gvDetalle.PageIndex = e.NewPageIndex;
+            gvDetalle.DataBind();
+        }
+        protected void gvPedidoListo_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            gvPedidoListo.PageIndex = e.NewPageIndex;
+            gvPedidoListo.DataBind();
+        }
+        protected void gvDetalleHistorial_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            gvDetalleHistorial.PageIndex = e.NewPageIndex;
+            gvDetalleHistorial.DataBind();
+        }
+        protected void gvPedidoPendiente_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            gvPedidoPendiente.PageIndex = e.NewPageIndex;
+            gvPedidoPendiente.DataBind();
+        }
         public Usuario MiSesion
         {
             get

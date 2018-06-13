@@ -92,22 +92,26 @@ namespace Web.Cliente {
 
                     ddlEstado.DataSource = Enum.GetValues(typeof(Estado_Usuario));
                     ddlEstado.DataBind();
+                    ddlEstado.Items.Insert(0,new ListItem("Seleccione Estado...","0"));
 
                     alerta.Visible = false;
                     ddlPais.DataSource = coleccionPais;
                     ddlPais.DataTextField = "NOMBRE_PAIS";
                     ddlPais.DataValueField = "ID_PAIS";
                     ddlPais.DataBind();
+                    ddlPais.Items.Insert(0,new ListItem("Seleccione Pais...","0"));
 
                     ddlRegion.DataSource = coleccionRegion.Where(x => x.Id_Pais == int.Parse(ddlPais.SelectedValue));
                     ddlRegion.DataTextField = "Nombre";
                     ddlRegion.DataValueField = "Id_Region";
                     ddlRegion.DataBind();
+                    ddlRegion.Items.Insert(0,new ListItem("Seleccione Comuna...","0"));
 
                     ddlGiro.DataSource = giros;
                     ddlGiro.DataTextField = "NOMBRE_GIRO";
                     ddlGiro.DataValueField = "ID_GIRO";
                     ddlGiro.DataBind();
+                    ddlEstado.Items.Insert(0,new ListItem("Seleccione Comuna...","0"));
 
                     Comuna com = new Comuna();
 
@@ -152,6 +156,7 @@ namespace Web.Cliente {
                     ddlComuna.DataTextField = "Nombre";
                     ddlComuna.DataValueField = "Id_Comuna";
                     ddlComuna.DataBind();
+                    ddlComuna.Items.Insert(0,new ListItem("Selecione Comuna...","0"));
 
                     ddlComuna.SelectedValue = com.Id_Comuna.ToString();
                     ddlGiro.SelectedValue = SesionCl.ID_GIRO.ToString();
@@ -207,68 +212,79 @@ namespace Web.Cliente {
                 Usuario usuario = new Modelo.Usuario();
                 Modelo.Cliente cliente = SesionCl;
 
-                if (MiSesion.TIPO_USUARIO.Equals(Tipo_Usuario.Cliente.ToString()) && MiSesion.ESTADO.Equals(Estado_Usuario.Habilitado.ToString())) {
-                    usuario = MiSesion;
-                }
-                else {
-                    usuario = SesionEdit;
-                }
-
-                if (!string.IsNullOrEmpty(txtPassword.Text) && (!string.IsNullOrEmpty(txtConfirmar.Text))) {
-                    if (txtPassword.Text.Equals(txtConfirmar.Text)) {
-                        string hashed = BCrypt.HashPassword(txtPassword.Text,BCrypt.GenerateSalt(12));
-                        usuario.PASSWORD = hashed;
-                    }
-                    else {
-                        error.Text = "Las contraseñas no son iguales";
-                        flag = false;
-                        alerta.Visible = true;
-                    }
-                }
-
-                if (!txtNombreC.Text.Equals(cliente.NOMBRE_CLIENTE)) {
-                    cliente.NOMBRE_CLIENTE = txtNombreC.Text;
-                }
-
-                if (!txtDireccion.Text.Equals(cliente.DIRECCION_CLIENTE)) {
-                    cliente.DIRECCION_CLIENTE = txtDireccion.Text;
-                    cliente.ID_COMUNA = short.Parse(ddlComuna.SelectedValue);
-                }
-
-                if (!txtEmail.Text.Equals(cliente.CORREO_CLIENTE)) {
-                    cliente.CORREO_CLIENTE = txtEmail.Text;
-                }
-
-                if (!txtTelefono.Text.Equals(cliente.TELEFONO_CLIENTE.ToString())) {
-                    cliente.TELEFONO_CLIENTE = long.Parse(txtTelefono.Text);
-                }
-
-                if (MiSesion.TIPO_USUARIO.Equals(Tipo_Usuario.Administrador.ToString())) {
-                    usuario.ESTADO = ddlEstado.SelectedValue.ToString();
-                }
-
-                if (!ddlGiro.SelectedValue.Equals(cliente.ID_GIRO.ToString())) {
-                    cliente.ID_GIRO = short.Parse(ddlGiro.SelectedValue.ToString());
-                }
-
-                if (flag) {
-                    if (usuario.Update() && cliente.Update()) {
+                if (ddlGiro.SelectedIndex != 0) {
+                    if (ddlComuna.SelectedIndex != 0) {
                         if (MiSesion.TIPO_USUARIO.Equals(Tipo_Usuario.Cliente.ToString()) && MiSesion.ESTADO.Equals(Estado_Usuario.Habilitado.ToString())) {
-                            Response.Write("<script language='javascript'>window.alert('Se ha actualizado con éxito.');window.location='../Hostal/WebLogin.aspx';</script>");
+                            usuario = MiSesion;
                         }
                         else {
-                            Response.Write("<script language='javascript'>window.alert('Se ha actualizado con éxito.');window.location='../Administrador/WebVerUsuarios.aspx';</script>");
+                            usuario = SesionEdit;
                         }
-                    }
-                    else {
-                        error.Text = "La actualización ha fallado";
+
+                        if (!string.IsNullOrEmpty(txtPassword.Text) && (!string.IsNullOrEmpty(txtConfirmar.Text))) {
+                            if (txtPassword.Text.Equals(txtConfirmar.Text)) {
+                                string hashed = BCrypt.HashPassword(txtPassword.Text,BCrypt.GenerateSalt(12));
+                                usuario.PASSWORD = hashed;
+                            }
+                            else {
+                                error.Text = "Las contraseñas no son iguales";
+                                flag = false;
+                                alerta.Visible = true;
+                            }
+                        }
+
+                        if (!txtNombreC.Text.Equals(cliente.NOMBRE_CLIENTE)) {
+                            cliente.NOMBRE_CLIENTE = txtNombreC.Text;
+                        }
+
+                        if (!txtDireccion.Text.Equals(cliente.DIRECCION_CLIENTE)) {
+                            cliente.DIRECCION_CLIENTE = txtDireccion.Text;
+                            cliente.ID_COMUNA = short.Parse(ddlComuna.SelectedValue);
+                        }
+
+                        if (!txtEmail.Text.Equals(cliente.CORREO_CLIENTE)) {
+                            cliente.CORREO_CLIENTE = txtEmail.Text;
+                        }
+
+                        if (!txtTelefono.Text.Equals(cliente.TELEFONO_CLIENTE.ToString())) {
+                            cliente.TELEFONO_CLIENTE = long.Parse(txtTelefono.Text);
+                        }
+
+                        if (MiSesion.TIPO_USUARIO.Equals(Tipo_Usuario.Administrador.ToString())) {
+                            usuario.ESTADO = ddlEstado.SelectedValue.ToString();
+                        }
+
+                        if (!ddlGiro.SelectedValue.Equals(cliente.ID_GIRO.ToString())) {
+                            cliente.ID_GIRO = short.Parse(ddlGiro.SelectedValue.ToString());
+                        }
+
+                        if (flag) {
+                            if (usuario.Update() && cliente.Update()) {
+                                if (MiSesion.TIPO_USUARIO.Equals(Tipo_Usuario.Cliente.ToString()) && MiSesion.ESTADO.Equals(Estado_Usuario.Habilitado.ToString())) {
+                                    Response.Write("<script language='javascript'>window.alert('Se ha actualizado con éxito.');window.location='../Hostal/WebLogin.aspx';</script>");
+                                }
+                                else {
+                                    Response.Write("<script language='javascript'>window.alert('Se ha actualizado con éxito.');window.location='../Administrador/WebVerUsuarios.aspx';</script>");
+                                }
+                            }
+                            else {
+                                error.Text = "La actualización ha fallado";
+                                alerta.Visible = true;
+                            }
+                        }
+                    }else {
+                        error.Text = "Verifique que selecciono correctamente la comuna, región o país";
                         alerta.Visible = true;
                     }
+                }
+                else {
+                    error.Text = "Seleccione un giro valido";
+                    alerta.Visible = true;
                 }
 
             }
-            catch (Exception) {
-                error.Text = "Excepcion";
+            catch (Exception ex) {
+                error.Text = "Excepcion: " + ex.Message;
                 alerta.Visible = true;
             }
         }
@@ -278,6 +294,7 @@ namespace Web.Cliente {
             ddlRegion.DataTextField = "Nombre";
             ddlRegion.DataValueField = "Id_Region";
             ddlRegion.DataBind();
+            ddlRegion.Items.Insert(0,new ListItem("Seleccione Comuna...","0"));
         }
 
         protected void ddlRegion_SelectedIndexChanged(object sender,EventArgs e) {
@@ -285,7 +302,7 @@ namespace Web.Cliente {
             ddlComuna.DataTextField = "Nombre";
             ddlComuna.DataValueField = "Id_Comuna";
             ddlComuna.DataBind();
-            ddlComuna.Enabled = true;
+            ddlComuna.Items.Insert(0,new ListItem("Selecione Comuna...","0"));
         }
     }
 }
