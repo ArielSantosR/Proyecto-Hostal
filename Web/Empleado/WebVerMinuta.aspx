@@ -15,8 +15,8 @@
     </div>
 
 
-    <div style="display: flex; justify-content: center; margin-bottom: 20px">
-        <asp:GridView ID="gvMinuta" AutoGenerateColumns="false" runat="server" ForeColor="#333333" GridLines="Vertical" AllowPaging="True" PageSize="8" OnPageIndexChanging="gvMinuta_PageIndexChanging">
+    <div style="display: flex; justify-content: center; margin-bottom: 20px; margin-top: 50px">
+        <asp:GridView ID="gvMinuta" AutoGenerateColumns="false" runat="server" ForeColor="#333333" GridLines="Vertical" AllowPaging="True" PageSize="8" OnPageIndexChanging="gvMinuta_PageIndexChanging" >
             <AlternatingRowStyle BackColor="White" />
             <EditRowStyle BackColor="#2461BF" />
             <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
@@ -33,8 +33,10 @@
                 <asp:BoundField DataField="NOMBRE_PENSION" HeaderText="Nombre de Minuta" />
                 <asp:BoundField DataField="VALOR_PENSION" HeaderText="Precio de Minuta" />
                 <asp:TemplateField>
-                   
-                </asp:TemplateField>
+                     <ItemTemplate>
+                   <asp:LinkButton ID="btnEliminar" OnClick="btnEliminar_Click" CssClass="btn btn-danger" CommandArgument='<%#Eval("ID_PENSION")%>' Text="Eliminar" runat="server" />
+                      </ItemTemplate>
+               </asp:TemplateField>
             </Columns>
         </asp:GridView>
     </div>

@@ -366,8 +366,17 @@ namespace WcfNegocio
         [OperationContract]
         string ListarMinuta();
 
-        // [OperationContract]
-        // Minuta ObtenerMinuta(string minuta);
+        [OperationContract]
+        bool ExisteMinuta(string pension);
+
+        [OperationContract]
+        bool EliminarMinuta(string pension);
+
+        [OperationContract]
+        bool ModificarMinuta(string pension);
+
+        [OperationContract]
+        Minuta ObtenerMinuta(string pension);
 
 
 

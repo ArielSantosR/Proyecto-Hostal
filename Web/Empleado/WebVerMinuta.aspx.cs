@@ -56,7 +56,23 @@ namespace Web.Empleado
                 Session["Usuario"] = value;
             }
         }
-       
+
+        public Minuta MiSesionMinuta
+        {
+            get
+            {
+                if (Session["Minuta"] == null)
+                {
+                    Session["Minuta"] = new Minuta();
+                }
+                return (Minuta)Session["Minuta"];
+            }
+            set
+            {
+                Session["Minuta"] = value;
+            }
+        }
+
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -84,6 +100,29 @@ namespace Web.Empleado
         {
             gvDetalleMinuta.PageIndex = e.NewPageIndex;
             gvDetalleMinuta.DataBind();
+        }
+
+        protected void btnEliminar_Click(object sender, EventArgs e)
+        {
+            Modelo.Minuta minuta = new Modelo.Minuta();
+            minuta.ID_PENSION = MiSesionMinuta.ID_PENSION;
+
+            Service1 s = new Service1();
+            XmlSerializer sr = new XmlSerializer(typeof(Modelo.Minuta));
+            StringWriter writer = new StringWriter();
+            sr.Serialize(writer, minuta);
+
+            if (s.EliminarMinuta(writer.ToString()))
+            {
+                MiSesionMinuta = null;
+                Response.Write("<script language='javascript'>window.alert('La minuta ha sido Eliminada con éxito');window.location='../Administrador/WebVerMinuta.aspx';</script>");
+                alerta.Visible = false;
+            }
+            else
+            {
+                error.Text = "No se ha podido Eliminar";
+                alerta.Visible = true;
+            }
         }
         /* 
          protected void btnEditar_Click(object sender, EventArgs e)

@@ -37,6 +37,9 @@
             <a class="nav-link" href="../Empleado/WebCrearMinuta.aspx">Crear Minuta</a>
         </li>
         <li class="nav-item">
+            <a class="nav-link" href="../Empleado/WebVerMinuta.aspx">Ver Minutas</a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" href="../Empleado/WebAsignarHabitacion.aspx">Asignar Habitación</a>
         </li>
         <li class="nav-item">

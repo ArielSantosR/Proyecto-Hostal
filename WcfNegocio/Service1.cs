@@ -2375,7 +2375,87 @@ namespace WcfNegocio
             writer.Close();
             return writer.ToString();
         }
-        
+
+        public bool EliminarMinuta(string pension)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.Minuta));
+            StringReader reader = new StringReader(pension);
+            Modelo.Minuta m = (Modelo.Minuta)ser.Deserialize(reader);
+            ServicioMinuta serv = new ServicioMinuta();
+            Datos.PENSION pDatos = new Datos.PENSION();
+
+            pDatos.ID_PENSION = m.ID_PENSION;
+
+            return serv.EliminarMinuta(pDatos);
+        }
+
+
+        public bool ModificarMinuta(string pension)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.Minuta));
+            StringReader reader = new StringReader(pension);
+            Modelo.Minuta m = (Modelo.Minuta)ser.Deserialize(reader);
+            ServicioMinuta serv = new ServicioMinuta();
+            Datos.PENSION pDatos = new Datos.PENSION();
+
+            pDatos.ID_PENSION = m.ID_PENSION;
+            pDatos.NOMBRE_PENSION = m.NOMBRE_PENSION;
+            pDatos.VALOR_PENSION = m.VALOR_PENSION;
+
+    
+
+            return serv.EditarMinuta(pDatos);
+        }
+
+        public bool ExisteMinuta(string pension)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.Minuta));
+            StringReader reader = new StringReader(pension);
+            Modelo.Minuta m = (Modelo.Minuta)ser.Deserialize(reader);
+            ServicioMinuta serv = new ServicioMinuta();
+            Datos.PENSION pDatos = new Datos.PENSION();
+            pDatos.ID_PENSION = m.ID_PENSION;
+
+            if (!serv.ExisteMinuta(pDatos))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        public Minuta ObtenerMinuta(string pension)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.Minuta));
+            StringReader reader = new StringReader(pension);
+            Modelo.Minuta m = (Modelo.Minuta)ser.Deserialize(reader);
+            ServicioMinuta serv = new ServicioMinuta();
+            Datos.PENSION pDatos = new Datos.PENSION();
+            pDatos.ID_PENSION = m.ID_PENSION;
+
+            if (!serv.ExisteMinuta(pDatos))
+            {
+                return null;
+            }
+            else
+            {
+                Datos.PENSION pDatos2 = serv.ObtenerMinuta(pDatos);
+
+                m.ID_PENSION = pDatos2.ID_PENSION;
+                m.NOMBRE_PENSION = pDatos2.NOMBRE_PENSION;
+                m.VALOR_PENSION = pDatos2.VALOR_PENSION;
+
+                
+
+                return m;
+            }
+        }
+
+
+
+
         #endregion
 
         #region DDL

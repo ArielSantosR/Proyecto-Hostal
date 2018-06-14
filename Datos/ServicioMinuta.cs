@@ -86,5 +86,55 @@ namespace Datos
             }
         }
 
+        public bool EliminarMinuta(PENSION minuta)
+        {
+            PENSION p = ent.PENSION.FirstOrDefault(objeto =>
+            objeto.ID_PENSION.Equals(minuta.ID_PENSION));
+
+            if (p != null)
+            {
+                ent.PENSION.Remove(p);
+                ent.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public bool EditarMinuta(PENSION minuta)
+        {
+            PENSION p = ent.PENSION.FirstOrDefault(objeto =>
+            objeto.ID_PENSION.Equals(minuta.ID_PENSION));
+
+            if (p != null)
+            {
+
+                p.NOMBRE_PENSION = minuta.NOMBRE_PENSION;
+                p.VALOR_PENSION = minuta.VALOR_PENSION;
+               
+                ent.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public bool ExisteMinuta(PENSION minuta)
+        {
+            PENSION p = ent.PENSION.FirstOrDefault(objeto =>
+            objeto.ID_PENSION.Equals(minuta.ID_PENSION));
+            if (p != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
     }
 }
