@@ -34,7 +34,7 @@
                 <asp:BoundField DataField="VALOR_PENSION" HeaderText="Precio de Minuta" />
                 <asp:TemplateField>
                     <ItemTemplate>
-                         <asp:LinkButton ID="btnInfo" OnClick="btnInfo_Click" CssClass="btn btn-info" CommandArgument='<%#Eval("ID_PENSION")%>' Text="Ver Detalle" runat="server" />
+                         <asp:LinkButton ID="btnInfo" CssClass="btn btn-info" CommandArgument='<%#Eval("ID_PENSION")%>' Text="Ver Detalle" runat="server" />
                         <asp:LinkButton ID="btnEditar" OnClick="btnEditar_Click" CssClass="btn btn-success" CommandArgument='<%#Eval("ID_PENSION")%>' Text="Aceptar" runat="server" />
                         <asp:LinkButton ID="btnEliminar" OnClick="btnEliminar_Click" CssClass="btn btn-danger" CommandArgument='<%#Eval("ID_PENSION")%>' Text="Eliminar" runat="server" />
                         
@@ -59,7 +59,7 @@
                 </div>
                 <div class="modal-body">
                     <div style="display: flex; justify-content: center; margin-bottom: 70px">
-                        <asp:GridView ID="gvDetalleMinuta" AutoGenerateColumns="true" runat="server" ForeColor="#333333" GridLines="Vertical" AllowPaging="True" PageSize="8" OnPageIndexChanging="gvDetalleMinuta_PageIndexChanging">
+                        <asp:GridView ID="gvDetalleMinuta" AutoGenerateColumns="true" runat="server" ForeColor="#333333" GridLines="Vertical" AllowPaging="True" PageSize="8" >
                             <AlternatingRowStyle BackColor="White" />
                             <EditRowStyle BackColor="#2461BF" />
                             <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />

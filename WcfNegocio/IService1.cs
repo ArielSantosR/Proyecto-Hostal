@@ -340,6 +340,9 @@ namespace WcfNegocio
         string ListaHuespedesNoAsignados(string orden);
 
         [OperationContract]
+        string ListaHuespedesAsignados(string orden);
+
+        [OperationContract]
         DetalleOrden ObtenerDetalleReserva(string detalle);
 
         [OperationContract]

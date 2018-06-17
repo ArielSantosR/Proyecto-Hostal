@@ -67,6 +67,16 @@ namespace Datos
             return lista;
         }
 
+        public List<DETALLE_ORDEN> ListaHuespedesAsignados(ORDEN_COMPRA orden)
+        {
+            var lista = (from consulta in ent.DETALLE_ORDEN
+                         where consulta.NUMERO_ORDEN == orden.NUMERO_ORDEN
+                         && consulta.ESTADO.Equals("Asignado")
+                         orderby consulta.ID_DETALLE
+                         select consulta).ToList();
+            return lista;
+        }
+
         public List<ORDEN_COMPRA> ListarReservaAceptada()
         {
             var lista = (from consulta in ent.ORDEN_COMPRA

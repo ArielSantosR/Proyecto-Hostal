@@ -425,5 +425,156 @@ namespace Web.Empleado
 
             ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modal", "$('#exampleModal2').modal();", true);
         }
+
+        protected void btnRemover_Click(object sender, EventArgs e)
+        {
+            #region Cambiar Estado de Habitacion
+            try
+            {
+                //1- Cambiando el estado de Habitación a Ocupado
+                Habitacion habitacion = new Habitacion();
+                habitacion.NUMERO_HABITACION = short.Parse(ddlHabitacion.SelectedValue);
+
+                Service1 s = new Service1();
+                XmlSerializer sr = new XmlSerializer(typeof(Modelo.Habitacion));
+                StringWriter writer = new StringWriter();
+                sr.Serialize(writer, habitacion);
+
+                if (s.ObtenerHabitacion(writer.ToString()) != null)
+                {
+                    habitacion = s.ObtenerHabitacion(writer.ToString());
+
+                    if (habitacion.ID_TIPO_HABITACION == 1)
+                    {
+                        habitacion.ESTADO_HABITACION = "Disponible";
+                    }
+                    else if (habitacion.ID_TIPO_HABITACION == 2)
+                    {
+                        if (habitacion.ESTADO_HABITACION.Equals("Vacante 1"))
+                        {
+                            habitacion.ESTADO_HABITACION = "Disponible";
+                        }
+                        else
+                        {
+                            habitacion.ESTADO_HABITACION = "Vacante 1";
+                        }
+                    }
+                    else if (habitacion.ID_TIPO_HABITACION == 3)
+                    {
+                        if (habitacion.ESTADO_HABITACION.Equals("Ocupado"))
+                        {
+                            habitacion.ESTADO_HABITACION = "Vacante 1";
+                        }
+                        else if (habitacion.ESTADO_HABITACION.Equals("Vacante 1"))
+                        {
+                            habitacion.ESTADO_HABITACION = "Vacante 2";
+                        }
+                        else
+                        {
+                            habitacion.ESTADO_HABITACION = "Disponible";
+                        }
+                    }
+
+                    XmlSerializer sr2 = new XmlSerializer(typeof(Modelo.Habitacion));
+                    StringWriter writer2 = new StringWriter();
+                    sr2.Serialize(writer2, habitacion);
+
+                    if (s.ModificarHabitacion(writer2.ToString()))
+                    {
+                        #region Eliminando Detalle de Habitacion
+                        //2- Agregando el detalle de habitación 
+                        DetalleHabitacion detalleHabitacion = new DetalleHabitacion();
+                        //Esta linea consulta si tiene un numero asignado, en caso contrario no hara nada.
+                        if (MiSesionOrden.RUT_CLIENTE.HasValue)
+                        {
+                            detalleHabitacion.RUT_CLIENTE = MiSesionOrden.RUT_CLIENTE.Value;
+                            detalleHabitacion.NUMERO_HABITACION = short.Parse(ddlHabitacion.SelectedValue);
+
+                            XmlSerializer sr3 = new XmlSerializer(typeof(Modelo.DetalleHabitacion));
+                            StringWriter writer3 = new StringWriter();
+                            sr3.Serialize(writer3, detalleHabitacion);
+
+                            if (s.AgregarDetalleHabitacion(writer3.ToString()))
+                            {
+                                #region Detalle Pasajeros
+                                //3- Agregando el detalle de pasajeros de la habitación junto con la fecha de entrada y salida
+                                DetallePasajeros detallePasajeros = new DetallePasajeros();
+                                detallePasajeros.RUT_HUESPED = MiSesionDetalleO.RUT_HUESPED;
+                                detallePasajeros.FECHA_LLEGADA = MiSesionOrden.FECHA_LLEGADA;
+                                detallePasajeros.FECHA_SALIDA = MiSesionOrden.FECHA_SALIDA;
+                                detallePasajeros.ID_PENSION = MiSesionDetalleO.ID_PENSION;
+                                detallePasajeros.NUMERO_HABITACION = short.Parse(ddlHabitacion.SelectedValue);
+
+                                XmlSerializer sr4 = new XmlSerializer(typeof(Modelo.DetallePasajeros));
+                                StringWriter writer4 = new StringWriter();
+                                sr4.Serialize(writer4, detallePasajeros);
+
+                                if (s.AgregarDetallePasajeros(writer4.ToString()))
+                                {
+                                    #region Detalle Orden
+                                    //4- Modificando el estado del detalle de orden a Asignado
+                                    DetalleOrden detalleOrden = MiSesionDetalleO;
+                                    detalleOrden.ESTADO = "Pendiente";
+
+                                    XmlSerializer sr5 = new XmlSerializer(typeof(Modelo.DetalleOrden));
+                                    StringWriter writer5 = new StringWriter();
+                                    sr5.Serialize(writer5, detalleOrden);
+
+                                    if (s.EditarEstadoDetalleReserva(writer5.ToString()))
+                                    {
+                                        Response.Write("<script language='javascript'>window.alert('Huésped Pendiente');window.location='../Empleado/WebAsignacion.aspx';</script>");
+                                    }
+                                    else
+                                    {
+                                        alerta_exito.Visible = false;
+                                        error.Text = "No se pudo editar el detalle de la Reserva";
+                                        alerta.Visible = true;
+                                    }
+                                    #endregion
+                                }
+                                else
+                                {
+                                    alerta_exito.Visible = false;
+                                    error.Text = "No se pudo agregar el detalle de pasajeros";
+                                    alerta.Visible = true;
+                                }
+
+                                #endregion
+                            }
+                            else
+                            {
+                                alerta_exito.Visible = false;
+                                error.Text = "No se pudo agregar el detalle de habitación";
+                                alerta.Visible = true;
+                            }
+                        }
+                        else
+                        {
+                            Response.Write("<script language='javascript'>window.alert('Vuelva a cargar la orden');window.location='../Hostal/WebAsignarHabitacion.aspx';</script>");
+                        }
+                        #endregion
+                    }
+                    else
+                    {
+                        alerta_exito.Visible = false;
+                        error.Text = "No se pudo modificar la habitación";
+                        alerta.Visible = true;
+                    }
+                }
+                else
+                {
+                    alerta_exito.Visible = false;
+                    error.Text = "No se pudo encontrar la habitación";
+                    alerta.Visible = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                alerta_exito.Visible = false;
+                error.Text = "Excepción: " + ex.ToString();
+                alerta.Visible = true;
+            }
+            #endregion
+        }
     }
 }

@@ -95,6 +95,7 @@ namespace Web.Empleado
             StringWriter writer = new StringWriter();
             sr.Serialize(writer, minuta);
 
+            /*
             if (s.ObtenerMinuta(writer.ToString()) == null)
             {
                 alerta_exito.Visible = false;
@@ -106,10 +107,12 @@ namespace Web.Empleado
                     error.Text = "La modificación de Minuta ha fallado";
                     alerta.Visible = true;
                 }
-            }
-        
+                */
+        }
+
+
         //fin editar
-        
+
         //eliminar
         protected void btnEliminar_Click(object sender, EventArgs e)
         {
@@ -119,7 +122,7 @@ namespace Web.Empleado
             Minuta minuta = new Minuta();
             minuta.ID_PENSION = id_pension;
 
-            MiSesionMinuta = minuta;
+            //MiSesionMinuta = minuta;
 
             ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modal", "$('#exampleModal').modal();", true);
         }

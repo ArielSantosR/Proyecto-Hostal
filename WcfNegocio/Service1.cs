@@ -2241,6 +2241,47 @@ namespace WcfNegocio
             }
         }
 
+        public string ListaHuespedesAsignados(string orden)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.OrdenCompra));
+            StringReader reader = new StringReader(orden);
+            Modelo.OrdenCompra or = (Modelo.OrdenCompra)ser.Deserialize(reader);
+            ServicioReserva serv = new ServicioReserva();
+
+            Datos.ORDEN_COMPRA oDatos = new Datos.ORDEN_COMPRA();
+            oDatos.NUMERO_ORDEN = or.NUMERO_ORDEN;
+
+            List<Datos.DETALLE_ORDEN> listaDetalle = serv.ListaHuespedesAsignados(oDatos);
+
+            if (listaDetalle == null)
+            {
+                return null;
+            }
+            else
+            {
+                Modelo.DetalleOrdenCollection listaDetalle2 = new DetalleOrdenCollection();
+
+                foreach (Datos.DETALLE_ORDEN o in listaDetalle)
+                {
+                    Modelo.DetalleOrden oModelo = new Modelo.DetalleOrden();
+                    oModelo.NUMERO_ORDEN = o.NUMERO_ORDEN;
+                    oModelo.ID_PENSION = o.ID_PENSION;
+                    oModelo.RUT_HUESPED = o.RUT_HUESPED;
+                    oModelo.ID_CATEGORIA_HABITACION = o.ID_CATEGORIA_HABITACION;
+                    oModelo.ID_DETALLE = o.ID_DETALLE;
+                    oModelo.ESTADO = o.ESTADO;
+
+                    listaDetalle2.Add(oModelo);
+                }
+
+                XmlSerializer ser2 = new XmlSerializer(typeof(Modelo.DetalleOrdenCollection));
+                StringWriter writer2 = new StringWriter();
+                ser2.Serialize(writer2, listaDetalle2);
+                writer2.Close();
+                return writer2.ToString();
+            }
+        }
+
         public DetalleOrden ObtenerDetalleReserva(string detalle)
         {
             XmlSerializer ser = new XmlSerializer(typeof(Modelo.DetalleOrden));
