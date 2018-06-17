@@ -35,7 +35,8 @@
                 <asp:TemplateField>
                      <ItemTemplate>
                    <asp:LinkButton ID="btnEliminar" OnClick="btnEliminar_Click" CssClass="btn btn-danger" CommandArgument='<%#Eval("ID_PENSION")%>' Text="Eliminar" runat="server" />
-                      </ItemTemplate>
+                       <asp:LinkButton ID="btnInfo" OnClick="btnInfo_Click" CssClass="btn btn-info" CommandArgument='<%#Eval("ID_PENSION")%>' Text="Ver Detalle" runat="server" />
+                        </ItemTemplate>
                </asp:TemplateField>
             </Columns>
         </asp:GridView>

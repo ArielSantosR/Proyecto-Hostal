@@ -86,14 +86,45 @@ namespace Datos
             }
         }
 
+        /*
+         *  DETALLE_PLATOS d = ent.DETALLE_PLATOS.FirstOrDefault(objeto =>
+            objeto.ID_PENSION.Equals(minuta.ID_PENSION));
+         */
+
+        public bool EliminarDetalleMinuta(PENSION minuta)
+        {
+            DETALLE_PLATOS d = ent.DETALLE_PLATOS.FirstOrDefault(objeto =>
+            objeto.ID_PENSION.Equals(minuta.ID_PENSION));
+
+
+
+            if (d != null)
+            {
+                
+                    ent.DETALLE_PLATOS.Remove(d);
+
+                    ent.SaveChanges();
+                    
+                
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public bool EliminarMinuta(PENSION minuta)
         {
             PENSION p = ent.PENSION.FirstOrDefault(objeto =>
             objeto.ID_PENSION.Equals(minuta.ID_PENSION));
 
+           
+
             if (p != null)
             {
                 ent.PENSION.Remove(p);
+                
                 ent.SaveChanges();
                 return true;
             }
@@ -136,5 +167,13 @@ namespace Datos
             }
         }
 
+        public List<DETALLE_PLATOS> ListaDetalleMinuta(PENSION platos)
+        {
+            var lista = (from consulta in ent.DETALLE_PLATOS
+                         where consulta.ID_PENSION == platos.ID_PENSION
+                         orderby consulta.ID_PLATO
+                         select consulta).ToList();
+            return lista;
+        }
     }
 }

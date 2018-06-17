@@ -2349,6 +2349,87 @@ namespace WcfNegocio
             return serv.AgregarDetalleMinuta(dDatos);
         }
 
+        public DetallePlato obtenerDetallePlato(string detalle)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.DetallePlato));
+            StringReader reader = new StringReader(detalle);
+            Modelo.DetallePlato d = (Modelo.DetallePlato)ser.Deserialize(reader);
+            ServicioMinuta serv = new ServicioMinuta();
+            Datos.DETALLE_PLATOS Datos = new Datos.DETALLE_PLATOS();
+            Datos.ID_DETALLE_PLATOS = d.ID_DETALLE_PLATOS;
+
+            if (serv.obtenerDetallePlatos(Datos) == null)
+            {
+                return null;
+            }
+            else
+            {
+                Datos.DETALLE_PLATOS Datos2 = serv.obtenerDetallePlatos(Datos);
+
+
+                d.CANTIDAD = Datos2.CANTIDAD;
+                d.ID_DETALLE_PLATOS = Datos2.ID_DETALLE_PLATOS;
+                d.ID_PENSION = Datos2.ID_PENSION;
+                d.ID_PLATO = Datos2.ID_PLATO;
+             
+
+                return d;
+            }
+        }
+
+        public bool EliminarDetallePlatos(string detalle)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.DetallePlato));
+            StringReader reader = new StringReader(detalle);
+            Modelo.DetallePlato d = (Modelo.DetallePlato)ser.Deserialize(reader);
+            ServicioMinuta servicio = new ServicioMinuta();
+
+            Datos.DETALLE_PLATOS dDatos = new Datos.DETALLE_PLATOS();
+            //Datos Detalle
+            dDatos.ID_DETALLE_PLATOS = d.ID_DETALLE_PLATOS;
+
+            return servicio.EliminarDetallePlatos(dDatos);
+        }
+
+        public string ListarDetalleMinuta(string minuta)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.Minuta));
+            StringReader reader = new StringReader(minuta);
+            Modelo.Minuta m = (Modelo.Minuta)ser.Deserialize(reader);
+            ServicioMinuta serv = new ServicioMinuta();
+
+            Datos.PENSION pDatos = new Datos.PENSION();
+            pDatos.ID_PENSION = m.ID_PENSION;
+
+            List<Datos.DETALLE_PLATOS> listaDetalle = serv.ListaDetalleMinuta(pDatos);
+
+            if (listaDetalle == null)
+            {
+                return null;
+            }
+            else
+            {
+                Modelo.DetallePlatoCollection listaDetalle2 = new DetallePlatoCollection();
+
+                foreach (Datos.DETALLE_PLATOS p in listaDetalle)
+                {
+                    Modelo.DetallePlato pModelo = new Modelo.DetallePlato();
+                    pModelo.ID_PLATO = p.ID_PLATO;
+                    pModelo.ID_PENSION = p.ID_PENSION;
+                    pModelo.CANTIDAD = p.CANTIDAD;
+                    pModelo.ID_DETALLE_PLATOS = p.ID_DETALLE_PLATOS;
+
+                    listaDetalle2.Add(pModelo);
+                }
+
+                XmlSerializer ser2 = new XmlSerializer(typeof(Modelo.DetallePlatoCollection));
+                StringWriter writer2 = new StringWriter();
+                ser2.Serialize(writer2, listaDetalle2);
+                writer2.Close();
+                return writer2.ToString();
+            }
+        }
+
         public string ListarMinuta()
         {
 
@@ -2453,7 +2534,7 @@ namespace WcfNegocio
             }
         }
 
-
+       
 
 
         #endregion
