@@ -361,10 +361,38 @@ namespace WcfNegocio
 
         #region Minuta
         [OperationContract]
+        DetallePlato obtenerDetallePlato(string detalle);
+
+        [OperationContract]
+        string ListarDetalleMinuta(string minuta);
+
+        [OperationContract]
         bool AgregarMinuta(string pension);
 
         [OperationContract]
         bool AgregarDetalleMinuta(string detalle);
+
+        [OperationContract]
+        string ListarMinuta();
+
+        [OperationContract]
+        bool ExisteMinuta(string pension);
+
+        [OperationContract]
+        bool EliminarMinuta(string pension);
+
+        [OperationContract]
+        bool EliminarDetallePlatos(string pension);
+
+        [OperationContract]
+        bool ModificarMinuta(string pension);
+
+        [OperationContract]
+        Minuta ObtenerMinuta(string pension);
+
+
+
+
         #endregion
 
         #region DDL
@@ -396,8 +424,8 @@ namespace WcfNegocio
         [OperationContract]
         string ListarHuespedService(string cliente);
 
-        [OperationContract]
-        string ListarMinuta();
+        //[OperationContract]
+        //string ListarMinuta();
 
         [OperationContract]
         string ListarHabitacionDisponibleCategoria(string detalle);

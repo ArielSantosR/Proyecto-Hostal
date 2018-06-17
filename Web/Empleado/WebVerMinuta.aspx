@@ -15,8 +15,8 @@
     </div>
 
 
-    <div style="display: flex; justify-content: center; margin-bottom: 20px">
-        <asp:GridView ID="gvMinuta" AutoGenerateColumns="false" runat="server" ForeColor="#333333" GridLines="Vertical" AllowPaging="True" PageSize="8" OnPageIndexChanging="gvMinuta_PageIndexChanging">
+    <div style="display: flex; justify-content: center; margin-bottom: 20px; margin-top: 50px">
+        <asp:GridView ID="gvMinuta" AutoGenerateColumns="false" runat="server" ForeColor="#333333" GridLines="Vertical" AllowPaging="True" PageSize="8" OnPageIndexChanging="gvMinuta_PageIndexChanging" >
             <AlternatingRowStyle BackColor="White" />
             <EditRowStyle BackColor="#2461BF" />
             <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
@@ -33,6 +33,7 @@
                 <asp:BoundField DataField="NOMBRE_PENSION" HeaderText="Nombre de Minuta" />
                 <asp:BoundField DataField="VALOR_PENSION" HeaderText="Precio de Minuta" />
                 <asp:TemplateField>
+<<<<<<< HEAD
                     <ItemTemplate>
                          <asp:LinkButton ID="btnInfo" CssClass="btn btn-info" CommandArgument='<%#Eval("ID_PENSION")%>' Text="Ver Detalle" runat="server" />
                         <asp:LinkButton ID="btnEditar" OnClick="btnEditar_Click" CssClass="btn btn-success" CommandArgument='<%#Eval("ID_PENSION")%>' Text="Aceptar" runat="server" />
@@ -41,6 +42,13 @@
                        
                     </ItemTemplate>
                 </asp:TemplateField>
+=======
+                     <ItemTemplate>
+                   <asp:LinkButton ID="btnEliminar" OnClick="btnEliminar_Click" CssClass="btn btn-danger" CommandArgument='<%#Eval("ID_PENSION")%>' Text="Eliminar" runat="server" />
+                       <asp:LinkButton ID="btnInfo" OnClick="btnInfo_Click" CssClass="btn btn-info" CommandArgument='<%#Eval("ID_PENSION")%>' Text="Ver Detalle" runat="server" />
+                        </ItemTemplate>
+               </asp:TemplateField>
+>>>>>>> 1f45958544927ca42e2107b7f622aea0a57325e6
             </Columns>
         </asp:GridView>
     </div>

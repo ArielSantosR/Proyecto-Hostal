@@ -8,6 +8,7 @@ using WcfNegocio;
 using Modelo;
 using System.Xml.Serialization;
 using System.IO;
+using System.Data;
 
 namespace Web.Empleado
 {
@@ -55,7 +56,23 @@ namespace Web.Empleado
                 Session["Usuario"] = value;
             }
         }
-       
+
+        public Minuta MiSesionMinuta
+        {
+            get
+            {
+                if (Session["Minuta"] == null)
+                {
+                    Session["Minuta"] = new Minuta();
+                }
+                return (Minuta)Session["Minuta"];
+            }
+            set
+            {
+                Session["Minuta"] = value;
+            }
+        }
+
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -79,22 +96,23 @@ namespace Web.Empleado
             gvMinuta.PageIndex = e.NewPageIndex;
             gvMinuta.DataBind();
         }
-        
-        protected void btnEditar_Click(object sender, EventArgs e)
+        protected void gvDetalleMinuta_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
-            //Lee los valores del LinkButton, primero usa la clase LinkButton para 
-            //Transformar los datos de Sender, luego los lee y los asigna a una variable
-            LinkButton btn = (LinkButton)(sender);
-            short id_pension = short.Parse(btn.CommandArgument);
+            gvDetalleMinuta.PageIndex = e.NewPageIndex;
+            gvDetalleMinuta.DataBind();
+        }
 
-            Minuta minuta = new Minuta();
-            minuta.ID_PENSION = id_pension;
+        protected void btnEliminar_Click(object sender, EventArgs e)
+        {
+            Modelo.Minuta minuta = new Modelo.Minuta();
+            minuta.ID_PENSION = MiSesionMinuta.ID_PENSION;
 
             Service1 s = new Service1();
             XmlSerializer sr = new XmlSerializer(typeof(Modelo.Minuta));
             StringWriter writer = new StringWriter();
             sr.Serialize(writer, minuta);
 
+<<<<<<< HEAD
             /*
             if (s.ObtenerMinuta(writer.ToString()) == null)
             {
@@ -134,117 +152,73 @@ namespace Web.Empleado
         {
 
             try
+=======
+            if (s.EliminarMinuta(writer.ToString()) && s.EliminarDetallePlatos(writer.ToString()))
+>>>>>>> 1f45958544927ca42e2107b7f622aea0a57325e6
             {
-                if (txtComentario.Text != string.Empty)
-                {
-                    Modelo.Pedido pedido = new Modelo.Pedido();
-                    pedido.NUMERO_PEDIDO = MiSesionPedido.NUMERO_PEDIDO;
-
-                    Service1 s = new Service1();
-                    XmlSerializer sr = new XmlSerializer(typeof(Modelo.Pedido));
-                    StringWriter writer = new StringWriter();
-                    sr.Serialize(writer, pedido);
-
-                    if (s.ObtenerPedido(writer.ToString()) != null)
-                    {
-                        pedido = s.ObtenerPedido(writer.ToString());
-                        pedido.COMENTARIO = txtComentario.Text;
-                        pedido.ESTADO_PEDIDO = "No Recepcionado";
-
-                        XmlSerializer sr2 = new XmlSerializer(typeof(Modelo.Pedido));
-                        StringWriter writer2 = new StringWriter();
-                        sr2.Serialize(writer2, pedido);
-
-                        if (s.EditarEstadoPedido(writer2.ToString()))
-                        {
-                            MiSesionPedido = null;
-
-                            Response.Write("<script language='javascript'>window.alert('Ha Rechazado el pedido');window.location='../Administrador/WebVerPedido.aspx';</script>");
-
-                        }
-                        else
-                        {
-                            alerta_exito.Visible = false;
-                            error.Text = "No se ha podido modificar el Estado de Producto";
-                            alerta.Visible = true;
-                        }
-                    }
-                    else
-                    {
-                        alerta_exito.Visible = false;
-                        error.Text = "Pedido no encontrado";
-                        alerta.Visible = true;
-                    }
-                }
-                else
-                {
-                    alerta_exito.Visible = false;
-                    error.Text = "Antes de rechazar el pedido debe mencionar las razones";
-                    alerta.Visible = true;
-                }
+                MiSesionMinuta = null;
+                Response.Write("<script language='javascript'>window.alert('La minuta ha sido Eliminada con éxito');window.location='../Administrador/WebVerMinuta.aspx';</script>");
+                alerta.Visible = false;
             }
-            catch (Exception ex)
+            else
             {
-                alerta_exito.Visible = false;
-                error.Text = "Excepción: " + ex.ToString();
+                error.Text = "No se ha podido Eliminar";
                 alerta.Visible = true;
             }
         }
-        //fin btn modal
+        
+         //inicio info
+          protected void btnInfo_Click(object sender, EventArgs e)
+         {
+             LinkButton btn = (LinkButton)(sender);
+             short id_pension = short.Parse(btn.CommandArgument);
 
-        //inicio info
-         protected void btnInfo_Click(object sender, EventArgs e)
-        {
-            LinkButton btn = (LinkButton)(sender);
-            short id_pension = short.Parse(btn.CommandArgument);
+             Minuta minuta = new Minuta();
+             minuta.ID_PENSION = id_pension;
 
-            Minuta minuta = new Minuta();
-            minuta.ID_PENSION = id_pension;
+             MiSesionMinuta = minuta;
 
-            MiSesionMinuta = minuta;
+             if (MiSesionMinuta.ID_PENSION != 0)
+             {
 
-            if (MiSesionMinuta.ID_PENSION != 0)
-            {
+                 Service1 s = new Service1();
+                 XmlSerializer sr = new XmlSerializer(typeof(Modelo.Minuta));
+                 StringWriter writer = new StringWriter();
+                 sr.Serialize(writer, minuta);
 
-                Service1 s = new Service1();
-                XmlSerializer sr = new XmlSerializer(typeof(Modelo.Minuta));
-                StringWriter writer = new StringWriter();
-                sr.Serialize(writer, minuta);
+                 if (s.ListarDetalleMinuta(writer.ToString()) != null)
+                 {
+                     string datos = s.ListarDetalleMinuta(writer.ToString());
+                     XmlSerializer ser3 = new XmlSerializer(typeof(Modelo.DetallePlatoCollection));
+                     StringReader reader = new StringReader(datos);
 
-                if (s.ListarDetalleMinuta(writer.ToString()) != null)
-                {
-                    string datos = s.ListarDetalleMinuta(writer.ToString());
-                    XmlSerializer ser3 = new XmlSerializer(typeof(Modelo.DetalleMinutaCollection));
-                    StringReader reader = new StringReader(datos);
+                     Modelo.DetallePlatoCollection listaMinuta = (Modelo.DetallePlatoCollection)ser3.Deserialize(reader);
+                     reader.Close();
+                     CargarTablaMinuta(listaMinuta);
+                 }
+             }
 
-                    Modelo.DetalleMinutaCollection listaMinuta = (Modelo.DetalleMinutaCollection)ser3.Deserialize(reader);
-                    reader.Close();
-                    CargarTablaMinuta(listaMinuta);
-                }
-            }
-
-            ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modal", "$('#exampleModal2').modal();", true);
-        }
-        //fin info
-        */
+             ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modal", "$('#exampleModal2').modal();", true);
+         }
+         //fin info
          
-        /*
-        private void CargarTablaMinuta(List<DetalleMinuta> lista) {
+
+
+        private void CargarTablaMinuta(List<DetallePlato> lista) {
             Minuta minuta = new Minuta();
             DataTable dt = new DataTable();
             dt.Columns.AddRange(new DataColumn[] {
-                new DataColumn("Código", typeof(long)),
+                new DataColumn("ID", typeof(long)),
                 new DataColumn("Nombre", typeof(string)),
-                new DataColumn("Descripción",typeof(string)),
-                new DataColumn("Unidad Medida",typeof(string)),
-                new DataColumn("Cantidad Pedida",typeof(int))
+                
+                new DataColumn("Precio",typeof(int))
             });
-            foreach (DetalleMinuta item in lista) {
+            foreach (DetallePlato item in lista) {
                 minuta = new Minuta();
                 minuta.ID_PENSION = item.ID_PENSION;
-                minuta.Read();
+                //minuta.Read();
 
-                dt.Rows.Add(producto.ID_PRODUCTO,producto.NOMBRE_PRODUCTO,producto.DESCRIPCION_PRODUCTO,producto.UNIDAD_MEDIDA,item.CANTIDAD);
+                dt.Rows.Add(minuta.ID_PENSION,minuta.NOMBRE_PENSION,minuta.VALOR_PENSION);
             }
 
 
@@ -253,7 +227,7 @@ namespace Web.Empleado
         }
 
         //fin tabla historial
-        */
+        
 
         
          
