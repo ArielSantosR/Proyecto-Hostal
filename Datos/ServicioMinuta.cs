@@ -86,52 +86,18 @@ namespace Datos
             }
         }
 
-        /*
-         *  DETALLE_PLATOS d = ent.DETALLE_PLATOS.FirstOrDefault(objeto =>
-            objeto.ID_PENSION.Equals(minuta.ID_PENSION));
-         */
-
-        public bool EliminarDetalleMinuta(PENSION minuta)
+        public bool EliminarDetalleMinuta(DETALLE_PLATOS detalle)
         {
-            DETALLE_PLATOS d = ent.DETALLE_PLATOS.FirstOrDefault(objeto =>
-            objeto.ID_PENSION.Equals(minuta.ID_PENSION));
-
-
-
-            if (d != null)
-            {
-                
-                    ent.DETALLE_PLATOS.Remove(d);
-
-                    ent.SaveChanges();
-                    
-                
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            ent.DETALLE_PLATOS.Remove(detalle);
+            ent.SaveChanges();
+            return true;
         }
 
         public bool EliminarMinuta(PENSION minuta)
         {
-            PENSION p = ent.PENSION.FirstOrDefault(objeto =>
-            objeto.ID_PENSION.Equals(minuta.ID_PENSION));
-
-           
-
-            if (p != null)
-            {
-                ent.PENSION.Remove(p);
-                
-                ent.SaveChanges();
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            ent.PENSION.Remove(minuta);
+            ent.SaveChanges();
+            return true;
         }
 
         public bool EditarMinuta(PENSION minuta)

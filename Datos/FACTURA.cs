@@ -27,6 +27,7 @@ namespace Datos
         public System.DateTime FECHA_EMISION_FACTURA { get; set; }
         public int RUT_CLIENTE { get; set; }
         public int RUT_EMPLEADO { get; set; }
+        public string METODO_PAGO { get; set; }
     
         public virtual CLIENTE CLIENTE { get; set; }
         public virtual ICollection<DETALLE_FACTURA> DETALLE_FACTURA { get; set; }

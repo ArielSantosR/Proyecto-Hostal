@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Hostal.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="11.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Model.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="11.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="BOLETA">
           <Key>
             <PropertyRef Name="ID_BOLETA" />
@@ -73,7 +73,7 @@
           <Property Name="CANTIDAD" Type="number" Precision="10" Scale="0" Nullable="false" />
           <Property Name="VALOR_TOTAL" Type="number" Precision="15" Scale="0" Nullable="false" />
           <Property Name="ID_FACTURA" Type="number" Precision="10" Scale="0" Nullable="false" />
-          <Property Name="RUT_CLIENTE" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="VALOR_UNITARIO" Type="number" Precision="10" Scale="0" Nullable="false" />
         </EntityType>
         <EntityType Name="DETALLE_HABITACION">
           <Key>
@@ -158,6 +158,7 @@
           <Property Name="FECHA_EMISION_FACTURA" Type="date" Nullable="false" />
           <Property Name="RUT_CLIENTE" Type="number" Precision="8" Scale="0" Nullable="false" />
           <Property Name="RUT_EMPLEADO" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="METODO_PAGO" Type="varchar2" MaxLength="30" Nullable="false" />
         </EntityType>
         <EntityType Name="FAMILIA">
           <Key>
@@ -257,6 +258,7 @@
           <Property Name="ID_PENSION" Type="number" Precision="5" Scale="0" Nullable="false" />
           <Property Name="NOMBRE_PENSION" Type="varchar2" MaxLength="35" Nullable="false" />
           <Property Name="VALOR_PENSION" Type="number" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="HABILITADO" Type="varchar2" MaxLength="1" Nullable="false" />
         </EntityType>
         <EntityType Name="PLATO">
           <Key>
@@ -428,18 +430,6 @@
             </Principal>
             <Dependent Role="DETALLE_BOLETA">
               <PropertyRef Name="ID_BOLETA" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DETALLE_FACTURA_CLIENTE">
-          <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="1" />
-          <End Role="DETALLE_FACTURA" Type="Self.DETALLE_FACTURA" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CLIENTE">
-              <PropertyRef Name="RUT_CLIENTE" />
-            </Principal>
-            <Dependent Role="DETALLE_FACTURA">
-              <PropertyRef Name="RUT_CLIENTE" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -923,7 +913,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="HostalStoreContainer">
+        <EntityContainer Name="ModelStoreContainer">
           <EntitySet Name="BOLETA" EntityType="Self.BOLETA" Schema="HOSTAL" store:Type="Tables" />
           <EntitySet Name="CATEGORIA" EntityType="Self.CATEGORIA" Schema="HOSTAL" store:Type="Tables" />
           <EntitySet Name="CATEGORIA_HABITACION" EntityType="Self.CATEGORIA_HABITACION" Schema="HOSTAL" store:Type="Tables" />
@@ -985,10 +975,6 @@
           <AssociationSet Name="FK_DETALLE_BOLETA_BOLETA" Association="Self.FK_DETALLE_BOLETA_BOLETA">
             <End Role="BOLETA" EntitySet="BOLETA" />
             <End Role="DETALLE_BOLETA" EntitySet="DETALLE_BOLETA" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DETALLE_FACTURA_CLIENTE" Association="Self.FK_DETALLE_FACTURA_CLIENTE">
-            <End Role="CLIENTE" EntitySet="CLIENTE" />
-            <End Role="DETALLE_FACTURA" EntitySet="DETALLE_FACTURA" />
           </AssociationSet>
           <AssociationSet Name="FK_DETALLE_FACTURA_FACTURA" Association="Self.FK_DETALLE_FACTURA_FACTURA">
             <End Role="FACTURA" EntitySet="FACTURA" />
@@ -1155,7 +1141,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="Hostal" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="BOLETA">
           <Key>
             <PropertyRef Name="ID_BOLETA" />
@@ -1204,7 +1190,6 @@
           <NavigationProperty Name="COMUNA" Relationship="Self.FK_CLIENTE_COMUNA" FromRole="CLIENTE" ToRole="COMUNA" />
           <NavigationProperty Name="DETALLE_HABITACION" Relationship="Self.FK_CLIENTE_DETALLE_H" FromRole="CLIENTE" ToRole="DETALLE_HABITACION" />
           <NavigationProperty Name="USUARIO" Relationship="Self.FK_CLIENTE_USUARIO" FromRole="CLIENTE" ToRole="USUARIO" />
-          <NavigationProperty Name="DETALLE_FACTURA" Relationship="Self.FK_DETALLE_FACTURA_CLIENTE" FromRole="CLIENTE" ToRole="DETALLE_FACTURA" />
           <NavigationProperty Name="FACTURA" Relationship="Self.FK_FACTURA_CLIENTE" FromRole="CLIENTE" ToRole="FACTURA" />
           <NavigationProperty Name="GIRO" Relationship="Self.FK_GIRO_CLIENTE" FromRole="CLIENTE" ToRole="GIRO" />
           <NavigationProperty Name="HUESPED" Relationship="Self.FK_HUESPED_CLIENTE" FromRole="CLIENTE" ToRole="HUESPED" />
@@ -1241,8 +1226,7 @@
           <Property Name="CANTIDAD" Type="Int32" Nullable="false" />
           <Property Name="VALOR_TOTAL" Type="Int64" Nullable="false" />
           <Property Name="ID_FACTURA" Type="Int32" Nullable="false" />
-          <Property Name="RUT_CLIENTE" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="CLIENTE" Relationship="Self.FK_DETALLE_FACTURA_CLIENTE" FromRole="DETALLE_FACTURA" ToRole="CLIENTE" />
+          <Property Name="VALOR_UNITARIO" Type="Int32" Nullable="false" />
           <NavigationProperty Name="FACTURA" Relationship="Self.FK_DETALLE_FACTURA_FACTURA" FromRole="DETALLE_FACTURA" ToRole="FACTURA" />
         </EntityType>
         <EntityType Name="DETALLE_HABITACION">
@@ -1349,6 +1333,7 @@
           <Property Name="FECHA_EMISION_FACTURA" Type="DateTime" Nullable="false" />
           <Property Name="RUT_CLIENTE" Type="Int32" Nullable="false" />
           <Property Name="RUT_EMPLEADO" Type="Int32" Nullable="false" />
+          <Property Name="METODO_PAGO" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="CLIENTE" Relationship="Self.FK_FACTURA_CLIENTE" FromRole="FACTURA" ToRole="CLIENTE" />
           <NavigationProperty Name="DETALLE_FACTURA" Relationship="Self.FK_DETALLE_FACTURA_FACTURA" FromRole="FACTURA" ToRole="DETALLE_FACTURA" />
           <NavigationProperty Name="EMPLEADO" Relationship="Self.FK_FACTURA_EMPLEADO" FromRole="FACTURA" ToRole="EMPLEADO" />
@@ -1475,6 +1460,7 @@
           <Property Name="ID_PENSION" Type="Int16" Nullable="false" />
           <Property Name="NOMBRE_PENSION" Type="String" MaxLength="35" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="VALOR_PENSION" Type="Int32" Nullable="false" />
+          <Property Name="HABILITADO" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="DETALLE_ORDEN" Relationship="Self.FK_DETALLE_ORDEN_PENSION" FromRole="PENSION" ToRole="DETALLE_ORDEN" />
           <NavigationProperty Name="DETALLE_PASAJEROS" Relationship="Self.FK_DETALLE_PENSION_P" FromRole="PENSION" ToRole="DETALLE_PASAJEROS" />
           <NavigationProperty Name="DETALLE_PLATOS" Relationship="Self.FK_DETALLE_PLATOS_PENSION" FromRole="PENSION" ToRole="DETALLE_PLATOS" />
@@ -1699,18 +1685,6 @@
             </Principal>
             <Dependent Role="CLIENTE">
               <PropertyRef Name="ID_USUARIO" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DETALLE_FACTURA_CLIENTE">
-          <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="1" />
-          <End Role="DETALLE_FACTURA" Type="Self.DETALLE_FACTURA" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CLIENTE">
-              <PropertyRef Name="RUT_CLIENTE" />
-            </Principal>
-            <Dependent Role="DETALLE_FACTURA">
-              <PropertyRef Name="RUT_CLIENTE" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2241,10 +2215,6 @@
             <End Role="USUARIO" EntitySet="USUARIO" />
             <End Role="CLIENTE" EntitySet="CLIENTE" />
           </AssociationSet>
-          <AssociationSet Name="FK_DETALLE_FACTURA_CLIENTE" Association="Self.FK_DETALLE_FACTURA_CLIENTE">
-            <End Role="CLIENTE" EntitySet="CLIENTE" />
-            <End Role="DETALLE_FACTURA" EntitySet="DETALLE_FACTURA" />
-          </AssociationSet>
           <AssociationSet Name="FK_FACTURA_CLIENTE" Association="Self.FK_FACTURA_CLIENTE">
             <End Role="CLIENTE" EntitySet="CLIENTE" />
             <End Role="FACTURA" EntitySet="FACTURA" />
@@ -2403,9 +2373,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="HostalStoreContainer" CdmEntityContainer="HostalEntities">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="HostalEntities">
           <EntitySetMapping Name="BOLETA">
-            <EntityTypeMapping TypeName="Hostal.BOLETA">
+            <EntityTypeMapping TypeName="Model.BOLETA">
               <MappingFragment StoreEntitySet="BOLETA">
                 <ScalarProperty Name="ID_BOLETA" ColumnName="ID_BOLETA" />
                 <ScalarProperty Name="VALOR_DESC_BOLETA" ColumnName="VALOR_DESC_BOLETA" />
@@ -2417,7 +2387,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CATEGORIA">
-            <EntityTypeMapping TypeName="Hostal.CATEGORIA">
+            <EntityTypeMapping TypeName="Model.CATEGORIA">
               <MappingFragment StoreEntitySet="CATEGORIA">
                 <ScalarProperty Name="ID_CATEGORIA" ColumnName="ID_CATEGORIA" />
                 <ScalarProperty Name="NOMBRE_CATEGORIA" ColumnName="NOMBRE_CATEGORIA" />
@@ -2425,7 +2395,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CATEGORIA_HABITACION">
-            <EntityTypeMapping TypeName="Hostal.CATEGORIA_HABITACION">
+            <EntityTypeMapping TypeName="Model.CATEGORIA_HABITACION">
               <MappingFragment StoreEntitySet="CATEGORIA_HABITACION">
                 <ScalarProperty Name="ID_CATEGORIA_HABITACION" ColumnName="ID_CATEGORIA_HABITACION" />
                 <ScalarProperty Name="NOMBRE_CATEGORIA" ColumnName="NOMBRE_CATEGORIA" />
@@ -2434,7 +2404,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CLIENTE">
-            <EntityTypeMapping TypeName="Hostal.CLIENTE">
+            <EntityTypeMapping TypeName="Model.CLIENTE">
               <MappingFragment StoreEntitySet="CLIENTE">
                 <ScalarProperty Name="RUT_CLIENTE" ColumnName="RUT_CLIENTE" />
                 <ScalarProperty Name="DV_CLIENTE" ColumnName="DV_CLIENTE" />
@@ -2449,7 +2419,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="COMUNA">
-            <EntityTypeMapping TypeName="Hostal.COMUNA">
+            <EntityTypeMapping TypeName="Model.COMUNA">
               <MappingFragment StoreEntitySet="COMUNA">
                 <ScalarProperty Name="ID_COMUNA" ColumnName="ID_COMUNA" />
                 <ScalarProperty Name="NOMBRE_COMUNA" ColumnName="NOMBRE_COMUNA" />
@@ -2458,7 +2428,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DETALLE_BOLETA">
-            <EntityTypeMapping TypeName="Hostal.DETALLE_BOLETA">
+            <EntityTypeMapping TypeName="Model.DETALLE_BOLETA">
               <MappingFragment StoreEntitySet="DETALLE_BOLETA">
                 <ScalarProperty Name="ID_DETALLE_BOLETA" ColumnName="ID_DETALLE_BOLETA" />
                 <ScalarProperty Name="DESCRIPCION_DETALLE" ColumnName="DESCRIPCION_DETALLE" />
@@ -2469,19 +2439,19 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DETALLE_FACTURA">
-            <EntityTypeMapping TypeName="Hostal.DETALLE_FACTURA">
+            <EntityTypeMapping TypeName="Model.DETALLE_FACTURA">
               <MappingFragment StoreEntitySet="DETALLE_FACTURA">
                 <ScalarProperty Name="ID_DETALLE_FACTURA" ColumnName="ID_DETALLE_FACTURA" />
                 <ScalarProperty Name="DESCRIPCION_DETALLE" ColumnName="DESCRIPCION_DETALLE" />
                 <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
                 <ScalarProperty Name="VALOR_TOTAL" ColumnName="VALOR_TOTAL" />
                 <ScalarProperty Name="ID_FACTURA" ColumnName="ID_FACTURA" />
-                <ScalarProperty Name="RUT_CLIENTE" ColumnName="RUT_CLIENTE" />
+                <ScalarProperty Name="VALOR_UNITARIO" ColumnName="VALOR_UNITARIO" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DETALLE_HABITACION">
-            <EntityTypeMapping TypeName="Hostal.DETALLE_HABITACION">
+            <EntityTypeMapping TypeName="Model.DETALLE_HABITACION">
               <MappingFragment StoreEntitySet="DETALLE_HABITACION">
                 <ScalarProperty Name="ID_DETALLE_H" ColumnName="ID_DETALLE_H" />
                 <ScalarProperty Name="NUMERO_HABITACION" ColumnName="NUMERO_HABITACION" />
@@ -2490,7 +2460,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DETALLE_ORDEN">
-            <EntityTypeMapping TypeName="Hostal.DETALLE_ORDEN">
+            <EntityTypeMapping TypeName="Model.DETALLE_ORDEN">
               <MappingFragment StoreEntitySet="DETALLE_ORDEN">
                 <ScalarProperty Name="ID_DETALLE" ColumnName="ID_DETALLE" />
                 <ScalarProperty Name="NUMERO_ORDEN" ColumnName="NUMERO_ORDEN" />
@@ -2502,7 +2472,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DETALLE_PASAJEROS">
-            <EntityTypeMapping TypeName="Hostal.DETALLE_PASAJEROS">
+            <EntityTypeMapping TypeName="Model.DETALLE_PASAJEROS">
               <MappingFragment StoreEntitySet="DETALLE_PASAJEROS">
                 <ScalarProperty Name="ID_DETALLE_PASAJEROS" ColumnName="ID_DETALLE_PASAJEROS" />
                 <ScalarProperty Name="NUMERO_HABITACION" ColumnName="NUMERO_HABITACION" />
@@ -2514,7 +2484,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DETALLE_PEDIDO">
-            <EntityTypeMapping TypeName="Hostal.DETALLE_PEDIDO">
+            <EntityTypeMapping TypeName="Model.DETALLE_PEDIDO">
               <MappingFragment StoreEntitySet="DETALLE_PEDIDO">
                 <ScalarProperty Name="ID_DETALLE_PEDIDO" ColumnName="ID_DETALLE_PEDIDO" />
                 <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
@@ -2524,7 +2494,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DETALLE_PLATOS">
-            <EntityTypeMapping TypeName="Hostal.DETALLE_PLATOS">
+            <EntityTypeMapping TypeName="Model.DETALLE_PLATOS">
               <MappingFragment StoreEntitySet="DETALLE_PLATOS">
                 <ScalarProperty Name="ID_DETALLE_PLATOS" ColumnName="ID_DETALLE_PLATOS" />
                 <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
@@ -2534,7 +2504,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DETALLE_RECEPCION">
-            <EntityTypeMapping TypeName="Hostal.DETALLE_RECEPCION">
+            <EntityTypeMapping TypeName="Model.DETALLE_RECEPCION">
               <MappingFragment StoreEntitySet="DETALLE_RECEPCION">
                 <ScalarProperty Name="ID_DETALLE_RECEPCION" ColumnName="ID_DETALLE_RECEPCION" />
                 <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
@@ -2544,7 +2514,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="EMPLEADO">
-            <EntityTypeMapping TypeName="Hostal.EMPLEADO">
+            <EntityTypeMapping TypeName="Model.EMPLEADO">
               <MappingFragment StoreEntitySet="EMPLEADO">
                 <ScalarProperty Name="RUT_EMPLEADO" ColumnName="RUT_EMPLEADO" />
                 <ScalarProperty Name="DV_EMPLEADO" ColumnName="DV_EMPLEADO" />
@@ -2557,7 +2527,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="FACTURA">
-            <EntityTypeMapping TypeName="Hostal.FACTURA">
+            <EntityTypeMapping TypeName="Model.FACTURA">
               <MappingFragment StoreEntitySet="FACTURA">
                 <ScalarProperty Name="ID_FACTURA" ColumnName="ID_FACTURA" />
                 <ScalarProperty Name="VALOR_NETO_FACTURA" ColumnName="VALOR_NETO_FACTURA" />
@@ -2567,11 +2537,12 @@
                 <ScalarProperty Name="FECHA_EMISION_FACTURA" ColumnName="FECHA_EMISION_FACTURA" />
                 <ScalarProperty Name="RUT_CLIENTE" ColumnName="RUT_CLIENTE" />
                 <ScalarProperty Name="RUT_EMPLEADO" ColumnName="RUT_EMPLEADO" />
+                <ScalarProperty Name="METODO_PAGO" ColumnName="METODO_PAGO" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="FAMILIA">
-            <EntityTypeMapping TypeName="Hostal.FAMILIA">
+            <EntityTypeMapping TypeName="Model.FAMILIA">
               <MappingFragment StoreEntitySet="FAMILIA">
                 <ScalarProperty Name="ID_FAMILIA" ColumnName="ID_FAMILIA" />
                 <ScalarProperty Name="NOMBRE_FAMILIA" ColumnName="NOMBRE_FAMILIA" />
@@ -2579,7 +2550,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="GIRO">
-            <EntityTypeMapping TypeName="Hostal.GIRO">
+            <EntityTypeMapping TypeName="Model.GIRO">
               <MappingFragment StoreEntitySet="GIRO">
                 <ScalarProperty Name="ID_GIRO" ColumnName="ID_GIRO" />
                 <ScalarProperty Name="NOMBRE_GIRO" ColumnName="NOMBRE_GIRO" />
@@ -2587,7 +2558,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="HABITACION">
-            <EntityTypeMapping TypeName="Hostal.HABITACION">
+            <EntityTypeMapping TypeName="Model.HABITACION">
               <MappingFragment StoreEntitySet="HABITACION">
                 <ScalarProperty Name="NUMERO_HABITACION" ColumnName="NUMERO_HABITACION" />
                 <ScalarProperty Name="ESTADO_HABITACION" ColumnName="ESTADO_HABITACION" />
@@ -2597,7 +2568,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="HUESPED">
-            <EntityTypeMapping TypeName="Hostal.HUESPED">
+            <EntityTypeMapping TypeName="Model.HUESPED">
               <MappingFragment StoreEntitySet="HUESPED">
                 <ScalarProperty Name="RUT_HUESPED" ColumnName="RUT_HUESPED" />
                 <ScalarProperty Name="DV_HUESPED" ColumnName="DV_HUESPED" />
@@ -2612,7 +2583,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="LOG_ERRORES">
-            <EntityTypeMapping TypeName="Hostal.LOG_ERRORES">
+            <EntityTypeMapping TypeName="Model.LOG_ERRORES">
               <MappingFragment StoreEntitySet="LOG_ERRORES">
                 <ScalarProperty Name="ID_ERROR" ColumnName="ID_ERROR" />
                 <ScalarProperty Name="NUMERO_ERROR" ColumnName="NUMERO_ERROR" />
@@ -2621,7 +2592,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="NOTIFICACION">
-            <EntityTypeMapping TypeName="Hostal.NOTIFICACION">
+            <EntityTypeMapping TypeName="Model.NOTIFICACION">
               <MappingFragment StoreEntitySet="NOTIFICACION">
                 <ScalarProperty Name="ID_NOTIFICACION" ColumnName="ID_NOTIFICACION" />
                 <ScalarProperty Name="MENSAJE" ColumnName="MENSAJE" />
@@ -2635,7 +2606,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ORDEN_COMPRA">
-            <EntityTypeMapping TypeName="Hostal.ORDEN_COMPRA">
+            <EntityTypeMapping TypeName="Model.ORDEN_COMPRA">
               <MappingFragment StoreEntitySet="ORDEN_COMPRA">
                 <ScalarProperty Name="NUMERO_ORDEN" ColumnName="NUMERO_ORDEN" />
                 <ScalarProperty Name="CANTIDAD_HUESPEDES" ColumnName="CANTIDAD_HUESPEDES" />
@@ -2649,7 +2620,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PAIS">
-            <EntityTypeMapping TypeName="Hostal.PAIS">
+            <EntityTypeMapping TypeName="Model.PAIS">
               <MappingFragment StoreEntitySet="PAIS">
                 <ScalarProperty Name="ID_PAIS" ColumnName="ID_PAIS" />
                 <ScalarProperty Name="NOMBRE_PAIS" ColumnName="NOMBRE_PAIS" />
@@ -2657,7 +2628,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PEDIDO">
-            <EntityTypeMapping TypeName="Hostal.PEDIDO">
+            <EntityTypeMapping TypeName="Model.PEDIDO">
               <MappingFragment StoreEntitySet="PEDIDO">
                 <ScalarProperty Name="NUMERO_PEDIDO" ColumnName="NUMERO_PEDIDO" />
                 <ScalarProperty Name="FECHA_PEDIDO" ColumnName="FECHA_PEDIDO" />
@@ -2671,16 +2642,17 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PENSION">
-            <EntityTypeMapping TypeName="Hostal.PENSION">
+            <EntityTypeMapping TypeName="Model.PENSION">
               <MappingFragment StoreEntitySet="PENSION">
                 <ScalarProperty Name="ID_PENSION" ColumnName="ID_PENSION" />
                 <ScalarProperty Name="NOMBRE_PENSION" ColumnName="NOMBRE_PENSION" />
                 <ScalarProperty Name="VALOR_PENSION" ColumnName="VALOR_PENSION" />
+                <ScalarProperty Name="HABILITADO" ColumnName="HABILITADO" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PLATO">
-            <EntityTypeMapping TypeName="Hostal.PLATO">
+            <EntityTypeMapping TypeName="Model.PLATO">
               <MappingFragment StoreEntitySet="PLATO">
                 <ScalarProperty Name="ID_PLATO" ColumnName="ID_PLATO" />
                 <ScalarProperty Name="NOMBRE_PLATO" ColumnName="NOMBRE_PLATO" />
@@ -2691,7 +2663,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PRODUCTO">
-            <EntityTypeMapping TypeName="Hostal.PRODUCTO">
+            <EntityTypeMapping TypeName="Model.PRODUCTO">
               <MappingFragment StoreEntitySet="PRODUCTO">
                 <ScalarProperty Name="ID_PRODUCTO" ColumnName="ID_PRODUCTO" />
                 <ScalarProperty Name="NOMBRE_PRODUCTO" ColumnName="NOMBRE_PRODUCTO" />
@@ -2708,7 +2680,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PROVEEDOR">
-            <EntityTypeMapping TypeName="Hostal.PROVEEDOR">
+            <EntityTypeMapping TypeName="Model.PROVEEDOR">
               <MappingFragment StoreEntitySet="PROVEEDOR">
                 <ScalarProperty Name="RUT_PROVEEDOR" ColumnName="RUT_PROVEEDOR" />
                 <ScalarProperty Name="DV_PROVEEDOR" ColumnName="DV_PROVEEDOR" />
@@ -2722,7 +2694,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="RECEPCION">
-            <EntityTypeMapping TypeName="Hostal.RECEPCION">
+            <EntityTypeMapping TypeName="Model.RECEPCION">
               <MappingFragment StoreEntitySet="RECEPCION">
                 <ScalarProperty Name="NUMERO_RECEPCION" ColumnName="NUMERO_RECEPCION" />
                 <ScalarProperty Name="FECHA_RECEPCION" ColumnName="FECHA_RECEPCION" />
@@ -2732,7 +2704,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="REGION">
-            <EntityTypeMapping TypeName="Hostal.REGION">
+            <EntityTypeMapping TypeName="Model.REGION">
               <MappingFragment StoreEntitySet="REGION">
                 <ScalarProperty Name="ID_REGION" ColumnName="ID_REGION" />
                 <ScalarProperty Name="NOMBRE_REGION" ColumnName="NOMBRE_REGION" />
@@ -2741,7 +2713,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TIPO_HABITACION">
-            <EntityTypeMapping TypeName="Hostal.TIPO_HABITACION">
+            <EntityTypeMapping TypeName="Model.TIPO_HABITACION">
               <MappingFragment StoreEntitySet="TIPO_HABITACION">
                 <ScalarProperty Name="ID_TIPO_HABITACION" ColumnName="ID_TIPO_HABITACION" />
                 <ScalarProperty Name="NOMBRE_TIPO_HABITACION" ColumnName="NOMBRE_TIPO_HABITACION" />
@@ -2751,7 +2723,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TIPO_PLATO">
-            <EntityTypeMapping TypeName="Hostal.TIPO_PLATO">
+            <EntityTypeMapping TypeName="Model.TIPO_PLATO">
               <MappingFragment StoreEntitySet="TIPO_PLATO">
                 <ScalarProperty Name="ID_TIPO_PLATO" ColumnName="ID_TIPO_PLATO" />
                 <ScalarProperty Name="NOMBRE_TIPO_PLATO" ColumnName="NOMBRE_TIPO_PLATO" />
@@ -2759,7 +2731,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TIPO_PROVEEDOR">
-            <EntityTypeMapping TypeName="Hostal.TIPO_PROVEEDOR">
+            <EntityTypeMapping TypeName="Model.TIPO_PROVEEDOR">
               <MappingFragment StoreEntitySet="TIPO_PROVEEDOR">
                 <ScalarProperty Name="ID_TIPO_PROVEEDOR" ColumnName="ID_TIPO_PROVEEDOR" />
                 <ScalarProperty Name="NOMBRE_TIPO" ColumnName="NOMBRE_TIPO" />
@@ -2767,7 +2739,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="USUARIO">
-            <EntityTypeMapping TypeName="Hostal.USUARIO">
+            <EntityTypeMapping TypeName="Model.USUARIO">
               <MappingFragment StoreEntitySet="USUARIO">
                 <ScalarProperty Name="ID_USUARIO" ColumnName="ID_USUARIO" />
                 <ScalarProperty Name="NOMBRE_USUARIO" ColumnName="NOMBRE_USUARIO" />

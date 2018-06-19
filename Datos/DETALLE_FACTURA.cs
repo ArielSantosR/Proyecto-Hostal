@@ -19,9 +19,8 @@ namespace Datos
         public int CANTIDAD { get; set; }
         public long VALOR_TOTAL { get; set; }
         public int ID_FACTURA { get; set; }
-        public int RUT_CLIENTE { get; set; }
+        public int VALOR_UNITARIO { get; set; }
     
-        public virtual CLIENTE CLIENTE { get; set; }
         public virtual FACTURA FACTURA { get; set; }
     }
 }

@@ -57,23 +57,6 @@ namespace Web.Empleado
             }
         }
 
-        public Minuta MiSesionMinuta
-        {
-            get
-            {
-                if (Session["Minuta"] == null)
-                {
-                    Session["Minuta"] = new Minuta();
-                }
-                return (Minuta)Session["Minuta"];
-            }
-            set
-            {
-                Session["Minuta"] = value;
-            }
-        }
-
-
         protected void Page_Load(object sender, EventArgs e)
         {
             error.Text = "";
@@ -85,7 +68,7 @@ namespace Web.Empleado
             string datos = service.ListarMinuta();
             XmlSerializer ser = new XmlSerializer(typeof(Modelo.MinutaCollection));
             StringReader reader = new StringReader(datos);
-            
+
             Modelo.MinutaCollection listaMinuta = (Modelo.MinutaCollection)ser.Deserialize(reader);
             reader.Close();
             gvMinuta.DataSource = listaMinuta;
@@ -104,35 +87,45 @@ namespace Web.Empleado
 
         protected void btnEliminar_Click(object sender, EventArgs e)
         {
+            LinkButton btn = (LinkButton)(sender);
+            short ID_PENSION = short.Parse(btn.CommandArgument);
+
             Modelo.Minuta minuta = new Modelo.Minuta();
-            minuta.ID_PENSION = MiSesionMinuta.ID_PENSION;
+            minuta.ID_PENSION = ID_PENSION;
 
             Service1 s = new Service1();
             XmlSerializer sr = new XmlSerializer(typeof(Modelo.Minuta));
             StringWriter writer = new StringWriter();
             sr.Serialize(writer, minuta);
 
-<<<<<<< HEAD
-            /*
-            if (s.ObtenerMinuta(writer.ToString()) == null)
+            string datos = s.ListarDetalleMinuta(writer.ToString());
+            XmlSerializer sr2 = new XmlSerializer(typeof(Modelo.DetallePlatoCollection));
+            StringReader reader = new StringReader(datos);
+
+            Modelo.DetallePlatoCollection listaDetalle = (Modelo.DetallePlatoCollection)sr2.Deserialize(reader);
+            reader.Close();
+
+            if (listaDetalle.Count > 0)
             {
-                alerta_exito.Visible = false;
-                error.Text = "No se ha encontrado la Minuta";
-                alerta.Visible = true;
-            }
-            else {
-                    alerta_exito.Visible = false;
-                    error.Text = "La modificación de Minuta ha fallado";
-                    alerta.Visible = true;
+                foreach (DetallePlato d in listaDetalle)
+                {
+                    XmlSerializer sr3 = new XmlSerializer(typeof(Modelo.DetallePlato));
+                    StringWriter writer2 = new StringWriter();
+                    sr3.Serialize(writer2, d);
+
+                    s.EliminarDetallePlatos(writer2.ToString());
                 }
-                */
+            }
+
+            if (s.EliminarMinuta(writer.ToString()))
+            {
+                Response.Write("<script language='javascript'>window.alert('La minuta ha sido Eliminada con éxito');window.location='../Administrador/WebVerMinuta.aspx';</script>");
+                alerta.Visible = false;
+            }
         }
 
-
-        //fin editar
-
-        //eliminar
-        protected void btnEliminar_Click(object sender, EventArgs e)
+        //inicio info
+        protected void btnInfo_Click(object sender, EventArgs e)
         {
             LinkButton btn = (LinkButton)(sender);
             short id_pension = short.Parse(btn.CommandArgument);
@@ -140,85 +133,49 @@ namespace Web.Empleado
             Minuta minuta = new Minuta();
             minuta.ID_PENSION = id_pension;
 
-            //MiSesionMinuta = minuta;
+            if (minuta.ID_PENSION != 0)
+            {
 
-            ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modal", "$('#exampleModal').modal();", true);
+                Service1 s = new Service1();
+                XmlSerializer sr = new XmlSerializer(typeof(Modelo.Minuta));
+                StringWriter writer = new StringWriter();
+                sr.Serialize(writer, minuta);
+
+                if (s.ListarDetalleMinuta(writer.ToString()) != null)
+                {
+                    string datos = s.ListarDetalleMinuta(writer.ToString());
+                    XmlSerializer ser3 = new XmlSerializer(typeof(Modelo.DetallePlatoCollection));
+                    StringReader reader = new StringReader(datos);
+
+                    Modelo.DetallePlatoCollection listaMinuta = (Modelo.DetallePlatoCollection)ser3.Deserialize(reader);
+                    reader.Close();
+                    CargarTablaMinuta(listaMinuta);
+                }
+            }
+
+            ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modal", "$('#exampleModal2').modal();", true);
         }
+        //fin info
 
-        //fin eliminar
-        /*
-        //btn modal
-         protected void btnModal_Click(object sender, EventArgs e)
+
+
+        private void CargarTablaMinuta(List<DetallePlato> lista)
         {
-
-            try
-=======
-            if (s.EliminarMinuta(writer.ToString()) && s.EliminarDetallePlatos(writer.ToString()))
->>>>>>> 1f45958544927ca42e2107b7f622aea0a57325e6
-            {
-                MiSesionMinuta = null;
-                Response.Write("<script language='javascript'>window.alert('La minuta ha sido Eliminada con éxito');window.location='../Administrador/WebVerMinuta.aspx';</script>");
-                alerta.Visible = false;
-            }
-            else
-            {
-                error.Text = "No se ha podido Eliminar";
-                alerta.Visible = true;
-            }
-        }
-        
-         //inicio info
-          protected void btnInfo_Click(object sender, EventArgs e)
-         {
-             LinkButton btn = (LinkButton)(sender);
-             short id_pension = short.Parse(btn.CommandArgument);
-
-             Minuta minuta = new Minuta();
-             minuta.ID_PENSION = id_pension;
-
-             MiSesionMinuta = minuta;
-
-             if (MiSesionMinuta.ID_PENSION != 0)
-             {
-
-                 Service1 s = new Service1();
-                 XmlSerializer sr = new XmlSerializer(typeof(Modelo.Minuta));
-                 StringWriter writer = new StringWriter();
-                 sr.Serialize(writer, minuta);
-
-                 if (s.ListarDetalleMinuta(writer.ToString()) != null)
-                 {
-                     string datos = s.ListarDetalleMinuta(writer.ToString());
-                     XmlSerializer ser3 = new XmlSerializer(typeof(Modelo.DetallePlatoCollection));
-                     StringReader reader = new StringReader(datos);
-
-                     Modelo.DetallePlatoCollection listaMinuta = (Modelo.DetallePlatoCollection)ser3.Deserialize(reader);
-                     reader.Close();
-                     CargarTablaMinuta(listaMinuta);
-                 }
-             }
-
-             ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modal", "$('#exampleModal2').modal();", true);
-         }
-         //fin info
-         
-
-
-        private void CargarTablaMinuta(List<DetallePlato> lista) {
             Minuta minuta = new Minuta();
             DataTable dt = new DataTable();
             dt.Columns.AddRange(new DataColumn[] {
                 new DataColumn("ID", typeof(long)),
                 new DataColumn("Nombre", typeof(string)),
-                
+
                 new DataColumn("Precio",typeof(int))
             });
-            foreach (DetallePlato item in lista) {
+            foreach (DetallePlato item in lista)
+            {
                 minuta = new Minuta();
                 minuta.ID_PENSION = item.ID_PENSION;
                 //minuta.Read();
 
-                dt.Rows.Add(minuta.ID_PENSION,minuta.NOMBRE_PENSION,minuta.VALOR_PENSION);
+                dt.Rows.Add(minuta.ID_PENSION, minuta.NOMBRE_PENSION, minuta.VALOR_PENSION);
             }
 
 
@@ -227,12 +184,5 @@ namespace Web.Empleado
         }
 
         //fin tabla historial
-        
-
-        
-         
-
-
-
     }
 }

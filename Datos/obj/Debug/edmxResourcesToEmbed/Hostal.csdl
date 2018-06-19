@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="Hostal" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+<Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityType Name="BOLETA">
     <Key>
       <PropertyRef Name="ID_BOLETA" />
@@ -48,7 +48,6 @@
     <NavigationProperty Name="COMUNA" Relationship="Self.FK_CLIENTE_COMUNA" FromRole="CLIENTE" ToRole="COMUNA" />
     <NavigationProperty Name="DETALLE_HABITACION" Relationship="Self.FK_CLIENTE_DETALLE_H" FromRole="CLIENTE" ToRole="DETALLE_HABITACION" />
     <NavigationProperty Name="USUARIO" Relationship="Self.FK_CLIENTE_USUARIO" FromRole="CLIENTE" ToRole="USUARIO" />
-    <NavigationProperty Name="DETALLE_FACTURA" Relationship="Self.FK_DETALLE_FACTURA_CLIENTE" FromRole="CLIENTE" ToRole="DETALLE_FACTURA" />
     <NavigationProperty Name="FACTURA" Relationship="Self.FK_FACTURA_CLIENTE" FromRole="CLIENTE" ToRole="FACTURA" />
     <NavigationProperty Name="GIRO" Relationship="Self.FK_GIRO_CLIENTE" FromRole="CLIENTE" ToRole="GIRO" />
     <NavigationProperty Name="HUESPED" Relationship="Self.FK_HUESPED_CLIENTE" FromRole="CLIENTE" ToRole="HUESPED" />
@@ -85,8 +84,7 @@
     <Property Name="CANTIDAD" Type="Int32" Nullable="false" />
     <Property Name="VALOR_TOTAL" Type="Int64" Nullable="false" />
     <Property Name="ID_FACTURA" Type="Int32" Nullable="false" />
-    <Property Name="RUT_CLIENTE" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="CLIENTE" Relationship="Self.FK_DETALLE_FACTURA_CLIENTE" FromRole="DETALLE_FACTURA" ToRole="CLIENTE" />
+    <Property Name="VALOR_UNITARIO" Type="Int32" Nullable="false" />
     <NavigationProperty Name="FACTURA" Relationship="Self.FK_DETALLE_FACTURA_FACTURA" FromRole="DETALLE_FACTURA" ToRole="FACTURA" />
   </EntityType>
   <EntityType Name="DETALLE_HABITACION">
@@ -193,6 +191,7 @@
     <Property Name="FECHA_EMISION_FACTURA" Type="DateTime" Nullable="false" />
     <Property Name="RUT_CLIENTE" Type="Int32" Nullable="false" />
     <Property Name="RUT_EMPLEADO" Type="Int32" Nullable="false" />
+    <Property Name="METODO_PAGO" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
     <NavigationProperty Name="CLIENTE" Relationship="Self.FK_FACTURA_CLIENTE" FromRole="FACTURA" ToRole="CLIENTE" />
     <NavigationProperty Name="DETALLE_FACTURA" Relationship="Self.FK_DETALLE_FACTURA_FACTURA" FromRole="FACTURA" ToRole="DETALLE_FACTURA" />
     <NavigationProperty Name="EMPLEADO" Relationship="Self.FK_FACTURA_EMPLEADO" FromRole="FACTURA" ToRole="EMPLEADO" />
@@ -319,6 +318,7 @@
     <Property Name="ID_PENSION" Type="Int16" Nullable="false" />
     <Property Name="NOMBRE_PENSION" Type="String" MaxLength="35" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="VALOR_PENSION" Type="Int32" Nullable="false" />
+    <Property Name="HABILITADO" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
     <NavigationProperty Name="DETALLE_ORDEN" Relationship="Self.FK_DETALLE_ORDEN_PENSION" FromRole="PENSION" ToRole="DETALLE_ORDEN" />
     <NavigationProperty Name="DETALLE_PASAJEROS" Relationship="Self.FK_DETALLE_PENSION_P" FromRole="PENSION" ToRole="DETALLE_PASAJEROS" />
     <NavigationProperty Name="DETALLE_PLATOS" Relationship="Self.FK_DETALLE_PLATOS_PENSION" FromRole="PENSION" ToRole="DETALLE_PLATOS" />
@@ -543,18 +543,6 @@
       </Principal>
       <Dependent Role="CLIENTE">
         <PropertyRef Name="ID_USUARIO" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_DETALLE_FACTURA_CLIENTE">
-    <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="1" />
-    <End Role="DETALLE_FACTURA" Type="Self.DETALLE_FACTURA" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="CLIENTE">
-        <PropertyRef Name="RUT_CLIENTE" />
-      </Principal>
-      <Dependent Role="DETALLE_FACTURA">
-        <PropertyRef Name="RUT_CLIENTE" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1084,10 +1072,6 @@
     <AssociationSet Name="FK_CLIENTE_USUARIO" Association="Self.FK_CLIENTE_USUARIO">
       <End Role="USUARIO" EntitySet="USUARIO" />
       <End Role="CLIENTE" EntitySet="CLIENTE" />
-    </AssociationSet>
-    <AssociationSet Name="FK_DETALLE_FACTURA_CLIENTE" Association="Self.FK_DETALLE_FACTURA_CLIENTE">
-      <End Role="CLIENTE" EntitySet="CLIENTE" />
-      <End Role="DETALLE_FACTURA" EntitySet="DETALLE_FACTURA" />
     </AssociationSet>
     <AssociationSet Name="FK_FACTURA_CLIENTE" Association="Self.FK_FACTURA_CLIENTE">
       <End Role="CLIENTE" EntitySet="CLIENTE" />

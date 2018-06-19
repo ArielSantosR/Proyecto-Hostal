@@ -24,6 +24,7 @@ namespace Datos
         public short ID_PENSION { get; set; }
         public string NOMBRE_PENSION { get; set; }
         public int VALOR_PENSION { get; set; }
+        public string HABILITADO { get; set; }
     
         public virtual ICollection<DETALLE_ORDEN> DETALLE_ORDEN { get; set; }
         public virtual ICollection<DETALLE_PASAJEROS> DETALLE_PASAJEROS { get; set; }

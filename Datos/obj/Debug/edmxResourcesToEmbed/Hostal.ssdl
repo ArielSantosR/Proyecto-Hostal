@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="Hostal.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="11.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="Model.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="11.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="BOLETA">
     <Key>
       <PropertyRef Name="ID_BOLETA" />
@@ -68,7 +68,7 @@
     <Property Name="CANTIDAD" Type="number" Precision="10" Scale="0" Nullable="false" />
     <Property Name="VALOR_TOTAL" Type="number" Precision="15" Scale="0" Nullable="false" />
     <Property Name="ID_FACTURA" Type="number" Precision="10" Scale="0" Nullable="false" />
-    <Property Name="RUT_CLIENTE" Type="number" Precision="8" Scale="0" Nullable="false" />
+    <Property Name="VALOR_UNITARIO" Type="number" Precision="10" Scale="0" Nullable="false" />
   </EntityType>
   <EntityType Name="DETALLE_HABITACION">
     <Key>
@@ -153,6 +153,7 @@
     <Property Name="FECHA_EMISION_FACTURA" Type="date" Nullable="false" />
     <Property Name="RUT_CLIENTE" Type="number" Precision="8" Scale="0" Nullable="false" />
     <Property Name="RUT_EMPLEADO" Type="number" Precision="8" Scale="0" Nullable="false" />
+    <Property Name="METODO_PAGO" Type="varchar2" MaxLength="30" Nullable="false" />
   </EntityType>
   <EntityType Name="FAMILIA">
     <Key>
@@ -252,6 +253,7 @@
     <Property Name="ID_PENSION" Type="number" Precision="5" Scale="0" Nullable="false" />
     <Property Name="NOMBRE_PENSION" Type="varchar2" MaxLength="35" Nullable="false" />
     <Property Name="VALOR_PENSION" Type="number" Precision="10" Scale="0" Nullable="false" />
+    <Property Name="HABILITADO" Type="varchar2" MaxLength="1" Nullable="false" />
   </EntityType>
   <EntityType Name="PLATO">
     <Key>
@@ -423,18 +425,6 @@
       </Principal>
       <Dependent Role="DETALLE_BOLETA">
         <PropertyRef Name="ID_BOLETA" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_DETALLE_FACTURA_CLIENTE">
-    <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="1" />
-    <End Role="DETALLE_FACTURA" Type="Self.DETALLE_FACTURA" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="CLIENTE">
-        <PropertyRef Name="RUT_CLIENTE" />
-      </Principal>
-      <Dependent Role="DETALLE_FACTURA">
-        <PropertyRef Name="RUT_CLIENTE" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -918,7 +908,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="HostalStoreContainer">
+  <EntityContainer Name="ModelStoreContainer">
     <EntitySet Name="BOLETA" EntityType="Self.BOLETA" Schema="HOSTAL" store:Type="Tables" />
     <EntitySet Name="CATEGORIA" EntityType="Self.CATEGORIA" Schema="HOSTAL" store:Type="Tables" />
     <EntitySet Name="CATEGORIA_HABITACION" EntityType="Self.CATEGORIA_HABITACION" Schema="HOSTAL" store:Type="Tables" />
@@ -980,10 +970,6 @@
     <AssociationSet Name="FK_DETALLE_BOLETA_BOLETA" Association="Self.FK_DETALLE_BOLETA_BOLETA">
       <End Role="BOLETA" EntitySet="BOLETA" />
       <End Role="DETALLE_BOLETA" EntitySet="DETALLE_BOLETA" />
-    </AssociationSet>
-    <AssociationSet Name="FK_DETALLE_FACTURA_CLIENTE" Association="Self.FK_DETALLE_FACTURA_CLIENTE">
-      <End Role="CLIENTE" EntitySet="CLIENTE" />
-      <End Role="DETALLE_FACTURA" EntitySet="DETALLE_FACTURA" />
     </AssociationSet>
     <AssociationSet Name="FK_DETALLE_FACTURA_FACTURA" Association="Self.FK_DETALLE_FACTURA_FACTURA">
       <End Role="FACTURA" EntitySet="FACTURA" />
