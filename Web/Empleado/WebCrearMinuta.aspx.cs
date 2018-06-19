@@ -298,7 +298,7 @@ namespace Web.Empleado
                     }
                     if (pension.VALOR_PENSION > 0)
                     {
-                        XmlSerializer sr2 = new XmlSerializer(typeof(Modelo.Pension));
+                        XmlSerializer sr2 = new XmlSerializer(typeof(Modelo.Minuta));
                         StringWriter writer3 = new StringWriter();
                         sr2.Serialize(writer3, pension);
                         writer2.Close();

@@ -2343,6 +2343,19 @@ namespace WcfNegocio
 
             return serv.AgregarDetalleHabitacion(dDatos);
         }
+
+        public bool EliminarDetalleHabitacion(string detalle)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.DetalleHabitacion));
+            StringReader reader = new StringReader(detalle);
+            Modelo.DetalleHabitacion d = (Modelo.DetalleHabitacion)ser.Deserialize(reader);
+            ServicioReserva serv = new ServicioReserva();
+            Datos.DETALLE_HABITACION dDatos = new Datos.DETALLE_HABITACION();
+            dDatos.NUMERO_HABITACION = d.NUMERO_HABITACION;
+            dDatos.RUT_CLIENTE = d.RUT_CLIENTE;
+
+            return serv.AgregarDetalleHabitacion(dDatos);
+        }
         #endregion
 
         #region Detalle Pasajeros
@@ -2487,7 +2500,6 @@ namespace WcfNegocio
                 pMinuta.NOMBRE_PENSION = p.NOMBRE_PENSION;
                 pMinuta.VALOR_PENSION = p.VALOR_PENSION;
                 pMinuta.HABILITADO = p.HABILITADO;
-       
 
                 listaMinuta.Add(pMinuta);
             }
@@ -2522,9 +2534,7 @@ namespace WcfNegocio
             Datos.PENSION pDatos = new Datos.PENSION();
 
             pDatos.ID_PENSION = m.ID_PENSION;
-            pDatos.NOMBRE_PENSION = m.NOMBRE_PENSION;
-            pDatos.VALOR_PENSION = m.VALOR_PENSION;
-           
+            pDatos.HABILITADO = "F";
     
 
             return serv.EditarMinuta(pDatos);

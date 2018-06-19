@@ -488,13 +488,12 @@ namespace Web.Empleado
                         if (MiSesionOrden.RUT_CLIENTE.HasValue)
                         {
                             detalleHabitacion.RUT_CLIENTE = MiSesionOrden.RUT_CLIENTE.Value;
-                            detalleHabitacion.NUMERO_HABITACION = short.Parse(ddlHabitacion.SelectedValue);
 
                             XmlSerializer sr3 = new XmlSerializer(typeof(Modelo.DetalleHabitacion));
                             StringWriter writer3 = new StringWriter();
                             sr3.Serialize(writer3, detalleHabitacion);
 
-                            if (s.AgregarDetalleHabitacion(writer3.ToString()))
+                            if (s.EliminarDetalleHabitacion(writer3.ToString()))
                             {
                                 #region Detalle Pasajeros
                                 //3- Agregando el detalle de pasajeros de la habitación junto con la fecha de entrada y salida

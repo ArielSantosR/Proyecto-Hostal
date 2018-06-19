@@ -352,6 +352,9 @@ namespace WcfNegocio
         #region Detalle Habitacion
         [OperationContract]
         bool AgregarDetalleHabitacion(string detalle);
+
+        [OperationContract]
+        bool EliminarDetalleHabitacion(string detalle);
         #endregion
 
         #region Detalle Pasajeros

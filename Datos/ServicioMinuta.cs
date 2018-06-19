@@ -20,6 +20,7 @@ namespace Datos
         public List<PENSION> ListarMinuta()
         {
             var lista = (from consulta in ent.PENSION
+                         where consulta.HABILITADO.Equals("T")
                          orderby consulta.ID_PENSION
                          select consulta).ToList();
             return lista;
@@ -107,9 +108,7 @@ namespace Datos
 
             if (p != null)
             {
-
-                p.NOMBRE_PENSION = minuta.NOMBRE_PENSION;
-                p.VALOR_PENSION = minuta.VALOR_PENSION;
+                p.HABILITADO = minuta.HABILITADO;
                
                 ent.SaveChanges();
                 return true;

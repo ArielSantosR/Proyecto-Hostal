@@ -90,9 +90,9 @@ namespace Web.Cliente
                         reader.Close();
 
                         string minuta = service.ListarMinuta();
-                        XmlSerializer ser2 = new XmlSerializer(typeof(Modelo.PensionCollection));
+                        XmlSerializer ser2 = new XmlSerializer(typeof(Modelo.MinutaCollection));
                         StringReader reader2 = new StringReader(minuta);
-                        Modelo.PensionCollection coleccionMinuta = (Modelo.PensionCollection)ser2.Deserialize(reader2);
+                        Modelo.MinutaCollection coleccionMinuta = (Modelo.MinutaCollection)ser2.Deserialize(reader2);
                         reader.Close();
 
                         if (!IsPostBack)

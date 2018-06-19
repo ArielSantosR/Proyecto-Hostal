@@ -117,9 +117,9 @@ namespace Web.Empleado
                 }
             }
 
-            if (s.EliminarMinuta(writer.ToString()))
+            if (s.ModificarMinuta(writer.ToString()))
             {
-                Response.Write("<script language='javascript'>window.alert('La minuta ha sido Eliminada con éxito');window.location='../Administrador/WebVerMinuta.aspx';</script>");
+                Response.Write("<script language='javascript'>window.alert('La minuta ha sido Eliminada con éxito');window.location='../Empleado/WebVerMinuta.aspx';</script>");
                 alerta.Visible = false;
             }
         }

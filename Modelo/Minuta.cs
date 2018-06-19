@@ -15,5 +15,10 @@ namespace Modelo
         public int VALOR_PENSION { get; set; }
         public string HABILITADO { get; set; }
 
+        public string NombreYPrecio
+        {
+            get { return this.NOMBRE_PENSION + " $" + this.VALOR_PENSION; }
+        }
+
     }
 }
