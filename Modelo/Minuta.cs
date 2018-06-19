@@ -13,6 +13,7 @@ namespace Modelo
         public short ID_PENSION { get; set; }
         public string NOMBRE_PENSION { get; set; }
         public int VALOR_PENSION { get; set; }
-        
+        public string HABILITADO { get; set; }
+
     }
 }

@@ -223,9 +223,10 @@ namespace Web.Empleado
             {
                 if (MiSesionM.Count > 0)
                 {
-                    Modelo.Pension pension = new Modelo.Pension();
+                    Modelo.Minuta pension = new Modelo.Minuta();
                     pension.NOMBRE_PENSION = string.Empty;
                     pension.VALOR_PENSION = 0;
+                    pension.HABILITADO = "T";
 
                     Service1 s = new Service1();
                     XmlSerializer sr = new XmlSerializer(typeof(Modelo.Plato));

@@ -2366,13 +2366,14 @@ namespace WcfNegocio
         #region Minuta
         public bool AgregarMinuta(string pension)
         {
-            XmlSerializer ser = new XmlSerializer(typeof(Modelo.Pension));
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.Minuta));
             StringReader reader = new StringReader(pension);
-            Modelo.Pension p = (Modelo.Pension)ser.Deserialize(reader);
+            Modelo.Minuta p = (Modelo.Minuta)ser.Deserialize(reader);
             ServicioMinuta serv = new ServicioMinuta();
             Datos.PENSION pdatos = new Datos.PENSION();
             pdatos.NOMBRE_PENSION = p.NOMBRE_PENSION;
             pdatos.VALOR_PENSION = p.VALOR_PENSION;
+            pdatos.HABILITADO = p.HABILITADO;
 
             return serv.AgregarMinuta(pdatos);
         }
@@ -2485,7 +2486,7 @@ namespace WcfNegocio
                 pMinuta.ID_PENSION = p.ID_PENSION;
                 pMinuta.NOMBRE_PENSION = p.NOMBRE_PENSION;
                 pMinuta.VALOR_PENSION = p.VALOR_PENSION;
-
+                pMinuta.HABILITADO = p.HABILITADO;
        
 
                 listaMinuta.Add(pMinuta);
@@ -2523,7 +2524,7 @@ namespace WcfNegocio
             pDatos.ID_PENSION = m.ID_PENSION;
             pDatos.NOMBRE_PENSION = m.NOMBRE_PENSION;
             pDatos.VALOR_PENSION = m.VALOR_PENSION;
-
+           
     
 
             return serv.EditarMinuta(pDatos);
@@ -2568,7 +2569,7 @@ namespace WcfNegocio
                 m.ID_PENSION = pDatos2.ID_PENSION;
                 m.NOMBRE_PENSION = pDatos2.NOMBRE_PENSION;
                 m.VALOR_PENSION = pDatos2.VALOR_PENSION;
-
+                m.HABILITADO = pDatos2.HABILITADO;
                 
 
                 return m;
