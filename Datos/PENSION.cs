@@ -16,8 +16,8 @@ namespace Datos
     {
         public PENSION()
         {
+            this.DETALLE_HABITACION = new HashSet<DETALLE_HABITACION>();
             this.DETALLE_ORDEN = new HashSet<DETALLE_ORDEN>();
-            this.DETALLE_PASAJEROS = new HashSet<DETALLE_PASAJEROS>();
             this.DETALLE_PLATOS = new HashSet<DETALLE_PLATOS>();
         }
     
@@ -26,8 +26,8 @@ namespace Datos
         public int VALOR_PENSION { get; set; }
         public string HABILITADO { get; set; }
     
+        public virtual ICollection<DETALLE_HABITACION> DETALLE_HABITACION { get; set; }
         public virtual ICollection<DETALLE_ORDEN> DETALLE_ORDEN { get; set; }
-        public virtual ICollection<DETALLE_PASAJEROS> DETALLE_PASAJEROS { get; set; }
         public virtual ICollection<DETALLE_PLATOS> DETALLE_PLATOS { get; set; }
     }
 }

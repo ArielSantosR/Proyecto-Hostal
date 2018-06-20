@@ -68,6 +68,38 @@
                             </Columns>
                         </asp:GridView>
         </div>
+    <div style="display: flex; justify-content: center; margin-bottom: 70px">
+    <asp:GridView ID="gvOrdenPendiente" AutoGenerateColumns="false" runat="server" ForeColor="#333333" GridLines="Vertical">      
+                            <AlternatingRowStyle BackColor="White" />
+                            <EditRowStyle BackColor="#2461BF" />
+                            <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+                            <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+                            <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+                            <RowStyle BackColor="#EFF3FB" />
+                            <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
+                            <SortedAscendingCellStyle BackColor="#F5F7FB" />
+                            <SortedAscendingHeaderStyle BackColor="#6D95E1" />
+                            <SortedDescendingCellStyle BackColor="#E9EBEF" />
+                            <SortedDescendingHeaderStyle BackColor="#4870BE" />
+                            <Columns>
+                                <asp:BoundField DataField="NUMERO_ORDEN" HeaderText="Número de Reserva" />
+                                <asp:BoundField DataField="CANTIDAD_HUESPEDES" HeaderText="Cantidad de Huéspedes" />
+                                <asp:BoundField DataField="FechaLlegada" HeaderText="Fecha de Llegada" />
+                                <asp:BoundField DataField="FechaSalida" HeaderText="Fecha de Salida" />
+                                <asp:BoundField DataField="RUT_EMPLEADO" HeaderText="RUT Empleado" />
+                                <asp:BoundField DataField="RUT_CLIENTE" HeaderText="RUT Cliente" />
+                                <asp:BoundField DataField="ESTADO_ORDEN" HeaderText="Estado Orden" />
+                                <asp:BoundField DataField="COMENTARIO" HeaderText="Comentario" />
+                                <asp:TemplateField>
+                                    <ItemTemplate>
+                                        <asp:LinkButton ID="btnInfo2"  CssClass="btn btn-info" CommandArgument='<%#Eval("NUMERO_ORDEN")%>' OnClick="btnInfo2_Click" text="Ver Detalle" runat="server"/>
+                                        <asp:LinkButton ID="btnEliminar"  CssClass="btn btn-danger" CommandArgument='<%#Eval("NUMERO_ORDEN")%>' OnClick="btnCancelar_Click" text="Cancelar" runat="server"/>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                            </Columns>
+                        </asp:GridView>
+        </div>
+
 
     <asp:ScriptManager runat="server"></asp:ScriptManager>             
 

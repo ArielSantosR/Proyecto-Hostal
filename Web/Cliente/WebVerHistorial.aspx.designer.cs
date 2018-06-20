@@ -58,6 +58,15 @@ namespace Web.Cliente {
         protected global::System.Web.UI.WebControls.GridView gvOrden;
         
         /// <summary>
+        /// Control gvOrdenPendiente.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvOrdenPendiente;
+        
+        /// <summary>
         /// Control gvDetalle.
         /// </summary>
         /// <remarks>

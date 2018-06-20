@@ -28,6 +28,16 @@ namespace Datos
         {
             var lista = (from consulta in ent.ORDEN_COMPRA
                          where consulta.RUT_CLIENTE == cliente.RUT_CLIENTE
+                         && !consulta.ESTADO_ORDEN.Equals("Pendiente") 
+                         orderby consulta.NUMERO_ORDEN
+                         select consulta).ToList();
+            return lista;
+        }
+
+        public List<ORDEN_COMPRA> HistorialOrdenCompraPendiente(CLIENTE cliente)
+        {
+            var lista = (from consulta in ent.ORDEN_COMPRA
+                         where consulta.RUT_CLIENTE == cliente.RUT_CLIENTE && consulta.ESTADO_ORDEN.Equals("Pendiente")
                          orderby consulta.NUMERO_ORDEN
                          select consulta).ToList();
             return lista;
@@ -99,11 +109,6 @@ namespace Datos
             if (o != null)
             {
                 o.NUMERO_ORDEN = orden.NUMERO_ORDEN;
-                o.FECHA_LLEGADA = orden.FECHA_LLEGADA;
-                o.FECHA_SALIDA = orden.FECHA_SALIDA;
-                o.COMENTARIO = orden.COMENTARIO;
-                o.RUT_EMPLEADO = orden.RUT_EMPLEADO;
-                o.RUT_CLIENTE = orden.RUT_CLIENTE;
                 o.ESTADO_ORDEN = orden.ESTADO_ORDEN;
 
                 ent.SaveChanges();
@@ -135,14 +140,14 @@ namespace Datos
             ent.SaveChanges();
             return true;
         }
-
+        /*
         public bool AgregarDetallePasajeros(DETALLE_PASAJEROS detalle)
         {
             ent.DETALLE_PASAJEROS.Add(detalle);
             ent.SaveChanges();
             return true;
         }
-
+        */
         public bool EditarDetalleReserva(DETALLE_ORDEN detalle)
         {
             DETALLE_ORDEN d = ent.DETALLE_ORDEN.FirstOrDefault(objeto => objeto.ID_DETALLE == detalle.ID_DETALLE);

@@ -322,6 +322,9 @@ namespace WcfNegocio
         string HistorialReserva(string cliente);
 
         [OperationContract]
+        string HistorialReservaPendiente(string cliente);
+
+        [OperationContract]
         OrdenCompra ObtenerReserva(string reserva);
 
         [OperationContract]
@@ -358,8 +361,10 @@ namespace WcfNegocio
         #endregion
 
         #region Detalle Pasajeros
+        /*
         [OperationContract]
         bool AgregarDetallePasajeros(string detalle);
+        */
         #endregion
 
         #region Minuta

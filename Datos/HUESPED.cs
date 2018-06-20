@@ -17,8 +17,8 @@ namespace Datos
         public HUESPED()
         {
             this.BOLETA = new HashSet<BOLETA>();
+            this.DETALLE_HABITACION = new HashSet<DETALLE_HABITACION>();
             this.DETALLE_ORDEN = new HashSet<DETALLE_ORDEN>();
-            this.DETALLE_PASAJEROS = new HashSet<DETALLE_PASAJEROS>();
         }
     
         public int RUT_HUESPED { get; set; }
@@ -33,7 +33,7 @@ namespace Datos
     
         public virtual ICollection<BOLETA> BOLETA { get; set; }
         public virtual CLIENTE CLIENTE { get; set; }
+        public virtual ICollection<DETALLE_HABITACION> DETALLE_HABITACION { get; set; }
         public virtual ICollection<DETALLE_ORDEN> DETALLE_ORDEN { get; set; }
-        public virtual ICollection<DETALLE_PASAJEROS> DETALLE_PASAJEROS { get; set; }
     }
 }
