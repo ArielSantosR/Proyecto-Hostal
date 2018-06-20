@@ -81,6 +81,16 @@ namespace Web.Cliente
                         reader.Close();
                         gvOrden.DataSource = listaPedido;
                         gvOrden.DataBind();
+
+                        string datos2 = service.HistorialReservaPendiente(writer2.ToString());
+
+                        XmlSerializer ser4 = new XmlSerializer(typeof(Modelo.OrdenCompraCollection));
+                        StringReader reader2 = new StringReader(datos2);
+
+                        Modelo.OrdenCompraCollection listaPedido2 = (Modelo.OrdenCompraCollection)ser4.Deserialize(reader2);
+                        reader.Close();
+                        gvOrdenPendiente.DataSource = listaPedido2;
+                        gvOrdenPendiente.DataBind();
                     }
                     //Else si es el administrador deberia decir algo supongo
                 }
@@ -172,6 +182,48 @@ namespace Web.Cliente
                 error.Text = "Excepción: " + ex.ToString();
                 alerta.Visible = true;
             }
+        }
+
+        protected void btnCancelar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                LinkButton btn = (LinkButton)(sender);
+                short numero_orden = short.Parse(btn.CommandArgument);
+
+                OrdenCompra orden = new OrdenCompra();
+                orden.NUMERO_ORDEN = numero_orden;
+
+                MiSesionOrden = orden;
+
+                if (MiSesionOrden.NUMERO_ORDEN != 0)
+                {
+                    Service1 s = new Service1();
+                    XmlSerializer sr = new XmlSerializer(typeof(Modelo.OrdenCompra));
+                    StringWriter writer = new StringWriter();
+
+                    orden.ESTADO_ORDEN = "Cancelado";
+                    sr.Serialize(writer, orden);
+
+                    if (s.EditarEstadoReserva(writer.ToString()))
+                    {
+                        Response.Write("<script language='javascript'>window.alert('Reserva Cancelada');window.location='../Cliente/WebVerHistorial.aspx';</script>");
+                    }
+                    else
+                    {
+                        alerta_exito.Visible = false;
+                        error.Text = "No se pudo cancelar la orden";
+                        alerta.Visible = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                alerta_exito.Visible = false;
+                error.Text = "Excepción: " + ex.ToString();
+                alerta.Visible = true;
+            }
+
         }
     }
 }

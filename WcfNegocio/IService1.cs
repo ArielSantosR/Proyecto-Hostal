@@ -322,6 +322,9 @@ namespace WcfNegocio
         string HistorialReserva(string cliente);
 
         [OperationContract]
+        string HistorialReservaPendiente(string cliente);
+
+        [OperationContract]
         OrdenCompra ObtenerReserva(string reserva);
 
         [OperationContract]

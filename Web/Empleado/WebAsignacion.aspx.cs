@@ -326,6 +326,10 @@ namespace Web.Empleado
                         {
                             detalleHabitacion.RUT_CLIENTE = MiSesionOrden.RUT_CLIENTE.Value;
                             detalleHabitacion.NUMERO_HABITACION = short.Parse(ddlHabitacion.SelectedValue);
+                            detalleHabitacion.RUT_HUESPED = MiSesionDetalleO.RUT_HUESPED;
+                            detalleHabitacion.FECHA_LLEGADA = MiSesionOrden.FECHA_LLEGADA;
+                            detalleHabitacion.FECHA_SALIDA = MiSesionOrden.FECHA_SALIDA;
+                            detalleHabitacion.ID_PENSION = MiSesionDetalleO.ID_PENSION;
 
                             XmlSerializer sr3 = new XmlSerializer(typeof(Modelo.DetalleHabitacion));
                             StringWriter writer3 = new StringWriter();
@@ -333,21 +337,6 @@ namespace Web.Empleado
 
                             if (s.AgregarDetalleHabitacion(writer3.ToString()))
                             {
-                                #region Detalle Pasajeros
-                                //3- Agregando el detalle de pasajeros de la habitación junto con la fecha de entrada y salida
-                                DetallePasajeros detallePasajeros = new DetallePasajeros();
-                                detallePasajeros.RUT_HUESPED = MiSesionDetalleO.RUT_HUESPED;
-                                detallePasajeros.FECHA_LLEGADA = MiSesionOrden.FECHA_LLEGADA;
-                                detallePasajeros.FECHA_SALIDA = MiSesionOrden.FECHA_SALIDA;
-                                detallePasajeros.ID_PENSION = MiSesionDetalleO.ID_PENSION;
-                                detallePasajeros.NUMERO_HABITACION = short.Parse(ddlHabitacion.SelectedValue);
-
-                                XmlSerializer sr4 = new XmlSerializer(typeof(Modelo.DetallePasajeros));
-                                StringWriter writer4 = new StringWriter();
-                                sr4.Serialize(writer4, detallePasajeros);
-                                /*
-                                if (s.AgregarDetallePasajeros(writer4.ToString()))
-                                {
                                     #region Detalle Orden
                                     //4- Modificando el estado del detalle de orden a Asignado
                                     DetalleOrden detalleOrden = MiSesionDetalleO;
@@ -368,15 +357,6 @@ namespace Web.Empleado
                                         alerta.Visible = true;
                                     }
                                     #endregion
-                                }
-                                else
-                                {
-                                    alerta_exito.Visible = false;
-                                    error.Text = "No se pudo agregar el detalle de pasajeros";
-                                    alerta.Visible = true;
-                                }
-                                */
-                                #endregion
                             }
                             else
                             {

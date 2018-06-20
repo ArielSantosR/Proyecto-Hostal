@@ -64,7 +64,6 @@
                                     <asp:TemplateField>
                                         <ItemTemplate>
                                             <asp:LinkButton ID="btnInfo2"  CssClass="btn btn-info" CommandArgument='<%#Eval("ID_DETALLE")%>' onclick="btnInfo2_Click" text="Seleccionar Habitación" runat="server"/>
-                                            <asp:LinkButton ID="btnEliminar" CssClass="btn btn-danger" CommandArgument='<%#Eval("ID_DETALLE")%>' onclick="btnEliminar_Click" text="Rechazar" runat="server"/>
                                         </ItemTemplate>
                                 </asp:TemplateField>
                                 </Columns>
@@ -93,7 +92,7 @@
                                     <asp:BoundField DataField="ESTADO" HeaderText="Estado" />
                                     <asp:TemplateField>
                                         <ItemTemplate>
-                                            <asp:LinkButton ID="btnRemover" CssClass="btn btn-danger" CommandArgument='<%#Eval("ID_DETALLE")%>' onclick="btnRemover_Click" text="" runat="server"/>
+                                            <asp:LinkButton ID="btnRemover" CssClass="btn btn-danger" CommandArgument='<%#Eval("ID_DETALLE")%>' onclick="btnRemover_Click" text="Cambiar" runat="server"/>
                                         </ItemTemplate>
                                 </asp:TemplateField>
                                 </Columns>

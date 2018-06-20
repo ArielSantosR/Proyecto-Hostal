@@ -159,7 +159,7 @@ namespace Web.Empleado
                     if (s.EditarEstadoReserva(writer2.ToString()))
                     {
                         MiSesionOrden = null;
-                        Response.Write("<script language='javascript'>window.alert('Ha Aceptado la Reserva');window.location='../Empleado/WebAsignarHabitacion.aspx';</script>");
+                        Response.Write("<script language='javascript'>window.alert('Ha Aceptado la Reserva');window.location='../Empleado/WebReservasPendientes.aspx';</script>");
                     }
                     else
                     {
