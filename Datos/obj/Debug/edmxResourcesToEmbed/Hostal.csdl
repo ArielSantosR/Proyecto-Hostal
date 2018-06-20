@@ -66,7 +66,6 @@
   <EntityType Name="DETALLE_BOLETA">
     <Key>
       <PropertyRef Name="ID_DETALLE_BOLETA" />
-      <PropertyRef Name="ID_BOLETA" />
     </Key>
     <Property Name="ID_DETALLE_BOLETA" Type="Int32" Nullable="false" />
     <Property Name="DESCRIPCION_DETALLE" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
@@ -94,8 +93,14 @@
     <Property Name="ID_DETALLE_H" Type="Int16" Nullable="false" />
     <Property Name="NUMERO_HABITACION" Type="Int16" Nullable="false" />
     <Property Name="RUT_CLIENTE" Type="Int32" Nullable="false" />
+    <Property Name="RUT_HUESPED" Type="Int32" Nullable="false" />
+    <Property Name="ID_PENSION" Type="Int16" Nullable="false" />
+    <Property Name="FECHA_LLEGADA" Type="DateTime" Nullable="false" />
+    <Property Name="FECHA_SALIDA" Type="DateTime" Nullable="false" />
     <NavigationProperty Name="CLIENTE" Relationship="Self.FK_CLIENTE_DETALLE_H" FromRole="DETALLE_HABITACION" ToRole="CLIENTE" />
     <NavigationProperty Name="HABITACION" Relationship="Self.FK_HABITACION_DETALLE_H" FromRole="DETALLE_HABITACION" ToRole="HABITACION" />
+    <NavigationProperty Name="HUESPED" Relationship="Self.FK_HUESPED_DETALLE_H" FromRole="DETALLE_HABITACION" ToRole="HUESPED" />
+    <NavigationProperty Name="PENSION" Relationship="Self.FK_PENSION_DETALLE_H" FromRole="DETALLE_HABITACION" ToRole="PENSION" />
   </EntityType>
   <EntityType Name="DETALLE_ORDEN">
     <Key>
@@ -112,24 +117,9 @@
     <NavigationProperty Name="HUESPED" Relationship="Self.FK_HUESPED_DETALLE_ORDEN" FromRole="DETALLE_ORDEN" ToRole="HUESPED" />
     <NavigationProperty Name="ORDEN_COMPRA" Relationship="Self.FK_ORDEN_DETALLE_ORDEN" FromRole="DETALLE_ORDEN" ToRole="ORDEN_COMPRA" />
   </EntityType>
-  <EntityType Name="DETALLE_PASAJEROS">
-    <Key>
-      <PropertyRef Name="ID_DETALLE_PASAJEROS" />
-    </Key>
-    <Property Name="ID_DETALLE_PASAJEROS" Type="Int16" Nullable="false" />
-    <Property Name="NUMERO_HABITACION" Type="Int16" Nullable="false" />
-    <Property Name="RUT_HUESPED" Type="Int32" Nullable="false" />
-    <Property Name="ID_PENSION" Type="Int16" Nullable="false" />
-    <Property Name="FECHA_LLEGADA" Type="DateTime" Nullable="false" />
-    <Property Name="FECHA_SALIDA" Type="DateTime" Nullable="false" />
-    <NavigationProperty Name="PENSION" Relationship="Self.FK_DETALLE_PENSION_P" FromRole="DETALLE_PASAJEROS" ToRole="PENSION" />
-    <NavigationProperty Name="HABITACION" Relationship="Self.FK_HABITACION_DETALLE_P" FromRole="DETALLE_PASAJEROS" ToRole="HABITACION" />
-    <NavigationProperty Name="HUESPED" Relationship="Self.FK_HUESPED_DETALLE_P" FromRole="DETALLE_PASAJEROS" ToRole="HUESPED" />
-  </EntityType>
   <EntityType Name="DETALLE_PEDIDO">
     <Key>
       <PropertyRef Name="ID_DETALLE_PEDIDO" />
-      <PropertyRef Name="ID_PRODUCTO" />
     </Key>
     <Property Name="ID_DETALLE_PEDIDO" Type="Int16" Nullable="false" />
     <Property Name="CANTIDAD" Type="Int32" Nullable="false" />
@@ -152,7 +142,6 @@
   <EntityType Name="DETALLE_RECEPCION">
     <Key>
       <PropertyRef Name="ID_DETALLE_RECEPCION" />
-      <PropertyRef Name="NUMERO_RECEPCION" />
     </Key>
     <Property Name="ID_DETALLE_RECEPCION" Type="Int16" Nullable="false" />
     <Property Name="CANTIDAD" Type="Int32" Nullable="false" />
@@ -222,7 +211,6 @@
     <Property Name="ID_CATEGORIA_HABITACION" Type="Int16" Nullable="false" />
     <NavigationProperty Name="CATEGORIA_HABITACION" Relationship="Self.FK_HABITACION_CATEGORIA_HAB" FromRole="HABITACION" ToRole="CATEGORIA_HABITACION" />
     <NavigationProperty Name="DETALLE_HABITACION" Relationship="Self.FK_HABITACION_DETALLE_H" FromRole="HABITACION" ToRole="DETALLE_HABITACION" />
-    <NavigationProperty Name="DETALLE_PASAJEROS" Relationship="Self.FK_HABITACION_DETALLE_P" FromRole="HABITACION" ToRole="DETALLE_PASAJEROS" />
     <NavigationProperty Name="TIPO_HABITACION" Relationship="Self.FK_HABITACION_TIPO_HABITACION" FromRole="HABITACION" ToRole="TIPO_HABITACION" />
   </EntityType>
   <EntityType Name="HUESPED">
@@ -240,8 +228,8 @@
     <Property Name="RUT_CLIENTE" Type="Int32" Nullable="false" />
     <NavigationProperty Name="BOLETA" Relationship="Self.FK_BOLETA_HUESPED" FromRole="HUESPED" ToRole="BOLETA" />
     <NavigationProperty Name="CLIENTE" Relationship="Self.FK_HUESPED_CLIENTE" FromRole="HUESPED" ToRole="CLIENTE" />
+    <NavigationProperty Name="DETALLE_HABITACION" Relationship="Self.FK_HUESPED_DETALLE_H" FromRole="HUESPED" ToRole="DETALLE_HABITACION" />
     <NavigationProperty Name="DETALLE_ORDEN" Relationship="Self.FK_HUESPED_DETALLE_ORDEN" FromRole="HUESPED" ToRole="DETALLE_ORDEN" />
-    <NavigationProperty Name="DETALLE_PASAJEROS" Relationship="Self.FK_HUESPED_DETALLE_P" FromRole="HUESPED" ToRole="DETALLE_PASAJEROS" />
   </EntityType>
   <EntityType Name="LOG_ERRORES">
     <Key>
@@ -319,8 +307,8 @@
     <Property Name="NOMBRE_PENSION" Type="String" MaxLength="35" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="VALOR_PENSION" Type="Int32" Nullable="false" />
     <Property Name="HABILITADO" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="DETALLE_HABITACION" Relationship="Self.FK_PENSION_DETALLE_H" FromRole="PENSION" ToRole="DETALLE_HABITACION" />
     <NavigationProperty Name="DETALLE_ORDEN" Relationship="Self.FK_DETALLE_ORDEN_PENSION" FromRole="PENSION" ToRole="DETALLE_ORDEN" />
-    <NavigationProperty Name="DETALLE_PASAJEROS" Relationship="Self.FK_DETALLE_PENSION_P" FromRole="PENSION" ToRole="DETALLE_PASAJEROS" />
     <NavigationProperty Name="DETALLE_PLATOS" Relationship="Self.FK_DETALLE_PLATOS_PENSION" FromRole="PENSION" ToRole="DETALLE_PLATOS" />
   </EntityType>
   <EntityType Name="PLATO">
@@ -342,6 +330,7 @@
     </Key>
     <Property Name="ID_PRODUCTO" Type="Int64" Nullable="false" />
     <Property Name="NOMBRE_PRODUCTO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PRECIO_PRODUCTO" Type="Int32" Nullable="false" />
     <Property Name="FECHA_VENCIMIENTO_PRODUCTO" Type="DateTime" />
     <Property Name="STOCK_PRODUCTO" Type="Int16" Nullable="false" />
     <Property Name="STOCK_CRITICO_PRODUCTO" Type="Int16" Nullable="false" />
@@ -350,7 +339,6 @@
     <Property Name="ID_FAMILIA" Type="Int16" Nullable="false" />
     <Property Name="RUT_PROVEEDOR" Type="Int32" Nullable="false" />
     <Property Name="ID_PRODUCTO_SEQ" Type="Int16" Nullable="false" />
-    <Property Name="PRECIO_PRODUCTO" Type="Int32" Nullable="false" />
     <NavigationProperty Name="DETALLE_PEDIDO" Relationship="Self.FK_DETALLE_PEDIDO_PRODUCTO" FromRole="PRODUCTO" ToRole="DETALLE_PEDIDO" />
     <NavigationProperty Name="DETALLE_RECEPCION" Relationship="Self.FK_DETALLE_RECEPCION_PRODUCTO" FromRole="PRODUCTO" ToRole="DETALLE_RECEPCION" />
     <NavigationProperty Name="FAMILIA" Relationship="Self.FK_PRODUCTO_FAMILIA" FromRole="PRODUCTO" ToRole="FAMILIA" />
@@ -630,6 +618,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_HUESPED_DETALLE_H">
+    <End Role="HUESPED" Type="Self.HUESPED" Multiplicity="1" />
+    <End Role="DETALLE_HABITACION" Type="Self.DETALLE_HABITACION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HUESPED">
+        <PropertyRef Name="RUT_HUESPED" />
+      </Principal>
+      <Dependent Role="DETALLE_HABITACION">
+        <PropertyRef Name="RUT_HUESPED" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PENSION_DETALLE_H">
+    <End Role="PENSION" Type="Self.PENSION" Multiplicity="1" />
+    <End Role="DETALLE_HABITACION" Type="Self.DETALLE_HABITACION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PENSION">
+        <PropertyRef Name="ID_PENSION" />
+      </Principal>
+      <Dependent Role="DETALLE_HABITACION">
+        <PropertyRef Name="ID_PENSION" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_DETALLE_ORDEN_PENSION">
     <End Role="PENSION" Type="Self.PENSION" Multiplicity="1" />
     <End Role="DETALLE_ORDEN" Type="Self.DETALLE_ORDEN" Multiplicity="*" />
@@ -663,42 +675,6 @@
       </Principal>
       <Dependent Role="DETALLE_ORDEN">
         <PropertyRef Name="NUMERO_ORDEN" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_DETALLE_PENSION_P">
-    <End Role="PENSION" Type="Self.PENSION" Multiplicity="1" />
-    <End Role="DETALLE_PASAJEROS" Type="Self.DETALLE_PASAJEROS" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="PENSION">
-        <PropertyRef Name="ID_PENSION" />
-      </Principal>
-      <Dependent Role="DETALLE_PASAJEROS">
-        <PropertyRef Name="ID_PENSION" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_HABITACION_DETALLE_P">
-    <End Role="HABITACION" Type="Self.HABITACION" Multiplicity="1" />
-    <End Role="DETALLE_PASAJEROS" Type="Self.DETALLE_PASAJEROS" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="HABITACION">
-        <PropertyRef Name="NUMERO_HABITACION" />
-      </Principal>
-      <Dependent Role="DETALLE_PASAJEROS">
-        <PropertyRef Name="NUMERO_HABITACION" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_HUESPED_DETALLE_P">
-    <End Role="HUESPED" Type="Self.HUESPED" Multiplicity="1" />
-    <End Role="DETALLE_PASAJEROS" Type="Self.DETALLE_PASAJEROS" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="HUESPED">
-        <PropertyRef Name="RUT_HUESPED" />
-      </Principal>
-      <Dependent Role="DETALLE_PASAJEROS">
-        <PropertyRef Name="RUT_HUESPED" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1012,7 +988,6 @@
     <EntitySet Name="DETALLE_FACTURA" EntityType="Self.DETALLE_FACTURA" />
     <EntitySet Name="DETALLE_HABITACION" EntityType="Self.DETALLE_HABITACION" />
     <EntitySet Name="DETALLE_ORDEN" EntityType="Self.DETALLE_ORDEN" />
-    <EntitySet Name="DETALLE_PASAJEROS" EntityType="Self.DETALLE_PASAJEROS" />
     <EntitySet Name="DETALLE_PEDIDO" EntityType="Self.DETALLE_PEDIDO" />
     <EntitySet Name="DETALLE_PLATOS" EntityType="Self.DETALLE_PLATOS" />
     <EntitySet Name="DETALLE_RECEPCION" EntityType="Self.DETALLE_RECEPCION" />
@@ -1101,6 +1076,14 @@
       <End Role="HABITACION" EntitySet="HABITACION" />
       <End Role="DETALLE_HABITACION" EntitySet="DETALLE_HABITACION" />
     </AssociationSet>
+    <AssociationSet Name="FK_HUESPED_DETALLE_H" Association="Self.FK_HUESPED_DETALLE_H">
+      <End Role="HUESPED" EntitySet="HUESPED" />
+      <End Role="DETALLE_HABITACION" EntitySet="DETALLE_HABITACION" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PENSION_DETALLE_H" Association="Self.FK_PENSION_DETALLE_H">
+      <End Role="PENSION" EntitySet="PENSION" />
+      <End Role="DETALLE_HABITACION" EntitySet="DETALLE_HABITACION" />
+    </AssociationSet>
     <AssociationSet Name="FK_DETALLE_ORDEN_PENSION" Association="Self.FK_DETALLE_ORDEN_PENSION">
       <End Role="PENSION" EntitySet="PENSION" />
       <End Role="DETALLE_ORDEN" EntitySet="DETALLE_ORDEN" />
@@ -1112,18 +1095,6 @@
     <AssociationSet Name="FK_ORDEN_DETALLE_ORDEN" Association="Self.FK_ORDEN_DETALLE_ORDEN">
       <End Role="ORDEN_COMPRA" EntitySet="ORDEN_COMPRA" />
       <End Role="DETALLE_ORDEN" EntitySet="DETALLE_ORDEN" />
-    </AssociationSet>
-    <AssociationSet Name="FK_DETALLE_PENSION_P" Association="Self.FK_DETALLE_PENSION_P">
-      <End Role="PENSION" EntitySet="PENSION" />
-      <End Role="DETALLE_PASAJEROS" EntitySet="DETALLE_PASAJEROS" />
-    </AssociationSet>
-    <AssociationSet Name="FK_HABITACION_DETALLE_P" Association="Self.FK_HABITACION_DETALLE_P">
-      <End Role="HABITACION" EntitySet="HABITACION" />
-      <End Role="DETALLE_PASAJEROS" EntitySet="DETALLE_PASAJEROS" />
-    </AssociationSet>
-    <AssociationSet Name="FK_HUESPED_DETALLE_P" Association="Self.FK_HUESPED_DETALLE_P">
-      <End Role="HUESPED" EntitySet="HUESPED" />
-      <End Role="DETALLE_PASAJEROS" EntitySet="DETALLE_PASAJEROS" />
     </AssociationSet>
     <AssociationSet Name="FK_DETALLE_PEDIDO_PEDIDO" Association="Self.FK_DETALLE_PEDIDO_PEDIDO">
       <End Role="PEDIDO" EntitySet="PEDIDO" />

@@ -76,9 +76,6 @@
     <Compile Include="DETALLE_ORDEN.cs">
       <DependentUpon>Hostal.tt</DependentUpon>
     </Compile>
-    <Compile Include="DETALLE_PASAJEROS.cs">
-      <DependentUpon>Hostal.tt</DependentUpon>
-    </Compile>
     <Compile Include="DETALLE_PEDIDO.cs">
       <DependentUpon>Hostal.tt</DependentUpon>
     </Compile>
@@ -186,7 +183,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.Config" />
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
     <EntityDeploy Include="Hostal.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Hostal.Designer.cs</LastGenOutput>

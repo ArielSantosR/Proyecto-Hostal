@@ -51,7 +51,6 @@
   <EntityType Name="DETALLE_BOLETA">
     <Key>
       <PropertyRef Name="ID_DETALLE_BOLETA" />
-      <PropertyRef Name="ID_BOLETA" />
     </Key>
     <Property Name="ID_DETALLE_BOLETA" Type="number" Precision="10" Scale="0" Nullable="false" />
     <Property Name="DESCRIPCION_DETALLE" Type="varchar2" MaxLength="250" Nullable="false" />
@@ -77,6 +76,10 @@
     <Property Name="ID_DETALLE_H" Type="number" Precision="5" Scale="0" Nullable="false" />
     <Property Name="NUMERO_HABITACION" Type="number" Precision="5" Scale="0" Nullable="false" />
     <Property Name="RUT_CLIENTE" Type="number" Precision="8" Scale="0" Nullable="false" />
+    <Property Name="RUT_HUESPED" Type="number" Precision="8" Scale="0" Nullable="false" />
+    <Property Name="ID_PENSION" Type="number" Precision="5" Scale="0" Nullable="false" />
+    <Property Name="FECHA_LLEGADA" Type="date" Nullable="false" />
+    <Property Name="FECHA_SALIDA" Type="date" Nullable="false" />
   </EntityType>
   <EntityType Name="DETALLE_ORDEN">
     <Key>
@@ -89,21 +92,9 @@
     <Property Name="ID_PENSION" Type="number" Precision="5" Scale="0" Nullable="false" />
     <Property Name="ESTADO" Type="varchar2" MaxLength="15" />
   </EntityType>
-  <EntityType Name="DETALLE_PASAJEROS">
-    <Key>
-      <PropertyRef Name="ID_DETALLE_PASAJEROS" />
-    </Key>
-    <Property Name="ID_DETALLE_PASAJEROS" Type="number" Precision="5" Scale="0" Nullable="false" />
-    <Property Name="NUMERO_HABITACION" Type="number" Precision="5" Scale="0" Nullable="false" />
-    <Property Name="RUT_HUESPED" Type="number" Precision="8" Scale="0" Nullable="false" />
-    <Property Name="ID_PENSION" Type="number" Precision="5" Scale="0" Nullable="false" />
-    <Property Name="FECHA_LLEGADA" Type="date" Nullable="false" />
-    <Property Name="FECHA_SALIDA" Type="date" Nullable="false" />
-  </EntityType>
   <EntityType Name="DETALLE_PEDIDO">
     <Key>
       <PropertyRef Name="ID_DETALLE_PEDIDO" />
-      <PropertyRef Name="ID_PRODUCTO" />
     </Key>
     <Property Name="ID_DETALLE_PEDIDO" Type="number" Precision="5" Scale="0" Nullable="false" />
     <Property Name="CANTIDAD" Type="number" Precision="10" Scale="0" Nullable="false" />
@@ -122,7 +113,6 @@
   <EntityType Name="DETALLE_RECEPCION">
     <Key>
       <PropertyRef Name="ID_DETALLE_RECEPCION" />
-      <PropertyRef Name="NUMERO_RECEPCION" />
     </Key>
     <Property Name="ID_DETALLE_RECEPCION" Type="number" Precision="5" Scale="0" Nullable="false" />
     <Property Name="CANTIDAD" Type="number" Precision="10" Scale="0" Nullable="false" />
@@ -271,6 +261,7 @@
     </Key>
     <Property Name="ID_PRODUCTO" Type="number" Precision="19" Scale="0" Nullable="false" />
     <Property Name="NOMBRE_PRODUCTO" Type="varchar2" MaxLength="50" Nullable="false" />
+    <Property Name="PRECIO_PRODUCTO" Type="number" Precision="10" Scale="0" Nullable="false" />
     <Property Name="FECHA_VENCIMIENTO_PRODUCTO" Type="date" />
     <Property Name="STOCK_PRODUCTO" Type="number" Precision="5" Scale="0" Nullable="false" />
     <Property Name="STOCK_CRITICO_PRODUCTO" Type="number" Precision="5" Scale="0" Nullable="false" />
@@ -279,7 +270,6 @@
     <Property Name="ID_FAMILIA" Type="number" Precision="5" Scale="0" Nullable="false" />
     <Property Name="RUT_PROVEEDOR" Type="number" Precision="8" Scale="0" Nullable="false" />
     <Property Name="ID_PRODUCTO_SEQ" Type="number" Precision="5" Scale="0" Nullable="false" />
-    <Property Name="PRECIO_PRODUCTO" Type="number" Precision="8" Scale="0" Nullable="false" />
   </EntityType>
   <EntityType Name="PROVEEDOR">
     <Key>
@@ -488,18 +478,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_DETALLE_PENSION_P">
-    <End Role="PENSION" Type="Self.PENSION" Multiplicity="1" />
-    <End Role="DETALLE_PASAJEROS" Type="Self.DETALLE_PASAJEROS" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="PENSION">
-        <PropertyRef Name="ID_PENSION" />
-      </Principal>
-      <Dependent Role="DETALLE_PASAJEROS">
-        <PropertyRef Name="ID_PENSION" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_DETALLE_PLATOS_PENSION">
     <End Role="PENSION" Type="Self.PENSION" Multiplicity="1" />
     <End Role="DETALLE_PLATOS" Type="Self.DETALLE_PLATOS" Multiplicity="*" />
@@ -620,18 +598,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_HABITACION_DETALLE_P">
-    <End Role="HABITACION" Type="Self.HABITACION" Multiplicity="1" />
-    <End Role="DETALLE_PASAJEROS" Type="Self.DETALLE_PASAJEROS" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="HABITACION">
-        <PropertyRef Name="NUMERO_HABITACION" />
-      </Principal>
-      <Dependent Role="DETALLE_PASAJEROS">
-        <PropertyRef Name="NUMERO_HABITACION" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_HABITACION_TIPO_HABITACION">
     <End Role="TIPO_HABITACION" Type="Self.TIPO_HABITACION" Multiplicity="1" />
     <End Role="HABITACION" Type="Self.HABITACION" Multiplicity="*" />
@@ -656,6 +622,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_HUESPED_DETALLE_H">
+    <End Role="HUESPED" Type="Self.HUESPED" Multiplicity="1" />
+    <End Role="DETALLE_HABITACION" Type="Self.DETALLE_HABITACION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HUESPED">
+        <PropertyRef Name="RUT_HUESPED" />
+      </Principal>
+      <Dependent Role="DETALLE_HABITACION">
+        <PropertyRef Name="RUT_HUESPED" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_HUESPED_DETALLE_ORDEN">
     <End Role="HUESPED" Type="Self.HUESPED" Multiplicity="1" />
     <End Role="DETALLE_ORDEN" Type="Self.DETALLE_ORDEN" Multiplicity="*" />
@@ -664,18 +642,6 @@
         <PropertyRef Name="RUT_HUESPED" />
       </Principal>
       <Dependent Role="DETALLE_ORDEN">
-        <PropertyRef Name="RUT_HUESPED" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_HUESPED_DETALLE_P">
-    <End Role="HUESPED" Type="Self.HUESPED" Multiplicity="1" />
-    <End Role="DETALLE_PASAJEROS" Type="Self.DETALLE_PASAJEROS" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="HUESPED">
-        <PropertyRef Name="RUT_HUESPED" />
-      </Principal>
-      <Dependent Role="DETALLE_PASAJEROS">
         <PropertyRef Name="RUT_HUESPED" />
       </Dependent>
     </ReferentialConstraint>
@@ -800,6 +766,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_PENSION_DETALLE_H">
+    <End Role="PENSION" Type="Self.PENSION" Multiplicity="1" />
+    <End Role="DETALLE_HABITACION" Type="Self.DETALLE_HABITACION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PENSION">
+        <PropertyRef Name="ID_PENSION" />
+      </Principal>
+      <Dependent Role="DETALLE_HABITACION">
+        <PropertyRef Name="ID_PENSION" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_PLATO_CATEGORIA">
     <End Role="CATEGORIA" Type="Self.CATEGORIA" Multiplicity="1" />
     <End Role="PLATO" Type="Self.PLATO" Multiplicity="*" />
@@ -918,7 +896,6 @@
     <EntitySet Name="DETALLE_FACTURA" EntityType="Self.DETALLE_FACTURA" Schema="HOSTAL" store:Type="Tables" />
     <EntitySet Name="DETALLE_HABITACION" EntityType="Self.DETALLE_HABITACION" Schema="HOSTAL" store:Type="Tables" />
     <EntitySet Name="DETALLE_ORDEN" EntityType="Self.DETALLE_ORDEN" Schema="HOSTAL" store:Type="Tables" />
-    <EntitySet Name="DETALLE_PASAJEROS" EntityType="Self.DETALLE_PASAJEROS" Schema="HOSTAL" store:Type="Tables" />
     <EntitySet Name="DETALLE_PEDIDO" EntityType="Self.DETALLE_PEDIDO" Schema="HOSTAL" store:Type="Tables" />
     <EntitySet Name="DETALLE_PLATOS" EntityType="Self.DETALLE_PLATOS" Schema="HOSTAL" store:Type="Tables" />
     <EntitySet Name="DETALLE_RECEPCION" EntityType="Self.DETALLE_RECEPCION" Schema="HOSTAL" store:Type="Tables" />
@@ -991,10 +968,6 @@
       <End Role="PRODUCTO" EntitySet="PRODUCTO" />
       <End Role="DETALLE_PEDIDO" EntitySet="DETALLE_PEDIDO" />
     </AssociationSet>
-    <AssociationSet Name="FK_DETALLE_PENSION_P" Association="Self.FK_DETALLE_PENSION_P">
-      <End Role="PENSION" EntitySet="PENSION" />
-      <End Role="DETALLE_PASAJEROS" EntitySet="DETALLE_PASAJEROS" />
-    </AssociationSet>
     <AssociationSet Name="FK_DETALLE_PLATOS_PENSION" Association="Self.FK_DETALLE_PLATOS_PENSION">
       <End Role="PENSION" EntitySet="PENSION" />
       <End Role="DETALLE_PLATOS" EntitySet="DETALLE_PLATOS" />
@@ -1035,10 +1008,6 @@
       <End Role="HABITACION" EntitySet="HABITACION" />
       <End Role="DETALLE_HABITACION" EntitySet="DETALLE_HABITACION" />
     </AssociationSet>
-    <AssociationSet Name="FK_HABITACION_DETALLE_P" Association="Self.FK_HABITACION_DETALLE_P">
-      <End Role="HABITACION" EntitySet="HABITACION" />
-      <End Role="DETALLE_PASAJEROS" EntitySet="DETALLE_PASAJEROS" />
-    </AssociationSet>
     <AssociationSet Name="FK_HABITACION_TIPO_HABITACION" Association="Self.FK_HABITACION_TIPO_HABITACION">
       <End Role="TIPO_HABITACION" EntitySet="TIPO_HABITACION" />
       <End Role="HABITACION" EntitySet="HABITACION" />
@@ -1047,13 +1016,13 @@
       <End Role="CLIENTE" EntitySet="CLIENTE" />
       <End Role="HUESPED" EntitySet="HUESPED" />
     </AssociationSet>
+    <AssociationSet Name="FK_HUESPED_DETALLE_H" Association="Self.FK_HUESPED_DETALLE_H">
+      <End Role="HUESPED" EntitySet="HUESPED" />
+      <End Role="DETALLE_HABITACION" EntitySet="DETALLE_HABITACION" />
+    </AssociationSet>
     <AssociationSet Name="FK_HUESPED_DETALLE_ORDEN" Association="Self.FK_HUESPED_DETALLE_ORDEN">
       <End Role="HUESPED" EntitySet="HUESPED" />
       <End Role="DETALLE_ORDEN" EntitySet="DETALLE_ORDEN" />
-    </AssociationSet>
-    <AssociationSet Name="FK_HUESPED_DETALLE_P" Association="Self.FK_HUESPED_DETALLE_P">
-      <End Role="HUESPED" EntitySet="HUESPED" />
-      <End Role="DETALLE_PASAJEROS" EntitySet="DETALLE_PASAJEROS" />
     </AssociationSet>
     <AssociationSet Name="FK_NOTIFICACION_ORDEN" Association="Self.FK_NOTIFICACION_ORDEN">
       <End Role="ORDEN_COMPRA" EntitySet="ORDEN_COMPRA" />
@@ -1094,6 +1063,10 @@
     <AssociationSet Name="FK_PEDIDO_RECEPCION" Association="Self.FK_PEDIDO_RECEPCION">
       <End Role="RECEPCION" EntitySet="RECEPCION" />
       <End Role="PEDIDO" EntitySet="PEDIDO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PENSION_DETALLE_H" Association="Self.FK_PENSION_DETALLE_H">
+      <End Role="PENSION" EntitySet="PENSION" />
+      <End Role="DETALLE_HABITACION" EntitySet="DETALLE_HABITACION" />
     </AssociationSet>
     <AssociationSet Name="FK_PLATO_CATEGORIA" Association="Self.FK_PLATO_CATEGORIA">
       <End Role="CATEGORIA" EntitySet="CATEGORIA" />

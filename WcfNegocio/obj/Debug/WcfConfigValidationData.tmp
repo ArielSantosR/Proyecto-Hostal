@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 <ValidationRecord xmlns="http://schemas.datacontract.org/2004/07/Microsoft.VisualStudio.ServiceModel.Validation" xmlns:i="http://www.w3.org/2001/XMLSchema-instance"><TimeStamps xmlns:a="http://schemas.microsoft.com/2003/10/Serialization/Arrays"><a:dateTime>2018-06-18T00:56:21.1123614Z</a:dateTime><a:dateTime>2018-06-19T23:15:34.9980392Z</a:dateTime><a:dateTime>2018-04-11T02:56:01.7206689Z</a:dateTime></TimeStamps></ValidationRecord>
+=======
+<ValidationRecord xmlns="http://schemas.datacontract.org/2004/07/Microsoft.VisualStudio.ServiceModel.Validation" xmlns:i="http://www.w3.org/2001/XMLSchema-instance"><TimeStamps xmlns:a="http://schemas.microsoft.com/2003/10/Serialization/Arrays"><a:dateTime>2018-04-24T15:52:04.8514664Z</a:dateTime><a:dateTime>2018-06-20T02:36:28.3130267Z</a:dateTime><a:dateTime>2018-05-08T06:07:14.7273035Z</a:dateTime></TimeStamps></ValidationRecord>
+>>>>>>> 651a0afd84545d7c9a61b8e2d4802dfc429c851c

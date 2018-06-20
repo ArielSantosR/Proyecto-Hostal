@@ -83,6 +83,10 @@
           <ScalarProperty Name="ID_DETALLE_H" ColumnName="ID_DETALLE_H" />
           <ScalarProperty Name="NUMERO_HABITACION" ColumnName="NUMERO_HABITACION" />
           <ScalarProperty Name="RUT_CLIENTE" ColumnName="RUT_CLIENTE" />
+          <ScalarProperty Name="RUT_HUESPED" ColumnName="RUT_HUESPED" />
+          <ScalarProperty Name="ID_PENSION" ColumnName="ID_PENSION" />
+          <ScalarProperty Name="FECHA_LLEGADA" ColumnName="FECHA_LLEGADA" />
+          <ScalarProperty Name="FECHA_SALIDA" ColumnName="FECHA_SALIDA" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -95,18 +99,6 @@
           <ScalarProperty Name="ID_CATEGORIA_HABITACION" ColumnName="ID_CATEGORIA_HABITACION" />
           <ScalarProperty Name="ID_PENSION" ColumnName="ID_PENSION" />
           <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="DETALLE_PASAJEROS">
-      <EntityTypeMapping TypeName="Model.DETALLE_PASAJEROS">
-        <MappingFragment StoreEntitySet="DETALLE_PASAJEROS">
-          <ScalarProperty Name="ID_DETALLE_PASAJEROS" ColumnName="ID_DETALLE_PASAJEROS" />
-          <ScalarProperty Name="NUMERO_HABITACION" ColumnName="NUMERO_HABITACION" />
-          <ScalarProperty Name="RUT_HUESPED" ColumnName="RUT_HUESPED" />
-          <ScalarProperty Name="ID_PENSION" ColumnName="ID_PENSION" />
-          <ScalarProperty Name="FECHA_LLEGADA" ColumnName="FECHA_LLEGADA" />
-          <ScalarProperty Name="FECHA_SALIDA" ColumnName="FECHA_SALIDA" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -294,6 +286,7 @@
         <MappingFragment StoreEntitySet="PRODUCTO">
           <ScalarProperty Name="ID_PRODUCTO" ColumnName="ID_PRODUCTO" />
           <ScalarProperty Name="NOMBRE_PRODUCTO" ColumnName="NOMBRE_PRODUCTO" />
+          <ScalarProperty Name="PRECIO_PRODUCTO" ColumnName="PRECIO_PRODUCTO" />
           <ScalarProperty Name="FECHA_VENCIMIENTO_PRODUCTO" ColumnName="FECHA_VENCIMIENTO_PRODUCTO" />
           <ScalarProperty Name="STOCK_PRODUCTO" ColumnName="STOCK_PRODUCTO" />
           <ScalarProperty Name="STOCK_CRITICO_PRODUCTO" ColumnName="STOCK_CRITICO_PRODUCTO" />
@@ -302,7 +295,6 @@
           <ScalarProperty Name="ID_FAMILIA" ColumnName="ID_FAMILIA" />
           <ScalarProperty Name="RUT_PROVEEDOR" ColumnName="RUT_PROVEEDOR" />
           <ScalarProperty Name="ID_PRODUCTO_SEQ" ColumnName="ID_PRODUCTO_SEQ" />
-          <ScalarProperty Name="PRECIO_PRODUCTO" ColumnName="PRECIO_PRODUCTO" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

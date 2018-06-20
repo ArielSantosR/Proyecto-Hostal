@@ -135,14 +135,14 @@ namespace Datos
             ent.SaveChanges();
             return true;
         }
-
+        /*
         public bool AgregarDetallePasajeros(DETALLE_PASAJEROS detalle)
         {
             ent.DETALLE_PASAJEROS.Add(detalle);
             ent.SaveChanges();
             return true;
         }
-
+        */
         public bool EditarDetalleReserva(DETALLE_ORDEN detalle)
         {
             DETALLE_ORDEN d = ent.DETALLE_ORDEN.FirstOrDefault(objeto => objeto.ID_DETALLE == detalle.ID_DETALLE);
