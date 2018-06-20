@@ -332,7 +332,7 @@ namespace Web.Empleado
                                 XmlSerializer sr4 = new XmlSerializer(typeof(Modelo.DetallePasajeros));
                                 StringWriter writer4 = new StringWriter();
                                 sr4.Serialize(writer4, detallePasajeros);
-
+                                /*
                                 if (s.AgregarDetallePasajeros(writer4.ToString()))
                                 {
                                     #region Detalle Orden
@@ -362,7 +362,7 @@ namespace Web.Empleado
                                     error.Text = "No se pudo agregar el detalle de pasajeros";
                                     alerta.Visible = true;
                                 }
-
+                                */
                                 #endregion
                             }
                             else
@@ -507,7 +507,7 @@ namespace Web.Empleado
                                 XmlSerializer sr4 = new XmlSerializer(typeof(Modelo.DetallePasajeros));
                                 StringWriter writer4 = new StringWriter();
                                 sr4.Serialize(writer4, detallePasajeros);
-
+                                /*
                                 if (s.AgregarDetallePasajeros(writer4.ToString()))
                                 {
                                     #region Detalle Orden
@@ -537,7 +537,7 @@ namespace Web.Empleado
                                     error.Text = "No se pudo agregar el detalle de pasajeros";
                                     alerta.Visible = true;
                                 }
-
+                                */
                                 #endregion
                             }
                             else

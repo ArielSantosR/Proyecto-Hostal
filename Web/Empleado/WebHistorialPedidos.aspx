@@ -74,7 +74,7 @@
                 </div>
                 <div class="modal-body">
                     <div style="display: flex; justify-content: center; margin-bottom: 70px">
-                        <asp:GridView ID="gvDetalle" AutoGenerateColumns="true" runat="server" ForeColor="#333333" GridLines="Vertical" OnRowDataBound="gvDetalle_RowDataBound" AllowPaging="True" PageSize="8" OnPageIndexChanging="gvDetalle_PageIndexChanging">
+                        <asp:GridView ID="gvDetalle" AutoGenerateColumns="false" runat="server" ForeColor="#333333" GridLines="Vertical" AllowPaging="True" PageSize="8" OnPageIndexChanging="gvDetalle_PageIndexChanging">
                             <AlternatingRowStyle BackColor="White" />
                             <EditRowStyle BackColor="#2461BF" />
                             <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
@@ -87,6 +87,12 @@
                             <SortedDescendingCellStyle BackColor="#E9EBEF" />
                             <SortedDescendingHeaderStyle BackColor="#4870BE" />
                             <Columns>
+                                <asp:BoundField DataField="ID Detalle" HeaderText="ID Detalle" Visible="false"/>
+                                <asp:BoundField DataField="Código" HeaderText="Código" />
+                                <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
+                                <asp:BoundField DataField="Descripción" HeaderText="Descripción" />
+                                <asp:BoundField DataField="Unidad Medida" HeaderText="Unidad Medida" />
+                                <asp:BoundField DataField="Cantidad Pedida" HeaderText="Cantidad Pedida" />
                                 <asp:TemplateField>
                                     <ItemTemplate>
                                         <asp:LinkButton ID="btnEditar" CssClass="btn btn-success" CommandArgument='<%#Eval("ID Detalle")%>' OnClick="btnEditar_Click" Text="Editar" runat="server" />

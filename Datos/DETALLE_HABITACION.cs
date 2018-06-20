@@ -17,8 +17,14 @@ namespace Datos
         public short ID_DETALLE_H { get; set; }
         public short NUMERO_HABITACION { get; set; }
         public int RUT_CLIENTE { get; set; }
+        public int RUT_HUESPED { get; set; }
+        public short ID_PENSION { get; set; }
+        public System.DateTime FECHA_LLEGADA { get; set; }
+        public System.DateTime FECHA_SALIDA { get; set; }
     
         public virtual CLIENTE CLIENTE { get; set; }
         public virtual HABITACION HABITACION { get; set; }
+        public virtual HUESPED HUESPED { get; set; }
+        public virtual PENSION PENSION { get; set; }
     }
 }

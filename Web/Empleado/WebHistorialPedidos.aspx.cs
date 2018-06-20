@@ -433,10 +433,6 @@ namespace Web.Empleado
             }
         }
 
-        protected void gvDetalle_RowDataBound(object sender,GridViewRowEventArgs e) {
-            e.Row.Cells[0].Visible = false;
-        }
-
         protected void gvDetalleHistorial_RowDataBound(object sender,GridViewRowEventArgs e) {
             e.Row.Cells[0].Visible = false;
         }

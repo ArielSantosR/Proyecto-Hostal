@@ -34,7 +34,6 @@ namespace Datos
         public DbSet<DETALLE_FACTURA> DETALLE_FACTURA { get; set; }
         public DbSet<DETALLE_HABITACION> DETALLE_HABITACION { get; set; }
         public DbSet<DETALLE_ORDEN> DETALLE_ORDEN { get; set; }
-        public DbSet<DETALLE_PASAJEROS> DETALLE_PASAJEROS { get; set; }
         public DbSet<DETALLE_PEDIDO> DETALLE_PEDIDO { get; set; }
         public DbSet<DETALLE_PLATOS> DETALLE_PLATOS { get; set; }
         public DbSet<DETALLE_RECEPCION> DETALLE_RECEPCION { get; set; }

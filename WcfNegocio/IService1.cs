@@ -358,8 +358,10 @@ namespace WcfNegocio
         #endregion
 
         #region Detalle Pasajeros
+        /*
         [OperationContract]
         bool AgregarDetallePasajeros(string detalle);
+        */
         #endregion
 
         #region Minuta

@@ -2359,6 +2359,7 @@ namespace WcfNegocio
         #endregion
 
         #region Detalle Pasajeros
+        /*
         public bool AgregarDetallePasajeros(string detalle)
         {
             XmlSerializer ser = new XmlSerializer(typeof(Modelo.DetallePasajeros));
@@ -2374,6 +2375,7 @@ namespace WcfNegocio
 
             return serv.AgregarDetallePasajeros(dDatos);
         }
+        */
         #endregion
 
         #region Minuta
