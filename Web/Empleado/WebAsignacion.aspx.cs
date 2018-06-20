@@ -74,6 +74,19 @@ namespace Web.Empleado
                         {
                             gvDetalle.DataSource = listaDetalle;
                             gvDetalle.DataBind();
+
+                            string datos2 = s.ListaHuespedesAsignados(writer.ToString());
+
+                            XmlSerializer ser4 = new XmlSerializer(typeof(Modelo.DetalleOrdenCollection));
+                            StringReader reader2 = new StringReader(datos2);
+
+                            Modelo.DetalleOrdenCollection listaDetalle2 = (Modelo.DetalleOrdenCollection)ser4.Deserialize(reader2);
+                            reader.Close();
+
+                            gvAceptado.DataSource = listaDetalle2;
+                            gvAceptado.DataBind();
+
+                     
                         }
                         else
                         {

@@ -200,6 +200,10 @@ C:\Users\Suzu\Documents\Proyecto-Hostal\Web\bin\Microsoft.AI.WindowsServer.xml
 C:\Users\Suzu\Documents\Proyecto-Hostal\Web\bin\Microsoft.ApplicationInsights.xml
 C:\Users\Suzu\Documents\Proyecto-Hostal\Web\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 C:\Users\Suzu\Documents\Proyecto-Hostal\Web\bin\EntityFramework.xml
-C:\Users\Suzu\Documents\Proyecto-Hostal\Web\obj\Debug\Web.csprojResolveAssemblyReference.cache
 C:\Users\Suzu\Documents\Proyecto-Hostal\Web\obj\Debug\Web.dll
 C:\Users\Suzu\Documents\Proyecto-Hostal\Web\obj\Debug\Web.pdb
+C:\Users\Suzu\Documents\Proyecto-Hostal\Web\bin\Datos.dll.config
+C:\Users\Suzu\Documents\Proyecto-Hostal\Web\bin\WcfNegocio.dll.config
+C:\Users\Suzu\Documents\Proyecto-Hostal\Web\obj\Debug\Web.csprojAssemblyReference.cache
+C:\Users\Suzu\Documents\Proyecto-Hostal\Web\obj\Debug\Web.csproj.CoreCompileInputs.cache
+C:\Users\Suzu\Documents\Proyecto-Hostal\Web\obj\Debug\Web.csproj.CopyComplete
