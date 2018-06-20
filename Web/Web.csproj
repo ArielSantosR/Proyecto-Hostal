@@ -137,8 +137,10 @@
     <Content Include="Empleado\WebCrearMinuta.aspx" />
     <Content Include="Empleado\WebCrearPedido.aspx" />
     <Content Include="Empleado\WebEditarEmpleado.aspx" />
+    <Content Include="Empleado\WebEditarInventario.aspx" />
     <Content Include="Empleado\WebEditarPedido.aspx" />
     <Content Include="Empleado\WebHistorialPedidos.aspx" />
+    <Content Include="Empleado\WebInventario.aspx" />
     <Content Include="Empleado\WebNotificacion.aspx" />
     <Content Include="Empleado\WebRecibirPedido.aspx" />
     <Content Include="Empleado\WebReservasPendientes.aspx" />
@@ -508,6 +510,13 @@
     <Compile Include="Empleado\WebEditarEmpleado.aspx.designer.cs">
       <DependentUpon>WebEditarEmpleado.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Empleado\WebEditarInventario.aspx.cs">
+      <DependentUpon>WebEditarInventario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Empleado\WebEditarInventario.aspx.designer.cs">
+      <DependentUpon>WebEditarInventario.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Empleado\WebEditarPedido.aspx.cs">
       <DependentUpon>WebEditarPedido.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -521,6 +530,13 @@
     </Compile>
     <Compile Include="Empleado\WebHistorialPedidos.aspx.designer.cs">
       <DependentUpon>WebHistorialPedidos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Empleado\WebInventario.aspx.cs">
+      <DependentUpon>WebInventario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Empleado\WebInventario.aspx.designer.cs">
+      <DependentUpon>WebInventario.aspx</DependentUpon>
     </Compile>
     <Compile Include="Empleado\WebNotificacion.aspx.cs">
       <DependentUpon>WebNotificacion.aspx</DependentUpon>
