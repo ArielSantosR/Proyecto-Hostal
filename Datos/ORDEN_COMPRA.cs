@@ -28,6 +28,7 @@ namespace Datos
         public Nullable<int> RUT_CLIENTE { get; set; }
         public string ESTADO_ORDEN { get; set; }
         public string COMENTARIO { get; set; }
+        public int MONTO_TOTAL { get; set; }
     
         public virtual CLIENTE CLIENTE { get; set; }
         public virtual ICollection<DETALLE_ORDEN> DETALLE_ORDEN { get; set; }

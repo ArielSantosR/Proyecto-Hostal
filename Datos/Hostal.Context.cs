@@ -58,5 +58,12 @@ namespace Datos
         public DbSet<TIPO_PLATO> TIPO_PLATO { get; set; }
         public DbSet<TIPO_PROVEEDOR> TIPO_PROVEEDOR { get; set; }
         public DbSet<USUARIO> USUARIO { get; set; }
+        public DbSet<V_CLIENTE_FRECUENTE> V_CLIENTE_FRECUENTE { get; set; }
+        public DbSet<V_CLIENTE_ORDENES> V_CLIENTE_ORDENES { get; set; }
+        public DbSet<V_CLIENTE_ORDENES_TOP_10> V_CLIENTE_ORDENES_TOP_10 { get; set; }
+        public DbSet<V_DIAS_USOS> V_DIAS_USOS { get; set; }
+        public DbSet<V_HABITACION_PREFERIDA> V_HABITACION_PREFERIDA { get; set; }
+        public DbSet<V_HABITACION_USOS> V_HABITACION_USOS { get; set; }
+        public DbSet<V_HABITACION_USOS_TOP_10> V_HABITACION_USOS_TOP_10 { get; set; }
     }
 }

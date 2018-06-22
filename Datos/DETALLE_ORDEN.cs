@@ -20,6 +20,8 @@ namespace Datos
         public short ID_CATEGORIA_HABITACION { get; set; }
         public short ID_PENSION { get; set; }
         public string ESTADO { get; set; }
+        public int VALOR_MINUTA { get; set; }
+        public int VALOR_HABITACION { get; set; }
     
         public virtual CATEGORIA_HABITACION CATEGORIA_HABITACION { get; set; }
         public virtual PENSION PENSION { get; set; }

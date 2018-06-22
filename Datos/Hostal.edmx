@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Model.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="11.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Model.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="11.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="BOLETA">
           <Key>
             <PropertyRef Name="ID_BOLETA" />
@@ -96,6 +96,8 @@
           <Property Name="ID_CATEGORIA_HABITACION" Type="number" Precision="3" Scale="0" Nullable="false" />
           <Property Name="ID_PENSION" Type="number" Precision="5" Scale="0" Nullable="false" />
           <Property Name="ESTADO" Type="varchar2" MaxLength="15" />
+          <Property Name="VALOR_MINUTA" Type="number" Precision="6" Scale="0" Nullable="false" />
+          <Property Name="VALOR_HABITACION" Type="number" Precision="6" Scale="0" Nullable="false" />
         </EntityType>
         <EntityType Name="DETALLE_PEDIDO">
           <Key>
@@ -220,6 +222,7 @@
           <Property Name="RUT_CLIENTE" Type="number" Precision="8" Scale="0" />
           <Property Name="ESTADO_ORDEN" Type="varchar2" MaxLength="25" Nullable="false" />
           <Property Name="COMENTARIO" Type="varchar2" MaxLength="256" />
+          <Property Name="MONTO_TOTAL" Type="number" Precision="6" Scale="0" Nullable="false" />
         </EntityType>
         <EntityType Name="PAIS">
           <Key>
@@ -338,6 +341,91 @@
           <Property Name="PASSWORD" Type="varchar2" MaxLength="255" Nullable="false" />
           <Property Name="TIPO_USUARIO" Type="varchar2" MaxLength="25" Nullable="false" />
           <Property Name="ESTADO" Type="varchar2" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'HOSTAL.V_CLIENTE_FRECUENTE' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="V_CLIENTE_FRECUENTE">
+          <Key>
+            <PropertyRef Name="NOMBRE_CLIENTE" />
+            <PropertyRef Name="GIRO" />
+            <PropertyRef Name="RUT" />
+          </Key>
+          <Property Name="RUT" Type="varchar2" MaxLength="42" Nullable="false" />
+          <Property Name="NOMBRE_CLIENTE" Type="varchar2" MaxLength="100" Nullable="false" />
+          <Property Name="GIRO" Type="varchar2" MaxLength="25" Nullable="false" />
+          <Property Name="CANTIDAD_ORDENES" Type="number" Precision="38" Scale="0" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'HOSTAL.V_CLIENTE_ORDENES' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="V_CLIENTE_ORDENES">
+          <Key>
+            <PropertyRef Name="NOMBRE_CLIENTE" />
+            <PropertyRef Name="GIRO" />
+            <PropertyRef Name="RUT" />
+          </Key>
+          <Property Name="RUT" Type="varchar2" MaxLength="42" Nullable="false" />
+          <Property Name="NOMBRE_CLIENTE" Type="varchar2" MaxLength="100" Nullable="false" />
+          <Property Name="GIRO" Type="varchar2" MaxLength="25" Nullable="false" />
+          <Property Name="ORDENES_PENDIENTES" Type="number" Precision="38" Scale="0" />
+          <Property Name="ORDENES_ASIGNADAS" Type="number" Precision="38" Scale="0" />
+          <Property Name="ORDENES_ACEPTADAS" Type="number" Precision="38" Scale="0" />
+          <Property Name="ORDENES_RECHAZADAS" Type="number" Precision="38" Scale="0" />
+          <Property Name="ORDENES_CANCELADAS" Type="number" Precision="38" Scale="0" />
+          <Property Name="CANTIDAD_ORDENES" Type="number" Precision="38" Scale="0" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'HOSTAL.V_CLIENTE_ORDENES_TOP_10' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="V_CLIENTE_ORDENES_TOP_10">
+          <Key>
+            <PropertyRef Name="NOMBRE_CLIENTE" />
+            <PropertyRef Name="GIRO" />
+            <PropertyRef Name="RUT" />
+          </Key>
+          <Property Name="RUT" Type="varchar2" MaxLength="42" Nullable="false" />
+          <Property Name="NOMBRE_CLIENTE" Type="varchar2" MaxLength="100" Nullable="false" />
+          <Property Name="GIRO" Type="varchar2" MaxLength="25" Nullable="false" />
+          <Property Name="ORDENES_PENDIENTES" Type="number" Precision="38" Scale="0" />
+          <Property Name="ORDENES_ASIGNADAS" Type="number" Precision="38" Scale="0" />
+          <Property Name="ORDENES_ACEPTADAS" Type="number" Precision="38" Scale="0" />
+          <Property Name="ORDENES_RECHAZADAS" Type="number" Precision="38" Scale="0" />
+          <Property Name="ORDENES_CANCELADAS" Type="number" Precision="38" Scale="0" />
+          <Property Name="CANTIDAD_ORDENES" Type="number" Precision="38" Scale="0" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'HOSTAL.V_DIAS_USOS' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="V_DIAS_USOS">
+          <Key>
+            <PropertyRef Name="NUMERO_HABITACION" />
+          </Key>
+          <Property Name="NUMERO_HABITACION" Type="number" Precision="5" Scale="0" Nullable="false" />
+          <Property Name="DIAS_USO" Type="number" Precision="38" Scale="0" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'HOSTAL.V_HABITACION_PREFERIDA' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="V_HABITACION_PREFERIDA">
+          <Key>
+            <PropertyRef Name="NUMERO_HABITACION" />
+          </Key>
+          <Property Name="NUMERO_HABITACION" Type="number" Precision="5" Scale="0" Nullable="false" />
+          <Property Name="NUMERO_USOS" Type="number" Precision="38" Scale="0" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'HOSTAL.V_HABITACION_USOS' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="V_HABITACION_USOS">
+          <Key>
+            <PropertyRef Name="NUMERO_HABITACION" />
+          </Key>
+          <Property Name="NUMERO_HABITACION" Type="number" Precision="5" Scale="0" Nullable="false" />
+          <Property Name="NUMERO_USOS" Type="number" Precision="38" Scale="0" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'HOSTAL.V_HABITACION_USOS_TOP_10' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="V_HABITACION_USOS_TOP_10">
+          <Key>
+            <PropertyRef Name="NUMERO_HABITACION" />
+          </Key>
+          <Property Name="NUMERO_HABITACION" Type="number" Precision="5" Scale="0" Nullable="false" />
+          <Property Name="NUMERO_USOS" Type="number" Precision="38" Scale="0" />
         </EntityType>
         <Association Name="FK_BOLETA_EMPLEADO">
           <End Role="EMPLEADO" Type="Self.EMPLEADO" Multiplicity="1" />
@@ -925,6 +1013,64 @@
           <EntitySet Name="TIPO_PLATO" EntityType="Self.TIPO_PLATO" Schema="HOSTAL" store:Type="Tables" />
           <EntitySet Name="TIPO_PROVEEDOR" EntityType="Self.TIPO_PROVEEDOR" Schema="HOSTAL" store:Type="Tables" />
           <EntitySet Name="USUARIO" EntityType="Self.USUARIO" Schema="HOSTAL" store:Type="Tables" />
+          <EntitySet Name="V_CLIENTE_FRECUENTE" EntityType="Self.V_CLIENTE_FRECUENTE" store:Type="Views" store:Schema="HOSTAL">
+            <DefiningQuery>SELECT 
+"V_CLIENTE_FRECUENTE"."RUT" AS "RUT", 
+"V_CLIENTE_FRECUENTE"."NOMBRE_CLIENTE" AS "NOMBRE_CLIENTE", 
+"V_CLIENTE_FRECUENTE"."GIRO" AS "GIRO", 
+"V_CLIENTE_FRECUENTE"."CANTIDAD_ORDENES" AS "CANTIDAD_ORDENES"
+FROM "HOSTAL"."V_CLIENTE_FRECUENTE" "V_CLIENTE_FRECUENTE"</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="V_CLIENTE_ORDENES" EntityType="Self.V_CLIENTE_ORDENES" store:Type="Views" store:Schema="HOSTAL">
+            <DefiningQuery>SELECT 
+"V_CLIENTE_ORDENES"."RUT" AS "RUT", 
+"V_CLIENTE_ORDENES"."NOMBRE_CLIENTE" AS "NOMBRE_CLIENTE", 
+"V_CLIENTE_ORDENES"."GIRO" AS "GIRO", 
+"V_CLIENTE_ORDENES"."ORDENES_PENDIENTES" AS "ORDENES_PENDIENTES", 
+"V_CLIENTE_ORDENES"."ORDENES_ASIGNADAS" AS "ORDENES_ASIGNADAS", 
+"V_CLIENTE_ORDENES"."ORDENES_ACEPTADAS" AS "ORDENES_ACEPTADAS", 
+"V_CLIENTE_ORDENES"."ORDENES_RECHAZADAS" AS "ORDENES_RECHAZADAS", 
+"V_CLIENTE_ORDENES"."ORDENES_CANCELADAS" AS "ORDENES_CANCELADAS", 
+"V_CLIENTE_ORDENES"."CANTIDAD_ORDENES" AS "CANTIDAD_ORDENES"
+FROM "HOSTAL"."V_CLIENTE_ORDENES" "V_CLIENTE_ORDENES"</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="V_CLIENTE_ORDENES_TOP_10" EntityType="Self.V_CLIENTE_ORDENES_TOP_10" store:Type="Views" store:Schema="HOSTAL">
+            <DefiningQuery>SELECT 
+"V_CLIENTE_ORDENES_TOP_10"."RUT" AS "RUT", 
+"V_CLIENTE_ORDENES_TOP_10"."NOMBRE_CLIENTE" AS "NOMBRE_CLIENTE", 
+"V_CLIENTE_ORDENES_TOP_10"."GIRO" AS "GIRO", 
+"V_CLIENTE_ORDENES_TOP_10"."ORDENES_PENDIENTES" AS "ORDENES_PENDIENTES", 
+"V_CLIENTE_ORDENES_TOP_10"."ORDENES_ASIGNADAS" AS "ORDENES_ASIGNADAS", 
+"V_CLIENTE_ORDENES_TOP_10"."ORDENES_ACEPTADAS" AS "ORDENES_ACEPTADAS", 
+"V_CLIENTE_ORDENES_TOP_10"."ORDENES_RECHAZADAS" AS "ORDENES_RECHAZADAS", 
+"V_CLIENTE_ORDENES_TOP_10"."ORDENES_CANCELADAS" AS "ORDENES_CANCELADAS", 
+"V_CLIENTE_ORDENES_TOP_10"."CANTIDAD_ORDENES" AS "CANTIDAD_ORDENES"
+FROM "HOSTAL"."V_CLIENTE_ORDENES_TOP_10" "V_CLIENTE_ORDENES_TOP_10"</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="V_DIAS_USOS" EntityType="Self.V_DIAS_USOS" store:Type="Views" store:Schema="HOSTAL">
+            <DefiningQuery>SELECT 
+"V_DIAS_USOS"."NUMERO_HABITACION" AS "NUMERO_HABITACION", 
+"V_DIAS_USOS"."DIAS_USO" AS "DIAS_USO"
+FROM "HOSTAL"."V_DIAS_USOS" "V_DIAS_USOS"</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="V_HABITACION_PREFERIDA" EntityType="Self.V_HABITACION_PREFERIDA" store:Type="Views" store:Schema="HOSTAL">
+            <DefiningQuery>SELECT 
+"V_HABITACION_PREFERIDA"."NUMERO_HABITACION" AS "NUMERO_HABITACION", 
+"V_HABITACION_PREFERIDA"."NUMERO_USOS" AS "NUMERO_USOS"
+FROM "HOSTAL"."V_HABITACION_PREFERIDA" "V_HABITACION_PREFERIDA"</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="V_HABITACION_USOS" EntityType="Self.V_HABITACION_USOS" store:Type="Views" store:Schema="HOSTAL">
+            <DefiningQuery>SELECT 
+"V_HABITACION_USOS"."NUMERO_HABITACION" AS "NUMERO_HABITACION", 
+"V_HABITACION_USOS"."NUMERO_USOS" AS "NUMERO_USOS"
+FROM "HOSTAL"."V_HABITACION_USOS" "V_HABITACION_USOS"</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="V_HABITACION_USOS_TOP_10" EntityType="Self.V_HABITACION_USOS_TOP_10" store:Type="Views" store:Schema="HOSTAL">
+            <DefiningQuery>SELECT 
+"V_HABITACION_USOS_TOP_10"."NUMERO_HABITACION" AS "NUMERO_HABITACION", 
+"V_HABITACION_USOS_TOP_10"."NUMERO_USOS" AS "NUMERO_USOS"
+FROM "HOSTAL"."V_HABITACION_USOS_TOP_10" "V_HABITACION_USOS_TOP_10"</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_BOLETA_EMPLEADO" Association="Self.FK_BOLETA_EMPLEADO">
             <End Role="EMPLEADO" EntitySet="EMPLEADO" />
             <End Role="BOLETA" EntitySet="BOLETA" />
@@ -1110,8 +1256,7 @@
             <End Role="REGION" EntitySet="REGION" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1231,6 +1376,8 @@
           <NavigationProperty Name="PENSION" Relationship="Self.FK_DETALLE_ORDEN_PENSION" FromRole="DETALLE_ORDEN" ToRole="PENSION" />
           <NavigationProperty Name="HUESPED" Relationship="Self.FK_HUESPED_DETALLE_ORDEN" FromRole="DETALLE_ORDEN" ToRole="HUESPED" />
           <NavigationProperty Name="ORDEN_COMPRA" Relationship="Self.FK_ORDEN_DETALLE_ORDEN" FromRole="DETALLE_ORDEN" ToRole="ORDEN_COMPRA" />
+          <Property Name="VALOR_MINUTA" Type="Int32" Nullable="false" />
+          <Property Name="VALOR_HABITACION" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="DETALLE_PEDIDO">
           <Key>
@@ -1387,6 +1534,7 @@
           <NavigationProperty Name="DETALLE_ORDEN" Relationship="Self.FK_ORDEN_DETALLE_ORDEN" FromRole="ORDEN_COMPRA" ToRole="DETALLE_ORDEN" />
           <NavigationProperty Name="EMPLEADO" Relationship="Self.FK_ORDEN_COMPRA_EMPLEADO" FromRole="ORDEN_COMPRA" ToRole="EMPLEADO" />
           <NavigationProperty Name="NOTIFICACION" Relationship="Self.FK_NOTIFICACION_ORDEN" FromRole="ORDEN_COMPRA" ToRole="NOTIFICACION" />
+          <Property Name="MONTO_TOTAL" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="PAIS">
           <Key>
@@ -2311,7 +2459,85 @@
             <End Role="PROVEEDOR" EntitySet="PROVEEDOR" />
             <End Role="RECEPCION" EntitySet="RECEPCION" />
           </AssociationSet>
+          <EntitySet Name="V_CLIENTE_FRECUENTE" EntityType="Model.V_CLIENTE_FRECUENTE" />
+          <EntitySet Name="V_CLIENTE_ORDENES" EntityType="Model.V_CLIENTE_ORDENES" />
+          <EntitySet Name="V_CLIENTE_ORDENES_TOP_10" EntityType="Model.V_CLIENTE_ORDENES_TOP_10" />
+          <EntitySet Name="V_DIAS_USOS" EntityType="Model.V_DIAS_USOS" />
+          <EntitySet Name="V_HABITACION_PREFERIDA" EntityType="Model.V_HABITACION_PREFERIDA" />
+          <EntitySet Name="V_HABITACION_USOS" EntityType="Model.V_HABITACION_USOS" />
+          <EntitySet Name="V_HABITACION_USOS_TOP_10" EntityType="Model.V_HABITACION_USOS_TOP_10" />
         </EntityContainer>
+        <EntityType Name="V_CLIENTE_FRECUENTE">
+          <Key>
+            <PropertyRef Name="NOMBRE_CLIENTE" />
+            <PropertyRef Name="GIRO" />
+            <PropertyRef Name="RUT" />
+          </Key>
+          <Property Name="RUT" Type="String" MaxLength="42" FixedLength="false" Unicode="false" ConcurrencyMode="None" Nullable="false" />
+          <Property Name="NOMBRE_CLIENTE" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="GIRO" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="CANTIDAD_ORDENES" Type="Decimal" Precision="38" Scale="0" />
+        </EntityType>
+        <EntityType Name="V_CLIENTE_ORDENES">
+          <Key>
+            <PropertyRef Name="NOMBRE_CLIENTE" />
+            <PropertyRef Name="GIRO" />
+            <PropertyRef Name="RUT" />
+          </Key>
+          <Property Name="RUT" Type="String" MaxLength="42" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NOMBRE_CLIENTE" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="GIRO" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="ORDENES_PENDIENTES" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="ORDENES_ASIGNADAS" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="ORDENES_ACEPTADAS" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="ORDENES_RECHAZADAS" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="ORDENES_CANCELADAS" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="CANTIDAD_ORDENES" Type="Decimal" Precision="38" Scale="0" />
+        </EntityType>
+        <EntityType Name="V_CLIENTE_ORDENES_TOP_10">
+          <Key>
+            <PropertyRef Name="NOMBRE_CLIENTE" />
+            <PropertyRef Name="GIRO" />
+            <PropertyRef Name="RUT" />
+          </Key>
+          <Property Name="RUT" Type="String" MaxLength="42" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NOMBRE_CLIENTE" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="GIRO" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="ORDENES_PENDIENTES" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="ORDENES_ASIGNADAS" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="ORDENES_ACEPTADAS" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="ORDENES_RECHAZADAS" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="ORDENES_CANCELADAS" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="CANTIDAD_ORDENES" Type="Decimal" Precision="38" Scale="0" />
+        </EntityType>
+        <EntityType Name="V_DIAS_USOS">
+          <Key>
+            <PropertyRef Name="NUMERO_HABITACION" />
+          </Key>
+          <Property Name="NUMERO_HABITACION" Type="Int16" Nullable="false" />
+          <Property Name="DIAS_USO" Type="Decimal" Precision="38" Scale="0" />
+        </EntityType>
+        <EntityType Name="V_HABITACION_PREFERIDA">
+          <Key>
+            <PropertyRef Name="NUMERO_HABITACION" />
+          </Key>
+          <Property Name="NUMERO_HABITACION" Type="Int16" Nullable="false" />
+          <Property Name="NUMERO_USOS" Type="Decimal" Precision="38" Scale="0" />
+        </EntityType>
+        <EntityType Name="V_HABITACION_USOS">
+          <Key>
+            <PropertyRef Name="NUMERO_HABITACION" />
+          </Key>
+          <Property Name="NUMERO_HABITACION" Type="Int16" Nullable="false" />
+          <Property Name="NUMERO_USOS" Type="Decimal" Precision="38" Scale="0" />
+        </EntityType>
+        <EntityType Name="V_HABITACION_USOS_TOP_10">
+          <Key>
+            <PropertyRef Name="NUMERO_HABITACION" />
+          </Key>
+          <Property Name="NUMERO_HABITACION" Type="Int16" Nullable="false" />
+          <Property Name="NUMERO_USOS" Type="Decimal" Precision="38" Scale="0" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2410,6 +2636,8 @@
           <EntitySetMapping Name="DETALLE_ORDEN">
             <EntityTypeMapping TypeName="Model.DETALLE_ORDEN">
               <MappingFragment StoreEntitySet="DETALLE_ORDEN">
+                <ScalarProperty Name="VALOR_HABITACION" ColumnName="VALOR_HABITACION" />
+                <ScalarProperty Name="VALOR_MINUTA" ColumnName="VALOR_MINUTA" />
                 <ScalarProperty Name="ID_DETALLE" ColumnName="ID_DETALLE" />
                 <ScalarProperty Name="NUMERO_ORDEN" ColumnName="NUMERO_ORDEN" />
                 <ScalarProperty Name="RUT_HUESPED" ColumnName="RUT_HUESPED" />
@@ -2544,6 +2772,7 @@
           <EntitySetMapping Name="ORDEN_COMPRA">
             <EntityTypeMapping TypeName="Model.ORDEN_COMPRA">
               <MappingFragment StoreEntitySet="ORDEN_COMPRA">
+                <ScalarProperty Name="MONTO_TOTAL" ColumnName="MONTO_TOTAL" />
                 <ScalarProperty Name="NUMERO_ORDEN" ColumnName="NUMERO_ORDEN" />
                 <ScalarProperty Name="CANTIDAD_HUESPEDES" ColumnName="CANTIDAD_HUESPEDES" />
                 <ScalarProperty Name="FECHA_LLEGADA" ColumnName="FECHA_LLEGADA" />
@@ -2682,6 +2911,78 @@
                 <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
                 <ScalarProperty Name="TIPO_USUARIO" ColumnName="TIPO_USUARIO" />
                 <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_CLIENTE_FRECUENTE">
+            <EntityTypeMapping TypeName="Model.V_CLIENTE_FRECUENTE">
+              <MappingFragment StoreEntitySet="V_CLIENTE_FRECUENTE">
+                <ScalarProperty Name="CANTIDAD_ORDENES" ColumnName="CANTIDAD_ORDENES" />
+                <ScalarProperty Name="GIRO" ColumnName="GIRO" />
+                <ScalarProperty Name="NOMBRE_CLIENTE" ColumnName="NOMBRE_CLIENTE" />
+                <ScalarProperty Name="RUT" ColumnName="RUT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_CLIENTE_ORDENES">
+            <EntityTypeMapping TypeName="Model.V_CLIENTE_ORDENES">
+              <MappingFragment StoreEntitySet="V_CLIENTE_ORDENES">
+                <ScalarProperty Name="CANTIDAD_ORDENES" ColumnName="CANTIDAD_ORDENES" />
+                <ScalarProperty Name="ORDENES_CANCELADAS" ColumnName="ORDENES_CANCELADAS" />
+                <ScalarProperty Name="ORDENES_RECHAZADAS" ColumnName="ORDENES_RECHAZADAS" />
+                <ScalarProperty Name="ORDENES_ACEPTADAS" ColumnName="ORDENES_ACEPTADAS" />
+                <ScalarProperty Name="ORDENES_ASIGNADAS" ColumnName="ORDENES_ASIGNADAS" />
+                <ScalarProperty Name="ORDENES_PENDIENTES" ColumnName="ORDENES_PENDIENTES" />
+                <ScalarProperty Name="GIRO" ColumnName="GIRO" />
+                <ScalarProperty Name="NOMBRE_CLIENTE" ColumnName="NOMBRE_CLIENTE" />
+                <ScalarProperty Name="RUT" ColumnName="RUT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_CLIENTE_ORDENES_TOP_10">
+            <EntityTypeMapping TypeName="Model.V_CLIENTE_ORDENES_TOP_10">
+              <MappingFragment StoreEntitySet="V_CLIENTE_ORDENES_TOP_10">
+                <ScalarProperty Name="CANTIDAD_ORDENES" ColumnName="CANTIDAD_ORDENES" />
+                <ScalarProperty Name="ORDENES_CANCELADAS" ColumnName="ORDENES_CANCELADAS" />
+                <ScalarProperty Name="ORDENES_RECHAZADAS" ColumnName="ORDENES_RECHAZADAS" />
+                <ScalarProperty Name="ORDENES_ACEPTADAS" ColumnName="ORDENES_ACEPTADAS" />
+                <ScalarProperty Name="ORDENES_ASIGNADAS" ColumnName="ORDENES_ASIGNADAS" />
+                <ScalarProperty Name="ORDENES_PENDIENTES" ColumnName="ORDENES_PENDIENTES" />
+                <ScalarProperty Name="GIRO" ColumnName="GIRO" />
+                <ScalarProperty Name="NOMBRE_CLIENTE" ColumnName="NOMBRE_CLIENTE" />
+                <ScalarProperty Name="RUT" ColumnName="RUT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_DIAS_USOS">
+            <EntityTypeMapping TypeName="Model.V_DIAS_USOS">
+              <MappingFragment StoreEntitySet="V_DIAS_USOS">
+                <ScalarProperty Name="DIAS_USO" ColumnName="DIAS_USO" />
+                <ScalarProperty Name="NUMERO_HABITACION" ColumnName="NUMERO_HABITACION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_HABITACION_PREFERIDA">
+            <EntityTypeMapping TypeName="Model.V_HABITACION_PREFERIDA">
+              <MappingFragment StoreEntitySet="V_HABITACION_PREFERIDA">
+                <ScalarProperty Name="NUMERO_USOS" ColumnName="NUMERO_USOS" />
+                <ScalarProperty Name="NUMERO_HABITACION" ColumnName="NUMERO_HABITACION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_HABITACION_USOS">
+            <EntityTypeMapping TypeName="Model.V_HABITACION_USOS">
+              <MappingFragment StoreEntitySet="V_HABITACION_USOS">
+                <ScalarProperty Name="NUMERO_USOS" ColumnName="NUMERO_USOS" />
+                <ScalarProperty Name="NUMERO_HABITACION" ColumnName="NUMERO_HABITACION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_HABITACION_USOS_TOP_10">
+            <EntityTypeMapping TypeName="Model.V_HABITACION_USOS_TOP_10">
+              <MappingFragment StoreEntitySet="V_HABITACION_USOS_TOP_10">
+                <ScalarProperty Name="NUMERO_USOS" ColumnName="NUMERO_USOS" />
+                <ScalarProperty Name="NUMERO_HABITACION" ColumnName="NUMERO_HABITACION" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

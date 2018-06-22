@@ -21,4 +21,12 @@ namespace Modelo {
         N,
         S
     }
+
+    public enum Estado_Orden {
+        Pendiente,
+        Rechazado,
+        Asignado,
+        Aceptado,
+        Cancelado
+    }
 }

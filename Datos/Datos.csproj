@@ -169,6 +169,7 @@
     <Compile Include="ServicioRecepcion.cs" />
     <Compile Include="ServicioReserva.cs" />
     <Compile Include="ServicioUsuario.cs" />
+    <Compile Include="ServicioVistas.cs" />
     <Compile Include="TIPO_HABITACION.cs">
       <DependentUpon>Hostal.tt</DependentUpon>
     </Compile>
@@ -179,6 +180,27 @@
       <DependentUpon>Hostal.tt</DependentUpon>
     </Compile>
     <Compile Include="USUARIO.cs">
+      <DependentUpon>Hostal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="V_CLIENTE_FRECUENTE.cs">
+      <DependentUpon>Hostal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="V_CLIENTE_ORDENES.cs">
+      <DependentUpon>Hostal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="V_CLIENTE_ORDENES_TOP_10.cs">
+      <DependentUpon>Hostal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="V_DIAS_USOS.cs">
+      <DependentUpon>Hostal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="V_HABITACION_PREFERIDA.cs">
+      <DependentUpon>Hostal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="V_HABITACION_USOS.cs">
+      <DependentUpon>Hostal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="V_HABITACION_USOS_TOP_10.cs">
       <DependentUpon>Hostal.tt</DependentUpon>
     </Compile>
   </ItemGroup>
