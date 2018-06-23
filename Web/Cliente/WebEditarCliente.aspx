@@ -90,7 +90,7 @@
                             <div class="col-sm-12">
                                 <div class="input-group">
                                     <span class="input-group-text"><i class="fa fa-globe fa-lg" aria-hidden="true"></i></span>
-                                    <asp:DropDownList ID="ddlGiro" CssClass="form-control" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlPais_SelectedIndexChanged"></asp:DropDownList>
+                                    <asp:DropDownList ID="ddlGiro" CssClass="form-control" runat="server" AutoPostBack="True"></asp:DropDownList>
                                 </div>
                             </div>
                         </div>

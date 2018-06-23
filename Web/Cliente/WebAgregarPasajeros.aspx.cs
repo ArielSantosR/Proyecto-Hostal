@@ -58,6 +58,7 @@ namespace Web.Cliente {
                         ddlEmpresa.DataTextField = "NOMBRE_CLIENTE";
                         ddlEmpresa.DataValueField = "RUT_CLIENTE";
                         ddlEmpresa.DataBind();
+                        ddlEmpresa.Items.Insert(0,new ListItem("Seleccione Empresa...","0"));
                     }
                     pasajeros = HuespedCollection.ListaHuesped().Where(x => x.RUT_CLIENTE == int.Parse(ddlEmpresa.SelectedValue)).ToList<Huesped>();
                     if (pasajeros.Count != 0)
@@ -166,84 +167,19 @@ namespace Web.Cliente {
 
         protected void btnAgregar_Click(object sender,EventArgs e) {
             try {
-                if (txtRutPasajero.Text != string.Empty && txtPNombre.Text != string.Empty && txtAPaterno.Text != string.Empty && txtAMaterno.Text != string.Empty) {
-                    int telefono = 0;
+                if (MiSesion.TIPO_USUARIO.Equals(Tipo_Usuario.Cliente.ToString())) {
+                    if (txtRutPasajero.Text != string.Empty && txtPNombre.Text != string.Empty && txtAPaterno.Text != string.Empty && txtAMaterno.Text != string.Empty) {
+                        int telefono = 0;
 
-                    if (txtNumeroTelefono.Text == string.Empty) {
-                        
-                        Huesped huesped = new Huesped();
+                        if (txtNumeroTelefono.Text == string.Empty) {
 
-                        huesped.RUT_HUESPED = int.Parse(txtRutPasajero.Text.Substring(0,txtRutPasajero.Text.Length - 2));
-                        huesped.DV_HUESPED = txtRutPasajero.Text.Substring(txtRutPasajero.Text.Length - 1);
-
-                        if (MiSesion.TIPO_USUARIO.Equals(Tipo_Usuario.Cliente.ToString()) && MiSesion.ESTADO.Equals(Estado_Usuario.Habilitado.ToString())) {
-                            huesped.RUT_CLIENTE = SesionCl.RUT_CLIENTE;
-                        }
-                        else {
-                            huesped.RUT_CLIENTE = int.Parse(ddlEmpresa.SelectedValue);
-                        }
-
-
-                        huesped.APP_MATERNO_HUESPED = txtAMaterno.Text;
-                        huesped.APP_PATERNO_HUESPED = txtAPaterno.Text;
-                        huesped.PNOMBRE_HUESPED = txtPNombre.Text;
-                        huesped.SNOMBRE_HUESPED = txtSNombre.Text;
-                        huesped.TELEFONO_HUESPED = telefono;
-                        huesped.REGISTRADO = Registrado_Huesped.N.ToString();
-
-
-                        if (!huesped.ExisteRut()) {
-                            if (huesped.Crear()) {
-                                exito.Text = "El registro ha se ha realizado con exito";
-                                alerta_exito.Visible = true;
-                                Limpiar();
-                                if (MiSesion.TIPO_USUARIO.Equals(Tipo_Usuario.Administrador.ToString()) && MiSesion.ESTADO.Equals(Estado_Usuario.Habilitado.ToString())) {
-                                    pasajeros = HuespedCollection.ListaHuesped().Where(x => x.RUT_CLIENTE == int.Parse(ddlEmpresa.SelectedValue)).ToList<Huesped>();
-                                    if (pasajeros.Count != 0) {
-                                        btnVer.Enabled = true;
-                                        CargarGridView(pasajeros);
-                                    }
-                                    else {
-                                        btnVer.Enabled = false;
-                                    }
-                                }
-                                else {
-                                    pasajeros = HuespedCollection.ListaHuesped().Where(x => x.RUT_CLIENTE == SesionCl.RUT_CLIENTE).ToList<Huesped>();
-                                    if (pasajeros.Count != 0) {
-                                        btnVer.Enabled = true;
-                                        CargarGridView(pasajeros);
-                                    }
-                                    else {
-                                        btnVer.Enabled = false;
-                                    }
-                                }
-
-                            }
-                            else {
-                                error.Text = "El registro ha fallado";
-                                alerta.Visible = true;
-                            }
-                        }
-                        else {
-                            error.Text = "El Rut ya existe";
-                            alerta.Visible = true;
-                        }
-                    }
-                    else {
-                        if (int.TryParse(txtNumeroTelefono.Text,out telefono)) {
                             Huesped huesped = new Huesped();
 
                             huesped.RUT_HUESPED = int.Parse(txtRutPasajero.Text.Substring(0,txtRutPasajero.Text.Length - 2));
                             huesped.DV_HUESPED = txtRutPasajero.Text.Substring(txtRutPasajero.Text.Length - 1);
 
-                            if (MiSesion.TIPO_USUARIO.Equals(Tipo_Usuario.Cliente.ToString()) && MiSesion.ESTADO.Equals(Estado_Usuario.Habilitado.ToString())) {
-                                huesped.RUT_CLIENTE = SesionCl.RUT_CLIENTE;
-                            }
-                            else {
-                                huesped.RUT_CLIENTE = int.Parse(ddlEmpresa.SelectedValue);
-                            }
-
-
+                            huesped.RUT_CLIENTE = SesionCl.RUT_CLIENTE;
+                            
                             huesped.APP_MATERNO_HUESPED = txtAMaterno.Text;
                             huesped.APP_PATERNO_HUESPED = txtAPaterno.Text;
                             huesped.PNOMBRE_HUESPED = txtPNombre.Text;
@@ -251,30 +187,18 @@ namespace Web.Cliente {
                             huesped.TELEFONO_HUESPED = telefono;
                             huesped.REGISTRADO = Registrado_Huesped.N.ToString();
 
+
                             if (!huesped.ExisteRut()) {
                                 if (huesped.Crear()) {
-                                    exito.Text = "El registro se ha realizado con exito";
+                                    exito.Text = "El registro ha se ha realizado con exito";
                                     alerta_exito.Visible = true;
                                     Limpiar();
-                                    if (MiSesion.TIPO_USUARIO.Equals(Tipo_Usuario.Administrador.ToString()) && MiSesion.ESTADO.Equals(Estado_Usuario.Habilitado.ToString())) {
-                                        pasajeros = HuespedCollection.ListaHuesped().Where(x => x.RUT_CLIENTE == int.Parse(ddlEmpresa.SelectedValue)).ToList<Huesped>();
-                                        if (pasajeros.Count != 0) {
-                                            btnVer.Enabled = true;
-                                            CargarGridView(pasajeros);
-                                        }
-                                        else {
-                                            btnVer.Enabled = false;
-                                        }
-                                    }
-                                    else {
-                                        pasajeros = HuespedCollection.ListaHuesped().Where(x => x.RUT_CLIENTE == SesionCl.RUT_CLIENTE).ToList<Huesped>();
-                                        if (pasajeros.Count != 0) {
-                                            btnVer.Enabled = true;
-                                            CargarGridView(pasajeros);
-                                        }
-                                        else {
-                                            btnVer.Enabled = false;
-                                        }
+                                    pasajeros = HuespedCollection.ListaHuesped().Where(x => x.RUT_CLIENTE == SesionCl.RUT_CLIENTE).ToList<Huesped>();
+                                    if (pasajeros.Count != 0) {
+                                        btnVer.Enabled = true;
+                                        CargarGridView(pasajeros);
+                                    }else {
+                                        btnVer.Enabled = false;
                                     }
                                 }
                                 else {
@@ -288,16 +212,164 @@ namespace Web.Cliente {
                             }
                         }
                         else {
-                            error.Text = "Verifique que ha ingresado el teléfono correctamente";
-                            alerta.Visible = true;
+                            if (int.TryParse(txtNumeroTelefono.Text,out telefono)) {
+                                Huesped huesped = new Huesped();
+
+                                huesped.RUT_HUESPED = int.Parse(txtRutPasajero.Text.Substring(0,txtRutPasajero.Text.Length - 2));
+                                huesped.DV_HUESPED = txtRutPasajero.Text.Substring(txtRutPasajero.Text.Length - 1);
+
+                                huesped.RUT_CLIENTE = SesionCl.RUT_CLIENTE;
+                                
+                                huesped.APP_MATERNO_HUESPED = txtAMaterno.Text;
+                                huesped.APP_PATERNO_HUESPED = txtAPaterno.Text;
+                                huesped.PNOMBRE_HUESPED = txtPNombre.Text;
+                                huesped.SNOMBRE_HUESPED = txtSNombre.Text;
+                                huesped.TELEFONO_HUESPED = telefono;
+                                huesped.REGISTRADO = Registrado_Huesped.N.ToString();
+
+                                if (!huesped.ExisteRut()) {
+                                    if (huesped.Crear()) {
+                                        exito.Text = "El registro se ha realizado con exito";
+                                        alerta_exito.Visible = true;
+                                        Limpiar();
+                                        pasajeros = HuespedCollection.ListaHuesped().Where(x => x.RUT_CLIENTE == SesionCl.RUT_CLIENTE).ToList<Huesped>();
+                                        if (pasajeros.Count != 0) {
+                                            btnVer.Enabled = true;
+                                            CargarGridView(pasajeros);
+                                        }
+                                        else {
+                                            btnVer.Enabled = false;
+                                        }
+                                    }
+                                    else {
+                                        error.Text = "El registro ha fallado";
+                                        alerta.Visible = true;
+                                    }
+                                }
+                                else {
+                                    error.Text = "El Rut ya existe";
+                                    alerta.Visible = true;
+                                }
+                            }
+                            else {
+                                error.Text = "Verifique que ha ingresado el teléfono correctamente";
+                                alerta.Visible = true;
+                            }
                         }
+                    }
+                    else {
+                        error.Text = "Verifique que ha ingresados todos los datos requeridos del Pasajero";
+                        alerta.Visible = true;
                     }
                 }
                 else {
-                    error.Text = "Verifique que ha ingresados todos los datos requeridos del Pasajero";
-                    alerta.Visible = true;
-                }
+                    if(ddlEmpresa.SelectedIndex != 0) {
+                        if (txtRutPasajero.Text != string.Empty && txtPNombre.Text != string.Empty && txtAPaterno.Text != string.Empty && txtAMaterno.Text != string.Empty) {
+                            int telefono = 0;
 
+                            if (txtNumeroTelefono.Text == string.Empty) {
+
+                                Huesped huesped = new Huesped();
+
+                                huesped.RUT_HUESPED = int.Parse(txtRutPasajero.Text.Substring(0,txtRutPasajero.Text.Length - 2));
+                                huesped.DV_HUESPED = txtRutPasajero.Text.Substring(txtRutPasajero.Text.Length - 1);
+
+                                huesped.RUT_CLIENTE = int.Parse(ddlEmpresa.SelectedValue);
+                                
+                                huesped.APP_MATERNO_HUESPED = txtAMaterno.Text;
+                                huesped.APP_PATERNO_HUESPED = txtAPaterno.Text;
+                                huesped.PNOMBRE_HUESPED = txtPNombre.Text;
+                                huesped.SNOMBRE_HUESPED = txtSNombre.Text;
+                                huesped.TELEFONO_HUESPED = telefono;
+                                huesped.REGISTRADO = Registrado_Huesped.N.ToString();
+
+
+                                if (!huesped.ExisteRut()) {
+                                    if (huesped.Crear()) {
+                                        exito.Text = "El registro ha se ha realizado con exito";
+                                        alerta_exito.Visible = true;
+                                        Limpiar();
+                                        pasajeros = HuespedCollection.ListaHuesped().Where(x => x.RUT_CLIENTE == int.Parse(ddlEmpresa.SelectedValue)).ToList<Huesped>();
+                                        if (pasajeros.Count != 0) {
+                                            btnVer.Enabled = true;
+                                            CargarGridView(pasajeros);
+                                        }
+                                        else {
+                                            btnVer.Enabled = false;
+                                        }
+                                    }
+                                    else {
+                                        error.Text = "El registro ha fallado";
+                                        alerta.Visible = true;
+                                    }
+                                }
+                                else {
+                                    error.Text = "El Rut ya existe";
+                                    alerta.Visible = true;
+                                }
+                            }
+                            else {
+                                if (int.TryParse(txtNumeroTelefono.Text,out telefono)) {
+                                    Huesped huesped = new Huesped();
+
+                                    huesped.RUT_HUESPED = int.Parse(txtRutPasajero.Text.Substring(0,txtRutPasajero.Text.Length - 2));
+                                    huesped.DV_HUESPED = txtRutPasajero.Text.Substring(txtRutPasajero.Text.Length - 1);
+
+                                    if (MiSesion.TIPO_USUARIO.Equals(Tipo_Usuario.Cliente.ToString()) && MiSesion.ESTADO.Equals(Estado_Usuario.Habilitado.ToString())) {
+                                        huesped.RUT_CLIENTE = SesionCl.RUT_CLIENTE;
+                                    }
+                                    else {
+                                        huesped.RUT_CLIENTE = int.Parse(ddlEmpresa.SelectedValue);
+                                    }
+
+
+                                    huesped.APP_MATERNO_HUESPED = txtAMaterno.Text;
+                                    huesped.APP_PATERNO_HUESPED = txtAPaterno.Text;
+                                    huesped.PNOMBRE_HUESPED = txtPNombre.Text;
+                                    huesped.SNOMBRE_HUESPED = txtSNombre.Text;
+                                    huesped.TELEFONO_HUESPED = telefono;
+                                    huesped.REGISTRADO = Registrado_Huesped.N.ToString();
+
+                                    if (!huesped.ExisteRut()) {
+                                        if (huesped.Crear()) {
+                                            exito.Text = "El registro se ha realizado con exito";
+                                            alerta_exito.Visible = true;
+                                            Limpiar();
+                                            pasajeros = HuespedCollection.ListaHuesped().Where(x => x.RUT_CLIENTE == int.Parse(ddlEmpresa.SelectedValue)).ToList<Huesped>();
+                                            if (pasajeros.Count != 0) {
+                                                btnVer.Enabled = true;
+                                                CargarGridView(pasajeros);
+                                            }
+                                            else {
+                                                btnVer.Enabled = false;
+                                            }
+                                        }
+                                        else {
+                                            error.Text = "El registro ha fallado";
+                                            alerta.Visible = true;
+                                        }
+                                    }
+                                    else {
+                                        error.Text = "El Rut ya existe";
+                                        alerta.Visible = true;
+                                    }
+                                }
+                                else {
+                                    error.Text = "Verifique que ha ingresado el teléfono correctamente";
+                                    alerta.Visible = true;
+                                }
+                            }
+                        }
+                        else {
+                            error.Text = "Verifique que ha ingresados todos los datos requeridos del Pasajero";
+                            alerta.Visible = true;
+                        }
+                    }
+                    else {
+                        error.Text = "Verifique que ha seleccionado una empresa valida";
+                        alerta.Visible = true;
+                    }
+                }
             }
             catch (Exception ex) {
                 error.Text = "Excepción: " + ex.Message;

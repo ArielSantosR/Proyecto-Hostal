@@ -101,37 +101,26 @@ namespace Web.Cliente {
                     ddlPais.DataBind();
                     ddlPais.Items.Insert(0,new ListItem("Seleccione Pais...","0"));
 
-                    ddlRegion.DataSource = coleccionRegion.Where(x => x.Id_Pais == int.Parse(ddlPais.SelectedValue));
-                    ddlRegion.DataTextField = "Nombre";
-                    ddlRegion.DataValueField = "Id_Region";
-                    ddlRegion.DataBind();
-                    ddlRegion.Items.Insert(0,new ListItem("Seleccione Comuna...","0"));
+                    ddlRegion.Items.Insert(0,new ListItem("Seleccione Región...","0"));
+                    ddlComuna.Items.Insert(0,new ListItem("Seleccione Comuna...","0"));
 
                     ddlGiro.DataSource = giros;
                     ddlGiro.DataTextField = "NOMBRE_GIRO";
                     ddlGiro.DataValueField = "ID_GIRO";
                     ddlGiro.DataBind();
-                    ddlEstado.Items.Insert(0,new ListItem("Seleccione Comuna...","0"));
+                    ddlGiro.Items.Insert(0,new ListItem("Seleccione Giro...","0"));
 
                     Comuna com = new Comuna();
-
-                    var listaC = coleccionComuna.Where(x => x.Id_Comuna == SesionCl.ID_COMUNA).ToList();
-                    com.Id_Comuna = listaC[0].Id_Comuna;
-                    com.Id_Region = listaC[0].Id_Region;
-                    com.Nombre = listaC[0].Nombre;
+                    com.Id_Comuna = SesionCl.ID_COMUNA;
+                    com.BuscarComuna();
 
                     Region reg = new Region();
-
-                    var listaR = coleccionRegion.Where(x => x.Id_Region == com.Id_Region).ToList();
-                    reg.Id_Pais = listaR[0].Id_Pais;
-                    reg.Id_Region = listaR[0].Id_Region;
-                    reg.Nombre = listaR[0].Nombre;
+                    reg.Id_Region = com.Id_Region;
+                    reg.BuscarRegion();
 
                     Pais pais = new Pais();
-
-                    var listaP = coleccionPais.Where(x => x.ID_PAIS == reg.Id_Pais).ToList();
-                    pais.ID_PAIS = listaP[0].ID_PAIS;
-                    pais.NOMBRE_PAIS = listaP[0].NOMBRE_PAIS;
+                    pais.ID_PAIS = reg.Id_Pais;
+                    pais.BuscarPais();
 
                     //Carga de datos actuales
                     txtRut.Text = SesionCl.RUT_CLIENTE.ToString() + "-" + SesionCl.DV_CLIENTE;
@@ -141,23 +130,20 @@ namespace Web.Cliente {
                             MiSesion.ESTADO.Equals(Estado_Usuario.Habilitado.ToString()))
                     {
                         txtNombre.Text = MiSesion.NOMBRE_USUARIO;
+                        ddlEstado.SelectedValue = MiSesion.ESTADO;
                     }
                     else
                     {
                         txtNombre.Text = SesionEdit.NOMBRE_USUARIO;
+                        ddlEstado.SelectedValue = SesionEdit.ESTADO;
                     }
 
                     txtTelefono.Text = SesionCl.TELEFONO_CLIENTE.ToString();
                     txtNombreC.Text = SesionCl.NOMBRE_CLIENTE;
                     ddlPais.SelectedValue = pais.ID_PAIS.ToString();
+                    FiltrarRegion();
                     ddlRegion.SelectedValue = reg.Id_Region.ToString();
-
-                    ddlComuna.DataSource = coleccionComuna.Where(x => x.Id_Region == int.Parse(ddlRegion.SelectedValue));
-                    ddlComuna.DataTextField = "Nombre";
-                    ddlComuna.DataValueField = "Id_Comuna";
-                    ddlComuna.DataBind();
-                    ddlComuna.Items.Insert(0,new ListItem("Selecione Comuna...","0"));
-
+                    FiltrarComuna();
                     ddlComuna.SelectedValue = com.Id_Comuna.ToString();
                     ddlGiro.SelectedValue = SesionCl.ID_GIRO.ToString();
                 }
@@ -290,19 +276,27 @@ namespace Web.Cliente {
         }
 
         protected void ddlPais_SelectedIndexChanged(object sender,EventArgs e) {
-            ddlRegion.DataSource = coleccionRegion.Where(x => x.Id_Pais == int.Parse(ddlPais.SelectedValue));
-            ddlRegion.DataTextField = "Nombre";
-            ddlRegion.DataValueField = "Id_Region";
-            ddlRegion.DataBind();
-            ddlRegion.Items.Insert(0,new ListItem("Seleccione Comuna...","0"));
+            FiltrarRegion();
         }
 
         protected void ddlRegion_SelectedIndexChanged(object sender,EventArgs e) {
+            FiltrarComuna();
+        }
+
+        private void FiltrarComuna() {
             ddlComuna.DataSource = coleccionComuna.Where(x => x.Id_Region == int.Parse(ddlRegion.SelectedValue));
             ddlComuna.DataTextField = "Nombre";
             ddlComuna.DataValueField = "Id_Comuna";
             ddlComuna.DataBind();
             ddlComuna.Items.Insert(0,new ListItem("Selecione Comuna...","0"));
+        }
+
+        private void FiltrarRegion() {
+            ddlRegion.DataSource = coleccionRegion.Where(x => x.Id_Pais == int.Parse(ddlPais.SelectedValue));
+            ddlRegion.DataTextField = "Nombre";
+            ddlRegion.DataValueField = "Id_Region";
+            ddlRegion.DataBind();
+            ddlRegion.Items.Insert(0,new ListItem("Seleccione Región...","0"));
         }
     }
 }
