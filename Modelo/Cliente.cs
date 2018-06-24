@@ -56,5 +56,26 @@ namespace Modelo
                 return false;
             }
         }
+
+        public bool BuscarCliente() {
+            ServicioCliente serv = new ServicioCliente();
+            CLIENTE datos = serv.BuscarCliente(this.RUT_CLIENTE);
+            if (datos != null) {
+                this.CORREO_CLIENTE = datos.CORREO_CLIENTE;
+                this.DIRECCION_CLIENTE = datos.DIRECCION_CLIENTE;
+                this.DV_CLIENTE = datos.DV_CLIENTE;
+                this.ID_COMUNA = datos.ID_COMUNA;
+                this.ID_USUARIO = datos.ID_USUARIO;
+                this.NOMBRE_CLIENTE = datos.NOMBRE_CLIENTE;
+                this.RUT_CLIENTE = datos.RUT_CLIENTE;
+                this.TELEFONO_CLIENTE = datos.TELEFONO_CLIENTE;
+                this.ID_GIRO = datos.ID_GIRO;
+
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
     }
 }

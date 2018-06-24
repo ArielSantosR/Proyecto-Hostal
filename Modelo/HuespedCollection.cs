@@ -34,5 +34,10 @@ namespace Modelo
             }
             return list;
         }
+
+        public static List<Huesped> ListaHuesped(int rUT_CLIENTE) {
+            ServicioHuesped serv = new ServicioHuesped();
+            return GenerarLista(serv.ListarHuesped(rUT_CLIENTE));
+        }
     }
 }

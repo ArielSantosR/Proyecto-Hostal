@@ -18,6 +18,16 @@ namespace Datos
             return true;
         }
 
+        public PAIS BuscarPais(short iD_PAIS) {
+            PAIS p = ent.PAIS.FirstOrDefault(x => x.ID_PAIS == iD_PAIS);
+            return p;
+        }
+
+        public REGION BuscarRegion(short id_Region) {
+            REGION r = ent.REGION.FirstOrDefault(x => x.ID_REGION == id_Region);
+            return r;
+        }
+
         public bool ExisteRut(CLIENTE cliente)
         {
             CLIENTE c = ent.CLIENTE.FirstOrDefault(objeto =>
@@ -30,6 +40,11 @@ namespace Datos
             {
                 return false;
             }
+        }
+
+        public COMUNA BuscarComuna(short id_Comuna) {
+            COMUNA c = ent.COMUNA.FirstOrDefault(x => x.ID_COMUNA == id_Comuna);
+            return c;
         }
 
         public List<CLIENTE> ListarCliente()
@@ -64,6 +79,11 @@ namespace Datos
             else {
                 return false;
             }
+        }
+
+        public CLIENTE BuscarCliente(int rUT_CLIENTE) {
+            CLIENTE c = ent.CLIENTE.FirstOrDefault(x => x.RUT_CLIENTE == rUT_CLIENTE);
+            return c;
         }
 
         public List<GIRO> ListarGiro() {

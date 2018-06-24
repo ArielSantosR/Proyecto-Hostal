@@ -26,6 +26,11 @@ namespace Datos
             return lista;
         }
 
+        public PENSION BuscarPension(short iD_PENSION) {
+            PENSION p = ent.PENSION.FirstOrDefault(x => x.ID_PENSION == iD_PENSION);
+            return p;
+        }
+
         public bool AgregarDetallePlatos(DETALLE_PLATOS d)
         {
             ent.DETALLE_PLATOS.Add(d);

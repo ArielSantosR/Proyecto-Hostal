@@ -200,6 +200,7 @@ namespace Web.Administrador
                         cli.NOMBRE_CLIENTE = item.NOMBRE_CLIENTE;
                         cli.RUT_CLIENTE = item.RUT_CLIENTE;
                         cli.TELEFONO_CLIENTE = item.TELEFONO_CLIENTE;
+                        cli.ID_GIRO = item.ID_GIRO;
                     }
                     SesionCl = cli;
                     Response.Redirect("../Cliente/WebEditarCliente.aspx");

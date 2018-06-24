@@ -58,6 +58,14 @@ namespace Datos
                 return true;
             }
         }
+
+        public List<HUESPED> ListarHuesped(int rUT_CLIENTE) {
+            var lista = (from consulta in ent.HUESPED
+                         where consulta.RUT_CLIENTE == rUT_CLIENTE
+                         select consulta).ToList();
+            return lista;
+        }
+
         public List<HUESPED> ListarHuesped()
         {
             var lista = (from consulta in ent.HUESPED

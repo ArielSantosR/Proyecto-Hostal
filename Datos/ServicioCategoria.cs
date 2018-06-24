@@ -14,5 +14,10 @@ namespace Datos
         {
             return ent.CATEGORIA_HABITACION.ToList();
         }
+
+        public CATEGORIA_HABITACION BuscarCategoria(short iD_CATEGORIA_HABITACION) {
+            CATEGORIA_HABITACION c = ent.CATEGORIA_HABITACION.FirstOrDefault(x => x.ID_CATEGORIA_HABITACION == iD_CATEGORIA_HABITACION);
+            return c;
+        }
     }
 }
