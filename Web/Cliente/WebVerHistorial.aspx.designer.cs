@@ -49,15 +49,6 @@ namespace Web.Cliente {
         protected global::System.Web.UI.WebControls.Literal exito;
         
         /// <summary>
-        /// Control gvOrden.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvOrden;
-        
-        /// <summary>
         /// Control gvOrdenPendiente.
         /// </summary>
         /// <remarks>
@@ -65,6 +56,15 @@ namespace Web.Cliente {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gvOrdenPendiente;
+        
+        /// <summary>
+        /// Control gvOrden.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvOrden;
         
         /// <summary>
         /// Control gvDetalle.

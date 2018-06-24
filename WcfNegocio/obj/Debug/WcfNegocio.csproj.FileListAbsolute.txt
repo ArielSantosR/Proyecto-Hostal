@@ -45,6 +45,10 @@ C:\Users\Suzu\Documents\Proyecto-Hostal\WcfNegocio\bin\Debug\Modelo.pdb
 C:\Users\Suzu\Documents\Proyecto-Hostal\WcfNegocio\bin\Debug\EntityFramework.xml
 C:\Users\Suzu\Documents\Proyecto-Hostal\WcfNegocio\obj\Debug\WcfNegocio.dll
 C:\Users\Suzu\Documents\Proyecto-Hostal\WcfNegocio\obj\Debug\WcfNegocio.pdb
+C:\Users\Suzu\Documents\Proyecto-Hostal\WcfNegocio\bin\Debug\Datos.dll.config
+C:\Users\Suzu\Documents\Proyecto-Hostal\WcfNegocio\obj\Debug\WcfNegocio.csprojAssemblyReference.cache
+C:\Users\Suzu\Documents\Proyecto-Hostal\WcfNegocio\obj\Debug\WcfNegocio.csproj.CoreCompileInputs.cache
+C:\Users\Suzu\Documents\Proyecto-Hostal\WcfNegocio\obj\Debug\WcfNegocio.csproj.CopyComplete
 C:\Users\shogu\Documents\GitHub\Proyecto-Hostal\WcfNegocio\bin\Debug\WcfNegocio.dll.config
 C:\Users\shogu\Documents\GitHub\Proyecto-Hostal\WcfNegocio\bin\Debug\WcfNegocio.dll
 C:\Users\shogu\Documents\GitHub\Proyecto-Hostal\WcfNegocio\bin\Debug\WcfNegocio.pdb
@@ -57,7 +61,3 @@ C:\Users\shogu\Documents\GitHub\Proyecto-Hostal\WcfNegocio\bin\Debug\EntityFrame
 C:\Users\shogu\Documents\GitHub\Proyecto-Hostal\WcfNegocio\obj\Debug\WcfNegocio.csprojResolveAssemblyReference.cache
 C:\Users\shogu\Documents\GitHub\Proyecto-Hostal\WcfNegocio\obj\Debug\WcfNegocio.dll
 C:\Users\shogu\Documents\GitHub\Proyecto-Hostal\WcfNegocio\obj\Debug\WcfNegocio.pdb
-C:\Users\Suzu\Documents\Proyecto-Hostal\WcfNegocio\bin\Debug\Datos.dll.config
-C:\Users\Suzu\Documents\Proyecto-Hostal\WcfNegocio\obj\Debug\WcfNegocio.csprojAssemblyReference.cache
-C:\Users\Suzu\Documents\Proyecto-Hostal\WcfNegocio\obj\Debug\WcfNegocio.csproj.CoreCompileInputs.cache
-C:\Users\Suzu\Documents\Proyecto-Hostal\WcfNegocio\obj\Debug\WcfNegocio.csproj.CopyComplete

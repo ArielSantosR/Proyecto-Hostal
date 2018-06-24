@@ -33,6 +33,10 @@ C:\Users\Suzu\Documents\Proyecto-Hostal\Modelo\bin\Debug\Datos.pdb
 C:\Users\Suzu\Documents\Proyecto-Hostal\Modelo\bin\Debug\EntityFramework.xml
 C:\Users\Suzu\Documents\Proyecto-Hostal\Modelo\obj\Debug\Modelo.dll
 C:\Users\Suzu\Documents\Proyecto-Hostal\Modelo\obj\Debug\Modelo.pdb
+C:\Users\Suzu\Documents\Proyecto-Hostal\Modelo\bin\Debug\Datos.dll.config
+C:\Users\Suzu\Documents\Proyecto-Hostal\Modelo\obj\Debug\Modelo.csprojAssemblyReference.cache
+C:\Users\Suzu\Documents\Proyecto-Hostal\Modelo\obj\Debug\Modelo.csproj.CoreCompileInputs.cache
+C:\Users\Suzu\Documents\Proyecto-Hostal\Modelo\obj\Debug\Modelo.csproj.CopyComplete
 C:\Users\shogu\Documents\GitHub\Proyecto-Hostal\Modelo\bin\Debug\Modelo.dll
 C:\Users\shogu\Documents\GitHub\Proyecto-Hostal\Modelo\bin\Debug\Modelo.pdb
 C:\Users\shogu\Documents\GitHub\Proyecto-Hostal\Modelo\bin\Debug\Datos.dll
@@ -42,7 +46,3 @@ C:\Users\shogu\Documents\GitHub\Proyecto-Hostal\Modelo\bin\Debug\EntityFramework
 C:\Users\shogu\Documents\GitHub\Proyecto-Hostal\Modelo\obj\Debug\Modelo.csprojResolveAssemblyReference.cache
 C:\Users\shogu\Documents\GitHub\Proyecto-Hostal\Modelo\obj\Debug\Modelo.dll
 C:\Users\shogu\Documents\GitHub\Proyecto-Hostal\Modelo\obj\Debug\Modelo.pdb
-C:\Users\Suzu\Documents\Proyecto-Hostal\Modelo\bin\Debug\Datos.dll.config
-C:\Users\Suzu\Documents\Proyecto-Hostal\Modelo\obj\Debug\Modelo.csprojAssemblyReference.cache
-C:\Users\Suzu\Documents\Proyecto-Hostal\Modelo\obj\Debug\Modelo.csproj.CoreCompileInputs.cache
-C:\Users\Suzu\Documents\Proyecto-Hostal\Modelo\obj\Debug\Modelo.csproj.CopyComplete

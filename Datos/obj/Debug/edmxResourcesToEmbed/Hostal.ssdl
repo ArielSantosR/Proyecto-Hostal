@@ -91,6 +91,8 @@
     <Property Name="ID_CATEGORIA_HABITACION" Type="number" Precision="3" Scale="0" Nullable="false" />
     <Property Name="ID_PENSION" Type="number" Precision="5" Scale="0" Nullable="false" />
     <Property Name="ESTADO" Type="varchar2" MaxLength="15" />
+    <Property Name="VALOR_MINUTA" Type="number" Precision="6" Scale="0" Nullable="false" />
+    <Property Name="VALOR_HABITACION" Type="number" Precision="6" Scale="0" Nullable="false" />
   </EntityType>
   <EntityType Name="DETALLE_PEDIDO">
     <Key>
@@ -215,6 +217,7 @@
     <Property Name="RUT_CLIENTE" Type="number" Precision="8" Scale="0" />
     <Property Name="ESTADO_ORDEN" Type="varchar2" MaxLength="25" Nullable="false" />
     <Property Name="COMENTARIO" Type="varchar2" MaxLength="256" />
+    <Property Name="MONTO_TOTAL" Type="number" Precision="6" Scale="0" Nullable="false" />
   </EntityType>
   <EntityType Name="PAIS">
     <Key>
@@ -333,6 +336,91 @@
     <Property Name="PASSWORD" Type="varchar2" MaxLength="255" Nullable="false" />
     <Property Name="TIPO_USUARIO" Type="varchar2" MaxLength="25" Nullable="false" />
     <Property Name="ESTADO" Type="varchar2" MaxLength="15" Nullable="false" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'HOSTAL.V_CLIENTE_FRECUENTE' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="V_CLIENTE_FRECUENTE">
+    <Key>
+      <PropertyRef Name="NOMBRE_CLIENTE" />
+      <PropertyRef Name="GIRO" />
+      <PropertyRef Name="RUT" />
+    </Key>
+    <Property Name="RUT" Type="varchar2" MaxLength="42" Nullable="false" />
+    <Property Name="NOMBRE_CLIENTE" Type="varchar2" MaxLength="100" Nullable="false" />
+    <Property Name="GIRO" Type="varchar2" MaxLength="25" Nullable="false" />
+    <Property Name="CANTIDAD_ORDENES" Type="number" Precision="38" Scale="0" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'HOSTAL.V_CLIENTE_ORDENES' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="V_CLIENTE_ORDENES">
+    <Key>
+      <PropertyRef Name="NOMBRE_CLIENTE" />
+      <PropertyRef Name="GIRO" />
+      <PropertyRef Name="RUT" />
+    </Key>
+    <Property Name="RUT" Type="varchar2" MaxLength="42" Nullable="false" />
+    <Property Name="NOMBRE_CLIENTE" Type="varchar2" MaxLength="100" Nullable="false" />
+    <Property Name="GIRO" Type="varchar2" MaxLength="25" Nullable="false" />
+    <Property Name="ORDENES_PENDIENTES" Type="number" Precision="38" Scale="0" />
+    <Property Name="ORDENES_ASIGNADAS" Type="number" Precision="38" Scale="0" />
+    <Property Name="ORDENES_ACEPTADAS" Type="number" Precision="38" Scale="0" />
+    <Property Name="ORDENES_RECHAZADAS" Type="number" Precision="38" Scale="0" />
+    <Property Name="ORDENES_CANCELADAS" Type="number" Precision="38" Scale="0" />
+    <Property Name="CANTIDAD_ORDENES" Type="number" Precision="38" Scale="0" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'HOSTAL.V_CLIENTE_ORDENES_TOP_10' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="V_CLIENTE_ORDENES_TOP_10">
+    <Key>
+      <PropertyRef Name="NOMBRE_CLIENTE" />
+      <PropertyRef Name="GIRO" />
+      <PropertyRef Name="RUT" />
+    </Key>
+    <Property Name="RUT" Type="varchar2" MaxLength="42" Nullable="false" />
+    <Property Name="NOMBRE_CLIENTE" Type="varchar2" MaxLength="100" Nullable="false" />
+    <Property Name="GIRO" Type="varchar2" MaxLength="25" Nullable="false" />
+    <Property Name="ORDENES_PENDIENTES" Type="number" Precision="38" Scale="0" />
+    <Property Name="ORDENES_ASIGNADAS" Type="number" Precision="38" Scale="0" />
+    <Property Name="ORDENES_ACEPTADAS" Type="number" Precision="38" Scale="0" />
+    <Property Name="ORDENES_RECHAZADAS" Type="number" Precision="38" Scale="0" />
+    <Property Name="ORDENES_CANCELADAS" Type="number" Precision="38" Scale="0" />
+    <Property Name="CANTIDAD_ORDENES" Type="number" Precision="38" Scale="0" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'HOSTAL.V_DIAS_USOS' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="V_DIAS_USOS">
+    <Key>
+      <PropertyRef Name="NUMERO_HABITACION" />
+    </Key>
+    <Property Name="NUMERO_HABITACION" Type="number" Precision="5" Scale="0" Nullable="false" />
+    <Property Name="DIAS_USO" Type="number" Precision="38" Scale="0" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'HOSTAL.V_HABITACION_PREFERIDA' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="V_HABITACION_PREFERIDA">
+    <Key>
+      <PropertyRef Name="NUMERO_HABITACION" />
+    </Key>
+    <Property Name="NUMERO_HABITACION" Type="number" Precision="5" Scale="0" Nullable="false" />
+    <Property Name="NUMERO_USOS" Type="number" Precision="38" Scale="0" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'HOSTAL.V_HABITACION_USOS' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="V_HABITACION_USOS">
+    <Key>
+      <PropertyRef Name="NUMERO_HABITACION" />
+    </Key>
+    <Property Name="NUMERO_HABITACION" Type="number" Precision="5" Scale="0" Nullable="false" />
+    <Property Name="NUMERO_USOS" Type="number" Precision="38" Scale="0" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'HOSTAL.V_HABITACION_USOS_TOP_10' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="V_HABITACION_USOS_TOP_10">
+    <Key>
+      <PropertyRef Name="NUMERO_HABITACION" />
+    </Key>
+    <Property Name="NUMERO_HABITACION" Type="number" Precision="5" Scale="0" Nullable="false" />
+    <Property Name="NUMERO_USOS" Type="number" Precision="38" Scale="0" />
   </EntityType>
   <Association Name="FK_BOLETA_EMPLEADO">
     <End Role="EMPLEADO" Type="Self.EMPLEADO" Multiplicity="1" />
@@ -920,6 +1008,64 @@
     <EntitySet Name="TIPO_PLATO" EntityType="Self.TIPO_PLATO" Schema="HOSTAL" store:Type="Tables" />
     <EntitySet Name="TIPO_PROVEEDOR" EntityType="Self.TIPO_PROVEEDOR" Schema="HOSTAL" store:Type="Tables" />
     <EntitySet Name="USUARIO" EntityType="Self.USUARIO" Schema="HOSTAL" store:Type="Tables" />
+    <EntitySet Name="V_CLIENTE_FRECUENTE" EntityType="Self.V_CLIENTE_FRECUENTE" store:Type="Views" store:Schema="HOSTAL">
+      <DefiningQuery>SELECT 
+"V_CLIENTE_FRECUENTE"."RUT" AS "RUT", 
+"V_CLIENTE_FRECUENTE"."NOMBRE_CLIENTE" AS "NOMBRE_CLIENTE", 
+"V_CLIENTE_FRECUENTE"."GIRO" AS "GIRO", 
+"V_CLIENTE_FRECUENTE"."CANTIDAD_ORDENES" AS "CANTIDAD_ORDENES"
+FROM "HOSTAL"."V_CLIENTE_FRECUENTE" "V_CLIENTE_FRECUENTE"</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="V_CLIENTE_ORDENES" EntityType="Self.V_CLIENTE_ORDENES" store:Type="Views" store:Schema="HOSTAL">
+      <DefiningQuery>SELECT 
+"V_CLIENTE_ORDENES"."RUT" AS "RUT", 
+"V_CLIENTE_ORDENES"."NOMBRE_CLIENTE" AS "NOMBRE_CLIENTE", 
+"V_CLIENTE_ORDENES"."GIRO" AS "GIRO", 
+"V_CLIENTE_ORDENES"."ORDENES_PENDIENTES" AS "ORDENES_PENDIENTES", 
+"V_CLIENTE_ORDENES"."ORDENES_ASIGNADAS" AS "ORDENES_ASIGNADAS", 
+"V_CLIENTE_ORDENES"."ORDENES_ACEPTADAS" AS "ORDENES_ACEPTADAS", 
+"V_CLIENTE_ORDENES"."ORDENES_RECHAZADAS" AS "ORDENES_RECHAZADAS", 
+"V_CLIENTE_ORDENES"."ORDENES_CANCELADAS" AS "ORDENES_CANCELADAS", 
+"V_CLIENTE_ORDENES"."CANTIDAD_ORDENES" AS "CANTIDAD_ORDENES"
+FROM "HOSTAL"."V_CLIENTE_ORDENES" "V_CLIENTE_ORDENES"</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="V_CLIENTE_ORDENES_TOP_10" EntityType="Self.V_CLIENTE_ORDENES_TOP_10" store:Type="Views" store:Schema="HOSTAL">
+      <DefiningQuery>SELECT 
+"V_CLIENTE_ORDENES_TOP_10"."RUT" AS "RUT", 
+"V_CLIENTE_ORDENES_TOP_10"."NOMBRE_CLIENTE" AS "NOMBRE_CLIENTE", 
+"V_CLIENTE_ORDENES_TOP_10"."GIRO" AS "GIRO", 
+"V_CLIENTE_ORDENES_TOP_10"."ORDENES_PENDIENTES" AS "ORDENES_PENDIENTES", 
+"V_CLIENTE_ORDENES_TOP_10"."ORDENES_ASIGNADAS" AS "ORDENES_ASIGNADAS", 
+"V_CLIENTE_ORDENES_TOP_10"."ORDENES_ACEPTADAS" AS "ORDENES_ACEPTADAS", 
+"V_CLIENTE_ORDENES_TOP_10"."ORDENES_RECHAZADAS" AS "ORDENES_RECHAZADAS", 
+"V_CLIENTE_ORDENES_TOP_10"."ORDENES_CANCELADAS" AS "ORDENES_CANCELADAS", 
+"V_CLIENTE_ORDENES_TOP_10"."CANTIDAD_ORDENES" AS "CANTIDAD_ORDENES"
+FROM "HOSTAL"."V_CLIENTE_ORDENES_TOP_10" "V_CLIENTE_ORDENES_TOP_10"</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="V_DIAS_USOS" EntityType="Self.V_DIAS_USOS" store:Type="Views" store:Schema="HOSTAL">
+      <DefiningQuery>SELECT 
+"V_DIAS_USOS"."NUMERO_HABITACION" AS "NUMERO_HABITACION", 
+"V_DIAS_USOS"."DIAS_USO" AS "DIAS_USO"
+FROM "HOSTAL"."V_DIAS_USOS" "V_DIAS_USOS"</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="V_HABITACION_PREFERIDA" EntityType="Self.V_HABITACION_PREFERIDA" store:Type="Views" store:Schema="HOSTAL">
+      <DefiningQuery>SELECT 
+"V_HABITACION_PREFERIDA"."NUMERO_HABITACION" AS "NUMERO_HABITACION", 
+"V_HABITACION_PREFERIDA"."NUMERO_USOS" AS "NUMERO_USOS"
+FROM "HOSTAL"."V_HABITACION_PREFERIDA" "V_HABITACION_PREFERIDA"</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="V_HABITACION_USOS" EntityType="Self.V_HABITACION_USOS" store:Type="Views" store:Schema="HOSTAL">
+      <DefiningQuery>SELECT 
+"V_HABITACION_USOS"."NUMERO_HABITACION" AS "NUMERO_HABITACION", 
+"V_HABITACION_USOS"."NUMERO_USOS" AS "NUMERO_USOS"
+FROM "HOSTAL"."V_HABITACION_USOS" "V_HABITACION_USOS"</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="V_HABITACION_USOS_TOP_10" EntityType="Self.V_HABITACION_USOS_TOP_10" store:Type="Views" store:Schema="HOSTAL">
+      <DefiningQuery>SELECT 
+"V_HABITACION_USOS_TOP_10"."NUMERO_HABITACION" AS "NUMERO_HABITACION", 
+"V_HABITACION_USOS_TOP_10"."NUMERO_USOS" AS "NUMERO_USOS"
+FROM "HOSTAL"."V_HABITACION_USOS_TOP_10" "V_HABITACION_USOS_TOP_10"</DefiningQuery>
+    </EntitySet>
     <AssociationSet Name="FK_BOLETA_EMPLEADO" Association="Self.FK_BOLETA_EMPLEADO">
       <End Role="EMPLEADO" EntitySet="EMPLEADO" />
       <End Role="BOLETA" EntitySet="BOLETA" />

@@ -116,6 +116,8 @@
     <NavigationProperty Name="PENSION" Relationship="Self.FK_DETALLE_ORDEN_PENSION" FromRole="DETALLE_ORDEN" ToRole="PENSION" />
     <NavigationProperty Name="HUESPED" Relationship="Self.FK_HUESPED_DETALLE_ORDEN" FromRole="DETALLE_ORDEN" ToRole="HUESPED" />
     <NavigationProperty Name="ORDEN_COMPRA" Relationship="Self.FK_ORDEN_DETALLE_ORDEN" FromRole="DETALLE_ORDEN" ToRole="ORDEN_COMPRA" />
+    <Property Name="VALOR_MINUTA" Type="Int32" Nullable="false" />
+    <Property Name="VALOR_HABITACION" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="DETALLE_PEDIDO">
     <Key>
@@ -272,6 +274,7 @@
     <NavigationProperty Name="DETALLE_ORDEN" Relationship="Self.FK_ORDEN_DETALLE_ORDEN" FromRole="ORDEN_COMPRA" ToRole="DETALLE_ORDEN" />
     <NavigationProperty Name="EMPLEADO" Relationship="Self.FK_ORDEN_COMPRA_EMPLEADO" FromRole="ORDEN_COMPRA" ToRole="EMPLEADO" />
     <NavigationProperty Name="NOTIFICACION" Relationship="Self.FK_NOTIFICACION_ORDEN" FromRole="ORDEN_COMPRA" ToRole="NOTIFICACION" />
+    <Property Name="MONTO_TOTAL" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="PAIS">
     <Key>
@@ -1196,5 +1199,83 @@
       <End Role="PROVEEDOR" EntitySet="PROVEEDOR" />
       <End Role="RECEPCION" EntitySet="RECEPCION" />
     </AssociationSet>
+    <EntitySet Name="V_CLIENTE_FRECUENTE" EntityType="Model.V_CLIENTE_FRECUENTE" />
+    <EntitySet Name="V_CLIENTE_ORDENES" EntityType="Model.V_CLIENTE_ORDENES" />
+    <EntitySet Name="V_CLIENTE_ORDENES_TOP_10" EntityType="Model.V_CLIENTE_ORDENES_TOP_10" />
+    <EntitySet Name="V_DIAS_USOS" EntityType="Model.V_DIAS_USOS" />
+    <EntitySet Name="V_HABITACION_PREFERIDA" EntityType="Model.V_HABITACION_PREFERIDA" />
+    <EntitySet Name="V_HABITACION_USOS" EntityType="Model.V_HABITACION_USOS" />
+    <EntitySet Name="V_HABITACION_USOS_TOP_10" EntityType="Model.V_HABITACION_USOS_TOP_10" />
   </EntityContainer>
+  <EntityType Name="V_CLIENTE_FRECUENTE">
+    <Key>
+      <PropertyRef Name="NOMBRE_CLIENTE" />
+      <PropertyRef Name="GIRO" />
+      <PropertyRef Name="RUT" />
+    </Key>
+    <Property Name="RUT" Type="String" MaxLength="42" FixedLength="false" Unicode="false" ConcurrencyMode="None" Nullable="false" />
+    <Property Name="NOMBRE_CLIENTE" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="GIRO" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="CANTIDAD_ORDENES" Type="Decimal" Precision="38" Scale="0" />
+  </EntityType>
+  <EntityType Name="V_CLIENTE_ORDENES">
+    <Key>
+      <PropertyRef Name="NOMBRE_CLIENTE" />
+      <PropertyRef Name="GIRO" />
+      <PropertyRef Name="RUT" />
+    </Key>
+    <Property Name="RUT" Type="String" MaxLength="42" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="NOMBRE_CLIENTE" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="GIRO" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="ORDENES_PENDIENTES" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="ORDENES_ASIGNADAS" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="ORDENES_ACEPTADAS" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="ORDENES_RECHAZADAS" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="ORDENES_CANCELADAS" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="CANTIDAD_ORDENES" Type="Decimal" Precision="38" Scale="0" />
+  </EntityType>
+  <EntityType Name="V_CLIENTE_ORDENES_TOP_10">
+    <Key>
+      <PropertyRef Name="NOMBRE_CLIENTE" />
+      <PropertyRef Name="GIRO" />
+      <PropertyRef Name="RUT" />
+    </Key>
+    <Property Name="RUT" Type="String" MaxLength="42" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="NOMBRE_CLIENTE" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="GIRO" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="ORDENES_PENDIENTES" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="ORDENES_ASIGNADAS" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="ORDENES_ACEPTADAS" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="ORDENES_RECHAZADAS" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="ORDENES_CANCELADAS" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="CANTIDAD_ORDENES" Type="Decimal" Precision="38" Scale="0" />
+  </EntityType>
+  <EntityType Name="V_DIAS_USOS">
+    <Key>
+      <PropertyRef Name="NUMERO_HABITACION" />
+    </Key>
+    <Property Name="NUMERO_HABITACION" Type="Int16" Nullable="false" />
+    <Property Name="DIAS_USO" Type="Decimal" Precision="38" Scale="0" />
+  </EntityType>
+  <EntityType Name="V_HABITACION_PREFERIDA">
+    <Key>
+      <PropertyRef Name="NUMERO_HABITACION" />
+    </Key>
+    <Property Name="NUMERO_HABITACION" Type="Int16" Nullable="false" />
+    <Property Name="NUMERO_USOS" Type="Decimal" Precision="38" Scale="0" />
+  </EntityType>
+  <EntityType Name="V_HABITACION_USOS">
+    <Key>
+      <PropertyRef Name="NUMERO_HABITACION" />
+    </Key>
+    <Property Name="NUMERO_HABITACION" Type="Int16" Nullable="false" />
+    <Property Name="NUMERO_USOS" Type="Decimal" Precision="38" Scale="0" />
+  </EntityType>
+  <EntityType Name="V_HABITACION_USOS_TOP_10">
+    <Key>
+      <PropertyRef Name="NUMERO_HABITACION" />
+    </Key>
+    <Property Name="NUMERO_HABITACION" Type="Int16" Nullable="false" />
+    <Property Name="NUMERO_USOS" Type="Decimal" Precision="38" Scale="0" />
+  </EntityType>
 </Schema>
