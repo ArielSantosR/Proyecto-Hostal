@@ -43,6 +43,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AjaxControlToolkit, Version=18.1.0.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
+      <HintPath>..\packages\AjaxControlToolkit.18.1.0\lib\net40\AjaxControlToolkit.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="itextsharp, Version=5.5.13.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
       <HintPath>..\packages\iTextSharp.5.5.13\lib\itextsharp.dll</HintPath>
       <Private>True</Private>
@@ -136,6 +140,7 @@
     <Content Include="Cliente\WebVerHistorial.aspx" />
     <Content Include="Empleado\WebAsignacion.aspx" />
     <Content Include="Empleado\WebAsignarHabitacion.aspx" />
+    <Content Include="Empleado\WebCrearBoleta.aspx" />
     <Content Include="Empleado\WebCrearDetalle.aspx" />
     <Content Include="Empleado\WebCrearFactura.aspx" />
     <Content Include="Empleado\WebCrearMinuta.aspx" />
@@ -148,8 +153,10 @@
     <Content Include="Empleado\WebNotificacion.aspx" />
     <Content Include="Empleado\WebRecibirPedido.aspx" />
     <Content Include="Empleado\WebReservasPendientes.aspx" />
+    <Content Include="Empleado\WebVerBoletas.aspx" />
     <Content Include="Empleado\WebVerFacturas.aspx" />
     <Content Include="Empleado\WebVerMinuta.aspx" />
+    <Content Include="Empleado\WebVerOrdenesFacturar.aspx" />
     <Content Include="Empleado\WebVerProductos.aspx" />
     <Content Include="Hostal\WebContacto.aspx" />
     <Content Include="Hostal\WebFaqs.aspx" />
@@ -479,6 +486,13 @@
     <Compile Include="Empleado\WebAsignarHabitacion.aspx.designer.cs">
       <DependentUpon>WebAsignarHabitacion.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Empleado\WebCrearBoleta.aspx.cs">
+      <DependentUpon>WebCrearBoleta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Empleado\WebCrearBoleta.aspx.designer.cs">
+      <DependentUpon>WebCrearBoleta.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Empleado\WebCrearDetalle.aspx.cs">
       <DependentUpon>WebCrearDetalle.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -563,6 +577,13 @@
     <Compile Include="Empleado\WebReservasPendientes.aspx.designer.cs">
       <DependentUpon>WebReservasPendientes.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Empleado\WebVerBoletas.aspx.cs">
+      <DependentUpon>WebVerBoletas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Empleado\WebVerBoletas.aspx.designer.cs">
+      <DependentUpon>WebVerBoletas.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Empleado\WebVerFacturas.aspx.cs">
       <DependentUpon>WebVerFacturas.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -576,6 +597,13 @@
     </Compile>
     <Compile Include="Empleado\WebVerMinuta.aspx.designer.cs">
       <DependentUpon>WebVerMinuta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Empleado\WebVerOrdenesFacturar.aspx.cs">
+      <DependentUpon>WebVerOrdenesFacturar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Empleado\WebVerOrdenesFacturar.aspx.designer.cs">
+      <DependentUpon>WebVerOrdenesFacturar.aspx</DependentUpon>
     </Compile>
     <Compile Include="Empleado\WebVerProductos.aspx.cs">
       <DependentUpon>WebVerProductos.aspx</DependentUpon>

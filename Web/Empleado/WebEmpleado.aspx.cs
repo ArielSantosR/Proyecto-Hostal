@@ -118,5 +118,17 @@ namespace Web
         {
             Response.Redirect("WebHistorialPedidos.aspx");
         }
+
+        protected void btnOrdenesFacturar_Click(object sender,EventArgs e) {
+            Response.Redirect("WebVerOrdenesFacturar.aspx");
+        }
+
+        protected void btnCrearBoletas_Click(object sender,EventArgs e) {
+            Response.Redirect("WebCrearBoleta.aspx");
+        }
+
+        protected void btnVerBoletas_Click(object sender,EventArgs e) {
+            Response.Redirect("WebVerBoletas.aspx");
+        }
     }
 }

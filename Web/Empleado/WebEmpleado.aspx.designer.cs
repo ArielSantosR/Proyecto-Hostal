@@ -67,6 +67,15 @@ namespace Web {
         protected global::System.Web.UI.WebControls.Button btnHistorial;
         
         /// <summary>
+        /// Control btnOrdenesFacturar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnOrdenesFacturar;
+        
+        /// <summary>
         /// Control btnCrearFactura.
         /// </summary>
         /// <remarks>
@@ -83,5 +92,23 @@ namespace Web {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnVerFacturas;
+        
+        /// <summary>
+        /// Control btnCrearBoletas.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCrearBoletas;
+        
+        /// <summary>
+        /// Control btnVerBoletas.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnVerBoletas;
     }
 }
