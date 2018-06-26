@@ -1,6 +1,6 @@
-﻿using iTextSharp.text;
-using iTextSharp.text.html.simpleparser;
-using iTextSharp.text.pdf;
+﻿//using iTextSharp.text;
+//using iTextSharp.text.html.simpleparser;
+//using iTextSharp.text.pdf;
 using Modelo;
 using Modelo.Modelo_Vistas;
 using System;
@@ -323,6 +323,7 @@ namespace Web.Administrador {
 
         protected void btnPdf_Click(object sender,EventArgs e) {
             try {
+                /*
                 PdfPTable pdfTable = new PdfPTable(gvDetalle.HeaderRow.Cells.Count);
                 foreach (TableCell cell in gvDetalle.HeaderRow.Cells) {
                     Font font = new Font();
@@ -356,6 +357,7 @@ namespace Web.Administrador {
                 Response.Write(pdfDoc);
                 Response.Flush();
                 Response.End();
+                */
             }
             catch (Exception ex) {
                 error.Text = "Exception:" + ex.Message;

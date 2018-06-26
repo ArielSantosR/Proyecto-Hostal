@@ -136,6 +136,7 @@
     <Content Include="Cliente\WebVerHistorial.aspx" />
     <Content Include="Empleado\WebAsignacion.aspx" />
     <Content Include="Empleado\WebAsignarHabitacion.aspx" />
+    <Content Include="Empleado\WebClientesAsignados.aspx" />
     <Content Include="Empleado\WebCrearDetalle.aspx" />
     <Content Include="Empleado\WebCrearFactura.aspx" />
     <Content Include="Empleado\WebCrearMinuta.aspx" />
@@ -478,6 +479,13 @@
     </Compile>
     <Compile Include="Empleado\WebAsignarHabitacion.aspx.designer.cs">
       <DependentUpon>WebAsignarHabitacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Empleado\WebClientesAsignados.aspx.cs">
+      <DependentUpon>WebClientesAsignados.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Empleado\WebClientesAsignados.aspx.designer.cs">
+      <DependentUpon>WebClientesAsignados.aspx</DependentUpon>
     </Compile>
     <Compile Include="Empleado\WebCrearDetalle.aspx.cs">
       <DependentUpon>WebCrearDetalle.aspx</DependentUpon>

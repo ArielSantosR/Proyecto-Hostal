@@ -118,5 +118,10 @@ namespace Web
         {
             Response.Redirect("WebHistorialPedidos.aspx");
         }
+
+        protected void btnInventario_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("../Empleado/WebInventario.aspx");
+        }
     }
 }

@@ -53,6 +53,7 @@
             <a class="dropdown-item" href="../Empleado/WebCrearPedido.aspx">Crear Pedido</a>
             <a class="dropdown-item" href="../Empleado/WebRecibirPedido.aspx">Recibir Pedido</a>
             <a class="dropdown-item" href="../Empleado/WebHistorialPedidos.aspx">Historial Pedidos</a>
+            <a class="dropdown-item" href="../Empleado/WebInventario.aspx">Inventario</a>
         </div>
       </li>
 

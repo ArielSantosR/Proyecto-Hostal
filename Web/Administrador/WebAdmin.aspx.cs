@@ -183,19 +183,21 @@ namespace Web
         protected void btnHistorialPedidos_Click(object sender, EventArgs e)
         {
             Response.Redirect("../Empleado/WebHistorialPedidos.aspx");
-
         }
 
         protected void btnReservPendien_Click(object sender, EventArgs e)
         {
             Response.Redirect("../Empleado/WebReservasPendientes.aspx");
-
         }
 
         protected void btnAsignarHabitacion_Click(object sender, EventArgs e)
         {
             Response.Redirect("../Empleado/WebAsignarHabitacion.aspx");
+        }
 
+        protected void btnInventario_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("../Empleado/WebInventario.aspx");
         }
     }
 }

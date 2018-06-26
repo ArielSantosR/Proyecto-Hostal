@@ -51,7 +51,7 @@
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                     <br />
-                                    <a href="WebRegistro.aspx" style="color: #FFFFFF; text-align: center" class="col-sm-12 control-label">¿Aún no tienes cuenta? Regístrate Aquí</a>
+                                        <center><a href="WebRegistro.aspx" style="color: #FFFFFF; text-align: center" class="col-sm-12 control-label">¿Aún no tienes cuenta? Regístrate Aquí</a></center>
                                 </div>
                             </div>
                         </div>

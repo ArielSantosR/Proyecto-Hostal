@@ -56,15 +56,17 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown3">
                             <a class="dropdown-item" href="../Empleado/WebEmpleado.aspx">Inicio Empleado</a>
+                            <a class="dropdown-item" href="../Empleado/WebReservasPendientes.aspx">Reservas Pendientes</a>
                             <a class="dropdown-item" href="../Empleado/WebAsignarHabitacion.aspx">Asignar Habitación</a>
+                            <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="../Empleado/WebCrearMinuta.aspx">Crear Minuta</a>
                             <a class="dropdown-item" href="../Empleado/WebVerMinuta.aspx">Ver Minutas</a>
-                            <a class="dropdown-item" href="../Empleado/WebReservasPendientes.aspx">Reservas Pendientes</a>
-
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="../Empleado/WebCrearPedido.aspx">Crear Pedido</a>
                             <a class="dropdown-item" href="../Empleado/WebRecibirPedido.aspx">Recibir Pedido</a>
                             <a class="dropdown-item" href="../Empleado/WebHistorialPedidos.aspx">Historial Pedidos</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="../Empleado/WebInventario.aspx">Inventario</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="../Empleado/WebCrearFactura.aspx">Crear Factura</a>
                             <a class="dropdown-item" href="../Empleado/WebVerFacturas.aspx">Ver Facturas</a>

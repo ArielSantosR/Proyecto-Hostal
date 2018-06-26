@@ -109,8 +109,8 @@
                 </ContentTemplate>
             </asp:UpdatePanel>
           <div class="row"> 
-                  <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                      <br/> <asp:Button ID="btnRegistrar" runat="server" Text="Editar"  CssClass="btn btn-primary btn-lg btn-block login-button" OnClick="btnRegistrar_Click" />
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                      <br/> <asp:Button ID="btnRegistrar" runat="server" Text="Editar"  CssClass="btn btn-success btn-lg btn-block login-button" OnClick="btnRegistrar_Click" />
                   </div>
                   
                 </div>   

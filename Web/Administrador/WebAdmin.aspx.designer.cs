@@ -58,6 +58,24 @@ namespace Web {
         protected global::System.Web.UI.WebControls.Button btnEmpleado;
         
         /// <summary>
+        /// Control btnReservPendien.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnReservPendien;
+        
+        /// <summary>
+        /// Control btnAsignarHabitacion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAsignarHabitacion;
+        
+        /// <summary>
         /// Control btnVerPedido.
         /// </summary>
         /// <remarks>
@@ -94,22 +112,13 @@ namespace Web {
         protected global::System.Web.UI.WebControls.Button btnHistorialPedidos;
         
         /// <summary>
-        /// Control btnReservPendien.
+        /// Control btnInventario.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnReservPendien;
-        
-        /// <summary>
-        /// Control btnAsignarHabitacion.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAsignarHabitacion;
+        protected global::System.Web.UI.WebControls.Button btnInventario;
         
         /// <summary>
         /// Control btnCrearHabitacion.

@@ -36,6 +36,7 @@
                      <asp:button runat="server" text="Crear Pedido" ID="btnCrearPedido" CssClass="btn btn-primary btn-lg btn-block login-button"  style="font-size: 15px" OnClick="btnCrearPedido_Click" />
                      <asp:button runat="server" text="Recepcionar Pedido" ID="btnRecepcionarPedido" CssClass="btn btn-primary btn-lg btn-block login-button" style="font-size: 15px" OnClick="btnRecepcionarPedido_Click" />
                      <asp:button runat="server" text="Historial de Pedidos" ID="btnHistorial" cssClass="btn btn-primary btn-lg btn-block login-button" style="font-size: 15px" OnClick="btnHistorial_Click"   />
+                     <asp:button runat="server" text="Inventario" ID="btnInventario" cssClass="btn btn-primary btn-lg btn-block login-button" style="font-size: 15px" OnClick="btnHistorial_Click"   />
                     </div>
                   </div>
 
