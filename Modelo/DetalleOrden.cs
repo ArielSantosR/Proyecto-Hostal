@@ -15,5 +15,8 @@ namespace Modelo
         public short ID_CATEGORIA_HABITACION { get; set; }
         public short ID_PENSION { get; set; }
         public string ESTADO { get; set; }
+        public int VALOR_MINUTA { get; set; }
+        public int VALOR_HABITACION { get; set; }
+        public int TIPO_HABITACION { get; set; }
     }
 }

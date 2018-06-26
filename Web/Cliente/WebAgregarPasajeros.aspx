@@ -30,7 +30,7 @@
                                 <label for="country" class="col-sm-12 control-label">Empresa</label>
                                 <div class="col-sm-12">
                                     <div class="input-group">
-                                        <span class="input-group-addon"><i class="fas fa-utensils" aria-hidden="true"></i></span>
+                                        <span class="input-group-text"><i class="fa fa-user fa" aria-hidden="true"></i></span>
                                         <asp:DropDownList ID="ddlEmpresa" CssClass="form-control" runat="server" AutoPostBack="True"></asp:DropDownList>
                                     </div>
                                 </div>

@@ -322,9 +322,9 @@ namespace Web.Empleado
                         //2- Agregando el detalle de habitación 
                         DetalleHabitacion detalleHabitacion = new DetalleHabitacion();
                         //Esta linea consulta si tiene un numero asignado, en caso contrario no hara nada.
-                        if (MiSesionOrden.RUT_CLIENTE.HasValue)
+                        if (MiSesionOrden.RUT_CLIENTE != 0)
                         {
-                            detalleHabitacion.RUT_CLIENTE = MiSesionOrden.RUT_CLIENTE.Value;
+                            detalleHabitacion.RUT_CLIENTE = MiSesionOrden.RUT_CLIENTE;
                             detalleHabitacion.NUMERO_HABITACION = short.Parse(ddlHabitacion.SelectedValue);
                             detalleHabitacion.RUT_HUESPED = MiSesionDetalleO.RUT_HUESPED;
                             detalleHabitacion.FECHA_LLEGADA = MiSesionOrden.FECHA_LLEGADA;
@@ -478,9 +478,9 @@ namespace Web.Empleado
                         //2- Agregando el detalle de habitación 
                         DetalleHabitacion detalleHabitacion = new DetalleHabitacion();
                         //Esta linea consulta si tiene un numero asignado, en caso contrario no hara nada.
-                        if (MiSesionOrden.RUT_CLIENTE.HasValue)
+                        if (MiSesionOrden.RUT_CLIENTE != 0)
                         {
-                            detalleHabitacion.RUT_CLIENTE = MiSesionOrden.RUT_CLIENTE.Value;
+                            detalleHabitacion.RUT_CLIENTE = MiSesionOrden.RUT_CLIENTE;
 
                             XmlSerializer sr3 = new XmlSerializer(typeof(Modelo.DetalleHabitacion));
                             StringWriter writer3 = new StringWriter();

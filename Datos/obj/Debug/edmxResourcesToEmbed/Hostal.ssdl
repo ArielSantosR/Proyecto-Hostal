@@ -93,6 +93,7 @@
     <Property Name="ESTADO" Type="varchar2" MaxLength="15" />
     <Property Name="VALOR_MINUTA" Type="number" Precision="6" Scale="0" Nullable="false" />
     <Property Name="VALOR_HABITACION" Type="number" Precision="6" Scale="0" Nullable="false" />
+    <Property Name="ID_TIPO_HABITACION" Type="number" Precision="5" Scale="0" Nullable="false" />
   </EntityType>
   <EntityType Name="DETALLE_PEDIDO">
     <Key>
@@ -214,7 +215,7 @@
     <Property Name="FECHA_LLEGADA" Type="date" Nullable="false" />
     <Property Name="FECHA_SALIDA" Type="date" Nullable="false" />
     <Property Name="RUT_EMPLEADO" Type="number" Precision="8" Scale="0" />
-    <Property Name="RUT_CLIENTE" Type="number" Precision="8" Scale="0" />
+    <Property Name="RUT_CLIENTE" Type="number" Precision="8" Scale="0" Nullable="false" />
     <Property Name="ESTADO_ORDEN" Type="varchar2" MaxLength="25" Nullable="false" />
     <Property Name="COMENTARIO" Type="varchar2" MaxLength="256" />
     <Property Name="MONTO_TOTAL" Type="number" Precision="6" Scale="0" Nullable="false" />
@@ -343,9 +344,8 @@ advertencia 6002: La tabla o vista 'HOSTAL.V_CLIENTE_FRECUENTE' no tiene definid
     <Key>
       <PropertyRef Name="NOMBRE_CLIENTE" />
       <PropertyRef Name="GIRO" />
-      <PropertyRef Name="RUT" />
     </Key>
-    <Property Name="RUT" Type="varchar2" MaxLength="42" Nullable="false" />
+    <Property Name="RUT" Type="varchar2" MaxLength="42" />
     <Property Name="NOMBRE_CLIENTE" Type="varchar2" MaxLength="100" Nullable="false" />
     <Property Name="GIRO" Type="varchar2" MaxLength="25" Nullable="false" />
     <Property Name="CANTIDAD_ORDENES" Type="number" Precision="38" Scale="0" />
@@ -356,14 +356,14 @@ advertencia 6002: La tabla o vista 'HOSTAL.V_CLIENTE_ORDENES' no tiene definida 
     <Key>
       <PropertyRef Name="NOMBRE_CLIENTE" />
       <PropertyRef Name="GIRO" />
-      <PropertyRef Name="RUT" />
     </Key>
-    <Property Name="RUT" Type="varchar2" MaxLength="42" Nullable="false" />
+    <Property Name="RUT" Type="varchar2" MaxLength="42" />
     <Property Name="NOMBRE_CLIENTE" Type="varchar2" MaxLength="100" Nullable="false" />
     <Property Name="GIRO" Type="varchar2" MaxLength="25" Nullable="false" />
     <Property Name="ORDENES_PENDIENTES" Type="number" Precision="38" Scale="0" />
     <Property Name="ORDENES_ASIGNADAS" Type="number" Precision="38" Scale="0" />
     <Property Name="ORDENES_ACEPTADAS" Type="number" Precision="38" Scale="0" />
+    <Property Name="ORDENES_CERRADAS" Type="number" Precision="38" Scale="0" />
     <Property Name="ORDENES_RECHAZADAS" Type="number" Precision="38" Scale="0" />
     <Property Name="ORDENES_CANCELADAS" Type="number" Precision="38" Scale="0" />
     <Property Name="CANTIDAD_ORDENES" Type="number" Precision="38" Scale="0" />
@@ -374,14 +374,14 @@ advertencia 6002: La tabla o vista 'HOSTAL.V_CLIENTE_ORDENES_TOP_10' no tiene de
     <Key>
       <PropertyRef Name="NOMBRE_CLIENTE" />
       <PropertyRef Name="GIRO" />
-      <PropertyRef Name="RUT" />
     </Key>
-    <Property Name="RUT" Type="varchar2" MaxLength="42" Nullable="false" />
+    <Property Name="RUT" Type="varchar2" MaxLength="42" />
     <Property Name="NOMBRE_CLIENTE" Type="varchar2" MaxLength="100" Nullable="false" />
     <Property Name="GIRO" Type="varchar2" MaxLength="25" Nullable="false" />
     <Property Name="ORDENES_PENDIENTES" Type="number" Precision="38" Scale="0" />
     <Property Name="ORDENES_ASIGNADAS" Type="number" Precision="38" Scale="0" />
     <Property Name="ORDENES_ACEPTADAS" Type="number" Precision="38" Scale="0" />
+    <Property Name="ORDENES_CERRADAS" Type="number" Precision="38" Scale="0" />
     <Property Name="ORDENES_RECHAZADAS" Type="number" Precision="38" Scale="0" />
     <Property Name="ORDENES_CANCELADAS" Type="number" Precision="38" Scale="0" />
     <Property Name="CANTIDAD_ORDENES" Type="number" Precision="38" Scale="0" />
@@ -515,6 +515,18 @@ advertencia 6002: La tabla o vista 'HOSTAL.V_HABITACION_USOS_TOP_10' no tiene de
       </Principal>
       <Dependent Role="DETALLE_FACTURA">
         <PropertyRef Name="ID_FACTURA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DETALLE_OR_TIPO_HAB">
+    <End Role="TIPO_HABITACION" Type="Self.TIPO_HABITACION" Multiplicity="1" />
+    <End Role="DETALLE_ORDEN" Type="Self.DETALLE_ORDEN" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TIPO_HABITACION">
+        <PropertyRef Name="ID_TIPO_HABITACION" />
+      </Principal>
+      <Dependent Role="DETALLE_ORDEN">
+        <PropertyRef Name="ID_TIPO_HABITACION" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -783,7 +795,7 @@ advertencia 6002: La tabla o vista 'HOSTAL.V_HABITACION_USOS_TOP_10' no tiene de
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_ORDEN_COMPRA_CLIENTE">
-    <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="0..1" />
+    <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="1" />
     <End Role="ORDEN_COMPRA" Type="Self.ORDEN_COMPRA" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="CLIENTE">
@@ -1024,6 +1036,7 @@ FROM "HOSTAL"."V_CLIENTE_FRECUENTE" "V_CLIENTE_FRECUENTE"</DefiningQuery>
 "V_CLIENTE_ORDENES"."ORDENES_PENDIENTES" AS "ORDENES_PENDIENTES", 
 "V_CLIENTE_ORDENES"."ORDENES_ASIGNADAS" AS "ORDENES_ASIGNADAS", 
 "V_CLIENTE_ORDENES"."ORDENES_ACEPTADAS" AS "ORDENES_ACEPTADAS", 
+"V_CLIENTE_ORDENES"."ORDENES_CERRADAS" AS "ORDENES_CERRADAS", 
 "V_CLIENTE_ORDENES"."ORDENES_RECHAZADAS" AS "ORDENES_RECHAZADAS", 
 "V_CLIENTE_ORDENES"."ORDENES_CANCELADAS" AS "ORDENES_CANCELADAS", 
 "V_CLIENTE_ORDENES"."CANTIDAD_ORDENES" AS "CANTIDAD_ORDENES"
@@ -1037,6 +1050,7 @@ FROM "HOSTAL"."V_CLIENTE_ORDENES" "V_CLIENTE_ORDENES"</DefiningQuery>
 "V_CLIENTE_ORDENES_TOP_10"."ORDENES_PENDIENTES" AS "ORDENES_PENDIENTES", 
 "V_CLIENTE_ORDENES_TOP_10"."ORDENES_ASIGNADAS" AS "ORDENES_ASIGNADAS", 
 "V_CLIENTE_ORDENES_TOP_10"."ORDENES_ACEPTADAS" AS "ORDENES_ACEPTADAS", 
+"V_CLIENTE_ORDENES_TOP_10"."ORDENES_CERRADAS" AS "ORDENES_CERRADAS", 
 "V_CLIENTE_ORDENES_TOP_10"."ORDENES_RECHAZADAS" AS "ORDENES_RECHAZADAS", 
 "V_CLIENTE_ORDENES_TOP_10"."ORDENES_CANCELADAS" AS "ORDENES_CANCELADAS", 
 "V_CLIENTE_ORDENES_TOP_10"."CANTIDAD_ORDENES" AS "CANTIDAD_ORDENES"
@@ -1097,6 +1111,10 @@ FROM "HOSTAL"."V_HABITACION_USOS_TOP_10" "V_HABITACION_USOS_TOP_10"</DefiningQue
     <AssociationSet Name="FK_DETALLE_FACTURA_FACTURA" Association="Self.FK_DETALLE_FACTURA_FACTURA">
       <End Role="FACTURA" EntitySet="FACTURA" />
       <End Role="DETALLE_FACTURA" EntitySet="DETALLE_FACTURA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DETALLE_OR_TIPO_HAB" Association="Self.FK_DETALLE_OR_TIPO_HAB">
+      <End Role="TIPO_HABITACION" EntitySet="TIPO_HABITACION" />
+      <End Role="DETALLE_ORDEN" EntitySet="DETALLE_ORDEN" />
     </AssociationSet>
     <AssociationSet Name="FK_DETALLE_ORDEN_CATEGORIA" Association="Self.FK_DETALLE_ORDEN_CATEGORIA">
       <End Role="CATEGORIA_HABITACION" EntitySet="CATEGORIA_HABITACION" />

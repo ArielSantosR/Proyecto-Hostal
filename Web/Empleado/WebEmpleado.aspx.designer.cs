@@ -67,22 +67,23 @@ namespace Web {
         protected global::System.Web.UI.WebControls.Button btnHistorial;
         
         /// <summary>
-<<<<<<< HEAD
         /// Control btnOrdenesFacturar.
-=======
-        /// Control btnInventario.
->>>>>>> 444ebab66c5ea3cf6e1a5100b4d60ff62afb503f
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-<<<<<<< HEAD
         protected global::System.Web.UI.WebControls.Button btnOrdenesFacturar;
-=======
-        protected global::System.Web.UI.WebControls.Button btnInventario;
->>>>>>> 444ebab66c5ea3cf6e1a5100b4d60ff62afb503f
         
+        /// <summary>
+        /// ontrol btnInventario.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnInventario;
+
         /// <summary>
         /// Control btnCrearFactura.
         /// </summary>

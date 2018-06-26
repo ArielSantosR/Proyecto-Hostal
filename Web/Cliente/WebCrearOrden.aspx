@@ -42,7 +42,7 @@
                             <div class="col-sm-12">
                                 <div class="input-group">
                                     <span class="input-group-text"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                                    <asp:DropDownList ID="ddlRut" CssClass="form-control" runat="server" AutoPostBack="true">
+                                    <asp:DropDownList ID="ddlRut" CssClass="form-control" runat="server" AutoPostBack="true" >
                                     </asp:DropDownList>
                                 </div>
                             </div>
@@ -104,6 +104,20 @@
                         </div>
                     </div>
                 </div>
+
+                <asp:UpdatePanel runat="server" id="UpdatePanel2" UpdateMode="Conditional">
+              <ContentTemplate>
+                  <div class="form-group">
+                      <label for="name" class="col-sm-12 control-label">Valor Diario</label>
+                        <div class="col-sm-12">
+                          <div class="input-group">
+                          <span class="input-group-text"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                          <asp:TextBox ID="txtPrecio" placeholder="Precio Total" runat="server" CssClass="form-control"></asp:TextBox>
+                        </div>
+                      </div>
+                    </div>
+                  </ContentTemplate>
+              </asp:UpdatePanel>
 
 
                 <div class="row">

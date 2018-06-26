@@ -25,8 +25,14 @@ namespace Modelo
             }
             else {
                 return false;
-
             }
         }
+
+        public string NombreYPrecio
+        {
+            get { return this.NOMBRE_CATEGORIA + " $" + this.PRECIO_CATEGORIA; }
+        }
+
+
     }
 }

@@ -20,6 +20,7 @@ namespace Datos
         public Nullable<decimal> ORDENES_PENDIENTES { get; set; }
         public Nullable<decimal> ORDENES_ASIGNADAS { get; set; }
         public Nullable<decimal> ORDENES_ACEPTADAS { get; set; }
+        public Nullable<decimal> ORDENES_CERRADAS { get; set; }
         public Nullable<decimal> ORDENES_RECHAZADAS { get; set; }
         public Nullable<decimal> ORDENES_CANCELADAS { get; set; }
         public Nullable<decimal> CANTIDAD_ORDENES { get; set; }

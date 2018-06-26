@@ -161,11 +161,8 @@ C:\Users\Suzu\Documents\Proyecto-Hostal\Web\bin\Microsoft.CodeDom.Providers.DotN
 C:\Users\Suzu\Documents\Proyecto-Hostal\Web\bin\EntityFramework.xml
 C:\Users\Suzu\Documents\Proyecto-Hostal\Web\obj\Debug\Web.dll
 C:\Users\Suzu\Documents\Proyecto-Hostal\Web\obj\Debug\Web.pdb
-C:\Users\Suzu\Documents\Proyecto-Hostal\Web\obj\Debug\Web.csprojAssemblyReference.cache
-C:\Users\Suzu\Documents\Proyecto-Hostal\Web\obj\Debug\Web.csproj.CoreCompileInputs.cache
-C:\Users\Suzu\Documents\Proyecto-Hostal\Web\bin\Datos.dll.config
-C:\Users\Suzu\Documents\Proyecto-Hostal\Web\bin\WcfNegocio.dll.config
-C:\Users\Suzu\Documents\Proyecto-Hostal\Web\obj\Debug\Web.csproj.CopyComplete
+C:\Users\Suzu\Documents\Proyecto-Hostal\Web\obj\Debug\Web.csproj.ResolveComReference.cache
+C:\Users\Suzu\Documents\Proyecto-Hostal\Web\obj\Debug\Web.csprojResolveAssemblyReference.cache
 C:\Users\shogu\Documents\GitHub\Proyecto-Hostal\Web\bin\ApplicationInsights.config
 C:\Users\shogu\Documents\GitHub\Proyecto-Hostal\Web\bin\roslyn\csc.exe
 C:\Users\shogu\Documents\GitHub\Proyecto-Hostal\Web\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
@@ -182,7 +179,9 @@ C:\Users\shogu\Documents\GitHub\Proyecto-Hostal\Web\bin\roslyn\VBCSCompiler.exe.
 C:\Users\shogu\Documents\GitHub\Proyecto-Hostal\Web\bin\Web.dll.config
 C:\Users\shogu\Documents\GitHub\Proyecto-Hostal\Web\bin\Web.dll
 C:\Users\shogu\Documents\GitHub\Proyecto-Hostal\Web\bin\Web.pdb
+C:\Users\shogu\Documents\GitHub\Proyecto-Hostal\Web\bin\AjaxControlToolkit.dll
 C:\Users\shogu\Documents\GitHub\Proyecto-Hostal\Web\bin\Datos.dll
+C:\Users\shogu\Documents\GitHub\Proyecto-Hostal\Web\bin\itextsharp.dll
 C:\Users\shogu\Documents\GitHub\Proyecto-Hostal\Web\bin\Microsoft.AI.Agent.Intercept.dll
 C:\Users\shogu\Documents\GitHub\Proyecto-Hostal\Web\bin\Microsoft.AI.DependencyCollector.dll
 C:\Users\shogu\Documents\GitHub\Proyecto-Hostal\Web\bin\Microsoft.AI.PerfCounterCollector.dll
@@ -197,6 +196,7 @@ C:\Users\shogu\Documents\GitHub\Proyecto-Hostal\Web\bin\EntityFramework.dll
 C:\Users\shogu\Documents\GitHub\Proyecto-Hostal\Web\bin\Datos.pdb
 C:\Users\shogu\Documents\GitHub\Proyecto-Hostal\Web\bin\Modelo.pdb
 C:\Users\shogu\Documents\GitHub\Proyecto-Hostal\Web\bin\WcfNegocio.pdb
+C:\Users\shogu\Documents\GitHub\Proyecto-Hostal\Web\bin\itextsharp.xml
 C:\Users\shogu\Documents\GitHub\Proyecto-Hostal\Web\bin\Microsoft.AI.DependencyCollector.xml
 C:\Users\shogu\Documents\GitHub\Proyecto-Hostal\Web\bin\Microsoft.AI.ServerTelemetryChannel.xml
 C:\Users\shogu\Documents\GitHub\Proyecto-Hostal\Web\bin\Microsoft.AI.Web.xml
@@ -208,5 +208,3 @@ C:\Users\shogu\Documents\GitHub\Proyecto-Hostal\Web\obj\Debug\Web.csprojResolveA
 C:\Users\shogu\Documents\GitHub\Proyecto-Hostal\Web\obj\Debug\Web.csproj.ResolveComReference.cache
 C:\Users\shogu\Documents\GitHub\Proyecto-Hostal\Web\obj\Debug\Web.dll
 C:\Users\shogu\Documents\GitHub\Proyecto-Hostal\Web\obj\Debug\Web.pdb
-C:\Users\shogu\Documents\GitHub\Proyecto-Hostal\Web\bin\itextsharp.dll
-C:\Users\shogu\Documents\GitHub\Proyecto-Hostal\Web\bin\itextsharp.xml

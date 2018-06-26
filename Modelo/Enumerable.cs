@@ -27,6 +27,7 @@ namespace Modelo {
         Rechazado,
         Asignado,
         Aceptado,
-        Cancelado
+        Cancelado,
+        Cerrado
     }
 }

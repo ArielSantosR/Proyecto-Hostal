@@ -48,6 +48,8 @@ namespace Web.Cliente {
                 btnVer.CausesValidation = false;
                 btnVer.UseSubmitBehavior = false;
 
+                
+
                 if (MiSesion.TIPO_USUARIO.Equals(Tipo_Usuario.Administrador.ToString()) && MiSesion.ESTADO.Equals(Estado_Usuario.Habilitado.ToString()))
                 {
 

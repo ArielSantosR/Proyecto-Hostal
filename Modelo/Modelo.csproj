@@ -49,6 +49,7 @@
     <Compile Include="Comuna.cs" />
     <Compile Include="ComunaCollection.cs" />
     <Compile Include="DetalleHabitacion.cs" />
+    <Compile Include="DetalleHabitacionCollection.cs" />
     <Compile Include="DetalleOrden.cs" />
     <Compile Include="DetalleOrdenCollection.cs" />
     <Compile Include="DetallePasajeros.cs" />

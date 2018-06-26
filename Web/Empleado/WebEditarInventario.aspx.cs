@@ -13,6 +13,34 @@ namespace Web.Empleado
 {
     public partial class WebEditarInventario : System.Web.UI.Page
     {
+        void Page_PreInit(object sender, EventArgs e)
+        {
+            if (MiSesion != null)
+            {
+                if (MiSesion.TIPO_USUARIO != null && MiSesion.ESTADO != null)
+                {
+                    if (MiSesion.TIPO_USUARIO.Equals("Administrador") &&
+                    MiSesion.ESTADO.Equals("Habilitado"))
+                    {
+                        MasterPageFile = "~/Administrador/AdminM.Master";
+                    }
+                    else if (MiSesion.TIPO_USUARIO.Equals("Empleado") &&
+                    MiSesion.ESTADO.Equals("Habilitado"))
+                    {
+                        MasterPageFile = "~/Empleado/EmpleadoM.Master";
+                    }
+                    else
+                    {
+                        Response.Write("<script language='javascript'>window.alert('No Posee los permisos necesarios');window.location='../Hostal/WebLogin.aspx';</script>");
+                    }
+                }
+                else
+                {
+                    Response.Write("<script language='javascript'>window.alert('Debe Iniciar Sesión Primero');window.location='../Hostal/WebLogin.aspx';</script>");
+                }
+            }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             error.Text = "";
@@ -155,25 +183,34 @@ namespace Web.Empleado
                         short.TryParse(txtStockCritico.Text, out stockCritico) &&
                         int.TryParse(txtPrecio.Text, out precio))
                     {
-                        producto.STOCK_PRODUCTO = stock;
-                        producto.STOCK_CRITICO_PRODUCTO = stockCritico;
-                        producto.PRECIO_PRODUCTO = precio;
-
-                        Service1 s = new Service1();
-                        XmlSerializer sr = new XmlSerializer(typeof(Modelo.Producto));
-                        StringWriter writer = new StringWriter();
-                        sr.Serialize(writer, producto);
-
-                        if (s.ModificarProducto(writer.ToString()))
+                        if (stock >= 0 && stockCritico >= 0 && precio >= 0)
                         {
-                            exito.Text = "El producto ha sido modificado con éxito";
-                            alerta_exito.Visible = true;
-                            alerta.Visible = false;
+                            producto.STOCK_PRODUCTO = stock;
+                            producto.STOCK_CRITICO_PRODUCTO = stockCritico;
+                            producto.PRECIO_PRODUCTO = precio;
+
+                            Service1 s = new Service1();
+                            XmlSerializer sr = new XmlSerializer(typeof(Modelo.Producto));
+                            StringWriter writer = new StringWriter();
+                            sr.Serialize(writer, producto);
+
+                            if (s.ModificarProducto(writer.ToString()))
+                            {
+                                exito.Text = "El producto ha sido modificado con éxito";
+                                alerta_exito.Visible = true;
+                                alerta.Visible = false;
+                            }
+                            else
+                            {
+                                alerta_exito.Visible = false;
+                                error.Text = "La modificación de Producto ha fallado";
+                                alerta.Visible = true;
+                            }
                         }
                         else
                         {
                             alerta_exito.Visible = false;
-                            error.Text = "La modificación de Producto ha fallado";
+                            error.Text = "Los valores no pueden ser menores a 0";
                             alerta.Visible = true;
                         }
                     }

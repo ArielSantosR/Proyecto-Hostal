@@ -17,6 +17,10 @@ namespace Datos
             return true;
         }
 
+        public List<DETALLE_ORDEN> ListaDetalleReserva() {
+            return ent.DETALLE_ORDEN.ToList();
+        }
+
         public bool AgregarDetalleOrden(DETALLE_ORDEN d)
         {
             ent.DETALLE_ORDEN.Add(d);
@@ -41,6 +45,16 @@ namespace Datos
                          orderby consulta.NUMERO_ORDEN
                          select consulta).ToList();
             return lista;
+        }
+
+        public ORDEN_COMPRA BuscarOrden(short nUMERO_ORDEN) {
+            ORDEN_COMPRA o = ent.ORDEN_COMPRA.FirstOrDefault(x => x.NUMERO_ORDEN == nUMERO_ORDEN);
+            if (o != null) {
+                return o;
+            }
+            else {
+                return null;
+            }
         }
 
         public ORDEN_COMPRA ObtenerReserva(ORDEN_COMPRA orden)
@@ -91,6 +105,14 @@ namespace Datos
         {
             var lista = (from consulta in ent.ORDEN_COMPRA
                          where consulta.ESTADO_ORDEN.Equals("Aceptado")
+                         orderby consulta.NUMERO_ORDEN
+                         select consulta).ToList();
+            return lista;
+        }
+
+        public List<ORDEN_COMPRA> ListarReservaAsignada() {
+            var lista = (from consulta in ent.ORDEN_COMPRA
+                         where consulta.ESTADO_ORDEN.Equals("Asignado")
                          orderby consulta.NUMERO_ORDEN
                          select consulta).ToList();
             return lista;
@@ -161,6 +183,8 @@ namespace Datos
                 d.ESTADO = detalle.ESTADO;
                 d.ORDEN_COMPRA = detalle.ORDEN_COMPRA;
                 d.ID_CATEGORIA_HABITACION = detalle.ID_CATEGORIA_HABITACION;
+                d.VALOR_HABITACION = detalle.VALOR_HABITACION;
+                d.VALOR_MINUTA = detalle.VALOR_MINUTA;
 
                 ent.SaveChanges();
                 return true;

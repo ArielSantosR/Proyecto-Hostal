@@ -155,6 +155,7 @@
     <Compile Include="ServicioBCrypt.cs" />
     <Compile Include="ServicioCategoria.cs" />
     <Compile Include="ServicioCliente.cs" />
+    <Compile Include="ServicioDetalleHabitacion.cs" />
     <Compile Include="ServicioDireccion.cs" />
     <Compile Include="ServicioEmpleado.cs" />
     <Compile Include="ServicioHabitacion.cs" />

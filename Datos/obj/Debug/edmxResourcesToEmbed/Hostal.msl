@@ -93,14 +93,15 @@
     <EntitySetMapping Name="DETALLE_ORDEN">
       <EntityTypeMapping TypeName="Model.DETALLE_ORDEN">
         <MappingFragment StoreEntitySet="DETALLE_ORDEN">
-          <ScalarProperty Name="VALOR_HABITACION" ColumnName="VALOR_HABITACION" />
-          <ScalarProperty Name="VALOR_MINUTA" ColumnName="VALOR_MINUTA" />
+          <ScalarProperty Name="ID_TIPO_HABITACION" ColumnName="ID_TIPO_HABITACION" />
           <ScalarProperty Name="ID_DETALLE" ColumnName="ID_DETALLE" />
           <ScalarProperty Name="NUMERO_ORDEN" ColumnName="NUMERO_ORDEN" />
           <ScalarProperty Name="RUT_HUESPED" ColumnName="RUT_HUESPED" />
           <ScalarProperty Name="ID_CATEGORIA_HABITACION" ColumnName="ID_CATEGORIA_HABITACION" />
           <ScalarProperty Name="ID_PENSION" ColumnName="ID_PENSION" />
           <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
+          <ScalarProperty Name="VALOR_MINUTA" ColumnName="VALOR_MINUTA" />
+          <ScalarProperty Name="VALOR_HABITACION" ColumnName="VALOR_HABITACION" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -229,7 +230,6 @@
     <EntitySetMapping Name="ORDEN_COMPRA">
       <EntityTypeMapping TypeName="Model.ORDEN_COMPRA">
         <MappingFragment StoreEntitySet="ORDEN_COMPRA">
-          <ScalarProperty Name="MONTO_TOTAL" ColumnName="MONTO_TOTAL" />
           <ScalarProperty Name="NUMERO_ORDEN" ColumnName="NUMERO_ORDEN" />
           <ScalarProperty Name="CANTIDAD_HUESPEDES" ColumnName="CANTIDAD_HUESPEDES" />
           <ScalarProperty Name="FECHA_LLEGADA" ColumnName="FECHA_LLEGADA" />
@@ -238,6 +238,7 @@
           <ScalarProperty Name="RUT_CLIENTE" ColumnName="RUT_CLIENTE" />
           <ScalarProperty Name="ESTADO_ORDEN" ColumnName="ESTADO_ORDEN" />
           <ScalarProperty Name="COMENTARIO" ColumnName="COMENTARIO" />
+          <ScalarProperty Name="MONTO_TOTAL" ColumnName="MONTO_TOTAL" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -374,72 +375,74 @@
     <EntitySetMapping Name="V_CLIENTE_FRECUENTE">
       <EntityTypeMapping TypeName="Model.V_CLIENTE_FRECUENTE">
         <MappingFragment StoreEntitySet="V_CLIENTE_FRECUENTE">
-          <ScalarProperty Name="CANTIDAD_ORDENES" ColumnName="CANTIDAD_ORDENES" />
-          <ScalarProperty Name="GIRO" ColumnName="GIRO" />
-          <ScalarProperty Name="NOMBRE_CLIENTE" ColumnName="NOMBRE_CLIENTE" />
           <ScalarProperty Name="RUT" ColumnName="RUT" />
+          <ScalarProperty Name="NOMBRE_CLIENTE" ColumnName="NOMBRE_CLIENTE" />
+          <ScalarProperty Name="GIRO" ColumnName="GIRO" />
+          <ScalarProperty Name="CANTIDAD_ORDENES" ColumnName="CANTIDAD_ORDENES" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="V_CLIENTE_ORDENES">
       <EntityTypeMapping TypeName="Model.V_CLIENTE_ORDENES">
         <MappingFragment StoreEntitySet="V_CLIENTE_ORDENES">
-          <ScalarProperty Name="CANTIDAD_ORDENES" ColumnName="CANTIDAD_ORDENES" />
-          <ScalarProperty Name="ORDENES_CANCELADAS" ColumnName="ORDENES_CANCELADAS" />
-          <ScalarProperty Name="ORDENES_RECHAZADAS" ColumnName="ORDENES_RECHAZADAS" />
-          <ScalarProperty Name="ORDENES_ACEPTADAS" ColumnName="ORDENES_ACEPTADAS" />
-          <ScalarProperty Name="ORDENES_ASIGNADAS" ColumnName="ORDENES_ASIGNADAS" />
-          <ScalarProperty Name="ORDENES_PENDIENTES" ColumnName="ORDENES_PENDIENTES" />
-          <ScalarProperty Name="GIRO" ColumnName="GIRO" />
-          <ScalarProperty Name="NOMBRE_CLIENTE" ColumnName="NOMBRE_CLIENTE" />
           <ScalarProperty Name="RUT" ColumnName="RUT" />
+          <ScalarProperty Name="NOMBRE_CLIENTE" ColumnName="NOMBRE_CLIENTE" />
+          <ScalarProperty Name="GIRO" ColumnName="GIRO" />
+          <ScalarProperty Name="ORDENES_PENDIENTES" ColumnName="ORDENES_PENDIENTES" />
+          <ScalarProperty Name="ORDENES_ASIGNADAS" ColumnName="ORDENES_ASIGNADAS" />
+          <ScalarProperty Name="ORDENES_ACEPTADAS" ColumnName="ORDENES_ACEPTADAS" />
+          <ScalarProperty Name="ORDENES_CERRADAS" ColumnName="ORDENES_CERRADAS" />
+          <ScalarProperty Name="ORDENES_RECHAZADAS" ColumnName="ORDENES_RECHAZADAS" />
+          <ScalarProperty Name="ORDENES_CANCELADAS" ColumnName="ORDENES_CANCELADAS" />
+          <ScalarProperty Name="CANTIDAD_ORDENES" ColumnName="CANTIDAD_ORDENES" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="V_CLIENTE_ORDENES_TOP_10">
       <EntityTypeMapping TypeName="Model.V_CLIENTE_ORDENES_TOP_10">
         <MappingFragment StoreEntitySet="V_CLIENTE_ORDENES_TOP_10">
-          <ScalarProperty Name="CANTIDAD_ORDENES" ColumnName="CANTIDAD_ORDENES" />
-          <ScalarProperty Name="ORDENES_CANCELADAS" ColumnName="ORDENES_CANCELADAS" />
-          <ScalarProperty Name="ORDENES_RECHAZADAS" ColumnName="ORDENES_RECHAZADAS" />
-          <ScalarProperty Name="ORDENES_ACEPTADAS" ColumnName="ORDENES_ACEPTADAS" />
-          <ScalarProperty Name="ORDENES_ASIGNADAS" ColumnName="ORDENES_ASIGNADAS" />
-          <ScalarProperty Name="ORDENES_PENDIENTES" ColumnName="ORDENES_PENDIENTES" />
-          <ScalarProperty Name="GIRO" ColumnName="GIRO" />
-          <ScalarProperty Name="NOMBRE_CLIENTE" ColumnName="NOMBRE_CLIENTE" />
           <ScalarProperty Name="RUT" ColumnName="RUT" />
+          <ScalarProperty Name="NOMBRE_CLIENTE" ColumnName="NOMBRE_CLIENTE" />
+          <ScalarProperty Name="GIRO" ColumnName="GIRO" />
+          <ScalarProperty Name="ORDENES_PENDIENTES" ColumnName="ORDENES_PENDIENTES" />
+          <ScalarProperty Name="ORDENES_ASIGNADAS" ColumnName="ORDENES_ASIGNADAS" />
+          <ScalarProperty Name="ORDENES_ACEPTADAS" ColumnName="ORDENES_ACEPTADAS" />
+          <ScalarProperty Name="ORDENES_CERRADAS" ColumnName="ORDENES_CERRADAS" />
+          <ScalarProperty Name="ORDENES_RECHAZADAS" ColumnName="ORDENES_RECHAZADAS" />
+          <ScalarProperty Name="ORDENES_CANCELADAS" ColumnName="ORDENES_CANCELADAS" />
+          <ScalarProperty Name="CANTIDAD_ORDENES" ColumnName="CANTIDAD_ORDENES" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="V_DIAS_USOS">
       <EntityTypeMapping TypeName="Model.V_DIAS_USOS">
         <MappingFragment StoreEntitySet="V_DIAS_USOS">
-          <ScalarProperty Name="DIAS_USO" ColumnName="DIAS_USO" />
           <ScalarProperty Name="NUMERO_HABITACION" ColumnName="NUMERO_HABITACION" />
+          <ScalarProperty Name="DIAS_USO" ColumnName="DIAS_USO" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="V_HABITACION_PREFERIDA">
       <EntityTypeMapping TypeName="Model.V_HABITACION_PREFERIDA">
         <MappingFragment StoreEntitySet="V_HABITACION_PREFERIDA">
-          <ScalarProperty Name="NUMERO_USOS" ColumnName="NUMERO_USOS" />
           <ScalarProperty Name="NUMERO_HABITACION" ColumnName="NUMERO_HABITACION" />
+          <ScalarProperty Name="NUMERO_USOS" ColumnName="NUMERO_USOS" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="V_HABITACION_USOS">
       <EntityTypeMapping TypeName="Model.V_HABITACION_USOS">
         <MappingFragment StoreEntitySet="V_HABITACION_USOS">
-          <ScalarProperty Name="NUMERO_USOS" ColumnName="NUMERO_USOS" />
           <ScalarProperty Name="NUMERO_HABITACION" ColumnName="NUMERO_HABITACION" />
+          <ScalarProperty Name="NUMERO_USOS" ColumnName="NUMERO_USOS" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="V_HABITACION_USOS_TOP_10">
       <EntityTypeMapping TypeName="Model.V_HABITACION_USOS_TOP_10">
         <MappingFragment StoreEntitySet="V_HABITACION_USOS_TOP_10">
-          <ScalarProperty Name="NUMERO_USOS" ColumnName="NUMERO_USOS" />
           <ScalarProperty Name="NUMERO_HABITACION" ColumnName="NUMERO_HABITACION" />
+          <ScalarProperty Name="NUMERO_USOS" ColumnName="NUMERO_USOS" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

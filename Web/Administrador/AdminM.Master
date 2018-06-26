@@ -66,12 +66,9 @@
                             <a class="dropdown-item" href="../Empleado/WebRecibirPedido.aspx">Recibir Pedido</a>
                             <a class="dropdown-item" href="../Empleado/WebHistorialPedidos.aspx">Historial Pedidos</a>
                             <div class="dropdown-divider"></div>
-<<<<<<< HEAD
-                            <a class="dropdown-item" href="../Empleado/WebVerOrdenesFacturar.aspx">Órdenes a Facturar</a>
-=======
                             <a class="dropdown-item" href="../Empleado/WebInventario.aspx">Inventario</a>
                             <div class="dropdown-divider"></div>
->>>>>>> 444ebab66c5ea3cf6e1a5100b4d60ff62afb503f
+                            <a class="dropdown-item" href="../Empleado/WebVerOrdenesFacturar.aspx">Órdenes a Facturar</a>
                             <a class="dropdown-item" href="../Empleado/WebCrearFactura.aspx">Crear Factura</a>
                             <a class="dropdown-item" href="../Empleado/WebVerFacturas.aspx">Ver Facturas</a>
                             <div class="dropdown-divider"></div>

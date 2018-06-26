@@ -48,6 +48,7 @@ namespace Web.Cliente
             exito.Text = "";
             alerta_exito.Visible = false;
             alerta.Visible = false;
+            txtPrecio.Attributes.Add("readonly", "Readonly");
 
             Service1 service = new Service1();
 
@@ -105,9 +106,8 @@ namespace Web.Cliente
                             ddlRut.DataBind();
                             ddlRut.Items.Insert(0,new ListItem("Seleccione Huesped...","0"));
 
-
                             ddlCategoria.DataSource = coleccionCategoria;
-                            ddlCategoria.DataTextField = "NOMBRE_CATEGORIA";
+                            ddlCategoria.DataTextField = "NombreYPrecio";
                             ddlCategoria.DataValueField = "ID_CATEGORIA_HABITACION";
                             ddlCategoria.DataBind();
                             ddlCategoria.Items.Insert(0,new ListItem("Seleccione Categoria de Habitación...","0"));
@@ -121,6 +121,8 @@ namespace Web.Cliente
                             MiSesionO = null;
                             btnVer.Enabled = false;
                             btnReservar.Enabled = false;
+
+                            txtPrecio.Text = "0";
                         }
                         CargarGridView(MiSesionO);
                     }
@@ -138,8 +140,7 @@ namespace Web.Cliente
                             ddlClientes.DataValueField = "RUT_CLIENTE";
                             ddlClientes.DataBind();
                             ddlClientes.Items.Insert(0,new ListItem("Seleccione Empresa...","0"));
-
-                            ddlRut.Items.Insert(0,new ListItem("Seleccione Huesped...","0"));
+                            ddlRut.Items.Insert(0, new ListItem("Seleccione Huesped...", "0"));
                             ddlCategoria.Items.Insert(0,new ListItem("Seleccione Categoria de Habitación...","0"));
                             ddlPension.Items.Insert(0,new ListItem("Seleccione Pensión...","0"));
 
@@ -167,36 +168,78 @@ namespace Web.Cliente
         {
             try
             {
-                Modelo.DetalleOrden detalle = new Modelo.DetalleOrden();
-                detalle.RUT_HUESPED = int.Parse(ddlRut.SelectedValue);
-                detalle.ID_PENSION = short.Parse(ddlPension.SelectedValue);
-                detalle.ID_CATEGORIA_HABITACION = short.Parse(ddlCategoria.SelectedValue);
-                bool existe = false;
+                if (ddlRut.SelectedIndex > 0 && ddlCategoria.SelectedIndex > 0 && ddlPension.SelectedIndex > 0)
+                {
+                    Modelo.DetalleOrden detalle = new Modelo.DetalleOrden();
+                    detalle.RUT_HUESPED = int.Parse(ddlRut.SelectedValue);
+                    detalle.ID_PENSION = short.Parse(ddlPension.SelectedValue);
+                    detalle.ID_CATEGORIA_HABITACION = short.Parse(ddlCategoria.SelectedValue);
+                    bool existe = false;
 
-                foreach (DetalleOrden o in MiSesionO)
-                {
-                    if (detalle.RUT_HUESPED == o.RUT_HUESPED)
+                    foreach (DetalleOrden o in MiSesionO)
                     {
-                        existe = true;
+                        if (detalle.RUT_HUESPED == o.RUT_HUESPED)
+                        {
+                            existe = true;
+                        }
                     }
-                }
-                if (existe)
-                {
-                    alerta_exito.Visible = false;
-                    error.Text = "Este Huésped ya ha sido agregado";
-                    alerta.Visible = true;
+                    if (existe)
+                    {
+                        alerta_exito.Visible = false;
+                        error.Text = "Este Huésped ya ha sido agregado";
+                        alerta.Visible = true;
+                    }
+                    else
+                    {
+                        exito.Text = "Huésped Agregado a Reserva.";
+                        alerta_exito.Visible = true;
+                        alerta.Visible = false;
+                        MiSesionO.Add(detalle);
+                        btnVer.Enabled = true;
+                        btnReservar.Enabled = true;
+                        ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modal", "$('#exampleModal2').modal();", true);
+                    }
+                    CargarGridView(MiSesionO);
+
+                    #region Precio Total
+                    Service1 s = new Service1();
+                    XmlSerializer ser = new XmlSerializer(typeof(Modelo.MinutaCollection));
+                    string minuta = s.ListarMinuta();
+                    StringReader reader = new StringReader(minuta);
+                    MinutaCollection coleccionMinuta = (MinutaCollection)ser.Deserialize(reader);
+
+                    XmlSerializer ser2 = new XmlSerializer(typeof(Modelo.CategoriaHabitacionCollection));
+                    string categoria = s.ListarCategoriaHabitacion();
+                    StringReader reader2 = new StringReader(categoria);
+                    CategoriaHabitacionCollection coleccionCategoria = (CategoriaHabitacionCollection)ser2.Deserialize(reader2);
+
+                    if (MiSesionO.Count > 0)
+                    {
+                        int precio = 0;
+
+                        foreach (DetalleOrden o in MiSesionO)
+                        {
+                            List<Modelo.Minuta> minutas = (from consulta in coleccionMinuta
+                                                           where consulta.ID_PENSION == o.ID_PENSION
+                                                           select consulta).ToList();
+
+                            List<Modelo.CategoriaHabitacion> categorias = (from consulta in coleccionCategoria
+                                                                           where consulta.ID_CATEGORIA_HABITACION == o.ID_CATEGORIA_HABITACION
+                                                                           select consulta).ToList();
+
+                            precio = precio + minutas[0].VALOR_PENSION + categorias[0].PRECIO_CATEGORIA;
+                        }
+
+                        txtPrecio.Text = precio + "";
+                    }
+                    #endregion
                 }
                 else
                 {
-                    exito.Text = "Huésped Agregado a Reserva.";
-                    alerta_exito.Visible = true;
-                    alerta.Visible = false;
-                    MiSesionO.Add(detalle);
-                    btnVer.Enabled = true;
-                    btnReservar.Enabled = true;
-                    ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modal", "$('#exampleModal2').modal();", true);
+                    alerta_exito.Visible = false;
+                    error.Text = "Para crear una reserva debe seleccionar todos los campos";
+                    alerta.Visible = true;
                 }
-                CargarGridView(MiSesionO);
             }
             catch (Exception ex)
             {
@@ -224,10 +267,44 @@ namespace Web.Cliente
                 }
                 CargarGridView(MiSesionO);
 
+                #region Precio Total
+                Service1 s = new Service1();
+                XmlSerializer ser = new XmlSerializer(typeof(Modelo.MinutaCollection));
+                string minuta = s.ListarMinuta();
+                StringReader reader = new StringReader(minuta);
+                MinutaCollection coleccionMinuta = (MinutaCollection)ser.Deserialize(reader);
+
+                XmlSerializer ser2 = new XmlSerializer(typeof(Modelo.CategoriaHabitacionCollection));
+                string categoria = s.ListarCategoriaHabitacion();
+                StringReader reader2 = new StringReader(categoria);
+                CategoriaHabitacionCollection coleccionCategoria = (CategoriaHabitacionCollection)ser2.Deserialize(reader2);
+
+                if (MiSesionO.Count > 0)
+                {
+                    int precio = 0;
+
+                    foreach (DetalleOrden o in MiSesionO)
+                    {
+                        List<Modelo.Minuta> minutas = (from consulta in coleccionMinuta
+                                                       where consulta.ID_PENSION == o.ID_PENSION
+                                                       select consulta).ToList();
+
+                        List<Modelo.CategoriaHabitacion> categorias = (from consulta in coleccionCategoria
+                                                                       where consulta.ID_CATEGORIA_HABITACION == o.ID_CATEGORIA_HABITACION
+                                                                       select consulta).ToList();
+
+                        precio = precio + minutas[0].VALOR_PENSION + categorias[0].PRECIO_CATEGORIA;
+                    }
+
+                    txtPrecio.Text = precio + "";
+                }
+                #endregion
+
                 if (MiSesionO.Count == 0)
                 {
                     btnVer.Enabled = false;
                     btnReservar.Enabled = false;
+                    txtPrecio.Text = "0";
                 }
             }
             catch (Exception ex)
@@ -341,10 +418,12 @@ namespace Web.Cliente
                                     StringWriter writer2 = new StringWriter();
                                     sr2.Serialize(writer2,orden);
 
-                                    if (s.AgregarReserva(writer2.ToString())) {
+                                    if (s.AgregarReserva(writer2.ToString()))
+                                    {
                                         bool v_exito = true;
 
-                                        foreach (DetalleOrden o in MiSesionO) {
+                                        foreach (DetalleOrden o in MiSesionO)
+                                        {
                                             Modelo.DetalleOrden detalle = new Modelo.DetalleOrden();
                                             detalle.RUT_HUESPED = o.RUT_HUESPED;
                                             detalle.ID_PENSION = o.ID_PENSION;
@@ -353,22 +432,64 @@ namespace Web.Cliente
 
                                             XmlSerializer sr3 = new XmlSerializer(typeof(Modelo.DetalleOrden));
                                             StringWriter writer3 = new StringWriter();
-                                            sr3.Serialize(writer3,detalle);
+                                            sr3.Serialize(writer3, detalle);
 
-                                            if (!s.AgregarDetalleReserva(writer3.ToString())) {
+                                            if (!s.AgregarDetalleReserva(writer3.ToString()))
+                                            {
                                                 v_exito = false;
                                             }
                                         }
-                                        if (v_exito) {
-                                            Response.Write("<script language='javascript'>window.alert('Reserva Realizada. Espere que su solicitud sea aceptada');window.location='../Cliente/WebVerHistorial.aspx';</script>");
+                                        if (v_exito)
+                                        {
+                                            #region Precio Total con Días
+
+                                            var date = orden.FECHA_SALIDA - orden.FECHA_LLEGADA;
+                                            int dias = date.Days + 1;
+
+                                            XmlSerializer ser = new XmlSerializer(typeof(Modelo.MinutaCollection));
+                                            string minuta = s.ListarMinuta();
+                                            StringReader reader = new StringReader(minuta);
+                                            MinutaCollection coleccionMinuta = (MinutaCollection)ser.Deserialize(reader);
+
+                                            XmlSerializer ser2 = new XmlSerializer(typeof(Modelo.CategoriaHabitacionCollection));
+                                            string categoria = s.ListarCategoriaHabitacion();
+                                            StringReader reader2 = new StringReader(categoria);
+                                            CategoriaHabitacionCollection coleccionCategoria = (CategoriaHabitacionCollection)ser2.Deserialize(reader2);
+
+                                            int precio = 0;
+
+                                            if (MiSesionO.Count > 0)
+                                            {
+
+
+                                                foreach (DetalleOrden o in MiSesionO)
+                                                {
+                                                    List<Modelo.Minuta> minutas = (from consulta in coleccionMinuta
+                                                                                   where consulta.ID_PENSION == o.ID_PENSION
+                                                                                   select consulta).ToList();
+
+                                                    List<Modelo.CategoriaHabitacion> categorias = (from consulta in coleccionCategoria
+                                                                                                   where consulta.ID_CATEGORIA_HABITACION == o.ID_CATEGORIA_HABITACION
+                                                                                                   select consulta).ToList();
+
+                                                    precio = precio + ((minutas[0].VALOR_PENSION + categorias[0].PRECIO_CATEGORIA) * dias);
+                                                }
+
+                                                txtPrecio.Text = precio + "";
+                                            }
+                                            #endregion
+
+                                            Response.Write("<script language='javascript'>window.alert('Reserva Realizada, El Precio Total de su estadía será de: $" + precio + ". Espere que su solicitud sea aceptada');window.location='../Cliente/WebVerHistorial.aspx';</script>");
                                         }
-                                        else {
+                                        else
+                                        {
                                             alerta_exito.Visible = false;
                                             error.Text = "No se ha podido realizar la reserva";
                                             alerta.Visible = true;
                                         }
                                     }
-                                    else {
+                                    else
+                                    {
                                         alerta_exito.Visible = false;
                                         error.Text = "No se ha podido realizar la reserva";
                                         alerta.Visible = true;
@@ -506,7 +627,7 @@ namespace Web.Cliente
             ddlRut.Items.Insert(0,new ListItem("Seleccione Huesped...","0"));
 
             ddlCategoria.DataSource = coleccionCategoria;
-            ddlCategoria.DataTextField = "NOMBRE_CATEGORIA";
+            ddlCategoria.DataTextField = "NombreYPrecio";
             ddlCategoria.DataValueField = "ID_CATEGORIA_HABITACION";
             ddlCategoria.DataBind();
             ddlCategoria.Items.Insert(0,new ListItem("Seleccione Categoria de Habitación...","0"));
