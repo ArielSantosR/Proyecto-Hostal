@@ -140,7 +140,11 @@
     <Content Include="Cliente\WebVerHistorial.aspx" />
     <Content Include="Empleado\WebAsignacion.aspx" />
     <Content Include="Empleado\WebAsignarHabitacion.aspx" />
+<<<<<<< HEAD
     <Content Include="Empleado\WebCrearBoleta.aspx" />
+=======
+    <Content Include="Empleado\WebClientesAsignados.aspx" />
+>>>>>>> 444ebab66c5ea3cf6e1a5100b4d60ff62afb503f
     <Content Include="Empleado\WebCrearDetalle.aspx" />
     <Content Include="Empleado\WebCrearFactura.aspx" />
     <Content Include="Empleado\WebCrearMinuta.aspx" />
@@ -486,12 +490,21 @@
     <Compile Include="Empleado\WebAsignarHabitacion.aspx.designer.cs">
       <DependentUpon>WebAsignarHabitacion.aspx</DependentUpon>
     </Compile>
+<<<<<<< HEAD
     <Compile Include="Empleado\WebCrearBoleta.aspx.cs">
       <DependentUpon>WebCrearBoleta.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Empleado\WebCrearBoleta.aspx.designer.cs">
       <DependentUpon>WebCrearBoleta.aspx</DependentUpon>
+=======
+    <Compile Include="Empleado\WebClientesAsignados.aspx.cs">
+      <DependentUpon>WebClientesAsignados.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Empleado\WebClientesAsignados.aspx.designer.cs">
+      <DependentUpon>WebClientesAsignados.aspx</DependentUpon>
+>>>>>>> 444ebab66c5ea3cf6e1a5100b4d60ff62afb503f
     </Compile>
     <Compile Include="Empleado\WebCrearDetalle.aspx.cs">
       <DependentUpon>WebCrearDetalle.aspx</DependentUpon>

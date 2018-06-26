@@ -20,6 +20,7 @@
                         <center> <i class="fas fa-file fa-8x"> </i> </center>
                     </div>
                 </div>
+<<<<<<< HEAD
 
                 <div class="row" style="margin-top: 20px;">
                     <div class="col-md-4">
@@ -29,6 +30,16 @@
                             <asp:Button runat="server" Text="Reservas Pendientes" ID="btnRegistrarOrden" CssClass="btn btn-primary btn-lg btn-block login-button" Style="font-size: 15px" OnClick="btnRegistrarOrden_Click" />
                             <asp:Button runat="server" Text="Crear Minuta" ID="btnMinuta" CssClass="btn btn-primary btn-lg btn-block login-button" Style="font-size: 15px" OnClick="btnMinuta_Click" />
                         </div>
+=======
+                    
+                <div class="col-md-4">
+                      <asp:button runat="server" Text="Pedidos" CssClass="btn btn-primary active  btn-lg btn-block login-button" data-toggle="collapse" data-target="#pedidos" OnClientClick="return false" />
+                    <div id="pedidos" class="collapse" style="margin-top: 10px;">
+                     <asp:button runat="server" text="Crear Pedido" ID="btnCrearPedido" CssClass="btn btn-primary btn-lg btn-block login-button"  style="font-size: 15px" OnClick="btnCrearPedido_Click" />
+                     <asp:button runat="server" text="Recepcionar Pedido" ID="btnRecepcionarPedido" CssClass="btn btn-primary btn-lg btn-block login-button" style="font-size: 15px" OnClick="btnRecepcionarPedido_Click" />
+                     <asp:button runat="server" text="Historial de Pedidos" ID="btnHistorial" cssClass="btn btn-primary btn-lg btn-block login-button" style="font-size: 15px" OnClick="btnHistorial_Click"   />
+                     <asp:button runat="server" text="Inventario" ID="btnInventario" cssClass="btn btn-primary btn-lg btn-block login-button" style="font-size: 15px" OnClick="btnHistorial_Click"   />
+>>>>>>> 444ebab66c5ea3cf6e1a5100b4d60ff62afb503f
                     </div>
 
                     <div class="col-md-4">

@@ -119,6 +119,7 @@ namespace Web
             Response.Redirect("WebHistorialPedidos.aspx");
         }
 
+<<<<<<< HEAD
         protected void btnOrdenesFacturar_Click(object sender,EventArgs e) {
             Response.Redirect("WebVerOrdenesFacturar.aspx");
         }
@@ -129,6 +130,11 @@ namespace Web
 
         protected void btnVerBoletas_Click(object sender,EventArgs e) {
             Response.Redirect("WebVerBoletas.aspx");
+=======
+        protected void btnInventario_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("../Empleado/WebInventario.aspx");
+>>>>>>> 444ebab66c5ea3cf6e1a5100b4d60ff62afb503f
         }
     }
 }
