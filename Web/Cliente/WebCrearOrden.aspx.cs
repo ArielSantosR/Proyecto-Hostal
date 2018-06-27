@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -353,8 +354,8 @@ namespace Web.Cliente
         protected void btnReservar_Click(object sender, EventArgs e)
         {
             try {
-                DateTime fechaLlegada = DateTime.Parse(txtFechaInicio.Text);
-                DateTime fechaSalida = DateTime.Parse(txtFechaFinal.Text);
+                DateTime fechaLlegada = DateTime.Parse(txtFechaInicio.Text, CultureInfo.CreateSpecificCulture("es-ES"));
+                DateTime fechaSalida = DateTime.Parse(txtFechaFinal.Text, CultureInfo.CreateSpecificCulture("es-ES"));
                 if (MiSesion.TIPO_USUARIO.Equals(Tipo_Usuario.Cliente.ToString())) {
                     if (MiSesionO.Count > 0) {
                         if (DateTime.Compare(fechaLlegada,DateTime.Today) >= 0 && DateTime.Compare(fechaSalida,fechaLlegada) >= 0) {

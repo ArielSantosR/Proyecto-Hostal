@@ -12,9 +12,12 @@ namespace Datos
     {
         HostalEntities ent = new HostalEntities();
 
-        public List<DETALLE_HABITACION> listarDetalleHabitacion()
+        public List<DETALLE_HABITACION> listarDetalleHabitacion(CLIENTE cliente)
         {
-            return ent.DETALLE_HABITACION.ToList();
+            List<DETALLE_HABITACION> lista = (from detalle in ent.DETALLE_HABITACION
+                                              where detalle.RUT_CLIENTE == cliente.RUT_CLIENTE
+                                                select detalle).ToList();
+            return lista;
         }
 
     }

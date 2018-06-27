@@ -44,6 +44,7 @@
                             <div id="Habitacion" class="collapse" style="margin-top: 20px; margin-bottom: 20px">
                                 <asp:button runat="server" text="Reservas Pendientes" ID="btnReservPendien" CssClass="btn btn-primary btn-lg btn-block login-button" style="font-size: 15px" OnClick="btnReservPendien_Click"  />
                                 <asp:button runat="server" text="Asignar Habitación" ID="btnAsignarHabitacion" CssClass="btn btn-primary btn-lg btn-block login-button" style="font-size: 15px" OnClick="btnAsignarHabitacion_Click" />
+                                <asp:button runat="server" text="Clientes Asignados" ID="btnClienteAsignado" CssClass="btn btn-primary btn-lg btn-block login-button" style="font-size: 15px" OnClick="btnClienteAsignado_Click" />
                             </div>
 
                             <asp:button runat="server" Text="Gestión Productos" CssClass="btn btn-danger  btn-lg btn-block login-button" data-toggle="collapse" data-target="#Producto" OnClientClick="return false" style="margin-top: 10px"/>

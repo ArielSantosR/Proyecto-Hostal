@@ -199,5 +199,10 @@ namespace Web
         {
             Response.Redirect("../Empleado/WebInventario.aspx");
         }
+
+        protected void btnClienteAsignado_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("../Empleado/WebClientesAsignados.aspx");
+        }
     }
 }

@@ -86,6 +86,7 @@
                             <asp:BoundField DataField="RUT_CLIENTE" HeaderText="RUT Cliente" />
                             <asp:BoundField DataField="ESTADO_ORDEN" HeaderText="Estado Orden" />
                             <asp:BoundField DataField="COMENTARIO" HeaderText="Comentario" />
+                            <asp:BoundField DataField="MONTO_TOTAL" HeaderText="Monto Total" />
                             <asp:TemplateField>
                                 <ItemTemplate>
                                     <asp:LinkButton ID="btnInfo2" CssClass="btn btn-info" CommandArgument='<%#Eval("NUMERO_ORDEN")%>' OnClick="btnInfo2_Click" Text="Detalles" runat="server" />
@@ -122,6 +123,7 @@
                 <asp:BoundField DataField="RUT_CLIENTE" HeaderText="RUT Cliente" />
                 <asp:BoundField DataField="ESTADO_ORDEN" HeaderText="Estado Orden" />
                 <asp:BoundField DataField="COMENTARIO" HeaderText="Comentario" />
+                <asp:BoundField DataField="MONTO_TOTAL" HeaderText="Monto Total" />
                 <asp:TemplateField>
                     <ItemTemplate>
                         <asp:LinkButton ID="btnInfo2" CssClass="btn btn-info" CommandArgument='<%#Eval("NUMERO_ORDEN")%>' OnClick="btnInfo2_Click" Text="Ver Detalle" runat="server" />
@@ -131,9 +133,37 @@
         </asp:GridView>
     </div>
 
-
-
-
+    <div style="display: flex; justify-content: center; margin-bottom: 70px">
+        <asp:GridView ID="gvOrdenAsignada" AutoGenerateColumns="false" runat="server" ForeColor="#333333" GridLines="Vertical">
+            <AlternatingRowStyle BackColor="White" />
+            <EditRowStyle BackColor="#2461BF" />
+            <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+            <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+            <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+            <RowStyle BackColor="#EFF3FB" />
+            <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
+            <SortedAscendingCellStyle BackColor="#F5F7FB" />
+            <SortedAscendingHeaderStyle BackColor="#6D95E1" />
+            <SortedDescendingCellStyle BackColor="#E9EBEF" />
+            <SortedDescendingHeaderStyle BackColor="#4870BE" />
+            <Columns>
+                <asp:BoundField DataField="NUMERO_ORDEN" HeaderText="Número de Reserva" />
+                <asp:BoundField DataField="CANTIDAD_HUESPEDES" HeaderText="Cantidad de Huéspedes" />
+                <asp:BoundField DataField="FechaLlegada" HeaderText="Fecha de Llegada" />
+                <asp:BoundField DataField="FechaSalida" HeaderText="Fecha de Salida" />
+                <asp:BoundField DataField="RUT_EMPLEADO" HeaderText="RUT Empleado" />
+                <asp:BoundField DataField="RUT_CLIENTE" HeaderText="RUT Cliente" />
+                <asp:BoundField DataField="ESTADO_ORDEN" HeaderText="Estado Orden" />
+                <asp:BoundField DataField="COMENTARIO" HeaderText="Comentario" />
+                <asp:BoundField DataField="MONTO_TOTAL" HeaderText="Monto Total" />
+                <asp:TemplateField>
+                    <ItemTemplate>
+                        <asp:LinkButton ID="btnInfo3" CssClass="btn btn-info" CommandArgument='<%#Eval("RUT_CLIENTE")%>' OnClick="btnInfo3_Click" Text="Ver Detalle" runat="server" />
+                    </ItemTemplate>
+                </asp:TemplateField>
+            </Columns>
+        </asp:GridView>
+    </div>
 
     <asp:ScriptManager runat="server"></asp:ScriptManager>
 
@@ -166,6 +196,48 @@
                                 <asp:BoundField DataField="RUT_HUESPED" HeaderText="RUT Huésped" />
                                 <asp:BoundField DataField="ID_CATEGORIA_HABITACION" HeaderText="ID Categoría" />
                                 <asp:BoundField DataField="ID_PENSION" HeaderText="ID Pensión" />
+                            </Columns>
+                        </asp:GridView>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel2">Habitación Asignada</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div style="display: flex; justify-content: center; margin-bottom: 70px">
+                        <asp:GridView ID="gvDetalle2" AutoGenerateColumns="false" runat="server" ForeColor="#333333" GridLines="Vertical">
+                            <AlternatingRowStyle BackColor="White" />
+                            <EditRowStyle BackColor="#2461BF" />
+                            <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+                            <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+                            <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+                            <RowStyle BackColor="#EFF3FB" />
+                            <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
+                            <SortedAscendingCellStyle BackColor="#F5F7FB" />
+                            <SortedAscendingHeaderStyle BackColor="#6D95E1" />
+                            <SortedDescendingCellStyle BackColor="#E9EBEF" />
+                            <SortedDescendingHeaderStyle BackColor="#4870BE" />
+                            <Columns>
+                                <asp:BoundField DataField="ID_DETALLE_H" HeaderText="ID Detalle" />
+                                <asp:BoundField DataField="NUMERO_HABITACION" HeaderText="Número de Habitación" />
+                                <asp:BoundField DataField="RUT_CLIENTE" HeaderText="RUT Cliente" />
+                                <asp:BoundField DataField="RUT_HUESPED" HeaderText="RUT Huésped" />
+                                <asp:BoundField DataField="ID_PENSION" HeaderText="ID Pensión" />
+                                <asp:BoundField DataField="FechaLlegada" HeaderText="Fecha de Llegada" />
+                                <asp:BoundField DataField="FechaSalida" HeaderText="Fecha de Salida" />
                             </Columns>
                         </asp:GridView>
                     </div>

@@ -58,12 +58,13 @@
             <Columns>
                 <asp:BoundField DataField="NUMERO_ORDEN" HeaderText="Número de Reserva" />
                 <asp:BoundField DataField="CANTIDAD_HUESPEDES" HeaderText="Cantidad de Huéspedes" />
-                <asp:BoundField DataField="FECHA_LLEGADA" HeaderText="Fecha de Llegada" />
-                <asp:BoundField DataField="FECHA_SALIDA" HeaderText="Fecha de Salida" />
+                <asp:BoundField DataField="FechaLlegada" HeaderText="Fecha de Llegada" />
+                <asp:BoundField DataField="FechaSalida" HeaderText="Fecha de Salida" />
                 <asp:BoundField DataField="RUT_EMPLEADO" HeaderText="RUT Empleado" />
                 <asp:BoundField DataField="RUT_CLIENTE" HeaderText="RUT Cliente" />
                 <asp:BoundField DataField="ESTADO_ORDEN" HeaderText="Estado Orden" />
                 <asp:BoundField DataField="COMENTARIO" HeaderText="Comentario" />
+                <asp:BoundField DataField="MONTO_TOTAL" HeaderText="Monto Total" />
                 <asp:TemplateField>
                     <ItemTemplate>
                         <asp:LinkButton ID="btnInfo2" CssClass="btn btn-info" CommandArgument='<%#Eval("NUMERO_ORDEN")%>' OnClick="btnInfo2_Click" Text="Ver Detalle" runat="server" />

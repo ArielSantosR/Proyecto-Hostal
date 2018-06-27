@@ -39,10 +39,6 @@
                             <small>Bebestibles y servicio de chofer se cobran por separado.</small>
 
                         </div>
-                       <strong> <li data-toggle="collapse" data-target="#dolares" style="cursor: pointer;">¿Se puede pagar con dólares?</li></strong>
-                        <div id="dolares" class="collapse">
-                            Nuestra plataforma está creada para mostrarle a los clientes que lo necesiten el valor de los servicios convertidos en dólares.
-                        </div>
                        <strong> <li data-toggle="collapse" data-target="#cancelar" style="cursor: pointer;">¿Que hago si quiero cancelar mi reserva?</li></strong>
                         <div id="cancelar" class="collapse">
                             Usted podrá cancelar su reserva a través de la plataforma en el historial de sus reservas.

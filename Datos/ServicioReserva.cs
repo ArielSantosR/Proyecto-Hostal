@@ -32,7 +32,8 @@ namespace Datos
         {
             var lista = (from consulta in ent.ORDEN_COMPRA
                          where consulta.RUT_CLIENTE == cliente.RUT_CLIENTE
-                         && !consulta.ESTADO_ORDEN.Equals("Pendiente") 
+                         && !consulta.ESTADO_ORDEN.Equals("Pendiente")
+                         && !consulta.ESTADO_ORDEN.Equals("Asignado") 
                          orderby consulta.NUMERO_ORDEN
                          select consulta).ToList();
             return lista;
@@ -42,6 +43,15 @@ namespace Datos
         {
             var lista = (from consulta in ent.ORDEN_COMPRA
                          where consulta.RUT_CLIENTE == cliente.RUT_CLIENTE && consulta.ESTADO_ORDEN.Equals("Pendiente")
+                         orderby consulta.NUMERO_ORDEN
+                         select consulta).ToList();
+            return lista;
+        }
+
+        public List<ORDEN_COMPRA> HistorialOrdenCompraAsignado(CLIENTE cliente)
+        {
+            var lista = (from consulta in ent.ORDEN_COMPRA
+                         where consulta.RUT_CLIENTE == cliente.RUT_CLIENTE && consulta.ESTADO_ORDEN.Equals("Asignado")
                          orderby consulta.NUMERO_ORDEN
                          select consulta).ToList();
             return lista;
