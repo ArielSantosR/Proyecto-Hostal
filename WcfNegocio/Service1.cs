@@ -1988,6 +1988,7 @@ namespace WcfNegocio
             oDatos.CANTIDAD_HUESPEDES = o.CANTIDAD_HUESPEDES;
             oDatos.ESTADO_ORDEN = o.ESTADO_ORDEN;
             oDatos.FECHA_SALIDA = o.FECHA_SALIDA;
+            oDatos.MONTO_TOTAL = o.MONTO_TOTAL;
 
             return serv.AgregarOrdenCompra(oDatos);
         }
