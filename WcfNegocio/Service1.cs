@@ -2156,6 +2156,9 @@ namespace WcfNegocio
                     oModelo.ID_CATEGORIA_HABITACION = o.ID_CATEGORIA_HABITACION;
                     oModelo.ID_DETALLE = o.ID_DETALLE;
                     oModelo.ESTADO = o.ESTADO;
+                    oModelo.ID_TIPO_HABITACION = o.ID_TIPO_HABITACION;
+                    oModelo.VALOR_HABITACION = o.VALOR_HABITACION;
+                    oModelo.VALOR_MINUTA = o.VALOR_MINUTA;
 
                     listaDetalle2.Add(oModelo);
                 }
@@ -2276,6 +2279,9 @@ namespace WcfNegocio
                     oModelo.ID_CATEGORIA_HABITACION = o.ID_CATEGORIA_HABITACION;
                     oModelo.ID_DETALLE = o.ID_DETALLE;
                     oModelo.ESTADO = o.ESTADO;
+                    oModelo.ID_TIPO_HABITACION = o.ID_TIPO_HABITACION;
+                    oModelo.VALOR_HABITACION = o.VALOR_HABITACION;
+                    oModelo.VALOR_MINUTA = o.VALOR_MINUTA;
 
                     listaDetalle2.Add(oModelo);
                 }
@@ -2317,6 +2323,9 @@ namespace WcfNegocio
                     oModelo.ID_CATEGORIA_HABITACION = o.ID_CATEGORIA_HABITACION;
                     oModelo.ID_DETALLE = o.ID_DETALLE;
                     oModelo.ESTADO = o.ESTADO;
+                    oModelo.ID_TIPO_HABITACION = o.ID_TIPO_HABITACION;
+                    oModelo.VALOR_HABITACION = o.VALOR_HABITACION;
+                    oModelo.VALOR_MINUTA = o.VALOR_MINUTA;
 
                     listaDetalle2.Add(oModelo);
                 }
@@ -2352,6 +2361,9 @@ namespace WcfNegocio
                 d.RUT_HUESPED = Datos2.RUT_HUESPED;
                 d.ID_CATEGORIA_HABITACION = Datos2.ID_CATEGORIA_HABITACION;
                 d.ESTADO = Datos2.ESTADO;
+                d.ID_TIPO_HABITACION = Datos2.ID_TIPO_HABITACION;
+                d.VALOR_HABITACION = Datos2.VALOR_HABITACION;
+                d.VALOR_MINUTA = Datos2.VALOR_MINUTA;
 
                 return d;
             }
@@ -2372,6 +2384,9 @@ namespace WcfNegocio
             dDatos.ESTADO = d.ESTADO;
             dDatos.RUT_HUESPED = d.RUT_HUESPED;
             dDatos.NUMERO_ORDEN = d.NUMERO_ORDEN;
+            dDatos.ID_TIPO_HABITACION = d.ID_TIPO_HABITACION;
+            dDatos.VALOR_HABITACION = d.VALOR_HABITACION;
+            dDatos.VALOR_MINUTA = d.VALOR_MINUTA;
 
             return servicio.EditarDetalleReserva(dDatos);
         }
