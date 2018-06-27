@@ -83,7 +83,7 @@ namespace Web.Cliente
 
                         if (coleccionHuesped.Count == 0)
                         {
-                            Response.Write("<script language='javascript'>window.alert('Para hacer una Reserva debe registrar huéspedes primero');window.location='../Hostal/WebAgregarPasajeros.aspx';</script>");
+                            Response.Write("<script language='javascript'>window.alert('Para hacer una Reserva debe registrar huéspedes primero');window.location='../Cliente/WebAgregarPasajeros.aspx';</script>");
                         }
 
                         string categoria_habitacion = service.ListarCategoriaHabitacion();
@@ -378,6 +378,50 @@ namespace Web.Cliente
                                 orden.RUT_CLIENTE = cliente2.RUT_CLIENTE;
                                 orden.ESTADO_ORDEN = "Pendiente";
 
+                                #region Precio Total con Días
+
+                                var date = orden.FECHA_SALIDA - orden.FECHA_LLEGADA;
+                                int dias = date.Days;
+
+                                XmlSerializer ser = new XmlSerializer(typeof(Modelo.MinutaCollection));
+                                string minuta = s.ListarMinuta();
+                                StringReader reader = new StringReader(minuta);
+                                MinutaCollection coleccionMinuta = (MinutaCollection)ser.Deserialize(reader);
+
+                                XmlSerializer ser2 = new XmlSerializer(typeof(Modelo.CategoriaHabitacionCollection));
+                                string categoria = s.ListarCategoriaHabitacion();
+                                StringReader reader2 = new StringReader(categoria);
+                                CategoriaHabitacionCollection coleccionCategoria = (CategoriaHabitacionCollection)ser2.Deserialize(reader2);
+
+                                List<TipoHabitacion> coleccionTipos = TipoHabitacionCollection.ListarTipos();
+
+                                int precio = 0;
+
+                                if (MiSesionO.Count > 0) {
+
+
+                                    foreach (DetalleOrden o in MiSesionO) {
+                                        List<Modelo.Minuta> minutas = (from consulta in coleccionMinuta
+                                                                       where consulta.ID_PENSION == o.ID_PENSION
+                                                                       select consulta).ToList();
+
+                                        List<Modelo.CategoriaHabitacion> categorias = (from consulta in coleccionCategoria
+                                                                                       where consulta.ID_CATEGORIA_HABITACION == o.ID_CATEGORIA_HABITACION
+                                                                                       select consulta).ToList();
+                                        List<Modelo.TipoHabitacion> tipos = (from consulta in coleccionTipos
+                                                                             where consulta.ID_TIPO_HABITACION == o.ID_TIPO_HABITACION
+                                                                             select consulta).ToList();
+
+
+                                        precio = precio + ((minutas[0].VALOR_PENSION + categorias[0].PRECIO_CATEGORIA + tipos[0].PRECIO_TIPO) * dias);
+                                    }
+
+                                    txtPrecio.Text = precio + "";
+                                }
+                                #endregion
+
+                                orden.MONTO_TOTAL = precio;
+
                                 XmlSerializer sr2 = new XmlSerializer(typeof(Modelo.OrdenCompra));
                                 StringWriter writer2 = new StringWriter();
                                 sr2.Serialize(writer2,orden);
@@ -394,6 +438,7 @@ namespace Web.Cliente
                                         detalle.VALOR_HABITACION = o.VALOR_HABITACION;
                                         detalle.VALOR_MINUTA = o.VALOR_MINUTA;
                                         detalle.ESTADO = "Pendiente";
+                                        
 
                                         XmlSerializer sr3 = new XmlSerializer(typeof(Modelo.DetalleOrden));
                                         StringWriter writer3 = new StringWriter();
@@ -404,49 +449,7 @@ namespace Web.Cliente
                                         }
                                     }
                                     if (v_exito) {
-                                        #region Precio Total con Días
-
-                                        var date = orden.FECHA_SALIDA - orden.FECHA_LLEGADA;
-                                        int dias = date.Days;
-
-                                        XmlSerializer ser = new XmlSerializer(typeof(Modelo.MinutaCollection));
-                                        string minuta = s.ListarMinuta();
-                                        StringReader reader = new StringReader(minuta);
-                                        MinutaCollection coleccionMinuta = (MinutaCollection)ser.Deserialize(reader);
-
-                                        XmlSerializer ser2 = new XmlSerializer(typeof(Modelo.CategoriaHabitacionCollection));
-                                        string categoria = s.ListarCategoriaHabitacion();
-                                        StringReader reader2 = new StringReader(categoria);
-                                        CategoriaHabitacionCollection coleccionCategoria = (CategoriaHabitacionCollection)ser2.Deserialize(reader2);
-
-                                        List<TipoHabitacion> coleccionTipos = TipoHabitacionCollection.ListarTipos();
-
-                                        int precio = 0;
-
-                                        if (MiSesionO.Count > 0) {
-
-
-                                            foreach (DetalleOrden o in MiSesionO) {
-                                                List<Modelo.Minuta> minutas = (from consulta in coleccionMinuta
-                                                                               where consulta.ID_PENSION == o.ID_PENSION
-                                                                               select consulta).ToList();
-
-                                                List<Modelo.CategoriaHabitacion> categorias = (from consulta in coleccionCategoria
-                                                                                               where consulta.ID_CATEGORIA_HABITACION == o.ID_CATEGORIA_HABITACION
-                                                                                               select consulta).ToList();
-                                                List<Modelo.TipoHabitacion> tipos = (from consulta in coleccionTipos
-                                                                                     where consulta.ID_TIPO_HABITACION == o.ID_TIPO_HABITACION
-                                                                                     select consulta).ToList();
-
-
-                                                precio = precio + ((minutas[0].VALOR_PENSION + categorias[0].PRECIO_CATEGORIA + tipos[0].PRECIO_TIPO) * dias);
-                                            }
-
-                                            txtPrecio.Text = precio + "";
-                                        }
-                                        #endregion
-
-                                        Response.Write("<script language='javascript'>window.alert('Reserva Realizada. Espere que su solicitud sea aceptada');window.location='../Cliente/WebVerHistorial.aspx';</script>");
+                                        Response.Write("<script language='javascript'>window.alert('Reserva Realizada, El Precio Total de su estadía será de: $" + precio + ". Espere que su solicitud sea aceptada');window.location='../Cliente/WebVerHistorial.aspx';</script>");
                                     }
                                     else {
                                         alerta_exito.Visible = false;
@@ -495,6 +498,49 @@ namespace Web.Cliente
                                     orden.RUT_CLIENTE = cliente.RUT_CLIENTE;
                                     orden.ESTADO_ORDEN = Estado_Orden.Pendiente.ToString();
 
+                                    #region Precio Total con Días
+
+                                    var date = orden.FECHA_SALIDA - orden.FECHA_LLEGADA;
+                                    int dias = date.Days;
+
+                                    XmlSerializer ser = new XmlSerializer(typeof(Modelo.MinutaCollection));
+                                    string minuta = s.ListarMinuta();
+                                    StringReader reader = new StringReader(minuta);
+                                    MinutaCollection coleccionMinuta = (MinutaCollection)ser.Deserialize(reader);
+
+                                    XmlSerializer ser2 = new XmlSerializer(typeof(Modelo.CategoriaHabitacionCollection));
+                                    string categoria = s.ListarCategoriaHabitacion();
+                                    StringReader reader2 = new StringReader(categoria);
+                                    CategoriaHabitacionCollection coleccionCategoria = (CategoriaHabitacionCollection)ser2.Deserialize(reader2);
+
+                                    List<TipoHabitacion> coleccionTipos = TipoHabitacionCollection.ListarTipos();
+
+                                    int precio = 0;
+
+                                    if (MiSesionO.Count > 0) {
+
+
+                                        foreach (DetalleOrden o in MiSesionO) {
+                                            List<Modelo.Minuta> minutas = (from consulta in coleccionMinuta
+                                                                           where consulta.ID_PENSION == o.ID_PENSION
+                                                                           select consulta).ToList();
+
+                                            List<Modelo.CategoriaHabitacion> categorias = (from consulta in coleccionCategoria
+                                                                                           where consulta.ID_CATEGORIA_HABITACION == o.ID_CATEGORIA_HABITACION
+                                                                                           select consulta).ToList();
+                                            List<Modelo.TipoHabitacion> tipos = (from consulta in coleccionTipos
+                                                                                 where consulta.ID_TIPO_HABITACION == o.ID_TIPO_HABITACION
+                                                                                 select consulta).ToList();
+
+                                            precio = precio + ((minutas[0].VALOR_PENSION + categorias[0].PRECIO_CATEGORIA + tipos[0].PRECIO_TIPO) * dias);
+                                        }
+
+                                        txtPrecio.Text = precio + "";
+                                    }
+                                    #endregion
+
+                                    orden.MONTO_TOTAL = precio;
+
                                     XmlSerializer sr2 = new XmlSerializer(typeof(Modelo.OrdenCompra));
                                     StringWriter writer2 = new StringWriter();
                                     sr2.Serialize(writer2,orden);
@@ -525,49 +571,6 @@ namespace Web.Cliente
                                         }
                                         if (v_exito)
                                         {
-                                            #region Precio Total con Días
-
-                                            var date = orden.FECHA_SALIDA - orden.FECHA_LLEGADA;
-                                            int dias = date.Days;
-
-                                            XmlSerializer ser = new XmlSerializer(typeof(Modelo.MinutaCollection));
-                                            string minuta = s.ListarMinuta();
-                                            StringReader reader = new StringReader(minuta);
-                                            MinutaCollection coleccionMinuta = (MinutaCollection)ser.Deserialize(reader);
-
-                                            XmlSerializer ser2 = new XmlSerializer(typeof(Modelo.CategoriaHabitacionCollection));
-                                            string categoria = s.ListarCategoriaHabitacion();
-                                            StringReader reader2 = new StringReader(categoria);
-                                            CategoriaHabitacionCollection coleccionCategoria = (CategoriaHabitacionCollection)ser2.Deserialize(reader2);
-
-                                            List<TipoHabitacion> coleccionTipos = TipoHabitacionCollection.ListarTipos();
-
-                                            int precio = 0;
-
-                                            if (MiSesionO.Count > 0)
-                                            {
-
-
-                                                foreach (DetalleOrden o in MiSesionO)
-                                                {
-                                                    List<Modelo.Minuta> minutas = (from consulta in coleccionMinuta
-                                                                                   where consulta.ID_PENSION == o.ID_PENSION
-                                                                                   select consulta).ToList();
-
-                                                    List<Modelo.CategoriaHabitacion> categorias = (from consulta in coleccionCategoria
-                                                                                                   where consulta.ID_CATEGORIA_HABITACION == o.ID_CATEGORIA_HABITACION
-                                                                                                   select consulta).ToList();
-                                                    List<Modelo.TipoHabitacion> tipos = (from consulta in coleccionTipos
-                                                                                         where consulta.ID_TIPO_HABITACION == o.ID_TIPO_HABITACION
-                                                                                         select consulta).ToList();
-
-                                                    precio = precio + ((minutas[0].VALOR_PENSION + categorias[0].PRECIO_CATEGORIA + tipos[0].PRECIO_TIPO) * dias);
-                                                }
-
-                                                txtPrecio.Text = precio + "";
-                                            }
-                                            #endregion
-
                                             Response.Write("<script language='javascript'>window.alert('Reserva Realizada, El Precio Total de su estadía será de: $" + precio + ". Espere que su solicitud sea aceptada');window.location='../Cliente/WebVerHistorial.aspx';</script>");
                                         }
                                         else
