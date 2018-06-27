@@ -19,5 +19,10 @@ namespace Datos
             CATEGORIA_HABITACION c = ent.CATEGORIA_HABITACION.FirstOrDefault(x => x.ID_CATEGORIA_HABITACION == iD_CATEGORIA_HABITACION);
             return c;
         }
+
+        public TIPO_HABITACION BuscarTipo(short iD_TIPO_HABITACION) {
+            TIPO_HABITACION t = ent.TIPO_HABITACION.FirstOrDefault(x => x.ID_TIPO_HABITACION == iD_TIPO_HABITACION);
+            return t;
+        }
     }
 }

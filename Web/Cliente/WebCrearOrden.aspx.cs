@@ -112,6 +112,12 @@ namespace Web.Cliente
                             ddlCategoria.DataBind();
                             ddlCategoria.Items.Insert(0,new ListItem("Seleccione Categoria de Habitación...","0"));
 
+                            ddlTipo.DataSource = TipoHabitacionCollection.ListarTipos();
+                            ddlTipo.DataTextField = "NombreYPrecio";
+                            ddlTipo.DataValueField = "ID_TIPO_HABITACION";
+                            ddlTipo.DataBind();
+                            ddlTipo.Items.Insert(0,new ListItem("Seleccione Tipo de Habitación...","0"));
+
                             ddlPension.DataSource = coleccionMinuta;
                             ddlPension.DataTextField = "NombreYPrecio";
                             ddlPension.DataValueField = "ID_PENSION";
@@ -134,6 +140,7 @@ namespace Web.Cliente
                             ddlCategoria.Enabled = false;
                             ddlPension.Enabled = false;
                             ddlRut.Enabled = false;
+                            ddlTipo.Enabled = false;
 
                             ddlClientes.DataSource = ClienteCollection.ListaClientes();
                             ddlClientes.DataTextField = "NOMBRE_CLIENTE";
@@ -143,6 +150,7 @@ namespace Web.Cliente
                             ddlRut.Items.Insert(0, new ListItem("Seleccione Huesped...", "0"));
                             ddlCategoria.Items.Insert(0,new ListItem("Seleccione Categoria de Habitación...","0"));
                             ddlPension.Items.Insert(0,new ListItem("Seleccione Pensión...","0"));
+                            ddlTipo.Items.Insert(0,new ListItem("Seleccione Tipo de Habitación...","0"));
 
                             MiSesionO = null;
                             btnVer.Enabled = false;
@@ -174,6 +182,22 @@ namespace Web.Cliente
                     detalle.RUT_HUESPED = int.Parse(ddlRut.SelectedValue);
                     detalle.ID_PENSION = short.Parse(ddlPension.SelectedValue);
                     detalle.ID_CATEGORIA_HABITACION = short.Parse(ddlCategoria.SelectedValue);
+                    detalle.ID_TIPO_HABITACION = short.Parse(ddlTipo.SelectedValue);
+
+                    CategoriaHabitacion cat = new CategoriaHabitacion();
+                    cat.ID_CATEGORIA_HABITACION = detalle.ID_CATEGORIA_HABITACION;
+                    cat.BuscarCategoria();
+
+                    TipoHabitacion tipo = new TipoHabitacion();
+                    tipo.ID_TIPO_HABITACION = detalle.ID_TIPO_HABITACION;
+                    tipo.BuscarTipo();
+
+                    Minuta min = new Minuta();
+                    min.ID_PENSION = detalle.ID_PENSION;
+                    min.BuscarMinuta();
+
+                    detalle.VALOR_HABITACION = tipo.PRECIO_TIPO + cat.PRECIO_CATEGORIA;
+                    detalle.VALOR_MINUTA = min.VALOR_PENSION;
                     bool existe = false;
 
                     foreach (DetalleOrden o in MiSesionO)
@@ -213,6 +237,8 @@ namespace Web.Cliente
                     StringReader reader2 = new StringReader(categoria);
                     CategoriaHabitacionCollection coleccionCategoria = (CategoriaHabitacionCollection)ser2.Deserialize(reader2);
 
+                    List<TipoHabitacion> coleccionTipos = TipoHabitacionCollection.ListarTipos();
+
                     if (MiSesionO.Count > 0)
                     {
                         int precio = 0;
@@ -227,7 +253,11 @@ namespace Web.Cliente
                                                                            where consulta.ID_CATEGORIA_HABITACION == o.ID_CATEGORIA_HABITACION
                                                                            select consulta).ToList();
 
-                            precio = precio + minutas[0].VALOR_PENSION + categorias[0].PRECIO_CATEGORIA;
+                            List<Modelo.TipoHabitacion> tipos = (from consulta in coleccionTipos
+                                                                 where consulta.ID_TIPO_HABITACION == o.ID_TIPO_HABITACION
+                                                                 select consulta).ToList();
+
+                            precio = precio + minutas[0].VALOR_PENSION + categorias[0].PRECIO_CATEGORIA + tipos[0].PRECIO_TIPO;
                         }
 
                         txtPrecio.Text = precio + "";
@@ -279,6 +309,8 @@ namespace Web.Cliente
                 StringReader reader2 = new StringReader(categoria);
                 CategoriaHabitacionCollection coleccionCategoria = (CategoriaHabitacionCollection)ser2.Deserialize(reader2);
 
+                List<TipoHabitacion> coleccionTipos = TipoHabitacionCollection.ListarTipos();
+
                 if (MiSesionO.Count > 0)
                 {
                     int precio = 0;
@@ -292,8 +324,11 @@ namespace Web.Cliente
                         List<Modelo.CategoriaHabitacion> categorias = (from consulta in coleccionCategoria
                                                                        where consulta.ID_CATEGORIA_HABITACION == o.ID_CATEGORIA_HABITACION
                                                                        select consulta).ToList();
+                        List<Modelo.TipoHabitacion> tipos = (from consulta in coleccionTipos
+                                                             where consulta.ID_TIPO_HABITACION == o.ID_TIPO_HABITACION
+                                                             select consulta).ToList();
 
-                        precio = precio + minutas[0].VALOR_PENSION + categorias[0].PRECIO_CATEGORIA;
+                        precio = precio + minutas[0].VALOR_PENSION + categorias[0].PRECIO_CATEGORIA + tipos[0].PRECIO_TIPO;
                     }
 
                     txtPrecio.Text = precio + "";
@@ -317,11 +352,12 @@ namespace Web.Cliente
 
         protected void btnReservar_Click(object sender, EventArgs e)
         {
-            try
-            {
+            try {
+                DateTime fechaLlegada = DateTime.Parse(txtFechaInicio.Text);
+                DateTime fechaSalida = DateTime.Parse(txtFechaFinal.Text);
                 if (MiSesion.TIPO_USUARIO.Equals(Tipo_Usuario.Cliente.ToString())) {
                     if (MiSesionO.Count > 0) {
-                        if (calendarFecha.SelectedDate >= DateTime.Today && calendarSalida.SelectedDate >= calendarFecha.SelectedDate) {
+                        if (DateTime.Compare(fechaLlegada,DateTime.Today) >= 0 && DateTime.Compare(fechaSalida,fechaLlegada) >= 0) {
                             Modelo.Cliente cliente = new Modelo.Cliente();
                             cliente.ID_USUARIO = MiSesion.ID_USUARIO;
 
@@ -337,8 +373,8 @@ namespace Web.Cliente
                             if (cliente2 != null) {
                                 Modelo.OrdenCompra orden = new Modelo.OrdenCompra();
                                 orden.CANTIDAD_HUESPEDES = MiSesionO.Count;
-                                orden.FECHA_LLEGADA = calendarFecha.SelectedDate;
-                                orden.FECHA_SALIDA = calendarSalida.SelectedDate;
+                                orden.FECHA_LLEGADA = fechaLlegada;
+                                orden.FECHA_SALIDA = fechaSalida;
                                 orden.RUT_CLIENTE = cliente2.RUT_CLIENTE;
                                 orden.ESTADO_ORDEN = "Pendiente";
 
@@ -354,6 +390,9 @@ namespace Web.Cliente
                                         detalle.RUT_HUESPED = o.RUT_HUESPED;
                                         detalle.ID_PENSION = o.ID_PENSION;
                                         detalle.ID_CATEGORIA_HABITACION = o.ID_CATEGORIA_HABITACION;
+                                        detalle.ID_TIPO_HABITACION = o.ID_TIPO_HABITACION;
+                                        detalle.VALOR_HABITACION = o.VALOR_HABITACION;
+                                        detalle.VALOR_MINUTA = o.VALOR_MINUTA;
                                         detalle.ESTADO = "Pendiente";
 
                                         XmlSerializer sr3 = new XmlSerializer(typeof(Modelo.DetalleOrden));
@@ -365,6 +404,48 @@ namespace Web.Cliente
                                         }
                                     }
                                     if (v_exito) {
+                                        #region Precio Total con Días
+
+                                        var date = orden.FECHA_SALIDA - orden.FECHA_LLEGADA;
+                                        int dias = date.Days;
+
+                                        XmlSerializer ser = new XmlSerializer(typeof(Modelo.MinutaCollection));
+                                        string minuta = s.ListarMinuta();
+                                        StringReader reader = new StringReader(minuta);
+                                        MinutaCollection coleccionMinuta = (MinutaCollection)ser.Deserialize(reader);
+
+                                        XmlSerializer ser2 = new XmlSerializer(typeof(Modelo.CategoriaHabitacionCollection));
+                                        string categoria = s.ListarCategoriaHabitacion();
+                                        StringReader reader2 = new StringReader(categoria);
+                                        CategoriaHabitacionCollection coleccionCategoria = (CategoriaHabitacionCollection)ser2.Deserialize(reader2);
+
+                                        List<TipoHabitacion> coleccionTipos = TipoHabitacionCollection.ListarTipos();
+
+                                        int precio = 0;
+
+                                        if (MiSesionO.Count > 0) {
+
+
+                                            foreach (DetalleOrden o in MiSesionO) {
+                                                List<Modelo.Minuta> minutas = (from consulta in coleccionMinuta
+                                                                               where consulta.ID_PENSION == o.ID_PENSION
+                                                                               select consulta).ToList();
+
+                                                List<Modelo.CategoriaHabitacion> categorias = (from consulta in coleccionCategoria
+                                                                                               where consulta.ID_CATEGORIA_HABITACION == o.ID_CATEGORIA_HABITACION
+                                                                                               select consulta).ToList();
+                                                List<Modelo.TipoHabitacion> tipos = (from consulta in coleccionTipos
+                                                                                     where consulta.ID_TIPO_HABITACION == o.ID_TIPO_HABITACION
+                                                                                     select consulta).ToList();
+
+
+                                                precio = precio + ((minutas[0].VALOR_PENSION + categorias[0].PRECIO_CATEGORIA + tipos[0].PRECIO_TIPO) * dias);
+                                            }
+
+                                            txtPrecio.Text = precio + "";
+                                        }
+                                        #endregion
+
                                         Response.Write("<script language='javascript'>window.alert('Reserva Realizada. Espere que su solicitud sea aceptada');window.location='../Cliente/WebVerHistorial.aspx';</script>");
                                     }
                                     else {
@@ -399,7 +480,7 @@ namespace Web.Cliente
                 }else {
                     if (ddlClientes.SelectedIndex != 0){
                         if (MiSesionO.Count > 0) {
-                            if (calendarFecha.SelectedDate >= DateTime.Today && calendarSalida.SelectedDate >= calendarFecha.SelectedDate) {
+                            if (DateTime.Compare(fechaLlegada,DateTime.Today) >= 0 && DateTime.Compare(fechaSalida,fechaLlegada) >= 0) {
                                 Modelo.Cliente cliente = new Modelo.Cliente();
                                 cliente.RUT_CLIENTE = int.Parse(ddlClientes.SelectedValue.ToString());
                                 Service1 s = new Service1();
@@ -409,8 +490,8 @@ namespace Web.Cliente
                                 if (cliente != null) {
                                     Modelo.OrdenCompra orden = new Modelo.OrdenCompra();
                                     orden.CANTIDAD_HUESPEDES = MiSesionO.Count;
-                                    orden.FECHA_LLEGADA = calendarFecha.SelectedDate;
-                                    orden.FECHA_SALIDA = calendarSalida.SelectedDate;
+                                    orden.FECHA_LLEGADA = fechaLlegada;
+                                    orden.FECHA_SALIDA = fechaSalida;
                                     orden.RUT_CLIENTE = cliente.RUT_CLIENTE;
                                     orden.ESTADO_ORDEN = Estado_Orden.Pendiente.ToString();
 
@@ -428,6 +509,9 @@ namespace Web.Cliente
                                             detalle.RUT_HUESPED = o.RUT_HUESPED;
                                             detalle.ID_PENSION = o.ID_PENSION;
                                             detalle.ID_CATEGORIA_HABITACION = o.ID_CATEGORIA_HABITACION;
+                                            detalle.ID_TIPO_HABITACION = o.ID_TIPO_HABITACION;
+                                            detalle.VALOR_HABITACION = o.VALOR_HABITACION;
+                                            detalle.VALOR_MINUTA = o.VALOR_MINUTA;
                                             detalle.ESTADO = "Pendiente";
 
                                             XmlSerializer sr3 = new XmlSerializer(typeof(Modelo.DetalleOrden));
@@ -444,7 +528,7 @@ namespace Web.Cliente
                                             #region Precio Total con Días
 
                                             var date = orden.FECHA_SALIDA - orden.FECHA_LLEGADA;
-                                            int dias = date.Days + 1;
+                                            int dias = date.Days;
 
                                             XmlSerializer ser = new XmlSerializer(typeof(Modelo.MinutaCollection));
                                             string minuta = s.ListarMinuta();
@@ -455,6 +539,8 @@ namespace Web.Cliente
                                             string categoria = s.ListarCategoriaHabitacion();
                                             StringReader reader2 = new StringReader(categoria);
                                             CategoriaHabitacionCollection coleccionCategoria = (CategoriaHabitacionCollection)ser2.Deserialize(reader2);
+
+                                            List<TipoHabitacion> coleccionTipos = TipoHabitacionCollection.ListarTipos();
 
                                             int precio = 0;
 
@@ -471,8 +557,11 @@ namespace Web.Cliente
                                                     List<Modelo.CategoriaHabitacion> categorias = (from consulta in coleccionCategoria
                                                                                                    where consulta.ID_CATEGORIA_HABITACION == o.ID_CATEGORIA_HABITACION
                                                                                                    select consulta).ToList();
+                                                    List<Modelo.TipoHabitacion> tipos = (from consulta in coleccionTipos
+                                                                                         where consulta.ID_TIPO_HABITACION == o.ID_TIPO_HABITACION
+                                                                                         select consulta).ToList();
 
-                                                    precio = precio + ((minutas[0].VALOR_PENSION + categorias[0].PRECIO_CATEGORIA) * dias);
+                                                    precio = precio + ((minutas[0].VALOR_PENSION + categorias[0].PRECIO_CATEGORIA + tipos[0].PRECIO_TIPO) * dias);
                                                 }
 
                                                 txtPrecio.Text = precio + "";
@@ -571,6 +660,7 @@ namespace Web.Cliente
             Huesped huesped;
             Pension pension;
             CategoriaHabitacion cat;
+            TipoHabitacion tipo;
 
             //Creacion DataTable
             DataTable dt = new DataTable();
@@ -578,7 +668,9 @@ namespace Web.Cliente
                 new DataColumn("RUT_HUESPED", typeof(string)),
                 new DataColumn("NOMBRE_HUESPED", typeof(string)),
                 new DataColumn("PENSION",typeof(string)),
+                new DataColumn("VALOR_PENSION",typeof(string)),
                 new DataColumn("CATEGORIA_HAB",typeof(string)),
+                new DataColumn("VALOR_HAB",typeof(string)),
                 new DataColumn("RUT_ELIMINAR",typeof(int))
             });
 
@@ -596,7 +688,11 @@ namespace Web.Cliente
                 cat.ID_CATEGORIA_HABITACION = d.ID_CATEGORIA_HABITACION;
                 cat.BuscarCategoria();
 
-                dt.Rows.Add(huesped.RUT_HUESPED + "-" + huesped.DV_HUESPED,huesped.PNOMBRE_HUESPED + " " + huesped.APP_PATERNO_HUESPED + " " + huesped.APP_MATERNO_HUESPED,pension.NOMBRE_PENSION,cat.NOMBRE_CATEGORIA,d.RUT_HUESPED);
+                tipo = new TipoHabitacion();
+                tipo.ID_TIPO_HABITACION = d.ID_TIPO_HABITACION;
+                tipo.BuscarTipo();
+
+                dt.Rows.Add(huesped.RUT_HUESPED + "-" + huesped.DV_HUESPED,huesped.PNOMBRE_HUESPED + " " + huesped.APP_PATERNO_HUESPED + " " + huesped.APP_MATERNO_HUESPED,pension.NOMBRE_PENSION,"$" + pension.VALOR_PENSION,tipo.NOMBRE_TIPO_HABITACION + "-" + cat.NOMBRE_CATEGORIA,"$" + d.VALOR_HABITACION,d.RUT_HUESPED);
             }
 
             //Carga de GriedView
@@ -638,6 +734,11 @@ namespace Web.Cliente
             ddlPension.DataBind();
             ddlPension.Items.Insert(0,new ListItem("Seleccione Pensión...","0"));
 
+            ddlTipo.DataSource = TipoHabitacionCollection.ListarTipos();
+            ddlTipo.DataTextField = "NombreYPrecio";
+            ddlTipo.DataValueField = "ID_TIPO_HABITACION";
+            ddlTipo.DataBind();
+            ddlTipo.Items.Insert(0,new ListItem("Seleccione Tipo de Habitación...","0"));
         }
 
         protected void ddlClientes_SelectedIndexChanged(object sender,EventArgs e) {
@@ -645,6 +746,7 @@ namespace Web.Cliente
             ddlCategoria.Enabled = true;
             ddlPension.Enabled = true;
             ddlRut.Enabled = true;
+            ddlTipo.Enabled = true;
         }
     }
 }

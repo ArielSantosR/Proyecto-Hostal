@@ -17,6 +17,6 @@ namespace Modelo
         public string ESTADO { get; set; }
         public int VALOR_MINUTA { get; set; }
         public int VALOR_HABITACION { get; set; }
-        public int TIPO_HABITACION { get; set; }
+        public short ID_TIPO_HABITACION { get; set; }
     }
 }

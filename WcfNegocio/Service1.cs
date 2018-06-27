@@ -2003,6 +2003,9 @@ namespace WcfNegocio
             dDatos.ID_PENSION = d.ID_PENSION;
             dDatos.ID_CATEGORIA_HABITACION = d.ID_CATEGORIA_HABITACION;
             dDatos.ESTADO = d.ESTADO;
+            dDatos.ID_TIPO_HABITACION = d.ID_TIPO_HABITACION;
+            dDatos.VALOR_HABITACION = d.VALOR_HABITACION;
+            dDatos.VALOR_MINUTA = d.VALOR_MINUTA;
 
             return serv.AgregarDetalleOrden(dDatos);
         }
