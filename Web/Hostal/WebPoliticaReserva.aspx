@@ -8,7 +8,7 @@
     <div class="main-login main-center">
 	    <div class="row">
 	        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
-		        <h1>POLÍTICAS DE PRIVACIDAD </h1>
+		        <h1>POLÍTICAS DE RESERVA </h1>
 	        </div>
         </div>
 	
