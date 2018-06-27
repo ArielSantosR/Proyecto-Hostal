@@ -2042,6 +2042,7 @@ namespace WcfNegocio
                     oModelo.RUT_CLIENTE = o.RUT_CLIENTE;
                     oModelo.ESTADO_ORDEN = o.ESTADO_ORDEN;
                     oModelo.COMENTARIO = o.COMENTARIO;
+                    oModelo.MONTO_TOTAL = o.MONTO_TOTAL;
 
                     listaOrden2.Add(oModelo);
                 }
@@ -2085,6 +2086,51 @@ namespace WcfNegocio
                     oModelo.RUT_CLIENTE = o.RUT_CLIENTE;
                     oModelo.ESTADO_ORDEN = o.ESTADO_ORDEN;
                     oModelo.COMENTARIO = o.COMENTARIO;
+                    oModelo.MONTO_TOTAL = o.MONTO_TOTAL;
+
+                    listaOrden2.Add(oModelo);
+                }
+
+                XmlSerializer ser2 = new XmlSerializer(typeof(Modelo.OrdenCompraCollection));
+                StringWriter writer2 = new StringWriter();
+                ser2.Serialize(writer2, listaOrden2);
+                writer2.Close();
+                return writer2.ToString();
+            }
+        }
+
+        public string HistorialReservaAsignado(string cliente)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.Cliente));
+            StringReader reader = new StringReader(cliente);
+            Modelo.Cliente pr = (Modelo.Cliente)ser.Deserialize(reader);
+            ServicioReserva serv = new ServicioReserva();
+
+            Datos.CLIENTE cDatos = new Datos.CLIENTE();
+            cDatos.RUT_CLIENTE = pr.RUT_CLIENTE;
+
+            List<Datos.ORDEN_COMPRA> listaOrden = serv.HistorialOrdenCompraAsignado(cDatos);
+
+            if (listaOrden == null)
+            {
+                return null;
+            }
+            else
+            {
+                Modelo.OrdenCompraCollection listaOrden2 = new OrdenCompraCollection();
+
+                foreach (Datos.ORDEN_COMPRA o in listaOrden)
+                {
+                    Modelo.OrdenCompra oModelo = new Modelo.OrdenCompra();
+                    oModelo.NUMERO_ORDEN = o.NUMERO_ORDEN;
+                    oModelo.CANTIDAD_HUESPEDES = o.CANTIDAD_HUESPEDES;
+                    oModelo.FECHA_LLEGADA = o.FECHA_LLEGADA;
+                    oModelo.FECHA_SALIDA = o.FECHA_SALIDA;
+                    oModelo.RUT_EMPLEADO = o.RUT_EMPLEADO;
+                    oModelo.RUT_CLIENTE = o.RUT_CLIENTE;
+                    oModelo.ESTADO_ORDEN = o.ESTADO_ORDEN;
+                    oModelo.COMENTARIO = o.COMENTARIO;
+                    oModelo.MONTO_TOTAL = o.MONTO_TOTAL;
 
                     listaOrden2.Add(oModelo);
                 }
@@ -2122,6 +2168,7 @@ namespace WcfNegocio
                 o.RUT_CLIENTE = Datos2.RUT_CLIENTE;
                 o.ESTADO_ORDEN = Datos2.ESTADO_ORDEN;
                 o.COMENTARIO = Datos2.COMENTARIO;
+                o.MONTO_TOTAL = Datos2.MONTO_TOTAL;
 
                 return o;
             }
@@ -2186,6 +2233,7 @@ namespace WcfNegocio
                 oModelo.RUT_CLIENTE = o.RUT_CLIENTE;
                 oModelo.ESTADO_ORDEN = o.ESTADO_ORDEN;
                 oModelo.COMENTARIO = o.COMENTARIO;
+                oModelo.MONTO_TOTAL = o.MONTO_TOTAL;
 
                 listaOrden.Add(oModelo);
             }
@@ -2220,7 +2268,6 @@ namespace WcfNegocio
 
         public string ListarReservaAceptada()
         {
-
             ServicioReserva servicio = new ServicioReserva();
             List<Datos.ORDEN_COMPRA> orden = servicio.ListarReservaAceptada();
             Modelo.OrdenCompraCollection listaOrden = new Modelo.OrdenCompraCollection();
@@ -2236,6 +2283,7 @@ namespace WcfNegocio
                 oModelo.RUT_CLIENTE = o.RUT_CLIENTE;
                 oModelo.ESTADO_ORDEN = o.ESTADO_ORDEN;
                 oModelo.COMENTARIO = o.COMENTARIO;
+                oModelo.MONTO_TOTAL = o.MONTO_TOTAL;
 
                 listaOrden.Add(oModelo);
             }
@@ -2375,6 +2423,35 @@ namespace WcfNegocio
 
             return servicio.EditarDetalleReserva(dDatos);
         }
+
+        public string ListarReservaAsignada()
+        {
+            ServicioReserva servicio = new ServicioReserva();
+            List<Datos.ORDEN_COMPRA> orden = servicio.ListarReservaAsignada();
+            Modelo.OrdenCompraCollection listaOrden = new Modelo.OrdenCompraCollection();
+
+            foreach (Datos.ORDEN_COMPRA o in orden)
+            {
+                Modelo.OrdenCompra oModelo = new Modelo.OrdenCompra();
+                oModelo.NUMERO_ORDEN = o.NUMERO_ORDEN;
+                oModelo.CANTIDAD_HUESPEDES = o.CANTIDAD_HUESPEDES;
+                oModelo.FECHA_LLEGADA = o.FECHA_LLEGADA;
+                oModelo.FECHA_SALIDA = o.FECHA_SALIDA;
+                oModelo.RUT_EMPLEADO = o.RUT_EMPLEADO;
+                oModelo.RUT_CLIENTE = o.RUT_CLIENTE;
+                oModelo.ESTADO_ORDEN = o.ESTADO_ORDEN;
+                oModelo.COMENTARIO = o.COMENTARIO;
+                oModelo.MONTO_TOTAL = o.MONTO_TOTAL;
+
+                listaOrden.Add(oModelo);
+            }
+
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.OrdenCompraCollection));
+            StringWriter writer = new StringWriter();
+            ser.Serialize(writer, listaOrden);
+            writer.Close();
+            return writer.ToString();
+        }
         #endregion
 
         #region Detalle Habitacion
@@ -2408,11 +2485,17 @@ namespace WcfNegocio
             return serv.AgregarDetalleHabitacion(dDatos);
         }
 
-        public string ListaDetalleHabitacion()
+        public string ListaDetalleHabitacionCliente(string cliente)
         {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.Cliente));
+            StringReader reader = new StringReader(cliente);
+            Modelo.Cliente cl = (Modelo.Cliente)ser.Deserialize(reader);
             ServicioDetalleHabitacion serv = new ServicioDetalleHabitacion();
 
-            List<Datos.DETALLE_HABITACION> listaOrden = serv.listarDetalleHabitacion();
+            Datos.CLIENTE cDatos = new Datos.CLIENTE();
+            cDatos.RUT_CLIENTE = cl.RUT_CLIENTE;
+
+            List<Datos.DETALLE_HABITACION> listaOrden = serv.listarDetalleHabitacion(cDatos);
 
             if (listaOrden == null)
             {
@@ -2431,6 +2514,7 @@ namespace WcfNegocio
                     dModelo.FECHA_SALIDA = d.FECHA_SALIDA;
                     dModelo.RUT_HUESPED = d.RUT_HUESPED;
                     dModelo.RUT_CLIENTE = d.RUT_CLIENTE;
+                    dModelo.NUMERO_HABITACION = d.NUMERO_HABITACION;
 
                     listaDetalle.Add(dModelo);
                 }

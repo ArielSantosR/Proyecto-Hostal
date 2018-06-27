@@ -91,6 +91,15 @@ namespace Web.Cliente
                         reader.Close();
                         gvOrdenPendiente.DataSource = listaPedido2;
                         gvOrdenPendiente.DataBind();
+
+                        string datos3 = service.HistorialReservaAsignado(writer2.ToString());
+                        XmlSerializer ser5 = new XmlSerializer(typeof(Modelo.OrdenCompraCollection));
+                        StringReader reader3 = new StringReader(datos3);
+
+                        Modelo.OrdenCompraCollection listaPedido3 = (Modelo.OrdenCompraCollection)ser5.Deserialize(reader3);
+                        reader.Close();
+                        gvOrdenAsignada.DataSource = listaPedido3;
+                        gvOrdenAsignada.DataBind();
                     }
                     //Else si es el administrador deberia decir algo supongo
                 }
@@ -121,6 +130,22 @@ namespace Web.Cliente
             set
             {
                 Session["Usuario"] = value;
+            }
+        }
+
+        public Modelo.Cliente MiSesionCl
+        {
+            get
+            {
+                if (Session["Cliente"] == null)
+                {
+                    Session["Cliente"] = new Modelo.Cliente();
+                }
+                return (Modelo.Cliente)Session["Cliente"];
+            }
+            set
+            {
+                Session["Cliente"] = value;
             }
         }
 
@@ -223,7 +248,47 @@ namespace Web.Cliente
                 error.Text = "Excepción: " + ex.ToString();
                 alerta.Visible = true;
             }
+        }
 
+        protected void btnInfo3_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                LinkButton btn = (LinkButton)(sender);
+                int rut_cliente = int.Parse(btn.CommandArgument);
+
+                Modelo.Cliente cliente = new Modelo.Cliente();
+                cliente.RUT_CLIENTE = rut_cliente;
+
+                MiSesionCl = cliente;
+
+                if (MiSesionCl.RUT_CLIENTE != 0)
+                {
+                    Service1 s = new Service1();
+                    XmlSerializer sr = new XmlSerializer(typeof(Modelo.Cliente));
+                    StringWriter writer = new StringWriter();
+                    sr.Serialize(writer, cliente);
+
+                    if (s.ListaDetalleHabitacionCliente(writer.ToString()) != null)
+                    {
+                        string datos = s.ListaDetalleHabitacionCliente(writer.ToString());
+                        XmlSerializer ser3 = new XmlSerializer(typeof(Modelo.DetalleHabitacionCollection));
+                        StringReader reader = new StringReader(datos);
+
+                        Modelo.DetalleHabitacionCollection listaDetalle = (Modelo.DetalleHabitacionCollection)ser3.Deserialize(reader);
+                        reader.Close();
+                        gvDetalle2.DataSource = listaDetalle;
+                        gvDetalle2.DataBind();
+                        ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modal", "$('#exampleModal2').modal();", true);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                alerta_exito.Visible = false;
+                error.Text = "Excepción: " + ex.ToString();
+                alerta.Visible = true;
+            }
         }
     }
 }

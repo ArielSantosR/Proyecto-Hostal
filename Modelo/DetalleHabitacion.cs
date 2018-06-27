@@ -16,5 +16,21 @@ namespace Modelo
         public short ID_PENSION { get; set; }
         public System.DateTime FECHA_LLEGADA { get; set; }
         public System.DateTime FECHA_SALIDA { get; set; }
+
+        public string FechaLlegada
+        {
+            get
+            {
+                return FECHA_LLEGADA.ToString("dd/MM/yyyy");
+            }
+        }
+
+        public string FechaSalida
+        {
+            get
+            {
+                return FECHA_SALIDA.ToString("dd/MM/yyyy");
+            }
+        }
     }
 }

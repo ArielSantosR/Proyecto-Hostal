@@ -43,6 +43,9 @@
                         <a class="nav-link" href="../Empleado/WebAsignarHabitacion.aspx">Asignar Habitación</a>
                     </li>
                     <li class="nav-item">
+                         <a class="nav-link" href="../Empleado/WebClientesAsignados.aspx">Clientes Asignados</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="../Empleado/WebReservasPendientes.aspx">Reservas Pendientes</a>
                     </li>
                     <li class="nav-item dropdown">
