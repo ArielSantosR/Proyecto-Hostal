@@ -28,9 +28,11 @@ namespace Datos
         public int RUT_CLIENTE { get; set; }
         public int RUT_EMPLEADO { get; set; }
         public string METODO_PAGO { get; set; }
+        public Nullable<short> NUMERO_ORDEN { get; set; }
     
         public virtual CLIENTE CLIENTE { get; set; }
         public virtual ICollection<DETALLE_FACTURA> DETALLE_FACTURA { get; set; }
         public virtual EMPLEADO EMPLEADO { get; set; }
+        public virtual ORDEN_COMPRA ORDEN_COMPRA { get; set; }
     }
 }

@@ -68,6 +68,7 @@
     <Property Name="VALOR_TOTAL" Type="number" Precision="15" Scale="0" Nullable="false" />
     <Property Name="ID_FACTURA" Type="number" Precision="10" Scale="0" Nullable="false" />
     <Property Name="VALOR_UNITARIO" Type="number" Precision="10" Scale="0" Nullable="false" />
+    <Property Name="VALOR_DESC" Type="number" Precision="15" Scale="0" />
   </EntityType>
   <EntityType Name="DETALLE_HABITACION">
     <Key>
@@ -147,6 +148,7 @@
     <Property Name="RUT_CLIENTE" Type="number" Precision="8" Scale="0" Nullable="false" />
     <Property Name="RUT_EMPLEADO" Type="number" Precision="8" Scale="0" Nullable="false" />
     <Property Name="METODO_PAGO" Type="varchar2" MaxLength="30" Nullable="false" />
+    <Property Name="NUMERO_ORDEN" Type="number" Precision="5" Scale="0" />
   </EntityType>
   <EntityType Name="FAMILIA">
     <Key>
@@ -662,6 +664,18 @@ advertencia 6002: La tabla o vista 'HOSTAL.V_HABITACION_USOS_TOP_10' no tiene de
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_FACTURA_ORDEN">
+    <End Role="ORDEN_COMPRA" Type="Self.ORDEN_COMPRA" Multiplicity="0..1" />
+    <End Role="FACTURA" Type="Self.FACTURA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ORDEN_COMPRA">
+        <PropertyRef Name="NUMERO_ORDEN" />
+      </Principal>
+      <Dependent Role="FACTURA">
+        <PropertyRef Name="NUMERO_ORDEN" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_GIRO_CLIENTE">
     <End Role="GIRO" Type="Self.GIRO" Multiplicity="1" />
     <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="*" />
@@ -1158,6 +1172,10 @@ FROM "HOSTAL"."V_HABITACION_USOS_TOP_10" "V_HABITACION_USOS_TOP_10"</DefiningQue
     </AssociationSet>
     <AssociationSet Name="FK_FACTURA_EMPLEADO" Association="Self.FK_FACTURA_EMPLEADO">
       <End Role="EMPLEADO" EntitySet="EMPLEADO" />
+      <End Role="FACTURA" EntitySet="FACTURA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FACTURA_ORDEN" Association="Self.FK_FACTURA_ORDEN">
+      <End Role="ORDEN_COMPRA" EntitySet="ORDEN_COMPRA" />
       <End Role="FACTURA" EntitySet="FACTURA" />
     </AssociationSet>
     <AssociationSet Name="FK_GIRO_CLIENTE" Association="Self.FK_GIRO_CLIENTE">

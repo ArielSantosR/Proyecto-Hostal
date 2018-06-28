@@ -390,32 +390,49 @@ namespace Web.Cliente {
         }
 
         protected void gvPasajeros_RowDeleting(object sender,GridViewDeleteEventArgs e) {
-            Huesped huesped = new Huesped();
-            huesped.RUT_HUESPED = int.Parse(e.Keys["Rut"].ToString().Substring(0,e.Keys["Rut"].ToString().Length - 2));
-            if (huesped.Delete()) {
-                pasajeros = HuespedCollection.ListaHuesped().Where(x => x.RUT_CLIENTE == int.Parse(ddlEmpresa.SelectedValue)).ToList<Huesped>();
-                if (pasajeros.Count != 0) {
-                    btnVer.Enabled = true;
-                    CargarGridView(pasajeros);
+            try {
+                Huesped huesped = new Huesped();
+                huesped.RUT_HUESPED = int.Parse(e.Keys["Rut"].ToString().Substring(0,e.Keys["Rut"].ToString().Length - 2));
+                if (huesped.Delete()) {
+                    pasajeros = HuespedCollection.ListaHuesped().Where(x => x.RUT_CLIENTE == int.Parse(ddlEmpresa.SelectedValue)).ToList<Huesped>();
+                    if (pasajeros.Count != 0) {
+                        btnVer.Enabled = true;
+                        CargarGridView(pasajeros);
+                    }
+                    else {
+                        btnVer.Enabled = false;
+                    }
+                    exito.Text = "Se ha eliminado con exito";
+                    alerta_exito.Visible = true;
+
                 }
                 else {
-                    btnVer.Enabled = false;
+                    error.Text = "La eliminación ha fallado";
+                    alerta.Visible = true;
                 }
-                exito.Text = "Se ha eliminado con exito";
-                alerta_exito.Visible = true;
-
-            }else {
-                error.Text = "La eliminación ha fallado";
+            }catch (System.Data.DataException) {
+                error.Text = "No puede elimnar un huésped que ya se ha hospedado en el hostal";
                 alerta.Visible = true;
             }
+            catch(Exception ex) {
+                error.Text = "Excepción: " + ex.Message;
+                alerta.Visible = true;
+            }
+            
         }
 
         protected void gvPasajeros_RowEditing(object sender,GridViewEditEventArgs e) {
-            Huesped huesped = new Huesped();
-            huesped.RUT_HUESPED = int.Parse(gvPasajeros.DataKeys[e.NewEditIndex].Value.ToString().Substring(0,gvPasajeros.DataKeys[e.NewEditIndex].Value.ToString().Length - 2));
-            huesped.BuscarHuesped();
-            SesionEdit = huesped;
-            Response.Redirect("../Cliente/WebEditarPasajero.aspx");
+            try {
+                Huesped huesped = new Huesped();
+                huesped.RUT_HUESPED = int.Parse(gvPasajeros.DataKeys[e.NewEditIndex].Value.ToString().Substring(0,gvPasajeros.DataKeys[e.NewEditIndex].Value.ToString().Length - 2));
+                huesped.BuscarHuesped();
+                SesionEdit = huesped;
+                Response.Redirect("../Cliente/WebEditarPasajero.aspx");
+            }
+            catch (Exception ex) {
+                error.Text = "Excepción: " + ex.Message;
+                alerta.Visible = true;
+            }
         }
 
         protected void btnVer_Click(object sender, EventArgs e)

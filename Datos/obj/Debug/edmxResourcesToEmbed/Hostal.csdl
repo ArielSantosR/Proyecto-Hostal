@@ -85,6 +85,7 @@
     <Property Name="ID_FACTURA" Type="Int32" Nullable="false" />
     <Property Name="VALOR_UNITARIO" Type="Int32" Nullable="false" />
     <NavigationProperty Name="FACTURA" Relationship="Self.FK_DETALLE_FACTURA_FACTURA" FromRole="DETALLE_FACTURA" ToRole="FACTURA" />
+    <Property Name="VALOR_DESC" Type="Int64" />
   </EntityType>
   <EntityType Name="DETALLE_HABITACION">
     <Key>
@@ -188,6 +189,8 @@
     <NavigationProperty Name="CLIENTE" Relationship="Self.FK_FACTURA_CLIENTE" FromRole="FACTURA" ToRole="CLIENTE" />
     <NavigationProperty Name="DETALLE_FACTURA" Relationship="Self.FK_DETALLE_FACTURA_FACTURA" FromRole="FACTURA" ToRole="DETALLE_FACTURA" />
     <NavigationProperty Name="EMPLEADO" Relationship="Self.FK_FACTURA_EMPLEADO" FromRole="FACTURA" ToRole="EMPLEADO" />
+    <Property Name="NUMERO_ORDEN" Type="Int16" />
+    <NavigationProperty Name="ORDEN_COMPRA" Relationship="Model.FK_FACTURA_ORDEN" FromRole="FACTURA" ToRole="ORDEN_COMPRA" />
   </EntityType>
   <EntityType Name="FAMILIA">
     <Key>
@@ -277,6 +280,7 @@
     <NavigationProperty Name="DETALLE_ORDEN" Relationship="Self.FK_ORDEN_DETALLE_ORDEN" FromRole="ORDEN_COMPRA" ToRole="DETALLE_ORDEN" />
     <NavigationProperty Name="EMPLEADO" Relationship="Self.FK_ORDEN_COMPRA_EMPLEADO" FromRole="ORDEN_COMPRA" ToRole="EMPLEADO" />
     <NavigationProperty Name="NOTIFICACION" Relationship="Self.FK_NOTIFICACION_ORDEN" FromRole="ORDEN_COMPRA" ToRole="NOTIFICACION" />
+    <NavigationProperty Name="FACTURA" Relationship="Model.FK_FACTURA_ORDEN" FromRole="ORDEN_COMPRA" ToRole="FACTURA" />
   </EntityType>
   <EntityType Name="PAIS">
     <Key>
@@ -1283,6 +1287,10 @@
       <End Role="TIPO_HABITACION" EntitySet="TIPO_HABITACION" />
       <End Role="DETALLE_ORDEN" EntitySet="DETALLE_ORDEN" />
     </AssociationSet>
+    <AssociationSet Name="FK_FACTURA_ORDEN" Association="Model.FK_FACTURA_ORDEN">
+      <End Role="ORDEN_COMPRA" EntitySet="ORDEN_COMPRA" />
+      <End Role="FACTURA" EntitySet="FACTURA" />
+    </AssociationSet>
   </EntityContainer>
   <Association Name="FK_DETALLE_OR_TIPO_HAB">
     <End Type="Model.TIPO_HABITACION" Role="TIPO_HABITACION" Multiplicity="1" />
@@ -1293,6 +1301,18 @@
       </Principal>
       <Dependent Role="DETALLE_ORDEN">
         <PropertyRef Name="ID_TIPO_HABITACION" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FACTURA_ORDEN">
+    <End Type="Model.ORDEN_COMPRA" Role="ORDEN_COMPRA" Multiplicity="0..1" />
+    <End Type="Model.FACTURA" Role="FACTURA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ORDEN_COMPRA">
+        <PropertyRef Name="NUMERO_ORDEN" />
+      </Principal>
+      <Dependent Role="FACTURA">
+        <PropertyRef Name="NUMERO_ORDEN" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

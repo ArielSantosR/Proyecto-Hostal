@@ -27,6 +27,7 @@ namespace Modelo
                 detalle.RUT_HUESPED = dato.RUT_HUESPED;
                 detalle.VALOR_HABITACION = dato.VALOR_HABITACION;
                 detalle.VALOR_MINUTA = dato.VALOR_MINUTA;
+                detalle.ID_TIPO_HABITACION = dato.ID_TIPO_HABITACION;
 
                 list.Add(detalle);
             }

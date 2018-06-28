@@ -164,6 +164,7 @@
     <Compile Include="ServicioHuesped.cs" />
     <Compile Include="ServicioNotificacion.cs" />
     <Compile Include="ServicioOrden.cs" />
+    <Compile Include="ServicioPagos.cs" />
     <Compile Include="ServicioPlato.cs" />
     <Compile Include="ServicioProducto.cs" />
     <Compile Include="ServicioProveedor.cs" />

@@ -51,5 +51,21 @@ namespace Modelo {
             }
 
         }
+
+        public bool Update()
+        {
+            ServicioReserva serv = new ServicioReserva();
+            ORDEN_COMPRA datos = new ORDEN_COMPRA();
+            datos.CANTIDAD_HUESPEDES = this.CANTIDAD_HUESPEDES;
+            datos.COMENTARIO = this.COMENTARIO;
+            datos.ESTADO_ORDEN = this.ESTADO_ORDEN;
+            datos.FECHA_LLEGADA = this.FECHA_LLEGADA;
+            datos.FECHA_SALIDA = this.FECHA_SALIDA;
+            datos.MONTO_TOTAL = this.MONTO_TOTAL;
+            datos.RUT_CLIENTE = this.RUT_CLIENTE;
+            datos.RUT_EMPLEADO = this.RUT_EMPLEADO;
+
+            return serv.EditarEstadoReserva(datos);
+        }
     }
 }

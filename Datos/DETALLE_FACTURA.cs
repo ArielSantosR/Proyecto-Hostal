@@ -20,6 +20,7 @@ namespace Datos
         public long VALOR_TOTAL { get; set; }
         public int ID_FACTURA { get; set; }
         public int VALOR_UNITARIO { get; set; }
+        public Nullable<long> VALOR_DESC { get; set; }
     
         public virtual FACTURA FACTURA { get; set; }
     }

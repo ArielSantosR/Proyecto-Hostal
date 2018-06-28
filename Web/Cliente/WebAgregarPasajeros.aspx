@@ -97,44 +97,47 @@
                         <asp:Button ID="btnAgregar" runat="server" Text="Agregar Pasajero" CssClass="btn btn-primary btn-lg btn-block login-button" OnClick="btnAgregar_Click" />
                     </div>
                     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                        <asp:Button ID="btnVer" runat="server" Text="Lista" CssClass="btn btn-info btn-lg btn-block login-button" onclick="btnVer_Click"/>
+                        <asp:Button ID="btnVer" runat="server" Text="Lista" CssClass="btn btn-info btn-lg btn-block login-button" OnClick="btnVer_Click" />
                     </div>
                 </div>
-             </div>
+            </div>
 
             <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModal2Label">Lista de Huéspedes</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div style="display: flex; justify-content: center; margin-top: 35px;">
-                            <asp:GridView ID="gvPasajeros" ForeColor="#333333" GridLines="None" runat="server" CellPadding="4" DataKeyNames="Rut" OnRowDeleting="gvPasajeros_RowDeleting" OnRowEditing="gvPasajeros_RowEditing">
-                                <AlternatingRowStyle BackColor="White" />
-                                <EditRowStyle BackColor="#2461BF" />
-                                <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
-                                <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
-                                <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
-                                <RowStyle BackColor="#EFF3FB" />
-                                <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
-                                <SortedAscendingCellStyle BackColor="#F5F7FB" />
-                                <SortedAscendingHeaderStyle BackColor="#6D95E1" />
-                                <SortedDescendingCellStyle BackColor="#E9EBEF" />
-                                <SortedDescendingHeaderStyle BackColor="#4870BE" />
-                            </asp:GridView>
-                         </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <div class="modal-dialog modal-lg" role="document" style="max-width: 1024px">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModal2Label">Lista de Huéspedes</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div style="display: flex; justify-content: center; margin-top: 35px;">
+                                <asp:GridView ID="gvPasajeros" ForeColor="#333333" GridLines="None" runat="server" CellPadding="4" DataKeyNames="Rut" OnRowDeleting="gvPasajeros_RowDeleting" OnRowEditing="gvPasajeros_RowEditing">
+                                    <AlternatingRowStyle BackColor="White" />
+                                    <EditRowStyle BackColor="#2461BF" />
+                                    <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+                                    <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+                                    <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+                                    <RowStyle BackColor="#EFF3FB" />
+                                    <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
+                                    <SortedAscendingCellStyle BackColor="#F5F7FB" />
+                                    <SortedAscendingHeaderStyle BackColor="#6D95E1" />
+                                    <SortedDescendingCellStyle BackColor="#E9EBEF" />
+                                    <SortedDescendingHeaderStyle BackColor="#4870BE" />
+                                    <Columns>
+                                        <asp:ButtonField runat="server" Text="Editar" CommandName="Edit" ControlStyle-CssClass="btn btn-success" ControlStyle-ForeColor="White"/>
+                                        <asp:ButtonField runat="server" Text="Eliminar" CommandName="Delete" ControlStyle-CssClass="btn btn-danger" ControlStyle-ForeColor="White"/>
+                                    </Columns>
+                                </asp:GridView>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
-            </div>
-        </div>
 </asp:Content>

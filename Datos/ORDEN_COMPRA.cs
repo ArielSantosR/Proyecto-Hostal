@@ -11,15 +11,16 @@ namespace Datos
 {
     using System;
     using System.Collections.Generic;
-
+    
     public partial class ORDEN_COMPRA
     {
         public ORDEN_COMPRA()
         {
             this.DETALLE_ORDEN = new HashSet<DETALLE_ORDEN>();
             this.NOTIFICACION = new HashSet<NOTIFICACION>();
+            this.FACTURA = new HashSet<FACTURA>();
         }
-
+    
         public short NUMERO_ORDEN { get; set; }
         public int CANTIDAD_HUESPEDES { get; set; }
         public System.DateTime FECHA_LLEGADA { get; set; }
@@ -29,10 +30,11 @@ namespace Datos
         public string ESTADO_ORDEN { get; set; }
         public string COMENTARIO { get; set; }
         public int MONTO_TOTAL { get; set; }
-
+    
         public virtual CLIENTE CLIENTE { get; set; }
         public virtual ICollection<DETALLE_ORDEN> DETALLE_ORDEN { get; set; }
         public virtual EMPLEADO EMPLEADO { get; set; }
         public virtual ICollection<NOTIFICACION> NOTIFICACION { get; set; }
+        public virtual ICollection<FACTURA> FACTURA { get; set; }
     }
 }

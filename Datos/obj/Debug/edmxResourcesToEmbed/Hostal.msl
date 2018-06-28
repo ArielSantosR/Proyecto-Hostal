@@ -68,6 +68,7 @@
     <EntitySetMapping Name="DETALLE_FACTURA">
       <EntityTypeMapping TypeName="Model.DETALLE_FACTURA">
         <MappingFragment StoreEntitySet="DETALLE_FACTURA">
+          <ScalarProperty Name="VALOR_DESC" ColumnName="VALOR_DESC" />
           <ScalarProperty Name="ID_DETALLE_FACTURA" ColumnName="ID_DETALLE_FACTURA" />
           <ScalarProperty Name="DESCRIPCION_DETALLE" ColumnName="DESCRIPCION_DETALLE" />
           <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
@@ -151,6 +152,7 @@
     <EntitySetMapping Name="FACTURA">
       <EntityTypeMapping TypeName="Model.FACTURA">
         <MappingFragment StoreEntitySet="FACTURA">
+          <ScalarProperty Name="NUMERO_ORDEN" ColumnName="NUMERO_ORDEN" />
           <ScalarProperty Name="ID_FACTURA" ColumnName="ID_FACTURA" />
           <ScalarProperty Name="VALOR_NETO_FACTURA" ColumnName="VALOR_NETO_FACTURA" />
           <ScalarProperty Name="VALOR_IVA_FACTURA" ColumnName="VALOR_IVA_FACTURA" />

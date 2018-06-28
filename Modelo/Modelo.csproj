@@ -40,6 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Boleta.cs" />
+    <Compile Include="BoletaCollection.cs" />
     <Compile Include="Categoria.cs" />
     <Compile Include="CategoriaCollection.cs" />
     <Compile Include="CategoriaHabitacion.cs" />
@@ -48,6 +50,10 @@
     <Compile Include="ClienteCollection.cs" />
     <Compile Include="Comuna.cs" />
     <Compile Include="ComunaCollection.cs" />
+    <Compile Include="DetalleBoleta.cs" />
+    <Compile Include="DetalleBoletaCollection.cs" />
+    <Compile Include="DetalleFactura.cs" />
+    <Compile Include="DetalleFacturaCollection.cs" />
     <Compile Include="DetalleHabitacion.cs" />
     <Compile Include="DetalleHabitacionCollection.cs" />
     <Compile Include="DetalleOrden.cs" />
@@ -62,6 +68,8 @@
     <Compile Include="Empleado.cs" />
     <Compile Include="EmpleadoCollection.cs" />
     <Compile Include="Enumerable.cs" />
+    <Compile Include="Factura.cs" />
+    <Compile Include="FacturaCollection.cs" />
     <Compile Include="Familia.cs" />
     <Compile Include="FamiliaCollection.cs" />
     <Compile Include="Giro.cs" />
