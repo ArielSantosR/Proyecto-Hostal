@@ -19,6 +19,27 @@ namespace Modelo {
         public string METODO_PAGO { get; set; }
         public short? NUMERO_ORDEN { get; set; }
 
+        public bool BuscarFactura () {
+            ServicioPagos serv = new ServicioPagos();
+            FACTURA dato = serv.BuscarFactura(this.ID_FACTURA);
+            if (dato != null) {
+                this.FECHA_EMISION_FACTURA = dato.FECHA_EMISION_FACTURA;
+                this.METODO_PAGO = dato.METODO_PAGO;
+                this.NUMERO_ORDEN = dato.NUMERO_ORDEN;
+                this.RUT_CLIENTE = dato.RUT_CLIENTE;
+                this.RUT_EMPLEADO = dato.RUT_EMPLEADO;
+                this.VALOR_DESC_FACTURA = dato.VALOR_DESC_FACTURA;
+                this.VALOR_IVA_FACTURA = dato.VALOR_IVA_FACTURA;
+                this.VALOR_NETO_FACTURA = dato.VALOR_NETO_FACTURA;
+                this.VALOR_TOTAL_FACTURA = dato.VALOR_TOTAL_FACTURA;
+
+                return true;
+            } else {
+                return false;
+
+            }
+        }
+
         public bool Crear() {
             ServicioPagos serv = new ServicioPagos();
             FACTURA datos = new FACTURA();

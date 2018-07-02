@@ -3058,5 +3058,44 @@ namespace WcfNegocio
             }
         }
         #endregion
+
+        #region Divisa
+        public string ListarDivisa () {
+            ServicioDivisa servicio = new ServicioDivisa();
+            List<DIVISA> divisa = servicio.ListarDivisa();
+            DivisaCollection listaDivisa = new DivisaCollection();
+
+            foreach (DIVISA d in divisa) {
+                Divisa dModelo = new Modelo.Divisa();
+                dModelo.ID_DIVISA = d.ID_DIVISA;
+                dModelo.NOMBRE_DIVISA = d.NOMBRE_DIVISA;
+                dModelo.PRECIO_DIVISA = d.PRECIO_DIVISA;
+
+                listaDivisa.Add(dModelo);
+            }
+
+            XmlSerializer ser = new XmlSerializer(typeof(DivisaCollection));
+            StringWriter writer = new StringWriter();
+            ser.Serialize(writer,listaDivisa);
+            writer.Close();
+            return writer.ToString();
+        }
+
+        public bool ModificarDivisa (string divisa) {
+            XmlSerializer ser = new XmlSerializer(typeof(Divisa));
+            StringReader reader = new StringReader(divisa);
+            Divisa d = (Divisa)ser.Deserialize(reader);
+            ServicioDivisa serv = new ServicioDivisa();
+            DIVISA dDatos = new DIVISA();
+
+            dDatos.ID_DIVISA = d.ID_DIVISA;
+            dDatos.NOMBRE_DIVISA = d.NOMBRE_DIVISA;
+            dDatos.PRECIO_DIVISA = d.PRECIO_DIVISA;
+
+            return serv.EditarDivisa(dDatos);
+        }
+
+        #endregion
+
     }
 }

@@ -34,8 +34,7 @@
                 <asp:BoundField DataField="VALOR_PENSION" HeaderText="Precio de Minuta" />
                 <asp:TemplateField>
                     <ItemTemplate>
-                         <asp:LinkButton ID="btnInfo" CssClass="btn btn-info" CommandArgument='<%#Eval("ID_PENSION")%>' Text="Ver Detalle" runat="server" />
-                        <asp:LinkButton ID="btnEditar" CssClass="btn btn-success" CommandArgument='<%#Eval("ID_PENSION")%>' Text="Aceptar" runat="server" />
+                         <asp:LinkButton ID="btnInfo" CssClass="btn btn-info" CommandArgument='<%#Eval("ID_PENSION")%>' Text="Ver Detalle" runat="server" OnClick="btnInfo_Click"/>
                         <asp:LinkButton ID="btnEliminar" OnClick="btnEliminar_Click" CssClass="btn btn-danger" CommandArgument='<%#Eval("ID_PENSION")%>' Text="Eliminar" runat="server" />
                         
                        

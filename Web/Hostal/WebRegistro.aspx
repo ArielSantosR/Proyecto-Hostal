@@ -6,14 +6,10 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
     <script type="text/javascript">
-
         $(function () {
             document.getElementById('<%=ddlPais.ClientID %>').selectedIndex = 0;
          document.getElementById('<%=ddlRegion.ClientID %>').selectedIndex = 0;
      });
-
-
-
     </script>
 
     <div class="alert alert-danger alert-dismissible" id="alerta" runat="server">

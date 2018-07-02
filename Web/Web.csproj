@@ -162,6 +162,16 @@
     <Content Include="Hostal\WebContacto.aspx" />
     <Content Include="Hostal\WebFaqs.aspx" />
     <Content Include="Hostal\WebPoliticaReserva.aspx" />
+    <Content Include="images\accesorios.jpg" />
+    <Content Include="images\calendar-icon.png" />
+    <Content Include="images\habitacion1.jpeg" />
+    <Content Include="images\habitacion2.jpg" />
+    <Content Include="images\habitacion3.jpg" />
+    <Content Include="images\imagen1.jpg" />
+    <Content Include="images\imagen2.jpg" />
+    <Content Include="images\imagen3.jpg" />
+    <Content Include="images\logo.jpeg" />
+    <Content Include="images\minuta.jpg" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

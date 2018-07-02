@@ -65,5 +65,6 @@ namespace Datos
         public DbSet<V_HABITACION_PREFERIDA> V_HABITACION_PREFERIDA { get; set; }
         public DbSet<V_HABITACION_USOS> V_HABITACION_USOS { get; set; }
         public DbSet<V_HABITACION_USOS_TOP_10> V_HABITACION_USOS_TOP_10 { get; set; }
+        public DbSet<DIVISA> DIVISA { get; set; }
     }
 }

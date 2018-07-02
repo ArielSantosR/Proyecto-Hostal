@@ -18,6 +18,11 @@ namespace Datos
             return true;
         }
 
+        public GIRO BuscarGiro (short iD_GIRO) {
+            GIRO g = ent.GIRO.FirstOrDefault(x => x.ID_GIRO == iD_GIRO);
+            return g;
+        }
+
         public PAIS BuscarPais(short iD_PAIS) {
             PAIS p = ent.PAIS.FirstOrDefault(x => x.ID_PAIS == iD_PAIS);
             return p;

@@ -10,9 +10,9 @@ namespace Modelo {
     public class OrdenCompra {
         public short NUMERO_ORDEN { get; set; }
         public int CANTIDAD_HUESPEDES { get; set; }
-        public System.DateTime FECHA_LLEGADA { get; set; }
-        public System.DateTime FECHA_SALIDA { get; set; }
-        public Nullable<int> RUT_EMPLEADO { get; set; }
+        public DateTime FECHA_LLEGADA { get; set; }
+        public DateTime FECHA_SALIDA { get; set; }
+        public int? RUT_EMPLEADO { get; set; }
         public int RUT_CLIENTE { get; set; }
         public string ESTADO_ORDEN { get; set; }
         public string COMENTARIO { get; set; }
@@ -56,6 +56,7 @@ namespace Modelo {
         {
             ServicioReserva serv = new ServicioReserva();
             ORDEN_COMPRA datos = new ORDEN_COMPRA();
+            datos.NUMERO_ORDEN = this.NUMERO_ORDEN;
             datos.CANTIDAD_HUESPEDES = this.CANTIDAD_HUESPEDES;
             datos.COMENTARIO = this.COMENTARIO;
             datos.ESTADO_ORDEN = this.ESTADO_ORDEN;

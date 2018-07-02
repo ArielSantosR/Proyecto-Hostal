@@ -443,5 +443,14 @@ namespace WcfNegocio
         [OperationContract]
         string ListarHabitacionDisponible(string detalle);
         #endregion
+
+        #region Divisa
+        [OperationContract]
+        string ListarDivisa ();
+
+        [OperationContract]
+        bool ModificarDivisa (string divisa);
+        #endregion
+
     }
 }

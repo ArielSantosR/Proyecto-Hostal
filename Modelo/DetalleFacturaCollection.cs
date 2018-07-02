@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Modelo {
     [Serializable]
-    class DetalleFacturaCollection : List<DetalleFactura>{
+    public class DetalleFacturaCollection : List<DetalleFactura>{
 
         public static List<DetalleFactura> ListarDetalleFacturas() {
             ServicioPagos serv = new ServicioPagos();
