@@ -123,6 +123,14 @@
     <Property Name="ID_PRODUCTO" Type="number" Precision="19" Scale="0" Nullable="false" />
     <Property Name="NUMERO_RECEPCION" Type="number" Precision="5" Scale="0" Nullable="false" />
   </EntityType>
+  <EntityType Name="DIVISA">
+    <Key>
+      <PropertyRef Name="ID_DIVISA" />
+    </Key>
+    <Property Name="ID_DIVISA" Type="number" Precision="5" Scale="0" Nullable="false" />
+    <Property Name="NOMBRE_DIVISA" Type="varchar2" MaxLength="3" Nullable="false" />
+    <Property Name="PRECIO_DIVISA" Type="number" Precision="6" Scale="2" Nullable="false" />
+  </EntityType>
   <EntityType Name="EMPLEADO">
     <Key>
       <PropertyRef Name="RUT_EMPLEADO" />
@@ -1013,6 +1021,7 @@ advertencia 6002: La tabla o vista 'HOSTAL.V_HABITACION_USOS_TOP_10' no tiene de
     <EntitySet Name="DETALLE_PEDIDO" EntityType="Self.DETALLE_PEDIDO" Schema="HOSTAL" store:Type="Tables" />
     <EntitySet Name="DETALLE_PLATOS" EntityType="Self.DETALLE_PLATOS" Schema="HOSTAL" store:Type="Tables" />
     <EntitySet Name="DETALLE_RECEPCION" EntityType="Self.DETALLE_RECEPCION" Schema="HOSTAL" store:Type="Tables" />
+    <EntitySet Name="DIVISA" EntityType="Self.DIVISA" Schema="HOSTAL" store:Type="Tables" />
     <EntitySet Name="EMPLEADO" EntityType="Self.EMPLEADO" Schema="HOSTAL" store:Type="Tables" />
     <EntitySet Name="FACTURA" EntityType="Self.FACTURA" Schema="HOSTAL" store:Type="Tables" />
     <EntitySet Name="FAMILIA" EntityType="Self.FAMILIA" Schema="HOSTAL" store:Type="Tables" />

@@ -65,6 +65,8 @@
     <Compile Include="DetallePlatoCollection.cs" />
     <Compile Include="DetalleRecepcion.cs" />
     <Compile Include="DetalleRecepcionCollection.cs" />
+    <Compile Include="Divisa.cs" />
+    <Compile Include="DivisaCollection.cs" />
     <Compile Include="Empleado.cs" />
     <Compile Include="EmpleadoCollection.cs" />
     <Compile Include="Enumerable.cs" />

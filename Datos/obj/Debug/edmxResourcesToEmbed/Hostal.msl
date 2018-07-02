@@ -448,5 +448,14 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="DIVISA">
+      <EntityTypeMapping TypeName="Model.DIVISA">
+        <MappingFragment StoreEntitySet="DIVISA">
+          <ScalarProperty Name="PRECIO_DIVISA" ColumnName="PRECIO_DIVISA" />
+          <ScalarProperty Name="NOMBRE_DIVISA" ColumnName="NOMBRE_DIVISA" />
+          <ScalarProperty Name="ID_DIVISA" ColumnName="ID_DIVISA" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

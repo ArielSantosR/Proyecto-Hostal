@@ -2625,8 +2625,6 @@ FROM "HOSTAL"."V_HABITACION_USOS_TOP_10" "V_HABITACION_USOS_TOP_10"</DefiningQue
         <EntityType Name="DIVISA">
           <Key>
             <PropertyRef Name="ID_DIVISA" />
-            <PropertyRef Name="NOMBRE_DIVISA" />
-            <PropertyRef Name="PRECIO_DIVISA" />
           </Key>
           <Property Name="ID_DIVISA" Type="Int16" Nullable="false" />
           <Property Name="NOMBRE_DIVISA" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />

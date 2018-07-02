@@ -85,6 +85,9 @@
     <Compile Include="DETALLE_RECEPCION.cs">
       <DependentUpon>Hostal.tt</DependentUpon>
     </Compile>
+    <Compile Include="DIVISA.cs">
+      <DependentUpon>Hostal.tt</DependentUpon>
+    </Compile>
     <Compile Include="EMPLEADO.cs">
       <DependentUpon>Hostal.tt</DependentUpon>
     </Compile>
@@ -157,6 +160,7 @@
     <Compile Include="ServicioCliente.cs" />
     <Compile Include="ServicioDetalleHabitacion.cs" />
     <Compile Include="ServicioDireccion.cs" />
+    <Compile Include="ServicioDivisa.cs" />
     <Compile Include="ServicioEmpleado.cs" />
     <Compile Include="ServicioHabitacion.cs" />
     <Compile Include="ServicioLogin.cs" />

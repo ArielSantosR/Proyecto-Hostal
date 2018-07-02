@@ -1291,6 +1291,7 @@
       <End Role="ORDEN_COMPRA" EntitySet="ORDEN_COMPRA" />
       <End Role="FACTURA" EntitySet="FACTURA" />
     </AssociationSet>
+    <EntitySet Name="DIVISA" EntityType="Model.DIVISA" />
   </EntityContainer>
   <Association Name="FK_DETALLE_OR_TIPO_HAB">
     <End Type="Model.TIPO_HABITACION" Role="TIPO_HABITACION" Multiplicity="1" />
@@ -1316,4 +1317,12 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="DIVISA">
+    <Key>
+      <PropertyRef Name="ID_DIVISA" />
+    </Key>
+    <Property Name="ID_DIVISA" Type="Int16" Nullable="false" />
+    <Property Name="NOMBRE_DIVISA" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Name="PRECIO_DIVISA" Type="Decimal" Nullable="false" Precision="6" Scale="2" />
+  </EntityType>
 </Schema>
