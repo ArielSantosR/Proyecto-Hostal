@@ -2541,6 +2541,50 @@ namespace WcfNegocio
                 return writer2.ToString();
             }
         }
+
+        public bool EditarDetalleHabitacion(string detalle)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.DetalleHabitacion));
+            StringReader reader = new StringReader(detalle);
+            Modelo.DetalleHabitacion d = (Modelo.DetalleHabitacion)ser.Deserialize(reader);
+            ServicioReserva servicio = new ServicioReserva();
+
+            Datos.DETALLE_HABITACION dDatos = new Datos.DETALLE_HABITACION();
+
+            dDatos.ID_DETALLE_H = d.ID_DETALLE_H;
+            dDatos.NUMERO_HABITACION = d.NUMERO_HABITACION;
+
+            return servicio.EditarDetalleHabitacion(dDatos);
+        }
+
+        public DetalleHabitacion obtenerDetalleHabitacion(string detalle)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.DetalleHabitacion));
+            StringReader reader = new StringReader(detalle);
+            Modelo.DetalleHabitacion d = (Modelo.DetalleHabitacion)ser.Deserialize(reader);
+            ServicioReserva serv = new ServicioReserva();
+            Datos.DETALLE_HABITACION Datos = new Datos.DETALLE_HABITACION();
+            Datos.ID_DETALLE_H = d.ID_DETALLE_H;
+
+            if (serv.obtenerDetalleHabitacion(Datos) == null)
+            {
+                return null;
+            }
+            else
+            {
+                Datos.DETALLE_HABITACION Datos2 = serv.obtenerDetalleHabitacion(Datos);
+
+                d.ID_DETALLE_H = Datos2.ID_DETALLE_H;
+                d.FECHA_LLEGADA = Datos2.FECHA_LLEGADA;
+                d.FECHA_SALIDA = Datos2.FECHA_SALIDA;
+                d.ID_PENSION = Datos2.ID_PENSION;
+                d.NUMERO_HABITACION = Datos2.NUMERO_HABITACION;
+                d.RUT_CLIENTE = Datos2.RUT_CLIENTE;
+                d.RUT_HUESPED = Datos2.RUT_HUESPED;
+
+                return d;
+            }
+        }
         #endregion
 
         #region Minuta
@@ -3018,17 +3062,10 @@ namespace WcfNegocio
             }
         }
 
-        public string ListarHabitacionDisponible(string detalle)
+        public string ListarHabitacionDisponible()
         {
-            XmlSerializer ser = new XmlSerializer(typeof(Modelo.DetalleOrden));
-            StringReader reader = new StringReader(detalle);
-            Modelo.DetalleOrden d = (Modelo.DetalleOrden)ser.Deserialize(reader);
             ServicioHabitacion serv = new ServicioHabitacion();
-
-            Datos.DETALLE_ORDEN dDatos = new Datos.DETALLE_ORDEN();
-            dDatos.ID_CATEGORIA_HABITACION = d.ID_CATEGORIA_HABITACION;
-
-            List<Datos.HABITACION> listaHabitacion = serv.listarHabitacionDisponible(dDatos);
+            List<Datos.HABITACION> listaHabitacion = serv.listarHabitacionDisponible();
 
             if (listaHabitacion == null)
             {

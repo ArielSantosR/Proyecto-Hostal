@@ -207,7 +207,7 @@ namespace Web.Empleado
 
                             if (coleccionHabitacion.Count == 0)
                             {
-                                string habitacion2 = s.ListarHabitacionDisponible(writer2.ToString());
+                                string habitacion2 = s.ListarHabitacionDisponible();
                                 XmlSerializer ser4 = new XmlSerializer(typeof(Modelo.HabitacionCollection));
                                 StringReader reader4 = new StringReader(habitacion2);
                                 coleccionHabitacion = (Modelo.HabitacionCollection)ser4.Deserialize(reader4);
@@ -403,7 +403,7 @@ namespace Web.Empleado
             StringWriter writer2 = new StringWriter();
             sr2.Serialize(writer2, detalle2);
 
-            string habitacion2 = s.ListarHabitacionDisponible(writer2.ToString());
+            string habitacion2 = s.ListarHabitacionDisponible();
             XmlSerializer ser4 = new XmlSerializer(typeof(Modelo.HabitacionCollection));
             StringReader reader4 = new StringReader(habitacion2);
             Modelo.HabitacionCollection coleccionHabitacion = (Modelo.HabitacionCollection)ser4.Deserialize(reader4);

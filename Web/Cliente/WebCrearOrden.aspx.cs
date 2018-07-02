@@ -445,9 +445,22 @@ namespace Web.Cliente
                                         StringWriter writer3 = new StringWriter();
                                         sr3.Serialize(writer3,detalle);
 
-                                        if (!s.AgregarDetalleReserva(writer3.ToString())) {
+                                        if (!s.AgregarDetalleReserva(writer3.ToString()))
+                                        {
                                             v_exito = false;
                                         }
+                                        /*
+                                        else
+                                        {
+                                            Modelo.Huesped huesped = new Huesped();
+                                            huesped.RUT_HUESPED = o.RUT_HUESPED;
+                                            huesped.REGISTRADO = "S";
+
+                                            XmlSerializer sr4 = new XmlSerializer(typeof(Modelo.Huesped));
+                                            StringWriter writer4 = new StringWriter();
+                                            sr3.Serialize(writer4, huesped);
+                                        }
+                                        */
                                     }
                                     if (v_exito) {
                                         Response.Write("<script language='javascript'>window.alert('Reserva Realizada, El Precio Total de su estadía será de: $" + precio + ". Espere que su solicitud sea aceptada');window.location='../Cliente/WebVerHistorial.aspx';</script>");

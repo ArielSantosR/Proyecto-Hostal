@@ -367,6 +367,12 @@ namespace WcfNegocio
 
         [OperationContract]
         string ListaDetalleHabitacionCliente(string cliente);
+
+        [OperationContract]
+        bool EditarDetalleHabitacion(string detalle);
+
+        [OperationContract]
+        DetalleHabitacion obtenerDetalleHabitacion(string detalle);
         #endregion
 
         #region Minuta
@@ -441,7 +447,7 @@ namespace WcfNegocio
         string ListarHabitacionDisponibleCategoria(string detalle);
 
         [OperationContract]
-        string ListarHabitacionDisponible(string detalle);
+        string ListarHabitacionDisponible();
         #endregion
 
         #region Divisa

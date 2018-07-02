@@ -16,7 +16,8 @@ namespace Datos
         {
             List<DETALLE_HABITACION> lista = (from detalle in ent.DETALLE_HABITACION
                                               where detalle.RUT_CLIENTE == cliente.RUT_CLIENTE
-                                                select detalle).ToList();
+                                              orderby detalle.ID_DETALLE_H
+                                              select detalle).ToList();
             return lista;
         }
 
