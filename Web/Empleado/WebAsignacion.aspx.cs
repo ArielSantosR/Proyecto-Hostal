@@ -1,6 +1,7 @@
 ﻿using Modelo;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -72,8 +73,7 @@ namespace Web.Empleado
 
                         if (listaDetalle.Count > 0)
                         {
-                            gvDetalle.DataSource = listaDetalle;
-                            gvDetalle.DataBind();
+                            CargarGridPendiente(listaDetalle);
 
                             string datos2 = s.ListaHuespedesAsignados(writer.ToString());
 
@@ -83,10 +83,8 @@ namespace Web.Empleado
                             Modelo.DetalleOrdenCollection listaDetalle2 = (Modelo.DetalleOrdenCollection)ser4.Deserialize(reader2);
                             reader.Close();
 
-                            gvAceptado.DataSource = listaDetalle2;
-                            gvAceptado.DataBind();
-
-                     
+                            CargarGridAceptado(listaDetalle2);
+                            
                         }
                         else
                         {
@@ -118,6 +116,94 @@ namespace Web.Empleado
                 Response.Write("<script language='javascript'>window.alert('Debe Iniciar Sesión Primero');window.location='../Hostal/WebLogin.aspx';</script>");
             }
         }
+
+        private void CargarGridAceptado (DetalleOrdenCollection listaDetalle2) {
+            Huesped huesped;
+            Pension pension;
+            Categoria cat;
+            TipoHabitacion tipo;
+
+            //Creacion DataTable
+            DataTable dt = new DataTable();
+            dt.Columns.AddRange(new DataColumn[] {
+                new DataColumn("ID_DETALLE", typeof(int)),
+                new DataColumn("RUT_HUESPED", typeof(string)),
+                new DataColumn("HUESPED",typeof(string)),
+                new DataColumn("HABITACION",typeof(string)),
+                new DataColumn("PENSION",typeof(string)),
+                new DataColumn("ESTADO",typeof(string))
+            });
+
+            //Carga de datos en DataTable
+            foreach (DetalleOrden d in listaDetalle2) {
+                huesped = new Huesped();
+                huesped.RUT_HUESPED = d.RUT_HUESPED;
+                huesped.BuscarHuesped();
+
+                cat = new Categoria();
+                cat.ID_CATEGORIA = d.ID_CATEGORIA_HABITACION;
+                cat.BuscarCategoria();
+
+                tipo = new TipoHabitacion();
+                tipo.ID_TIPO_HABITACION = d.ID_TIPO_HABITACION;
+                tipo.BuscarTipo();
+
+                pension = new Pension();
+                pension.ID_PENSION = d.ID_PENSION;
+                pension.BuscarPension();
+
+                dt.Rows.Add(d.ID_DETALLE,huesped.RUT_HUESPED + "-" + huesped.DV_HUESPED,huesped.PNOMBRE_HUESPED + " " + huesped.APP_PATERNO_HUESPED + " " + huesped.APP_MATERNO_HUESPED,tipo.NOMBRE_TIPO_HABITACION + "-" + cat.NOMBRE_CATEGORIA,pension.NOMBRE_PENSION,d.ESTADO);
+            }
+
+            //Carga de GriedView
+            gvAceptado.DataSource = dt;
+            gvAceptado.DataBind();
+        }
+
+        private void CargarGridPendiente (DetalleOrdenCollection listaDetalle) {
+            Huesped huesped;
+            Pension pension;
+            Categoria cat;
+            TipoHabitacion tipo;
+
+            //Creacion DataTable
+            DataTable dt = new DataTable();
+            dt.Columns.AddRange(new DataColumn[] {
+                new DataColumn("ID_DETALLE", typeof(int)),
+                new DataColumn("RUT_HUESPED", typeof(string)),
+                new DataColumn("HUESPED",typeof(string)),
+                new DataColumn("HABITACION",typeof(string)),
+                new DataColumn("PENSION",typeof(string)),
+                new DataColumn("ESTADO",typeof(string))
+            });
+
+            //Carga de datos en DataTable
+            foreach (DetalleOrden d in listaDetalle) {
+                huesped = new Huesped();
+                huesped.RUT_HUESPED = d.RUT_HUESPED;
+                huesped.BuscarHuesped();
+
+                cat = new Categoria();
+                cat.ID_CATEGORIA = d.ID_CATEGORIA_HABITACION;
+                cat.BuscarCategoria();
+
+                tipo = new TipoHabitacion();
+                tipo.ID_TIPO_HABITACION = d.ID_TIPO_HABITACION;
+                tipo.BuscarTipo();
+
+                pension = new Pension();
+                pension.ID_PENSION = d.ID_PENSION;
+                pension.BuscarPension();
+
+                dt.Rows.Add(d.ID_DETALLE,huesped.RUT_HUESPED + "-" + huesped.DV_HUESPED,huesped.PNOMBRE_HUESPED + " " + huesped.APP_PATERNO_HUESPED + " " + huesped.APP_MATERNO_HUESPED,tipo.NOMBRE_TIPO_HABITACION + "-" + cat.NOMBRE_CATEGORIA,pension.NOMBRE_PENSION,d.ESTADO);
+            }
+
+            //Carga de GriedView
+            gvDetalle.DataSource = dt;
+            gvDetalle.DataBind();
+        }
+
+
 
         //Creación de Sesión
         public Usuario MiSesion

@@ -93,6 +93,11 @@ namespace Datos
             }
         }
 
+        public HABITACION BuscarHabitacion (short nUMERO_HABITACION) {
+            HABITACION h = ent.HABITACION.FirstOrDefault(x => x.NUMERO_HABITACION == nUMERO_HABITACION);
+            return h;
+        }
+
         public List<HABITACION> listarHabitacionDisponibleCategoria(DETALLE_ORDEN detalle)
         {
             List<HABITACION> lista = (from consulta in ent.HABITACION

@@ -28,6 +28,10 @@ namespace Datos
             return true;
         }
 
+        public List<ORDEN_COMPRA> ListarReservas () {
+            return ent.ORDEN_COMPRA.ToList();
+        }
+
         public List<ORDEN_COMPRA> HistorialOrdenCompra(CLIENTE cliente)
         {
             var lista = (from consulta in ent.ORDEN_COMPRA
@@ -172,14 +176,7 @@ namespace Datos
             ent.SaveChanges();
             return true;
         }
-        /*
-        public bool AgregarDetallePasajeros(DETALLE_PASAJEROS detalle)
-        {
-            ent.DETALLE_PASAJEROS.Add(detalle);
-            ent.SaveChanges();
-            return true;
-        }
-        */
+        
         public bool EditarDetalleReserva(DETALLE_ORDEN detalle)
         {
             DETALLE_ORDEN d = ent.DETALLE_ORDEN.FirstOrDefault(objeto => objeto.ID_DETALLE == detalle.ID_DETALLE);

@@ -1,6 +1,7 @@
 ﻿using Modelo;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -59,8 +60,7 @@ namespace Web.Empleado
 
                     Modelo.OrdenCompraCollection listaOrden = (Modelo.OrdenCompraCollection)ser.Deserialize(reader);
                     reader.Close();
-                    gvOrden.DataSource = listaOrden;
-                    gvOrden.DataBind();
+                    CargarOrden(listaOrden);
                 }
                 else
                 {
@@ -71,6 +71,85 @@ namespace Web.Empleado
             {
                 Response.Write("<script language='javascript'>window.alert('Debe Iniciar Sesión Primero');window.location='../Hostal/WebLogin.aspx';</script>");
             }
+        }
+
+        private void CargarOrden (OrdenCompraCollection listaOrden) {
+            Modelo.Cliente cliente;
+            Modelo.Empleado emp;
+            //Creacion DataTable
+            DataTable dt = new DataTable();
+            dt.Columns.AddRange(new DataColumn[] {
+                new DataColumn("NUMERO_ORDEN", typeof(int)),
+                new DataColumn("CANTIDAD_HUESPEDES", typeof(int)),
+                new DataColumn("FechaLlegada",typeof(string)),
+                new DataColumn("FechaSalida",typeof(string)),
+                new DataColumn("EMPLEADO",typeof(string)),
+                new DataColumn("CLIENTE",typeof(string)),
+                new DataColumn("COMENTARIO",typeof(string)),
+                new DataColumn("MONTO_TOTAL",typeof(string))
+            });
+
+            //Carga de datos en DataTable
+            foreach (OrdenCompra o in listaOrden) {
+                cliente = new Modelo.Cliente();
+                cliente.RUT_CLIENTE = o.RUT_CLIENTE;
+                cliente.BuscarCliente();
+
+                if (o.RUT_EMPLEADO.HasValue) {
+                    emp = new Modelo.Empleado();
+                    emp.RUT_EMPLEADO = o.RUT_EMPLEADO.Value;
+                    emp.BuscarEmpleado();
+                    dt.Rows.Add(o.NUMERO_ORDEN,o.CANTIDAD_HUESPEDES,o.FECHA_LLEGADA.ToShortDateString(),o.FECHA_SALIDA.ToShortDateString(),emp.PNOMBRE_EMPLEADO + " " + emp.APP_PATERNO_EMPLEADO + " " + emp.APP_MATERNO_EMPLEADO,cliente.NOMBRE_CLIENTE,o.COMENTARIO,"$" + o.MONTO_TOTAL);
+                }else {
+                    dt.Rows.Add(o.NUMERO_ORDEN,o.CANTIDAD_HUESPEDES,o.FECHA_LLEGADA.ToShortDateString(),o.FECHA_SALIDA.ToShortDateString(),"",cliente.NOMBRE_CLIENTE,o.COMENTARIO,"$" + o.MONTO_TOTAL);
+                }
+            }
+
+            //Carga de GriedView
+            gvOrden.DataSource = dt;
+            gvOrden.DataBind();
+        }
+
+        private void CargarGridDetalles (List<DetalleOrden> detalle) {
+            Huesped huesped;
+            Pension pension;
+            CategoriaHabitacion cat;
+            TipoHabitacion tipo;
+
+            //Creacion DataTable
+            DataTable dt = new DataTable();
+            dt.Columns.AddRange(new DataColumn[] {
+                new DataColumn("RUT_HUSPED",typeof(string)),
+                new DataColumn("HUESPED", typeof(string)),
+                new DataColumn("HABITACION",typeof(string)),
+                new DataColumn("PENSION",typeof(string)),
+                new DataColumn("ESTADO",typeof(string))
+            });
+
+            //Carga de datos en DataTable
+            foreach (DetalleOrden d in detalle) {
+                huesped = new Huesped();
+                huesped.RUT_HUESPED = d.RUT_HUESPED;
+                huesped.BuscarHuesped();
+
+                pension = new Pension();
+                pension.ID_PENSION = d.ID_PENSION;
+                pension.BuscarPension();
+
+                cat = new CategoriaHabitacion();
+                cat.ID_CATEGORIA_HABITACION = d.ID_CATEGORIA_HABITACION;
+                cat.BuscarCategoria();
+
+                tipo = new TipoHabitacion();
+                tipo.ID_TIPO_HABITACION = d.ID_TIPO_HABITACION;
+                tipo.BuscarTipo();
+
+                dt.Rows.Add(huesped.RUT_HUESPED + "-" + huesped.DV_HUESPED,huesped.PNOMBRE_HUESPED + " " + huesped.APP_PATERNO_HUESPED + " " + huesped.APP_MATERNO_HUESPED,tipo.NOMBRE_TIPO_HABITACION + "-" + cat.NOMBRE_CATEGORIA,pension.NOMBRE_PENSION,d.ESTADO);
+            }
+
+            //Carga de GriedView
+            gvDetalle.DataSource = dt;
+            gvDetalle.DataBind();
         }
 
         //Creación de Sesión
@@ -154,11 +233,10 @@ namespace Web.Empleado
 
                         Modelo.DetalleOrdenCollection listaDetalle = (Modelo.DetalleOrdenCollection)ser3.Deserialize(reader);
                         reader.Close();
-                        gvDetalle.DataSource = listaDetalle;
-                        gvDetalle.DataBind();
+                        CargarGridDetalles(listaDetalle);
 
                         MiSesionOrden = s.ObtenerReserva(writer.ToString());
-
+                        exampleModalLabel2.InnerText = "Detalle Orden N°" + MiSesionOrden.NUMERO_ORDEN;
                         ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modal", "$('#exampleModal2').modal();", true);
                     }
                 }

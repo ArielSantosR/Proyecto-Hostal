@@ -1,6 +1,7 @@
 ﻿using Modelo;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -79,18 +80,15 @@ namespace Web.Cliente
 
                         Modelo.OrdenCompraCollection listaPedido = (Modelo.OrdenCompraCollection)ser3.Deserialize(reader);
                         reader.Close();
-                        gvOrden.DataSource = listaPedido;
-                        gvOrden.DataBind();
+                        CargarGridOrdenes(listaPedido);
 
                         string datos2 = service.HistorialReservaPendiente(writer2.ToString());
-
                         XmlSerializer ser4 = new XmlSerializer(typeof(Modelo.OrdenCompraCollection));
                         StringReader reader2 = new StringReader(datos2);
 
                         Modelo.OrdenCompraCollection listaPedido2 = (Modelo.OrdenCompraCollection)ser4.Deserialize(reader2);
                         reader.Close();
-                        gvOrdenPendiente.DataSource = listaPedido2;
-                        gvOrdenPendiente.DataBind();
+                        CargarGridPendientes(listaPedido2);
 
                         string datos3 = service.HistorialReservaAsignado(writer2.ToString());
                         XmlSerializer ser5 = new XmlSerializer(typeof(Modelo.OrdenCompraCollection));
@@ -98,10 +96,18 @@ namespace Web.Cliente
 
                         Modelo.OrdenCompraCollection listaPedido3 = (Modelo.OrdenCompraCollection)ser5.Deserialize(reader3);
                         reader.Close();
-                        gvOrdenAsignada.DataSource = listaPedido3;
-                        gvOrdenAsignada.DataBind();
+                        CargarGridAsignado(listaPedido3);
+                    }else {
+                        divClientes.Visible = true;
+                        List<Modelo.Cliente> clientes = ClienteCollection.ListaClientes();
+                        if (!IsPostBack) {
+                            ddlClientes.DataSource = clientes;
+                            ddlClientes.DataTextField = "NOMBRE_CLIENTE";
+                            ddlClientes.DataValueField = "RUT_CLIENTE";
+                            ddlClientes.DataBind();
+                            ddlClientes.Items.Insert(0,new ListItem("Seleccione una Empresa...","0"));
+                        }
                     }
-                    //Else si es el administrador deberia decir algo supongo
                 }
                 else
                 {
@@ -114,7 +120,194 @@ namespace Web.Cliente
             }
         }
 
+        private void CargarGridOrdenes (List<OrdenCompra> ordenes) {
+            Modelo.Cliente cliente;
 
+            //Creacion DataTable
+            DataTable dt = new DataTable();
+            dt.Columns.AddRange(new DataColumn[] {
+                new DataColumn("NUMERO_ORDEN", typeof(int)),
+                new DataColumn("CANTIDAD_HUESPEDES", typeof(int)),
+                new DataColumn("FechaLlegada",typeof(string)),
+                new DataColumn("FechaSalida",typeof(string)),
+                new DataColumn("NOMBRE_CLIENTE",typeof(string)),
+                new DataColumn("ESTADO_ORDEN",typeof(string)),
+                new DataColumn("COMENTARIO",typeof(string)),
+                new DataColumn("MONTO_TOTAL",typeof(string))
+            });
+
+            //Carga de datos en DataTable
+            foreach (OrdenCompra o in ordenes) {
+                cliente = new Modelo.Cliente();
+                cliente.RUT_CLIENTE = o.RUT_CLIENTE;
+                cliente.BuscarCliente();
+
+                dt.Rows.Add(o.NUMERO_ORDEN,o.CANTIDAD_HUESPEDES,o.FECHA_LLEGADA.ToShortDateString(),o.FECHA_SALIDA.ToShortDateString(),cliente.NOMBRE_CLIENTE,o.ESTADO_ORDEN,o.COMENTARIO,"$" + o.MONTO_TOTAL);
+            }
+
+            //Carga de GriedView
+            gvOrden.DataSource = dt;
+            gvOrden.DataBind();
+            if (MiSesion.TIPO_USUARIO.Equals(Tipo_Usuario.Administrador.ToString())) {
+                gvOrden.Columns[4].Visible = true;
+            }
+        }
+
+        private void CargarGridPendientes (List<OrdenCompra> ordenes) {
+            Modelo.Cliente cliente;
+
+            //Creacion DataTable
+            DataTable dt = new DataTable();
+            dt.Columns.AddRange(new DataColumn[] {
+                new DataColumn("NUMERO_ORDEN", typeof(int)),
+                new DataColumn("CANTIDAD_HUESPEDES", typeof(int)),
+                new DataColumn("FechaLlegada",typeof(string)),
+                new DataColumn("FechaSalida",typeof(string)),
+                new DataColumn("NOMBRE_CLIENTE",typeof(string)),
+                new DataColumn("ESTADO_ORDEN",typeof(string)),
+                new DataColumn("COMENTARIO",typeof(string)),
+                new DataColumn("MONTO_TOTAL",typeof(string))
+            });
+
+            //Carga de datos en DataTable
+            foreach (OrdenCompra o in ordenes) {
+                cliente = new Modelo.Cliente();
+                cliente.RUT_CLIENTE = o.RUT_CLIENTE;
+                cliente.BuscarCliente();
+
+                dt.Rows.Add(o.NUMERO_ORDEN,o.CANTIDAD_HUESPEDES,o.FECHA_LLEGADA.ToShortDateString(),o.FECHA_SALIDA.ToShortDateString(),cliente.NOMBRE_CLIENTE,o.ESTADO_ORDEN,o.COMENTARIO,"$" + o.MONTO_TOTAL);
+            }
+
+            //Carga de GriedView
+            gvOrdenPendiente.DataSource = dt;
+            gvOrdenPendiente.DataBind();
+            if (MiSesion.TIPO_USUARIO.Equals(Tipo_Usuario.Administrador.ToString())) {
+                gvOrdenPendiente.Columns[4].Visible = true;
+            }
+        }
+
+        private void CargarGridAsignado (List<OrdenCompra> ordenes) {
+            Modelo.Cliente cliente;
+
+            //Creacion DataTable
+            DataTable dt = new DataTable();
+            dt.Columns.AddRange(new DataColumn[] {
+                new DataColumn("NUMERO_ORDEN", typeof(int)),
+                new DataColumn("CANTIDAD_HUESPEDES", typeof(int)),
+                new DataColumn("FechaLlegada",typeof(string)),
+                new DataColumn("FechaSalida",typeof(string)),
+                new DataColumn("NOMBRE_CLIENTE",typeof(string)),
+                new DataColumn("RUT_CLIENTE",typeof(int)),
+                new DataColumn("ESTADO_ORDEN",typeof(string)),
+                new DataColumn("COMENTARIO",typeof(string)),
+                new DataColumn("MONTO_TOTAL",typeof(string))
+            });
+
+            //Carga de datos en DataTable
+            foreach (OrdenCompra o in ordenes) {
+                cliente = new Modelo.Cliente();
+                cliente.RUT_CLIENTE = o.RUT_CLIENTE;
+                cliente.BuscarCliente();
+
+                dt.Rows.Add(o.NUMERO_ORDEN,o.CANTIDAD_HUESPEDES,o.FECHA_LLEGADA.ToShortDateString(),o.FECHA_SALIDA.ToShortDateString(),cliente.NOMBRE_CLIENTE,o.RUT_CLIENTE,o.ESTADO_ORDEN,o.COMENTARIO,"$" + o.MONTO_TOTAL);
+            }
+
+            //Carga de GriedView
+            gvOrdenAsignada.DataSource = dt;
+            gvOrdenAsignada.DataBind();
+            if (MiSesion.TIPO_USUARIO.Equals(Tipo_Usuario.Administrador.ToString())) {
+                gvOrdenPendiente.Columns[4].Visible = true;
+            }
+        }
+
+        private void CargarGridDetalle1 (List<DetalleOrden> detalle) {
+            Huesped huesped;
+            Pension pension;
+            CategoriaHabitacion cat;
+            TipoHabitacion tipo;
+
+            //Creacion DataTable
+            DataTable dt = new DataTable();
+            dt.Columns.AddRange(new DataColumn[] {
+                new DataColumn("NOMBRE_HUESPED", typeof(string)),
+                new DataColumn("HABITACION",typeof(string)),
+                new DataColumn("PENSION",typeof(string))
+            });
+
+            //Carga de datos en DataTable
+            foreach (Modelo.DetalleOrden d in detalle) {
+                huesped = new Huesped();
+                huesped.RUT_HUESPED = d.RUT_HUESPED;
+                huesped.BuscarHuesped();
+
+                pension = new Pension();
+                pension.ID_PENSION = d.ID_PENSION;
+                pension.BuscarPension();
+
+                cat = new CategoriaHabitacion();
+                cat.ID_CATEGORIA_HABITACION = d.ID_CATEGORIA_HABITACION;
+                cat.BuscarCategoria();
+
+                tipo = new TipoHabitacion();
+                tipo.ID_TIPO_HABITACION = d.ID_TIPO_HABITACION;
+                tipo.BuscarTipo();
+
+                dt.Rows.Add(huesped.PNOMBRE_HUESPED + " " + huesped.APP_PATERNO_HUESPED + " " + huesped.APP_MATERNO_HUESPED,pension.NOMBRE_PENSION,tipo.NOMBRE_TIPO_HABITACION + "-" + cat.NOMBRE_CATEGORIA);
+            }
+
+            //Carga de GriedView
+            gvDetalle.DataSource = dt;
+            gvDetalle.DataBind();
+        }
+
+        private void CargarGridDetalle2 (List<DetalleHabitacion> detalle) {
+            Huesped huesped;
+            Pension pension;
+            Habitacion hab;
+            CategoriaHabitacion cat;
+            TipoHabitacion tipo;
+
+            //Creacion DataTable
+            DataTable dt = new DataTable();
+            dt.Columns.AddRange(new DataColumn[] {
+                new DataColumn("NUMERO_HABITACION", typeof(string)),
+                new DataColumn("HUESPED", typeof(string)),
+                new DataColumn("PENSION",typeof(string)),
+                new DataColumn("HABITACION",typeof(string)),
+                new DataColumn("CATEGORIA_HAB",typeof(string)),
+                new DataColumn("FechaLlegada",typeof(string)),
+                new DataColumn("FechaSalida",typeof(int))
+            });
+
+            //Carga de datos en DataTable
+            foreach (DetalleHabitacion d in detalle) {
+                huesped = new Huesped();
+                huesped.RUT_HUESPED = d.RUT_HUESPED;
+                huesped.BuscarHuesped();
+                
+                pension = new Pension();
+                pension.ID_PENSION = d.ID_PENSION;
+                pension.BuscarPension();
+
+                hab = new Habitacion();
+                hab.NUMERO_HABITACION = d.NUMERO_HABITACION;
+                hab.BuscarHabitacion();
+
+                cat = new CategoriaHabitacion();
+                cat.ID_CATEGORIA_HABITACION = hab.ID_CATEGORIA_HABITACION;
+                cat.BuscarCategoria();
+
+                tipo = new TipoHabitacion();
+                tipo.ID_TIPO_HABITACION = hab.ID_TIPO_HABITACION;
+                tipo.BuscarTipo();
+
+                dt.Rows.Add(d.NUMERO_HABITACION,huesped.PNOMBRE_HUESPED + " " + huesped.APP_PATERNO_HUESPED + " " + huesped.APP_MATERNO_HUESPED,pension.NOMBRE_PENSION,tipo.NOMBRE_TIPO_HABITACION,cat.NOMBRE_CATEGORIA,d.FECHA_LLEGADA.ToShortDateString(),d.FECHA_SALIDA.ToShortDateString());
+            }
+
+            //Carga de GriedView
+            gvDetalle2.DataSource = dt;
+            gvDetalle2.DataBind();
+        }
 
         //Creación de Sesión
         public Usuario MiSesion
@@ -192,11 +385,10 @@ namespace Web.Cliente
 
                         Modelo.DetalleOrdenCollection listaDetalle = (Modelo.DetalleOrdenCollection)ser3.Deserialize(reader);
                         reader.Close();
-                        gvDetalle.DataSource = listaDetalle;
-                        gvDetalle.DataBind();
+                        CargarGridDetalle1(listaDetalle);
 
                         MiSesionOrden = s.ObtenerReserva(writer.ToString());
-
+                        exampleModalLabel.InnerText = "Detalle Reserva N°" + MiSesionOrden.NUMERO_ORDEN;
                         ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modal", "$('#exampleModal').modal();", true);
                     }
                 }
@@ -277,14 +469,37 @@ namespace Web.Cliente
 
                         Modelo.DetalleHabitacionCollection listaDetalle = (Modelo.DetalleHabitacionCollection)ser3.Deserialize(reader);
                         reader.Close();
-                        gvDetalle2.DataSource = listaDetalle;
-                        gvDetalle2.DataBind();
+                        CargarGridDetalle2(listaDetalle);
                         ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modal", "$('#exampleModal2').modal();", true);
                     }
                 }
             }
             catch (Exception ex)
             {
+                alerta_exito.Visible = false;
+                error.Text = "Excepción: " + ex.ToString();
+                alerta.Visible = true;
+            }
+        }
+
+        protected void ddlClientes_SelectedIndexChanged (object sender,EventArgs e) {
+            try {
+                if (ddlClientes.SelectedIndex != 0) {
+                    List<OrdenCompra> ordenes = OrdenCompraCollection.ListarOrdenes().Where(x => x.RUT_CLIENTE == int.Parse(ddlClientes.SelectedValue)).ToList();
+                    CargarGridOrdenes(ordenes);
+
+                    var listaP = ordenes.Where(x => x.ESTADO_ORDEN.Equals(Estado_Orden.Pendiente.ToString())).ToList();
+                    CargarGridPendientes(listaP);
+
+                    var listaA = ordenes.Where(x => x.ESTADO_ORDEN.Equals(Estado_Orden.Asignado.ToString())).ToList();
+                    CargarGridAsignado(listaA);
+
+                } else {
+                    alerta_exito.Visible = false;
+                    error.Text = "Debe seleccionar una empresa válida";
+                    alerta.Visible = true;
+                }
+            } catch (Exception ex) {
                 alerta_exito.Visible = false;
                 error.Text = "Excepción: " + ex.ToString();
                 alerta.Visible = true;

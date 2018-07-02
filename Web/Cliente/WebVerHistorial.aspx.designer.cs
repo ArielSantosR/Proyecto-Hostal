@@ -13,6 +13,15 @@ namespace Web.Cliente {
     public partial class WebVerHistorial {
         
         /// <summary>
+        /// Control upAlert.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel upAlert;
+        
+        /// <summary>
         /// Control alerta.
         /// </summary>
         /// <remarks>
@@ -49,13 +58,40 @@ namespace Web.Cliente {
         protected global::System.Web.UI.WebControls.Literal exito;
         
         /// <summary>
-        /// Control gvOrdenPendiente.
+        /// Control upEmpresas.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvOrdenPendiente;
+        protected global::System.Web.UI.UpdatePanel upEmpresas;
+        
+        /// <summary>
+        /// Control divClientes.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divClientes;
+        
+        /// <summary>
+        /// Control ddlClientes.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlClientes;
+        
+        /// <summary>
+        /// Control upOrdenes.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel upOrdenes;
         
         /// <summary>
         /// Control gvOrden.
@@ -67,6 +103,33 @@ namespace Web.Cliente {
         protected global::System.Web.UI.WebControls.GridView gvOrden;
         
         /// <summary>
+        /// Control upOrdenesPendientes.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel upOrdenesPendientes;
+        
+        /// <summary>
+        /// Control gvOrdenPendiente.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvOrdenPendiente;
+        
+        /// <summary>
+        /// Control upOrdenAsignada.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel upOrdenAsignada;
+        
+        /// <summary>
         /// Control gvOrdenAsignada.
         /// </summary>
         /// <remarks>
@@ -76,6 +139,24 @@ namespace Web.Cliente {
         protected global::System.Web.UI.WebControls.GridView gvOrdenAsignada;
         
         /// <summary>
+        /// Control upModal.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel upModal;
+        
+        /// <summary>
+        /// Control exampleModalLabel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl exampleModalLabel;
+        
+        /// <summary>
         /// Control gvDetalle.
         /// </summary>
         /// <remarks>
@@ -83,6 +164,15 @@ namespace Web.Cliente {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gvDetalle;
+        
+        /// <summary>
+        /// Control upModal2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel upModal2;
         
         /// <summary>
         /// Control gvDetalle2.
