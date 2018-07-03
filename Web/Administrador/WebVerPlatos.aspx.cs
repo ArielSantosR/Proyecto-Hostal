@@ -1,6 +1,7 @@
 ﻿using Modelo;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -45,7 +46,37 @@ namespace Web
 
             Modelo.PlatoCollection listaPlato = (Modelo.PlatoCollection)ser.Deserialize(reader);
             reader.Close();
-            gvPlato.DataSource = listaPlato;
+            CargarGrid(listaPlato);
+        }
+
+        private void CargarGrid (PlatoCollection listaPlato) {
+            TipoPlato tipo;
+            Categoria cat;
+
+            //Creacion DataTable
+            DataTable dt = new DataTable();
+            dt.Columns.AddRange(new DataColumn[] {
+                new DataColumn("ID_PLATO", typeof(int)),
+                new DataColumn("NOMBRE_PLATO", typeof(string)),
+                new DataColumn("PRECIO_PLATO",typeof(string)),
+                new DataColumn("CATEGORIA",typeof(string)),
+                new DataColumn("TIPO_PLATO",typeof(string))
+            });
+
+            foreach (Plato p in listaPlato) {
+                tipo = new TipoPlato();
+                tipo.ID_TIPO_PLATO = p.ID_TIPO_PLATO;
+                tipo.BuscarTipo();
+
+                cat = new Categoria();
+                cat.ID_CATEGORIA = p.ID_CATEGORIA;
+                cat.BuscarCategoria();
+
+                dt.Rows.Add(p.ID_PLATO,p.NOMBRE_PLATO,"$" + p.PRECIO_PLATO,tipo.NOMBRE_TIPO_PLATO,cat.NOMBRE_CATEGORIA);
+            }
+
+            //Carga de GriedView
+            gvPlato.DataSource = dt;
             gvPlato.DataBind();
         }
 

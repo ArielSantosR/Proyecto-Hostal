@@ -33,7 +33,7 @@
                     <div class="col-sm-12 input-group-lg">
                         <div class="input-group-text col-sm-12" style="background-color: #009edf; border: none; color: #FFF">
                             <label class="control-label">R.U.T:</label>&nbsp;
-                            <asp:TextBox ID="txtRut" runat="server" CssClass="form-control" oninput="checkRut(this)" Width="230px" required="required"></asp:TextBox>&nbsp;&nbsp;&nbsp;
+                            <asp:TextBox ID="txtRut" runat="server" CssClass="form-control" oninput="checkRut(this)" Width="230px" required="required" OnTextChanged="txtRut_TextChanged"></asp:TextBox>&nbsp;&nbsp;&nbsp;
                             <label class="control-label">Nombre:</label>&nbsp;
                             <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control" required="required"></asp:TextBox>
                         </div>

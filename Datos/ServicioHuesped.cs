@@ -74,6 +74,16 @@ namespace Datos
             return lista;
         }
 
+        public List<HUESPED> ListarHuespedNoAsignado(CLIENTE huesped)
+        {
+            var lista = (from consulta in ent.HUESPED
+                         where consulta.RUT_CLIENTE == huesped.RUT_CLIENTE
+                         //&& consulta.REGISTRADO.Equals("S")
+                         orderby consulta.RUT_HUESPED
+                         select consulta).ToList();
+            return lista;
+        }
+
         public HUESPED BuscarHuesped(int RUT_HUESPED) {
             HUESPED huesped = ent.HUESPED.FirstOrDefault(x => x.RUT_HUESPED == RUT_HUESPED);
             return huesped;

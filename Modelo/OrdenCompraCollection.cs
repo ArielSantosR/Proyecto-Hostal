@@ -15,6 +15,11 @@ namespace Modelo
             return GenerarLista(ser.ListarReservaAsignada());
         }
 
+        public static List<OrdenCompra> ListarOrdenes() {
+            ServicioReserva ser = new ServicioReserva();
+            return GenerarLista(ser.ListarReservas());
+        }
+
         private static List<OrdenCompra> GenerarLista(List<ORDEN_COMPRA> listDatos) {
             List<OrdenCompra> list = new List<OrdenCompra>();
             OrdenCompra orden;

@@ -51,5 +51,23 @@ namespace Modelo
 
             }
         }
+
+        public bool BuscarEmpleado () {
+            ServicioEmpleado serv = new ServicioEmpleado();
+            EMPLEADO datos = serv.BuscarEmpleado(this.RUT_EMPLEADO);
+            if (datos != null) {
+                this.APP_MATERNO_EMPLEADO = datos.APP_MATERNO_EMPLEADO;
+                this.APP_PATERNO_EMPLEADO = datos.APP_PATERNO_EMPLEADO;
+                this.DV_EMPLEADO = datos.DV_EMPLEADO;
+                this.PNOMBRE_EMPLEADO = datos.PNOMBRE_EMPLEADO;
+                this.ID_USUARIO = datos.ID_USUARIO;
+                this.SNOMBRE_EMPLEADO = datos.SNOMBRE_EMPLEADO;
+
+                return true;
+            } else {
+                return false;
+
+            }
+        }
     }
 }

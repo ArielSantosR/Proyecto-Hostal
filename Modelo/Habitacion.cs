@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Datos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -43,6 +44,20 @@ namespace Modelo
                 }
                 return datos;
              }
+        }
+
+        public bool BuscarHabitacion () {
+            ServicioHabitacion serv = new ServicioHabitacion();
+            HABITACION datos = serv.BuscarHabitacion(this.NUMERO_HABITACION);
+            if (datos != null) {
+                this.ESTADO_HABITACION = datos.ESTADO_HABITACION;
+                this.ID_CATEGORIA_HABITACION = datos.ID_CATEGORIA_HABITACION;
+                this.ID_TIPO_HABITACION = datos.ID_TIPO_HABITACION;
+
+                return true;
+            } else {
+                return false;
+            }
         }
     }
 }

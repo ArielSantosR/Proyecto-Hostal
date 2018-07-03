@@ -22,6 +22,11 @@ namespace Datos
             return (from a in ent.PRODUCTO where a.RUT_PROVEEDOR.Equals(p.RUT_PROVEEDOR) select a).ToList();
         }
 
+        public FAMILIA BuscarFamilia (short iD_FAMILIA) {
+            FAMILIA f = ent.FAMILIA.FirstOrDefault(x => x.ID_FAMILIA == iD_FAMILIA);
+            return f;
+        }
+
         public List<PRODUCTO> ListarProducto()
         {
             return ent.PRODUCTO.ToList<PRODUCTO>();

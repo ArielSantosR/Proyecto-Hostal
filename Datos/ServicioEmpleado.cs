@@ -74,5 +74,9 @@ namespace Datos
             return e;
         }
 
+        public EMPLEADO BuscarEmpleado (int rUT_EMPLEADO) {
+            EMPLEADO e = ent.EMPLEADO.FirstOrDefault(x => x.RUT_EMPLEADO == rUT_EMPLEADO);
+            return e;
+        }
     }
 }

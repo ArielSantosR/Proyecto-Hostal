@@ -150,6 +150,8 @@ namespace Web.Empleado
                     Modelo.DetallePlatoCollection listaMinuta = (Modelo.DetallePlatoCollection)ser3.Deserialize(reader);
                     reader.Close();
                     CargarTablaMinuta(listaMinuta);
+
+                    exampleModal2Label.InnerText = "Detalle Minuta " + minuta.ID_PENSION;
                 }
             }
 
@@ -161,28 +163,38 @@ namespace Web.Empleado
 
         private void CargarTablaMinuta(List<DetallePlato> lista)
         {
-            Minuta minuta = new Minuta();
+            Plato plato;
+            Categoria cat;
+            TipoPlato tipo;
+
             DataTable dt = new DataTable();
             dt.Columns.AddRange(new DataColumn[] {
-                new DataColumn("ID", typeof(long)),
+                new DataColumn("ID Plato", typeof(long)),
                 new DataColumn("Nombre", typeof(string)),
-
-                new DataColumn("Precio",typeof(int))
+                new DataColumn("Categoria",typeof(string)),
+                new DataColumn("Tipo",typeof(string)),
+                new DataColumn("Precio",typeof(string))
             });
+
             foreach (DetallePlato item in lista)
             {
-                minuta = new Minuta();
-                minuta.ID_PENSION = item.ID_PENSION;
-                //minuta.Read();
+                plato = new Plato();
+                plato.ID_PLATO = item.ID_PLATO;
+                plato.BuscarPlato();
 
-                dt.Rows.Add(minuta.ID_PENSION, minuta.NOMBRE_PENSION, minuta.VALOR_PENSION);
+                cat = new Categoria();
+                cat.ID_CATEGORIA = plato.ID_CATEGORIA;
+                cat.BuscarCategoria();
+
+                tipo = new TipoPlato();
+                tipo.ID_TIPO_PLATO = plato.ID_TIPO_PLATO;
+                tipo.BuscarTipo();
+
+                dt.Rows.Add(plato.ID_PLATO,plato.NOMBRE_PLATO,cat.NOMBRE_CATEGORIA,tipo.NOMBRE_TIPO_PLATO,"$" + plato.PRECIO_PLATO);
             }
-
-
+            
             gvDetalleMinuta.DataSource = dt;
             gvDetalleMinuta.DataBind();
         }
-
-        //fin tabla historial
     }
 }

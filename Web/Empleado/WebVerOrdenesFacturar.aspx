@@ -28,11 +28,11 @@
         </ContentTemplate>
     </asp:UpdatePanel>
     <div class="container">
-        <div class="row" style="margin-top: 20px; margin-bottom: 20px;">
+        <div class="row" style="margin-top: 20px; margin-bottom: 70px;">
             <div class="main-center" style="max-width: 1024px;">
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
-                        <h1>Lista de Usuarios</h1>
+                        <h1>Lista de Órdenes</h1>
                     </div>
                 </div>
                 <asp:UpdatePanel ID="UpdatePanel2" runat="server" UpdateMode="Always">
@@ -69,7 +69,7 @@
                     <ContentTemplate>
                         <% if (gvOrdenes.Rows.Count != 0) { %>
                         <div class="form-group">
-                            <div style="display: flex; justify-content: center; margin-bottom: 20px">
+                            <div style="display: flex; justify-content: center; margin-bottom: 70px">
                                 <asp:GridView ID="gvOrdenes" runat="server" ForeColor="#333333" GridLines="Vertical" CssClass="text-center rounded" AllowPaging="True" PageSize="8" DataKeyNames="Número Orden" OnSelectedIndexChanged="gvOrdenes_SelectedIndexChanged">
                                     <AlternatingRowStyle BackColor="White" />
                                     <Columns>

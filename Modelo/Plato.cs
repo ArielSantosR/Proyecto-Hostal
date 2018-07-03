@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Datos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -36,6 +37,22 @@ namespace Modelo
 
                 }
                 return nombre_precio;
+            }
+        }
+
+        public bool BuscarPlato () {
+            ServicioPlato serv = new ServicioPlato();
+            PLATO dato = serv.BuscarPlato(this.ID_PLATO);
+            if (dato != null) {
+                this.ID_CATEGORIA = dato.ID_CATEGORIA;
+                this.ID_TIPO_PLATO = dato.ID_TIPO_PLATO;
+                this.NOMBRE_PLATO = dato.NOMBRE_PLATO;
+                this.PRECIO_PLATO = dato.PRECIO_PLATO;
+
+                return true;
+            } else {
+                return false;
+
             }
         }
     }

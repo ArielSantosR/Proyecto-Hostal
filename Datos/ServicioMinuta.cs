@@ -26,6 +26,16 @@ namespace Datos
             return lista;
         }
 
+        public TIPO_PLATO BuscarTipoPlato (short iD_TIPO_PLATO) {
+            TIPO_PLATO t = ent.TIPO_PLATO.FirstOrDefault(x => x.ID_TIPO_PLATO == iD_TIPO_PLATO);
+            return t;
+        }
+
+        public CATEGORIA BuscarCategoria (short iD_CATEGORIA) {
+            CATEGORIA c = ent.CATEGORIA.FirstOrDefault(x => x.ID_CATEGORIA == iD_CATEGORIA);
+            return c;
+        }
+
         public PENSION BuscarPension(short iD_PENSION) {
             PENSION p = ent.PENSION.FirstOrDefault(x => x.ID_PENSION == iD_PENSION);
             return p;

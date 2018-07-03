@@ -40,7 +40,7 @@
         </div>
         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
         <div class="modal fade" id="modalPrev" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-dialog modal-lg" role="document" style="max-width:1024px">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModal2Label">Detalle Informe</h5>

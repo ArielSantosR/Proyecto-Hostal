@@ -225,9 +225,9 @@ namespace Web.Empleado
                     StringWriter writer = new StringWriter();
                     sr.Serialize(writer, orden);
 
-                    if (s.ListaDetalleHabitacionCliente(writer.ToString()) != null)
+                    if (s.ListarDetalleReserva(writer.ToString()) != null)
                     {
-                        string datos = s.ListaDetalleHabitacionCliente(writer.ToString());
+                        string datos = s.ListarDetalleReserva(writer.ToString());
                         XmlSerializer ser3 = new XmlSerializer(typeof(Modelo.DetalleOrdenCollection));
                         StringReader reader = new StringReader(datos);
 

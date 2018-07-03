@@ -147,7 +147,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                    <asp:Button ID="btnModificar" runat="server" Text="Ver Todas las Habitaciones Disponibles" OnClick="btnModificar_Click" CssClass="btn btn-success" />
+                    <asp:Button ID="btnModificar" runat="server" Text="Cambiar Habitación" OnClick="btnModificar_Click" CssClass="btn btn-success" />
                 </div>
             </div>
         </div>

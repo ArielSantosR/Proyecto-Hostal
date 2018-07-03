@@ -22,6 +22,7 @@ namespace Web.Empleado {
         Font font8B = new Font(FontFamily.HELVETICA,8,Font.BOLD);
         private List<Comuna> coleccionComuna;
         private List<Region> coleccionRegion;
+
         void Page_PreInit (object sender,EventArgs e) {
             if (MiSesion != null) {
                 if (MiSesion.TIPO_USUARIO != null && MiSesion.ESTADO != null) {
@@ -286,7 +287,11 @@ namespace Web.Empleado {
                 if (gvDetalle.Rows.Count != 0) {
                     Factura factura = new Factura();
                     factura.FECHA_EMISION_FACTURA = DateTime.Today;
-                    factura.NUMERO_ORDEN = short.Parse(txtOrden.Text);
+                    if (!string.IsNullOrEmpty(txtOrden.Text)) {
+                        factura.NUMERO_ORDEN = short.Parse(txtOrden.Text);
+                    } else {
+                        factura.NUMERO_ORDEN = null;
+                    }
                     factura.RUT_CLIENTE = int.Parse(txtRut.Text.Substring(0,txtRut.Text.Length - 2));
                     factura.RUT_EMPLEADO = SesionEmp.RUT_EMPLEADO;
                     if (string.IsNullOrEmpty(txtDescuento.Text)) {
@@ -1241,7 +1246,7 @@ namespace Web.Empleado {
                     totalN += int.Parse(totalT.Text);
                     descuentoN += int.Parse(desT.Text);
                 }
-
+                
                 txtIva.Text = (totalN * 0.19).ToString();
                 txtNeto.Text = (totalN - (totalN * 0.19)).ToString();
                 txtDescuento.Text = descuentoN.ToString();
@@ -1259,33 +1264,83 @@ namespace Web.Empleado {
                 TextBox valorUnit = (TextBox)currentRow.FindControl("txtValorUniG");
                 TextBox descuento = (TextBox)currentRow.FindControl("txtDescuentoG");
                 TextBox total = (TextBox)currentRow.FindControl("txtValorTotal");
+                RangeValidator validador = (RangeValidator)currentRow.FindControl("rvDescuento");
+
+                validador.ControlToValidate = descuento.ToString();
 
                 DataRow rowEdit = SesionTable.Rows[currentRow.RowIndex];
+                validador.Validate();
+                if (validador.IsValid) {
+                    if (int.Parse(total.Text) > int.Parse(descuento.Text)) {
+                        total.Text = ((int.Parse(cantidad.Text) * int.Parse(valorUnit.Text)) - (double.Parse(descuento.Text)) / 100 * (int.Parse(cantidad.Text) * int.Parse(valorUnit.Text))).ToString();
+                        rowEdit[2] = int.Parse(descuento.Text);
+                        rowEdit[4] = int.Parse(total.Text);
+                    } else {
+                        error.Text = "El descuento no puede ser mayor que el total actual";
+                        alerta.Visible = true;
+                        alerta_exito.Visible = false;
+                    }
 
-                if (int.Parse(total.Text) > int.Parse(descuento.Text)) {
-                    total.Text = ((int.Parse(cantidad.Text) * int.Parse(valorUnit.Text)) - int.Parse(descuento.Text)).ToString();
-                    rowEdit[2] = int.Parse(descuento.Text);
-                    rowEdit[4] = int.Parse(total.Text);
+                    int totalN = 0;
+                    int descuentoN = 0;
+                    foreach (GridViewRow rowG in gvDetalle.Rows) {
+                        cantidad = (TextBox)rowG.FindControl("txtCantidad");
+                        valorUnit = (TextBox)rowG.FindControl("txtValorUniG");
+                        TextBox totalT = (TextBox)rowG.FindControl("txtValorTotal");
+                        TextBox desT = (TextBox)rowG.FindControl("txtDescuentoG");
+                        totalN += int.Parse(totalT.Text);
+                        descuentoN += (int)(double.Parse(desT.Text)/100 * (int.Parse(cantidad.Text) * int.Parse(valorUnit.Text)));
+                    }
+
+                    txtIva.Text = (totalN * 0.19).ToString();
+                    txtNeto.Text = (totalN - (totalN * 0.19)).ToString();
+                    txtDescuento.Text = descuentoN.ToString();
+                    txtTotal.Text = totalN.ToString();
                 } else {
-                    error.Text = "El descuento no puede ser mayor que el total actual";
+                    error.Text = "El descuento no puede ser menor a 0 ni mayor a 99";
                     alerta.Visible = true;
                     alerta_exito.Visible = false;
                 }
+            } catch (Exception ex) {
+                error.Text = "Excepción: " + ex.Message;
+                alerta.Visible = true;
+            }
+        }
 
-                int totalN = 0;
-                int descuentoN = 0;
-                foreach (GridViewRow rowG in gvDetalle.Rows) {
-                    TextBox totalT = (TextBox)rowG.Cells[4].FindControl("txtValorTotal");
-                    TextBox desT = (TextBox)rowG.Cells[2].FindControl("txtDescuentoG");
-                    totalN += int.Parse(totalT.Text);
-                    descuentoN += int.Parse(desT.Text);
+        protected void txtRut_TextChanged (object sender,EventArgs e) {
+            try {
+                Modelo.Cliente cliente = new Modelo.Cliente();
+                int rut = int.Parse(txtRut.Text.Substring(0,txtRut.Text.Length - 2));
+                cliente.RUT_CLIENTE = rut;
+                if (cliente.BuscarCliente()) {
+                    Comuna com = new Comuna();
+                    com.Id_Comuna = cliente.ID_COMUNA;
+                    com.BuscarComuna();
+
+                    Region reg = new Region();
+                    reg.Id_Region = com.Id_Region;
+                    reg.BuscarRegion();
+
+                    Pais pais = new Pais();
+                    pais.ID_PAIS = reg.Id_Pais;
+                    pais.BuscarPais();
+
+                    txtDireccion.Text = cliente.DIRECCION_CLIENTE;
+                    txtNombre.Text = cliente.NOMBRE_CLIENTE; ;
+                    txtTelefono.Text = cliente.TELEFONO_CLIENTE.ToString();
+                    ddlPais.SelectedValue = pais.ID_PAIS.ToString();
+                    FiltrarRegion();
+                    ddlRegion.SelectedValue = reg.Id_Region.ToString();
+                    FiltrarComuna();
+                    ddlComuna.SelectedValue = com.Id_Comuna.ToString();
+                    ddlGiro.SelectedValue = cliente.ID_GIRO.ToString();
+
+                    upPag.Update();
+                }else {
+                    error.Text = "El cliente no esta registrado";
+                    alerta.Visible = true;
+                    alerta_exito.Visible = false;
                 }
-
-                txtIva.Text = (totalN * 0.19).ToString();
-                txtNeto.Text = (totalN - (totalN * 0.19)).ToString();
-                txtDescuento.Text = descuentoN.ToString();
-                txtTotal.Text = totalN.ToString();
-
             } catch (Exception ex) {
                 error.Text = "Excepción: " + ex.Message;
                 alerta.Visible = true;

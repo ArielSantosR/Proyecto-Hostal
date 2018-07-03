@@ -8,6 +8,7 @@ using Modelo;
 using WcfNegocio;
 using System.Xml.Serialization;
 using System.IO;
+using System.Data;
 
 namespace Web.Administrador
 {
@@ -45,9 +46,39 @@ namespace Web.Administrador
 
             Modelo.ProductoCollection listaProducto = (Modelo.ProductoCollection)ser.Deserialize(reader);
             reader.Close();
-            gvProducto.DataSource = listaProducto;
+            CargarGrid(listaProducto);
+        }
+
+        private void CargarGrid (ProductoCollection listaProducto) {
+            Familia familia;
+
+            //Creacion DataTable
+            DataTable dt = new DataTable();
+            dt.Columns.AddRange(new DataColumn[] {
+                new DataColumn("ID_PRODUCTO", typeof(string)),
+                new DataColumn("NOMBRE_PRODUCTO", typeof(string)),
+                new DataColumn("PRECIO_PRODUCTO",typeof(string)),
+                new DataColumn("DESCRIPCION_PRODUCTO",typeof(string)),
+                new DataColumn("STOCK_PRODUCTO",typeof(string)),
+                new DataColumn("STOCK_CRITICO_PRODUCTO",typeof(string)),
+                new DataColumn("UNIDAD_MEDIDA",typeof(string)),
+                new DataColumn("FAMILIA",typeof(string)),
+                new DataColumn("FECHA_VENCIMIENTO_PRODUCTO",typeof(string))
+            });
+
+            foreach (Producto p in listaProducto) {
+                familia = new Familia();
+                familia.ID_FAMILIA = p.ID_FAMILIA;
+                familia.BuscarFamilia();
+
+                dt.Rows.Add(p.ID_PRODUCTO,p.NOMBRE_PRODUCTO,"$" + p.PRECIO_PRODUCTO,p.STOCK_PRODUCTO,p.STOCK_CRITICO_PRODUCTO,p.UNIDAD_MEDIDA,familia.NOMBRE_FAMILIA,p.FECHA_VENCIMIENTO_PRODUCTO.Value.ToShortDateString());
+            }
+
+            //Carga de GriedView
+            gvProducto.DataSource = dt;
             gvProducto.DataBind();
         }
+
         protected void btnEditar_Click(object sender, EventArgs e)
         {
             //Lee los valores del LinkButton, primero usa la clase LinkButton para 
@@ -76,13 +107,13 @@ namespace Web.Administrador
 
             Response.Redirect("../Administrador/WebEliminarProducto.aspx");
         }
+        
         protected void gvProducto_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             gvProducto.PageIndex = e.NewPageIndex;
             gvProducto.DataBind();
         }
-
-
+        
         public Producto MiSesionp
         {
             get
@@ -98,8 +129,7 @@ namespace Web.Administrador
                 Session["Producto"] = value;
             }
         }
-
-
+        
         public Usuario MiSesion
         {
             get
@@ -115,7 +145,5 @@ namespace Web.Administrador
                 Session["Usuario"] = value;
             }
         }
-
-        
     }
 }

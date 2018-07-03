@@ -59,6 +59,11 @@ namespace Datos
             }
         }
 
+        public PLATO BuscarPlato (short iD_PLATO) {
+            PLATO p = ent.PLATO.FirstOrDefault(x => x.ID_PLATO == iD_PLATO);
+            return p;
+        }
+
         public bool ExisteTipoPlato(TIPO_PLATO tipoPlato)
         {
             TIPO_PLATO tp = ent.TIPO_PLATO.FirstOrDefault(objeto =>

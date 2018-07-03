@@ -22,13 +22,13 @@ namespace Web.Empleado {
         protected global::System.Web.UI.ScriptManager ScriptManager;
         
         /// <summary>
-        /// Control upAlert.
+        /// Control upPag.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel upAlert;
+        protected global::System.Web.UI.UpdatePanel upPag;
         
         /// <summary>
         /// Control alerta.
@@ -94,15 +94,6 @@ namespace Web.Empleado {
         protected global::System.Web.UI.WebControls.TextBox txtDireccion;
         
         /// <summary>
-        /// Control upPais.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel upPais;
-        
-        /// <summary>
         /// Control ddlPais.
         /// </summary>
         /// <remarks>
@@ -112,15 +103,6 @@ namespace Web.Empleado {
         protected global::System.Web.UI.WebControls.DropDownList ddlPais;
         
         /// <summary>
-        /// Control upRegion.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel upRegion;
-        
-        /// <summary>
         /// Control ddlRegion.
         /// </summary>
         /// <remarks>
@@ -128,15 +110,6 @@ namespace Web.Empleado {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlRegion;
-        
-        /// <summary>
-        /// Control upComuna.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel upComuna;
         
         /// <summary>
         /// Control ddlComuna.
@@ -157,15 +130,6 @@ namespace Web.Empleado {
         protected global::System.Web.UI.WebControls.TextBox txtOrden;
         
         /// <summary>
-        /// Control upGiro.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel upGiro;
-        
-        /// <summary>
         /// Control ddlGiro.
         /// </summary>
         /// <remarks>
@@ -184,15 +148,6 @@ namespace Web.Empleado {
         protected global::System.Web.UI.WebControls.TextBox txtTelefono;
         
         /// <summary>
-        /// Control upGrid.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel upGrid;
-        
-        /// <summary>
         /// Control gvDetalle.
         /// </summary>
         /// <remarks>
@@ -200,15 +155,6 @@ namespace Web.Empleado {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gvDetalle;
-        
-        /// <summary>
-        /// Control upPagos.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel upPagos;
         
         /// <summary>
         /// Control txtNeto.

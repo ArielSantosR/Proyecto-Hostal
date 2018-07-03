@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Empleado/EmpleadoM.Master" AutoEventWireup="true" CodeBehind="WebVerMinuta.aspx.cs" Inherits="Web.Empleado.WebVerMinuta" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -16,7 +17,7 @@
 
 
     <div style="display: flex; justify-content: center; margin-bottom: 20px; margin-top: 50px">
-        <asp:GridView ID="gvMinuta" AutoGenerateColumns="false" runat="server" ForeColor="#333333" GridLines="Vertical" AllowPaging="True" PageSize="8" OnPageIndexChanging="gvMinuta_PageIndexChanging" >
+        <asp:GridView ID="gvMinuta" AutoGenerateColumns="false" runat="server" ForeColor="#333333" GridLines="Vertical" AllowPaging="True" PageSize="8" OnPageIndexChanging="gvMinuta_PageIndexChanging">
             <AlternatingRowStyle BackColor="White" />
             <EditRowStyle BackColor="#2461BF" />
             <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
@@ -34,10 +35,8 @@
                 <asp:BoundField DataField="VALOR_PENSION" HeaderText="Precio de Minuta" />
                 <asp:TemplateField>
                     <ItemTemplate>
-                         <asp:LinkButton ID="btnInfo" CssClass="btn btn-info" CommandArgument='<%#Eval("ID_PENSION")%>' Text="Ver Detalle" runat="server" OnClick="btnInfo_Click"/>
+                        <asp:LinkButton ID="btnInfo" CssClass="btn btn-info" CommandArgument='<%#Eval("ID_PENSION")%>' Text="Ver Detalle" runat="server" OnClick="btnInfo_Click" />
                         <asp:LinkButton ID="btnEliminar" OnClick="btnEliminar_Click" CssClass="btn btn-danger" CommandArgument='<%#Eval("ID_PENSION")%>' Text="Eliminar" runat="server" />
-                        
-                       
                     </ItemTemplate>
                 </asp:TemplateField>
             </Columns>
@@ -46,19 +45,19 @@
 
     <asp:ScriptManager runat="server"></asp:ScriptManager>
 
-    
+
     <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModal2Label">Detalle Minuta</h5>
+                    <h5 class="modal-title" id="exampleModal2Label" runat="server"></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <div style="display: flex; justify-content: center; margin-bottom: 70px">
-                        <asp:GridView ID="gvDetalleMinuta" AutoGenerateColumns="true" runat="server" ForeColor="#333333" GridLines="Vertical" AllowPaging="True" PageSize="8" >
+                        <asp:GridView ID="gvDetalleMinuta" AutoGenerateColumns="true" runat="server" ForeColor="#333333" GridLines="Vertical" AllowPaging="True" PageSize="8">
                             <AlternatingRowStyle BackColor="White" />
                             <EditRowStyle BackColor="#2461BF" />
                             <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
@@ -70,7 +69,6 @@
                             <SortedAscendingHeaderStyle BackColor="#6D95E1" />
                             <SortedDescendingCellStyle BackColor="#E9EBEF" />
                             <SortedDescendingHeaderStyle BackColor="#4870BE" />
-                            
                         </asp:GridView>
                     </div>
                 </div>

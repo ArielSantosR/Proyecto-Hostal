@@ -1,4 +1,4 @@
-﻿using System;
+﻿    using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -146,6 +146,7 @@ namespace Datos
             {
                 o.NUMERO_ORDEN = orden.NUMERO_ORDEN;
                 o.ESTADO_ORDEN = orden.ESTADO_ORDEN;
+                o.COMENTARIO = orden.COMENTARIO;
 
                 ent.SaveChanges();
                 return true;
@@ -175,6 +176,38 @@ namespace Datos
             ent.DETALLE_HABITACION.Add(detalle);
             ent.SaveChanges();
             return true;
+        }
+        
+
+        public bool EditarDetalleHabitacion(DETALLE_HABITACION detalle)
+        {
+            DETALLE_HABITACION d = ent.DETALLE_HABITACION.FirstOrDefault(objeto => objeto.ID_DETALLE_H == detalle.ID_DETALLE_H);
+
+            if (d != null)
+            {
+                d.ID_DETALLE_H = detalle.ID_DETALLE_H;
+                d.NUMERO_HABITACION = detalle.NUMERO_HABITACION;
+                ent.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public DETALLE_HABITACION obtenerDetalleHabitacion(DETALLE_HABITACION detalle)
+        {
+            DETALLE_HABITACION d = ent.DETALLE_HABITACION.FirstOrDefault(objeto => objeto.ID_DETALLE_H == detalle.ID_DETALLE_H);
+
+            if (d != null)
+            {
+                return d;
+            }
+            else
+            {
+                return null;
+            }
         }
         
         public bool EditarDetalleReserva(DETALLE_ORDEN detalle)

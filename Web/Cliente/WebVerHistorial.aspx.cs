@@ -420,6 +420,7 @@ namespace Web.Cliente
                     StringWriter writer = new StringWriter();
 
                     orden.ESTADO_ORDEN = "Cancelado";
+                    orden.COMENTARIO = "Cancelado por el Cliente";
                     sr.Serialize(writer, orden);
 
                     if (s.EditarEstadoReserva(writer.ToString()))

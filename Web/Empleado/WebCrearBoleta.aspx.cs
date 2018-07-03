@@ -20,8 +20,6 @@ namespace Web.Empleado {
         Font font6B = new Font(FontFamily.HELVETICA,6,Font.BOLD);
         Font font8 = new Font(FontFamily.HELVETICA,8);
         Font font8B = new Font(FontFamily.HELVETICA,8,Font.BOLD);
-        private List<Comuna> coleccionComuna;
-        private List<Region> coleccionRegion;
 
         void Page_PreInit (object sender,EventArgs e) {
             if (MiSesion != null) {
@@ -53,9 +51,6 @@ namespace Web.Empleado {
                 exito.Text = "";
                 alerta_exito.Visible = false;
                 alerta.Visible = false;
-
-                coleccionComuna = ComunaCollection.ListaComuna();
-                coleccionRegion = RegionCollection.ListaRegion();
 
                 if (!IsPostBack) {
                     ddlPension.DataSource = PensionCollection.ListarPensiones();
@@ -97,28 +92,8 @@ namespace Web.Empleado {
             SesionTable = dt;
         }
 
-        private string GenerarServicioOrden (DetalleOrden d) {
-            TipoHabitacion tipo = new TipoHabitacion();
-            tipo.ID_TIPO_HABITACION = d.ID_TIPO_HABITACION;
-            tipo.BuscarTipo();
-
-            CategoriaHabitacion cat = new CategoriaHabitacion();
-            cat.ID_CATEGORIA_HABITACION = d.ID_CATEGORIA_HABITACION;
-            cat.BuscarCategoria();
-
-            Pension pen = new Pension();
-            pen.ID_PENSION = d.ID_PENSION;
-            pen.BuscarPension();
-
-            return "Servicio de Estadía: Habitación " + tipo.NOMBRE_TIPO_HABITACION + "-" + cat.NOMBRE_CATEGORIA + " con Pensión " + pen.NOMBRE_PENSION;
-        }
-
         private string GenerarServicioPension (Pension pension) {
             return "Servicio de Pensión: " + pension.NOMBRE_PENSION;
-        }
-
-        private string GenerarServicioEstadia (TipoHabitacion tipo,CategoriaHabitacion cat) {
-            return "Servicio de Estadía: Habitación " + tipo.NOMBRE_TIPO_HABITACION + "-" + cat.NOMBRE_CATEGORIA;
         }
 
         //Creación de Sesión
@@ -201,7 +176,7 @@ namespace Web.Empleado {
                                 boleta.BuscarBoleta();
 
                                 List<DetalleBoleta> detalles = DetalleBoletaCollection.ListarDetallesBoleta().Where(x => x.ID_BOLETA == boleta.ID_BOLETA).ToList();
-                                ImprimirFactura(boleta,detalles);
+                                ImprimirBoleta(boleta,detalles);
 
                                 exito.Text = "Boleta creada con éxito";
                                 alerta.Visible = false;
@@ -243,7 +218,7 @@ namespace Web.Empleado {
                                 boleta.BuscarBoleta();
 
                                 List<DetalleBoleta> detalles = DetalleBoletaCollection.ListarDetallesBoleta().Where(x => x.ID_BOLETA == boleta.ID_BOLETA).ToList();
-                                ImprimirFactura(boleta,detalles);
+                                ImprimirBoleta(boleta,detalles);
 
                                 exito.Text = "Boleta creada con éxito";
                                 alerta.Visible = false;
@@ -285,7 +260,7 @@ namespace Web.Empleado {
                                 boleta.BuscarBoleta();
 
                                 List<DetalleBoleta> detalles = DetalleBoletaCollection.ListarDetallesBoleta().Where(x => x.ID_BOLETA == boleta.ID_BOLETA).ToList();
-                                ImprimirFactura(boleta,detalles);
+                                ImprimirBoleta(boleta,detalles);
 
                                 exito.Text = "Boleta creada con éxito";
                                 alerta.Visible = false;
@@ -319,7 +294,7 @@ namespace Web.Empleado {
             }
         }
 
-        private void ImprimirFactura (Boleta boleta,List<DetalleBoleta> detalles) {
+        private void ImprimirBoleta (Boleta boleta,List<DetalleBoleta> detalles) {
             PdfPTable table = new PdfPTable(6);
             table.TotalWidth = 530;
             table.SetWidths(new float[] { 1,2,1,1,1,1 });
@@ -1024,6 +999,24 @@ namespace Web.Empleado {
                 txtDescuento.Text = descuentoN.ToString();
                 txtTotal.Text = totalN.ToString();
 
+            } catch (Exception ex) {
+                error.Text = "Excepción: " + ex.Message;
+                alerta.Visible = true;
+            }
+        }
+
+        protected void txtRut_TextChanged (object sender,EventArgs e) {
+            try {
+                Huesped huesped = new Huesped();
+                int rut = int.Parse(txtRut.Text.Substring(0,txtRut.Text.Length - 2));
+                huesped.RUT_HUESPED = rut;
+                if (huesped.BuscarHuesped()) {
+                    txtNombre.Text = huesped.PNOMBRE_HUESPED + " " + huesped.APP_PATERNO_HUESPED + " " + huesped.APP_MATERNO_HUESPED;
+                } else {
+                    error.Text = "El huésped no esta registrado";
+                    alerta.Visible = true;
+                    alerta_exito.Visible = false;
+                }
             } catch (Exception ex) {
                 error.Text = "Excepción: " + ex.Message;
                 alerta.Visible = true;

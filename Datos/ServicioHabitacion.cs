@@ -110,7 +110,7 @@ namespace Datos
             return lista;
         }
 
-        public List<HABITACION> listarHabitacionDisponible(DETALLE_ORDEN detalle)
+        public List<HABITACION> listarHabitacionDisponible()
         {
             List<HABITACION> lista = (from consulta in ent.HABITACION
                                       where consulta.ESTADO_HABITACION.Equals("Disponible")
