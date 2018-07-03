@@ -4,10 +4,12 @@ using Modelo;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Xml.Serialization;
 using static iTextSharp.text.Font;
 
 namespace Web.Empleado {
@@ -337,6 +339,82 @@ namespace Web.Empleado {
                                     orden.BuscarOrden();
                                     orden.ESTADO_ORDEN = Estado_Orden.Cerrado.ToString();
                                     orden.Update();
+
+                                    DetalleHabitacion detalle = new DetalleHabitacion();
+                                    detalle.NUMERO_ORDEN = orden.NUMERO_ORDEN;
+
+                                    WcfNegocio.Service1 s = new WcfNegocio.Service1();
+
+                                    XmlSerializer ser3 = new XmlSerializer(typeof(DetalleHabitacion));
+                                    StringWriter writer3 = new StringWriter();
+                                    ser3.Serialize(writer3, detalle);
+
+                                    string detalle_habitacion = s.ListaDetalleHabitacionOrden(writer3.ToString());
+
+                                    XmlSerializer ser2 = new XmlSerializer(typeof(DetalleHabitacionCollection));
+                                    StringReader reader3 = new StringReader(detalle_habitacion);
+                                    DetalleHabitacionCollection detalleCollection = (DetalleHabitacionCollection)ser2.Deserialize(reader3);
+
+                                    string habitacion2 = s.ListarHabitacion();
+                                    XmlSerializer ser4 = new XmlSerializer(typeof(Modelo.HabitacionCollection));
+                                    StringReader reader4 = new StringReader(habitacion2);
+                                    HabitacionCollection habitacionCollection = (Modelo.HabitacionCollection)ser4.Deserialize(reader4);
+
+                                    foreach (var item in detalleCollection)
+                                    {
+                                        List<Habitacion> habitaciones = (from consulta in habitacionCollection
+                                                                         where consulta.NUMERO_HABITACION == item.NUMERO_HABITACION
+                                                                         select consulta).ToList();
+
+                                        Habitacion habitacion = new Habitacion();
+                                        habitacion.NUMERO_HABITACION = habitaciones[0].NUMERO_HABITACION;
+
+                                        XmlSerializer sr = new XmlSerializer(typeof(Modelo.Habitacion));
+                                        StringWriter writer = new StringWriter();
+                                        sr.Serialize(writer, habitacion);
+
+                                        if (s.ObtenerHabitacion(writer.ToString()) != null)
+                                        {
+                                            Habitacion habitacion3 = s.ObtenerHabitacion(writer.ToString());
+
+                                            if (habitacion3.ID_TIPO_HABITACION == 1)
+                                            {
+                                                habitacion3.ESTADO_HABITACION = "Disponible";
+                                            }
+                                            else if (habitacion3.ID_TIPO_HABITACION == 2)
+                                            {
+                                                if (habitacion3.ESTADO_HABITACION.Equals("Vacante 1"))
+                                                {
+                                                    habitacion3.ESTADO_HABITACION = "Disponible";
+                                                }
+                                                else
+                                                {
+                                                    habitacion3.ESTADO_HABITACION = "Vacante 1";
+                                                }
+                                            }
+                                            else if (habitacion3.ID_TIPO_HABITACION == 3)
+                                            {
+                                                if (habitacion3.ESTADO_HABITACION.Equals("Ocupado"))
+                                                {
+                                                    habitacion3.ESTADO_HABITACION = "Vacante 1";
+                                                }
+                                                else if (habitacion3.ESTADO_HABITACION.Equals("Vacante 1"))
+                                                {
+                                                    habitacion3.ESTADO_HABITACION = "Vacante 2";
+                                                }
+                                                else
+                                                {
+                                                    habitacion3.ESTADO_HABITACION = "Disponible";
+                                                }
+                                            }
+
+                                            XmlSerializer sr4 = new XmlSerializer(typeof(Modelo.Habitacion));
+                                            StringWriter writer4 = new StringWriter();
+                                            sr4.Serialize(writer4, habitacion3);
+
+                                            s.ModificarHabitacion(writer4.ToString());
+                                        }
+                                    }
                                 }
                                 List<Factura> facturas = FacturaCollection.ListarFacturas().OrderBy(x => x.FECHA_EMISION_FACTURA).ToList();
                                 factura = new Factura();
@@ -447,12 +525,89 @@ namespace Web.Empleado {
                             }
 
                             if (flag) {
-                                if (!string.IsNullOrEmpty(txtOrden.Text)) {
+                                if (!string.IsNullOrEmpty(txtOrden.Text))
+                                {
                                     OrdenCompra orden = new OrdenCompra();
                                     orden.NUMERO_ORDEN = short.Parse(txtOrden.Text);
                                     orden.BuscarOrden();
                                     orden.ESTADO_ORDEN = Estado_Orden.Cerrado.ToString();
                                     orden.Update();
+
+                                    DetalleHabitacion detalle = new DetalleHabitacion();
+                                    detalle.NUMERO_ORDEN = orden.NUMERO_ORDEN;
+
+                                    WcfNegocio.Service1 s = new WcfNegocio.Service1();
+
+                                    XmlSerializer ser3 = new XmlSerializer(typeof(DetalleHabitacion));
+                                    StringWriter writer3 = new StringWriter();
+                                    ser3.Serialize(writer3, detalle);
+
+                                    string detalle_habitacion = s.ListaDetalleHabitacionOrden(writer3.ToString());
+
+                                    XmlSerializer ser2 = new XmlSerializer(typeof(DetalleHabitacionCollection));
+                                    StringReader reader3 = new StringReader(detalle_habitacion);
+                                    DetalleHabitacionCollection detalleCollection = (DetalleHabitacionCollection)ser2.Deserialize(reader3);
+
+                                    string habitacion2 = s.ListarHabitacion();
+                                    XmlSerializer ser4 = new XmlSerializer(typeof(Modelo.HabitacionCollection));
+                                    StringReader reader4 = new StringReader(habitacion2);
+                                    HabitacionCollection habitacionCollection = (Modelo.HabitacionCollection)ser4.Deserialize(reader4);
+
+                                    foreach (var item in detalleCollection)
+                                    {
+                                        List<Habitacion> habitaciones = (from consulta in habitacionCollection
+                                                                         where consulta.NUMERO_HABITACION == item.NUMERO_HABITACION
+                                                                         select consulta).ToList();
+
+                                        Habitacion habitacion = new Habitacion();
+                                        habitacion.NUMERO_HABITACION = habitaciones[0].NUMERO_HABITACION;
+
+                                        XmlSerializer sr = new XmlSerializer(typeof(Modelo.Habitacion));
+                                        StringWriter writer = new StringWriter();
+                                        sr.Serialize(writer, habitacion);
+
+                                        if (s.ObtenerHabitacion(writer.ToString()) != null)
+                                        {
+                                            Habitacion habitacion3 = s.ObtenerHabitacion(writer.ToString());
+
+                                            if (habitacion3.ID_TIPO_HABITACION == 1)
+                                            {
+                                                habitacion3.ESTADO_HABITACION = "Disponible";
+                                            }
+                                            else if (habitacion3.ID_TIPO_HABITACION == 2)
+                                            {
+                                                if (habitacion3.ESTADO_HABITACION.Equals("Vacante 1"))
+                                                {
+                                                    habitacion3.ESTADO_HABITACION = "Disponible";
+                                                }
+                                                else
+                                                {
+                                                    habitacion3.ESTADO_HABITACION = "Vacante 1";
+                                                }
+                                            }
+                                            else if (habitacion3.ID_TIPO_HABITACION == 3)
+                                            {
+                                                if (habitacion3.ESTADO_HABITACION.Equals("Ocupado"))
+                                                {
+                                                    habitacion3.ESTADO_HABITACION = "Vacante 1";
+                                                }
+                                                else if (habitacion3.ESTADO_HABITACION.Equals("Vacante 1"))
+                                                {
+                                                    habitacion3.ESTADO_HABITACION = "Vacante 2";
+                                                }
+                                                else
+                                                {
+                                                    habitacion3.ESTADO_HABITACION = "Disponible";
+                                                }
+                                            }
+
+                                            XmlSerializer sr4 = new XmlSerializer(typeof(Modelo.Habitacion));
+                                            StringWriter writer4 = new StringWriter();
+                                            sr4.Serialize(writer4, habitacion3);
+
+                                            s.ModificarHabitacion(writer4.ToString());
+                                        }
+                                    }
                                 }
 
                                 List<Factura> facturas = FacturaCollection.ListarFacturas().OrderBy(x => x.FECHA_EMISION_FACTURA).ToList();

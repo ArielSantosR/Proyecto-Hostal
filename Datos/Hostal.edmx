@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Model.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="11.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Model.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="11.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="BOLETA">
           <Key>
             <PropertyRef Name="ID_BOLETA" />
@@ -56,6 +56,7 @@
         <EntityType Name="DETALLE_BOLETA">
           <Key>
             <PropertyRef Name="ID_DETALLE_BOLETA" />
+            <PropertyRef Name="ID_BOLETA" />
           </Key>
           <Property Name="ID_DETALLE_BOLETA" Type="number" Precision="10" Scale="0" Nullable="false" />
           <Property Name="DESCRIPCION_DETALLE" Type="varchar2" MaxLength="250" Nullable="false" />
@@ -86,6 +87,7 @@
           <Property Name="ID_PENSION" Type="number" Precision="5" Scale="0" Nullable="false" />
           <Property Name="FECHA_LLEGADA" Type="date" Nullable="false" />
           <Property Name="FECHA_SALIDA" Type="date" Nullable="false" />
+          <Property Name="NUMERO_ORDEN" Type="number" Precision="5" Scale="0" Nullable="false" />
         </EntityType>
         <EntityType Name="DETALLE_ORDEN">
           <Key>
@@ -104,6 +106,7 @@
         <EntityType Name="DETALLE_PEDIDO">
           <Key>
             <PropertyRef Name="ID_DETALLE_PEDIDO" />
+            <PropertyRef Name="ID_PRODUCTO" />
           </Key>
           <Property Name="ID_DETALLE_PEDIDO" Type="number" Precision="5" Scale="0" Nullable="false" />
           <Property Name="CANTIDAD" Type="number" Precision="10" Scale="0" Nullable="false" />
@@ -122,6 +125,7 @@
         <EntityType Name="DETALLE_RECEPCION">
           <Key>
             <PropertyRef Name="ID_DETALLE_RECEPCION" />
+            <PropertyRef Name="NUMERO_RECEPCION" />
           </Key>
           <Property Name="ID_DETALLE_RECEPCION" Type="number" Precision="5" Scale="0" Nullable="false" />
           <Property Name="CANTIDAD" Type="number" Precision="10" Scale="0" Nullable="false" />
@@ -280,7 +284,6 @@
           </Key>
           <Property Name="ID_PRODUCTO" Type="number" Precision="19" Scale="0" Nullable="false" />
           <Property Name="NOMBRE_PRODUCTO" Type="varchar2" MaxLength="50" Nullable="false" />
-          <Property Name="PRECIO_PRODUCTO" Type="number" Precision="10" Scale="0" Nullable="false" />
           <Property Name="FECHA_VENCIMIENTO_PRODUCTO" Type="date" />
           <Property Name="STOCK_PRODUCTO" Type="number" Precision="5" Scale="0" Nullable="false" />
           <Property Name="STOCK_CRITICO_PRODUCTO" Type="number" Precision="5" Scale="0" Nullable="false" />
@@ -289,6 +292,7 @@
           <Property Name="ID_FAMILIA" Type="number" Precision="5" Scale="0" Nullable="false" />
           <Property Name="RUT_PROVEEDOR" Type="number" Precision="8" Scale="0" Nullable="false" />
           <Property Name="ID_PRODUCTO_SEQ" Type="number" Precision="5" Scale="0" Nullable="false" />
+          <Property Name="PRECIO_PRODUCTO" Type="number" Precision="8" Scale="0" Nullable="false" />
         </EntityType>
         <EntityType Name="PROVEEDOR">
           <Key>
@@ -530,6 +534,18 @@ advertencia 6002: La tabla o vista 'HOSTAL.V_HABITACION_USOS_TOP_10' no tiene de
             </Principal>
             <Dependent Role="DETALLE_FACTURA">
               <PropertyRef Name="ID_FACTURA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DETALLE_HAB_ORDEN">
+          <End Role="ORDEN_COMPRA" Type="Self.ORDEN_COMPRA" Multiplicity="1" />
+          <End Role="DETALLE_HABITACION" Type="Self.DETALLE_HABITACION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ORDEN_COMPRA">
+              <PropertyRef Name="NUMERO_ORDEN" />
+            </Principal>
+            <Dependent Role="DETALLE_HABITACION">
+              <PropertyRef Name="NUMERO_ORDEN" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1013,6 +1029,19 @@ advertencia 6002: La tabla o vista 'HOSTAL.V_HABITACION_USOS_TOP_10' no tiene de
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="FN_CALCULAR_DIAS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="HOSTAL" ReturnType="number">
+          <Parameter Name="NUM_HAB" Type="number" Mode="In" />
+        </Function>
+        <Function Name="FN_CANTIDAD_ORDENES_TIPO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="HOSTAL" ReturnType="number">
+          <Parameter Name="RUT" Type="number" Mode="In" />
+          <Parameter Name="ESTADO" Type="varchar2" Mode="In" />
+        </Function>
+        <Function Name="FN_PRODUCTO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="HOSTAL" ReturnType="number">
+          <Parameter Name="P_ID_PROVEEDOR" Type="number" Mode="In" />
+          <Parameter Name="P_ID_FAMILIA" Type="number" Mode="In" />
+          <Parameter Name="P_FECHA_VENCIMIENTO" Type="date" Mode="In" />
+          <Parameter Name="P_ID_PRODUCTO_S" Type="number" Mode="In" />
+        </Function>
         <EntityContainer Name="ModelStoreContainer">
           <EntitySet Name="BOLETA" EntityType="Self.BOLETA" Schema="HOSTAL" store:Type="Tables" />
           <EntitySet Name="CATEGORIA" EntityType="Self.CATEGORIA" Schema="HOSTAL" store:Type="Tables" />
@@ -1139,6 +1168,10 @@ FROM "HOSTAL"."V_HABITACION_USOS_TOP_10" "V_HABITACION_USOS_TOP_10"</DefiningQue
           <AssociationSet Name="FK_DETALLE_FACTURA_FACTURA" Association="Self.FK_DETALLE_FACTURA_FACTURA">
             <End Role="FACTURA" EntitySet="FACTURA" />
             <End Role="DETALLE_FACTURA" EntitySet="DETALLE_FACTURA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DETALLE_HAB_ORDEN" Association="Self.FK_DETALLE_HAB_ORDEN">
+            <End Role="ORDEN_COMPRA" EntitySet="ORDEN_COMPRA" />
+            <End Role="DETALLE_HABITACION" EntitySet="DETALLE_HABITACION" />
           </AssociationSet>
           <AssociationSet Name="FK_DETALLE_OR_TIPO_HAB" Association="Self.FK_DETALLE_OR_TIPO_HAB">
             <End Role="TIPO_HABITACION" EntitySet="TIPO_HABITACION" />
@@ -1301,7 +1334,8 @@ FROM "HOSTAL"."V_HABITACION_USOS_TOP_10" "V_HABITACION_USOS_TOP_10"</DefiningQue
             <End Role="REGION" EntitySet="REGION" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1371,6 +1405,7 @@ FROM "HOSTAL"."V_HABITACION_USOS_TOP_10" "V_HABITACION_USOS_TOP_10"</DefiningQue
         <EntityType Name="DETALLE_BOLETA">
           <Key>
             <PropertyRef Name="ID_DETALLE_BOLETA" />
+            <PropertyRef Name="ID_BOLETA" />
           </Key>
           <Property Name="ID_DETALLE_BOLETA" Type="Int32" Nullable="false" />
           <Property Name="DESCRIPCION_DETALLE" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
@@ -1389,8 +1424,8 @@ FROM "HOSTAL"."V_HABITACION_USOS_TOP_10" "V_HABITACION_USOS_TOP_10"</DefiningQue
           <Property Name="VALOR_TOTAL" Type="Int64" Nullable="false" />
           <Property Name="ID_FACTURA" Type="Int32" Nullable="false" />
           <Property Name="VALOR_UNITARIO" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="FACTURA" Relationship="Self.FK_DETALLE_FACTURA_FACTURA" FromRole="DETALLE_FACTURA" ToRole="FACTURA" />
           <Property Name="VALOR_DESC" Type="Int64" />
+          <NavigationProperty Name="FACTURA" Relationship="Self.FK_DETALLE_FACTURA_FACTURA" FromRole="DETALLE_FACTURA" ToRole="FACTURA" />
         </EntityType>
         <EntityType Name="DETALLE_HABITACION">
           <Key>
@@ -1403,7 +1438,9 @@ FROM "HOSTAL"."V_HABITACION_USOS_TOP_10" "V_HABITACION_USOS_TOP_10"</DefiningQue
           <Property Name="ID_PENSION" Type="Int16" Nullable="false" />
           <Property Name="FECHA_LLEGADA" Type="DateTime" Nullable="false" />
           <Property Name="FECHA_SALIDA" Type="DateTime" Nullable="false" />
+          <Property Name="NUMERO_ORDEN" Type="Int16" Nullable="false" />
           <NavigationProperty Name="CLIENTE" Relationship="Self.FK_CLIENTE_DETALLE_H" FromRole="DETALLE_HABITACION" ToRole="CLIENTE" />
+          <NavigationProperty Name="ORDEN_COMPRA" Relationship="Self.FK_DETALLE_HAB_ORDEN" FromRole="DETALLE_HABITACION" ToRole="ORDEN_COMPRA" />
           <NavigationProperty Name="HABITACION" Relationship="Self.FK_HABITACION_DETALLE_H" FromRole="DETALLE_HABITACION" ToRole="HABITACION" />
           <NavigationProperty Name="HUESPED" Relationship="Self.FK_HUESPED_DETALLE_H" FromRole="DETALLE_HABITACION" ToRole="HUESPED" />
           <NavigationProperty Name="PENSION" Relationship="Self.FK_PENSION_DETALLE_H" FromRole="DETALLE_HABITACION" ToRole="PENSION" />
@@ -1420,16 +1457,17 @@ FROM "HOSTAL"."V_HABITACION_USOS_TOP_10" "V_HABITACION_USOS_TOP_10"</DefiningQue
           <Property Name="ESTADO" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="VALOR_MINUTA" Type="Int32" Nullable="false" />
           <Property Name="VALOR_HABITACION" Type="Int32" Nullable="false" />
+          <Property Name="ID_TIPO_HABITACION" Type="Int16" Nullable="false" />
           <NavigationProperty Name="CATEGORIA_HABITACION" Relationship="Self.FK_DETALLE_ORDEN_CATEGORIA" FromRole="DETALLE_ORDEN" ToRole="CATEGORIA_HABITACION" />
+          <NavigationProperty Name="TIPO_HABITACION" Relationship="Self.FK_DETALLE_OR_TIPO_HAB" FromRole="DETALLE_ORDEN" ToRole="TIPO_HABITACION" />
           <NavigationProperty Name="PENSION" Relationship="Self.FK_DETALLE_ORDEN_PENSION" FromRole="DETALLE_ORDEN" ToRole="PENSION" />
           <NavigationProperty Name="HUESPED" Relationship="Self.FK_HUESPED_DETALLE_ORDEN" FromRole="DETALLE_ORDEN" ToRole="HUESPED" />
           <NavigationProperty Name="ORDEN_COMPRA" Relationship="Self.FK_ORDEN_DETALLE_ORDEN" FromRole="DETALLE_ORDEN" ToRole="ORDEN_COMPRA" />
-          <Property Name="ID_TIPO_HABITACION" Type="Int16" Nullable="false" />
-          <NavigationProperty Name="TIPO_HABITACION" Relationship="Model.FK_DETALLE_OR_TIPO_HAB" FromRole="DETALLE_ORDEN" ToRole="TIPO_HABITACION" />
         </EntityType>
         <EntityType Name="DETALLE_PEDIDO">
           <Key>
             <PropertyRef Name="ID_DETALLE_PEDIDO" />
+            <PropertyRef Name="ID_PRODUCTO" />
           </Key>
           <Property Name="ID_DETALLE_PEDIDO" Type="Int16" Nullable="false" />
           <Property Name="CANTIDAD" Type="Int32" Nullable="false" />
@@ -1452,6 +1490,7 @@ FROM "HOSTAL"."V_HABITACION_USOS_TOP_10" "V_HABITACION_USOS_TOP_10"</DefiningQue
         <EntityType Name="DETALLE_RECEPCION">
           <Key>
             <PropertyRef Name="ID_DETALLE_RECEPCION" />
+            <PropertyRef Name="NUMERO_RECEPCION" />
           </Key>
           <Property Name="ID_DETALLE_RECEPCION" Type="Int16" Nullable="false" />
           <Property Name="CANTIDAD" Type="Int32" Nullable="false" />
@@ -1459,6 +1498,14 @@ FROM "HOSTAL"."V_HABITACION_USOS_TOP_10" "V_HABITACION_USOS_TOP_10"</DefiningQue
           <Property Name="NUMERO_RECEPCION" Type="Int16" Nullable="false" />
           <NavigationProperty Name="PRODUCTO" Relationship="Self.FK_DETALLE_RECEPCION_PRODUCTO" FromRole="DETALLE_RECEPCION" ToRole="PRODUCTO" />
           <NavigationProperty Name="RECEPCION" Relationship="Self.FK_DETALLE_RECEPCION_RECEPCION" FromRole="DETALLE_RECEPCION" ToRole="RECEPCION" />
+        </EntityType>
+        <EntityType Name="DIVISA">
+          <Key>
+            <PropertyRef Name="ID_DIVISA" />
+          </Key>
+          <Property Name="ID_DIVISA" Type="Int16" Nullable="false" />
+          <Property Name="NOMBRE_DIVISA" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PRECIO_DIVISA" Type="Decimal" Precision="6" Scale="2" Nullable="false" />
         </EntityType>
         <EntityType Name="EMPLEADO">
           <Key>
@@ -1491,11 +1538,11 @@ FROM "HOSTAL"."V_HABITACION_USOS_TOP_10" "V_HABITACION_USOS_TOP_10"</DefiningQue
           <Property Name="RUT_CLIENTE" Type="Int32" Nullable="false" />
           <Property Name="RUT_EMPLEADO" Type="Int32" Nullable="false" />
           <Property Name="METODO_PAGO" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NUMERO_ORDEN" Type="Int16" />
           <NavigationProperty Name="CLIENTE" Relationship="Self.FK_FACTURA_CLIENTE" FromRole="FACTURA" ToRole="CLIENTE" />
           <NavigationProperty Name="DETALLE_FACTURA" Relationship="Self.FK_DETALLE_FACTURA_FACTURA" FromRole="FACTURA" ToRole="DETALLE_FACTURA" />
           <NavigationProperty Name="EMPLEADO" Relationship="Self.FK_FACTURA_EMPLEADO" FromRole="FACTURA" ToRole="EMPLEADO" />
-          <Property Name="NUMERO_ORDEN" Type="Int16" />
-          <NavigationProperty Name="ORDEN_COMPRA" Relationship="Model.FK_FACTURA_ORDEN" FromRole="FACTURA" ToRole="ORDEN_COMPRA" />
+          <NavigationProperty Name="ORDEN_COMPRA" Relationship="Self.FK_FACTURA_ORDEN" FromRole="FACTURA" ToRole="ORDEN_COMPRA" />
         </EntityType>
         <EntityType Name="FAMILIA">
           <Key>
@@ -1582,10 +1629,11 @@ FROM "HOSTAL"."V_HABITACION_USOS_TOP_10" "V_HABITACION_USOS_TOP_10"</DefiningQue
           <Property Name="COMENTARIO" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
           <Property Name="MONTO_TOTAL" Type="Int32" Nullable="false" />
           <NavigationProperty Name="CLIENTE" Relationship="Self.FK_ORDEN_COMPRA_CLIENTE" FromRole="ORDEN_COMPRA" ToRole="CLIENTE" />
+          <NavigationProperty Name="DETALLE_HABITACION" Relationship="Self.FK_DETALLE_HAB_ORDEN" FromRole="ORDEN_COMPRA" ToRole="DETALLE_HABITACION" />
           <NavigationProperty Name="DETALLE_ORDEN" Relationship="Self.FK_ORDEN_DETALLE_ORDEN" FromRole="ORDEN_COMPRA" ToRole="DETALLE_ORDEN" />
           <NavigationProperty Name="EMPLEADO" Relationship="Self.FK_ORDEN_COMPRA_EMPLEADO" FromRole="ORDEN_COMPRA" ToRole="EMPLEADO" />
+          <NavigationProperty Name="FACTURA" Relationship="Self.FK_FACTURA_ORDEN" FromRole="ORDEN_COMPRA" ToRole="FACTURA" />
           <NavigationProperty Name="NOTIFICACION" Relationship="Self.FK_NOTIFICACION_ORDEN" FromRole="ORDEN_COMPRA" ToRole="NOTIFICACION" />
-          <NavigationProperty Name="FACTURA" Relationship="Model.FK_FACTURA_ORDEN" FromRole="ORDEN_COMPRA" ToRole="FACTURA" />
         </EntityType>
         <EntityType Name="PAIS">
           <Key>
@@ -1644,7 +1692,6 @@ FROM "HOSTAL"."V_HABITACION_USOS_TOP_10" "V_HABITACION_USOS_TOP_10"</DefiningQue
           </Key>
           <Property Name="ID_PRODUCTO" Type="Int64" Nullable="false" />
           <Property Name="NOMBRE_PRODUCTO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="PRECIO_PRODUCTO" Type="Int32" Nullable="false" />
           <Property Name="FECHA_VENCIMIENTO_PRODUCTO" Type="DateTime" />
           <Property Name="STOCK_PRODUCTO" Type="Int16" Nullable="false" />
           <Property Name="STOCK_CRITICO_PRODUCTO" Type="Int16" Nullable="false" />
@@ -1653,6 +1700,7 @@ FROM "HOSTAL"."V_HABITACION_USOS_TOP_10" "V_HABITACION_USOS_TOP_10"</DefiningQue
           <Property Name="ID_FAMILIA" Type="Int16" Nullable="false" />
           <Property Name="RUT_PROVEEDOR" Type="Int32" Nullable="false" />
           <Property Name="ID_PRODUCTO_SEQ" Type="Int16" Nullable="false" />
+          <Property Name="PRECIO_PRODUCTO" Type="Int32" Nullable="false" />
           <NavigationProperty Name="DETALLE_PEDIDO" Relationship="Self.FK_DETALLE_PEDIDO_PRODUCTO" FromRole="PRODUCTO" ToRole="DETALLE_PEDIDO" />
           <NavigationProperty Name="DETALLE_RECEPCION" Relationship="Self.FK_DETALLE_RECEPCION_PRODUCTO" FromRole="PRODUCTO" ToRole="DETALLE_RECEPCION" />
           <NavigationProperty Name="FAMILIA" Relationship="Self.FK_PRODUCTO_FAMILIA" FromRole="PRODUCTO" ToRole="FAMILIA" />
@@ -1708,8 +1756,8 @@ FROM "HOSTAL"."V_HABITACION_USOS_TOP_10" "V_HABITACION_USOS_TOP_10"</DefiningQue
           <Property Name="NOMBRE_TIPO_HABITACION" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="CANTIDAD_PASAJERO" Type="Int16" Nullable="false" />
           <Property Name="PRECIO_TIPO" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DETALLE_ORDEN" Relationship="Self.FK_DETALLE_OR_TIPO_HAB" FromRole="TIPO_HABITACION" ToRole="DETALLE_ORDEN" />
           <NavigationProperty Name="HABITACION" Relationship="Self.FK_HABITACION_TIPO_HABITACION" FromRole="TIPO_HABITACION" ToRole="HABITACION" />
-          <NavigationProperty Name="DETALLE_ORDEN" Relationship="Model.FK_DETALLE_OR_TIPO_HAB" FromRole="TIPO_HABITACION" ToRole="DETALLE_ORDEN" />
         </EntityType>
         <EntityType Name="TIPO_PLATO">
           <Key>
@@ -1991,6 +2039,18 @@ FROM "HOSTAL"."V_HABITACION_USOS_TOP_10" "V_HABITACION_USOS_TOP_10"</DefiningQue
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_DETALLE_HAB_ORDEN">
+          <End Role="ORDEN_COMPRA" Type="Self.ORDEN_COMPRA" Multiplicity="1" />
+          <End Role="DETALLE_HABITACION" Type="Self.DETALLE_HABITACION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ORDEN_COMPRA">
+              <PropertyRef Name="NUMERO_ORDEN" />
+            </Principal>
+            <Dependent Role="DETALLE_HABITACION">
+              <PropertyRef Name="NUMERO_ORDEN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_HABITACION_DETALLE_H">
           <End Role="HABITACION" Type="Self.HABITACION" Multiplicity="1" />
           <End Role="DETALLE_HABITACION" Type="Self.DETALLE_HABITACION" Multiplicity="*" />
@@ -2024,6 +2084,18 @@ FROM "HOSTAL"."V_HABITACION_USOS_TOP_10" "V_HABITACION_USOS_TOP_10"</DefiningQue
             </Principal>
             <Dependent Role="DETALLE_HABITACION">
               <PropertyRef Name="ID_PENSION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DETALLE_OR_TIPO_HAB">
+          <End Role="TIPO_HABITACION" Type="Self.TIPO_HABITACION" Multiplicity="1" />
+          <End Role="DETALLE_ORDEN" Type="Self.DETALLE_ORDEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_HABITACION">
+              <PropertyRef Name="ID_TIPO_HABITACION" />
+            </Principal>
+            <Dependent Role="DETALLE_ORDEN">
+              <PropertyRef Name="ID_TIPO_HABITACION" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2192,6 +2264,18 @@ FROM "HOSTAL"."V_HABITACION_USOS_TOP_10" "V_HABITACION_USOS_TOP_10"</DefiningQue
             </Principal>
             <Dependent Role="RECEPCION">
               <PropertyRef Name="RUT_EMPLEADO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FACTURA_ORDEN">
+          <End Role="ORDEN_COMPRA" Type="Self.ORDEN_COMPRA" Multiplicity="0..1" />
+          <End Role="FACTURA" Type="Self.FACTURA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ORDEN_COMPRA">
+              <PropertyRef Name="NUMERO_ORDEN" />
+            </Principal>
+            <Dependent Role="FACTURA">
+              <PropertyRef Name="NUMERO_ORDEN" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2376,6 +2460,7 @@ FROM "HOSTAL"."V_HABITACION_USOS_TOP_10" "V_HABITACION_USOS_TOP_10"</DefiningQue
           <EntitySet Name="DETALLE_PEDIDO" EntityType="Self.DETALLE_PEDIDO" />
           <EntitySet Name="DETALLE_PLATOS" EntityType="Self.DETALLE_PLATOS" />
           <EntitySet Name="DETALLE_RECEPCION" EntityType="Self.DETALLE_RECEPCION" />
+          <EntitySet Name="DIVISA" EntityType="Self.DIVISA" />
           <EntitySet Name="EMPLEADO" EntityType="Self.EMPLEADO" />
           <EntitySet Name="FACTURA" EntityType="Self.FACTURA" />
           <EntitySet Name="FAMILIA" EntityType="Self.FAMILIA" />
@@ -2464,6 +2549,10 @@ FROM "HOSTAL"."V_HABITACION_USOS_TOP_10" "V_HABITACION_USOS_TOP_10"</DefiningQue
             <End Role="FACTURA" EntitySet="FACTURA" />
             <End Role="DETALLE_FACTURA" EntitySet="DETALLE_FACTURA" />
           </AssociationSet>
+          <AssociationSet Name="FK_DETALLE_HAB_ORDEN" Association="Self.FK_DETALLE_HAB_ORDEN">
+            <End Role="ORDEN_COMPRA" EntitySet="ORDEN_COMPRA" />
+            <End Role="DETALLE_HABITACION" EntitySet="DETALLE_HABITACION" />
+          </AssociationSet>
           <AssociationSet Name="FK_HABITACION_DETALLE_H" Association="Self.FK_HABITACION_DETALLE_H">
             <End Role="HABITACION" EntitySet="HABITACION" />
             <End Role="DETALLE_HABITACION" EntitySet="DETALLE_HABITACION" />
@@ -2475,6 +2564,10 @@ FROM "HOSTAL"."V_HABITACION_USOS_TOP_10" "V_HABITACION_USOS_TOP_10"</DefiningQue
           <AssociationSet Name="FK_PENSION_DETALLE_H" Association="Self.FK_PENSION_DETALLE_H">
             <End Role="PENSION" EntitySet="PENSION" />
             <End Role="DETALLE_HABITACION" EntitySet="DETALLE_HABITACION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DETALLE_OR_TIPO_HAB" Association="Self.FK_DETALLE_OR_TIPO_HAB">
+            <End Role="TIPO_HABITACION" EntitySet="TIPO_HABITACION" />
+            <End Role="DETALLE_ORDEN" EntitySet="DETALLE_ORDEN" />
           </AssociationSet>
           <AssociationSet Name="FK_DETALLE_ORDEN_PENSION" Association="Self.FK_DETALLE_ORDEN_PENSION">
             <End Role="PENSION" EntitySet="PENSION" />
@@ -2532,6 +2625,10 @@ FROM "HOSTAL"."V_HABITACION_USOS_TOP_10" "V_HABITACION_USOS_TOP_10"</DefiningQue
             <End Role="EMPLEADO" EntitySet="EMPLEADO" />
             <End Role="RECEPCION" EntitySet="RECEPCION" />
           </AssociationSet>
+          <AssociationSet Name="FK_FACTURA_ORDEN" Association="Self.FK_FACTURA_ORDEN">
+            <End Role="ORDEN_COMPRA" EntitySet="ORDEN_COMPRA" />
+            <End Role="FACTURA" EntitySet="FACTURA" />
+          </AssociationSet>
           <AssociationSet Name="FK_PRODUCTO_FAMILIA" Association="Self.FK_PRODUCTO_FAMILIA">
             <End Role="FAMILIA" EntitySet="FAMILIA" />
             <End Role="PRODUCTO" EntitySet="PRODUCTO" />
@@ -2588,48 +2685,7 @@ FROM "HOSTAL"."V_HABITACION_USOS_TOP_10" "V_HABITACION_USOS_TOP_10"</DefiningQue
             <End Role="PROVEEDOR" EntitySet="PROVEEDOR" />
             <End Role="RECEPCION" EntitySet="RECEPCION" />
           </AssociationSet>
-          <AssociationSet Name="FK_DETALLE_OR_TIPO_HAB" Association="Model.FK_DETALLE_OR_TIPO_HAB">
-            <End Role="TIPO_HABITACION" EntitySet="TIPO_HABITACION" />
-            <End Role="DETALLE_ORDEN" EntitySet="DETALLE_ORDEN" />
-          </AssociationSet>
-          <AssociationSet Name="FK_FACTURA_ORDEN" Association="Model.FK_FACTURA_ORDEN">
-            <End Role="ORDEN_COMPRA" EntitySet="ORDEN_COMPRA" />
-            <End Role="FACTURA" EntitySet="FACTURA" />
-          </AssociationSet>
-          <EntitySet Name="DIVISA" EntityType="Model.DIVISA" />
         </EntityContainer>
-        <Association Name="FK_DETALLE_OR_TIPO_HAB">
-          <End Type="Model.TIPO_HABITACION" Role="TIPO_HABITACION" Multiplicity="1" />
-          <End Type="Model.DETALLE_ORDEN" Role="DETALLE_ORDEN" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TIPO_HABITACION">
-              <PropertyRef Name="ID_TIPO_HABITACION" />
-            </Principal>
-            <Dependent Role="DETALLE_ORDEN">
-              <PropertyRef Name="ID_TIPO_HABITACION" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_FACTURA_ORDEN">
-          <End Type="Model.ORDEN_COMPRA" Role="ORDEN_COMPRA" Multiplicity="0..1" />
-          <End Type="Model.FACTURA" Role="FACTURA" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ORDEN_COMPRA">
-              <PropertyRef Name="NUMERO_ORDEN" />
-            </Principal>
-            <Dependent Role="FACTURA">
-              <PropertyRef Name="NUMERO_ORDEN" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="DIVISA">
-          <Key>
-            <PropertyRef Name="ID_DIVISA" />
-          </Key>
-          <Property Name="ID_DIVISA" Type="Int16" Nullable="false" />
-          <Property Name="NOMBRE_DIVISA" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
-          <Property Name="PRECIO_DIVISA" Type="Decimal" Nullable="false" Precision="6" Scale="2" />
-        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2703,13 +2759,13 @@ FROM "HOSTAL"."V_HABITACION_USOS_TOP_10" "V_HABITACION_USOS_TOP_10"</DefiningQue
           <EntitySetMapping Name="DETALLE_FACTURA">
             <EntityTypeMapping TypeName="Model.DETALLE_FACTURA">
               <MappingFragment StoreEntitySet="DETALLE_FACTURA">
-                <ScalarProperty Name="VALOR_DESC" ColumnName="VALOR_DESC" />
                 <ScalarProperty Name="ID_DETALLE_FACTURA" ColumnName="ID_DETALLE_FACTURA" />
                 <ScalarProperty Name="DESCRIPCION_DETALLE" ColumnName="DESCRIPCION_DETALLE" />
                 <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
                 <ScalarProperty Name="VALOR_TOTAL" ColumnName="VALOR_TOTAL" />
                 <ScalarProperty Name="ID_FACTURA" ColumnName="ID_FACTURA" />
                 <ScalarProperty Name="VALOR_UNITARIO" ColumnName="VALOR_UNITARIO" />
+                <ScalarProperty Name="VALOR_DESC" ColumnName="VALOR_DESC" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2723,13 +2779,13 @@ FROM "HOSTAL"."V_HABITACION_USOS_TOP_10" "V_HABITACION_USOS_TOP_10"</DefiningQue
                 <ScalarProperty Name="ID_PENSION" ColumnName="ID_PENSION" />
                 <ScalarProperty Name="FECHA_LLEGADA" ColumnName="FECHA_LLEGADA" />
                 <ScalarProperty Name="FECHA_SALIDA" ColumnName="FECHA_SALIDA" />
+                <ScalarProperty Name="NUMERO_ORDEN" ColumnName="NUMERO_ORDEN" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DETALLE_ORDEN">
             <EntityTypeMapping TypeName="Model.DETALLE_ORDEN">
               <MappingFragment StoreEntitySet="DETALLE_ORDEN">
-                <ScalarProperty Name="ID_TIPO_HABITACION" ColumnName="ID_TIPO_HABITACION" />
                 <ScalarProperty Name="ID_DETALLE" ColumnName="ID_DETALLE" />
                 <ScalarProperty Name="NUMERO_ORDEN" ColumnName="NUMERO_ORDEN" />
                 <ScalarProperty Name="RUT_HUESPED" ColumnName="RUT_HUESPED" />
@@ -2738,6 +2794,7 @@ FROM "HOSTAL"."V_HABITACION_USOS_TOP_10" "V_HABITACION_USOS_TOP_10"</DefiningQue
                 <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
                 <ScalarProperty Name="VALOR_MINUTA" ColumnName="VALOR_MINUTA" />
                 <ScalarProperty Name="VALOR_HABITACION" ColumnName="VALOR_HABITACION" />
+                <ScalarProperty Name="ID_TIPO_HABITACION" ColumnName="ID_TIPO_HABITACION" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2771,6 +2828,15 @@ FROM "HOSTAL"."V_HABITACION_USOS_TOP_10" "V_HABITACION_USOS_TOP_10"</DefiningQue
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="DIVISA">
+            <EntityTypeMapping TypeName="Model.DIVISA">
+              <MappingFragment StoreEntitySet="DIVISA">
+                <ScalarProperty Name="ID_DIVISA" ColumnName="ID_DIVISA" />
+                <ScalarProperty Name="NOMBRE_DIVISA" ColumnName="NOMBRE_DIVISA" />
+                <ScalarProperty Name="PRECIO_DIVISA" ColumnName="PRECIO_DIVISA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="EMPLEADO">
             <EntityTypeMapping TypeName="Model.EMPLEADO">
               <MappingFragment StoreEntitySet="EMPLEADO">
@@ -2787,7 +2853,6 @@ FROM "HOSTAL"."V_HABITACION_USOS_TOP_10" "V_HABITACION_USOS_TOP_10"</DefiningQue
           <EntitySetMapping Name="FACTURA">
             <EntityTypeMapping TypeName="Model.FACTURA">
               <MappingFragment StoreEntitySet="FACTURA">
-                <ScalarProperty Name="NUMERO_ORDEN" ColumnName="NUMERO_ORDEN" />
                 <ScalarProperty Name="ID_FACTURA" ColumnName="ID_FACTURA" />
                 <ScalarProperty Name="VALOR_NETO_FACTURA" ColumnName="VALOR_NETO_FACTURA" />
                 <ScalarProperty Name="VALOR_IVA_FACTURA" ColumnName="VALOR_IVA_FACTURA" />
@@ -2797,6 +2862,7 @@ FROM "HOSTAL"."V_HABITACION_USOS_TOP_10" "V_HABITACION_USOS_TOP_10"</DefiningQue
                 <ScalarProperty Name="RUT_CLIENTE" ColumnName="RUT_CLIENTE" />
                 <ScalarProperty Name="RUT_EMPLEADO" ColumnName="RUT_EMPLEADO" />
                 <ScalarProperty Name="METODO_PAGO" ColumnName="METODO_PAGO" />
+                <ScalarProperty Name="NUMERO_ORDEN" ColumnName="NUMERO_ORDEN" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2927,7 +2993,6 @@ FROM "HOSTAL"."V_HABITACION_USOS_TOP_10" "V_HABITACION_USOS_TOP_10"</DefiningQue
               <MappingFragment StoreEntitySet="PRODUCTO">
                 <ScalarProperty Name="ID_PRODUCTO" ColumnName="ID_PRODUCTO" />
                 <ScalarProperty Name="NOMBRE_PRODUCTO" ColumnName="NOMBRE_PRODUCTO" />
-                <ScalarProperty Name="PRECIO_PRODUCTO" ColumnName="PRECIO_PRODUCTO" />
                 <ScalarProperty Name="FECHA_VENCIMIENTO_PRODUCTO" ColumnName="FECHA_VENCIMIENTO_PRODUCTO" />
                 <ScalarProperty Name="STOCK_PRODUCTO" ColumnName="STOCK_PRODUCTO" />
                 <ScalarProperty Name="STOCK_CRITICO_PRODUCTO" ColumnName="STOCK_CRITICO_PRODUCTO" />
@@ -2936,6 +3001,7 @@ FROM "HOSTAL"."V_HABITACION_USOS_TOP_10" "V_HABITACION_USOS_TOP_10"</DefiningQue
                 <ScalarProperty Name="ID_FAMILIA" ColumnName="ID_FAMILIA" />
                 <ScalarProperty Name="RUT_PROVEEDOR" ColumnName="RUT_PROVEEDOR" />
                 <ScalarProperty Name="ID_PRODUCTO_SEQ" ColumnName="ID_PRODUCTO_SEQ" />
+                <ScalarProperty Name="PRECIO_PRODUCTO" ColumnName="PRECIO_PRODUCTO" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3080,15 +3146,6 @@ FROM "HOSTAL"."V_HABITACION_USOS_TOP_10" "V_HABITACION_USOS_TOP_10"</DefiningQue
               <MappingFragment StoreEntitySet="V_HABITACION_USOS_TOP_10">
                 <ScalarProperty Name="NUMERO_HABITACION" ColumnName="NUMERO_HABITACION" />
                 <ScalarProperty Name="NUMERO_USOS" ColumnName="NUMERO_USOS" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DIVISA">
-            <EntityTypeMapping TypeName="Model.DIVISA">
-              <MappingFragment StoreEntitySet="DIVISA">
-                <ScalarProperty Name="PRECIO_DIVISA" ColumnName="PRECIO_DIVISA" />
-                <ScalarProperty Name="NOMBRE_DIVISA" ColumnName="NOMBRE_DIVISA" />
-                <ScalarProperty Name="ID_DIVISA" ColumnName="ID_DIVISA" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

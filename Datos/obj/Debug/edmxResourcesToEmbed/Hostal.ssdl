@@ -51,6 +51,7 @@
   <EntityType Name="DETALLE_BOLETA">
     <Key>
       <PropertyRef Name="ID_DETALLE_BOLETA" />
+      <PropertyRef Name="ID_BOLETA" />
     </Key>
     <Property Name="ID_DETALLE_BOLETA" Type="number" Precision="10" Scale="0" Nullable="false" />
     <Property Name="DESCRIPCION_DETALLE" Type="varchar2" MaxLength="250" Nullable="false" />
@@ -81,6 +82,7 @@
     <Property Name="ID_PENSION" Type="number" Precision="5" Scale="0" Nullable="false" />
     <Property Name="FECHA_LLEGADA" Type="date" Nullable="false" />
     <Property Name="FECHA_SALIDA" Type="date" Nullable="false" />
+    <Property Name="NUMERO_ORDEN" Type="number" Precision="5" Scale="0" Nullable="false" />
   </EntityType>
   <EntityType Name="DETALLE_ORDEN">
     <Key>
@@ -99,6 +101,7 @@
   <EntityType Name="DETALLE_PEDIDO">
     <Key>
       <PropertyRef Name="ID_DETALLE_PEDIDO" />
+      <PropertyRef Name="ID_PRODUCTO" />
     </Key>
     <Property Name="ID_DETALLE_PEDIDO" Type="number" Precision="5" Scale="0" Nullable="false" />
     <Property Name="CANTIDAD" Type="number" Precision="10" Scale="0" Nullable="false" />
@@ -117,6 +120,7 @@
   <EntityType Name="DETALLE_RECEPCION">
     <Key>
       <PropertyRef Name="ID_DETALLE_RECEPCION" />
+      <PropertyRef Name="NUMERO_RECEPCION" />
     </Key>
     <Property Name="ID_DETALLE_RECEPCION" Type="number" Precision="5" Scale="0" Nullable="false" />
     <Property Name="CANTIDAD" Type="number" Precision="10" Scale="0" Nullable="false" />
@@ -275,7 +279,6 @@
     </Key>
     <Property Name="ID_PRODUCTO" Type="number" Precision="19" Scale="0" Nullable="false" />
     <Property Name="NOMBRE_PRODUCTO" Type="varchar2" MaxLength="50" Nullable="false" />
-    <Property Name="PRECIO_PRODUCTO" Type="number" Precision="10" Scale="0" Nullable="false" />
     <Property Name="FECHA_VENCIMIENTO_PRODUCTO" Type="date" />
     <Property Name="STOCK_PRODUCTO" Type="number" Precision="5" Scale="0" Nullable="false" />
     <Property Name="STOCK_CRITICO_PRODUCTO" Type="number" Precision="5" Scale="0" Nullable="false" />
@@ -284,6 +287,7 @@
     <Property Name="ID_FAMILIA" Type="number" Precision="5" Scale="0" Nullable="false" />
     <Property Name="RUT_PROVEEDOR" Type="number" Precision="8" Scale="0" Nullable="false" />
     <Property Name="ID_PRODUCTO_SEQ" Type="number" Precision="5" Scale="0" Nullable="false" />
+    <Property Name="PRECIO_PRODUCTO" Type="number" Precision="8" Scale="0" Nullable="false" />
   </EntityType>
   <EntityType Name="PROVEEDOR">
     <Key>
@@ -525,6 +529,18 @@ advertencia 6002: La tabla o vista 'HOSTAL.V_HABITACION_USOS_TOP_10' no tiene de
       </Principal>
       <Dependent Role="DETALLE_FACTURA">
         <PropertyRef Name="ID_FACTURA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DETALLE_HAB_ORDEN">
+    <End Role="ORDEN_COMPRA" Type="Self.ORDEN_COMPRA" Multiplicity="1" />
+    <End Role="DETALLE_HABITACION" Type="Self.DETALLE_HABITACION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ORDEN_COMPRA">
+        <PropertyRef Name="NUMERO_ORDEN" />
+      </Principal>
+      <Dependent Role="DETALLE_HABITACION">
+        <PropertyRef Name="NUMERO_ORDEN" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1008,6 +1024,19 @@ advertencia 6002: La tabla o vista 'HOSTAL.V_HABITACION_USOS_TOP_10' no tiene de
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="FN_CALCULAR_DIAS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="HOSTAL" ReturnType="number">
+    <Parameter Name="NUM_HAB" Type="number" Mode="In" />
+  </Function>
+  <Function Name="FN_CANTIDAD_ORDENES_TIPO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="HOSTAL" ReturnType="number">
+    <Parameter Name="RUT" Type="number" Mode="In" />
+    <Parameter Name="ESTADO" Type="varchar2" Mode="In" />
+  </Function>
+  <Function Name="FN_PRODUCTO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="HOSTAL" ReturnType="number">
+    <Parameter Name="P_ID_PROVEEDOR" Type="number" Mode="In" />
+    <Parameter Name="P_ID_FAMILIA" Type="number" Mode="In" />
+    <Parameter Name="P_FECHA_VENCIMIENTO" Type="date" Mode="In" />
+    <Parameter Name="P_ID_PRODUCTO_S" Type="number" Mode="In" />
+  </Function>
   <EntityContainer Name="ModelStoreContainer">
     <EntitySet Name="BOLETA" EntityType="Self.BOLETA" Schema="HOSTAL" store:Type="Tables" />
     <EntitySet Name="CATEGORIA" EntityType="Self.CATEGORIA" Schema="HOSTAL" store:Type="Tables" />
@@ -1134,6 +1163,10 @@ FROM "HOSTAL"."V_HABITACION_USOS_TOP_10" "V_HABITACION_USOS_TOP_10"</DefiningQue
     <AssociationSet Name="FK_DETALLE_FACTURA_FACTURA" Association="Self.FK_DETALLE_FACTURA_FACTURA">
       <End Role="FACTURA" EntitySet="FACTURA" />
       <End Role="DETALLE_FACTURA" EntitySet="DETALLE_FACTURA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DETALLE_HAB_ORDEN" Association="Self.FK_DETALLE_HAB_ORDEN">
+      <End Role="ORDEN_COMPRA" EntitySet="ORDEN_COMPRA" />
+      <End Role="DETALLE_HABITACION" EntitySet="DETALLE_HABITACION" />
     </AssociationSet>
     <AssociationSet Name="FK_DETALLE_OR_TIPO_HAB" Association="Self.FK_DETALLE_OR_TIPO_HAB">
       <End Role="TIPO_HABITACION" EntitySet="TIPO_HABITACION" />

@@ -37,6 +37,7 @@ namespace Datos
         public DbSet<DETALLE_PEDIDO> DETALLE_PEDIDO { get; set; }
         public DbSet<DETALLE_PLATOS> DETALLE_PLATOS { get; set; }
         public DbSet<DETALLE_RECEPCION> DETALLE_RECEPCION { get; set; }
+        public DbSet<DIVISA> DIVISA { get; set; }
         public DbSet<EMPLEADO> EMPLEADO { get; set; }
         public DbSet<FACTURA> FACTURA { get; set; }
         public DbSet<FAMILIA> FAMILIA { get; set; }
@@ -65,6 +66,5 @@ namespace Datos
         public DbSet<V_HABITACION_PREFERIDA> V_HABITACION_PREFERIDA { get; set; }
         public DbSet<V_HABITACION_USOS> V_HABITACION_USOS { get; set; }
         public DbSet<V_HABITACION_USOS_TOP_10> V_HABITACION_USOS_TOP_10 { get; set; }
-        public DbSet<DIVISA> DIVISA { get; set; }
     }
 }

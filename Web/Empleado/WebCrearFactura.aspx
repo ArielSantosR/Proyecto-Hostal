@@ -133,10 +133,10 @@
                             </div>
                             <div class="border-top my-3"></div>
                             <div class="row">
-                                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                                     <asp:Button ID="btnAgregar" runat="server" Text="Agregar Servicios" CssClass="btn btn-primary btn-lg btn-block login-button" OnClick="btnAgregar_Click" />
                                 </div>
-                                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                                     <asp:Button ID="btnFacturar" runat="server" Text="Facturar" CssClass="btn btn-success btn-block btn-lg login-button" OnClick="btnFacturar_Click" />
                                 </div>
                             </div>

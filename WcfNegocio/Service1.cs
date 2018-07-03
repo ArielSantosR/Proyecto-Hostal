@@ -2483,6 +2483,7 @@ namespace WcfNegocio
             dDatos.ID_PENSION = d.ID_PENSION;
             dDatos.FECHA_LLEGADA = d.FECHA_LLEGADA;
             dDatos.FECHA_SALIDA = d.FECHA_SALIDA;
+            dDatos.NUMERO_ORDEN = d.NUMERO_ORDEN;
 
             return serv.AgregarDetalleHabitacion(dDatos);
         }
@@ -2583,6 +2584,49 @@ namespace WcfNegocio
                 d.RUT_HUESPED = Datos2.RUT_HUESPED;
 
                 return d;
+            }
+        }
+
+        public string ListaDetalleHabitacionOrden(string detalle)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.DetalleHabitacion));
+            StringReader reader = new StringReader(detalle);
+            Modelo.DetalleHabitacion cl = (Modelo.DetalleHabitacion)ser.Deserialize(reader);
+            ServicioDetalleHabitacion serv = new ServicioDetalleHabitacion();
+
+            Datos.DETALLE_HABITACION cDatos = new Datos.DETALLE_HABITACION();
+            cDatos.NUMERO_ORDEN = cl.NUMERO_ORDEN;
+
+            List<Datos.DETALLE_HABITACION> listaOrden = serv.listarDetalleHabitacionOrden(cDatos);
+
+            if (listaOrden == null)
+            {
+                return null;
+            }
+            else
+            {
+                Modelo.DetalleHabitacionCollection listaDetalle = new DetalleHabitacionCollection();
+
+                foreach (Datos.DETALLE_HABITACION d in listaOrden)
+                {
+                    Modelo.DetalleHabitacion dModelo = new Modelo.DetalleHabitacion();
+                    dModelo.ID_DETALLE_H = d.ID_DETALLE_H;
+                    dModelo.ID_PENSION = d.ID_PENSION;
+                    dModelo.FECHA_LLEGADA = d.FECHA_LLEGADA;
+                    dModelo.FECHA_SALIDA = d.FECHA_SALIDA;
+                    dModelo.RUT_HUESPED = d.RUT_HUESPED;
+                    dModelo.RUT_CLIENTE = d.RUT_CLIENTE;
+                    dModelo.NUMERO_HABITACION = d.NUMERO_HABITACION;
+                    dModelo.NUMERO_ORDEN = d.NUMERO_ORDEN;
+
+                    listaDetalle.Add(dModelo);
+                }
+
+                XmlSerializer ser2 = new XmlSerializer(typeof(Modelo.DetalleHabitacionCollection));
+                StringWriter writer2 = new StringWriter();
+                ser2.Serialize(writer2, listaDetalle);
+                writer2.Close();
+                return writer2.ToString();
             }
         }
         #endregion

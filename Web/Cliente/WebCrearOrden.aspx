@@ -85,11 +85,11 @@
                     </ContentTemplate>
                 </asp:UpdatePanel>
                 <div class="row">
-                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                         <br />
                         <asp:Button ID="btnAgregar" runat="server" Text="Agregar Huésped" CssClass="btn btn-primary btn-lg btn-block login-button" OnClick="btnAgregar_Click" />
                     </div>
-                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                         <br />
                         <asp:Button ID="btnVer" runat="server" Text="Lista de Huéspedes" CssClass="btn btn-info btn-lg btn-block login-button" OnClick="btnVer_Click" />
                     </div>
@@ -114,12 +114,20 @@
                 <asp:UpdatePanel runat="server" ID="UpdatePanel2" UpdateMode="Conditional">
                     <ContentTemplate>
                         <div class="form-group">
-                            <label for="name" class="col-sm-12 control-label">Valor Diario</label>
-                            <div class="col-sm-12">
-                                <div class="input-group">
-                                    <span class="input-group-text"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                                    <asp:TextBox ID="txtPrecio" placeholder="Precio Total" runat="server" CssClass="form-control"></asp:TextBox>
-                                </div>
+                            <div class="row">
+                                <label for="name" class="col-sm-12 control-label">Valor Diario</label>
+                                    <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+                                        <div class="input-group">
+                                            <span class="input-group-text"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                                            <asp:TextBox ID="txtPrecio" placeholder="Precio Total" runat="server" CssClass="form-control"></asp:TextBox>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                        <div class="input-group">
+                                            <asp:DropDownList ID="ddlDivisa" CssClass="form-control" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlDivisa_SelectedIndexChanged">
+                                            </asp:DropDownList>
+                                        </div>
+                                    </div>
                             </div>
                         </div>
                     </ContentTemplate>
@@ -127,7 +135,7 @@
 
 
                 <div class="row">
-                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <br />
                         <asp:Button ID="btnReservar" runat="server" Text="Reservar" CssClass="btn btn-secondary btn-lg btn-block login-button" OnClick="btnReservar_Click" />
                     </div>

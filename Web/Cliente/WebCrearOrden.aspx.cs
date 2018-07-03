@@ -99,6 +99,12 @@ namespace Web.Cliente
                         Modelo.MinutaCollection coleccionMinuta = (Modelo.MinutaCollection)ser2.Deserialize(reader2);
                         reader.Close();
 
+                        string divisa = service.ListarDivisa();
+                        XmlSerializer ser5 = new XmlSerializer(typeof(Modelo.DivisaCollection));
+                        StringReader reader5 = new StringReader(divisa);
+                        Modelo.DivisaCollection coleccionDivisa = (Modelo.DivisaCollection)ser5.Deserialize(reader5);
+                        reader.Close();
+
                         if (!IsPostBack)
                         {
                             ddlRut.DataSource = coleccionHuesped;
@@ -125,6 +131,11 @@ namespace Web.Cliente
                             ddlPension.DataBind();
                             ddlPension.Items.Insert(0,new ListItem("Seleccione Pensión...","0"));
 
+                            ddlDivisa.DataSource = coleccionDivisa;
+                            ddlDivisa.DataTextField = "NOMBRE_DIVISA";
+                            ddlDivisa.DataValueField = "ID_DIVISA";
+                            ddlDivisa.DataBind();
+
                             MiSesionO = null;
                             btnVer.Enabled = false;
                             btnReservar.Enabled = false;
@@ -136,6 +147,11 @@ namespace Web.Cliente
                     else
                     {
                         divClientes.Visible = true;
+
+                        string divisa = service.ListarDivisa();
+                        XmlSerializer ser5 = new XmlSerializer(typeof(Modelo.DivisaCollection));
+                        StringReader reader5 = new StringReader(divisa);
+                        Modelo.DivisaCollection coleccionDivisa = (Modelo.DivisaCollection)ser5.Deserialize(reader5);
 
                         if (!IsPostBack) {
                             ddlCategoria.Enabled = false;
@@ -152,6 +168,11 @@ namespace Web.Cliente
                             ddlCategoria.Items.Insert(0,new ListItem("Seleccione Categoria de Habitación...","0"));
                             ddlPension.Items.Insert(0,new ListItem("Seleccione Pensión...","0"));
                             ddlTipo.Items.Insert(0,new ListItem("Seleccione Tipo de Habitación...","0"));
+
+                            ddlDivisa.DataSource = coleccionDivisa;
+                            ddlDivisa.DataTextField = "NOMBRE_DIVISA";
+                            ddlDivisa.DataValueField = "ID_DIVISA";
+                            ddlDivisa.DataBind();
 
                             MiSesionO = null;
                             btnVer.Enabled = false;
@@ -238,11 +259,16 @@ namespace Web.Cliente
                     StringReader reader2 = new StringReader(categoria);
                     CategoriaHabitacionCollection coleccionCategoria = (CategoriaHabitacionCollection)ser2.Deserialize(reader2);
 
+                    string divisa = s.ListarDivisa();
+                    XmlSerializer ser5 = new XmlSerializer(typeof(Modelo.DivisaCollection));
+                    StringReader reader5 = new StringReader(divisa);
+                    Modelo.DivisaCollection coleccionDivisa = (Modelo.DivisaCollection)ser5.Deserialize(reader5);
+
                     List<TipoHabitacion> coleccionTipos = TipoHabitacionCollection.ListarTipos();
 
                     if (MiSesionO.Count > 0)
                     {
-                        int precio = 0;
+                        decimal precio = 0;
 
                         foreach (DetalleOrden o in MiSesionO)
                         {
@@ -260,6 +286,13 @@ namespace Web.Cliente
 
                             precio = precio + minutas[0].VALOR_PENSION + categorias[0].PRECIO_CATEGORIA + tipos[0].PRECIO_TIPO;
                         }
+
+                        List<Modelo.Divisa> divisas = (from consulta in coleccionDivisa
+                                                       where consulta.ID_DIVISA == short.Parse(ddlDivisa.SelectedValue)
+                                                       select consulta).ToList();
+
+                        precio = precio / divisas[0].PRECIO_DIVISA;
+                        precio = Math.Round(precio, 2);
 
                         txtPrecio.Text = precio + "";
                     }
@@ -310,11 +343,16 @@ namespace Web.Cliente
                 StringReader reader2 = new StringReader(categoria);
                 CategoriaHabitacionCollection coleccionCategoria = (CategoriaHabitacionCollection)ser2.Deserialize(reader2);
 
+                string divisa = s.ListarDivisa();
+                XmlSerializer ser5 = new XmlSerializer(typeof(Modelo.DivisaCollection));
+                StringReader reader5 = new StringReader(divisa);
+                Modelo.DivisaCollection coleccionDivisa = (Modelo.DivisaCollection)ser5.Deserialize(reader5);
+
                 List<TipoHabitacion> coleccionTipos = TipoHabitacionCollection.ListarTipos();
 
                 if (MiSesionO.Count > 0)
                 {
-                    int precio = 0;
+                    decimal precio = 0;
 
                     foreach (DetalleOrden o in MiSesionO)
                     {
@@ -325,12 +363,20 @@ namespace Web.Cliente
                         List<Modelo.CategoriaHabitacion> categorias = (from consulta in coleccionCategoria
                                                                        where consulta.ID_CATEGORIA_HABITACION == o.ID_CATEGORIA_HABITACION
                                                                        select consulta).ToList();
+
                         List<Modelo.TipoHabitacion> tipos = (from consulta in coleccionTipos
                                                              where consulta.ID_TIPO_HABITACION == o.ID_TIPO_HABITACION
                                                              select consulta).ToList();
 
                         precio = precio + minutas[0].VALOR_PENSION + categorias[0].PRECIO_CATEGORIA + tipos[0].PRECIO_TIPO;
                     }
+
+                    List<Modelo.Divisa> divisas = (from consulta in coleccionDivisa
+                                                   where consulta.ID_DIVISA == short.Parse(ddlDivisa.SelectedValue)
+                                                   select consulta).ToList();
+
+                    precio = precio / divisas[0].PRECIO_DIVISA;
+                    precio = Math.Round(precio, 2);
 
                     txtPrecio.Text = precio + "";
                 }
@@ -394,14 +440,23 @@ namespace Web.Cliente
                                 StringReader reader2 = new StringReader(categoria);
                                 CategoriaHabitacionCollection coleccionCategoria = (CategoriaHabitacionCollection)ser2.Deserialize(reader2);
 
+                                string divisa = s.ListarDivisa();
+                                XmlSerializer ser5 = new XmlSerializer(typeof(Modelo.DivisaCollection));
+                                StringReader reader5 = new StringReader(divisa);
+                                Modelo.DivisaCollection coleccionDivisa = (Modelo.DivisaCollection)ser5.Deserialize(reader5);
+
+
                                 List<TipoHabitacion> coleccionTipos = TipoHabitacionCollection.ListarTipos();
 
                                 int precio = 0;
+                                decimal precioConvertido = 0;
 
-                                if (MiSesionO.Count > 0) {
+                                if (MiSesionO.Count > 0)
+                                {
 
 
-                                    foreach (DetalleOrden o in MiSesionO) {
+                                    foreach (DetalleOrden o in MiSesionO)
+                                    {
                                         List<Modelo.Minuta> minutas = (from consulta in coleccionMinuta
                                                                        where consulta.ID_PENSION == o.ID_PENSION
                                                                        select consulta).ToList();
@@ -413,11 +468,17 @@ namespace Web.Cliente
                                                                              where consulta.ID_TIPO_HABITACION == o.ID_TIPO_HABITACION
                                                                              select consulta).ToList();
 
-
                                         precio = precio + ((minutas[0].VALOR_PENSION + categorias[0].PRECIO_CATEGORIA + tipos[0].PRECIO_TIPO) * dias);
                                     }
 
-                                    txtPrecio.Text = precio + "";
+                                    List<Modelo.Divisa> divisas = (from consulta in coleccionDivisa
+                                                                   where consulta.ID_DIVISA == short.Parse(ddlDivisa.SelectedValue)
+                                                                   select consulta).ToList();
+
+                                    precioConvertido = precio / divisas[0].PRECIO_DIVISA;
+                                    precioConvertido = Math.Round(precioConvertido, 2);
+
+                                    txtPrecio.Text = precioConvertido + "";
                                 }
                                 #endregion
 
@@ -527,9 +588,16 @@ namespace Web.Cliente
                                     StringReader reader2 = new StringReader(categoria);
                                     CategoriaHabitacionCollection coleccionCategoria = (CategoriaHabitacionCollection)ser2.Deserialize(reader2);
 
+                                    string divisa = s.ListarDivisa();
+                                    XmlSerializer ser5 = new XmlSerializer(typeof(Modelo.DivisaCollection));
+                                    StringReader reader5 = new StringReader(divisa);
+                                    Modelo.DivisaCollection coleccionDivisa = (Modelo.DivisaCollection)ser5.Deserialize(reader5);
+
+
                                     List<TipoHabitacion> coleccionTipos = TipoHabitacionCollection.ListarTipos();
 
                                     int precio = 0;
+                                    decimal precioConvertido = 0;
 
                                     if (MiSesionO.Count > 0) {
 
@@ -549,7 +617,14 @@ namespace Web.Cliente
                                             precio = precio + ((minutas[0].VALOR_PENSION + categorias[0].PRECIO_CATEGORIA + tipos[0].PRECIO_TIPO) * dias);
                                         }
 
-                                        txtPrecio.Text = precio + "";
+                                        List<Modelo.Divisa> divisas = (from consulta in coleccionDivisa
+                                                                       where consulta.ID_DIVISA == short.Parse(ddlDivisa.SelectedValue)
+                                                                       select consulta).ToList();
+
+                                        precioConvertido = precio / divisas[0].PRECIO_DIVISA;
+                                        precioConvertido = Math.Round(precioConvertido, 2);
+
+                                        txtPrecio.Text = precioConvertido + "";
                                     }
                                     #endregion
 
@@ -585,7 +660,7 @@ namespace Web.Cliente
                                         }
                                         if (v_exito)
                                         {
-                                            Response.Write("<script language='javascript'>window.alert('Reserva Realizada, El Precio Total de su estadía será de: $" + precio + ". Espere que su solicitud sea aceptada');window.location='../Cliente/WebVerHistorial.aspx';</script>");
+                                            Response.Write("<script language='javascript'>window.alert('Reserva Realizada, El Precio Total de su estadía será de: $" + precioConvertido + ". Espere que su solicitud sea aceptada');window.location='../Cliente/WebVerHistorial.aspx';</script>");
                                         }
                                         else
                                         {
@@ -764,6 +839,62 @@ namespace Web.Cliente
             ddlPension.Enabled = true;
             ddlRut.Enabled = true;
             ddlTipo.Enabled = true;
+        }
+
+        protected void ddlDivisa_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            #region Precio Total
+            Service1 s = new Service1();
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.MinutaCollection));
+            string minuta = s.ListarMinuta();
+            StringReader reader = new StringReader(minuta);
+            MinutaCollection coleccionMinuta = (MinutaCollection)ser.Deserialize(reader);
+
+            XmlSerializer ser2 = new XmlSerializer(typeof(Modelo.CategoriaHabitacionCollection));
+            string categoria = s.ListarCategoriaHabitacion();
+            StringReader reader2 = new StringReader(categoria);
+            CategoriaHabitacionCollection coleccionCategoria = (CategoriaHabitacionCollection)ser2.Deserialize(reader2);
+
+            string divisa = s.ListarDivisa();
+            XmlSerializer ser5 = new XmlSerializer(typeof(Modelo.DivisaCollection));
+            StringReader reader5 = new StringReader(divisa);
+            Modelo.DivisaCollection coleccionDivisa = (Modelo.DivisaCollection)ser5.Deserialize(reader5);
+
+            List<TipoHabitacion> coleccionTipos = TipoHabitacionCollection.ListarTipos();
+
+            if (MiSesionO.Count > 0)
+            {
+                decimal precio = 0;
+
+                foreach (DetalleOrden o in MiSesionO)
+                {
+                    List<Modelo.Minuta> minutas = (from consulta in coleccionMinuta
+                                                   where consulta.ID_PENSION == o.ID_PENSION
+                                                   select consulta).ToList();
+
+                    List<Modelo.CategoriaHabitacion> categorias = (from consulta in coleccionCategoria
+                                                                   where consulta.ID_CATEGORIA_HABITACION == o.ID_CATEGORIA_HABITACION
+                                                                   select consulta).ToList();
+
+                    List<Modelo.TipoHabitacion> tipos = (from consulta in coleccionTipos
+                                                         where consulta.ID_TIPO_HABITACION == o.ID_TIPO_HABITACION
+                                                         select consulta).ToList();
+
+                    precio = precio + minutas[0].VALOR_PENSION + categorias[0].PRECIO_CATEGORIA + tipos[0].PRECIO_TIPO;
+                }
+
+                List<Modelo.Divisa> divisas = (from consulta in coleccionDivisa
+                                               where consulta.ID_DIVISA == short.Parse(ddlDivisa.SelectedValue)
+                                               select consulta).ToList();
+
+                precio = precio / divisas[0].PRECIO_DIVISA;
+                precio = Math.Round(precio, 2);
+
+                txtPrecio.Text = precio + "";
+
+                UpdatePanel2.Update();
+            }
+            #endregion
         }
     }
 }

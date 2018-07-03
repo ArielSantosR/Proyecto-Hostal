@@ -16,9 +16,10 @@ namespace Datos
     {
         public ORDEN_COMPRA()
         {
+            this.DETALLE_HABITACION = new HashSet<DETALLE_HABITACION>();
             this.DETALLE_ORDEN = new HashSet<DETALLE_ORDEN>();
-            this.NOTIFICACION = new HashSet<NOTIFICACION>();
             this.FACTURA = new HashSet<FACTURA>();
+            this.NOTIFICACION = new HashSet<NOTIFICACION>();
         }
     
         public short NUMERO_ORDEN { get; set; }
@@ -32,9 +33,10 @@ namespace Datos
         public int MONTO_TOTAL { get; set; }
     
         public virtual CLIENTE CLIENTE { get; set; }
+        public virtual ICollection<DETALLE_HABITACION> DETALLE_HABITACION { get; set; }
         public virtual ICollection<DETALLE_ORDEN> DETALLE_ORDEN { get; set; }
         public virtual EMPLEADO EMPLEADO { get; set; }
-        public virtual ICollection<NOTIFICACION> NOTIFICACION { get; set; }
         public virtual ICollection<FACTURA> FACTURA { get; set; }
+        public virtual ICollection<NOTIFICACION> NOTIFICACION { get; set; }
     }
 }

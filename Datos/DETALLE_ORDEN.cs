@@ -25,9 +25,9 @@ namespace Datos
         public short ID_TIPO_HABITACION { get; set; }
     
         public virtual CATEGORIA_HABITACION CATEGORIA_HABITACION { get; set; }
+        public virtual TIPO_HABITACION TIPO_HABITACION { get; set; }
         public virtual PENSION PENSION { get; set; }
         public virtual HUESPED HUESPED { get; set; }
         public virtual ORDEN_COMPRA ORDEN_COMPRA { get; set; }
-        public virtual TIPO_HABITACION TIPO_HABITACION { get; set; }
     }
 }

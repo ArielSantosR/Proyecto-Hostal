@@ -373,6 +373,9 @@ namespace WcfNegocio
 
         [OperationContract]
         DetalleHabitacion obtenerDetalleHabitacion(string detalle);
+
+        [OperationContract]
+        string ListaDetalleHabitacionOrden(string detalle);
         #endregion
 
         #region Minuta

@@ -416,6 +416,7 @@ namespace Web.Empleado
                             detalleHabitacion.FECHA_LLEGADA = MiSesionOrden.FECHA_LLEGADA;
                             detalleHabitacion.FECHA_SALIDA = MiSesionOrden.FECHA_SALIDA;
                             detalleHabitacion.ID_PENSION = MiSesionDetalleO.ID_PENSION;
+                            detalleHabitacion.NUMERO_ORDEN = MiSesionOrden.NUMERO_ORDEN;
 
                             XmlSerializer sr3 = new XmlSerializer(typeof(Modelo.DetalleHabitacion));
                             StringWriter writer3 = new StringWriter();

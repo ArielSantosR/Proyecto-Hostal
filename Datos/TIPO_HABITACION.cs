@@ -16,8 +16,8 @@ namespace Datos
     {
         public TIPO_HABITACION()
         {
-            this.HABITACION = new HashSet<HABITACION>();
             this.DETALLE_ORDEN = new HashSet<DETALLE_ORDEN>();
+            this.HABITACION = new HashSet<HABITACION>();
         }
     
         public short ID_TIPO_HABITACION { get; set; }
@@ -25,7 +25,7 @@ namespace Datos
         public short CANTIDAD_PASAJERO { get; set; }
         public int PRECIO_TIPO { get; set; }
     
-        public virtual ICollection<HABITACION> HABITACION { get; set; }
         public virtual ICollection<DETALLE_ORDEN> DETALLE_ORDEN { get; set; }
+        public virtual ICollection<HABITACION> HABITACION { get; set; }
     }
 }
