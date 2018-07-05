@@ -85,7 +85,7 @@
                                                 </ItemTemplate>
                                             </asp:TemplateField>
                                             <asp:BoundField DataField="Descripcion" HeaderText="DESCRIPCIÓN" />
-                                            <asp:TemplateField HeaderText="DESCUENTO">
+                                            <asp:TemplateField HeaderText="DESCUENTO(%)">
                                                 <ItemTemplate>
                                                     <asp:UpdatePanel ID="upDescuento" ChildrenAsTriggers="true" UpdateMode="Conditional" runat="server">
                                                         <ContentTemplate>
@@ -145,6 +145,9 @@
                 </div>
             </div>
         </ContentTemplate>
+        <Triggers>
+            <asp:PostBackTrigger ControlID="btnFacturar"/>
+        </Triggers>
     </asp:UpdatePanel>
     <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document" style="max-width: 1024px">
@@ -163,7 +166,6 @@
                             <br />
                             <asp:Button ID="btnAgregarPension" runat="server" Text="Agregar" CssClass="btn btn-primary" OnClick="btnAgregarPension_Click" />
                         </div>
-
                         <div class="col-sm-12">
                             <label for="name" class="col-sm control-label"><strong>Estadías</strong></label>
                             <asp:DropDownList ID="ddlCategoria" runat="server" CssClass="form-control"></asp:DropDownList>

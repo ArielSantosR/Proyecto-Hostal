@@ -136,8 +136,10 @@ namespace Web.Cliente
                 new DataColumn("MONTO_TOTAL",typeof(string))
             });
 
+            var lista = ordenes.Where(x => x.ESTADO_ORDEN.Equals(Estado_Orden.Cerrado.ToString())).ToList();
+
             //Carga de datos en DataTable
-            foreach (OrdenCompra o in ordenes) {
+            foreach (OrdenCompra o in lista) {
                 cliente = new Modelo.Cliente();
                 cliente.RUT_CLIENTE = o.RUT_CLIENTE;
                 cliente.BuscarCliente();

@@ -1419,13 +1419,9 @@ namespace Web.Empleado {
                 TextBox valorUnit = (TextBox)currentRow.FindControl("txtValorUniG");
                 TextBox descuento = (TextBox)currentRow.FindControl("txtDescuentoG");
                 TextBox total = (TextBox)currentRow.FindControl("txtValorTotal");
-                RangeValidator validador = (RangeValidator)currentRow.FindControl("rvDescuento");
-
-                validador.ControlToValidate = descuento.ToString();
 
                 DataRow rowEdit = SesionTable.Rows[currentRow.RowIndex];
-                validador.Validate();
-                if (validador.IsValid) {
+                if (int.Parse(descuento.Text) >= 0 && int.Parse(descuento.Text) < 100) {
                     if (int.Parse(total.Text) > int.Parse(descuento.Text)) {
                         total.Text = ((int.Parse(cantidad.Text) * int.Parse(valorUnit.Text)) - (double.Parse(descuento.Text)) / 100 * (int.Parse(cantidad.Text) * int.Parse(valorUnit.Text))).ToString();
                         rowEdit[2] = int.Parse(descuento.Text);

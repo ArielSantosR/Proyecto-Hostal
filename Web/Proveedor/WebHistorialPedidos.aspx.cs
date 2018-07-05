@@ -1,6 +1,7 @@
 ﻿using Modelo;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -219,10 +220,11 @@ namespace Web.Proveedor
 
                         Modelo.DetallePedidoCollection listaDetalle = (Modelo.DetallePedidoCollection)ser3.Deserialize(reader);
                         reader.Close();
-                        gvDetalle.DataSource = listaDetalle;
-                        gvDetalle.DataBind();
+                        CargarGrid(listaDetalle);
 
                         MiSesionPedido = s.ObtenerPedido(writer.ToString());
+
+                        exampleModalLabel.InnerText = "Detalle Pedido N°" + MiSesionPedido.NUMERO_PEDIDO;
 
                         ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modal", "$('#exampleModal').modal();", true);
                     }
@@ -234,6 +236,30 @@ namespace Web.Proveedor
                 error.Text = "Excepción: " + ex.ToString();
                 alerta.Visible = true;
             }
+        }
+
+        private void CargarGrid (DetallePedidoCollection listaDetalle) {
+            Producto producto = new Producto();
+
+            DataTable dt = new DataTable();
+            dt.Columns.AddRange(new DataColumn[] {
+                new DataColumn("Código", typeof(long)),
+                new DataColumn("Nombre", typeof(string)),
+                new DataColumn("Descripción",typeof(string)),
+                new DataColumn("Unidad Medida",typeof(string)),
+                new DataColumn("Cantidad",typeof(int))
+            });
+
+            foreach (DetallePedido item in listaDetalle) {
+                producto = new Producto();
+                producto.ID_PRODUCTO = item.ID_PRODUCTO;
+                producto.Read();
+
+                dt.Rows.Add(producto.ID_PRODUCTO,producto.NOMBRE_PRODUCTO,producto.DESCRIPCION_PRODUCTO,producto.UNIDAD_MEDIDA,item.CANTIDAD);
+            }
+
+            gvDetalle.DataSource = dt;
+            gvDetalle.DataBind();
         }
     }
 }

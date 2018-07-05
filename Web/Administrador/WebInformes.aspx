@@ -18,20 +18,20 @@
         <div class="row main">
             <div class="main-login main-center-wide">
                 <div class="row" style="margin-top: 20px; margin-bottom: 20px;">
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <asp:Button runat="server" Text="Informes de Clientes" CssClass="btn btn-primary active  btn-lg btn-block login-button" Style="margin: auto;" data-toggle="collapse" data-target="#informeCliente" OnClientClick="return false" />
                         <div id="informeCliente" class="collapse" style="margin-top: 10px;">
                             <asp:Button runat="server" Text="Informe Ordenes de Clientes" ID="btnClienteOrd" CssClass="btn btn-primary btn-lg btn-block login-button" Style="font-size: 15px;" OnClick="btnClienteOrd_Click" />
                             <asp:Button runat="server" Text="Informe Clientes Frecuentes" ID="btnClienteFrec" CssClass="btn btn-primary btn-lg btn-block login-button" Style="font-size: 15px;" OnClick="btnClienteFrec_Click" />
-                            <asp:Button runat="server" Text="Informe Top 10 de CLientes" ID="btnClienteTop" CssClass="btn btn-primary btn-lg btn-block login-button" Style="font-size: 15px;" OnClick="btnClienteTop_Click" />
+                            <asp:Button runat="server" Text="Informe Top 10 de Clientes" ID="btnClienteTop" CssClass="btn btn-primary btn-lg btn-block login-button" Style="font-size: 15px;" OnClick="btnClienteTop_Click" />
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <asp:Button runat="server" Text="Informes de Habitaciones" CssClass="btn btn-primary btn-lg btn-block active" Style="margin: auto;" data-toggle="collapse" data-target="#informeHabitacion" OnClientClick="return false" />
                         <div id="informeHabitacion" class="collapse" style="margin-top: 10px;">
                             <asp:Button runat="server" Text="Dias de Uso de Habitaciones" ID="btnDiasUso" CssClass="btn btn-primary btn-lg btn-block login-button" Style="font-size: 15px" OnClick="btnDiasUso_Click" />
                             <asp:Button runat="server" Text="Cantidad de Usos de Habitaciones" ID="btnCantidadUsos" CssClass="btn btn-primary btn-lg btn-block login-button" Style="font-size: 15px" OnClick="btnCantidadUsos_Click" />
-                            <asp:Button runat="server" Text="Top 10 Cantidad de Usos de Habitaciones" ID="btnCantidadUsosTop" CssClass="btn btn-primary btn-lg btn-block login-button" Style="font-size: 15px" OnClick="btnCantidadUsosTop_Click" />
+                            <asp:Button runat="server" Text="Top 10 Usos de Habitaciones" ID="btnCantidadUsosTop" CssClass="btn btn-primary btn-lg btn-block login-button" Style="font-size: 15px" OnClick="btnCantidadUsosTop_Click" />
                             <asp:Button runat="server" Text="Habitaciones Preferidas" ID="btnHabitacionPref" CssClass="btn btn-primary btn-lg btn-block login-button" Style="font-size: 15px" OnClick="btnHabitacionPref_Click" />
                         </div>
                     </div>

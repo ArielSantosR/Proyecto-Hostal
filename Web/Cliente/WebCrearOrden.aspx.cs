@@ -404,7 +404,7 @@ namespace Web.Cliente
                 DateTime fechaSalida = DateTime.Parse(txtFechaFinal.Text, CultureInfo.CreateSpecificCulture("es-ES"));
                 if (MiSesion.TIPO_USUARIO.Equals(Tipo_Usuario.Cliente.ToString())) {
                     if (MiSesionO.Count > 0) {
-                        if (DateTime.Compare(fechaLlegada,DateTime.Today) >= 0 && DateTime.Compare(fechaSalida,fechaLlegada) >= 0) {
+                        if (DateTime.Compare(fechaLlegada,DateTime.Today) > 0 && DateTime.Compare(fechaSalida,fechaLlegada) > 0) {
                             Modelo.Cliente cliente = new Modelo.Cliente();
                             cliente.ID_USUARIO = MiSesion.ID_USUARIO;
 
@@ -546,7 +546,7 @@ namespace Web.Cliente
                         }
                         else {
                             alerta_exito.Visible = false;
-                            error.Text = "debe ingresar una fecha válida, igual a la fecha actual o superior";
+                            error.Text = "debe ingresar una fecha válida, igual a la fecha superior a la fecha actual";
                             alerta.Visible = true;
                         }
                     }
@@ -558,7 +558,7 @@ namespace Web.Cliente
                 }else {
                     if (ddlClientes.SelectedIndex != 0){
                         if (MiSesionO.Count > 0) {
-                            if (DateTime.Compare(fechaLlegada,DateTime.Today) >= 0 && DateTime.Compare(fechaSalida,fechaLlegada) >= 0) {
+                            if (DateTime.Compare(fechaLlegada,DateTime.Today) > 0 && DateTime.Compare(fechaSalida,fechaLlegada) > 0) {
                                 Modelo.Cliente cliente = new Modelo.Cliente();
                                 cliente.RUT_CLIENTE = int.Parse(ddlClientes.SelectedValue.ToString());
                                 Service1 s = new Service1();
@@ -701,6 +701,10 @@ namespace Web.Cliente
                     }
                 }
                 
+            } catch (FormatException) {
+                alerta_exito.Visible = false;
+                error.Text = "Las fechas no pueden estar vacias";
+                alerta.Visible = true;
             }
             catch (Exception ex)
             {

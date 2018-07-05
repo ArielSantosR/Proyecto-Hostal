@@ -1,6 +1,7 @@
 ﻿using Modelo;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -59,8 +60,7 @@ namespace Web.Empleado
 
                     Modelo.OrdenCompraCollection listaOrden = (Modelo.OrdenCompraCollection)ser.Deserialize(reader);
                     reader.Close();
-                    gvOrden.DataSource = listaOrden;
-                    gvOrden.DataBind();
+                    CargarGridOrdenes(listaOrden);
                 }
                 else
                 {
@@ -84,6 +84,80 @@ namespace Web.Empleado
             MiSesionOrden = orden;
 
             ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modal", "$('#exampleModal').modal();", true);
+        }
+
+        private void CargarGridOrdenes (OrdenCompraCollection listaOrden) {
+            Modelo.Empleado emp;
+            Modelo.Cliente cli;
+
+            DataTable dt = new DataTable();
+            dt.Columns.AddRange(new DataColumn[] {
+                new DataColumn("NUMERO_ORDEN", typeof(string)),
+                new DataColumn("CANTIDAD_HUESPEDES", typeof(string)),
+                new DataColumn("FECHA_LLEGADA",typeof(string)),
+                new DataColumn("FECHA_SALIDA",typeof(string)),
+                new DataColumn("EMPLEADO",typeof(string)),
+                new DataColumn("CLIENTE",typeof(string)),
+                new DataColumn("ESTADO_ORDEN",typeof(string)),
+                new DataColumn("COMENTARIO",typeof(string))
+            });
+
+            foreach (OrdenCompra o in listaOrden) {
+                cli = new Modelo.Cliente();
+                cli.RUT_CLIENTE = o.RUT_CLIENTE;
+                cli.BuscarCliente();
+
+                if (o.RUT_EMPLEADO.HasValue) {
+                    emp = new Modelo.Empleado();
+                    emp.RUT_EMPLEADO = o.RUT_EMPLEADO.Value;
+                    emp.BuscarEmpleado();
+
+                    dt.Rows.Add(o.NUMERO_ORDEN,o.CANTIDAD_HUESPEDES,o.FECHA_LLEGADA.ToShortDateString(),o.FECHA_SALIDA.ToShortDateString(),emp.PNOMBRE_EMPLEADO + " " + emp.APP_PATERNO_EMPLEADO + " " + emp.APP_MATERNO_EMPLEADO,cli.NOMBRE_CLIENTE,o.ESTADO_ORDEN,o.COMENTARIO);
+                }else {
+                    dt.Rows.Add(o.NUMERO_ORDEN,o.CANTIDAD_HUESPEDES,o.FECHA_LLEGADA.ToShortDateString(),o.FECHA_SALIDA.ToShortDateString()," ",cli.NOMBRE_CLIENTE,o.ESTADO_ORDEN,o.COMENTARIO);
+                }
+            }
+
+            gvOrden.DataSource = dt;
+            gvOrden.DataBind();
+        }
+
+        private void CargarGrid (DetalleOrdenCollection listaDetalles) {
+            Huesped huesped;
+            TipoHabitacion tipo;
+            CategoriaHabitacion cat;
+            Pension pension;
+
+            DataTable dt = new DataTable();
+            dt.Columns.AddRange(new DataColumn[] {
+                new DataColumn("RUT_HUESPED", typeof(string)),
+                new DataColumn("HUESPED", typeof(string)),
+                new DataColumn("HABITACION",typeof(string)),
+                new DataColumn("PENSION",typeof(string))
+            });
+
+            foreach (DetalleOrden d in listaDetalles) {
+                huesped = new Huesped();
+                huesped.RUT_HUESPED = d.RUT_HUESPED;
+                huesped.BuscarHuesped();
+
+                tipo = new TipoHabitacion();
+                tipo.ID_TIPO_HABITACION = d.ID_TIPO_HABITACION;
+                tipo.BuscarTipo();
+
+                cat = new CategoriaHabitacion();
+                cat.ID_CATEGORIA_HABITACION = d.ID_CATEGORIA_HABITACION;
+                cat.BuscarCategoria();
+
+                pension = new Pension();
+                pension.ID_PENSION = d.ID_PENSION;
+                pension.BuscarPension();
+
+                dt.Rows.Add(huesped.RUT_HUESPED + "-" + huesped.DV_HUESPED,huesped.PNOMBRE_HUESPED + " " + huesped.APP_PATERNO_HUESPED + " " + huesped.APP_MATERNO_HUESPED,tipo.NOMBRE_TIPO_HABITACION + "-" + cat.NOMBRE_CATEGORIA,pension.NOMBRE_PENSION);
+            }
+
+            gvDetalle.DataSource = dt;
+            gvDetalle.DataBind();
         }
 
         protected void btnInfo2_Click(object sender, EventArgs e)
@@ -113,10 +187,11 @@ namespace Web.Empleado
 
                         Modelo.DetalleOrdenCollection listaDetalle = (Modelo.DetalleOrdenCollection)ser3.Deserialize(reader);
                         reader.Close();
-                        gvDetalle.DataSource = listaDetalle;
-                        gvDetalle.DataBind();
-
+                        CargarGrid(listaDetalle);
+                        
                         MiSesionOrden = s.ObtenerReserva(writer.ToString());
+
+                        exampleModalLabel2.InnerText = "Detalle Reserva N°" + MiSesionOrden.NUMERO_ORDEN;
 
                         ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modal", "$('#exampleModal2').modal();", true);
                     }

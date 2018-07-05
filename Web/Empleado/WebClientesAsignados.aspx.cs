@@ -1,6 +1,7 @@
 ﻿using Modelo;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -150,8 +151,8 @@ namespace Web.Empleado
 
                         Modelo.DetalleHabitacionCollection listaDetalle = (Modelo.DetalleHabitacionCollection)ser3.Deserialize(reader);
                         reader.Close();
-                        gvDetalle.DataSource = listaDetalle;
-                        gvDetalle.DataBind();
+                        CargarGrid(listaDetalle);
+
                         ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modal", "$('#exampleModal2').modal();", true);
                     }
                 }
@@ -390,6 +391,42 @@ namespace Web.Empleado
                 alerta.Visible = true;
             }
             #endregion
+        }
+
+        private void CargarGrid (DetalleHabitacionCollection listaDetalle) {
+            Huesped huesped;
+            Modelo.Cliente cli;
+            Pension pension;
+
+            DataTable dt = new DataTable();
+            dt.Columns.AddRange(new DataColumn[] {
+                new DataColumn("ID_DETALLE_H", typeof(short)),
+                new DataColumn("NUMERO_HABITACION", typeof(short)),
+                new DataColumn("CLIENTE",typeof(string)),
+                new DataColumn("HUESPED",typeof(string)),
+                new DataColumn("PENSION",typeof(string)),
+                new DataColumn("FechaLlegada",typeof(string)),
+                new DataColumn("FechaSalida",typeof(string))
+            });
+
+            foreach (DetalleHabitacion item in listaDetalle) {
+                huesped = new Huesped();
+                huesped.RUT_HUESPED = item.RUT_HUESPED;
+                huesped.BuscarHuesped();
+
+                cli = new Modelo.Cliente();
+                cli.RUT_CLIENTE = item.RUT_CLIENTE;
+                cli.BuscarCliente();
+
+                pension = new Pension();
+                pension.ID_PENSION = item.ID_PENSION;
+                pension.BuscarPension();
+
+                dt.Rows.Add(item.ID_DETALLE_H,item.NUMERO_HABITACION,cli.NOMBRE_CLIENTE,huesped.PNOMBRE_HUESPED + " " + huesped.APP_PATERNO_HUESPED + " " + huesped.APP_MATERNO_HUESPED,pension.NOMBRE_PENSION,item.FECHA_LLEGADA.ToShortDateString(),item.FECHA_SALIDA.ToShortDateString());
+            }
+
+            gvDetalle.DataSource = dt;
+            gvDetalle.DataBind();
         }
     }
 }

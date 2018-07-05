@@ -1,5 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Empleado/EmpleadoM.Master" AutoEventWireup="true" CodeBehind="WebCrearBoleta.aspx.cs" Inherits="Web.Empleado.WebCrearBoleta" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <script type="text/javascript" src="../js/scriptRut.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <asp:ScriptManager ID="ScriptManager" runat="server"></asp:ScriptManager>
@@ -99,9 +100,9 @@
                             <ContentTemplate>
                                 <div class="input-group-text col-sm-12" style="background-color: #009edf; border: none; color: #FFF">
                                     <label class="control-label">Descuento:</label>&nbsp;
-                                    <asp:TextBox ID="txtDescuento" runat="server" CssClass="form-control"></asp:TextBox>&nbsp;&nbsp;&nbsp;
+                                    <asp:TextBox ID="txtDescuento" Enabled="false" runat="server" CssClass="form-control"></asp:TextBox>&nbsp;&nbsp;&nbsp;
                                     <label class="control-label">Total:</label>&nbsp;
-                                    <asp:TextBox ID="txtTotal" runat="server" CssClass="form-control"></asp:TextBox>
+                                    <asp:TextBox ID="txtTotal" Enabled="false" runat="server" CssClass="form-control"></asp:TextBox>
                                 </div>
                             </ContentTemplate>
                         </asp:UpdatePanel>

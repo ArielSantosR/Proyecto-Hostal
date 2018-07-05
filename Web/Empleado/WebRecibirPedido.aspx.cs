@@ -271,8 +271,11 @@ namespace Web.Empleado
                 producto.ID_PRODUCTO = item.ID_PRODUCTO;
                 producto.Read();
 
-                dt.Rows.Add(item.ID_DETALLE_PEDIDO,producto.ID_PRODUCTO,producto.NOMBRE_PRODUCTO,producto.DESCRIPCION_PRODUCTO,producto.UNIDAD_MEDIDA,item.CANTIDAD);
+                dt.Rows.Add(producto.ID_PRODUCTO,producto.NOMBRE_PRODUCTO,producto.DESCRIPCION_PRODUCTO,producto.UNIDAD_MEDIDA,item.CANTIDAD);
             }
+
+            gvDetalleHistorial.DataSource = dt;
+            gvDetalleHistorial.DataBind();
         }
 
         protected void btnModal_Click(object sender, EventArgs e)

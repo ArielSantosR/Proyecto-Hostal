@@ -1,6 +1,7 @@
 ﻿using Modelo;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -77,6 +78,37 @@ namespace Web.Empleado
             {
                 Session["Usuario"] = value;
             }
+        }
+
+        private void CargarGrid (ProductoCollection listaProducto) {
+            Familia familia;
+
+            DataTable dt = new DataTable();
+            dt.Columns.AddRange(new DataColumn[] {
+                new DataColumn("ID_PRODUCTO", typeof(long)),
+                new DataColumn("NOMBRE_PRODUCTO", typeof(string)),
+                new DataColumn("PRECIO_PRODUCTO",typeof(string)),
+                new DataColumn("DESCRIPCION_PRODUCTO",typeof(string)),
+                new DataColumn("STOCK_PRODUCTO",typeof(short)),
+                new DataColumn("STOCK_CRITICO_PRODUCTO",typeof(short)),
+                new DataColumn("UNIDAD_MEDIDA",typeof(string)),
+                new DataColumn("FAMILIA",typeof(string)),
+                new DataColumn("FECHA_VENCIMIENTO_PRODUCTO",typeof(string))
+            });
+
+            foreach (Producto item in listaProducto) {
+                familia = new Familia();
+                familia.ID_FAMILIA = item.ID_FAMILIA;
+                familia.BuscarFamilia();
+                if (item.FECHA_VENCIMIENTO_PRODUCTO.HasValue) {
+                    dt.Rows.Add(item.ID_PRODUCTO,item.NOMBRE_PRODUCTO,"$" + item.PRECIO_PRODUCTO,item.DESCRIPCION_PRODUCTO,item.STOCK_PRODUCTO,item.STOCK_CRITICO_PRODUCTO,item.UNIDAD_MEDIDA,familia.NOMBRE_FAMILIA,item.FECHA_VENCIMIENTO_PRODUCTO.Value.ToShortDateString());
+                } else {
+                    dt.Rows.Add(item.ID_PRODUCTO,item.NOMBRE_PRODUCTO,"$" + item.PRECIO_PRODUCTO,item.DESCRIPCION_PRODUCTO,item.STOCK_PRODUCTO,item.STOCK_CRITICO_PRODUCTO,item.UNIDAD_MEDIDA,familia.NOMBRE_FAMILIA,"Sin Fecha Vencimiento");
+                }
+            }
+
+            gvProducto.DataSource = dt;
+            gvProducto.DataBind();
         }
     }
 }

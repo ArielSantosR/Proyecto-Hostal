@@ -75,10 +75,10 @@
 
     <asp:ScriptManager runat="server"></asp:ScriptManager>
     <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-dialog modal-lg" style="max-width:1200px" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel2">Habitación Asignada</h5>
+                    <h5 class="modal-title" id="exampleModalLabel2" runat="server">Habitación Asignada</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -98,11 +98,11 @@
                             <SortedDescendingCellStyle BackColor="#E9EBEF" />
                             <SortedDescendingHeaderStyle BackColor="#4870BE" />
                             <Columns>
-                                <asp:BoundField DataField="ID_DETALLE_H" HeaderText="ID Detalle" />
+                                <asp:BoundField DataField="ID_DETALLE_H" Visible="false"/>
                                 <asp:BoundField DataField="NUMERO_HABITACION" HeaderText="Número de Habitación" />
-                                <asp:BoundField DataField="RUT_CLIENTE" HeaderText="RUT Cliente" />
-                                <asp:BoundField DataField="RUT_HUESPED" HeaderText="RUT Huésped" />
-                                <asp:BoundField DataField="ID_PENSION" HeaderText="ID Pensión" />
+                                <asp:BoundField DataField="CLIENTE" HeaderText="Cliente" />
+                                <asp:BoundField DataField="HUESPED" HeaderText="RUT Huésped" />
+                                <asp:BoundField DataField="PENSION" HeaderText="ID Pensión" />
                                 <asp:BoundField DataField="FechaLlegada" HeaderText="Fecha de Llegada" />
                                 <asp:BoundField DataField="FechaSalida" HeaderText="Fecha de Salida" />
                                 <asp:TemplateField>
